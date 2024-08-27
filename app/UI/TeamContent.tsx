@@ -1,0 +1,85 @@
+import React from 'react';
+import { type CarouselApi } from "../../components/ui/carousel"
+import { about_us_team } from '../contents/about';
+// Define interface for Team member object
+
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '../../components/ui/carousel';
+
+import Team from './Team';
+import Bullet from './Bullet';
+import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
+
+const TeamContent: React.FC = ({
+ 
+}) => {
+  const [api, setApi] = React.useState<CarouselApi>()
+  const [current, setCurrent] = React.useState(0)
+  const [count, setCount] = React.useState(0)
+ 
+  React.useEffect(() => {
+    if (!api) {
+      return
+    }
+ 
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+ 
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
+  return (
+    <section
+      className={` ${whiteSpaces.paddingX} xmd:max-w-[2000px] m-auto justify-center`}
+    >
+      <Carousel
+        className="xmd:w-11/12 grid m-auto xmd:h-[560px] sm:h-[550px] md:h-[620px] lg:w-full md:w-full lg:h-[630px]"
+        setApi={setApi}
+      >
+        <CarouselContent className="">
+          {about_us_team.map((about, index) => (
+            <CarouselItem
+              className="xmd:basis-[16rem] mobile:basis-[20rem] sm:basis-1/2 md:basis-2/4 lg:basis-1/3 "
+              key={index}
+            >
+              <Team
+                key={`${about.id}--abt`}
+                index={index}
+                image={about.image}
+                fullName={about.fullname}
+                post={about.post}
+                personality={about.personality}
+                view_profile={about.view_profile}
+                profile_1={about.profile_1}
+                profile_2={about.profile_2}
+                profile_3={about.profile_3}
+                profile_4={about.profile_4}
+                profile_5={about.profile_5}
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="bg-hover-color hover:bg-white border-2 border-[#333333] opacity-25 ml-8 z-10" />
+        <CarouselNext className="bg-hover-color border-2 border-[#333333] opacity-25  mr-8 hover:bg-white z-10 " />
+      </Carousel>
+
+      <div className="flex justify-center gap-2">
+        {about_us_team.map((team, i) => (
+          <Bullet
+            key={`${team.id}-team`}
+            className={` ${current === i ? 'bg-hover-color' : 'bg-[#D9D9D9]'} `}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default TeamContent;

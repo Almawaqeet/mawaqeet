@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://use.typekit.net/zgh1mdb.css");
+@import url("https://fonts.cdnfonts.com/css/sahur-ramadhan");
+
+@layer utilities {
+  .bg-quote-img {
+    background-image: url('../public/images/bg-quote.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+body {
+  margin: 0;
+  color: #333333;
+  background-color: #ffffff;
+  min-height: 100vh;
+  font-size: 1rem;
+  font-family: "dejavu-sans", "sans-serif";
+}
+
+.package::before {
+  content: '';
+  position: absolute;
+  top: 99.5%;
+  left: 40%;
+  right: 40%;
+  font-family: 'dejavu-sans', sans-serif;
+  bottom: 0;
+  background-color: #87592A;
+  transform-origin: top right;
+  display: grid;
+  margin: auto;
+}
+
+.package:hover:after {
+  background-color: #ffffff;
+}
+
+.package:hover::before {
+  background-color: #ffffff;
+}
+
+.package::after {
+  content: '';
+  position: absolute;
+  top: 99.5%;
+  left: 40%;
+  right: 40%;
+  bottom: 0;
+  background-color: #87592A;
+  transform-origin: top right;
+  display: grid;
+  margin: auto;
+}
+
+.section-title::before {
+  content: '';
+  position: absolute;
+  top: 93%;
+  left: 40%;
+  right: 45%;
+  bottom: 0;
+  background-color: #87592A;
+}
+
+.home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../public/images/bg-img-1.png');
+  z-index: -1;
+
+
+}
+
+/* .home::after {
+  content: '';
+  position: absolute;
+  top: 20;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0000004D;
+  z-index: -1;
+} */
+
+.slantDiv::before {
+  content: '';
+  top: 92%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #87592A;
+  position: absolute;
+  transform-origin: top right;
+  transform: skewX(32deg);
+  z-index: -1;
+  display: grid;
+  margin: auto;
+}
+
+
+
+.sectionDiv::before {
+  content: '';
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #87592A;
+  position: absolute;
+  transform-origin: top right;
+  transform: skewX(32deg);
+  z-index: -1;
+}
+
+.sectionDiv::after {
+  content: '';
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: inherit;
+  position: absolute;
+  transform-origin: bottom left;
+  transform: skewX(32deg);
+  z-index: -1;
+}
+
+.bg-scheme{
+  background-image: url("../public//images/bg-scheme.png");
+}
+
+.savingscheme::after {
+  content: '';
+  position: absolute;
+  background-color: #87592A;
+  opacity: 85%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.live-chat::after {
+  content: '';
+  top: 90%;
+  left: 0;
+  right: 0;
+  bottom: -12%;
+  position: absolute;
+  z-index: 1;
+  background-color: #A88A69;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+
+.live-chat::before {
+  content: '';
+  top: 89%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+  background-color: #87592A;
+}
+
+@media screen and (min-width: 769px) {
+
+  .live-chat::after {
+    content: '';
+    top: 90%;
+    left: 0;
+    right: 0;
+    bottom: -1%;
+    position: absolute;
+    z-index: 1;
+    background-color: #A88A69;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+
+  .live-chat::before {
+    content: '';
+    top: 89%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 1;
+    background-color: #87592A;
+  }
+}
+
+/* loader */
+
+/* .spinner {
+    margin: 4.8rem auto;
+    width: 6.4rem;
+    height: 6.4rem; 
+    border-radius: 50%;
+    background: radial-gradient(farthest-side, #87592A 94%, #0000)
+      top/10px 10px no-repeat,
+      conic-gradient(#0000 30%, #87592A);
+    -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
+    animation: rotate 1.5s infinite linear;
+  }
+
+  .spinner-mini {
+    width: 2.4rem;
+    height: 2.4rem;
+    animation: rotate 1.5s infinite linear;
+  }
+  
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+  
+  
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+   */
+
+
+.reach-us::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #333333;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+/* globals.css or any CSS file */
+.reach-us-img {
+  background-image: url('../public/images/bg-reach-us.png');
+}
+
+@media (min-width: 640px) { /* sm */
+  .reach-us-img-1 {
+    background-image: url('../public/images/reachus2.png');
+  }
+}
+
+@media (min-width: 175px) { /* xmd */
+  .reach-us-img {
+    background-image: url('../public/images/bg-reach-us.png');
+  }
+}
