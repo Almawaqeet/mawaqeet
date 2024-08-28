@@ -14,7 +14,7 @@ import Headings from '../libs/utilities/Headings';
 const Footer: React.FC = () => {
   return (
     <section
-      className={`xmd:max-w-[2000px ${whiteSpaces.sectionMargin} bg-[#4B3938] xmd:pt-[30px] xmd:pb-1`}
+      className={`xmd:max-w-[2000px  bg-[#4B3938] xmd:pt-[30px] xmd:pb-1`}
     >
       <div
         className={`${whiteSpaces.paddingX} xmd:grid grid-cols-1 sm:justify-center md:justify-end m-auto md:grid-cols-[1fr_minmax(100px,_150px)_250px] lg:grid-cols-[1fr_minmax(180px,_250px)_300px]`}
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
               <Headings
                 type={'BrandText'}
                 key={`itm-${itm.id}`}
-                classname="mobile:text-fz-md text-white "
+                classname="mobile:text-fz-md text-white font-dejavu"
               >
                 {itm.brand}
               </Headings>
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
           {footerText.map((text) => (
             <p
               key={`foot-${text.id}`}
-              className="text-align mobile:text-fz-xsm md:text-fz-sm text-white font-normal xmd:leading-[20.97px] xmd:pb-7 md:pb-0 md:leading-[24.95px] tracking-[0.1px]"
+              className="text-align mobile:text-fz-xsm md:text-fz-sm font-dejavu text-white font-normal xmd:leading-[20.97px] xmd:pb-7 md:pb-0 md:leading-[24.95px] tracking-[0.1px]"
             >
               {text.text}
             </p>
@@ -55,16 +55,16 @@ const Footer: React.FC = () => {
           {footerContent.map((cont) => (
             <p
               key={`${cont.id}-cont`}
-              className="text-white xmd:pb-8 md:pb-4 font-normal text-contact-clamp leading-[20.95px] tracking-[0.09px] xmd:text-start md:text-end"
+              className="text-white xmd:pb-8 md:pb-4 font-normal text-contact-clamp leading-[20.95px] tracking-[0.09px] xmd:text-start md:text-end font-dejavu"
             >
               {cont.content_2}
             </p>
           ))}
 
-          <ul className="flex flex-col xmd:gap-6 md:gap-4 md:text-end xmd:text-start md:justify-center text-contact-clamp">
+          <ul className="flex flex-col xmd:gap-6 md:gap-4 md:text-end xmd:text-start md:justify-center text-contact-clamp font-dejavu">
             {useful_Links.map((link) =>
               link.usefulLinks.map((itm) => (
-                <li key={`${itm.id}-itms-`} className="text-white md:text-end">
+                <li key={`${itm.id}-itms-`} className="text-white md:text-end font-dejavu">
                   {itm.content}
                 </li>
               ))
@@ -76,7 +76,7 @@ const Footer: React.FC = () => {
           {footerContent.map((itm) => (
             <p
               key={`${itm.id}-cont`}
-              className="text-white xmd:pb-8 md:pb-2 font-normal text-contact-clamp leading-[20.95px] tracking-[0.09px] md:text-end xmd:text-start"
+              className="text-white xmd:pb-8 md:pb-2 font-normal text-contact-clamp leading-[20.95px] tracking-[0.09px] md:text-end xmd:text-start font-dejavu"
             >
               {itm.content_3}
             </p>
@@ -106,7 +106,7 @@ const Footer: React.FC = () => {
         <div className="flex xmd:gap-4 items-center justify-center">
           <p className="xmd:text-[30px] text-white">&copy;</p>
           <div className="border-[1px] xmd:h-[30px] border-white"></div>
-          <p className="font-normal xmd:text-fz-xss leading-5 tracking-wide text-white">
+          <p className="font-normal xmd:text-fz-xss leading-5 tracking-wide text-white font-dejavu">
             All rights reserved.
           </p>
         </div>

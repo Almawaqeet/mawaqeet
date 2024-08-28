@@ -17,35 +17,37 @@ import Paragraph from '../libs/utilities/Paragraph';
 const HomeV2 = () => {
   return (
     <>
-      <section className={`${whiteSpaces.paddingY}`}>
+      <section className={` ${whiteSpaces.paddingY}  mt-6`}>
+        <main className={`quote-img`}>
         <div className={` xmd:py-12 ${whiteSpaces.paddingX} `}>
           {quote.map((quote) => (
             <Headings
               type={'quoteText'}
-              classname="text-justify "
+              classname="text-justify text-white"
               key={`quote-${quote.id}`}
             >
               {quote.quote}
             </Headings>
           ))}
         </div>
+        </main>
       </section>
 
-      <section className={`${whiteSpaces.paddingY}`}>
+      <section className={`${whiteSpaces.paddingY} mt-6`}>
         <main
-          className={`  relative xmd:min-h-[800px] sm:min-h-[600px] md:min-h-[695px]  xmd:max-w-[375px] mobile:max-w-[700px] m-auto sm:max-w-[900px] md:max-w-[1000px] lg:max-w-[2000px] `}
+          className={`  relative xmd:min-h-[680px] sm:min-h-[470px] md:min-h-[520px]  xmd:max-w-[375px] mobile:max-w-[700px] m-auto sm:max-w-[900px] md:max-w-[1000px] lg:max-w-[2000px] `}
         >
           <SavingScheme />
         </main>
       </section>
 
-      <section className={` xmd:max-w-[2000px] ${whiteSpaces.paddingY}`}>
+      <section className={` xmd:max-w-[2000px] ${whiteSpaces.paddingY} mt-6`}>
         <main className={` ${whiteSpaces.paddingX}`}>
           {home.map((home) => (
             <Headings
               type={'sectionName'}
               key={`${home.id}--head`}
-              classname="xmd:text-center xmd:mb-4 md:mb-6"
+              classname="xmd:text-center xmd:mb-4 md:mb-2 font-dejavu"
             >
               {home.bold_text_2}
             </Headings>
@@ -63,7 +65,7 @@ const HomeV2 = () => {
         </main>
 
         <main
-          className={`${whiteSpaces.paddingX} grid xmd:grid-cols-1 sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr] grid-flow-row xmd:gap-4 sm:gap-6 md:gap-10 items-center `}
+          className={`${whiteSpaces.paddingX} mt-6 grid xmd:grid-cols-1  ${whiteSpaces.paddingY} md:grid-cols-[1fr_1fr] grid-flow-row xmd:gap-4 sm:gap-6 md:gap-10 items-center `}
         >
           <div className="">
             {home.map((text) => (
@@ -100,28 +102,30 @@ const HomeV2 = () => {
 
           <div>
             <Image
-            src={'/images/spiritual.png'}
+            src={'/images/image14.png'}
             alt='spiritual-img'
-            className="rounded-lg drop-shadow-white-ash shadow-sm xmd:w-full object-contain mobile:h-100 sm:h-full sm:w-full "
-            width={100}
-            height={100}
+            className="rounded-lg drop-shadow-white-ash shadow-sm  object-contain  "
+            width={50}
+            height={50}
+            layout='responsive'
+            
              />
           </div>
         </main>
       </section>
 
       {/* contact section */}
-      <section className={`${whiteSpaces.paddingY}`}>
+      <section className={`${whiteSpaces.paddingY} mt-6`}>
         <Contact />
       </section>
 
       {/* FAQ section */}
-      <section className={`${whiteSpaces.paddingY}`}>
+      <section className={`${whiteSpaces.paddingY} mt-6`}>
         <Faqs />
       </section>
 
       <section
-        className={`reach-us reach-us-img-1 reach-us-img bg-no-repeat bg-cover relative  max-w-[2000px] m-auto`}
+        className={`reach-us reach-us-img-1 reach-us-img bg-no-repeat bg-cover relative  max-w-[2000px] m-auto ${whiteSpaces.paddingY} mt-6`}
       >
         <div
           className={`xmd:py-8 flex flex-col xmd:min-h-[400px] items-center justify-center ${whiteSpaces.paddingX} ${whiteSpaces.paddingY}`}
@@ -130,7 +134,7 @@ const HomeV2 = () => {
             <Headings
               type={'sectionName'}
               key={`reach-${txt.id}`}
-              classname="mobile:mb-0 text-center text-white"
+              classname="mobile:mb-0 text-center text-white font-dejavu"
             >
               {txt.reachout}
             </Headings>
@@ -140,7 +144,7 @@ const HomeV2 = () => {
             <Paragraph
               key={`${txt.id}-text`}
               type={'bodyParagraph'}
-              classname="sm:leading-7 mobile:leading-5 xmd:mb-4 mobile:mb-8 text-white text-center"
+              classname="sm:leading-7 mobile:leading-5 xmd:mb-4 mobile:mb-8 text-white text-center font-dejavu"
             >
               {txt.dedicated}
             </Paragraph>
@@ -150,7 +154,7 @@ const HomeV2 = () => {
             <Paragraph
               key={`${txt.id}-text`}
               type={'bodyParagraph'}
-              classname="sm:leading-7 mobile:leading-5 italic text-white"
+              classname="sm:leading-7 mobile:leading-5 italic text-white font-dejavu"
             >
               {txt.motto}
             </Paragraph>
@@ -158,7 +162,9 @@ const HomeV2 = () => {
         </div>
       </section>
       {/* footer */}
+      <section className={`${whiteSpaces.paddingY} mt-8`}>
       <Footer />
+      </section>
     </>
   );
 };

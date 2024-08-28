@@ -160,7 +160,8 @@ export const hajj_and_umrah_saving_scheme: SavingScheme[] = [
   {
     id: "scheme-card-body",
     scheme_card_body:
-      "Embark on the spiritual journey with peace of mind. Our Hajj and Umrah Savings Scheme is your pathway to Makkah and Madinah. Save steadily, watch your dream grow, and experience the thrill of Hajj without financial stress. Your sacred savings are in trusted hands. We prioritize your comfort and spiritual fulfillment. Join Al – Mawaqeet today and make your Hajj aspiration a reality.",
+      "Join Al-Mawaqeet's Hajj and Umrah Savings Scheme for a secure, financially-friendly way to experience the thrill of Hajj and Makkah, ensuring comfort and spiritual fulfillment."
+,
   },
 ];
 

@@ -4,13 +4,20 @@ type FAQItem = {
   content_1?: string;
   content?: string;
 };
+type Item = {
+
+    id: string,
+    content: string
+
+}
 
 type FAQSection = {
   id: string;
-  contents: FAQItem[];
+  contents: Item[] ;
+
 };
 
-type FAQSectionOrUndefined = FAQSection | undefined;
+
 
 
 export const faqs_1: FAQItem[] = [
@@ -58,7 +65,7 @@ export const faqs_1_1: FAQItem[] = [
   },
 ];
 
-export const faqs: FAQSectionOrUndefined[] = [
+export const faqs: FAQSection[] = [
   {
     id: 'questions',
     contents: [

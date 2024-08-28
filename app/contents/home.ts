@@ -1,13 +1,9 @@
 // Importing icons
 import { StaticImageData } from 'next/image';
-import 
-  icon_1 from '../../public/images/icon_1.png';
-  import 
-  icon_2 from '../../public/images/icon_2.png';
-  import 
-  icon_3 from '../../public/images/icon_3.png';
-  import 
-  icon_4 from '../../public/images/icon_4.png';
+import icon_1 from '../../public/images/icon_1.png';
+  import icon_2 from '../../public/images/icon_2.png';
+  import icon_3 from '../../public/images/icon_3.png';
+  import icon_4 from '../../public/images/icon_4.png';
 
 // Define types for home content
 type HomeContentItem = {
@@ -34,12 +30,12 @@ type QuoteItem = {
 // Define types for why_hajj_umrah
 type WhyReasonsItem = {
   id: string;
-  content: string | StaticImageData | undefined;
+  content: string | StaticImageData;
 };
 
 type WhyReasons = {
   id: string;
-  reasons: WhyReasonsItem[];
+  reasons: WhyReasonsItem[] ;
 };
 
 // Define types for why_image
@@ -69,12 +65,12 @@ export const home: HomeContentItem[] = [
   {
     id: 'bold_text',
     bold_text:
-      "Ever wished you could walk in the shoes of Prophet Muhammad (PBUH)? Craved the deep peace and calm that comes from being close to Allah (SWT) in the two Islam's holiest cities– Makkah and Madinah?",
+      "Have you ever wished to experience the peace and calm of being close to Allah in the holiest cities of Islam, Makkah and Madinah?",
   },
   {
     id: 'light_text',
     light_text:
-      "This isn't just a trip; it's a life-changing experience. It's your chance to let go of everyday stress and dive deep into the heart of the fifth pillar of Islam– Hajj and its other equivalent, Umrah. Picture the amazing feelings of going around the Kaabah, the joy you feel when you pray at the Prophet's Mosque, and the sense of togetherness when you stand with Muslims from all over the world. Hajj and Umrah are so much more than just religious tasks",
+      "Experience the life-changing journey of Hajj and Umrah, the fifth pillar of Islam. Enjoy     the joy of prayer at the Prophet's Mosque and the sense of togetherness with Muslims worldwide.",
   },
   {
     id: 'light_text_1',
@@ -84,7 +80,7 @@ export const home: HomeContentItem[] = [
   {
     id: 'light_text_2',
     light_text_2:
-      "We get that planning for such a big trip can feel tricky. That's why we're here to guide you every step of the way. With our Hajj and Umrah Savings Scheme, your fear of gathering the funds at ONCE is removed. Our team of skilled, knowledgeable and committed professionals will make sure your Hajj or Umrah is seamless, rewarding, and one for the books.",
+      "Our Hajj and Umrah Savings Scheme offers a hassle-free, rewarding experience for planning big trips, ensuring a seamless and rewarding experience for our skilled professionals.",
   },
   {
     id: 'bold_text_1',
@@ -170,19 +166,19 @@ export const why_hajj_umrah: WhyReasons[] = [
     reasons: [
       {
         id: 'img_1',
-        content: icon_1,
+        content: icon_1 as StaticImageData,
       },
       {
         id: 'img_2',
-        content: icon_2,
+        content: icon_2 as StaticImageData,
       },
       {
         id: 'img_3',
-        content: icon_3,
+        content: icon_3 as StaticImageData,
       },
       {
         id: 'img_4',
-        content: icon_4,
+        content: icon_4 as StaticImageData,
       },
     ],
   },

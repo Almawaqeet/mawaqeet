@@ -5,7 +5,7 @@
 @import url("https://fonts.cdnfonts.com/css/sahur-ramadhan");
 
 @layer utilities {
-  .bg-quote-img {
+  .quote-img {
     background-image: url('../public/images/bg-quote.png');
     background-size: cover;
     background-position: center;

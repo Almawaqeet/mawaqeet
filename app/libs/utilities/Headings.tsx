@@ -20,7 +20,7 @@ const Headings: React.FC<HeadingsProps> = ({ children, type, classname }) => {
   const styles = {
     BrandText: `${Brand_clamp} font-sahur-ramadan font-normal mobile:leading-5 sm:leading-10`,
     heroHeading: `${Hero_clamp} font-bold mobile:leading-8 md:leading-10 tracking-wide text-center font-dejavu`,
-    heading_1: `${Bold_1_clamp} font-bold tracking-tight mobile:leading-5 md:leading-10 font-dejavu`,
+    heading_1: `${Bold_1_clamp} font-bold tracking-tight xmd:leading-5 lg:leading-10 md:leading-8 font-dejavu`,
     sectionName: `${sectionClamp} font-bold xmd:tracking-[0.18px]`,
     heading_2: `${Bold_2_clamp} font-bold tracking-wide mobile:leading-[14px] sm:leading-[20px] font-dejavu`,
     quoteText: `${quote} font-bold tracking-wide mobile:leading-5 sm:leading-6 md:leading-10 text-left font-dejavu`,
@@ -34,7 +34,7 @@ const Headings: React.FC<HeadingsProps> = ({ children, type, classname }) => {
       return <Image src={children} alt="" className={classname} />;
     } else {
       // Otherwise, render the content as text or other React nodes
-      return <span className={classname}>{children}</span>;
+      return <div className={classname}>{children}</div>;
     }
   };
 

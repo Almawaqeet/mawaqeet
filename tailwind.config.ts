@@ -50,14 +50,14 @@ const config: Config = {
         'head-3-clamp': 'clamp(0.875rem, -0.1373rem + 4.3192vw, 3.75rem',
         'quote-clamp': 'clamp(1rem, 0.8239rem + 0.7512vw, 1.5rem)',
         'scheme-clamp': 'clamp(0.875rem, -0.1373rem + 4.3192vw, 3.75rem)',
-        'body-clamp': 'clamp(0.75rem, 0.4859rem + 1.1268vw, 1.5rem)',
+        'body-clamp': 'clamp(0.75rem, 0.4859rem + 1.1268vw, 1.125rem)',
         'team-clamp': 'clamp(0.875rem, 0.831rem + 0.1878vw, 1rem)',
         'purpose-clamp': 'clamp(0.625rem, 0.831rem + 0.1878vw, 1rem)',
       },
 
       fontFamily: {
         'sahur-ramadan': ['Sahur Ramadhan', 'sans-serif'],
-        dejavu: ['dejavu-sans', 'sans-serif'],
+        "dejavu": ['dejavu-sans', 'sans-serif'],
       },
 
       screens: {

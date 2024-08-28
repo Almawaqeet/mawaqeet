@@ -1,7 +1,9 @@
 "use client"
 import Navbar from "./UI/Navbar";
-import About from "./pages/About";
+import Homes from "./pages/Home";
 import { MbisProvider } from "./libs/hooks/useContextProvider";
+import HomeV1 from "./UI/HomeV1";
+import HomeV2 from "./UI/HomeV2";
 
 
 export default function Home() {
@@ -9,7 +11,10 @@ export default function Home() {
     <MbisProvider>
       <main>
         <Navbar />
-        <Home />
+        <Homes>
+          <HomeV1 />
+          <HomeV2 />
+        </Homes>
       </main>
     </MbisProvider>
   )

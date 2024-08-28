@@ -11,13 +11,13 @@ import Paragraph from '../libs/utilities/Paragraph';
 const SavingScheme: React.FC = () => {
   return (
     <div
-      className={`bg-scheme -z-10 xmd:min-h-[600px]  savingscheme relative lg:min-h-[500px] sm:min-h-[400px] grid items-baseline md:min-h-[500px] gap-8 md:gap-10`}
+      className={`bg-scheme -z-10 xmd:min-h-[600px]  savingscheme relative lg:min-h-[650px] sm:min-h-[400px] grid items-baseline md:min-h-[400px] gap-8 md:gap-10`}
     >
       <div
-        className={`sm:${whiteSpaces.paddingX} xmd:gap-8 lg:gap-8 xl:gap-20 sm:gap-4 xmd:grid-cols-1 xmd:grid sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr] justify-between sm:m-auto`}
+        className={`sm:${whiteSpaces.paddingX} xmd:gap-8 lg:gap-8 xl:gap-20 sm:gap-4 xmd:grid-cols-1 xmd:grid sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr] justify-between sm:mt-10 lg:mt-16`}
       >
-        <div className="grid gap-8 md:gap-1">
-          <div className="xmd:grid h-fit md:gap-[1px] xmd:mt-8 sm:mt-0">
+        <div className="grid gap-8 md:gap-1 ">
+          <div className="xmd:grid h-fit md:gap-[1px] xmd:mt-8] sm:mt-0 ">
             {hajj_and_umrah_saving_scheme.map((scheme) => (
               <Headings
                 type="schemeText"
@@ -33,7 +33,7 @@ const SavingScheme: React.FC = () => {
             {hajj_and_umrah_saving_scheme.map((subText, i) => (
               <p
                 key={`${i}list`}
-                className={`text-Bold-2-clamp   sm:text-left xmd:text-center text-white   ${
+                className={`text-Bold-2-clamp   sm:text-left xmd:text-center text-white  font-dejavu ${
                   i === 1 ? 'list-disc sm:list-none  sm:ml-0' : 'list-none'
                 }`}
               >
@@ -50,7 +50,7 @@ const SavingScheme: React.FC = () => {
             >
               <Paragraph
                 type={'bodyBold'}
-                classname="font-normal xmd:leading-[16.3px] xmd:tracking-[0.07px] align-middle text-center leading-[20.95px] md:tracking-[0.2px] "
+                classname="font-normal xmd:leading-[16.3px] xmd:tracking-[0.07px] align-middle text-center leading-[20.95px] md:tracking-[0.2px] text-inherit "
               >
                 Get Started
               </Paragraph>
@@ -66,17 +66,18 @@ const SavingScheme: React.FC = () => {
           src={'/images/scheme.png'}
           alt='scheme'
           className="drop-shadow-black-white rounded-lg absolute xmd:h-[270px] sm:w-5/6 lg:w-5/6 xl:w-5/6 xmd:w-full md:w-[639px] xmd:left-1/2 xmd:transform sm:h-[270px] -translate-x-1/2 xmd:px-7 xmd:-bottom-7 md:h-[320px]  sm:px-0"
-          width={100}
-          height={270}
+          width={300}
+          height={300}
+         
            />
         </div>
       </div>
 
       <div
-        className={`${whiteSpaces.paddingX} absolute xmd:-bottom-36 md:-bottom-52 lg:-bottom-44`}
+        className={`${whiteSpaces.paddingX} xmd:absolute xmd:-bottom-20 sm:bottom-30 md:-bottom-32 lg:bottom-0 lg:relative`}
       >
         <div
-          className={`bg-white drop-shadow-trans-white rounded-lg  xmd:px-5 xmd:py-6 relative shadow-2xl`}
+          className={`bg-white drop-shadow-trans-white rounded-lg  xmd:px-5 xmd:py-6 relative shadow-xl`}
         >
           {hajj_and_umrah_saving_scheme.map((title, i) => (
             <li
@@ -92,7 +93,7 @@ const SavingScheme: React.FC = () => {
           {hajj_and_umrah_saving_scheme.map((bdy) => (
             <p
               key={`body-${bdy.id}`}
-              className="text-Bold-2-clamp xmd:leading-5 md:leading-8 md:tracking-[0.24px] xmd:tracking-[0.12px] text-justify"
+              className="text-Bold-2-clamp xmd:leading-5 md:leading-8 md:tracking-[0.24px] xmd:tracking-[0.12px] text-justify font-dejavu"
             >
               {bdy.scheme_card_body}
             </p>
