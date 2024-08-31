@@ -10,14 +10,14 @@ import Paragraph from '../libs/utilities/Paragraph';
 
 const SavingScheme: React.FC = () => {
   return (
-    <div
-      className={`bg-scheme -z-10 xmd:min-h-[600px]  savingscheme relative lg:min-h-[650px] sm:min-h-[400px] grid items-baseline md:min-h-[400px] gap-8 md:gap-10`}
+    <section
+      className={`bg-scheme -z-10 xmd:min-h-[600px]  savingscheme relative lg:min-h-[650px] sm:min-h-[400px] grid items-baseline md:min-h-[400px] gap-8 md:gap-10 w-full mt-20 max-w-[2000px] m-auto`}
     >
       <div
         className={`sm:${whiteSpaces.paddingX} xmd:gap-8 lg:gap-8 xl:gap-20 sm:gap-4 xmd:grid-cols-1 xmd:grid sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr] justify-between sm:mt-10 lg:mt-16`}
       >
         <div className="grid gap-8 md:gap-1 ">
-          <div className="xmd:grid h-fit md:gap-[1px] xmd:mt-8] sm:mt-0 ">
+          <div className="xmd:grid h-fit md:gap-[1px] xmd:mt-8 sm:mt-0 ">
             {hajj_and_umrah_saving_scheme.map((scheme) => (
               <Headings
                 type="schemeText"
@@ -100,7 +100,7 @@ const SavingScheme: React.FC = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

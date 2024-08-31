@@ -15,7 +15,7 @@ import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 const About = () => {
   return (
     <>
-      <section className="xmd:max-w-[2000px] m-auto">
+      <section className="xmd:max-w-[2000px] m-auto pb-6">
         <Hero
           heading={<Headings type={'heroHeading'}>About Us</Headings>}
           subheading={about_hero.map((subhead) => (
@@ -28,9 +28,9 @@ const About = () => {
         />
       </section>
 
-      <section className={`${whiteSpaces.sectionMargin}`}>
-        <SlantDiv className={'xmd:before:w-[60px]'}>
-          <Headings type={'sectionName'} classname="text-center ">
+      <section className={`${whiteSpaces.sectionMargin} pb-6`}>
+        <SlantDiv className={'xmd:before:w-[60px] '}>
+          <Headings type={'sectionName'} classname="text-center">
             About Us
           </Headings>
         </SlantDiv>
@@ -46,13 +46,14 @@ const About = () => {
                     alt='vector'
                     width={70}
                     height={50}
+                    layout='responsive'
                   />
                 </div>
                 {about_main_body.map((main) => (
                   <Paragraph
                     type={'global'}
                     key={`main-${main.id}`}
-                    classname="font-normal xmd:text-fz-xsm leading-5 tracking-tight text-justify md:w-11/12 lg:w-9/12"
+                    classname="font-normal xmd:text-fz-xsm leading-5 tracking-tight text-justify md:w-11/12 lg:w-9/12 font-dejavu lg:text-fz-mz md:text-fz-sm md:leading-8 lg:leading-[45px]"
                   >
                     {main.about_main_content}
                   </Paragraph>
@@ -66,6 +67,7 @@ const About = () => {
              className="rounded-lg drop-shadow-white-ash shadow-sm xmd:w-full relative -z-10 sm:h-72"
              width={100}
              height={72}
+             layout='responsive'
               />
             </div>
           </div>

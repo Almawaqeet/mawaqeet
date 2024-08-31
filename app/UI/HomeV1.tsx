@@ -47,14 +47,14 @@ const HomeV1 = () => {
       >
         <main className={`${whiteSpaces.paddingX}`}>
           <div className="md:grid md:grid-cols-[200px_1fr] lg:grid-cols-[400px_1fr] md:grid-flow-row lg:grid-flow-row gap-5">
-            <div className="md:grid mobile:hidden xmd:hidden grid-cols-2 lg:grid-rows-[320px_320px] md:grid-rows-[300px_300px] md:gap-x-2 md:gap-y-2">
+            <div className="md:grid mobile:hidden xmd:hidden grid-cols-2  md:gap-2 ">
               <Image
                 src={'/images/stack_img_1.png'}
                 alt='stack1'
                 className="object-cover relative bottom-8"
                 width={1920}
-                height={1080}
-              // layout='responsive'
+                height={2080}
+              layout='responsive'
               />
               <Image
                 src={'/images/stack_img_2.png'}
@@ -70,7 +70,7 @@ const HomeV1 = () => {
                 className="object-cover"
                 width={1920}
                 height={1080}
-              // layout='responsive'
+              layout='responsive'
               />
               <Image
                 src={'/images/stack_img_4.png'}
@@ -78,7 +78,7 @@ const HomeV1 = () => {
                 className="object-cover relative top-1"
                 width={1920}
                 height={1080}
-              // layout='responsive'
+              layout='responsive'
               />
             </div>
 

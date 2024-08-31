@@ -103,7 +103,7 @@ export const home: HomeContentItem[] = [
   {
     id: 'light_text_4',
     light_text_4:
-      'No matter which package you select, we are steadfast in our commitment to delivering outstanding service and ensuring a pilgrimage that is devoid of stress. Our seasoned team will accompany you at every juncture, from the application for visas to the selection of accommodations. Additionally, we offer knowledgeable guides who will impart their spiritual and mundane wisdom, guaranteeing a journey that is both seamless and enriching. You have four mouthwatering packages to choose from:',
+      'Our commitment to exceptional service ensures a stress-free pilgrimage experience. Our seasoned team assists with visa applications and accommodations selection, while knowledgeable guides impart spiritual and mundane wisdom. Choose from four packages.',
   },
 ];
 

@@ -14,7 +14,7 @@ import Headings from '../libs/utilities/Headings';
 const Footer: React.FC = () => {
   return (
     <section
-      className={`xmd:max-w-[2000px  bg-[#4B3938] xmd:pt-[30px] xmd:pb-1`}
+      className={`  bg-[#4B3938] xmd:pt-[30px] xmd:pb-1`}
     >
       <div
         className={`${whiteSpaces.paddingX} xmd:grid grid-cols-1 sm:justify-center md:justify-end m-auto md:grid-cols-[1fr_minmax(100px,_150px)_250px] lg:grid-cols-[1fr_minmax(180px,_250px)_300px]`}

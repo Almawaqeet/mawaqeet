@@ -162,7 +162,7 @@ const Navbar: React.FC = () => {
             ) : (
               <FaBarsStaggered
                 className={`transform transition-all duration-220 w-8 h-5 text-white ${
-                  !navbar_bar ? 'rotate-225 delay-120 ease-in-out' : ''
+                  navbar_bar ? 'rotate-225 delay-120 ease-in-out' : ''
                 } ${isActive ? 'relative right-1/2' : ''}`}
               />
             )}
@@ -172,7 +172,7 @@ const Navbar: React.FC = () => {
 
       {isActive && (
         <div
-          className={`fixed z-10 min-h-screen overflow-y-scroll bg-white drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16 xmd:left-[20%] translate-x-0 ${
+          className={`fixed z-10 min-h-svh h-screen max-h-[1000px] overflow-y-scroll bg-white drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16 xmd:left-[20%] translate-x-0 ${innerHeight > 1000 ? 'overflow-y-scroll': 'overflow-y-hidden'}  ${
             isActive
               ? 'transition-all duration-[1.0s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[200] translate-x-0 '
               : '-translate-x-[100%] transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[200]'
@@ -189,12 +189,12 @@ const Navbar: React.FC = () => {
                   item.id === activeIndex
                     ? 'text-hover-color'
                     : ' text-[#333333]'
-                } ${i === 2 && dropdownmobile ? 'pb-[150px]' : ''}`}
+                } ${i === 2 && dropdownmobile ? 'pb-40' : ''}`}
               >
                 {i === 2 ? (
                   <>
                     <span
-                      className="flex gap-[.5px] items-center"
+                      className="flex gap-[.5px] items-center relative"
                       onClick={handleDropdownToggle}
                     >
                       {item.content}
@@ -211,12 +211,12 @@ const Navbar: React.FC = () => {
 
                     {dropdownmobile && (
                       <Dropdown
-                        className={`${
-                          dropdownmobile
-                            ? 'transition-all duration-[1s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[500] translate-y-0'
-                            : 'translate-y-[30px]'
-                        } mobile:translate-y-[100px] tab_md:hidden grid gap-2 pt-2 pb-7 px-4 z-30`}
-                      >
+                      className={`${
+                        dropdownmobile
+                          ? 'transition-all duration-[1s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[500] translate-y-0'
+                          : 'translate-y-[30px]'
+                      } tab_md:hidden grid gap-2 pt-2 pb-7 mt-2 px-4 z-30 absolute`}
+                    >
                         {dropdownItems.map((itm) => (
                           <ol
                             key={`itm-${itm.id}`}

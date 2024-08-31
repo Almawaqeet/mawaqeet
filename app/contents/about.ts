@@ -41,7 +41,7 @@ export const about_main_body: AboutMainBody[] = [
   {
     id: 'about_main',
     about_main_content:
-      'Al-Mawaqeet Travels and Tours stands as a premier Islamic travel agency, committed to delivering unparalleled pilgrimage and educational experiences to travelers in search of spiritual enlightenment and academic exploration. Our dedicated team, comprising erudite Islamic scholars and core professionals, is devoted to ensuring a seamless journey for each traveler, guaranteeing safety, satisfaction, and an experience that will be etched in their memories.',
+      'Al-Mawaqeet Travels and Tours is an Islamic travel agency specializing in spiritual pilgrimage and educational experiences, backed by a dedicated team of scholars and professionals.',
   },
 ];
 

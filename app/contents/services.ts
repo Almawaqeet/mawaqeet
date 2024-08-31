@@ -7,6 +7,41 @@ type TitleIntroHajj = {
   serviceContent?: string;
 };
 
+type ComplementaryServicesIntro = {
+  id: string;
+  intro: string;
+};
+
+type SavingScheme = {
+  id: string;
+  scheme_heading?: string;
+  scheme_sub_heading?: string;
+  scheme_card_subHeading?: string;
+  scheme_card_body?: string;
+};
+
+type ComplementaryServicesHighlight = {
+  id: string;
+  highlight?: string;
+  
+};
+
+type ComplementaryServices = {
+  id: string;
+  highlights: ComplementaryServicesHighlight[];
+};
+
+type WhyScholarshipGuidanceHeading = {
+  id: string;
+  heading_content: string;
+};
+
+type WhyScholarshipGuidance = {
+  id: string;
+  why_scholarship_heading: WhyScholarshipGuidanceHeading[];
+};
+
+
 // Data for title and intro
 export const title_intro_hajj: TitleIntroHajj[] = [
   {
@@ -24,7 +59,7 @@ export const title_intro_hajj: TitleIntroHajj[] = [
   {
     id: "hajj-content-1",
     serviceContent:
-      "We present meticulously designed Hajj and Umrah packages customized to meet your unique requirements and financial constraints. Our comprehensive offerings include visa facilitation, accommodation in close proximity to the Haram, transportation logistics, and knowledgeable guides who will offer insightful guidance, ensuring a pilgrimage journey that is both smooth and enriching.",
+      "Our customized Hajj and Umrah packages cater to your specific needs, including visa facilitation, accommodation near Haram, transportation logistics, and knowledgeable guides for a smooth and enriching pilgrimage journey."
   },
 ];
 
@@ -73,6 +108,12 @@ type Package = {
   heading: string;
   content: PackageContent;
   conclusion: string;
+};
+
+type ScholarshipGuidance = {
+  id: string;
+  center_text?: string;
+  align_text?: string;
 };
 
 // Data for packages
@@ -134,14 +175,6 @@ export const packages: Package[] = [
   },
 ];
 
-// Define types for Hajj & Umrah saving scheme
-type SavingScheme = {
-  id: string;
-  scheme_heading?: string;
-  scheme_sub_heading?: string;
-  scheme_card_subHeading?: string;
-  scheme_card_body?: string;
-};
 
 // Data for Hajj & Umrah saving scheme
 export const hajj_and_umrah_saving_scheme: SavingScheme[] = [
@@ -165,12 +198,6 @@ export const hajj_and_umrah_saving_scheme: SavingScheme[] = [
   },
 ];
 
-// Define types for complementary services intro
-type ComplementaryServicesIntro = {
-  id: string;
-  intro: string;
-};
-
 // Data for complementary services intro
 export const complementary_services_intro: ComplementaryServicesIntro[] = [
   {
@@ -180,18 +207,6 @@ export const complementary_services_intro: ComplementaryServicesIntro[] = [
   },
 ];
 
-// Define types for complementary services
-type ComplementaryServicesHighlight = {
-  id: string;
-  highlight_1?: string;
-  highlight_2?: string;
-  highlight_3?: string;
-};
-
-type ComplementaryServices = {
-  id: string;
-  highlights: ComplementaryServicesHighlight[];
-};
 
 // Data for complementary services
 export const complementary_services: ComplementaryServices[] = [
@@ -200,16 +215,17 @@ export const complementary_services: ComplementaryServices[] = [
     highlights: [
       {
         id: "Ziyarah",
-        highlight_1: "Ziyarah Tours:",
+        highlight: "Ziyarah Tours:",
       },
       {
         id: "Intensive",
-        highlight_2: "Intensive Pre-departure Seminars:",
+        highlight: "Intensive Pre-departure Seminars:",
       },
       {
         id: "Special",
-        highlight_3: "Special Dietary Scheme:",
+        highlight: "Special Dietary Scheme:",
       },
+      
     ],
   },
   {
@@ -217,19 +233,20 @@ export const complementary_services: ComplementaryServices[] = [
     highlights: [
       {
         id: "delve",
-        highlight_1:
+        highlight:
           "Delve into the significant historical and religious sites within Makkah and Madinah.",
       },
       {
         id: "Acquire",
-        highlight_2:
+        highlight:
           "Acquire essential knowledge and insights to adequately prepare for your Hajj or Umrah.",
       },
       {
         id: "Catering",
-        highlight_3:
+        highlight:
           "Catering to specific dietary requirements, especially local and continental cuisine that may be difficult to find within the sphere of Haram, we guarantee a pilgrimage journey that is comfortable for everyone.",
       },
+     
     ],
   },
   {
@@ -237,110 +254,83 @@ export const complementary_services: ComplementaryServices[] = [
     highlights: [
       {
         id: "experience",
-        highlight_1:
+        highlight:
           "Join us in creating an unforgettable experience for your Hajj or Umrah journey.",
       },
-    ],
-  },
-  {
-    id: "tour-sub-heading",
-    highlights: [
       {
         id: "Educational",
-        highlight_1:
+        highlight:
           "Educational Tours: Embark on a Journey That Combines Academic Inquiry with Cultural Insight",
       },
     ],
   },
+
   {
     id: "tour-body",
     highlights: [
       {
         id: "Educational",
-        highlight_1:
+        highlight:
           "At Al-Mawaqeet Travels & Tours, we present meticulously designed educational tours for students in the application stages of prestigious universities in the Middle East. Our tours extend beyond mere campus visits, offering a comprehensive experience that allows you to:",
       },
     ],
   },
-];
 
-// Define types for why complementary services
-type WhyComplementaryServicesHeading = {
-  id: string;
-  reason: string;
-};
-
-type WhyComplementaryServicesBody = {
-  id: string;
-  reason: string;
-};
-
-type WhyComplementaryServices = {
-  id: string;
-  why_complementary_services_heading: WhyComplementaryServicesHeading[];
-};
-
-// Data for why complementary services
-export const why_complementary_services: WhyComplementaryServices[] = [
   {
-    id: "why_heading",
-    why_complementary_services_heading: [
+    id: 'complement',
+    highlights: [
       {
         id: "Explore",
-        reason: "Explore Superior Universities:",
+        highlight: "Explore Superior Universities:",
       },
       {
         id: "interact",
-        reason: "Interact with Faculty and Admission Officers:",
+        highlight: "Interact with Faculty and Admission Officers:",
       },
       {
         id: "Engage",
-        reason: "Engage with the Local Culture:",
+        highlight: "Engage with the Local Culture:",
       },
       {
         id: "relationship",
-        reason: "Build Relationships with Peers:",
+        highlight: "Build Relationships with Peers:",
       },
-    ],
+    ]
   },
+
   {
-    id: "why_body",
-    why_complementary_services_heading: [
+    id: 'complement-body',
+    highlights: [
       {
         id: "Visitation",
-        reason:
+        highlight:
           "Visit distinguished universities such as Islamic University of Madeenah in Saudi Arabia, Islam University of Kuwait, Hamad Bin Khalifa University in Qatar, Universiti Brunei Darussalam in Brunei, and University of Bahrain in Bahrain.",
       },
       {
         id: "Benefit",
-        reason:
+        highlight:
           "Benefit from insightful discussions on academic programs, the application process, and the daily life of a student through interactions with professors and admissions officers.",
       },
       {
         id: "Discover",
-        reason:
+        highlight:
           "Discover the essence of the region’s culture through its vibrant cities, historical monuments, and cultural artifacts, enriching your understanding of its profound heritage.",
       },
       {
         id: "Connect",
-        reason:
+        highlight:
           "Connect with students from across the globe, sharing your academic ambitions and forging lasting friendships.",
       },
       {
         id: "exceptional",
-        reason:
+        highlight:
           "“Our Educational Tours provide an exceptional platform for students to engage with the academic environment of these esteemed institutions, fostering a deeper connection and understanding of the region’s academic excellence.”",
       },
-    ],
-  },
+    ]
+  }
 ];
 
-// Define types for scholarship guidance
-type ScholarshipGuidance = {
-  id: string;
-  center_text?: string;
-  align_text?: string;
-};
+
 
 // Data for scholarship guidance
 export const scholarship_guidance: ScholarshipGuidance[] = [
@@ -355,21 +345,6 @@ export const scholarship_guidance: ScholarshipGuidance[] = [
   },
 ];
 
-// Define types for why scholarship guidance
-type WhyScholarshipGuidanceHeading = {
-  id: string;
-  heading_content: string;
-};
-
-type WhyScholarshipGuidanceBody = {
-  id: string;
-  heading_content: string;
-};
-
-type WhyScholarshipGuidance = {
-  id: string;
-  why_scholarship_heading: WhyScholarshipGuidanceHeading[];
-};
 
 // Data for why scholarship guidance
 export const why_scholarship_guidance: WhyScholarshipGuidance[] = [

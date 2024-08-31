@@ -1,6 +1,5 @@
 import { navbar } from '@/app/contents/navbar';
-import React, { useContext, useReducer, createContext, ReactNode } from 'react';
-
+import React, { useReducer, createContext, ReactNode, RefObject, useContext } from 'react';
 
 // Define types for the state and actions
 type State = {
@@ -14,8 +13,8 @@ type State = {
   dropdownmobile: boolean;
   arrow: boolean;
   isActive: boolean;
-  activeBtnServiceId: HTMLButtonElement | null;
-  showPackage: HTMLButtonElement | null;
+  activeBtnServiceId: RefObject<HTMLButtonElement> | null;
+  showPackage: RefObject<HTMLButtonElement> | null;
   isLoading: boolean;
   isSelected: boolean | null; 
 };
@@ -27,31 +26,28 @@ type Action =
   | { type: 'toggledropdown' }
   | { type: 'toggledropdownmobile' }
   | { type: 'togglearrow' }
-  | { type: 'setshowpackage'; payload: HTMLButtonElement | null }
+  | { type: 'setshowpackage'; payload: RefObject<HTMLButtonElement> }
   | { type: 'setActiveIndex'; payload: number }
   | { type: 'setSubNavActiveIndex'; payload: number }
-  | { type: 'setactiveBtnService'; payload: HTMLButtonElement | null } 
+  | { type: 'setactiveBtnService'; payload: RefObject<HTMLButtonElement> } 
   | { type: 'shownav' }
   | { type: 'setIsLoading'; payload: boolean };
 
-  
-// Create the context with a default value
 const mbisContext = createContext<{
   state: State;
   dispatch: React.Dispatch<Action>;
 } | undefined>(undefined);
 
 const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Find nav items in array
-  const mainNav = navbar.find((navList) => navList.id === 'mainNav');
-  const subNav = navbar.find((navList) => navList.id === 'subItems');
+    // Find nav items in array
+    const mainNav = navbar.find((navList) => navList.id === 'mainNav');
+    const subNav = navbar.find((navList) => navList.id === 'subItems');
 
-  // Ensure initial state structure matches required data
   const initialState: State = {
     navbar_bar: false,
     activeIndex: -1,
     subNavActiveIndex: -1,
-    navItems: mainNav ? mainNav.navItems : [], // Default to empty array if mainNav is not found
+     navItems: mainNav ? mainNav.navItems : [], 
     dropdownItems: subNav ? subNav.navItems : [],
     navbtn: false,
     dropdown: false,
@@ -67,84 +63,33 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const reducer = (state: State, action: Action): State => {
     switch (action.type) {
       case 'togglenav':
-        return {
-          ...state,
-          navbar_bar: !state.navbar_bar,
-        };
-
+        return { ...state, navbar_bar: !state.navbar_bar };
       case 'setSelected':
-        return {
-          ...state,
-          isSelected: action.payload,
-        };
-
+        return { ...state, isSelected: action.payload };
       case 'togglenavbtn':
-        return {
-          ...state,
-          navbtn: !state.navbtn,
-        };
-
+        return { ...state, navbtn: !state.navbtn };
       case 'toggledropdown':
-        return {
-          ...state,
-          dropdown: !state.dropdown,
-        };
-
+        return { ...state, dropdown: !state.dropdown };
       case 'toggledropdownmobile':
-        return {
-          ...state,
-          dropdownmobile: !state.dropdownmobile,
-        };
-
+        return { ...state, dropdownmobile: !state.dropdownmobile };
       case 'togglearrow':
-        return {
-          ...state,
-          arrow: !state.arrow,
-        };
-
+        return { ...state, arrow: !state.arrow };
       case 'setshowpackage':
-        return {
-          ...state,
-          showPackage: action.payload,
-        };
-
+        return { ...state, showPackage: action.payload };
       case 'setActiveIndex': {
-        const newActiveIndex =
-          state.activeIndex === action.payload ? -1 : action.payload; // Toggle active state
-
-        return {
-          ...state,
-          activeIndex: newActiveIndex,
-        };
+        const newActiveIndex = state.activeIndex === action.payload ? -1 : action.payload;
+        return { ...state, activeIndex: newActiveIndex };
       }
-
       case 'setSubNavActiveIndex': {
-        const newSubNavActiveIndex =
-          state.subNavActiveIndex === action.payload ? -1 : action.payload; // Toggle active state
-        return {
-          ...state,
-          subNavActiveIndex: newSubNavActiveIndex,
-        };
+        const newSubNavActiveIndex = state.subNavActiveIndex === action.payload ? -1 : action.payload;
+        return { ...state, subNavActiveIndex: newSubNavActiveIndex };
       }
-
       case 'setactiveBtnService':
-        return {
-          ...state,
-          activeBtnServiceId: action.payload,
-        };
-
+        return { ...state, activeBtnServiceId: action.payload };
       case 'shownav':
-        return {
-          ...state,
-          isActive: !state.isActive,
-        };
-
+        return { ...state, isActive: !state.isActive };
       case 'setIsLoading':
-        return {
-          ...state,
-          isLoading: action.payload,
-        };
-
+        return { ...state, isLoading: action.payload };
       default:
         return state;
     }
@@ -153,12 +98,7 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <mbisContext.Provider
-      value={{
-        state,
-        dispatch,
-      }}
-    >
+    <mbisContext.Provider value={{ state, dispatch }}>
       {children}
     </mbisContext.Provider>
   );

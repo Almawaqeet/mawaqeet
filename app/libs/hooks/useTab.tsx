@@ -1,5 +1,5 @@
-import { useRef, RefObject } from 'react';
-import { useMbisContext } from './useContextProvider';
+import { RefObject, useRef } from "react";
+import { useMbisContext } from "./useContextProvider";
 
 export const useTab = () => {
   const { dispatch, state: { activeBtnServiceId, showPackage } } = useMbisContext();
@@ -10,11 +10,10 @@ export const useTab = () => {
   const btn4Ref = useRef<HTMLButtonElement>(null);
 
   const handleButtonClick = (buttonRef: RefObject<HTMLButtonElement>) => () => {
-    if (showPackage && activeBtnServiceId !== buttonRef.current) {
-      if (buttonRef.current) {
-        dispatch({ type: 'setshowpackage', payload: buttonRef.current });
-        dispatch({ type: 'setactiveBtnService', payload: buttonRef.current });
-      }
+    if (showPackage !== buttonRef.current && activeBtnServiceId !== buttonRef.current) {
+      dispatch({ type: 'setshowpackage', payload: buttonRef });
+      dispatch({ type: 'setactiveBtnService', payload: buttonRef });
+      
     }
   };
 

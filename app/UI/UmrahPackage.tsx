@@ -19,12 +19,12 @@ import Headings from '../libs/utilities/Headings';
 const UmrahPackage: React.FC = () => {
   return (
     <>
-      <div className="sm:grid sm:grid-cols-[300px_1fr] md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_500px] items-center justify-center lg:gap-12 md:gap-10 mobile:gap-2">
+      <div className="sm:grid sm:grid-cols-[300px_1fr] md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_500px] items-center justify-center lg:gap-12 md:gap-10 mobile:gap-2 mt-20">
         <div className="flex flex-col relative">
           {title_intro_hajj.map((title) => (
             <Headings
               type="sectionName"
-              classname=" sm:text-left xmd:text-center mb-3 xmd:hidden sm:block"
+              classname=" sm:text-left xmd:text-center mb-3 xmd:hidden sm:block font-dejavu"
               key={`title-${title.id}`}
             >
               {title.intro_1_1}
@@ -36,7 +36,8 @@ const UmrahPackage: React.FC = () => {
               <UmrahDiv
                 key={`category-${category.id}`}
                 umrahbatch={category.umrahbatches}
-                icon={<FaArrowsDownToPeople className="text-hover-color" />}
+                icon={<FaArrowsDownToPeople className="text-hover-color " />}
+                
               />
             ))
           )}
@@ -49,6 +50,7 @@ const UmrahPackage: React.FC = () => {
           className="xmd:hidden sm:block mobile:h-full"
           height={100}
           width={100}
+          layout='responsive'
            />
         </div>
       </div>
@@ -56,24 +58,17 @@ const UmrahPackage: React.FC = () => {
         {title_intro_hajj.map((title) => (
           <Headings
             type="heading_1"
-            classname="text-left sm:block xmd:hidden sm:pb-4"
+            classname="text-left sm:block xmd:hidden sm:pb-4 font-dejavu"
             key={`heading_1-${title.id}`}
           >
             {title.intro_2}
           </Headings>
         ))}
       </div>
-      <div className="grid xmd:grid-cols-1 xmd:gap-8 mobile:grid-flow-row w-full md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr]">
-        {packages.map((pack, i) => (
-          <div
-            key={`container-${i}`}
-            className={`${i === 0 && 'md:col-span-2 lg:col-span-1'} ${
-              i === 2 && ' md:col-auto'
-            } ${i === 1 && 'mobile:w-full'} `}
-          >
-            <PackagesContent pack={pack} key={`pack-${pack.id}`} index={i} />
-          </div>
-        ))}
+      <div className="grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]">
+       
+            <PackagesContent  />
+         
       </div>
     </>
   );

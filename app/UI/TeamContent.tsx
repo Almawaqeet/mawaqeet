@@ -15,29 +15,15 @@ import {
 import Team from './Team';
 import Bullet from './Bullet';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
+import useSlider from '../libs/hooks/useSlider';
 
 const TeamContent: React.FC = ({
  
 }) => {
-  const [api, setApi] = React.useState<CarouselApi>()
-  const [current, setCurrent] = React.useState(0)
-  const [count, setCount] = React.useState(0)
- 
-  React.useEffect(() => {
-    if (!api) {
-      return
-    }
- 
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap() + 1)
- 
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1)
-    })
-  }, [api])
+ const { setApi, current } = useSlider()
   return (
     <section
-      className={` ${whiteSpaces.paddingX} xmd:max-w-[2000px] m-auto justify-center`}
+      className={` ${whiteSpaces.paddingX} ${whiteSpaces.paddingY} xmd:max-w-[2000px] m-auto justify-center`}
     >
       <Carousel
         className="xmd:w-11/12 grid m-auto xmd:h-[560px] sm:h-[550px] md:h-[620px] lg:w-full md:w-full lg:h-[630px]"
