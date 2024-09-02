@@ -1,7 +1,5 @@
 import React from 'react';
-import { type CarouselApi } from "../../components/ui/carousel"
 import { about_us_team } from '../contents/about';
-// Define interface for Team member object
 
 
 import {
@@ -18,7 +16,7 @@ import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import useSlider from '../libs/hooks/useSlider';
 
 const TeamContent: React.FC = ({
- 
+
 }) => {
  const { setApi, current } = useSlider()
   return (

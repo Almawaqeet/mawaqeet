@@ -4,7 +4,7 @@ import React from 'react';
 
 interface HeadingsProps {
   children: React.ReactNode | StaticImageData | null;
-  type: 'BrandText' | 'heroHeading' | 'heading_1' | 'heading_2' | 'quoteText' | 'schemeText' | 'sectionName';
+  type: 'BrandText' | 'heroHeading' | 'heading_1' | 'heading_2' | 'quoteText' | 'schemeText' | 'sectionName'| 'global';
   classname?: string;
 }
 
@@ -16,6 +16,7 @@ const Headings: React.FC<HeadingsProps> = ({ children, type, classname }) => {
   const Bold_2_clamp = 'text-Bold-2-clamp';
   const quote = 'text-quote-clamp';
   const scheme = 'text-scheme-clamp';
+  const global = 'text-account-clamp';
 
   const styles = {
     BrandText: `${Brand_clamp} font-sahur-ramadan font-normal mobile:leading-5 sm:leading-10`,
@@ -25,6 +26,7 @@ const Headings: React.FC<HeadingsProps> = ({ children, type, classname }) => {
     heading_2: `${Bold_2_clamp} font-bold tracking-wide mobile:leading-[14px] sm:leading-[20px] font-dejavu`,
     quoteText: `${quote} font-bold tracking-wide mobile:leading-5 sm:leading-6 md:leading-10 text-left font-dejavu`,
     schemeText: `${scheme} font-bold mobile:tracking-normal text-white sm:tracking-[1.6px] mobile:leading-8 md:leading-12 text-center font-dejavu`,
+    global: `${global}`
   };
 
   const renderContent = () => {
@@ -59,6 +61,9 @@ const Headings: React.FC<HeadingsProps> = ({ children, type, classname }) => {
 
     case 'sectionName':
       return <h4 className={styles[type]}>{renderContent()}</h4>;
+
+      case 'global':
+        return <h4 className={styles[type]}>{renderContent()}</h4>;
 
     default:
       return null;

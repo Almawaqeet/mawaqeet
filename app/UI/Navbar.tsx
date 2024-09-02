@@ -37,9 +37,9 @@ const Navbar: React.FC = () => {
   
 
   const handleDropdownToggle = () => {
-    dispatch({ type: 'toggledropdown' });
-    dispatch({ type: 'toggledropdownmobile' });
-    dispatch({ type: 'togglearrow' });
+    dispatch({ type: 'toggledropdown', payload:true });
+    dispatch({ type: 'toggledropdownmobile', payload:true });
+    dispatch({ type: 'togglearrow', payload: true });
   };
 
   const handleToggleNav = () => {
@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
 
   return (
     <section className="xmd:max-w-[375px] mobile:max-w-[700px] sm:max-w-[900px] lg:max-w-[2000px] tab_md:max-w-[1500px] m-auto relative z-50">
-      <nav className={`${whiteSpaces.paddingX} xmd:h-16 lg:h-[80px] tab_md:h-16 drop-shadow-white-ash grid my-auto bg-white mobile:right-0 xmd:w-full tab_md:relative xmd:fixed`}>
+      <nav className={`${whiteSpaces.paddingX} xmd:h-16 lg:h-[80px] tab_md:h-16 drop-shadow-white-ash shadow-md grid my-auto bg-white mobile:right-0 xmd:w-full tab_md:relative xmd:fixed xmd:top-0`}>
         <ul className="flex justify-between items-center font-dejavu lg:gap-12 md:gap-10 text-navbar-clamp font-normal md:leading-5">
           <div>
             <li className="flex gap-2 mobile:gap-3 tab_md:gap-[4px] items-center">
@@ -77,8 +77,10 @@ const Navbar: React.FC = () => {
             {navItems.map((item, i) => (
               <li
                 key={`nav-${item.id}`}
-                onClick={() =>
+                onClick={() => {
                   dispatch({ type: 'setActiveIndex', payload: item.id })
+                  
+                }
                 }
                 className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${
                   item.id === activeIndex
@@ -114,12 +116,14 @@ const Navbar: React.FC = () => {
                         {dropdownItems.map((itm) => (
                           <ol
                             key={`itm-${itm.id}`}
-                            onClick={() =>
+                            onClick={() => {
                               dispatch({
                                 type: 'setSubNavActiveIndex',
                                 payload: itm.id,
                               })
-                            }
+                              dispatch({ type: 'toggledropdown', payload:false });
+                              dispatch({ type: 'togglearrow', payload:false });
+                            }}
                             className={`md:block mobile:hidden text-left hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[200] cursor-pointer font-normal text-fz-xss px-7 py-2 items-center font-dejavu ${
                               itm.id === subNavActiveIndex
                                 ? 'bg-hover-color text-white hover:text-white'
@@ -220,11 +224,14 @@ const Navbar: React.FC = () => {
                         {dropdownItems.map((itm) => (
                           <ol
                             key={`itm-${itm.id}`}
-                            onClick={() =>
+                            onClick={() => {
                               dispatch({
                                 type: 'setSubNavActiveIndex',
                                 payload: itm.id,
                               })
+                              dispatch({ type: 'toggledropdownmobile', payload:true });
+                              dispatch({ type: 'togglearrow', payload: false });
+                            }
                             }
                             className={`text-left hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[200] cursor-pointer font-normal text-fz-xsm px-4 py-2 items-center font-dejavu ${
                               itm.id === subNavActiveIndex

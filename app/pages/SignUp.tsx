@@ -1,0 +1,103 @@
+import React from 'react'
+import Image from 'next/image';
+import { IoEyeOutline } from "react-icons/io5";
+import { whiteSpaces } from '../libs/utilities/GlobalSpaces'
+import FormInput from '../UI/FormInput'
+import Headings from '../libs/utilities/Headings'
+import Paragraph from '../libs/utilities/Paragraph'
+import BtnGlobal from '../UI/BtnGlobal';
+import { FaFacebook } from "react-icons/fa6";
+import Footer from '../UI/Footer';
+
+const SignUp = () => {
+    return (
+        <section className='max-w-[2000px] m-auto '>
+            <main className='sm:grid md:grid-cols-[1fr_1fr]'>
+                <div>
+                    <Image
+                    src={'/images/regImg.png'}
+                    alt='reg-img'
+                    height={100}
+                    width={100}
+                    layout='responsive'
+                    className='md:block xmd:hidden object-contain'
+                     />
+                </div>
+            <div className={`${whiteSpaces.sectionMargin} ${whiteSpaces.paddingX} xmd:pt-16 md:pt-4 lg:mt-16`}>
+                <Headings
+                    type='global'
+                    classname=' text-inherit xmd:pb-10  md:pb-4 lg:pb-8 font-bold font-dejavu leading-[18px] tracking-tight text-account-clamp'
+                >Create Account</Headings>
+
+                <Paragraph
+                    type='global'
+                    classname='text-Bold-1-clamp text-inherit xmd:pb-10  lg:pb-[5.5rem] md:pb-[1.5rem] tracking-tight font-normal font-dejavu'
+                >Fill all required details</Paragraph>
+
+                <FormInput
+                    label='First Name'
+                    name='first-name'
+                    placeholder='First Name'
+                    type='text'
+                    
+                />
+
+                <FormInput
+                    label='Last Name'
+                    name='last-name'
+                    placeholder='Last Name'
+                    type='text'
+                />
+
+                <FormInput
+                    label='Email Address'
+                    placeholder='Your Email Address'
+                    name='email'
+                    type='email'
+                />
+
+                <FormInput
+                    label='Password'
+                    placeholder='********'
+                    name='password'
+                    type='password'
+                    icon={<IoEyeOutline />
+                    }
+                />
+
+                <FormInput
+                    label='Phone Number'
+                    placeholder='Your Phone Number'
+                    name='phone number'
+                    type='number'
+                    className='xmd:pb-14 md:pb-16'
+                />
+
+                <div className='flex justify-center xmd:gap-[50px] xmd:pb-14'>
+                    <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#848484] font-dejavu'>Already have an account?</Paragraph>
+
+                    <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#87592A] font-dejavu'>Sign In</Paragraph>
+                </div>
+
+                <div className=' xmd:pb-[22px] md:pb-[19px]'>
+                    <BtnGlobal icon={<FaFacebook className="text-white w-[27px] h-[27px] grid m-auto" />} className='bg-[#357AFF] text-fz-xss text-white text-center font-dejavu xmd:w-3/4 grid m-auto rounded-lg' btnStyle='justify-center xmd:gap-8 flex-row-reverse'>Continue with Facebook</BtnGlobal>
+                </div>
+
+                <div>
+                    <BtnGlobal
+                        icon={<Image src='/images/googlelogo.png' alt='Google Logo' width={20} height={20} />}
+                        className='border-[0.5px] border-[#EB4335] text-fz-xss text-center font-dejavu text-[#333333] xmd:w-3/4 m-auto rounded-lg justify-center '
+                        btnStyle='flex-row-reverse xmd:gap-8'>
+                        Continue with Google
+                    </BtnGlobal>
+                </div>
+                </div>
+            </main>
+            <footer className='mt-24 md:mt-2'>
+                <Footer />
+            </footer>
+        </section>
+    )
+}
+
+export default SignUp

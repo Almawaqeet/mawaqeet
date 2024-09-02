@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StaticImageData } from "next/image";
-import  Image  from "next/image";
+import Image from "next/image"
 
 import BtnGlobal from "./BtnGlobal";
 import Headings from "../libs/utilities/Headings";
@@ -57,6 +57,7 @@ const Team: React.FC<TeamProps> = ({
           <Paragraph
             type="global"
             classname="font-normal xmd:leading-5 md:leading-8 text-center xmd:tracking-[0.16px] text-team-clamp group-hover:text-white"
+            
           >
             {personality}
           </Paragraph>
@@ -78,6 +79,7 @@ const Team: React.FC<TeamProps> = ({
               } ${
                 index === 0 ? "mobile:top-0 xmd:relative md:top-0" : ""
               } xmd:rounded-[20px] drop-shadow-trans-white border-2 border-[#4b3938] xmd:px-6 xmd:py-3 group-hover:border-white`}
+              
             >
               <Paragraph
                 type="global"

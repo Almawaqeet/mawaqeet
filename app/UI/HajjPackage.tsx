@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { packages, scholarship_guidance, title_intro_hajj, why_scholarship_guidance } from '../contents/services';
+import { scholarship_guidance, title_intro_hajj, why_scholarship_guidance } from '../contents/services';
 
 import PackagesContent from './PackagesContent';
 import Headings from '../libs/utilities/Headings';
@@ -89,10 +89,10 @@ const HajjPackage: React.FC = () => {
         <div className='sm:grid sm:grid-cols-[1fr_1fr]  xmd:gap-8 md:gap-16'>
           {why_scholarship_heading?.why_scholarship_heading.map((itm, index) => (
             < React.Fragment>
-              <div className='' key={`${itm.id}${index}`}>
+              <div className='xmd:pb-8 md:pb-0' key={`${itm.id}${index}`}>
                 <div>
                   <span className='flex xmd:gap-4 md:gap-1' key={`${itm.id}-hi`}>
-                    <Bullet className='md:w-2'/>
+                    <Bullet className='md:w-[8px]'/>
                     <Paragraph type='globalBold' classname='font-bold xmd:leading-5 text-body-clamp tracking-tight font-dejavu w-full pb-1' key={`${itm.id}-par`}>{itm.heading_content}</Paragraph>
                   </span>
                   <Paragraph type='bodyParagraph' classname={`text-justify`} key={`${itm.id}-par`}>{why_scholarship_body?.why_scholarship_heading[index].heading_content}</Paragraph>

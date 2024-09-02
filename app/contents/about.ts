@@ -1,6 +1,5 @@
 import { StaticImageData } from 'next/image';
 import team1 from '../../public/images/team_1.png';
-import team2 from '../../public/images/team_2.png';
 import team3 from '../../public/images/team_3.png';
 import team4 from '../../public/images/team_4.png';
 
@@ -77,24 +76,6 @@ export const about_us_team: AboutUsTeam[] = [
       'Shaykh Abdul-Hakeem’s efforts extend beyond the confines of his institute. He has been a pivotal figure in numerous da’wah activities across Nigeria, tirelessly working to spread the message of Islam. His lectures, seminars, and workshops are known for their depth of knowledge, clarity, and relevance, touching on various aspects of faith, spirituality, and practical life.',
     profile_4:
       'With a deep commitment to Islamic principles and a passion for community service, Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi continues to be a beacon of guidance and inspiration for Muslims in Nigeria and beyond. His unwavering dedication to da’wah and the welfare of pilgrims cements his role as a leading figure in the Islamic community.',
-  },
-  {
-    id: 'img3',
-    image: team2,
-    fullname: 'Dr. Abubakar AbdulMumin Eleyinla',
-    post: 'Ameerul Hajj',
-    personality: '{Ph.D in Hadeeth Studies and its Sciences, Islamic University of Madeenah, Kingdom of Saudi Arabia}',
-    view_profile: 'View Profile',
-    profile_1:
-      'Shaykh Dr. Abdulmumeen Abubakar Eleyinla is an honored Nigerian scholar specializing in Hadeeth Studies. He holds a Ph.D. in Hadeeth Studies and its Sciences from the prestigious Islamic University of Madeenah, Kingdom of Saudi Arabia. With a profound understanding of Islamic traditions and an extensive knowledge of Hadeeth, Dr. Eleyinla has made significant contributions to the field of Islamic scholarship.',
-    profile_2:
-      'For over a decade, Shaykh Dr. Abdulmumeen has served as a guide for Hajj and Umrah pilgrims, providing spiritual and practical guidance to thousands of Muslims undertaking these sacred journeys. His deep knowledge of the rituals and his compassionate approach have earned him respect and admiration from pilgrims and scholars alike.',
-    profile_3:
-      'Dr. Eleyinla’s contributions to the growth of Islam extend beyond his work as a guide. He has been an influential figure in promoting Islamic education and scholarship both in Nigeria and internationally. His teachings and writings have enriched the understanding of Hadeeth and its sciences, offering valuable insights and guidance to students and scholars.',
-    profile_4:
-      "Through his scholarship, mentorship, and leadership, Shaykh Dr. Abdulmumeen Abubakar Eleyinla has had a profound impact on the Islamic world. His work continues to inspire and educate, leaving a lasting legacy in the field of Islamic studies and beyond. He's the Ameerul Hajj of Al-Mawaqeet Travels and Tours.",
-    profile_5:
-      'In addition to his academic and practical contributions, Shaykh Dr. Abdulmumeen has been actively involved in various Islamic organizations and institutions. His dedication to spreading authentic Islamic knowledge and his commitment to the spiritual development of the Muslim community have made him a beloved and respected figure.',
   },
   {
     id: 'img4',

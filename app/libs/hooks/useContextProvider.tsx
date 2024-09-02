@@ -23,9 +23,9 @@ type Action =
   | { type: 'togglenav' }
   | { type: 'setSelected'; payload: boolean | null } 
   | { type: 'togglenavbtn' }
-  | { type: 'toggledropdown' }
-  | { type: 'toggledropdownmobile' }
-  | { type: 'togglearrow' }
+  | { type: 'toggledropdown', payload: boolean }
+  | { type: 'toggledropdownmobile', payload: boolean }
+  | { type: 'togglearrow', payload: boolean }
   | { type: 'setshowpackage'; payload: RefObject<HTMLButtonElement> }
   | { type: 'setActiveIndex'; payload: number }
   | { type: 'setSubNavActiveIndex'; payload: number }
@@ -69,11 +69,11 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       case 'togglenavbtn':
         return { ...state, navbtn: !state.navbtn };
       case 'toggledropdown':
-        return { ...state, dropdown: !state.dropdown };
+        return { ...state, dropdown: action.payload !== state.dropdown ? action.payload : !state.dropdown };
       case 'toggledropdownmobile':
-        return { ...state, dropdownmobile: !state.dropdownmobile };
+        return { ...state,  dropdownmobile: action.payload !== state.dropdownmobile ? action.payload : !state.dropdownmobile };
       case 'togglearrow':
-        return { ...state, arrow: !state.arrow };
+        return { ...state, arrow: action.payload !== !state.arrow ? action.payload : !state.arrow };
       case 'setshowpackage':
         return { ...state, showPackage: action.payload };
       case 'setActiveIndex': {

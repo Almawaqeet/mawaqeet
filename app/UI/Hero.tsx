@@ -26,9 +26,9 @@ const Hero: React.FC<HeroProps> = ({ heading, subheading, CTA, subCTA }) => {
               {CTA}
             </BtnGlobal>
 
-            <div className="flex gap-[5px] items-center justify-center">
-              <BtnGlobal className="font-normal text-Bold-2-clamp leading-4 -tracking-tight cursor-pointer m-auto flex items-center flex-row-reverse xmd:px-6 tab_md:px-8 xmd:py-3 md:relative md:bottom-3 gap-1  md:mb-0">
-                <BsArrowRight className="mobile:w-4 mobile:h-8 tab_md:w-5 tab_md:h-5 hover:text-white" />
+            <div className="flex gap-[5px] items-center justify-center flex-col-reverse">
+              <BtnGlobal className="font-normal text-Bold-2-clamp leading-4 -tracking-tight cursor-pointer m-auto flex items-center flex-row-reverse xmd:px-6 tab_md:px-8 xmd:py-3 md:relative md:bottom-3 gap-1  md:mb-0 " icon={<BsArrowRight className="mobile:w-4 mobile:h-8 tab_md:w-5 tab_md:h-5 hover:text-white" />} btnStyle="gap-4 flex" >
+                
                 {subCTA}
               </BtnGlobal>
             </div>

@@ -9,7 +9,7 @@ import HajjPackage from './HajjPackage';
 import UmrahPackage from './UmrahPackage';
 import Complementary from './Complementary';
 import SavingScheme from './SavingScheme';
-import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
+
 
 const ServiceTab: React.FC = () => {
   const { btn1Ref, btn2Ref, btn3Ref, btn4Ref, showPackage, activeBtnServiceId, handleButtonClick } = useTab();

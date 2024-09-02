@@ -1,21 +1,34 @@
 import classNames from "classnames";
-import React from "react";
+import { StaticImageData } from "next/image";
+import Image from "next/image"; // Image should not be destructured, directly import
+import React, { ReactNode } from "react";
 
 interface BtnGlobalProps {
   children: React.ReactNode;
   className?: string;
+  btnStyle?: string;
+  icon?: ReactNode | StaticImageData;
   onClick?: () => void;
 }
 
-const BtnGlobal: React.FC<BtnGlobalProps> = ({ children, className, onClick }) => {
+const BtnGlobal: React.FC<BtnGlobalProps> = ({ children, className, icon, btnStyle, onClick }) => {
   const baseClasses = "h-[48px] rounded-[100px] font-dejavu";
-
   const buttonClasses = classNames(baseClasses, className);
 
   return (
-    <button className={buttonClasses} onClick={onClick}>
-      {children}
-    </button>
+    <div>
+      <button className={`${buttonClasses} flex items-center`} onClick={onClick}>
+        <span className={`flex items-center ${btnStyle}`}>
+        {children}
+          {icon && typeof icon === "object" && "src" in icon ? (
+            <Image src={icon} alt="" className="mr-2" />
+          ) : (
+            <span className="mr-2">{icon}</span>
+          )}
+          
+        </span>
+      </button>
+    </div>
   );
 };
 
