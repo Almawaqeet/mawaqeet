@@ -23,7 +23,8 @@
 
     "shadcn-ui": "^0.8.0",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "classnames": "^2.5.1"
   },
   "devDependencies": {
     "@types/node": "^20",

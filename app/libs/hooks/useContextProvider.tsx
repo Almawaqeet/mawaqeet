@@ -1,4 +1,5 @@
 import { navbar } from '@/app/contents/navbar';
+import Step1 from '@/app/UI/Step1';
 import React, { useReducer, createContext, ReactNode, RefObject, useContext } from 'react';
 
 // Define types for the state and actions
@@ -16,7 +17,9 @@ type State = {
   activeBtnServiceId: RefObject<HTMLButtonElement> | null;
   showPackage: RefObject<HTMLButtonElement> | null;
   isLoading: boolean;
-  isSelected: boolean | null; 
+  isSelected: boolean | null;
+  selectedNumber: number;
+  selectedComponent: ReactNode 
 };
 
 type Action =
@@ -31,7 +34,10 @@ type Action =
   | { type: 'setSubNavActiveIndex'; payload: number }
   | { type: 'setactiveBtnService'; payload: RefObject<HTMLButtonElement> } 
   | { type: 'shownav' }
-  | { type: 'setIsLoading'; payload: boolean };
+  | { type: 'setIsLoading'; payload: boolean }
+  | { type: 'setselectedNumber'; payload: number}
+  | { type: 'setSelectedComponent'; payload: ReactNode }
+  
 
 const mbisContext = createContext<{
   state: State;
@@ -58,6 +64,8 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     showPackage: null,
     isLoading: false,
     isSelected: null,
+    selectedNumber: 0,
+    selectedComponent: null
   };
 
   const reducer = (state: State, action: Action): State => {
@@ -90,6 +98,10 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         return { ...state, isActive: !state.isActive };
       case 'setIsLoading':
         return { ...state, isLoading: action.payload };
+        case 'setselectedNumber':
+        return { ...state, selectedNumber: action.payload };
+        case 'setSelectedComponent':
+          return { ...state, selectedComponent: action.payload };
       default:
         return state;
     }

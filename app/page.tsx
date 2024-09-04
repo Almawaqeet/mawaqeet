@@ -1,5 +1,4 @@
 "use client"
-
 import HomeV1 from "./UI/HomeV1";
 import Homes from "./pages/Home";
 import Navbar from "./UI/Navbar";
@@ -10,9 +9,8 @@ import About from "./pages/About";
 import ContactUs from "./pages/ContactUs";
 import LocateUs from "./UI/LocateUs";
 import Payment from "./UI/Payment";
+import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-
-
 
 export default function Home() {
   return (
@@ -27,7 +25,8 @@ export default function Home() {
         {/* <ContactUs /> */}
         {/* <LocateUs /> */}
         {/* <Payment /> */}
-        <SignUp />
+        {/* <SignUp /> */}
+        <Payment />
       </main>
     </MbisProvider>
   )

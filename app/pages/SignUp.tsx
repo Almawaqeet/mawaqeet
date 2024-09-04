@@ -13,25 +13,34 @@ const SignUp = () => {
     return (
         <section className='max-w-[2000px] m-auto '>
             <main className='sm:grid md:grid-cols-[1fr_1fr]'>
-                <div>
-                    <Image
-                    src={'/images/regImg.png'}
-                    alt='reg-img'
-                    height={100}
-                    width={100}
-                    layout='responsive'
-                    className='md:block xmd:hidden object-contain'
-                     />
-                </div>
-            <div className={`${whiteSpaces.sectionMargin} ${whiteSpaces.paddingX} xmd:pt-16 md:pt-4 lg:mt-16`}>
+            <div className='relative'>
+            <Image
+              src={'/images/regImg.png'}
+              alt='reg-img'
+              height={100}
+              width={100}
+              layout='responsive'
+              className='md:block xmd:hidden object-contain min-h-dvh min-w-full'
+            />
+            <Image
+              src={'/logo.png'}
+              alt='reg-img'
+              height={80}
+              width={80}
+            //   layout='responsive'
+              className='lg:block xmd:hidden object-contain absolute lg:bottom-5 right-5 md:bottom-auto opacity-50'
+            />
+          </div>
+          
+            <div className={`${whiteSpaces.sectionMargin} ${whiteSpaces.paddingX} xmd:pt-16 md:pt-4 xl:mt-16 lg:mt-8`}>
                 <Headings
                     type='global'
-                    classname=' text-inherit xmd:pb-10  md:pb-4 lg:pb-8 font-bold font-dejavu leading-[18px] tracking-tight text-account-clamp'
+                    classname=' text-inherit xmd:pb-10  md:pb-4 xl:pb-8 lg:pb-4 font-bold font-dejavu leading-[18px] tracking-tight text-account-clamp'
                 >Create Account</Headings>
 
                 <Paragraph
                     type='global'
-                    classname='text-Bold-1-clamp text-inherit xmd:pb-10  lg:pb-[5.5rem] md:pb-[1.5rem] tracking-tight font-normal font-dejavu'
+                    classname='text-Bold-1-clamp text-inherit xmd:pb-10  xl:pb-[5.5rem] lg:pb-[2.5rem] md:pb-[1.5rem] tracking-tight font-normal font-dejavu'
                 >Fill all required details</Paragraph>
 
                 <FormInput
@@ -70,10 +79,12 @@ const SignUp = () => {
                     placeholder='Your Phone Number'
                     name='phone number'
                     type='number'
-                    className='xmd:pb-14 md:pb-16'
+                    className='xmd:pb-14 md:pb-8 lg:pb-16'
                 />
 
-                <div className='flex justify-center xmd:gap-[50px] xmd:pb-14'>
+<BtnGlobal className='font-dejavu xmd:py-[10px] xmd:px-[78px] md:py-4 md:px-[108px] m-auto text-white text-center rounded-lg bg-[#4B3938]'>Sign In</BtnGlobal>
+
+                <div className='flex justify-center xmd:gap-[50px] xmd:pb-14 md:pb-7 lg:pb-[106px] xmd:pt-[26px] lg:pt-[75px]'>
                     <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#848484] font-dejavu'>Already have an account?</Paragraph>
 
                     <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#87592A] font-dejavu'>Sign In</Paragraph>
