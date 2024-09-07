@@ -6,7 +6,12 @@ import useSlider from '../libs/hooks/useSlider';
 import { packages } from '../contents/services';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 
-const PackagesContent: React.FC = () => {
+type packProps = {
+  offstyle?: string
+  offheight?: string
+}
+
+const PackagesContent: React.FC<packProps> = ({ offstyle, offheight }) => {
   const { setApi, current } = useSlider();
 
   const isMobile = window.innerWidth < 1020;
@@ -19,7 +24,7 @@ const PackagesContent: React.FC = () => {
             className={` ${whiteSpaces.paddingX} ${whiteSpaces.paddingY} xmd:max-w-[2000px] m-auto `}
           >
 
-            <Carousel className=" xmd:w-full m-auto grid sm:h-[900px] lg:w-full md:w-full md:h-[870px] lg:h-[800px]" setApi={setApi}>
+            <Carousel className={` xmd:w-full m-auto grid sm:h-[900px] lg:w-full md:w-full md:h-[870px] lg:h-[800px] ${offheight}`} setApi={setApi}>
               <CarouselContent >
                 {packages.map((pack, idx) => {
                   const { id, package_title, content, conclusion, heading } = pack;
@@ -38,6 +43,8 @@ const PackagesContent: React.FC = () => {
                         title_head={package_title}
                         index={idx}
                         className="md:block"
+                        offstyle={offstyle}
+                        offheight={offheight}
                       />
                     </CarouselItem>
                   );
@@ -70,7 +77,8 @@ const PackagesContent: React.FC = () => {
               title_conclusion={conclusion}
               title_head={package_title}
               index={idx}
-
+            offstyle={offstyle}
+            offheight={offheight}
             />
           );
         })

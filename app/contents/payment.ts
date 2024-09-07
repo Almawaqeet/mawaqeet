@@ -1,3 +1,6 @@
+import { ReactElement, ReactNode } from "react"
+
+
 type Content = {
     id: string,
     item: string
@@ -16,6 +19,7 @@ type paymentDetailsProps = {
 type AppForm = {
     id: string,
     content: string
+    component?: ReactElement
 }
 
 export const payment:paymentProps[] = [
@@ -23,12 +27,12 @@ export const payment:paymentProps[] = [
         id: 'itm',
         content: [
             {
-                id: 'pay',
-                item: 'Payment Info'
-            },
-            {
                 id: 'app',
                 item: 'Application Form'
+            },
+            {
+                id: 'pay',
+                item: 'Payment Info'
             }
         ]
     }
@@ -64,16 +68,43 @@ export const paymentDetails:paymentDetailsProps[] = [
 export const appForm: AppForm[] = [
     {
         id: '1',
-        content: 'Step 1'
+        content: '1'
     },
 
     {
         id: '2',
-        content: 'Step 2'
+        content: '2'
     },
 
     {
         id: '3',
-        content: 'Step 3'
+        content: '3'
     }
-] 
+]
+
+export const apptype: AppForm[] = [
+    {
+        id: '1',
+        content: 'Hajj Package'
+    },
+
+    {
+        id: '2',
+        content: 'Umrah Package'
+    }
+]
+
+
+export const packtype: AppForm[] = [
+    {
+      id: '1',
+      content: 'Saving Scheme',
+     
+    },
+
+    {
+      id: '2',
+      content: 'Upfront Payment',
+    }
+  ];
+  

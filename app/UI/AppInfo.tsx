@@ -1,14 +1,19 @@
 import React from 'react';
-import useAppInfo from '../libs/hooks/useAppInfo'; 
-import BtnGlobal from './BtnGlobal';
-import Paragraph from '../libs/utilities/Paragraph';
-import { appForm } from '../contents/payment';
 import Headings from '../libs/utilities/Headings';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
+import Paragraph from '../libs/utilities/Paragraph';
+import { appForm } from '../contents/payment';
+import { MdArrowRightAlt } from "react-icons/md";
+
+
+import { useAppInfo } from '../libs/hooks/useAppInfo';
+import AppInfoContent from './AppInfoContent';
+import Footer from './Footer';
+import ComplementNum from './ComplementNum';
+
 
 const AppInfo = () => {
-    const { selectedNumber, selectedComponent, handleNext, handlePrevious } = useAppInfo();
-
+    const { selectedNumber } = useAppInfo()
     return (
         <div>
             <section className='max-w-[2000px] m-auto'>
@@ -21,41 +26,43 @@ const AppInfo = () => {
                         Provide all the required Information
                     </Paragraph>
 
-                    <div className='flex xmd:gap-8 md:gap-[50px] xmd:justify-center md:justify-start'>
-                        {appForm.map((app, i) => (
-                            <div className='flex flex-col' key={app.id}>
-                                <div
-                                    className={`xmd:px-4 xmd:py-3 rounded-sm cursor-pointer ${selectedNumber === i ? 'bg-hover-color text-white' : 'bg-white'}`}
-                                >
-                                    <Paragraph type='global' classname={`text-quote-clamp font-normal xmd:text-center md:text-start leading-5 tracking-tight font-dejavu`}>
-                                        {app.content}
-                                    </Paragraph>
-                                </div>
 
-                                {selectedComponent}
+                    <div>
+                        <div className='grid grid-cols-3'>
+                            {appForm.map((app, i) => (
+                                <div className='w-full' key={app.id}>
+                                    <span className='flex items-center relative'>
+                                        
+                                        <ComplementNum
+                                            className={`xmd:w-[50px] xmd:h-[50px] m-auto cursor-pointer relative ${selectedNumber === i ? 'bg-hover-color text-white transition-all' : 'bg-white border-dotted border-2 border-[#333333]'}`}
+                                            position={i + 1}
+                                        />
 
-                                {selectedNumber === i && (
-                                    <div className='mt-4'>
-                                        {i > 0 ? (
-                                            <span className='flex gap-2'>
-                                                <BtnGlobal onClick={handlePrevious} className='font-dejavu bg-blue-500 text-white px-4 py-2 rounded'>
-                                                    Previous
-                                                </BtnGlobal>
-                                                <BtnGlobal onClick={handleNext} className='font-dejavu bg-blue-500 text-white px-4 py-2 rounded'>
-                                                    Next
-                                                </BtnGlobal>
-                                            </span>
-                                        ) : (
-                                            <button onClick={handleNext} className='font-dejavu bg-blue-500 text-white px-4 py-2 rounded'>
-                                                Next
-                                            </button>
+                                        
+                                        {i !== 2 && (
+                                            <MdArrowRightAlt
+                                                className='absolute top-1/2 text-[82px] left-3/4 transform -translate-y-1/2 m-auto text-[#A0A8AD] '
+                                               
+                                            />
                                         )}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
+                                    </span>
+
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </main>
+
+                {appForm.map((app, i) => (
+                    <React.Fragment key={app.id}>
+                        <AppInfoContent index={i} />
+
+                    </React.Fragment>
+                ))}
+            </section>
+
+            <section className='xmd:mt-[152px]'>
+                <Footer />
             </section>
         </div>
     );

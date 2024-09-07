@@ -42,7 +42,7 @@ const Payment = () => {
           
         </main>
       </section>
-      {selectedNumber && selectedComponent ? <AppInfo /> : <PayInfo />}
+      {selectedNumber && selectedComponent ? <PayInfo /> :  <AppInfo />}
     </div>
   )
 }
