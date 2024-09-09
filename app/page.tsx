@@ -11,22 +11,24 @@ import LocateUs from "./UI/LocateUs";
 import Payment from "./UI/Payment";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import PayInfo from "./UI/PayInfo";
+import ConfirmPayment from "./UI/ConfirmPayment";
 
 export default function Home() {
   return (
     <MbisProvider>
       <main>
         <Navbar />
-        {/* <Homes>
+        <Homes>
           <HomeV1 />
-        </Homes> */}
+        </Homes>
         {/* <About /> */}
         {/* <TeamProfile /> */}
         {/* <ContactUs /> */}
         {/* <LocateUs /> */}
-        {/* <Payment /> */}
         {/* <SignUp /> */}
-        <Payment />
+        {/* <Payment /> */}
+        {/* <ConfirmPayment /> */}
       </main>
     </MbisProvider>
   )

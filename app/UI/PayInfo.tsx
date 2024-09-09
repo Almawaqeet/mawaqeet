@@ -11,7 +11,7 @@ import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 const PayInfo = () => {
     return (
         <>
-            <section className='max-w-[2000px] m-auto'>
+            <section className='max-w-[2000px] m-auto relative'>
                 <div className={`${whiteSpaces.paddingX} xmd:pb-[87px] md:pb-[145px]`}>
                     <div className={`bg-[#F8F8F8] drop-shadow-transparent shadow-lg xmd:px-5  `}>
                         <main className='xmd:pt-[17px] md:pt-[58px] '>
@@ -26,8 +26,6 @@ const PayInfo = () => {
                                             {details.content}
                                         </span> : details.content}
                                     </Paragraph>
-
-
                                 </div>
                             ))}
 
@@ -35,8 +33,6 @@ const PayInfo = () => {
                                 <BtnGlobal className='font-dejavu xmd:py-[10px] xmd:px-[78px] md:py-4 md:px-[108px] m-auto text-white text-center rounded-lg bg-[#4B3938]'>Paid</BtnGlobal>
                             </div>
                         </main>
-
-
                     </div>
                 </div>
                 <footer>

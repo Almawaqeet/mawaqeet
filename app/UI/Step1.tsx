@@ -1,12 +1,11 @@
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces'
 import FormInput from '../UI/FormInput'
 import React from 'react'
-import Footer from './Footer'
 
 const Step1: React.FC = () => {
   return (
     <React.Fragment>
-      <div className={`${whiteSpaces.paddingX}`}>
+      <div className={`${whiteSpaces.paddingX} grid xmd:grid-cols-1 md:grid-cols-2 md:gap-x-20`}>
 
         <FormInput
           label='First Name'

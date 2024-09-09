@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Packages from './Packages';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Bullet from './Bullet';
@@ -9,12 +9,37 @@ import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 type packProps = {
   offstyle?: string
   offheight?: string
+  morestyle?: string
+  installment?: string
+  hajjupfront?: string
+  umrahupfront?: string
 }
 
-const PackagesContent: React.FC<packProps> = ({ offstyle, offheight }) => {
+const PackagesContent: React.FC<packProps> = ({ offstyle, offheight, morestyle, installment, hajjupfront, umrahupfront }) => {
   const { setApi, current } = useSlider();
 
-  const isMobile = window.innerWidth < 1020;
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1020);
+
+  const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
+
+  const handleClick = (index: number) => {
+    setSelectedPackage(index);
+  };
+
+  // useEffect to handle window resize and update the state
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1020);
+    };
+
+    // Add event listener on mount
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -27,7 +52,11 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offheight }) => {
             <Carousel className={` xmd:w-full m-auto grid sm:h-[900px] lg:w-full md:w-full md:h-[870px] lg:h-[800px] ${offheight}`} setApi={setApi}>
               <CarouselContent >
                 {packages.map((pack, idx) => {
-                  const { id, package_title, content, conclusion, heading } = pack;
+                  const { id, package_title, content, conclusion, heading, pricehajjinstallment, pricehajjupfront, priceumrahupfront } = pack;
+                  const { packs, week, any, month } = pricehajjinstallment
+                  const { amount: hajjUpfrontAmount } = pricehajjupfront;
+                  const { amount: umrahUpfrontAmount } = priceumrahupfront;
+
                   const bullets = Object.values(content).filter(Boolean) as string[];
 
                   return (
@@ -45,6 +74,18 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offheight }) => {
                         className="md:block"
                         offstyle={offstyle}
                         offheight={offheight}
+                        morestyle={morestyle}
+                        installment={installment}
+                        hajjupfront={hajjupfront}
+                        umrahupfront={umrahupfront}
+                        pack={packs}
+                        month={month}
+                        week={week}
+                        hajjamount={hajjUpfrontAmount}
+                        umrahamount={umrahUpfrontAmount}
+                        any={any}
+                        isSelected={selectedPackage === idx}
+                        handleClick={handleClick}
                       />
                     </CarouselItem>
                   );
@@ -66,7 +107,10 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offheight }) => {
         </>
       ) : (
         packages.map((pack, idx) => {
-          const { id, package_title, content, conclusion, heading } = pack;
+          const { id, package_title, content, conclusion, heading, pricehajjinstallment, pricehajjupfront, priceumrahupfront } = pack;
+          const { packs, week, any, month } = pricehajjinstallment
+          const { amount: hajjUpfrontAmount } = pricehajjupfront;
+          const { amount: umrahUpfrontAmount } = priceumrahupfront;
           const bullets = Object.values(content).filter(Boolean) as string[];
 
           return (
@@ -77,8 +121,20 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offheight }) => {
               title_conclusion={conclusion}
               title_head={package_title}
               index={idx}
-            offstyle={offstyle}
-            offheight={offheight}
+              offstyle={offstyle}
+              offheight={offheight}
+              morestyle={morestyle}
+              hajjupfront={hajjupfront}
+              umrahupfront={umrahupfront}
+              installment={installment}
+              pack={packs}
+              month={month}
+              week={week}
+              hajjamount={hajjUpfrontAmount}
+              umrahamount={umrahUpfrontAmount}
+              any={any}
+              isSelected={selectedPackage === idx}
+              handleClick={handleClick}
             />
           );
         })

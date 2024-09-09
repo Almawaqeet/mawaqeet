@@ -4,6 +4,7 @@ import { payment } from '../contents/payment'
 import Paragraph from '../libs/utilities/Paragraph'
 import PayInfo from './PayInfo'
 import AppInfo from './AppInfo'
+import ConfirmPayment from './ConfirmPayment'
 
 const Payment = () => {
   // Set the initial state to index 0
@@ -39,10 +40,12 @@ const Payment = () => {
             </div>
           ))}
 
-          
+          {/* <div className=''>
+            <ConfirmPayment image={'/images/Animation-pay.png'} className='absolute w-3/4 top-1 left-1/2 transform -translate-x-1/2 z-10' />
+          </div> */}
         </main>
       </section>
-      {selectedNumber && selectedComponent ? <PayInfo /> :  <AppInfo />}
+      {selectedNumber && selectedComponent ? <PayInfo /> : <AppInfo />}
     </div>
   )
 }

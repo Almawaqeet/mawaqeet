@@ -102,10 +102,24 @@ type PackageContent = {
   bullet_5?: string;
 };
 
+type PackagePrice = {
+  packs: string;
+  week: string;
+  month: string;
+  any: string;
+};
+
+type Upfront = {
+  amount: string
+}
+
 type Package = {
   id: string;
   package_title: string;
   heading: string;
+  pricehajjinstallment: PackagePrice
+  pricehajjupfront: Upfront
+  priceumrahupfront: Upfront
   content: PackageContent;
   conclusion: string;
 };
@@ -123,6 +137,22 @@ export const packages: Package[] = [
     package_title: "VIP Package",
     heading:
       "Indulge in a truly regal experience with our 5-star hotel accommodations, boasting:",
+
+      pricehajjinstallment: {
+        packs: 'VIP',
+        week: 'Weekly  =  1M',
+        month: 'Monthly  =  2M',
+        any: 'Any Amount  =  __'
+      },
+
+      pricehajjupfront: {
+        amount: 'Total Package = 10M'
+      },
+
+      priceumrahupfront: {
+        amount: 'Total Package = 4M'
+      },
+
     content: {
       bullet_1:
         "Luxurious rooms with en-suite bathrooms meticulously designed for your comfort",
@@ -143,6 +173,22 @@ export const packages: Package[] = [
     package_title: "Deluxe Package",
     heading:
       "Enjoy a harmonious blend of luxury and affordability with our Deluxe Package, carefully crafted to elevate your pilgrimage experience:",
+
+      pricehajjinstallment: {
+        packs: 'Deluxe',
+        week: 'Weekly  =  500K',
+        month: 'Monthly  =  1M',
+        any: 'Any Amount  =  __'
+      },
+
+      pricehajjupfront: {
+        amount: 'Total Package = 7M'
+      },
+
+      priceumrahupfront: {
+        amount: 'Total Package = 2.5M'
+      },
+
     content: {
       bullet_1:
         "4-star hotel lodging, just steps away from the Haram, offering unparalleled proximity",
@@ -161,6 +207,21 @@ export const packages: Package[] = [
     package_title: "Standard Package",
     heading:
       "Embark on a spiritual journey with our Standard Package, offering a perfect balance of affordability and comfort:",
+      pricehajjinstallment: {
+        packs: 'Standard',
+        week: 'Weekly  =  100K',
+        month: 'Monthly  =  500K',
+        any: 'Any Amount  =  __'
+      },
+
+      pricehajjupfront: {
+        amount: 'Total Package = 6M'
+      },
+
+      priceumrahupfront: {
+        amount: 'Total Package = 1.5M'
+      },
+
     content: {
       bullet_1:
         "3-star hotel lodging, just a short distance from the Haram (Makkah & Madeenah)",
