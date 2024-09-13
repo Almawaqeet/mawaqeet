@@ -1,9 +1,12 @@
+'use client'
 import React, { ReactNode, useState, useEffect } from 'react'
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces'
 import { payment } from '../contents/payment'
 import Paragraph from '../libs/utilities/Paragraph'
-import PayInfo from './PayInfo'
-import AppInfo from './AppInfo'
+import PayInfo from '../UI/PayInfo'
+import AppInfo from '../UI/AppInfo'
+import { MbisProvider } from '../libs/hooks/useContextProvider'
+import Navbar from '../UI/Navbar'
 
 const Payment = () => {
   const [selectedComponent, setSelectedComponent] = useState<ReactNode>(<PayInfo />);
@@ -20,7 +23,8 @@ const Payment = () => {
   }
 
   return (
-    <div>
+    <MbisProvider>
+        <Navbar />
       <section className={`max-w-[2000px] m-auto ${whiteSpaces.paddingY}`}>
         <main className={`${whiteSpaces.paddingX} xmd:pt-[89px] md:pt-[79px]`}>
           {payment.map((itm) => (
@@ -37,14 +41,10 @@ const Payment = () => {
               ))}
             </div>
           ))}
-
-          {/* <div className=''>
-            <ConfirmPayment image={'/images/Animation-pay.png'} className='absolute w-3/4 top-1 left-1/2 transform -translate-x-1/2 z-10' />
-          </div> */}
         </main>
       </section>
       {selectedNumber && selectedComponent ? <PayInfo /> : <AppInfo />}
-    </div>
+    </MbisProvider>
   )
 }
 

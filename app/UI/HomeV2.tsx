@@ -33,7 +33,7 @@ const HomeV2 = () => {
         </main>
       </section>
 
-      <section className={`${whiteSpaces.paddingY} mt-6`}>
+      <section className={``}>
         <main
           className={`  relative xmd:min-h-[680px] sm:min-h-[470px] md:min-h-[520px]  xmd:max-w-[375px] mobile:max-w-[700px] m-auto sm:max-w-[900px] md:max-w-[1000px] lg:max-w-[2000px] `}
         >

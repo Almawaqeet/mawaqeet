@@ -34,8 +34,9 @@ const HomeV1 = () => {
             {subText.sub_heading}
           </Headings>
         ))}
-        CTA="Get Package Price"
+        CTA="Get Started"
         subCTA="Learn More"
+        to='/registration-form'
       />
 
       <section
@@ -51,7 +52,7 @@ const HomeV1 = () => {
                 className="object-cover relative bottom-8"
                 width={250}
                 height={250}
-                // objectFit={'cover'}
+                
               />
               <Image
                 src="/images/stack_img_2.png"
@@ -59,7 +60,7 @@ const HomeV1 = () => {
                 className="object-cover"
                 width={250}
                 height={250}
-                // objectFit={'cover'}
+               
               />
               <Image
                 src="/images/stack_img_3.png"
@@ -67,7 +68,7 @@ const HomeV1 = () => {
                 className="object-cover"
                 width={250}
                 height={250}
-                // objectFit={'cover'}
+                
               />
               <Image
                 src="/images/stack_img_4.png"
@@ -75,7 +76,7 @@ const HomeV1 = () => {
                 className="object-cover relative top-1"
                 width={250}
                 height={250}
-                // objectFit={'cover'}
+              
               />
             </div>
 

@@ -9,7 +9,6 @@ export const useTab = () => {
 
   const { dispatch, state: { activeBtnServiceId, showPackage } } = useMbisContext();
 
-
   const handleButtonClick = (buttonRef: RefObject<HTMLButtonElement>) => () => {
     if (showPackage !== buttonRef.current && activeBtnServiceId !== buttonRef.current) {
       dispatch({ type: 'setshowpackage', payload: buttonRef });

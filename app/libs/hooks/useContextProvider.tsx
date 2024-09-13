@@ -1,5 +1,5 @@
+
 import { navbar } from '@/app/contents/navbar';
-import Step1 from '@/app/UI/Step1';
 import React, { useReducer, createContext, ReactNode, RefObject, useContext } from 'react';
 
 // Define types for the state and actions
@@ -22,7 +22,7 @@ type State = {
   selectedComponent: ReactNode 
 };
 
-type Action =
+type Action = 
   | { type: 'togglenav' }
   | { type: 'setSelected'; payload: boolean | null } 
   | { type: 'togglenavbtn' }
@@ -33,7 +33,7 @@ type Action =
   | { type: 'setActiveIndex'; payload: number }
   | { type: 'setSubNavActiveIndex'; payload: number }
   | { type: 'setactiveBtnService'; payload: RefObject<HTMLButtonElement> } 
-  | { type: 'shownav' }
+  | { type: 'shownav';  payload: boolean}
   | { type: 'setIsLoading'; payload: boolean }
   | { type: 'setselectedNumber'; payload: number}
   | { type: 'setSelectedComponent'; payload: ReactNode }
@@ -95,7 +95,7 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       case 'setactiveBtnService':
         return { ...state, activeBtnServiceId: action.payload };
       case 'shownav':
-        return { ...state, isActive: !state.isActive };
+        return { ...state,  isActive: action.payload !== state.isActive ? action.payload : !state.isActive };
       case 'setIsLoading':
         return { ...state, isLoading: action.payload };
         case 'setselectedNumber':

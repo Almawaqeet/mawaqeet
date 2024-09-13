@@ -1,12 +1,12 @@
 "use client"
 import React from 'react';
-import SlantDiv from '../UI/SlantDiv';
+import SlantDiv from './SlantDiv';
 
-import ServiceTab from '../UI/ServiceTab';
+import ServiceTab from './ServiceTab';
 
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import Headings from '../libs/utilities/Headings';
-import Footer from '../UI/Footer';
+import Footer from './Footer';
 
 
 
@@ -23,7 +23,7 @@ const Services: React.FC = () => {
             </Headings>
           </SlantDiv>
 
-          <div >
+          <div className={`${whiteSpaces.sectionMargin}`}>
             <ServiceTab />
           </div>
         </div>

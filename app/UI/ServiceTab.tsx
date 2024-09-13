@@ -12,7 +12,7 @@ import SavingScheme from './SavingScheme';
 
 
 const ServiceTab: React.FC = () => {
-  const { btn1Ref, btn2Ref, btn3Ref, btn4Ref, showPackage, activeBtnServiceId, handleButtonClick } = useTab();
+  const { btn1Ref, btn2Ref, btn3Ref, btn4Ref, showPackage, activeBtnServiceId, dispatch, handleButtonClick } = useTab();
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isTabDisplay, setTabDisplay] = useState<RefObject<HTMLButtonElement> | null>(null);
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
@@ -20,7 +20,9 @@ const ServiceTab: React.FC = () => {
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
-    };
+    }; 
+
+    dispatch({ type: 'setactiveBtnService', payload: btn1Ref });
 
     window.addEventListener('resize', handleResize);
     return () => {
@@ -33,7 +35,7 @@ const ServiceTab: React.FC = () => {
     label: string
   ) => (
     <button
-      className={`drop-shadow-white-ash md:px-5 md:text-purpose-clamp xmd:text-fz-xsm font-bold md:leading-[50px] tracking-[0.32px] rounded-ee-lg rounded-ss-lg xmd:py-2 xmd:px-2 mobile:px-4 mobile:py-4 mobile:text-fz-sm font-dejavu ${showPackage?.current === ref.current && activeBtnServiceId?.current === ref.current
+      className={`drop-shadow-white-ash md:px-5 md:text-purpose-clamp xmd:text-fz-xsm font-bold md:leading-[50px] tracking-[0.32px] rounded-ee-lg rounded-ss-lg xmd:py-2 xmd:px-2 mobile:px-4 mobile:py-4 mobile:text-fz-sm font-dejavu ${activeBtnServiceId?.current === ref.current
         ? 'bg-hover-color text-white'
         : 'bg-accordion text-[#333333]'
         } transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400]`}

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import SlantDiv from '../UI/SlantDiv';
 
 import TeamContent from '../UI/TeamContent';
-import Services from './Services';
+import Services from '../UI/Services';
 import Hero from '../UI/Hero'; // Correct import
 import Headings from '../libs/utilities/Headings';
 import Paragraph from '../libs/utilities/Paragraph';

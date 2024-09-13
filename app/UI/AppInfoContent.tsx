@@ -3,6 +3,7 @@ import { PiGreaterThanLight, PiLessThanLight } from "react-icons/pi";
 import { useAppInfo } from '../libs/hooks/useAppInfo';
 import BtnGlobal from './BtnGlobal';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
+import { MbisProvider } from '../libs/hooks/useContextProvider';
 
 type AppInfoProps = {
     index: number;
@@ -11,7 +12,7 @@ type AppInfoProps = {
 const AppInfoContent: React.FC<AppInfoProps> = ({ index }) => {
     const { selectedComponent, selectedNumber, handleNext, handlePrevious } = useAppInfo()
     return (
-        <React.Fragment>
+        <MbisProvider>
             <section className='xmd:mt-16'>
                 <div className='col-span-3'>
                     {selectedNumber === index && selectedComponent}
@@ -51,7 +52,7 @@ const AppInfoContent: React.FC<AppInfoProps> = ({ index }) => {
                 )}
             </section>
 
-        </React.Fragment>
+        </MbisProvider>
     )
 }
 

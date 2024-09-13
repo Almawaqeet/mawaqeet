@@ -8,6 +8,7 @@ import BtnGlobal from './BtnGlobal';
 import classNames from 'classnames';
 import Headings from '../libs/utilities/Headings';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
+import Link from 'next/link';
 
 interface ContactProps {
   bgColor?: string; // Background color
@@ -41,7 +42,7 @@ const Contact: React.FC<ContactProps> = ({
   );
 
   return (
-    <main className={` ${bgColor} xmd:pb-[48px] sm:pb-[48px] md:pb-[56px] lg:pb-[48px] rounded-[20px] drop-shadow-transparent shadow-lg ${position} xmd:w-11/12`} >
+    <main className={` ${bgColor} xmd:pb-[48px] sm:pb-[48px] md:pb-[56px] lg:pb-[48px] rounded-[20px] drop-shadow-transparent shadow-lg ${baseClassNames} ${position} xmd:w-11/12`} >
       <div className={` ${whiteSpaces.paddingX} ${whiteSpaces.paddingY}`}>
         {contact.map((heading) => (
           <Headings
@@ -121,6 +122,7 @@ const Contact: React.FC<ContactProps> = ({
                 MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN
               </p>
               <div>
+                <Link href='/contact-us/locate-us'>
                 <BtnGlobal className={`bg-white rounded-lg xmd:px-9 xmd:py-3 md:py-[11px] md:px-[35px] grid m-auto items-baseline drop-shadow-transparent shadow-md`}>
                   <h6
                     className={`font-normal xmd:text-fz-xss leading-8 tracking-[0.14px] text-center  text-hover-color font-dejavu`}
@@ -128,6 +130,7 @@ const Contact: React.FC<ContactProps> = ({
                     Locate Us
                   </h6>
                 </BtnGlobal>
+                </Link>
               </div>
             </div>
           </div>

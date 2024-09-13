@@ -31,7 +31,7 @@ const Complementary = () => {
       <div className='pb-20 md:grid md:grid-cols-[1fr_1fr] md:gap-8'>
         {Bold?.highlights.map((bold, index) => (
           <div className={`grid xmd:grid-cols-[30px_1fr] xmd:gap-6 xmd:pb-11 lg:gap-16 ${index === 2 && 'col-span-2'}`} key={`dsd${bold.id}`}>
-            <ComplementNum position={`${index + 1}`} key={`${bold.id}num`} />
+            <ComplementNum position={index + 1} key={`${bold.id}num`} />
             <span className={` items-baseline  ${index !== 0 ? 'block text-justify' : 'grid xmd:grid-cols-[90px_1fr] mobile:grid-cols-[100px_1fr] sm:grid-cols-[120px_1fr] md:block'}`} key={`${bold.id}span`}>
               <Paragraph type='globalBold' classname='font-bold xmd:leading-5 text-body-clamp tracking-tight font-dejavu w-full' key={`${bold.id}par`}>{bold.highlight}</Paragraph>
               <Paragraph type='bodyParagraph' classname={`text-justify`} key={`${bold.id}-par`}>{Span?.highlights[index].highlight}</Paragraph>
@@ -63,7 +63,7 @@ const Complementary = () => {
             <div className='grid md:grid-cols-[1fr_1fr] md:gap-4'>
               {index === 1 && complement?.highlights.map((comp, compIndex) => (
                 <div key={`${comp.id}--compla`} className='grid xmd:grid-cols-[50px_1fr] lg:gap-16'>
-                  <ComplementNum position={`${compIndex + 1}`} key={`${comp.id}-num`} />
+                  <ComplementNum position={compIndex + 1} key={`${comp.id}-num`} />
                   <span key={`${comp.id}-complement-${compIndex}`} className='grid '>
                     <Paragraph
                       type="globalBold"
