@@ -38,6 +38,28 @@ export const payment:paymentProps[] = [
     }
 ]
 
+export const steps:paymentProps[] = [
+    {
+        id: 'itm',
+        content: [
+            {
+                id: 'step1',
+                item: 'Step 1:  Fill all personal details'
+            },
+
+            {
+                id: 'step2',
+                item: 'Step 2:  Select Package'
+            },
+
+            {
+                id: 'step3',
+                item: 'Step 3:  Next of Kin details'
+            }
+        ]
+    }
+]
+
 export const paymentDetails:paymentDetailsProps[] = [
 {
     id: 'copy',

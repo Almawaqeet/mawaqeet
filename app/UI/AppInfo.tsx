@@ -1,7 +1,5 @@
 import React from 'react';
-import Headings from '../libs/utilities/Headings';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
-import Paragraph from '../libs/utilities/Paragraph';
 import { appForm } from '../contents/payment';
 import { MdArrowRightAlt } from "react-icons/md";
 
@@ -18,17 +16,9 @@ const AppInfo = () => {
         <div>
             <section className='max-w-[2000px] m-auto'>
                 <main className={`${whiteSpaces.paddingX}`}>
-                    <Headings type='global' classname='font-bold xmd:leading-[18px] tracking-tight xmd:pb-3 md:pb-5 lg:pb-8 text-center font-dejavu'>
-                        Application Form
-                    </Headings>
 
-                    <Paragraph type='global' classname='font-dejavu xmd:text-fz-xss md:text-fz-sm lg:text-fz-md text-center text-[#848484] xmd:pb-[55px] md:pb-[66px]'>
-                        Provide all the required Information
-                    </Paragraph>
-
-
-                    <div className='grid justify-stretch'>
-                        <div className='grid grid-cols-3 xmd:w-full md:w-2/4  md:items-start xmd:items-center'>
+                    <div className='grid justify-stretch xmd:pb-[55px]'>
+                        <div className='grid grid-cols-3 xmd:w-full md:w-2/4 justify-center m-auto xmd:items-center'>
                             {appForm.map((app, i) => (
                                 <div className='w-full' key={app.id}>
                                     <span className='flex relative'>

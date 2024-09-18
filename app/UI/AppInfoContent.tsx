@@ -13,7 +13,7 @@ const AppInfoContent: React.FC<AppInfoProps> = ({ index }) => {
     const { selectedComponent, selectedNumber, handleNext, handlePrevious } = useAppInfo()
     return (
         <MbisProvider>
-            <section className='xmd:mt-16'>
+            <section className='xmd:mt-[37px]'>
                 <div className='col-span-3'>
                     {selectedNumber === index && selectedComponent}
                 </div>

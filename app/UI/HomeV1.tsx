@@ -1,13 +1,21 @@
 import React from 'react';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { home, why_hajj_umrah, whyImages } from '../contents/home';
 import Hero from './Hero';
 import Purpose from './Purpose';
 import Headings from '../libs/utilities/Headings';
 import Paragraph from '../libs/utilities/Paragraph';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
+import { useMbisContext } from '../libs/hooks/useContextProvider';
+import LearnModal from './LearnModal';
+
 
 const HomeV1 = () => {
+
+  const { dispatch } = useMbisContext()
+
+  const handleOpen = () => { dispatch({ type: 'openModal', payload: true }) }
+
   // Find content from home.js
   const purposeHeading = why_hajj_umrah.find(
     (content) => content.id === 'why_heading'
@@ -15,10 +23,6 @@ const HomeV1 = () => {
 
   const purposeBody = why_hajj_umrah.find(
     (content) => content.id === 'why_body'
-  );
-
-  const purposeIcon = why_hajj_umrah.find(
-    (content) => content.id === 'why_image'
   );
 
   return (
@@ -35,9 +39,13 @@ const HomeV1 = () => {
           </Headings>
         ))}
         CTA="Get Started"
-        subCTA="Learn More"
+        subCTA='Learn More'
         to='/registration-form'
+        id=''
+        handleOpen={handleOpen}
       />
+
+      <LearnModal />
 
       <section
         className={`xmd:max-w-[375px] mobile:max-w-[700px] m-auto md:max-w-[1500px] lg:max-w-[2000px] ${whiteSpaces.paddingY} mt-6`}
@@ -52,7 +60,7 @@ const HomeV1 = () => {
                 className="object-cover relative bottom-8"
                 width={250}
                 height={250}
-                
+
               />
               <Image
                 src="/images/stack_img_2.png"
@@ -60,7 +68,7 @@ const HomeV1 = () => {
                 className="object-cover"
                 width={250}
                 height={250}
-               
+
               />
               <Image
                 src="/images/stack_img_3.png"
@@ -68,7 +76,7 @@ const HomeV1 = () => {
                 className="object-cover"
                 width={250}
                 height={250}
-                
+
               />
               <Image
                 src="/images/stack_img_4.png"
@@ -76,7 +84,7 @@ const HomeV1 = () => {
                 className="object-cover relative top-1"
                 width={250}
                 height={250}
-              
+
               />
             </div>
 

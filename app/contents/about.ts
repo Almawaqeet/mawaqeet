@@ -3,7 +3,11 @@ import team1 from '../../public/images/team_1.png';
 import team3 from '../../public/images/team_3.png';
 import team4 from '../../public/images/team_4.png';
 
-import teamProfile from '../../public/images/Rectangle1.png'
+import Maruf from '../../public/images/Rectangle1.png'
+import Kutubi from '../../public/images/Rectangle3.png'
+import Ramadan from '../../public/images/Rectangle2.png'
+
+
 
 
 interface AboutHero {
@@ -53,7 +57,7 @@ export const about_us_team: AboutUsTeam[] = [
     id: 'img1',
     slug: 'Shaykh-Abdullah',
     image: team4,
-    imageProfile: teamProfile, 
+    imageProfile: Maruf, 
     fullname: 'Shaykh Abdullah Ma’ruf Oyelekan',
     post: 'Chief Executive Officer and Managing Director, Al-Mawaqeet Travels and Tours',
     personality: '{Ph.D. (in-view), Islamic Economics and Finance, Islamic University of Madeenah Kingdom of Saudi Arabia}',
@@ -71,7 +75,7 @@ export const about_us_team: AboutUsTeam[] = [
     id: 'img2',
     slug: 'Shaykh-Abdul-Hakeem',
     image: team1,
-    imageProfile: teamProfile,
+    imageProfile: Kutubi,
     fullname: 'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi',
     post: 'Chief Managing Director Al-Mawaqeet Travels and Tours',
     personality: '{Director, Abū Hurayrah Islamic Institute, Shimawa, Ogun State, Nigeria}',
@@ -89,7 +93,7 @@ export const about_us_team: AboutUsTeam[] = [
     id: 'img4',
     slug: 'Shaykh-Zahradeen',
     image: team3,
-    imageProfile: teamProfile,
+    imageProfile: Ramadan,
     fullname: 'Shaykh Abdullah Zahradeen Abū Ramadan',
     post: 'Chief Operating Officer, Al-Mawaqeet Travels and Tours',
     view_profile: 'View Profile',

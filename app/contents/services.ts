@@ -102,12 +102,17 @@ type PackageContent = {
   bullet_5?: string;
 };
 
-type PackagePrice = {
-  packs: string;
+type PackagePrices = {
+  package_name: string
+  type_upfront: string
+  type_installment: string
+  amount_upfront_hajj: string
+  amount_upfront_umrah: string
   week: string;
   month: string;
   any: string;
 };
+
 
 type Upfront = {
   amount: string
@@ -117,7 +122,7 @@ type Package = {
   id: string;
   package_title: string;
   heading: string;
-  pricehajjinstallment: PackagePrice
+ packagePrices: PackagePrices
   pricehajjupfront: Upfront
   priceumrahupfront: Upfront
   content: PackageContent;
@@ -138,10 +143,14 @@ export const packages: Package[] = [
     heading:
       "Indulge in a truly regal experience with our 5-star hotel accommodations, boasting:",
 
-      pricehajjinstallment: {
-        packs: 'VIP',
-        week: 'Weekly  =  1M',
-        month: 'Monthly  =  2M',
+      packagePrices: {
+        package_name: 'VIP',
+        amount_upfront_umrah: 'Total Package = 4M',
+        type_upfront: 'Upfront :',
+        amount_upfront_hajj: 'Total Package = 10,000,000',
+        type_installment: 'Installment :',
+        week: 'Weekly  =  1,000,000',
+        month: 'Monthly  =  2,000,000',
         any: 'Any Amount  =  __'
       },
 
@@ -174,10 +183,14 @@ export const packages: Package[] = [
     heading:
       "Enjoy a harmonious blend of luxury and affordability with our Deluxe Package, carefully crafted to elevate your pilgrimage experience:",
 
-      pricehajjinstallment: {
-        packs: 'Deluxe',
-        week: 'Weekly  =  500K',
-        month: 'Monthly  =  1M',
+      packagePrices: {
+        package_name: 'Deluxe',
+        amount_upfront_umrah: 'Total Package = 2,500,000',
+        type_upfront: 'Upfront :',
+        amount_upfront_hajj: 'Total Package = 7,000,000',
+        type_installment: 'Installment :',
+        week: 'Weekly  =  500,000',
+        month: 'Monthly  =  1,000,000',
         any: 'Any Amount  =  __'
       },
 
@@ -207,10 +220,15 @@ export const packages: Package[] = [
     package_title: "Standard Package",
     heading:
       "Embark on a spiritual journey with our Standard Package, offering a perfect balance of affordability and comfort:",
-      pricehajjinstallment: {
-        packs: 'Standard',
-        week: 'Weekly  =  100K',
-        month: 'Monthly  =  500K',
+      
+      packagePrices: {
+        package_name: 'Standard',
+        amount_upfront_umrah: 'Total Package = 1,500,000',
+        type_upfront: 'Upfront :',
+        amount_upfront_hajj: 'Total Package = 6,000,000',
+        type_installment: 'Installment :',
+        week: 'Weekly  =  500,000',
+        month: 'Monthly  =  1,000,000',
         any: 'Any Amount  =  __'
       },
 

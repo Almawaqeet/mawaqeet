@@ -7,8 +7,8 @@ type State = {
   navbar_bar: boolean;
   activeIndex: number;
   subNavActiveIndex: number;
-  navItems: any[]; 
-  dropdownItems: any[]; 
+  navItems: any[];
+  dropdownItems: any[];
   navbtn: boolean;
   dropdown: boolean;
   dropdownmobile: boolean;
@@ -19,12 +19,13 @@ type State = {
   isLoading: boolean;
   isSelected: boolean | null;
   selectedNumber: number;
-  selectedComponent: ReactNode 
+  selectedComponent: ReactNode
+  openModal: boolean
 };
 
-type Action = 
+type Action =
   | { type: 'togglenav' }
-  | { type: 'setSelected'; payload: boolean | null } 
+  | { type: 'setSelected'; payload: boolean | null }
   | { type: 'togglenavbtn' }
   | { type: 'toggledropdown', payload: boolean }
   | { type: 'toggledropdownmobile', payload: boolean }
@@ -32,12 +33,13 @@ type Action =
   | { type: 'setshowpackage'; payload: RefObject<HTMLButtonElement> }
   | { type: 'setActiveIndex'; payload: number }
   | { type: 'setSubNavActiveIndex'; payload: number }
-  | { type: 'setactiveBtnService'; payload: RefObject<HTMLButtonElement> } 
-  | { type: 'shownav';  payload: boolean}
+  | { type: 'setactiveBtnService'; payload: RefObject<HTMLButtonElement> }
+  | { type: 'shownav'; payload: boolean }
   | { type: 'setIsLoading'; payload: boolean }
-  | { type: 'setselectedNumber'; payload: number}
+  | { type: 'setselectedNumber'; payload: number }
   | { type: 'setSelectedComponent'; payload: ReactNode }
-  
+  | { type: 'openModal', payload: boolean }
+
 
 const mbisContext = createContext<{
   state: State;
@@ -45,15 +47,15 @@ const mbisContext = createContext<{
 } | undefined>(undefined);
 
 const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    // Find nav items in array
-    const mainNav = navbar.find((navList) => navList.id === 'mainNav');
-    const subNav = navbar.find((navList) => navList.id === 'subItems');
+  // Find nav items in array
+  const mainNav = navbar.find((navList) => navList.id === 'mainNav');
+  const subNav = navbar.find((navList) => navList.id === 'subItems');
 
   const initialState: State = {
     navbar_bar: false,
     activeIndex: -1,
     subNavActiveIndex: -1,
-     navItems: mainNav ? mainNav.navItems : [], 
+    navItems: mainNav ? mainNav.navItems : [],
     dropdownItems: subNav ? subNav.navItems : [],
     navbtn: false,
     dropdown: false,
@@ -65,7 +67,8 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     isLoading: false,
     isSelected: null,
     selectedNumber: 0,
-    selectedComponent: null
+    selectedComponent: null,
+    openModal: false
   };
 
   const reducer = (state: State, action: Action): State => {
@@ -79,7 +82,7 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       case 'toggledropdown':
         return { ...state, dropdown: action.payload !== state.dropdown ? action.payload : !state.dropdown };
       case 'toggledropdownmobile':
-        return { ...state,  dropdownmobile: action.payload !== state.dropdownmobile ? action.payload : !state.dropdownmobile };
+        return { ...state, dropdownmobile: action.payload !== state.dropdownmobile ? action.payload : !state.dropdownmobile };
       case 'togglearrow':
         return { ...state, arrow: action.payload !== !state.arrow ? action.payload : !state.arrow };
       case 'setshowpackage':
@@ -95,13 +98,15 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       case 'setactiveBtnService':
         return { ...state, activeBtnServiceId: action.payload };
       case 'shownav':
-        return { ...state,  isActive: action.payload !== state.isActive ? action.payload : !state.isActive };
+        return { ...state, isActive: action.payload !== state.isActive ? action.payload : !state.isActive };
       case 'setIsLoading':
         return { ...state, isLoading: action.payload };
-        case 'setselectedNumber':
+      case 'setselectedNumber':
         return { ...state, selectedNumber: action.payload };
-        case 'setSelectedComponent':
-          return { ...state, selectedComponent: action.payload };
+      case 'setSelectedComponent':
+        return { ...state, selectedComponent: action.payload };
+      case 'openModal':
+        return { ...state, openModal: action.payload };
       default:
         return state;
     }

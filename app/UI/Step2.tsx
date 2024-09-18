@@ -1,33 +1,27 @@
-import React, { ReactNode, RefObject, useEffect, useState } from 'react';
+import React, { RefObject, useEffect, useState } from 'react';
 import Paragraph from '../libs/utilities/Paragraph';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import { useTab } from '../libs/hooks/useTab';
 import PackagesContent from './PackagesContent';
-import { apptype } from '../contents/payment';
 import { umrahCategory } from '../contents/services';
 import UmrahDiv from './UmrahDiv';
+import Headings from '../libs/utilities/Headings';
 
 
 const Step2: React.FC = () => {
   const { btn1Ref, btn2Ref, showPackage, activeBtnServiceId, handleButtonClick, dispatch } = useTab();
 
-  const [isSelected, setSelected] = useState<number | boolean>(false);
-  const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
+
+  const [isShowPackage, setShowPackage] = useState<number | null>(null);
 
   const handleClick = (index: number) => {
-    setSelectedPackage(index);
-  };
-  
-
-  const handleRadioClick = (index: number) => {
-    setSelected(index);
+    setShowPackage(index);
   };
 
   useEffect(() => {
     if (btn1Ref.current) {
       dispatch({ type: 'setactiveBtnService', payload: btn1Ref });
       dispatch({ type: 'setshowpackage', payload: btn1Ref });
-      setSelected(0)
     }
   }, [dispatch, btn1Ref]);
 
@@ -52,55 +46,37 @@ const Step2: React.FC = () => {
   return (
     <section className=''>
       <main className={`${whiteSpaces.paddingX} `}>
-        <Paragraph
-          type='globalBold'
-          classname='text-Bold-1-clamp font-bold tracking-tight leading-[18px] text-inherit xmd:pb-8 font-dejavu'
-        >
-          Select Package
+        <Headings type='global' classname='font-bold xmd:leading-[18px] tracking-tight xmd:pb-3 md:pb-5 lg:pb-8 text-center font-dejavu'>
+          Select your Package
+        </Headings>
+
+        <Paragraph type='global' classname='font-dejavu xmd:text-fz-xss md:text-fz-sm lg:text-fz-md text-center text-[#848484] xmd:pb-[55px] md:pb-[66px]'>
+          Select the package you are going for.
         </Paragraph>
 
         {/* Render buttons */}
-        <div className={`grid grid-cols-2 md:justify-start md:w-2/4 xmd:gap-4 xmd:pb-16`}>
-          {renderButton(btn1Ref, 'Saving Scheme')}
-          {renderButton(btn2Ref, 'Upfront Payment')}
+        <div className={`grid grid-cols-2 m-auto md:w-2/4 xmd:gap-4 xmd:pb-16`}>
+          {renderButton(btn1Ref, 'Hajj Package')}
+          {renderButton(btn2Ref, 'Umrah Package')}
         </div>
+      
 
-        {/* Render radio inputs for apptype */}
-        <div className='flex xmd:gap-9'>
-          {apptype.map((typ, index) => (
-            <span key={`${typ.id}-span`} className='flex xmd:gap-5'>
-              <input
-                className={`xmd:w-[18px] xmd:h-[18px] rounded-full border-[1px] border-[#848484] ${isSelected === index ? 'radiostyle' : ''}`}
-                type='radio'
-                checked={isSelected === index}
-                onClick={() => handleRadioClick(index)}
-              />
-              <Paragraph type='global'
-                key={`${typ.id}-typ`}
-                classname='text-Bold-1-clamp font-normal tracking-tight leading-[18px] text-inherit xmd:pb-8 font-dejavu'
-              >
-                {typ.content}
-              </Paragraph>
-            </span>
-          ))}
-        </div>
 
-        {/* Render selected package content based on button or radio input */}
-        {showPackage === btn1Ref && activeBtnServiceId === btn1Ref && isSelected === 0 ? (
+        {showPackage === btn1Ref && activeBtnServiceId === btn1Ref ? (
           <div className="grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]">
-            <PackagesContent offstyle='hidden' offheight='xmd:h-[900px] sm:h-[600px] md:h-[650px] lg:min-h-[500px]' hajjupfront='hidden' umrahupfront='hidden' />
+            <PackagesContent offcontent='hidden' offheight='xmd:h-[1220px] sm:h-[1220px] md:h-[1020px] lg:h-[700px]'  offmainheight='xmd:min-h-[1200px] md:min-h-[1000px] lg:min-h-[900px]' umrah_show='hidden' to='' />
           </div>
-        ) : isSelected === 1 ? (
+        ) : btn2Ref ? (
           <>
 
             {umrahCategory.map((batch) =>
               batch.content.map((category, index) => (
                 <div key={index} className='flex xmd:gap-4 items-center'>
                   <input
-                    className={`xmd:w-[18px] xmd:h-[18px] rounded-full border-[1px] grid justify-start border-[#848484] ${isSelected ? 'radiostyle' : ''
+                    className={`xmd:w-[18px] xmd:h-[18px]  border-[1px] grid justify-start border-[#848484] ${isShowPackage === index ? 'checkstyle relative' : ''
                       }`}
                     type='checkbox'
-                    checked={selectedPackage === index}
+                    checked={isShowPackage === index}
                     onClick={() => handleClick(index)}
                   />
                   <UmrahDiv
@@ -114,15 +90,12 @@ const Step2: React.FC = () => {
             )}
 
             <div className="grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]">
-              <PackagesContent offstyle='hidden' offheight='xmd:h-[900px] sm:h-[600px] md:h-[650px] lg:min-h-[500px]' hajjupfront='xmd:hidden'  installment='xmd:hidden' />
+              <PackagesContent offcontent='hidden'  offheight='xmd:h-[1120px] sm:h-[1000px] md:h-[650px] lg:h-[800px]'  offmainheight='xmd:min-h-[1100px] lg:min-h-[900px]' hajj_show='hidden' to='' />
             </div>
 
           </>
-        ) : showPackage === btn2Ref && activeBtnServiceId === btn2Ref ? (
-          <div className="grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]">
-          <PackagesContent offstyle='hidden' offheight='xmd:h-[900px] sm:h-[600px] md:h-[650px] lg:min-h-[500px]' installment='xmd:hidden' umrahupfront='xmd:hidden' />
-        </div>
-        ) : null}
+        )
+          : null}
       </main>
     </section>
   );

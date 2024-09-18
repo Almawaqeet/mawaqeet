@@ -14,7 +14,7 @@ import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import { MbisProvider } from '../libs/hooks/useContextProvider';
 import Navbar from '../UI/Navbar';
 
-const About = () => {
+const Page = () => {
     return (
         <MbisProvider>
             <Navbar />
@@ -29,6 +29,7 @@ const About = () => {
                     CTA={'Get in touch'}
                     subCTA="Explore"
                     to='/contact-us'
+                   id='#team'
                 />
             </section>
 
@@ -78,7 +79,7 @@ const About = () => {
                 </div>
             </section>
 
-            <section className={`${whiteSpaces.sectionMargin}`}>
+            <section className={`${whiteSpaces.sectionMargin}`} id='team'>
                 <SlantDiv className={'xmd:before:w-[70px]'}>
                     <Headings type={'sectionName'} classname="text-center ">
                         Meet Our Team
@@ -90,7 +91,7 @@ const About = () => {
                 </main>
             </section>
 
-            <section className={`${whiteSpaces.sectionMargin}`}>
+            <section className={`${whiteSpaces.sectionMargin}`} id='service-section'>
                 <main>
                     <Services />
                 </main>
@@ -99,4 +100,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default Page;

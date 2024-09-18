@@ -1,12 +1,15 @@
 'use client'
 import React, { ReactNode, useState, useEffect } from 'react'
+import { CiClock2 } from "react-icons/ci";
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces'
-import { payment } from '../contents/payment'
+import { payment, steps } from '../contents/payment'
 import Paragraph from '../libs/utilities/Paragraph'
 import PayInfo from '../UI/PayInfo'
 import AppInfo from '../UI/AppInfo'
 import { MbisProvider } from '../libs/hooks/useContextProvider'
 import Navbar from '../UI/Navbar'
+import Image from 'next/image';
+
 
 const Payment = () => {
   const [selectedComponent, setSelectedComponent] = useState<ReactNode>(<PayInfo />);
@@ -24,7 +27,7 @@ const Payment = () => {
 
   return (
     <MbisProvider>
-        <Navbar />
+      <Navbar />
       <section className={`max-w-[2000px] m-auto ${whiteSpaces.paddingY}`}>
         <main className={`${whiteSpaces.paddingX} xmd:pt-[89px] md:pt-[79px]`}>
           {payment.map((itm) => (

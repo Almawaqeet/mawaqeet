@@ -9,15 +9,16 @@ interface BtnGlobalProps {
   btnStyle?: string;
   icon?: ReactNode | StaticImageData;
   onClick?: () => void;
+  id?: string
 }
 
-const BtnGlobal: React.FC<BtnGlobalProps> = ({ children, className, icon, btnStyle, onClick }) => {
+const BtnGlobal: React.FC<BtnGlobalProps> = ({ children, className, icon, btnStyle, onClick, id }) => {
   const baseClasses = "h-[48px] rounded-[100px] font-dejavu";
   const buttonClasses = classNames(baseClasses, className);
 
   return (
     <div>
-      <button className={`${buttonClasses} flex items-center`} onClick={onClick}>
+      <button className={`${buttonClasses} flex items-center`} onClick={onClick} id={id}>
         <span className={`flex items-center ${btnStyle}`}>
         {children}
           {icon && typeof icon === "object" && "src" in icon ? (

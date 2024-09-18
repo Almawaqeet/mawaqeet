@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
+import Link from 'next/link';
 import { FiFacebook } from 'react-icons/fi';
 import { BsTwitterX } from 'react-icons/bs';
 import { IoLogoInstagram } from 'react-icons/io5';
@@ -11,7 +12,9 @@ import { footerContent, footerText, useful_Links } from '../contents/footer';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import Headings from '../libs/utilities/Headings';
 
+
 const Footer: React.FC = () => {
+
   return (
     <section
       className={`  bg-[#4B3938] xmd:pt-[30px] xmd:pb-1`}
@@ -23,12 +26,12 @@ const Footer: React.FC = () => {
           <li className="flex gap-2 mobile:gap-3 tab_md:gap-[4px] items-center xmd:pb-6 ">
             <div>
               <Image
-              src={'/images/logo1.png'}
-              alt='whitelogo'
-              className="mobile:w-[20.31px] mobile:h-[20px] lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7"
-              width={20.31}
-              height={20}
-               />
+                src={'/images/logo1.png'}
+                alt='whitelogo'
+                className="mobile:w-[20.31px] mobile:h-[20px] lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7"
+                width={20.31}
+                height={20}
+              />
             </div>
             {brand.map((itm) => (
               <Headings
@@ -63,10 +66,18 @@ const Footer: React.FC = () => {
 
           <ul className="flex flex-col xmd:gap-6 md:gap-4 md:text-end xmd:text-start md:justify-center text-contact-clamp font-dejavu">
             {useful_Links.map((link) =>
-              link.usefulLinks.map((itm) => (
-                <li key={`${itm.id}-itms-`} className="text-white md:text-end font-dejavu">
-                  {itm.content}
-                </li>
+              link.usefulLinks.map((itm, i) => (
+                <>
+                  {i === 4 ? <Link href='/#faqs'><li key={`${itm.id}-itms-`} className="text-white md:text-end font-dejavu" >
+                    {itm.content}
+                  </li></Link> :
+                    <Link href={`${i === 0 ? '/' : i === 1 ? '/about-us' : i === 2 ? '/contact-us' : i === 3 ? '/about-us#service-section' : null}`}>
+                      <li key={`${itm.id}-itms-`} className="text-white md:text-end font-dejavu">
+                        {itm.content}
+                      </li>
+                    </Link>}
+
+                </>
               ))
             )}
           </ul>

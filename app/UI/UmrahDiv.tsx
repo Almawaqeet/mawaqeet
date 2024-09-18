@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface UmrahDivProps {
-  umrahbatch: string;
+  umrahbatch?: string;
   icon?: React.ReactNode;
   offstyle?: string
   linestyle?: string

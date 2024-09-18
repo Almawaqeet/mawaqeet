@@ -26,7 +26,7 @@ const Faqs = () => {
   const findanswers = faqs.find((faq) => faq.id === 'answers');
   
   return (
-    <section className={`xmd:max-w-[800px] m-auto ${whiteSpaces.sectionMargin} ${whiteSpaces.paddingX} `}>
+    <section className={`xmd:max-w-[800px] m-auto ${whiteSpaces.sectionMargin} ${whiteSpaces.paddingX} `} id='faqs'>
       <SlantDiv className={'xmd:before:w-[50px]'}>
         <Headings
           type={'sectionName'}

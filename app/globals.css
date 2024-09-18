@@ -82,7 +82,7 @@ body {
 
 .radiostyle[type='radio']:checked {
   display: flex;
-  background-color: none;
+  background-color: transparent;
   border-color: #848484; 
   appearance: none; 
   outline: none;
@@ -95,9 +95,29 @@ body {
   height: 90%;
   margin: auto;
   background-color: #87592A; 
-  border-radius: 100%;
-  transition: all 10ms ease-in-out #87592A;
+  border-radius: 100%; 
+  transition: all 0.1s ease-in-out;
 }
+
+.checkstyle[type='checkbox']:checked {
+  display: flex;
+  background-color: transparent;
+  border-color: #848484; 
+  appearance: none; 
+  outline: none;
+}
+
+.checkstyle[type='checkbox']:checked::before {
+  content: '';
+  display: flex;
+  width: 90%;
+  height: 90%;
+  margin: auto;
+  background-color: #87592A; 
+  border-radius: 100%; 
+  transition: all 0.1s ease-in-out;
+}
+
 
 .slantDiv::before {
   content: '';
