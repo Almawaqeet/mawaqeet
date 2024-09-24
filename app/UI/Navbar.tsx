@@ -144,12 +144,12 @@ const Navbar: React.FC = () => {
           >
             {navbar_bar ? (
               <LiaTimesSolid
-                className={`transform transition-all duration-220 w-8 h-5 text-white ${navbar_bar ? 'rotate-225 delay-500 ease-in-out' : ''
+                className={`transform transition-all duration-220 w-8 h-5 text-white ${navbar_bar ? 'rotate-225  delay-&lsqb;500&rsqb; ease-in-out' : ''
                   } ${isActive ? 'grid m-auto' : ''}`}
               />
             ) : (
               <FaBarsStaggered
-                className={`transform transition-all duration-220 w-8 h-5 text-white ${navbar_bar ? 'rotate-225 delay-120 ease-in-out' : ''
+                className={`transform transition-all duration-220 w-8 h-5 text-white ${navbar_bar ? 'rotate-225 delay-&lsqb;400&rsqb;  ease-in-out' : ''
                   } ${isActive ? 'relative right-1/2' : ''}`}
               />
             )}
@@ -163,7 +163,7 @@ const Navbar: React.FC = () => {
           className={`fixed z-10 min-h-svh h-screen max-h-[1000px] overflow-y-scroll bg-white drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16 xmd:left-[20%] translate-x-0 ${innerHeight > 1000 ? 'overflow-y-scroll' : 'overflow-y-hidden'
             }  ${isActive
               ? 'transition-all duration-[1.0s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[200] translate-x-0 '
-              : '-translate-x-[100%] transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[200]'
+              : '-translate-x-[100%] transition-all duration-[0.5s] ease-&lsqb;cubic-bezier(0.645,0.045,0.355,1)&rsqb; delay-&lsqb;200&rsqb;'
             }`}
         >
           <ul className="font-dejavu text-fz-xs font-normal gap-4 flex flex-col justify-center items-center relative mt-8">
@@ -174,7 +174,7 @@ const Navbar: React.FC = () => {
                   dispatch({ type: 'setActiveIndex', payload: item.id });
                   dispatch({ type: 'shownav', payload: false });
                 }}
-                className={`mobile:block tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-1 cursor-pointer ${item.id === activeIndex
+                className={`mobile:block tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-&lsqb;400&rsqb; p-1 cursor-pointer ${item.id === activeIndex
                     ? 'text-hover-color'
                     : ' text-[#333333]'
                   } ${i === 2 && dropdownmobile ? 'pb-40' : ''}`}
@@ -209,7 +209,7 @@ const Navbar: React.FC = () => {
                               dispatch({ type: 'toggledropdownmobile', payload: false });
                               dispatch({ type: 'togglearrow', payload: true });
                             }}
-                            className={`text-left hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[200] cursor-pointer font-normal text-fz-xss px-7 py-2 items-center font-dejavu ${itm.id === subNavActiveIndex
+                            className={`text-left hover:text-hover-color transition-all duration-[0.5s] ease-&lsqb;cubic-bezier(0.645,0.045,0.355,1)&rsqb; delay-&lsqb;400&rsqb; cursor-pointer font-normal text-fz-xss px-7 py-2 items-center font-dejavu ${itm.id === subNavActiveIndex
                                 ? 'bg-hover-color text-white hover:text-white'
                                 : ' text-[#333333]'
                               }`}
@@ -231,7 +231,7 @@ const Navbar: React.FC = () => {
             
              <Link href={'/login'}> <BtnGlobal
               onClick={() => dispatch({ type: 'togglenavbtn' })}
-              className={`text-white font-normal text-fz-xs leading-[0.07px] text-center px-12 transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer hover:bg-hover-color ${
+              className={`text-white font-normal text-fz-xs leading-[0.07px] text-center px-12 transition-all duration-[0.5s]ease-&lsqb;cubic-bezier(0.645,0.045,0.355,1)&rsqb; delay-&lsqb;400&rsqb; cursor-pointer hover:bg-hover-color ${
                 navbtn ? 'bg-hover-color' : 'bg-logo-color'
               }`}
             >
