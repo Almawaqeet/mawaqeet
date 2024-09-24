@@ -2,6 +2,7 @@ import React from "react";
 import { BsArrowRight } from "react-icons/bs";
 import BtnGlobal from "./BtnGlobal";
 import Link from "next/link";
+import { useAppInfo } from "../libs/hooks/useAppInfo";
 
 interface HeroProps {
   heading: React.ReactNode;
@@ -15,6 +16,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ heading, subheading, CTA, subCTA, to, subto, id, handleOpen }) => {
+  const { handleNext } = useAppInfo()
   return (
     <section className="mobile:max-w-[2000px] grid items-center relative home tab_md:min-h-screen xmd:min-h-screen mt-auto">
       <div className="mobile:px-16 xmd:px-8 text-center text-white">

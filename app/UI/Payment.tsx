@@ -3,7 +3,7 @@ import { whiteSpaces } from '../libs/utilities/GlobalSpaces'
 import { payment } from '../contents/payment'
 import Paragraph from '../libs/utilities/Paragraph'
 import PayInfo from './PayInfo'
-import AppInfo from './AppInfo'
+import AppInfo from './ApplicationForm'
 
 const Payment = () => {
   const [selectedComponent, setSelectedComponent] = useState<ReactNode>(<PayInfo />);
@@ -16,7 +16,7 @@ const Payment = () => {
 
   const handlePayment = (i: number) => {
     setSelectedNumber(i);
-    setSelectedComponent(i === 0 ? <PayInfo /> : <AppInfo />);
+    setSelectedComponent(i === 1 ? <PayInfo /> : <AppInfo />);
   }
 
   return (
@@ -25,12 +25,12 @@ const Payment = () => {
         <main className={`${whiteSpaces.paddingX} xmd:pt-[89px] md:pt-[79px]`}>
           {payment.map((itm) => (
             <div className='flex gap-9' key={itm.id}>
-              {itm.content.map((cont, index) => (
+              {itm.content.map((cont) => (
                 <Paragraph
                   type='global'
                   key={`${cont.id}--`}
-                  classname={`font-dejavu xmd:pb-10 md:pb-[58px] cursor-pointer ${selectedNumber === index ? 'font-bold text-black text-Bold-1-clamp' : 'text-[#848484]'}`}
-                  onClick={() => handlePayment(index)}
+                  classname={`font-dejavu xmd:pb-10 md:pb-[58px] cursor-pointer ${selectedNumber === itm.id ? 'font-bold text-black text-Bold-1-clamp' : 'text-[#848484]'}`}
+                  onClick={() => handlePayment(itm.id)}
                 >
                   {cont.item}
                 </Paragraph>

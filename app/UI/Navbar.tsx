@@ -126,13 +126,13 @@ const Navbar: React.FC = () => {
                 )}
               </li>
             ))}
-            <Link href={'/register'}>
+            <Link href={'/login'}>
               <BtnGlobal
                 onClick={() => dispatch({ type: 'togglenavbtn' })}
-                className={`mobile:hidden xmd:hidden tab_md:block text-white font-normal text-navbar-clamp leading-[0.07px] text-center lg:px-4 md:px-4 py-4 transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer hover:bg-hover-color ${navbtn ? 'bg-hover-color' : 'bg-logo-color'
+                className={`mobile:hidden xmd:hidden tab_md:block text-white font-normal text-navbar-clamp leading-[0.07px] text-center lg:px-8 md:px-8 py-4 transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer hover:bg-hover-color ${navbtn ? 'bg-hover-color' : 'bg-logo-color'
                   }`}
               >
-                Create Account
+                Sign In
               </BtnGlobal>
             </Link>
           </div>
@@ -229,14 +229,14 @@ const Navbar: React.FC = () => {
               </li>
             ))}
             
-              <BtnGlobal
+             <Link href={'/login'}> <BtnGlobal
               onClick={() => dispatch({ type: 'togglenavbtn' })}
-              className={`text-white font-normal text-fz-xs leading-[0.07px] text-center px-7 transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer hover:bg-hover-color ${
+              className={`text-white font-normal text-fz-xs leading-[0.07px] text-center px-12 transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer hover:bg-hover-color ${
                 navbtn ? 'bg-hover-color' : 'bg-logo-color'
               }`}
             >
-              Create Account
-            </BtnGlobal>
+              Sign In
+            </BtnGlobal></Link>
           </ul>
         </div>
       )}

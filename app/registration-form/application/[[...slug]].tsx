@@ -1,17 +1,23 @@
+'use client'
+import { appForm } from '@/app/contents/payment';
+import { whiteSpaces } from '@/app/libs/utilities/GlobalSpaces';
+import ComplementNum from '@/app/UI/ComplementNum';
 import React from 'react';
-import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
-import { appForm } from '../contents/payment';
-import { MdArrowRightAlt } from "react-icons/md";
+import { MdArrowRightAlt } from 'react-icons/md';
+import PaymentPage, { PaymentPageSteps } from '../components/PaymentPage';
+import AppInfoContent from '@/app/UI/AppInfoContent';
+import Footer from '@/app/UI/Footer';
+import { useAppInfo } from '@/app/libs/hooks/useAppInfo';
 
 
-import { useAppInfo } from '../libs/hooks/useAppInfo';
-import AppInfoContent from './AppInfoContent';
-import Footer from './Footer';
-import ComplementNum from './ComplementNum';
+
+type AppFormProps = {
+    pageSlug?: string
+}
 
 
-const AppInfo = () => {
-    const { selectedNumber } = useAppInfo()
+const ApplicationForm = ({ pageSlug }:AppFormProps) => {
+    const { selectedComponent, selectedNumber } = useAppInfo();
     return (
         <div>
             <section className='max-w-[2000px] m-auto'>
@@ -43,9 +49,9 @@ const AppInfo = () => {
                     </div>
                 </main>
 
-                {appForm.map((app, i) => (
+                {appForm.map((app,i) => (
                     <React.Fragment key={app.id}>
-                        <AppInfoContent index={i} />
+                        <AppInfoContent index={i} pageSlug={pageSlug} />
                     </React.Fragment>
                 ))}
             </section>
@@ -57,4 +63,4 @@ const AppInfo = () => {
     );
 };
 
-export default AppInfo;
+export default ApplicationForm;

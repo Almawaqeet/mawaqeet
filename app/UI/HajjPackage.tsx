@@ -66,7 +66,7 @@ const HajjPackage: React.FC = () => {
       </div>
       <div className={`grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]`}>
 
-        <PackagesContent morestyle='xmd:hidden' to='/registration-form' />
+        <PackagesContent morestyle='xmd:hidden' to='/registration-form/application/step1' />
 
       </div>
 

@@ -44,10 +44,6 @@ export const navbar: NavbarSection[] = [
         id: 'contact-us',
         content: 'Contact Us',
       },
-      {
-        id: 'login',
-        content: 'Log In',
-      },
     ],
   },
   {

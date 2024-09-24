@@ -1,46 +1,69 @@
+
 import { useEffect } from "react";
 import { useMbisContext } from "./useContextProvider";
 import { appForm } from "@/app/contents/payment";
 import Step1 from "@/app/UI/Step1";
 import Step2 from "@/app/UI/Step2";
 import Step3 from "@/app/UI/Step3";
+import { useRouter } from "next/navigation";
 
 
- export const useAppInfo = () => {
-    const { dispatch, state : { selectedNumber, selectedComponent } } = useMbisContext()
+export const useAppInfo = () => {
+    const { dispatch, state: { selectedNumber, selectedComponent } } = useMbisContext();
 
-    useEffect(() => {
-        updateComponent(selectedNumber);
-    }, [selectedNumber]);
+    const router = useRouter()
+
+    const handleNext = () => {
+        const nextStepIndex = (selectedNumber + 1) % appForm.length;
+        const nextStepContent = appForm[nextStepIndex].content;
     
-     const handleNext = () => {
+        // Extract the current URL path
+        const currentPath = window.location.pathname;
+    
+        // Append the next step to the current URL path
+        const newURL = `${currentPath}/${nextStepContent}`;
+    
+        // Push the updated URL to the browser history
+        window.history.pushState(null, '', newURL);
+
+        // router.push(`${currentPath}/${nextStepContent}`)
+    
+        // Update the state with the new step index
         dispatch({
             type: 'setselectedNumber',
-            payload: (selectedNumber + 1) % appForm.length
+            payload: nextStepIndex,
         });
+
+        
     };
     
+
+
     const handlePrevious = () => {
-        dispatch({type: 'setselectedNumber', payload:  (selectedNumber - 1 + appForm.length) % appForm.length})
-    };
+        const currentPath = window.location.pathname;
     
-    const updateComponent = (step: number) => {
-        switch (step) {
-            case 0:
-                dispatch({ type: 'setSelectedComponent', payload: <Step1  /> });
-                break;
-            case 1:
-                dispatch({ type: 'setSelectedComponent', payload: <Step2  /> });
-                break;
-            case 2:
-                dispatch({ type: 'setSelectedComponent', payload: <Step3  /> });
-                break;
-            default:
-                dispatch({ type: 'setSelectedComponent', payload: <Step1  /> });
-                break;
+        // Split the current path into an array by "/"
+        const pathSegments = currentPath.split('/');
+    
+        // Ensure there are more than the base segments
+        if (pathSegments.length > 1) {
+            // Remove the last segment (the last step)
+            pathSegments.pop();
+    
+            // Join the remaining segments to form the new path
+            const newURL = pathSegments.join('/');
+    
+            // Push the updated URL to the browser history
+            window.history.pushState(null, '', newURL);
+    
+            // Update the state to move back to the previous step
+            const previousStepIndex = (selectedNumber - 1 + appForm.length) % appForm.length;
+            dispatch({
+                type: 'setselectedNumber',
+                payload: previousStepIndex,
+            });
         }
     };
 
     return { handleNext, handlePrevious, selectedNumber, selectedComponent }
-  }
-
+}

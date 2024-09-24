@@ -1,4 +1,4 @@
-import FormInput from './FormInput'
+import FormInput from './formComponents/FormContainer'
 import React from 'react'
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces'
 import Paragraph from '../libs/utilities/Paragraph'

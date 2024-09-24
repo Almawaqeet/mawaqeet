@@ -38,6 +38,8 @@
 
     "embla-carousel-react": "^8.2.0",
 
+    "formik": "^2.4.6",
+
     "init": "^0.1.2",
 
     "lucide-react": "^0.437.0",
@@ -54,7 +56,9 @@
 
     "tailwind-merge": "^2.5.2",
 
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+
+    "yup": "^1.4.0"
 
   },
 

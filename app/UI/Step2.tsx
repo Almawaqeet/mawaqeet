@@ -6,11 +6,17 @@ import PackagesContent from './PackagesContent';
 import { umrahCategory } from '../contents/services';
 import UmrahDiv from './UmrahDiv';
 import Headings from '../libs/utilities/Headings';
+import BtnGlobal from './BtnGlobal';
+import { PiGreaterThanLight } from 'react-icons/pi';
+import { useAppInfo } from '../libs/hooks/useAppInfo';
+import { useValidate } from '../libs/hooks/useValidate';
 
 
 const Step2: React.FC = () => {
   const { btn1Ref, btn2Ref, showPackage, activeBtnServiceId, handleButtonClick, dispatch } = useTab();
 
+  const { handleNext, handlePrevious } = useAppInfo()
+  const { Form, Formik } = useValidate()
 
   const [isShowPackage, setShowPackage] = useState<number | null>(null);
 
@@ -59,12 +65,12 @@ const Step2: React.FC = () => {
           {renderButton(btn1Ref, 'Hajj Package')}
           {renderButton(btn2Ref, 'Umrah Package')}
         </div>
-      
+
 
 
         {showPackage === btn1Ref && activeBtnServiceId === btn1Ref ? (
           <div className="grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]">
-            <PackagesContent offcontent='hidden' offheight='xmd:h-[1220px] sm:h-[1220px] md:h-[1020px] lg:h-[700px]'  offmainheight='xmd:min-h-[1200px] md:min-h-[1000px] lg:min-h-[900px]' umrah_show='hidden' to='' />
+            <PackagesContent offcontent='hidden' offheight='xmd:h-[1220px] sm:h-[1220px] md:h-[1020px] lg:h-[700px]' offmainheight='xmd:min-h-[1200px] md:min-h-[1000px] lg:min-h-[900px]' umrah_show='hidden' to='' />
           </div>
         ) : btn2Ref ? (
           <>
@@ -90,12 +96,25 @@ const Step2: React.FC = () => {
             )}
 
             <div className="grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]">
-              <PackagesContent offcontent='hidden'  offheight='xmd:h-[1120px] sm:h-[1000px] md:h-[650px] lg:h-[800px]'  offmainheight='xmd:min-h-[1100px] lg:min-h-[900px]' hajj_show='hidden' to='' />
+              <PackagesContent offcontent='hidden' offheight='xmd:h-[1120px] sm:h-[1000px] md:h-[650px] lg:h-[800px]' offmainheight='xmd:min-h-[1100px] lg:min-h-[900px]' hajj_show='hidden' to='' />
             </div>
-
           </>
         )
           : null}
+
+        <div className={`mt-14 w-full ${whiteSpaces.paddingX} m-auto`}>        <span className='flex gap-2 m-auto xmd:justify-center md:justify-end'>
+          <Form>
+          <BtnGlobal className='font-dejavu bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg' onClick={handlePrevious}>
+            Previous
+          </BtnGlobal>
+          <BtnGlobal className='font-dejavu bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg' onClick={handleNext}>
+            <span className='flex gap-2 items-center'>
+              Next <PiGreaterThanLight />
+            </span>
+          </BtnGlobal>
+          </Form>
+        </span>
+        </div>
       </main>
     </section>
   );

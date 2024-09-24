@@ -13,7 +13,6 @@ import LearnModal from './LearnModal';
 const HomeV1 = () => {
 
   const { dispatch } = useMbisContext()
-
   const handleOpen = () => { dispatch({ type: 'openModal', payload: true }) }
 
   // Find content from home.js
@@ -40,7 +39,7 @@ const HomeV1 = () => {
         ))}
         CTA="Get Started"
         subCTA='Learn More'
-        to='/registration-form'
+        to='/registration-form/application'
         id=''
         handleOpen={handleOpen}
       />
