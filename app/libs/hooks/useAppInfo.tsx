@@ -1,10 +1,6 @@
 
-import { useEffect } from "react";
 import { useMbisContext } from "./useContextProvider";
 import { appForm } from "@/app/contents/payment";
-import Step1 from "@/app/UI/Step1";
-import Step2 from "@/app/UI/Step2";
-import Step3 from "@/app/UI/Step3";
 import { useRouter } from "next/navigation";
 
 

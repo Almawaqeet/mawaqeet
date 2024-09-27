@@ -41,7 +41,7 @@ const TeamContent: React.FC = ({
                 post={about.post}
                 personality={about.personality}
                 view_profile={about.view_profile}
-                to={`/about-us/${about.slug}/profile`}
+                to={`/about-us/${about.slug}`}
               />
             </CarouselItem>
           ))}

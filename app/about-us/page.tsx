@@ -14,7 +14,7 @@ import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import { MbisProvider } from '../libs/hooks/useContextProvider';
 import Navbar from '../UI/Navbar';
 
-const Page = () => {
+const AboutUsStaticPage = () => {
     return (
         <MbisProvider>
             <Navbar />
@@ -100,4 +100,4 @@ const Page = () => {
     );
 };
 
-export default Page;
+export default AboutUsStaticPage;

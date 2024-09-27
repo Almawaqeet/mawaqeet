@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect, RefObject } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import Dropdown from './Dropdown';
@@ -15,19 +16,11 @@ const ServiceTab: React.FC = () => {
   const { btn1Ref, btn2Ref, btn3Ref, btn4Ref, showPackage, activeBtnServiceId, dispatch, handleButtonClick } = useTab();
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isTabDisplay, setTabDisplay] = useState<RefObject<HTMLButtonElement> | null>(null);
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
+  let isMobile = 768;
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    }; 
 
     dispatch({ type: 'setactiveBtnService', payload: btn1Ref });
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
   }, []);
 
   const renderButton = (
