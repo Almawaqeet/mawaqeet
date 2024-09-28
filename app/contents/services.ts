@@ -102,10 +102,29 @@ type PackageContent = {
   bullet_5?: string;
 };
 
+type PackagePrices = {
+  package_name: string
+  type_upfront: string
+  type_installment: string
+  amount_upfront_hajj: string
+  amount_upfront_umrah: string
+  week: string;
+  month: string;
+  any: string;
+};
+
+
+type Upfront = {
+  amount: string
+}
+
 type Package = {
   id: string;
   package_title: string;
   heading: string;
+ packagePrices: PackagePrices
+  pricehajjupfront: Upfront
+  priceumrahupfront: Upfront
   content: PackageContent;
   conclusion: string;
 };
@@ -123,6 +142,26 @@ export const packages: Package[] = [
     package_title: "VIP Package",
     heading:
       "Indulge in a truly regal experience with our 5-star hotel accommodations, boasting:",
+
+      packagePrices: {
+        package_name: 'VIP',
+        amount_upfront_umrah: 'Total Package = 4M',
+        type_upfront: 'Upfront :',
+        amount_upfront_hajj: 'Total Package = 10,000,000',
+        type_installment: 'Installment :',
+        week: 'Weekly  =  1,000,000',
+        month: 'Monthly  =  2,000,000',
+        any: 'Any Amount  =  __'
+      },
+
+      pricehajjupfront: {
+        amount: 'Total Package = 10M'
+      },
+
+      priceumrahupfront: {
+        amount: 'Total Package = 4M'
+      },
+
     content: {
       bullet_1:
         "Luxurious rooms with en-suite bathrooms meticulously designed for your comfort",
@@ -143,6 +182,26 @@ export const packages: Package[] = [
     package_title: "Deluxe Package",
     heading:
       "Enjoy a harmonious blend of luxury and affordability with our Deluxe Package, carefully crafted to elevate your pilgrimage experience:",
+
+      packagePrices: {
+        package_name: 'Deluxe',
+        amount_upfront_umrah: 'Total Package = 2,500,000',
+        type_upfront: 'Upfront :',
+        amount_upfront_hajj: 'Total Package = 7,000,000',
+        type_installment: 'Installment :',
+        week: 'Weekly  =  500,000',
+        month: 'Monthly  =  1,000,000',
+        any: 'Any Amount  =  __'
+      },
+
+      pricehajjupfront: {
+        amount: 'Total Package = 7M'
+      },
+
+      priceumrahupfront: {
+        amount: 'Total Package = 2.5M'
+      },
+
     content: {
       bullet_1:
         "4-star hotel lodging, just steps away from the Haram, offering unparalleled proximity",
@@ -161,6 +220,26 @@ export const packages: Package[] = [
     package_title: "Standard Package",
     heading:
       "Embark on a spiritual journey with our Standard Package, offering a perfect balance of affordability and comfort:",
+      
+      packagePrices: {
+        package_name: 'Standard',
+        amount_upfront_umrah: 'Total Package = 1,500,000',
+        type_upfront: 'Upfront :',
+        amount_upfront_hajj: 'Total Package = 6,000,000',
+        type_installment: 'Installment :',
+        week: 'Weekly  =  500,000',
+        month: 'Monthly  =  1,000,000',
+        any: 'Any Amount  =  __'
+      },
+
+      pricehajjupfront: {
+        amount: 'Total Package = 6M'
+      },
+
+      priceumrahupfront: {
+        amount: 'Total Package = 1.5M'
+      },
+
     content: {
       bullet_1:
         "3-star hotel lodging, just a short distance from the Haram (Makkah & Madeenah)",

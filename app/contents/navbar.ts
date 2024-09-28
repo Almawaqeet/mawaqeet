@@ -29,11 +29,11 @@ export const navbar: NavbarSection[] = [
     id: 'mainNav',
     navItems: [
       {
-        id: 'home',
+        id: '/',
         content: 'Home',
       },
       {
-        id: 'about',
+        id: 'about-us',
         content: 'About Us',
       },
       {
@@ -41,12 +41,8 @@ export const navbar: NavbarSection[] = [
         content: 'Services',
       },
       {
-        id: 'contact',
+        id: 'contact-us',
         content: 'Contact Us',
-      },
-      {
-        id: 'log',
-        content: 'Log In',
       },
     ],
   },

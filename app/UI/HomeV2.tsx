@@ -12,6 +12,7 @@ import SavingScheme from './SavingScheme';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import Headings from '../libs/utilities/Headings';
 import Paragraph from '../libs/utilities/Paragraph';
+import Link from 'next/link';
 
 
 const HomeV2 = () => {
@@ -19,21 +20,21 @@ const HomeV2 = () => {
     <>
       <section className={` ${whiteSpaces.paddingY}  mt-6`}>
         <main className={`quote-img`}>
-        <div className={` xmd:py-12 ${whiteSpaces.paddingX} `}>
-          {quote.map((quote) => (
-            <Headings
-              type={'quoteText'}
-              classname="text-justify text-white"
-              key={`quote-${quote.id}`}
-            >
-              {quote.quote}
-            </Headings>
-          ))}
-        </div>
+          <div className={` xmd:py-12 ${whiteSpaces.paddingX} `}>
+            {quote.map((quote) => (
+              <Headings
+                type={'quoteText'}
+                classname="text-justify text-white"
+                key={`quote-${quote.id}`}
+              >
+                {quote.quote}
+              </Headings>
+            ))}
+          </div>
         </main>
       </section>
 
-      <section className={`${whiteSpaces.paddingY} mt-6`}>
+      <section className={``}>
         <main
           className={`  relative xmd:min-h-[680px] sm:min-h-[470px] md:min-h-[520px]  xmd:max-w-[375px] mobile:max-w-[700px] m-auto sm:max-w-[900px] md:max-w-[1000px] lg:max-w-[2000px] `}
         >
@@ -89,7 +90,7 @@ const HomeV2 = () => {
             ))}
 
             <div className="grid justify-start ">
-              <BtnGlobal
+              <Link href={'/about-us#service-section'}> <BtnGlobal
                 className={
                   '  font-normal text-Bold-2-clamp leading-4 -tracking-tight cursor-pointer border-2 border-hover-color m-auto flex items-center flex-row-reverse xmd:px-6 py-2 gap-1 xmd:mb-6 md:mb-0 transition-all duration-500 ease-in-out r hover:bg-number-color hover:text-white hover:border-white'
                 }
@@ -97,19 +98,20 @@ const HomeV2 = () => {
                 <BsArrowRight className="mobile:w-4 mobile:h-8  tab_md:w-8 tab_md:h-8 text-hover-color" />
                 Check Package
               </BtnGlobal>
+              </Link>
             </div>
           </div>
 
           <div>
             <Image
-            src={'/images/image14.png'}
-            alt='spiritual-img'
-            className="rounded-lg drop-shadow-white-ash shadow-sm  object-contain  "
-            width={50}
-            height={50}
-            layout='responsive'
-            
-             />
+              src={'/images/image14.png'}
+              alt='spiritual-img'
+              className="rounded-lg drop-shadow-white-ash shadow-sm  object-contain  "
+              width={50}
+              height={50}
+              layout='responsive'
+
+            />
           </div>
         </main>
       </section>
@@ -162,8 +164,8 @@ const HomeV2 = () => {
         </div>
       </section>
       {/* footer */}
-      <section className={`${whiteSpaces.paddingY} mt-8`}>
-      <Footer />
+      <section className={`${whiteSpaces.paddingY} mt-8`} id='faqs'>
+        <Footer />
       </section>
     </>
   );

@@ -41,8 +41,11 @@ type WhyReasons = {
 // Define types for why_image
 type WhyImageItem = {
   id: string;
-  content: StaticImageData;
-};
+  content: {
+      id: string,
+      img: StaticImageData
+    }[]
+}
 
 // Define types for reach_out_to_us
 type ReachOutItem = {
@@ -161,28 +164,32 @@ export const why_hajj_umrah: WhyReasons[] = [
       },
     ],
   },
+  
+];
+
+export const whyImages: WhyImageItem[] = [
   {
     id: 'why_image',
-    reasons: [
+    content: [
       {
         id: 'img_1',
-        content: icon_1 as StaticImageData,
+        img: icon_4 ,
       },
       {
         id: 'img_2',
-        content: icon_2 as StaticImageData,
+        img: icon_2,
       },
       {
         id: 'img_3',
-        content: icon_3 as StaticImageData,
+        img: icon_3 ,
       },
       {
         id: 'img_4',
-        content: icon_4 as StaticImageData,
+        img: icon_4 ,
       },
     ],
   },
-];
+]
 
 // Data for reach_out_to_us
 export const reach_out_to_us: ReachOutItem[] = [

@@ -1,15 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Packages from './Packages';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Bullet from './Bullet';
 import useSlider from '../libs/hooks/useSlider';
 import { packages } from '../contents/services';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
+import { useMbisContext } from '../libs/hooks/useContextProvider';
 
-const PackagesContent: React.FC = () => {
+type packProps = {
+  offstyle?: string
+  offheight?: string
+  offcontent?: string
+  offmainheight?: string
+  morestyle?: string
+  prices?: string
+  umrahprices?: string
+  hajj_show?: string
+  umrah_show?: string
+  to: string
+}
+
+const PackagesContent: React.FC<packProps> = ({ offstyle, offcontent, offheight, offmainheight, morestyle, prices, umrahprices, hajj_show, umrah_show, to }) => {
   const { setApi, current } = useSlider();
+  const { dispatch } = useMbisContext()
 
-  const isMobile = window.innerWidth < 1020;
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1020);
+
+  const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
+
+  const handleClick = (index: number) => {
+    setSelectedPackage(index);
+    dispatch({ type: 'setSelectedComponent', payload: true })
+  };
+
+  // useEffect to handle window resize and update the state
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1020);
+    };
+
+    // Add event listener on mount
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -19,10 +56,13 @@ const PackagesContent: React.FC = () => {
             className={` ${whiteSpaces.paddingX} ${whiteSpaces.paddingY} xmd:max-w-[2000px] m-auto `}
           >
 
-            <Carousel className=" xmd:w-full m-auto grid sm:h-[900px] lg:w-full md:w-full md:h-[870px] lg:h-[800px]" setApi={setApi}>
+            <Carousel className={` xmd:w-full m-auto grid sm:h-[900px] lg:w-full md:w-full md:h-[870px] lg:h-[800px] ${offheight}`} setApi={setApi}>
               <CarouselContent >
                 {packages.map((pack, idx) => {
-                  const { id, package_title, content, conclusion, heading } = pack;
+                  const { id, package_title, content, conclusion, heading, packagePrices } = pack;
+
+                  const { package_name, type_installment, type_upfront, week, month, any, amount_upfront_hajj, amount_upfront_umrah } = packagePrices
+
                   const bullets = Object.values(content).filter(Boolean) as string[];
 
                   return (
@@ -38,6 +78,25 @@ const PackagesContent: React.FC = () => {
                         title_head={package_title}
                         index={idx}
                         className="md:block"
+                        offstyle={offstyle}
+                        offcontent={offcontent}
+                        offmainheight={offmainheight}
+                        morestyle={morestyle}
+                        prices={prices}
+                        umrahprices={umrahprices}
+                        hajj_show={hajj_show}
+                        umrah_show={umrah_show}
+                        package_name={package_name}
+                        type_installment={type_installment}
+                        type_upfront={type_upfront}
+                        week={week}
+                        month={month}
+                        any={any}
+                        hajjupfront={amount_upfront_hajj}
+                        umrahupfront={amount_upfront_umrah}
+                        isSelected={selectedPackage === idx}
+                        handleClick={handleClick}
+                        to={to}
                       />
                     </CarouselItem>
                   );
@@ -59,19 +118,41 @@ const PackagesContent: React.FC = () => {
         </>
       ) : (
         packages.map((pack, idx) => {
-          const { id, package_title, content, conclusion, heading } = pack;
+          const { id, package_title, content, conclusion, heading, packagePrices } = pack;
+
+          const { package_name, type_installment, type_upfront, week, month, any, amount_upfront_hajj, amount_upfront_umrah } = packagePrices
+
           const bullets = Object.values(content).filter(Boolean) as string[];
 
           return (
             <Packages
-              key={`package-${id}`}
-              title_intro={heading}
-              bullets={bullets}
-              title_conclusion={conclusion}
-              title_head={package_title}
-              index={idx}
-
-            />
+            key={`package-${id}`}
+            title_intro={heading}
+            bullets={bullets}
+            title_conclusion={conclusion}
+            title_head={package_title}
+            index={idx}
+            className="md:block"
+            offstyle={offstyle}
+            offcontent={offcontent}
+            offmainheight={offmainheight}
+            morestyle={morestyle}
+            prices={prices}
+            umrahprices={umrahprices}
+            hajj_show={hajj_show}
+            umrah_show={umrah_show}
+            package_name={package_name}
+            type_installment={type_installment}
+            type_upfront={type_upfront}
+            week={week}
+            month={month}
+            any={any}
+            to={to}
+            hajjupfront={amount_upfront_hajj}
+            umrahupfront={amount_upfront_umrah}
+            isSelected={selectedPackage === idx}
+            handleClick={handleClick}
+          />
           );
         })
       )}

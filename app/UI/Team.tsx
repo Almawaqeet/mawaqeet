@@ -5,19 +5,16 @@ import Image from "next/image"
 import BtnGlobal from "./BtnGlobal";
 import Headings from "../libs/utilities/Headings";
 import Paragraph from "../libs/utilities/Paragraph";
+import Link from "next/link";
 
 
 interface TeamProps {
   index: number;
   fullName: string;
   post: string;
+  to: string,
   personality?: string;
   view_profile: string;
-  profile_1: string;
-  profile_2: string;
-  profile_3: string;
-  profile_4?: string;
-  profile_5?: string;
   image: StaticImageData;
 }
 
@@ -27,14 +24,9 @@ const Team: React.FC<TeamProps> = ({
   post,
   personality,
   view_profile,
-  profile_1,
-  profile_2,
-  profile_3,
-  profile_4,
-  profile_5,
   image,
+  to
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
@@ -57,75 +49,35 @@ const Team: React.FC<TeamProps> = ({
           <Paragraph
             type="global"
             classname="font-normal xmd:leading-5 md:leading-8 text-center xmd:tracking-[0.16px] text-team-clamp group-hover:text-white"
-            
+
           >
             {personality}
           </Paragraph>
 
           <div className="grid m-auto">
-            <BtnGlobal
-              className={`${
-                index === 1
-                  ? "xmd:relative xmd:top-5 mobile:top-10 lg:top-0"
-                  : ""
-              } ${
-                index === 2
-                  ? "xmd:relative xmd:top-5 mobile:top-10 md:top-8 lg:top-16"
-                  : ""
-              } ${
-                index === 3
-                  ? "xmd:relative xmd:top-[5rem] mobile:top-24 sm:top-24 md:top-24"
-                  : ""
-              } ${
-                index === 0 ? "mobile:top-0 xmd:relative md:top-0" : ""
-              } xmd:rounded-[20px] drop-shadow-trans-white border-2 border-[#4b3938] xmd:px-6 xmd:py-3 group-hover:border-white`}
-              
-            >
-              <Paragraph
-                type="global"
-                classname="xmd:text-fz-xss xmd:leading-4 xmd:tracking-[0.07px] text-center group-hover:text-white"
+            <Link href={to} passHref>
+              <BtnGlobal
+                className={`${index === 1
+                    ? "xmd:relative xmd:top-5 mobile:top-10 lg:top-0"
+                    : ""
+                  } ${index === 2
+                    ? "xmd:relative xmd:top-5 mobile:top-10 md:top-8 lg:top-16"
+                    : ""
+                  } ${index === 3
+                    ? "xmd:relative xmd:top-[5rem] mobile:top-24 sm:top-24 md:top-24"
+                    : ""
+                  } ${index === 0 ? "mobile:top-0 xmd:relative md:top-0" : ""
+                  } xmd:rounded-[20px] drop-shadow-trans-white border-2 border-[#4b3938] xmd:px-6 xmd:py-3 group-hover:border-white`}
+
               >
-                {view_profile}
-              </Paragraph>
-            </BtnGlobal>
-          </div>
-
-          <div>
-            {isOpen && (
-              <>
                 <Paragraph
                   type="global"
-                  classname="font-normal xmd:leading-5 text-center md:leading-8 xmd:tracking-[0.16px] text-team-clamp"
+                  classname="xmd:text-fz-xss xmd:leading-4 xmd:tracking-[0.07px] text-center group-hover:text-white"
                 >
-                  {profile_1}
+                  {view_profile}
                 </Paragraph>
-
-                <Paragraph
-                  type="global"
-                  classname="font-normal xmd:leading-5 text-center md:leading-8 xmd:tracking-[0.16px] text-team-clamp"
-                >
-                  {profile_2}
-                </Paragraph>
-                <Paragraph
-                  type="global"
-                  classname="font-normal xmd:leading-5 text-center md:leading-8 xmd:tracking-[0.16px] text-team-clamp"
-                >
-                  {profile_3}
-                </Paragraph>
-                <Paragraph
-                  type="global"
-                  classname="font-normal xmd:leading-5 text-center md:leading-8 xmd:tracking-[0.16px] text-team-clamp"
-                >
-                  {profile_4}
-                </Paragraph>
-                <Paragraph
-                  type="global"
-                  classname="font-normal xmd:leading-5 text-center md:leading-8 xmd:tracking-[0.16px] text-team-clamp"
-                >
-                  {profile_5}
-                </Paragraph>
-              </>
-            )}
+              </BtnGlobal>
+            </Link>
           </div>
 
           <div>

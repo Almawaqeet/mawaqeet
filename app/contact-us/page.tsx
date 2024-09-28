@@ -1,12 +1,16 @@
+'use client'
 import React from 'react'
 import Headings from '../libs/utilities/Headings'
 import Contact from '../UI/Contact'
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces'
 import Footer from '../UI/Footer'
+import { MbisProvider } from '../libs/hooks/useContextProvider'
+import Navbar from '../UI/Navbar'
 
 const ContactUs: React.FC = () => {
     return (
-        <>
+        <MbisProvider>
+            <Navbar />
             <section className=' max-w-[2000px]  m-auto relative lg:pb-96 md:pb-[40rem] sm:pb-[46rem] xmd:pb-[50rem]'>
                 <main className='bg-personality bg-contain bg-blend-normal  md:pb-0'>
                     <main className='  h-screen m-auto flex items-center justify-center flex-col '>
@@ -32,7 +36,7 @@ const ContactUs: React.FC = () => {
             <footer className={`${whiteSpaces.sectionMargin} md:pt-6 xmd:pt-12 relative`}>
                 <Footer />
             </footer>
-        </>
+        </MbisProvider>
     )
 }
 

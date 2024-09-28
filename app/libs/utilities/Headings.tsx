@@ -26,7 +26,7 @@ const Headings: React.FC<HeadingsProps> = ({ children, type, classname }) => {
     heading_2: `${Bold_2_clamp} font-bold tracking-wide mobile:leading-[14px] sm:leading-[20px] font-dejavu`,
     quoteText: `${quote} font-bold tracking-wide mobile:leading-5 sm:leading-6 md:leading-10 text-left font-dejavu`,
     schemeText: `${scheme} font-bold mobile:tracking-normal text-white sm:tracking-[1.6px] mobile:leading-8 md:leading-12 text-center font-dejavu`,
-    global: `${global}`
+    global: `${global}`       
   };
 
   const renderContent = () => {
