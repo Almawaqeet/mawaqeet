@@ -1,4 +1,5 @@
 "use client"
+
 import React from 'react'
 import { about_hero, about_main_body, } from '../contents/about';
 import Image from 'next/image';
@@ -7,14 +8,14 @@ import SlantDiv from '../UI/SlantDiv';
 
 import TeamContent from '../UI/TeamContent';
 import Services from '../UI/Services';
-import Hero from '../UI/Hero'; 
+import Hero from '../UI/Hero';
 import Headings from '../libs/utilities/Headings';
 import Paragraph from '../libs/utilities/Paragraph';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import { MbisProvider } from '../libs/hooks/useContextProvider';
 import Navbar from '../UI/Navbar';
 
-const AboutUsStaticPage = () => {
+const AboutUsPage = () => {
     return (
         <MbisProvider>
             <Navbar />
@@ -100,4 +101,4 @@ const AboutUsStaticPage = () => {
     );
 };
 
-export default AboutUsStaticPage;
+export default AboutUsPage;
