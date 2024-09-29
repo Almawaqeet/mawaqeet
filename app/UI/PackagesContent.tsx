@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from 'react';
 import Packages from './Packages';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
@@ -24,7 +26,7 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offcontent, offheight,
   const { setApi, current } = useSlider();
   const { dispatch } = useMbisContext()
 
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1020);
+  const [isMobile, setIsMobile] = useState<boolean>(typeof window !== 'undefined' ? window.innerWidth < 1020 : false);
 
   const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
 
@@ -35,17 +37,22 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offcontent, offheight,
 
   // useEffect to handle window resize and update the state
   useEffect(() => {
-    const handleResize = () => {
+    if (typeof window !== 'undefined') {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 1020);
+      };
+
+      // Set initial state
       setIsMobile(window.innerWidth < 1020);
-    };
 
-    // Add event listener on mount
-    window.addEventListener('resize', handleResize);
+      // Add event listener
+      window.addEventListener('resize', handleResize);
 
-    // Clean up the event listener on unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+      // Clean up the event listener on unmount
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }
   }, []);
 
   return (

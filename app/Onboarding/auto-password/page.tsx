@@ -1,4 +1,6 @@
-'use client'
+"use client"
+
+
 import React from 'react'
 import { FormikHelpers } from 'formik'
 
@@ -17,19 +19,19 @@ import { useRouter } from 'next/navigation'
 interface IntialInputValues {
     email: string
   }
-  
 
-const OboardingEmail = () => {
+
+const OnboardingEmail = () => {
     const { Field, Form, Formik } = useValidate()
     const router = useRouter()
   return (
     <div>
-        <FormInterface 
+        <FormInterface
         heading='Provide your email'
         sub_heading='Provide your email address to receive your login details'
         layout='grid sm:grid-cols-1 md:grid-cols-[500px_1fr]'
         >
-            
+
         <Formik
               initialValues={{
                 email: '',
@@ -41,7 +43,7 @@ const OboardingEmail = () => {
               ) => {
                 console.log(values);
                 setSubmitting(false);
-                router.push(`${window.location.pathname}/verify-password`)
+                router.push(`verify-password`)
               }}
             >
               {({ handleBlur, handleChange, handleSubmit, values, errors, touched, isSubmitting }) => (
@@ -52,7 +54,7 @@ const OboardingEmail = () => {
                       {errors.email && touched.email ? (
                         <FormError message={errors.email}  />
                       ) : null}
-                      
+
                     </FormContainer>
 
                     <BtnGlobal className='font-dejavu xmd:py-[10px] xmd:px-[78px] md:py-4 md:px-[108px] m-auto text-white text-center rounded-lg bg-[#4B3938]' type='submit' disable={isSubmitting}>Sign Up</BtnGlobal>
@@ -65,4 +67,4 @@ const OboardingEmail = () => {
   )
 }
 
-export default OboardingEmail
+export default OnboardingEmail
