@@ -1,13 +1,10 @@
 
 import { useMbisContext } from "./useContextProvider";
 import { appForm } from "@/app/contents/payment";
-import { useRouter } from "next/navigation";
 
 
 export const useAppInfo = () => {
     const { dispatch, state: { selectedNumber, selectedComponent } } = useMbisContext();
-
-    const router = useRouter()
 
     const handleNext = () => {
         const nextStepIndex = (selectedNumber + 1) % appForm.length;

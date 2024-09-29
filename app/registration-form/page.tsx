@@ -3,7 +3,7 @@ import { appForm, payment } from "@/app/contents/payment";
 import { MbisProvider } from "@/app/libs/hooks/useContextProvider";
 import { whiteSpaces } from "@/app/libs/utilities/GlobalSpaces";
 import Paragraph from "@/app/libs/utilities/Paragraph";
-import ApplicationForm from "@/app/UI/ApplicationForm";
+import ApplicationForm from "./application/[[...steps]]/page";
 import Navbar from "@/app/UI/Navbar";
 import PayInfo from "@/app/UI/PayInfo";
 import { ReactNode, useEffect, useState } from "react";
@@ -19,7 +19,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
       if (pageSlug) {
           const index = appForm.findIndex(item => item.content === pageSlug);
           setSelectedNumber(index);
-          setSelectedComponent(<ApplicationForm pageSlug={pageSlug} />);
+          setSelectedComponent(<ApplicationForm  />);
       }
   }, [pageSlug]);
 
@@ -50,7 +50,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
                       ))}
                   </main>
               </section>
-              {selectedComponent ? selectedComponent : <ApplicationForm pageSlug={pageSlug} />}
+              {selectedComponent ? selectedComponent : <ApplicationForm  />}
           </div>
       </MbisProvider>
   );

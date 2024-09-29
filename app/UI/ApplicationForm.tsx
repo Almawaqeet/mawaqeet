@@ -6,19 +6,13 @@ import { MdArrowRightAlt } from "react-icons/md";
 
 
 import { useAppInfo } from '../libs/hooks/useAppInfo';
-// import AppInfoContent from './AppInfoContent';
 import Footer from './Footer';
 import ComplementNum from './ComplementNum';
 import PaymentPage, { PaymentPageSteps } from '../registration-form/components/PaymentPage';
 
 
-type AppFormProps = {
-    pageSlug?: string
-}
-
-
-const ApplicationForm = ({ pageSlug }:AppFormProps) => {
-    const { selectedComponent, selectedNumber } = useAppInfo();
+const app = () => {
+    const { selectedNumber } = useAppInfo();
     return (
         <div>
             <section className='max-w-[2000px] m-auto'>
@@ -51,12 +45,6 @@ const ApplicationForm = ({ pageSlug }:AppFormProps) => {
                 </main>
 
                {selectedNumber === 0 ? <PaymentPage steps={PaymentPageSteps.ONBOARDING} /> : selectedNumber === 1 ? <PaymentPage steps={PaymentPageSteps.PACKAGE_SELECTION} /> : selectedNumber === 2 ? <PaymentPage steps={PaymentPageSteps.EXTRA_INFORMATION} /> : null}
-
-                {/* {appForm.map((app,i) => (
-                    <React.Fragment key={app.id}>
-                        <AppInfoContent index={i} pageSlug={pageSlug} />
-                    </React.Fragment>
-                ))} */}
             </section>
 
             <section className='xmd:mt-[152px]'>
@@ -66,4 +54,4 @@ const ApplicationForm = ({ pageSlug }:AppFormProps) => {
     );
 };
 
-export default ApplicationForm;
+export default app;

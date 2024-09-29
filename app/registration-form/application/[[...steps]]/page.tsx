@@ -1,25 +1,20 @@
 'use client'
+import React from 'react';
 import { appForm } from '@/app/contents/payment';
 import { whiteSpaces } from '@/app/libs/utilities/GlobalSpaces';
 import ComplementNum from '@/app/UI/ComplementNum';
-import React from 'react';
 import { MdArrowRightAlt } from 'react-icons/md';
-import PaymentPage, { PaymentPageSteps } from '../components/PaymentPage';
-import AppInfoContent from '@/app/UI/AppInfoContent';
+// import AppInfoContent from '@/app/UI/AppInfoContent';
 import Footer from '@/app/UI/Footer';
 import { useAppInfo } from '@/app/libs/hooks/useAppInfo';
+import PaymentPage, { PaymentPageSteps } from '../../components/PaymentPage';
+import { MbisProvider } from '@/app/libs/hooks/useContextProvider';
 
 
-
-type AppFormProps = {
-    pageSlug?: string
-}
-
-
-const ApplicationForm = ({ pageSlug }:AppFormProps) => {
-    const { selectedComponent, selectedNumber } = useAppInfo();
+const ApplicationForm = () => {
+    const { selectedNumber } = useAppInfo();
     return (
-        <div>
+        <MbisProvider>
             <section className='max-w-[2000px] m-auto'>
                 <main className={`${whiteSpaces.paddingX}`}>
 
@@ -30,7 +25,7 @@ const ApplicationForm = ({ pageSlug }:AppFormProps) => {
                                     <span className='flex relative'>
 
                                         <ComplementNum
-                                            className={`xmd:w-[50px] xmd:h-[50px] m-auto cursor-pointer md:grid md:mx-0 relative ${selectedNumber === i ? 'bg-hover-color text-white transition-all' : 'bg-white border-dotted border-2 border-[#333333]'}`}
+                                            className={`xmd:w-[50px] xmd:h-[50px] m-auto cursor-pointer md:grid md:mx-0 relative  ${selectedNumber === i ? 'bg-hover-color text-white transition-all' : 'bg-white border-dotted border-2 border-[#333333]'}`}
                                             position={i + 1}
                                         />
 
@@ -49,17 +44,19 @@ const ApplicationForm = ({ pageSlug }:AppFormProps) => {
                     </div>
                 </main>
 
+                {selectedNumber === 0 ? <PaymentPage steps={PaymentPageSteps.ONBOARDING} /> : selectedNumber === 1 ? <PaymentPage steps={PaymentPageSteps.PACKAGE_SELECTION} /> : selectedNumber === 2 ? <PaymentPage steps={PaymentPageSteps.EXTRA_INFORMATION} /> : null}
+{/* 
                 {appForm.map((app,i) => (
                     <React.Fragment key={app.id}>
-                        <AppInfoContent index={i} pageSlug={pageSlug} />
+                        <AppInfoContent index={i}/>
                     </React.Fragment>
-                ))}
+                ))} */}
             </section>
 
             <section className='xmd:mt-[152px]'>
                 <Footer />
             </section>
-        </div>
+        </MbisProvider>
     );
 };
 
