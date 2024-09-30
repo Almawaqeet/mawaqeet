@@ -24,7 +24,7 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offcontent, offheight,
   const { setApi, current } = useSlider();
   const { dispatch } = useMbisContext()
 
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1020);
+  let isMobile = 1020;
 
   const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
 
@@ -32,21 +32,6 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offcontent, offheight,
     setSelectedPackage(index);
     dispatch({ type: 'setSelectedComponent', payload: true })
   };
-
-  // useEffect to handle window resize and update the state
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1020);
-    };
-
-    // Add event listener on mount
-    window.addEventListener('resize', handleResize);
-
-    // Clean up the event listener on unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <>
