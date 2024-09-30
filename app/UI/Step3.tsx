@@ -9,12 +9,11 @@ import BtnGlobal from './BtnGlobal'
 import { PiGreaterThanLight, PiLessThanLight } from 'react-icons/pi'
 import FormError from './formComponents/FormError'
 import { FormikHelpers } from 'formik'
-import { onboardingSchema } from '../libs/utilities/schemas'
+import { next_of_kin_Schema, onboardingSchema } from '../libs/utilities/schemas'
 import { useAppInfo } from '../libs/hooks/useAppInfo'
 
 interface Step1InitialValues {
-  first_name: string,
-  last_name: string,
+  Next_of_Kin_Name: string,
   email: string,
   phone_number: string
   address: string
@@ -29,19 +28,17 @@ const Step3: React.FC = () => {
         type='globalBold'
         classname={`text-Bold-1-clamp font-bold tracking-tight leading-[18px] text-inherit xmd:pb-8 font-dejavu xmd:text-start ${whiteSpaces.paddingX}`}
       >
-        Select Package
+        Next of Kin Info
       </Paragraph>
 
-      <div className={`${whiteSpaces.paddingX} grid xmd:grid-cols-1 md:grid-cols-2 md:gap-x-20`}>
         <Formik
           initialValues={{
-            first_name: '',
-            last_name: '',
+            Next_of_Kin_Name: '',
             email: '',
             phone_number: '',
             address: ''
           }}
-          validationSchema={onboardingSchema}
+          validationSchema={next_of_kin_Schema}
 
           onSubmit={(
             values: Step1InitialValues,
@@ -55,30 +52,25 @@ const Step3: React.FC = () => {
           }}
         >
           {({ handleSubmit, values, errors, touched }) => (<Form onSubmit={handleSubmit}>
-            <div className={`${whiteSpaces.paddingX} grid xmd:grid-cols-1 md:grid-cols-2 md:gap-x-20`}>
-              <FormContainer label='First Name'>
-                <Field name="first_name" component={CustomInputComponent} input_type="text" placeholder="First Name" value={values.first_name} />
-                {errors.first_name && touched.first_name ? <FormError message={errors.first_name} className='text-red-700 font-dejavu' /> : null}
+            <div className={`${whiteSpaces.paddingX} grid xmd:grid-cols-1 md:grid-cols-2 md:gap-x-20 `}>
+              <FormContainer label='Next of Kin Name'>
+                <Field name="Next_of_Kin_Name" component={CustomInputComponent} input_type="text" placeholder="Full Name" value={values.Next_of_Kin_Name} />
+                {errors.Next_of_Kin_Name && touched.Next_of_Kin_Name ? <FormError message={errors.Next_of_Kin_Name} className='text-red-700 font-dejavu' /> : null}
               </FormContainer>
 
-              <FormContainer label='Last Name'>
-                <Field name="last_name" component={CustomInputComponent} input_type="text" placeholder="Last Name" value={values.last_name} />
-                {errors.last_name && touched.last_name ? <FormError message={errors.last_name} className='text-red-700 font-dejavu' /> : null}
-              </FormContainer>
-
-              <FormContainer label='Email'>
-                <Field name="email" component={CustomInputComponent} input_type="email" placeholder="Your Email Address" value={values.email} />
+              <FormContainer label='Email Address'>
+                <Field name="last_name" component={CustomInputComponent} input_type="email" placeholder="Email Address" value={values.email} />
                 {errors.email && touched.email ? <FormError message={errors.email} className='text-red-700 font-dejavu' /> : null}
               </FormContainer>
 
-              <FormContainer label='Phone Number' className="xmd:pb-14 md:pb-8 lg:pb-16">
-                <Field name="phone_number" component={CustomInputComponent} input_type="tel" placeholder="Phone number" value={values.phone_number} />
-                {errors.phone_number && touched.phone_number ? <FormError message={errors.phone_number} className='text-red-700 font-dejavu' /> : null}
+              <FormContainer label='Home Address'>
+                <Field name="address" component={CustomInputComponent} input_type="text" placeholder="Next of Kin Adrress" value={values.address} />
+                {errors.address && touched.address ? <FormError message={errors.address} className='text-red-700 font-dejavu' /> : null}
               </FormContainer>
 
-              <FormContainer label='Address' className="xmd:pb-14 md:pb-8 lg:pb-16">
-                <Field name="address" component={CustomInputComponent} input_type="text" placeholder="Your Residential Address" value={values.phone_number} />
-                {errors.address && touched.address ? <FormError message={errors.address} className='text-red-700 font-dejavu' /> : null}
+              <FormContainer label='Contact Number' className="xmd:pb-14 md:pb-8 lg:pb-16">
+                <Field name="phone_number" component={CustomInputComponent} input_type="tel" placeholder="Enter digits" value={values.phone_number} />
+                {errors.phone_number && touched.phone_number ? <FormError message={errors.phone_number} className='text-red-700 font-dejavu' /> : null}
               </FormContainer>
             </div>
 
@@ -86,7 +78,7 @@ const Step3: React.FC = () => {
               <BtnGlobal onClick={handlePrevious} className='font-dejavu bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg'>
                 <PiLessThanLight /> Previous
               </BtnGlobal>
-              <BtnGlobal className='font-dejavu bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg'>
+              <BtnGlobal className='font-dejavu bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg' type='submit'>
                 <span className='flex gap-2 items-center'>
                   Submit
                 </span>
@@ -94,7 +86,6 @@ const Step3: React.FC = () => {
             </span>
           </Form>)}
         </Formik>
-      </div>
     </React.Fragment>
   )
 }

@@ -25,3 +25,14 @@ const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
     phone_number: Yup.number().positive().integer().required("Phone is required"),
   });
+
+
+  export const next_of_kin_Schema = Yup.object().shape({
+    Next_of_Kin_Name: Yup.string().min(3, 'Full name too short').max(120, 'Full name too long').required('Next of Kin Name is required'),
+
+    email: Yup.string().email('Invalid email address').required('Email is required'),
+
+    address: Yup.string().min(3, 'Next of Kin Address is too short').max(200, 'Next of Kin address is too long').required('Next of Kin Address is required'),
+
+    phone_number: Yup.number().positive().integer().required("Phone is required"),
+  });
