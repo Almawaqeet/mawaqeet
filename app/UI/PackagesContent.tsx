@@ -33,24 +33,27 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offcontent, offheight,
     dispatch({ type: 'setSelectedComponent', payload: true })
   };
 
-  // useEffect to handle window resize and update the state
-  useEffect(() => {
+
+   // useEffect to handle window resize and update the state
+   useEffect(() => {
     if (typeof window !== 'undefined') {
+      const handleResize = () => {
         setIsMobile(window.innerWidth < 1020);
-    }
+      };
 
-    const handleResize = () => {
+      // Set initial state
       setIsMobile(window.innerWidth < 1020);
-    };
 
-    // Add event listener on mount
-    window.addEventListener('resize', handleResize);
+      // Add event listener
+      window.addEventListener('resize', handleResize);
 
-    // Clean up the event listener on unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+      // Clean up the event listener on unmount
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }
   }, []);
+
 
   return (
     <>
