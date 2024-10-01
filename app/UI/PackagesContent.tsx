@@ -24,7 +24,7 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offcontent, offheight,
   const { setApi, current } = useSlider();
   const { dispatch } = useMbisContext()
 
-  let isMobile = 1020;
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1020);
 
   const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
 
@@ -32,6 +32,25 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offcontent, offheight,
     setSelectedPackage(index);
     dispatch({ type: 'setSelectedComponent', payload: true })
   };
+
+  // useEffect to handle window resize and update the state
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+        setIsMobile(window.innerWidth < 1020);
+    }
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1020);
+    };
+
+    // Add event listener on mount
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -111,33 +130,33 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offcontent, offheight,
 
           return (
             <Packages
-            key={`package-${id}`}
-            title_intro={heading}
-            bullets={bullets}
-            title_conclusion={conclusion}
-            title_head={package_title}
-            index={idx}
-            className="md:block"
-            offstyle={offstyle}
-            offcontent={offcontent}
-            offmainheight={offmainheight}
-            morestyle={morestyle}
-            prices={prices}
-            umrahprices={umrahprices}
-            hajj_show={hajj_show}
-            umrah_show={umrah_show}
-            package_name={package_name}
-            type_installment={type_installment}
-            type_upfront={type_upfront}
-            week={week}
-            month={month}
-            any={any}
-            to={to}
-            hajjupfront={amount_upfront_hajj}
-            umrahupfront={amount_upfront_umrah}
-            isSelected={selectedPackage === idx}
-            handleClick={handleClick}
-          />
+              key={`package-${id}`}
+              title_intro={heading}
+              bullets={bullets}
+              title_conclusion={conclusion}
+              title_head={package_title}
+              index={idx}
+              className="md:block"
+              offstyle={offstyle}
+              offcontent={offcontent}
+              offmainheight={offmainheight}
+              morestyle={morestyle}
+              prices={prices}
+              umrahprices={umrahprices}
+              hajj_show={hajj_show}
+              umrah_show={umrah_show}
+              package_name={package_name}
+              type_installment={type_installment}
+              type_upfront={type_upfront}
+              week={week}
+              month={month}
+              any={any}
+              to={to}
+              hajjupfront={amount_upfront_hajj}
+              umrahupfront={amount_upfront_umrah}
+              isSelected={selectedPackage === idx}
+              handleClick={handleClick}
+            />
           );
         })
       )}

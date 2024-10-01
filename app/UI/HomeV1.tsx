@@ -39,7 +39,7 @@ const HomeV1 = () => {
         ))}
         CTA="Get Started"
         subCTA='Learn More'
-        to='/registration-form'
+        to='/registration-form/'
         id=''
         handleOpen={handleOpen}
       />
