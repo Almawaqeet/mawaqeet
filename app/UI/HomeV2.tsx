@@ -95,8 +95,9 @@ const HomeV2 = () => {
                   '  font-normal text-Bold-2-clamp leading-4 -tracking-tight cursor-pointer border-2 border-hover-color m-auto flex items-center flex-row-reverse xmd:px-6 py-2 gap-1 xmd:mb-6 md:mb-0 transition-all duration-500 ease-in-out r hover:bg-number-color hover:text-white hover:border-white'
                 }
               >
-                <BsArrowRight className="mobile:w-4 mobile:h-8  tab_md:w-8 tab_md:h-8 text-hover-color" />
+
                 Check Package
+                <BsArrowRight className="mobile:w-4 mobile:h-8  tab_md:w-8 tab_md:h-8 text-hover-color" />
               </BtnGlobal>
               </Link>
             </div>

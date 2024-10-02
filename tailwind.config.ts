@@ -43,7 +43,7 @@ const config: Config = {
 
         "heading-clamp": "clamp(1.125rem, 1.004rem + 1.1067vw, 2rem)",
         "brand-clamp": "clamp(1.25rem, 0.4286rem + 1.1905vw, 1.75rem)",
-        "hero-clamp": "clamp(1.5rem, 0.9718rem + 2.2535vw, 3rem);",
+        "hero-clamp": "clamp(2.2rem, 0.9718rem + 2.2535vw, 4.8rem);",
         "navbar-clamp": "clamp(0.725rem, 0.3393rem + 0.5952vw, 0.875rem)",
 
         "Bold-1-clamp": "clamp(0.875rem, 0.6549rem + 0.939vw, 1.5rem)",

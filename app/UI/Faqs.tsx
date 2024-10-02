@@ -95,7 +95,7 @@ const Faqs = () => {
             </p>
           }
           answers={
-            <li className={`${isSelected === index ? 'list-disc' : 'list-none'}`}>
+            <li className={`list-none`}>
               {isSelected === index ? findanswers?.contents[index].content : ''}
             </li>
           }

@@ -18,7 +18,7 @@ const Accordion = ({
     <div className="flex flex-col gap-4 ">
 
 
-      <div className="flex justify-between bg-accordion xmd:py-4 xmd:px-4 md:px-6 items-center  rounded-[8px] xmd:gap-4 md:gap-0">
+      <div className="flex justify-between flex-row-reverse bg-accordion xmd:py-4 xmd:px-4 md:px-6 items-center  rounded-[8px] xmd:gap-4 md:gap-0">
         <div onClick={() => handleFaqClick} className='md:w-[50px] md:h-[50px] xmd:w-8 xmd:h-8 rounded-full bg-[#87592A] opacity-60 relative'>{icon}</div>
         <div className="font-dejavu" onClick={() => handleFaqClick} >{questions}</div>
       </div>

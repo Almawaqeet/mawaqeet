@@ -32,7 +32,7 @@ const app = () => {
 
                                         {i !== 2 && (
                                             <MdArrowRightAlt
-                                                className='absolute top-1/2 text-[82px] left-3/4 transform -translate-y-1/2 m-auto text-[#A0A8AD] md:left-2/4'
+                                                className='absolute top-1/2 text-[82px] left-3/4 transform -translate-y-1/2 m-auto text-[#A0A8AD] md:left-2/4 xmd:w-10'
 
                                             />
                                         )}

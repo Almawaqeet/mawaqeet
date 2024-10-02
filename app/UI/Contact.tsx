@@ -54,13 +54,13 @@ const Contact: React.FC<ContactProps> = ({
           </Headings>
         ))}
 
-        <div className="flex xmd:flex-col xmd:gap-6 md:grid md:flex-col lg:grid-cols-[1fr_minmax(10px,_20px)_1fr] justify-around lg:gap-1">
+        <div className="flex xmd:flex-col  md:grid md:flex-col lg:grid-cols-[1fr_minmax(10px,_20px)_1fr] justify-around lg:gap-1">
           <div
-            className={`flex xmd:flex-col xmd:gap-2 bg-[rgb(249,249,249)] xmd:p-10 md:p-5 rounded-lg `}
+            className={`flex xmd:flex-col xmd:gap-28 bg-[rgb(249,249,249)] xmd:p-10 md:p-5 rounded-lg `}
           >
             <div className="flex xmd:gap-1 md:gap-4 justify-between ">
               <div
-                className={`${bgRound} rounded-full xmd:w-[60px] xmd:h-[50px] lg:w-[80px] lg:h-[80px] sm:w-[50px] sm:h-[50px] relative flex items-center md:w-[70px] md:h-[70px]`}
+                className={`${bgRound} rounded-full xmd:w-[60px] xmd:h-[50px] mobile:h-[55px] lg:w-[80px] lg:h-[80px] sm:w-[50px] sm:h-[50px] relative flex items-center md:w-[70px] md:h-[70px]`}
               >
                 <BsEnvelope className="text-hover-color absolute left-1/2 transform -translate-x-1/2 xmd:w-[21.33px] xmd:h-[16px] md:w-[42.63px] md:h-[32px] text-start" />
               </div>
@@ -71,16 +71,16 @@ const Contact: React.FC<ContactProps> = ({
                 <BtnGlobal
                   className={`${btnColor} rounded-lg xmd:p-2  md:py-[11px] md:px-[15px] flex items-center`}
                 >
-                  <h6 className={`font-normal xmd:text-fz-xxs mobile:text-fz-sm leading-8 tracking-[0.14px] text-center font-dejavu ${textColor} `}>
+                  <h6 className={`font-normal xmd:text-fz-xsm sm:text-fz-sm leading-8 tracking-[0.14px] text-center font-dejavu ${textColor} `}>
                     almawaqeettravelsandtours@gmail.com
                   </h6>
                 </BtnGlobal>
               </div>
             </div>
 
-            <div className="flex xmd:gap-0 justify-between items-center  overflow-x-hidden">
+            <div className="flex justify-between items-center ">
               <div
-                className={`${bgRound} rounded-full  xmd:w-[50px] xmd:h-[50px] lg:w-[80px] lg:h-[80px] relative flex items-center md:w-[70px] md:h-[70px] xmd:bottom-7 mobile:bottom-0`}
+                className={`${bgRound} rounded-full  xmd:w-[50px] xmd:h-[50px] mobile:w-[55px] mobile:h-[55px] lg:w-[80px] lg:h-[80px] relative flex items-center md:w-[70px] md:h-[70px] xmd:bottom-7 mobile:bottom-0`}
               >
                 <IoPhonePortraitOutline className="text-hover-color absolute left-1/2 transform -translate-x-1/2 xmd:w-[21.33px] xmd:h-[16px] md:w-[42.63px] md:h-[32px]" />
               </div>
@@ -102,7 +102,7 @@ const Contact: React.FC<ContactProps> = ({
           </div>
 
           <div
-            className={` border-[0.1px] w-1/4 m-auto md:w-0 md:h-2/3 md:grid bg-${lineColor} `}
+            className={` border-[0.1px] w-1/4 m-auto md:w-0 md:h-2/3 xmd:hidden md:grid bg-${lineColor} `}
           ></div>
 
           <div className={`flex flex-row-reverse items-center justify-between bg-[#F9F9F9] mobile:p-10 xmd:px-4 xmd:py-4 md:p-8 lg:p-4 rounded-lg rounded-b-none  xmd:mt-9 md:mt-0`}>
@@ -113,7 +113,7 @@ const Contact: React.FC<ContactProps> = ({
                   Office Address
                 </label>
                 <div
-                  className={`${bgRound} rounded-full xmd:w-[50px] xmd:h-[50px] lg:w-[80px] lg:h-[80px] sm:w-[50px] sm:h-[50px] relative flex items-center md:w-[70px] md:h-[70px]`}
+                  className={`${bgRound} rounded-full xmd:w-[50px] xmd:h-[50px] mobile:h-[55px] mobile:w-[55px] lg:w-[80px] lg:h-[80px] sm:w-[50px] sm:h-[50px] relative flex items-center md:w-[70px] md:h-[70px]`}
                 >
                   <IoLocationOutline className="text-hover-color absolute left-1/2 transform -translate-x-1/2 xmd:w-[24px] xmd:h-[20px] md:w-[42.63px] md:h-[32px] text-start" />
                 </div>

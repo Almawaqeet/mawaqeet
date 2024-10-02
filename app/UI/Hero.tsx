@@ -18,7 +18,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ heading, subheading, CTA, subCTA, to, subto, id, handleOpen }) => {
   const { handleNext } = useAppInfo()
   return (
-    <section className="mobile:max-w-[2000px] grid items-center relative home tab_md:min-h-screen xmd:min-h-screen mt-auto">
+    <section className="mobile:max-w-[2000px] grid items-center relative home tab_md:min-h-screen xmd:min-h-screen">
       <div className="mobile:px-16 xmd:px-8 text-center text-white">
         <div className="flex flex-col xmd:gap-4 md:gap-6 xmd:mb-8 lg:mb-20 md:mb-10 xmd:mt-16 md:mt-0">
           <div>{heading}</div>
