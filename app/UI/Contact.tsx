@@ -56,11 +56,11 @@ const Contact: React.FC<ContactProps> = ({
 
         <div className="flex xmd:flex-col  md:grid md:flex-col lg:grid-cols-[1fr_minmax(10px,_20px)_1fr] justify-around lg:gap-1">
           <div
-            className={`flex xmd:flex-col xmd:gap-28 bg-[rgb(249,249,249)] xmd:p-10 md:p-5 rounded-lg `}
+            className={`flex xmd:flex-col xmd:gap-28 bg-[rgb(249,249,249)] xmd:p-5 md:p-5 rounded-lg `}
           >
             <div className="flex xmd:gap-1 md:gap-4 justify-between ">
               <div
-                className={`${bgRound} rounded-full xmd:w-[60px] xmd:h-[50px] mobile:h-[55px] lg:w-[80px] lg:h-[80px] sm:w-[50px] sm:h-[50px] relative flex items-center md:w-[70px] md:h-[70px]`}
+                className={`${bgRound} rounded-full xmd:w-[55px] xmd:h-[50px] mobile:h-[55px] lg:w-[80px] lg:h-[80px] sm:w-[50px] sm:h-[50px] relative flex items-center md:w-[70px] md:h-[70px]`}
               >
                 <BsEnvelope className="text-hover-color absolute left-1/2 transform -translate-x-1/2 xmd:w-[21.33px] xmd:h-[16px] md:w-[42.63px] md:h-[32px] text-start" />
               </div>
@@ -69,9 +69,9 @@ const Contact: React.FC<ContactProps> = ({
                   Email Address
                 </label>
                 <BtnGlobal
-                  className={`${btnColor} rounded-lg xmd:p-2  md:py-[11px] md:px-[15px] flex items-center`}
+                  className={`${btnColor} rounded-lg  md:py-[11px] md:px-[15px] flex items-center m-auto`}
                 >
-                  <h6 className={`font-normal xmd:text-fz-xsm sm:text-fz-sm leading-8 tracking-[0.14px] text-center font-dejavu ${textColor} `}>
+                  <h6 className={`font-normal xmd:text-fz-xxs sm:text-fz-sm leading-8 tracking-[0.14px] text-center font-dejavu m-auto ${textColor} `}>
                     almawaqeettravelsandtours@gmail.com
                   </h6>
                 </BtnGlobal>
