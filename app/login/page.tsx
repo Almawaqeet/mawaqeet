@@ -83,23 +83,23 @@ const SignIn = () => {
                       <Field name="password" component={CustomInputComponent} input_type="password" placeholder="Password" value={values.password} onChange={handleChange} onBlur={handleBlur} />
                     </FormContainer>
 
-                    <BtnGlobal className='font-dejavu xmd:py-[10px] xmd:px-[78px] md:py-4 md:px-[108px] m-auto text-white text-center rounded-lg bg-[#4B3938]' type='submit'>Sign Up</BtnGlobal>
+                    <BtnGlobal className='font-dejavu xmd:py-[10px] xmd:px-[78px] md:py-4 md:px-[108px] m-auto grid text-white text-center rounded-lg mb-4 bg-[#4B3938]' type='submit'>Sign In</BtnGlobal>
 
-                    <div className='flex justify-center xmd:gap-[50px] xmd:pb-14 md:pb-7 lg:pb-[106px] xmd:pt-[26px] lg:pt-[75px]'>
-                      <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#848484] font-dejavu'>Already have an account?</Paragraph>
+                    <div className='flex justify-center items-center mb-4'>
+                      <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#848484] font-dejavu '>Already have an account?</Paragraph>
 
                       <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#87592A] font-dejavu'>Sign In</Paragraph>
                     </div>
 
-                    <div className=' xmd:pb-[22px] md:pb-[19px]'>
-                      <BtnGlobal icon={<FaFacebook className="text-white w-[27px] h-[27px] grid m-auto" />} className='bg-[#357AFF] text-fz-xss text-white text-center font-dejavu xmd:w-3/4 grid m-auto rounded-lg' btnStyle='justify-center xmd:gap-8 flex-row-reverse'>Continue with Facebook</BtnGlobal>
+                    <div className=''>
+                      <BtnGlobal icon={<FaFacebook className="text-white w-[27px] h-[27px]   " />} className='bg-[#357AFF] font-dejavu xmd:py-[10px]  md:w-3/4 sm:w-2/4 xmd:w-full md:py-4 m-auto grid text-white text-center rounded-lg mb-4' btnStyle='justify-center xmd:gap-8 flex items-center flex-row-reverse'>Continue with Facebook</BtnGlobal>
                     </div>
 
                     <div>
                       <BtnGlobal
                         icon={<Image src='/images/googlelogo.png' alt='Google Logo' width={20} height={20} />}
-                        className='border-[0.5px] border-[#EB4335] text-fz-xss text-center font-dejavu text-[#333333] xmd:w-3/4 m-auto rounded-lg justify-center '
-                        btnStyle='flex-row-reverse xmd:gap-8'>
+                        className='border-[0.5px] border-[#EB4335] text-center font-dejavu text-[#333333] md:w-3/4 sm:w-2/4 xmd:w-full m-auto rounded-lg grid items-center mb-4'
+                        btnStyle='justify-center xmd:gap-8 flex items-center flex-row-reverse'>
                         Continue with Google
                       </BtnGlobal>
                     </div>
@@ -109,7 +109,7 @@ const SignIn = () => {
             </Formik>
           </div>
         </main>
-        <footer className='mt-24 md:mt-2'>
+        <footer className=''>
           <Footer />
         </footer>
       </section >

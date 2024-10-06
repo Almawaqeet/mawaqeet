@@ -18,11 +18,11 @@ const AboutUsStaticPage = () => {
     return (
         <MbisProvider>
             <Navbar />
-            <section className="xmd:max-w-[2000px] m-auto pb-6">
+            <section className="xmd:max-w-[2000px] m-auto">
                 <Hero
                     heading={<Headings type={'heroHeading'}>About Us</Headings>}
                     subheading={about_hero.map((subhead) => (
-                        <Headings type={'heading_1'} key={`head-${subhead.id}`}>
+                        <Headings type={'BrandText'} key={`head-${subhead.id}`}>
                             {subhead.hero_content}
                         </Headings>
                     ))}
@@ -33,15 +33,15 @@ const AboutUsStaticPage = () => {
                 />
             </section>
 
-            <section className={`${whiteSpaces.sectionMargin} pb-6`}>
+            <section className={`pb-[150px]`}>
                 <SlantDiv className={'xmd:before:w-[60px] '}>
-                    <Headings type={'sectionName'} classname="text-center">
+                    <Headings type={'sectionName'} classname="text-center font-dejavu">
                         About Us
                     </Headings>
                 </SlantDiv>
 
                 <div className={`${whiteSpaces.paddingX} ${whiteSpaces.paddingY}`}>
-                    <div className="xmd:gap-5 xmd:grid mobile:grid-cols-1 sm:grid-cols-[1fr_1fr] relative col-reverse items-center ">
+                    <div className="xmd:gap-4 xmd:grid mobile:grid-cols-1 sm:grid-cols-[1fr_1fr] relative col-reverse items-center ">
                         <div className="sm:absolute sm:w-100 sm:left-1/3 lg:right-0 lg:w-8/12">
                             <div className="sm:bg-[#f7f7f7] rounded-lg sm:drop-shadow-trans-white sm:shadow-sm sm:px-8 sm:py-4 sm:flex sm:items-center sm:justify-between ">
                                 <div>
@@ -55,13 +55,13 @@ const AboutUsStaticPage = () => {
                                     />
                                 </div>
                                 {about_main_body.map((main) => (
-                                    <Paragraph
-                                        type={'global'}
+                                    <Headings
+                                        type={'BrandText'}
                                         key={`main-${main.id}`}
-                                        classname="font-normal xmd:text-fz-xsm leading-5 tracking-tight text-justify md:w-11/12 lg:w-9/12 font-dejavu lg:text-fz-mz md:text-fz-sm md:leading-8 lg:leading-[45px]"
+                                        classname="sm:leading-6 md:leading-8"
                                     >
                                         {main.about_main_content}
-                                    </Paragraph>
+                                    </Headings>
                                 ))}
                             </div>
                         </div>
@@ -79,9 +79,9 @@ const AboutUsStaticPage = () => {
                 </div>
             </section>
 
-            <section className={`${whiteSpaces.sectionMargin}`} id='team'>
+            <section className={`pb-[150px]`} id='team'>
                 <SlantDiv className={'xmd:before:w-[70px]'}>
-                    <Headings type={'sectionName'} classname="text-center ">
+                    <Headings type={'sectionName'} classname="text-center  font-dejavu">
                         Meet Our Team
                     </Headings>
                 </SlantDiv>
@@ -91,7 +91,7 @@ const AboutUsStaticPage = () => {
                 </main>
             </section>
 
-            <section className={`${whiteSpaces.sectionMargin}`} id='service-section'>
+            <section className={``} id='service-section'>
                 <main>
                     <Services />
                 </main>

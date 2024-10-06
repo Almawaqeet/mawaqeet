@@ -21,10 +21,10 @@ const TeamContent: React.FC = ({
  const { setApi, current } = useSlider()
   return (
     <section
-      className={` ${whiteSpaces.paddingX} ${whiteSpaces.paddingY} xmd:max-w-[2000px] m-auto justify-center`}
+      className={` ${whiteSpaces.paddingX} ${whiteSpaces.paddingY}  xmd:max-w-[2000px] m-auto justify-center`}
     >
       <Carousel
-        className="xmd:w-11/12 grid m-auto xmd:h-[560px] sm:h-[550px] md:h-[620px] lg:w-full md:w-full lg:h-[630px]"
+        className="xmd:w-11/12 grid m-auto xmd:h-[550px] sm:h-[550px] md:h-[620px] lg:w-full md:w-full lg:h-[630px]"
         setApi={setApi}
       >
         <CarouselContent className="">

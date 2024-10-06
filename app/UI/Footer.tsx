@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
           {footerText.map((text) => (
             <p
               key={`foot-${text.id}`}
-              className="text-align mobile:text-fz-xsm md:text-fz-sm font-dejavu text-white font-normal xmd:leading-[20.97px] xmd:pb-7 md:pb-0 md:leading-[24.95px] tracking-[0.1px]"
+              className="text-left mobile:text-fz-xsm md:text-fz-sm font-dejavu text-white font-normal xmd:leading-[20.97px] xmd:pb-7 md:pb-0 md:leading-[24.95px] tracking-[0.1px]"
             >
               {text.text}
             </p>

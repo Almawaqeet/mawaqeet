@@ -19,7 +19,7 @@ const ContactUs: React.FC = () => {
                     </main>
                 </main>
 
-                <main className='w-3/4 xmd:mt-14 md:mt-0'>
+                <main className='w-3/4 xmd:mt-14 md:mt-0 pb-[150px]'>
                     <Contact
                         bgColor='bg-white'
                         bgRound='bg-[#FFEFDD]'
@@ -33,7 +33,7 @@ const ContactUs: React.FC = () => {
 
 
             </section>
-            <footer className={`${whiteSpaces.sectionMargin} md:pt-6 xmd:pt-12 relative`}>
+            <footer className={` md:pt-6 xmd:pt-12 relative`}>
                 <Footer />
             </footer>
         </MbisProvider>

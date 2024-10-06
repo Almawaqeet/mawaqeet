@@ -12,6 +12,7 @@ import {
 import PackagesContent from './PackagesContent';
 import UmrahDiv from './UmrahDiv';
 import Headings from '../libs/utilities/Headings';
+import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 
 
 type UmrahProps = {
@@ -19,10 +20,10 @@ type UmrahProps = {
 }
 
 
-const UmrahPackage: React.FC<UmrahProps> = ({ image='' }) => {
+const UmrahPackage: React.FC<UmrahProps> = ({ image = '' }) => {
   return (
     <>
-      <div className="sm:grid sm:grid-cols-[300px_1fr] md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_500px] items-center justify-center lg:gap-12 md:gap-10 mobile:gap-2 mt-20">
+      <div className={`sm:grid sm:grid-cols-[300px_1fr] md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_500px] items-center justify-center  ${whiteSpaces.paddingY}`}>
         <div className="flex flex-col relative">
           {title_intro_hajj.map((title) => (
             <Headings
@@ -40,7 +41,7 @@ const UmrahPackage: React.FC<UmrahProps> = ({ image='' }) => {
                 key={`category-${category.id}`}
                 umrahbatch={category.umrahbatches}
                 icon={<FaArrowsDownToPeople className="text-hover-color " />}
-                
+
               />
             ))
           )}
@@ -48,16 +49,16 @@ const UmrahPackage: React.FC<UmrahProps> = ({ image='' }) => {
 
         <div className={`${image}`}>
           <Image
-          src={'/images/umrah.png'}
-          alt='umrah-img'
-          className={`xmd:hidden sm:block mobile:h-full `}
-          height={100}
-          width={100}
-          layout='responsive'
-           />
+            src={'/images/umrah.png'}
+            alt='umrah-img'
+            className={`xmd:hidden sm:block mobile:h-full `}
+            height={100}
+            width={100}
+            layout='responsive'
+          />
         </div>
       </div>
-      <div className="xmd:pt-4">
+      <div className={`${whiteSpaces.paddingY}`}>
         {title_intro_hajj.map((title) => (
           <Headings
             type="heading_1"
@@ -68,10 +69,10 @@ const UmrahPackage: React.FC<UmrahProps> = ({ image='' }) => {
           </Headings>
         ))}
       </div>
-      <div className="grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]">
-       
-            <PackagesContent morestyle='xmd:hidden' to='/registration-form/application/step1' />
-         
+      <div className="grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr] pb-[150px]">
+
+        <PackagesContent morestyle='xmd:hidden' to='/registration-form/application/step1' />
+
       </div>
     </>
   );

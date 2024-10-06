@@ -19,7 +19,7 @@ const Headings: React.FC<HeadingsProps> = ({ children, type, classname }) => {
   const global = 'text-account-clamp';
 
   const styles = {
-    BrandText: `${Brand_clamp} font-sahur-ramadan font-normal xmd:leading-7 sm:leading-10`,
+    BrandText: `${Brand_clamp} font-sahur-ramadan font-normal xmd:leading-7`,
     heroHeading: `${Hero_clamp} font-bold xmd:leading-[3rem] tracking-wide text-center font-dejavu`,
     heading_1: `${Bold_1_clamp} font-bold tracking-tight xmd:leading-[2.375rem] font-dejavu`,
     sectionName: `${sectionClamp} font-bold xmd:tracking-[0.18px]`,

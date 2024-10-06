@@ -10,6 +10,7 @@ import HajjPackage from './HajjPackage';
 import UmrahPackage from './UmrahPackage';
 import Complementary from './Complementary';
 import SavingScheme from './SavingScheme';
+import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 
 
 const ServiceTab: React.FC = () => {
@@ -45,7 +46,7 @@ const ServiceTab: React.FC = () => {
 
   return (
     <>
-      <section className="xmd:max-w-[2000px] mx-auto mt-2">
+      <section className="xmd:max-w-[2000px] mx-auto ">
         <div className="flex justify-center relative xmd:flex-col-reverse md:flex-row m-auto xmd:gap-2 md:gap-0 ">
           {isActive && isMobile ? (
             <Dropdown className="md:hidden w-3/4 flex flex-col m-auto absolute top-20 left-1/2 transform -translate-x-1/2 z-20 mobile:py-0">
@@ -93,7 +94,7 @@ const ServiceTab: React.FC = () => {
           ) : showPackage === btn3Ref && activeBtnServiceId === btn3Ref ? (
             <Complementary />
           ) : showPackage === btn4Ref && activeBtnServiceId === btn4Ref ? (
-            <div className='xmd:pb-32 md:pb-0'>
+            <div className={`${whiteSpaces.paddingY} pb-[150px]`}>
             <SavingScheme />
             </div>
           ) : (
