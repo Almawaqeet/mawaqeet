@@ -43,15 +43,15 @@ const config: Config = {
 
         "heading-clamp": "clamp(1.125rem, 1.004rem + 1.1067vw, 2rem)",
         "brand-clamp": "clamp(1.25rem, 0.4286rem + 1.1905vw, 1.75rem)",
-        "hero-clamp": "clamp(2.2rem, 0.9718rem + 2.2535vw, 4.8rem);",
+        "hero-clamp": "clamp(2.4rem, 0.9718rem + 2.2535vw, 7.8rem);",
         "navbar-clamp": "clamp(0.725rem, 0.3393rem + 0.5952vw, 0.875rem)",
 
-        "Bold-1-clamp": "clamp(0.875rem, 0.6549rem + 0.939vw, 1.5rem)",
-        "Bold-2-clamp": "clamp(0.75rem, 0.618rem + 0.5634vw, 1.125rem)",
+        "Bold-1-clamp": "clamp(1.775rem, 0.6549rem + 0.939vw, 5.8rem)",
+        "Bold-2-clamp": "clamp(1rem, 0.618rem + 0.5634vw, 2.57rem)",
         "head-3-clamp": "clamp(0.875rem, -0.1373rem + 4.3192vw, 3.75rem",
         "quote-clamp": "clamp(1rem, 0.8239rem + 0.7512vw, 1.5rem)",
         "scheme-clamp": "clamp(0.875rem, -0.1373rem + 4.3192vw, 3.75rem)",
-        "body-clamp": "clamp(0.75rem, 0.4859rem + 1.1268vw, 1.125rem)",
+        "body-clamp": "clamp(0.85rem, 0.4859rem + 1.1268vw, 1rem)",
         "team-clamp": "clamp(0.875rem, 0.831rem + 0.1878vw, 1rem)",
         "purpose-clamp": "clamp(0.625rem, 0.831rem + 0.1878vw, 1rem)",
         "account-clamp": "clamp(1rem, 0.8617rem + 1.2648vw, 2rem)"

@@ -29,7 +29,7 @@ const BtnGlobal: React.FC<BtnGlobalProps> = ({
 
   return (
     <div>
-      <button className={`${buttonClasses} flex items-center`}  id={id} type={type} disabled={disable} onClick={onClick}>
+      <button className={`${buttonClasses} `}  id={id} type={type} disabled={disable} onClick={onClick}>
         <span className={`flex items-center ${btnStyle}`}>
           {children}
           {icon && typeof icon === "object" && "src" in icon ? (

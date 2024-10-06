@@ -26,11 +26,11 @@ const Faqs = () => {
   const findanswers = faqs.find((faq) => faq.id === 'answers');
   
   return (
-    <section className={`xmd:max-w-[800px] m-auto ${whiteSpaces.sectionMargin} ${whiteSpaces.paddingX} `} id='faqs'>
+    <section className={`xmd:max-w-[800px] m-auto ${whiteSpaces.paddingX} mb-[130px]`} id='faqs'>
       <SlantDiv className={'xmd:before:w-[50px]'}>
         <Headings
           type={'sectionName'}
-          classname="text-center xmd:mb-[84px] md:mb[76px]"
+          classname="text-center xmd:mb-[84px] md:mb[76px] font-dejavu"
         >
           Faqs
         </Headings>

@@ -73,13 +73,10 @@ export const home: HomeContentItem[] = [
   {
     id: 'light_text',
     light_text:
-      "Experience the life-changing journey of Hajj and Umrah, the fifth pillar of Islam. Enjoy     the joy of prayer at the Prophet's Mosque and the sense of togetherness with Muslims worldwide.",
+      "Experience the life-changing journey of Hajj and Umrah, the fifth pillar of Islam. Enjoy the joy of prayer at the Prophet's Mosque and the sense of togetherness with Muslims worldwide. They're big chances for personal growth and feeling closer to God.",
+      
   },
-  {
-    id: 'light_text_1',
-    light_text_1:
-      "They're big chances for personal growth and feeling closer to God.",
-  },
+  
   {
     id: 'light_text_2',
     light_text_2:
@@ -195,7 +192,7 @@ export const whyImages: WhyImageItem[] = [
 export const reach_out_to_us: ReachOutItem[] = [
   {
     id: 'text-1',
-    reachout: 'Reach Out to Us',
+    reachout: 'Reach Out to Us!!!',
   },
   {
     id: 'text-2',

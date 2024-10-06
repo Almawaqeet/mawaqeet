@@ -47,14 +47,14 @@ const Contact: React.FC<ContactProps> = ({
         {contact.map((heading) => (
           <Headings
             key={`heading-${heading.id}`}
-            type={'sectionName'}
-            classname={`md:leading-10 xmd:leading-6 xmd:text-center ${headingColor} xmd:mb-6 font-dejavu`}
+            type={'heading_1'}
+            classname={`md:leading-[3rem] xmd:leading-[1.9rem] xmd:text-left ${headingColor} xmd:mb-6 font-dejavu`}
           >
             {heading.contact_heading}
           </Headings>
         ))}
 
-        <div className="flex xmd:flex-col  md:grid md:flex-col lg:grid-cols-[1fr_minmax(10px,_20px)_1fr] justify-around lg:gap-1">
+        <div className="flex xmd:flex-col  md:grid md:flex-col lg:grid-cols-[1fr_minmax(10px,_20px)_1fr] justify-around lg:gap-1 gap-4">
           <div
             className={`flex xmd:flex-col xmd:gap-28 bg-[rgb(249,249,249)] xmd:p-5 md:p-5 rounded-lg `}
           >
@@ -118,7 +118,7 @@ const Contact: React.FC<ContactProps> = ({
                   <IoLocationOutline className="text-hover-color absolute left-1/2 transform -translate-x-1/2 xmd:w-[24px] xmd:h-[20px] md:w-[42.63px] md:h-[32px] text-start" />
                 </div>
               </div>
-              <p className="font-normal xmd:text-fz-xss xmd:leading-6 xmd:tracking-tight mobile:text-fz-xsm md:text-fz-sm md:leading-8 md:tracking-[0.18px] text-justify text-[#333333] font-dejavu ">
+              <p className="font-normal xmd:text-fz-xss xmd:leading-6 xmd:tracking-tight mobile:text-fz-xsm md:text-fz-sm md:leading-8 md:tracking-[0.18px] text-left text-[#333333] font-dejavu ">
                 MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN
               </p>
               <div>

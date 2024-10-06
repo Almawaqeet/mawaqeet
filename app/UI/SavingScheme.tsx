@@ -11,19 +11,19 @@ import Paragraph from '../libs/utilities/Paragraph';
 const SavingScheme: React.FC = () => {
   return (
     <section
-      className={`bg-scheme -z-10 xmd:min-h-[600px]  savingscheme relative lg:min-h-[650px] sm:min-h-[400px] grid items-baseline md:min-h-[400px] gap-8 md:gap-10 w-full mt-20 max-w-[2000px] m-auto`}
+      className={`bg-scheme -z-10 xmd:min-h-[600px]  savingscheme relative lg:min-h-[650px] sm:min-h-[400px] grid items-baseline md:min-h-[480px] gap-8 md:gap-10 w-full max-w-[2000px] m-auto`}
     >
       <div
         className={`sm:${whiteSpaces.paddingX} xmd:gap-8 lg:gap-8 xl:gap-20 sm:gap-4 xmd:grid-cols-1 xmd:grid sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr] justify-between sm:mt-10 lg:mt-16`}
       >
-        <div className="grid gap-8 md:gap-1 ">
-          <div className="xmd:grid h-fit md:gap-[1px] xmd:mt-8 sm:mt-0 ">
+        <div className="xmd:flex xmd:flex-col xmd:gap-12 sm:gap-4 md:gap-4">
+          <div className="xmd:flex xmd:flex-col xmd:gap-[2px] md:gap-1">
             {hajj_and_umrah_saving_scheme.map((scheme) => (
               <Headings
                 type="schemeText"
                 key={`${scheme.id}-savins`}
                 classname={
-                  'opacity-100  sm:text-[24px]  sm:text-left md:leading-[30px] sm:mb-1 lg:leading-8'
+                  'opacity-100  sm:text-[24px]  sm:text-left md:leading-[30px] lg:leading-8 xmd:mt-8'
                 }
               >
                 {scheme.scheme_heading}
@@ -32,7 +32,7 @@ const SavingScheme: React.FC = () => {
 
             {hajj_and_umrah_saving_scheme.map((subText, i) => (
               <p
-                key={`${i}list`}
+                key={`${subText.id}list`}
                 className={`text-Bold-2-clamp   sm:text-left xmd:text-center text-white  font-dejavu ${
                   i === 1 ? 'list-disc sm:list-none  sm:ml-0' : 'list-none'
                 }`}
@@ -45,7 +45,7 @@ const SavingScheme: React.FC = () => {
           <div>
             <BtnGlobal
               className={
-                'xmd:py-4 xmd:px-10 bg-white hover:text-white cursor-pointer z-10 grid sm:justify-self-start xmd:m-auto sm:ml-0'
+                'xmd:py-4 xmd:px-10 bg-white hover:text-white cursor-pointer z-10 grid m-auto sm:block sm:ml-0'
               }
             >
               <Paragraph
@@ -65,7 +65,7 @@ const SavingScheme: React.FC = () => {
           <Image
           src={'/images/scheme.png'}
           alt='scheme'
-          className="drop-shadow-black-white rounded-lg absolute xmd:h-[270px] sm:w-5/6 lg:w-5/6 xl:w-5/6 xmd:w-full md:w-[639px] xmd:left-1/2 xmd:transform sm:h-[270px] -translate-x-1/2 xmd:px-7 xmd:-bottom-7 md:h-[320px]  sm:px-0"
+          className="drop-shadow-black-white rounded-lg absolute xmd:h-[270px] sm:w-5/6 lg:w-5/6 xl:w-5/6 xmd:w-full md:w-[639px] xmd:left-1/2 xmd:transform sm:h-[270px] -translate-x-1/2 xmd:px-7 xmd:-bottom-7 md:-bottom-8 md:h-[320px]  sm:px-0"
           width={300}
           height={300}
          
@@ -74,10 +74,10 @@ const SavingScheme: React.FC = () => {
       </div>
 
       <div
-        className={`${whiteSpaces.paddingX} xmd:absolute xmd:-bottom-20 sm:bottom-30 md:-bottom-32 lg:bottom-0 lg:relative`}
+        className={`${whiteSpaces.paddingX} xmd:absolute xmd:-bottom-28 sm:bottom-30 md:-bottom-28 lg:bottom-0 lg:relative`}
       >
         <div
-          className={`bg-white drop-shadow-trans-white rounded-lg  xmd:px-5 xmd:py-6 relative shadow-xl`}
+          className={`bg-white drop-shadow-trans-white rounded-lg  xmd:px-5 xmd:py-6 relative shadow-xl md:w-3/5 m-auto`}
         >
           {hajj_and_umrah_saving_scheme.map((title, i) => (
             <li
@@ -93,7 +93,7 @@ const SavingScheme: React.FC = () => {
           {hajj_and_umrah_saving_scheme.map((bdy) => (
             <p
               key={`body-${bdy.id}`}
-              className="text-Bold-2-clamp xmd:leading-5 md:leading-8 md:tracking-[0.24px] xmd:tracking-[0.12px] text-justify font-dejavu"
+              className="text-Bold-2-clamp xmd:leading-5 md:leading-8 md:tracking-[0.24px] xmd:tracking-[0.12px] text-left font-dejavu"
             >
               {bdy.scheme_card_body}
             </p>
