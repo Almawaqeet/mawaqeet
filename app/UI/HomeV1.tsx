@@ -9,11 +9,11 @@ import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import { useMbisContext } from '../libs/hooks/useContextProvider';
 import LearnModal from './LearnModal';
 
-
 const HomeV1 = () => {
-
-  const { dispatch } = useMbisContext()
-  const handleOpen = () => { dispatch({ type: 'openModal', payload: true }) }
+  const { dispatch } = useMbisContext();
+  const handleOpen = () => {
+    dispatch({ type: 'openModal', payload: true });
+  };
 
   // Find content from home.js
   const purposeHeading = why_hajj_umrah.find(
@@ -33,14 +33,18 @@ const HomeV1 = () => {
           </Headings>
         ))}
         subheading={home.map((subText) => (
-          <Headings type="BrandText" key={`subText${subText.id}`}>
+          <Headings
+            type="BrandText"
+            key={`subText${subText.id}`}
+            classname="font-dejavu"
+          >
             {subText.sub_heading}
           </Headings>
         ))}
         CTA="Get Started"
-        subCTA='Learn More'
-        to='/registration-form/'
-        id=''
+        subCTA="Learn More"
+        to="/registration-form"
+        id=""
         handleOpen={handleOpen}
       />
 
@@ -84,7 +88,6 @@ const HomeV1 = () => {
               />
             </div>
 
-
             {/* Dynamic Content Section */}
             <div className="md:grid md:grid-cols-[1fr_1fr] lg:block w-full md:gap-6 items-center">
               <div className="">
@@ -123,19 +126,21 @@ const HomeV1 = () => {
                             key={item.id}
                             src={item.content[index].img}
                             alt={`Purpose Icon ${item.id}`}
-                            sizes='md:w-8'
+                            sizes="md:w-8"
                             className=" rounded-lg absolute"
                           />
                         ))}
                       </div>
                     }
-
-                    heading={<Headings type="sectionName" classname='xmd:leading-7'>{text.content}</Headings>}
+                    heading={
+                      <Headings type="sectionName" classname="xmd:leading-7">
+                        {text.content}
+                      </Headings>
+                    }
                     subheading={purposeBody?.reasons[index].content as string}
                   />
                 ))}
               </div>
-
             </div>
           </div>
         </main>

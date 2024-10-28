@@ -134,7 +134,7 @@ const HomeV2 = () => {
             {quote.map((quote) => (
               <Headings
                 type={'BrandText'}
-                classname="text-left text-white font-bold"
+                classname="text-left text-white font-bold font-dejavu"
                 key={`quote-${quote.id}`}
               >
                 {quote.quote}

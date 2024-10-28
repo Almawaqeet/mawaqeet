@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Packages from './Packages';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 import Bullet from './Bullet';
 import useSlider from '../libs/hooks/useSlider';
 import { packages } from '../contents/services';
@@ -41,7 +47,7 @@ const PackagesContent: React.FC<packProps> = ({
 
   const handleClick = (index: number) => {
     setSelectedPackage(index);
-    dispatch({ type: 'setSelectedComponent', payload: true });
+    dispatch({ type: 'openPackage', payload: true });
   };
 
   // useEffect to handle screen size changes using matchMedia API
@@ -68,16 +74,36 @@ const PackagesContent: React.FC<packProps> = ({
   return (
     <>
       {isMobile ? (
-        <section className={` ${whiteSpaces.paddingX} ${whiteSpaces.paddingY} xmd:max-w-[2000px] m-auto `}>
+        <section
+          className={` ${whiteSpaces.paddingX} ${whiteSpaces.paddingY} xmd:max-w-[2000px] m-auto `}
+        >
           <Carousel
             className={`xmd:w-full m-auto grid sm:h-[900px] lg:w-full md:w-full md:h-[870px] lg:h-[800px] ${offheight}`}
             setApi={setApi}
           >
             <CarouselContent>
               {packages.map((pack, idx) => {
-                const { id, package_title, content, conclusion, heading, packagePrices } = pack;
-                const { package_name, type_installment, type_upfront, week, month, any, amount_upfront_hajj, amount_upfront_umrah } = packagePrices;
-                const bullets = Object.values(content).filter(Boolean) as string[];
+                const {
+                  id,
+                  package_title,
+                  content,
+                  conclusion,
+                  heading,
+                  packagePrices,
+                } = pack;
+                const {
+                  package_name,
+                  type_installment,
+                  type_upfront,
+                  week,
+                  month,
+                  any,
+                  amount_upfront_hajj,
+                  amount_upfront_umrah,
+                } = packagePrices;
+                const bullets = Object.values(content).filter(
+                  Boolean
+                ) as string[];
 
                 return (
                   <CarouselItem
@@ -101,13 +127,13 @@ const PackagesContent: React.FC<packProps> = ({
                       hajj_show={hajj_show}
                       umrah_show={umrah_show}
                       package_name={package_name}
-                      type_installment={type_installment}
-                      type_upfront={type_upfront}
+                      // type_installment={type_installment}
+                      // type_upfront={type_upfront}
                       week={week}
                       month={month}
                       any={any}
-                      hajjupfront={amount_upfront_hajj}
-                      umrahupfront={amount_upfront_umrah}
+                      // hajjupfront={amount_upfront_hajj}
+                      // umrahupfront={amount_upfront_umrah}
                       isSelected={selectedPackage === idx}
                       handleClick={handleClick}
                       to={to}
@@ -124,15 +150,33 @@ const PackagesContent: React.FC<packProps> = ({
             {packages.map((pack, idx) => (
               <Bullet
                 key={`${pack.id}-bullet`}
-                className={`${current === idx ? 'bg-hover-color' : 'bg-[#D9D9D9]'}`}
+                className={`${
+                  current === idx ? 'bg-hover-color' : 'bg-[#D9D9D9]'
+                }`}
               />
             ))}
           </div>
         </section>
       ) : (
         packages.map((pack, idx) => {
-          const { id, package_title, content, conclusion, heading, packagePrices } = pack;
-          const { package_name, type_installment, type_upfront, week, month, any, amount_upfront_hajj, amount_upfront_umrah } = packagePrices;
+          const {
+            id,
+            package_title,
+            content,
+            conclusion,
+            heading,
+            packagePrices,
+          } = pack;
+          const {
+            package_name,
+            type_installment,
+            type_upfront,
+            week,
+            month,
+            any,
+            amount_upfront_hajj,
+            amount_upfront_umrah,
+          } = packagePrices;
           const bullets = Object.values(content).filter(Boolean) as string[];
 
           return (
@@ -153,14 +197,14 @@ const PackagesContent: React.FC<packProps> = ({
               hajj_show={hajj_show}
               umrah_show={umrah_show}
               package_name={package_name}
-              type_installment={type_installment}
-              type_upfront={type_upfront}
+              // type_installment={type_installment}
+              // type_upfront={type_upfront}
               week={week}
               month={month}
               any={any}
               to={to}
-              hajjupfront={amount_upfront_hajj}
-              umrahupfront={amount_upfront_umrah}
+              // hajjupfront={amount_upfront_hajj}
+              // umrahupfront={amount_upfront_umrah}
               isSelected={selectedPackage === idx}
               handleClick={handleClick}
             />
