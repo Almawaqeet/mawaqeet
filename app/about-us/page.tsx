@@ -9,7 +9,6 @@ import TeamContent from '../UI/TeamContent';
 import Services from '../UI/Services';
 import Hero from '../UI/Hero'; 
 import Headings from '../libs/utilities/Headings';
-import Paragraph from '../libs/utilities/Paragraph';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import { MbisProvider } from '../libs/hooks/useContextProvider';
 import Navbar from '../UI/Navbar';
@@ -22,7 +21,7 @@ const AboutUsStaticPage = () => {
                 <Hero
                     heading={<Headings type={'heroHeading'}>About Us</Headings>}
                     subheading={about_hero.map((subhead) => (
-                        <Headings type={'BrandText'} key={`head-${subhead.id}`}>
+                        <Headings type={'BrandText'} key={`head-${subhead.id}`} classname='font-dejavu'>
                             {subhead.hero_content}
                         </Headings>
                     ))}
@@ -58,7 +57,7 @@ const AboutUsStaticPage = () => {
                                     <Headings
                                         type={'BrandText'}
                                         key={`main-${main.id}`}
-                                        classname="sm:leading-6 md:leading-8"
+                                        classname="sm:leading-6 md:leading-8 font-dejavu"
                                     >
                                         {main.about_main_content}
                                     </Headings>

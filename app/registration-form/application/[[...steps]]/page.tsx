@@ -6,22 +6,22 @@ import { whiteSpaces } from '@/app/libs/utilities/GlobalSpaces';
 import ComplementNum from '@/app/UI/ComplementNum';
 import { MdArrowRightAlt } from 'react-icons/md';
 import Footer from '@/app/UI/Footer';
-import PaymentPage, { PaymentPageSteps } from '../../components/PaymentPage';
 import { MbisProvider } from '@/app/libs/hooks/useContextProvider';
-import { useAppInfo } from '@/app/libs/hooks/useAppInfo'; // Moved this to be used after the provider wraps components
+import { useAppInfo } from '@/app/libs/hooks/useAppInfo';
+import PaymentPage, { PaymentPageSteps } from '../../components/PaymentPage';
 
 const PageContent = () => {
   const { selectedNumber } = useAppInfo();
 
   return (
     <>
-      <section className='max-w-[2000px] m-auto'>
+      <section className="max-w-[2000px] m-auto">
         <main className={`${whiteSpaces.paddingX}`}>
-          <div className='grid justify-stretch xmd:pb-[55px]'>
-            <div className='grid grid-cols-3 xmd:w-full md:w-2/4 justify-center m-auto xmd:items-center'>
+          <div className="grid justify-stretch xmd:pb-[55px]">
+            <div className="grid grid-cols-3 xmd:w-full md:w-2/4 justify-center m-auto xmd:items-center">
               {appForm.map((app, i) => (
-                <div className='w-full' key={app.id}>
-                  <span className='flex relative'>
+                <div className="w-full" key={app.id}>
+                  <span className="flex relative">
                     <ComplementNum
                       className={`xmd:w-[50px] xmd:h-[50px] m-auto cursor-pointer md:grid md:mx-0 relative  ${
                         selectedNumber === i
@@ -31,9 +31,7 @@ const PageContent = () => {
                       position={i + 1}
                     />
                     {i !== 2 && (
-                      <MdArrowRightAlt
-                        className='absolute top-1/2 text-[82px] left-3/4 transform -translate-y-1/2 m-auto text-[#A0A8AD] md:left-2/4'
-                      />
+                      <MdArrowRightAlt className="absolute top-1/2 text-[82px] left-3/4 transform -translate-y-1/2 m-auto text-[#A0A8AD] md:left-2/4" />
                     )}
                   </span>
                 </div>
@@ -51,14 +49,14 @@ const PageContent = () => {
         ) : null}
       </section>
 
-      <section className='xmd:mt-[152px]'>
+      <section className="xmd:mt-[152px]">
         <Footer />
       </section>
     </>
   );
 };
 
-const Page = () => {
+const StepsContent = () => {
   return (
     <MbisProvider>
       <PageContent />
@@ -66,4 +64,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default StepsContent;
