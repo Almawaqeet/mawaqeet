@@ -47,7 +47,18 @@ const PackagesContent: React.FC<packProps> = ({
 
   const handleClick = (index: number) => {
     setSelectedPackage(index);
-    dispatch({ type: 'openPackage', payload: true });
+
+    switch (index) {
+      case 0:
+        return dispatch({ type: 'openVipPackage', payload: true });
+      case 1:
+        return dispatch({ type: 'openDelauxePackage', payload: true });
+      case 2:
+        return dispatch({ type: 'openStandardPackage', payload: true });
+        default :
+        return null
+    }
+
   };
 
   // useEffect to handle screen size changes using matchMedia API
@@ -135,7 +146,7 @@ const PackagesContent: React.FC<packProps> = ({
                       // hajjupfront={amount_upfront_hajj}
                       // umrahupfront={amount_upfront_umrah}
                       isSelected={selectedPackage === idx}
-                      handleClick={handleClick}
+                      handleClick={() => handleClick(idx)}
                       to={to}
                     />
                   </CarouselItem>
@@ -150,9 +161,8 @@ const PackagesContent: React.FC<packProps> = ({
             {packages.map((pack, idx) => (
               <Bullet
                 key={`${pack.id}-bullet`}
-                className={`${
-                  current === idx ? 'bg-hover-color' : 'bg-[#D9D9D9]'
-                }`}
+                className={`${current === idx ? 'bg-hover-color' : 'bg-[#D9D9D9]'
+                  }`}
               />
             ))}
           </div>
@@ -206,7 +216,7 @@ const PackagesContent: React.FC<packProps> = ({
               // hajjupfront={amount_upfront_hajj}
               // umrahupfront={amount_upfront_umrah}
               isSelected={selectedPackage === idx}
-              handleClick={handleClick}
+              handleClick={() => handleClick(idx)}
             />
           );
         })

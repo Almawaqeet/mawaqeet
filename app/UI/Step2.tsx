@@ -10,7 +10,9 @@ import BtnGlobal from './BtnGlobal';
 import { PiGreaterThanLight } from 'react-icons/pi';
 import { useAppInfo } from '../libs/hooks/useAppInfo';
 import { useMbisContext } from '../libs/hooks/useContextProvider';
-import SelectPackagesModal from './SelectPackages';
+import VipPackageModal from './VipPackageModal';
+import DelauxePackageModal from './DelauxePackageModal';
+import StandardPackageModal from './StandardPackageModal';
 
 const Step2: React.FC = () => {
   const {
@@ -25,9 +27,6 @@ const Step2: React.FC = () => {
   const { handleNext, handlePrevious } = useAppInfo();
   const [isShowPackage, setShowPackage] = useState<number | null>(null);
 
-  const {
-    state: { openPackage },
-  } = useMbisContext();
 
   const handleClick = (index: number) => {
     setShowPackage(index);
@@ -144,7 +143,9 @@ const Step2: React.FC = () => {
           </span>
         </div>
 
-        <SelectPackagesModal />
+        <VipPackageModal />
+        <DelauxePackageModal />
+        <StandardPackageModal />
       </main>
     </section>
   );

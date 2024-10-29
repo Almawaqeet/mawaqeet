@@ -32,7 +32,7 @@ interface PackagesProps {
   umrahamount?: string;
   any?: string;
   index: number;
-  isSelected: boolean;
+  isSelected?: boolean;
   to: string;
   handleClick: (i: number) => void;
 }

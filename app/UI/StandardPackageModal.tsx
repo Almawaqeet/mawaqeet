@@ -11,6 +11,7 @@ import Headings from '../libs/utilities/Headings';
 import Paragraph from '../libs/utilities/Paragraph';
 import Link from 'next/link';
 import BtnGlobal from './BtnGlobal';
+import { packages } from '../contents/services';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -42,20 +43,21 @@ const style = {
   },
 };
 
-export default function SelectPackagesModal() {
+export default function StandardPackageModal() {
   const {
-    state: { openPackage },
+    state: { openStandardPackage },
     dispatch,
   } = useMbisContext();
 
   const handleClose = () => {
-    dispatch({ type: 'openPackage', payload: false });
+    dispatch({ type: 'openStandardPackage', payload: false });
   };
 
+  const standard_package = packages.find((itm) => itm.id === 'standard package')
   return (
     <div>
       <Modal
-        open={openPackage as boolean}
+        open={openStandardPackage as boolean}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -75,7 +77,7 @@ export default function SelectPackagesModal() {
           >
             <SlantDiv className={'xmd:before:w-[60px] '}>
               <Headings type={'sectionName'} classname="text-center ">
-                Watch Video
+               {standard_package?.package_title}
               </Headings>
             </SlantDiv>
           </Typography>

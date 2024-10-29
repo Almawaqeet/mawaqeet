@@ -26,7 +26,9 @@ type State = {
   selectedNumber: number;
   selectedComponent: ReactNode;
   openModal: boolean;
-  openPackage: boolean | number;
+  openVipPackage: boolean | number;
+  openDelauxePackage: boolean | number;
+  openStandardPackage: boolean | number;
 };
 
 type Action =
@@ -45,7 +47,9 @@ type Action =
   | { type: 'setselectedNumber'; payload: number }
   | { type: 'setSelectedComponent'; payload: ReactNode }
   | { type: 'openModal'; payload: boolean }
-  | { type: 'openPackage'; payload: boolean | number };
+  | { type: 'openVipPackage'; payload: boolean | number }
+  | { type: 'openDelauxePackage'; payload: boolean | number }
+  | { type: 'openStandardPackage'; payload: boolean | number }
 
 const mbisContext = createContext<
   | {
@@ -78,7 +82,9 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     selectedNumber: 0,
     selectedComponent: null,
     openModal: false,
-    openPackage: false,
+    openVipPackage: false,
+    openDelauxePackage: false,
+    openStandardPackage: false,
   };
 
   const reducer = (state: State, action: Action): State => {
@@ -141,8 +147,12 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         return { ...state, selectedComponent: action.payload };
       case 'openModal':
         return { ...state, openModal: action.payload };
-      case 'openPackage':
-        return { ...state, openPackage: action.payload };
+      case 'openVipPackage':
+        return { ...state, openVipPackage: action.payload };
+        case 'openDelauxePackage':
+          return { ...state, openDelauxePackage: action.payload };
+          case 'openStandardPackage':
+            return { ...state, openStandardPackage: action.payload };
       default:
         return state;
     }
