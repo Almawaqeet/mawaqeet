@@ -1,4 +1,4 @@
-import { CarouselApi } from "@/components/ui/carousel";
+import { CarouselApi } from "@/Components/Ui/carousel";
 import React from "react";
 
 
