@@ -29,7 +29,7 @@ const Payment = () => {
                 <Paragraph
                   type='global'
                   key={`${cont.id}--`}
-                  classname={`font-dejavu xmd:pb-10 md:pb-[58px] cursor-pointer ${selectedNumber === itm.id ? 'font-bold text-black text-Bold-1-clamp' : 'text-[#848484]'}`}
+                  classname={`  xmd:pb-10 md:pb-[58px] cursor-pointer ${selectedNumber === itm.id ? 'font-bold text-black text-Bold-1-clamp' : 'text-[#848484]'}`}
                   onClick={() => handlePayment(itm.id)}
                 >
                   {cont.item}
@@ -49,4 +49,3 @@ const Payment = () => {
 }
 
 export default Payment;
-

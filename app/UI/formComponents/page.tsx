@@ -29,7 +29,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
                     <div key={teamMember.id} className={`xmd:grid lg:grid-cols-[1fr_1fr] xmd:grid-rows-1 lg:items-center lg:gap-16 lg:justify-between  xmd:h-[448px] md:h-[620px]  ${whiteSpaces.paddingX} `}>
                         <div className='xmd:gap-5 flex xmd:flex-col lg:justify-center'>
                             <Headings type='heroHeading' classname='text-white xmd:pt-14'>{teamMember.fullname}</Headings>
-                            <Paragraph type='globalBold' classname='text-Bold-1-clamp xmd:font-normal font-dejavu text-white text-center'>{teamMember.post}</Paragraph>
+                            <Paragraph type='globalBold' classname='text-Bold-1-clamp xmd:font-normal   text-white text-center'>{teamMember.post}</Paragraph>
                         </div>
                         <div className="">
                             <Image src={teamMember.imageProfile} alt={`${teamMember.fullname}'s image`} width={100} height={100} className="object-cover m-auto xmd:absolute lg:static xmd:w-[332px] mobile:w-[400px] md:h-[500px] sm:w-[483px] md:w-[683px] rounded-3xl xmd:left-1/2 transform xmd:-translate-x-1/2 lg:translate-x-0 lg:left-0 xmd:top-1/2 lg:top-0" sizes='w-0' />

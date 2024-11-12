@@ -76,7 +76,7 @@ const MobileNavMenu: React.FC<MobileNavMenuProps> = ({ isActive, navItems, activ
 
 // Mobile Navigation List Component
 const MobileNavList: React.FC<MobileNavListProps> = ({ navItems, activeIndex, dispatch, dropdownmobile, arrow, dropdownItems, subNavActiveIndex, navbtn }) => (
-  <ul className="font-dejavu text-fz-xs font-normal gap-4 flex flex-col justify-center items-center relative mt-8">
+  <ul className="  text-fz-xs font-normal gap-4 flex flex-col justify-center items-center relative mt-8">
     {navItems?.map((item: NavItem, i: number) => (
       <MobileNavItem
         key={`nav-${item.id}`}
@@ -97,7 +97,6 @@ const MobileNavList: React.FC<MobileNavListProps> = ({ navItems, activeIndex, di
         variant={navbtn ? "default" : "outline"}
         className="text-fz-xs"
         icon={<IoMdArrowRoundForward />}
-        isLoading={true}
       >
         Get Started
       </Button>
@@ -153,7 +152,7 @@ const Navbar: React.FC = () => {
   return (
     <section className="xmd:max-w-[375px] mobile:max-w-[700px] sm:max-w-[900px] lg:max-w-[2000px] tab_md:max-w-[1500px] m-auto relative z-50">
       <nav className={`${whiteSpaces.paddingX} px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 drop-shadow-white-ash shadow-md grid my-auto bg-white mobile:right-0 xmd:w-full tab_md:relative xmd:fixed xmd:top-0`}>
-        <ul className="flex justify-between items-center font-dejavu lg:gap-12 md:gap-10 text-navbar-clamp font-normal md:leading-5">
+        <ul className="flex justify-between items-center   lg:gap-12 md:gap-10 text-navbar-clamp font-normal md:leading-5">
           <Logo />
 
           <DesktopNavLinks

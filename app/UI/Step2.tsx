@@ -35,7 +35,7 @@ const Step2: React.FC = () => {
     label: string
   ) => (
     <button
-      className={`drop-shadow-white-ash md:px-5 md:text-purpose-clamp xmd:text-fz-xsm font-bold md:leading-[50px] tracking-[0.32px] rounded-ee-lg rounded-ss-lg mobile:px-4 mobile:py-4 xmd:px-6 xmd:py-3 rounded-sm cursor-pointer mobile:text-fz-sm font-dejavu
+      className={`drop-shadow-white-ash md:px-5 md:text-purpose-clamp xmd:text-fz-xsm font-bold md:leading-[50px] tracking-[0.32px] rounded-ee-lg rounded-ss-lg mobile:px-4 mobile:py-4 xmd:px-6 xmd:py-3 rounded-sm cursor-pointer mobile:text-fz-sm
         ${activeBtnServiceId?.current === ref.current
           ? 'bg-hover-color text-white'
           : 'bg-accordion text-[#333333]'
@@ -50,11 +50,11 @@ const Step2: React.FC = () => {
   return (
     <section className=''>
       <main className={`${whiteSpaces.paddingX} `}>
-        <Headings type='global' classname='font-bold xmd:leading-[18px] tracking-tight xmd:pb-3 md:pb-5 lg:pb-8 text-center font-dejavu'>
+        <Headings type='global' classname='font-bold xmd:leading-[18px] tracking-tight xmd:pb-3 md:pb-5 lg:pb-8 text-center  '>
           Select your Package
         </Headings>
 
-        <Paragraph type='global' classname='font-dejavu xmd:text-fz-xss md:text-fz-sm lg:text-fz-md text-center text-[#848484] xmd:pb-[55px] md:pb-[66px]'>
+        <Paragraph type='global' classname='  xmd:text-fz-xss md:text-fz-sm lg:text-fz-md text-center text-[#848484] xmd:pb-[55px] md:pb-[66px]'>
           Select the package you are going for.
         </Paragraph>
 
@@ -101,10 +101,10 @@ const Step2: React.FC = () => {
           : null}
 
         <div className={`mt-14 w-full ${whiteSpaces.paddingX} m-auto`}>        <span className='flex gap-2 m-auto xmd:justify-center md:justify-end'>
-          <BtnGlobal className='font-dejavu bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg' onClick={handlePrevious}>
+          <BtnGlobal className='  bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg' onClick={handlePrevious}>
             Previous
           </BtnGlobal>
-          <BtnGlobal className='font-dejavu bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg' onClick={handleNext}>
+          <BtnGlobal className='  bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg' onClick={handleNext}>
             <span className='flex gap-2 items-center'>
               Next <PiGreaterThanLight />
             </span>

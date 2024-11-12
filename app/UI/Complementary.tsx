@@ -18,7 +18,7 @@ const Complementary = () => {
     <main>
       <div className='xmd:pb-11'>
         <SlantDiv className="xmd:before:w-[120px] justify-start">
-          <Headings type="sectionName" classname="text-center font-dejavu">
+          <Headings type="sectionName" classname="text-center  ">
             Complementary services
           </Headings>
         </SlantDiv>
@@ -33,7 +33,7 @@ const Complementary = () => {
           <div className={`grid xmd:grid-cols-[30px_1fr] xmd:gap-6 xmd:pb-11 lg:gap-16 ${index === 2 && 'col-span-2'}`} key={`dsd${bold.id}`}>
             <ComplementNum position={index + 1} key={`${bold.id}num`} />
             <span className={` items-baseline  ${index !== 0 ? 'block text-justify' : 'grid xmd:grid-cols-[90px_1fr] mobile:grid-cols-[100px_1fr] sm:grid-cols-[120px_1fr] md:block'}`} key={`${bold.id}span`}>
-              <Paragraph type='globalBold' classname='font-bold xmd:leading-5 text-body-clamp tracking-tight font-dejavu w-full' key={`${bold.id}par`}>{bold.highlight}</Paragraph>
+              <Paragraph type='globalBold' classname='font-bold xmd:leading-5 text-body-clamp tracking-tight   w-full' key={`${bold.id}par`}>{bold.highlight}</Paragraph>
               <Paragraph type='bodyParagraph' classname={`text-justify`} key={`${bold.id}-par`}>{Span?.highlights[index].highlight}</Paragraph>
             </span>
           </div>
@@ -45,7 +45,7 @@ const Complementary = () => {
           <React.Fragment key={`${tour.id}-fragment`}>
             <Paragraph
               type="globalBold"
-              classname={`font-dejavu font-bold xmd:text-fz-xs md:text-fz-sm lg:text-fz-md xmd:leading-5 tracking-tight text-center xmd:pb-9 ${index === 0 && 'md:hidden'}`}
+              classname={`  font-bold xmd:text-fz-xs md:text-fz-sm lg:text-fz-md xmd:leading-5 tracking-tight text-center xmd:pb-9 ${index === 0 && 'md:hidden'}`}
             >
               {tour.highlight}
             </Paragraph>
@@ -67,7 +67,7 @@ const Complementary = () => {
                   <span key={`${comp.id}-complement-${compIndex}`} className='grid '>
                     <Paragraph
                       type="globalBold"
-                      classname="font-dejavu font-bold xmd:text-fz-xs xmd:leading-5 md:text-fz-sm pb-2 tracking-tight text-start"
+                      classname="  font-bold xmd:text-fz-xs xmd:leading-5 md:text-fz-sm pb-2 tracking-tight text-start"
                     >
                       {comp.highlight}
                     </Paragraph>

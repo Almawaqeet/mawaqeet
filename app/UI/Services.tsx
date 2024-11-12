@@ -18,7 +18,7 @@ const Services: React.FC = () => {
       <main className="xmd:max-w-[575px] mobile:max-w-[1000px] m-auto sm:max-w-[900px] md:max-w-[1200px] lg:max-w-[2000px] mb-4">
         <div className={`${whiteSpaces.paddingX} ${whiteSpaces.sectionMargin}`}>
           <SlantDiv className="xmd:before:w-[60px]">
-            <Headings type="sectionName" classname="text-center font-dejavu">
+            <Headings type="sectionName" classname="text-center  ">
               Our Services
             </Headings>
           </SlantDiv>

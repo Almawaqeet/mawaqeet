@@ -7,8 +7,8 @@ interface BtnGlobalProps {
   children: React.ReactNode;
   className?: string;
   btnStyle?: string;
-  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"]; 
-  disable?:  ButtonHTMLAttributes<HTMLButtonElement>['disabled']; 
+  type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  disable?:  ButtonHTMLAttributes<HTMLButtonElement>['disabled'];
   icon?: ReactNode | StaticImageData;
   onClick?: () => void;
   id?: string;
@@ -24,7 +24,7 @@ const BtnGlobal: React.FC<BtnGlobalProps> = ({
   id,
   type = "button", // Default button type to 'button'
 }) => {
-  const baseClasses = "h-[48px] rounded-[100px] font-dejavu";
+  const baseClasses = "h-[48px] rounded-[100px]  ";
   const buttonClasses = classNames(baseClasses, className);
 
   return (

@@ -25,7 +25,7 @@ const ConfirmPayment: React.FC<ConfrmpaymentProps> = ({ className = '', image, i
                 </div>
 
                 <div>
-                    <Paragraph type='global' classname='xmd:text-fz-xs md:text-fz-sm lg:text-fz-md text-center font-dejavu md:leading-[27.94px] tracking-tight text-inherit xmd:leading-6'>Please wait while we redirect you to the confirmation page</Paragraph>
+                    <Paragraph type='global' classname='xmd:text-fz-xs md:text-fz-sm lg:text-fz-md text-center   md:leading-[27.94px] tracking-tight text-inherit xmd:leading-6'>Please wait while we redirect you to the confirmation page</Paragraph>
                 </div>
 
             </div>

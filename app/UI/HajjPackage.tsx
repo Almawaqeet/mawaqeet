@@ -24,7 +24,7 @@ const HajjPackage: React.FC = () => {
           {title_intro_hajj.map((title) => (
             <Headings
               type={'sectionName'}
-              classname="sm:text-left  sm:leading-7 sm:mb-4 max-[sm]:text-fz-md mb-2  text-start sm:block font-dejavu"
+              classname="sm:text-left  sm:leading-7 sm:mb-4 max-[sm]:text-fz-md mb-2  text-start sm:block  "
               key={`title--${title.id}`}
             >
               {title.intro_1}
@@ -34,7 +34,7 @@ const HajjPackage: React.FC = () => {
             {title_intro_hajj.map((content) => (
               <Paragraph
                 type={'bodyParagraph'}
-                classname=" sm:grid text-justify xmd:text-fz-xsm md:text-fz-xs lg:text-fz-md lg:leading-10  xmd:leading-2  md:leading-4 sm:tracking-tighter font-dejavu xmd:w-3/4 sm:w-full items-center"
+                classname=" sm:grid text-justify xmd:text-fz-xsm md:text-fz-xs lg:text-fz-md lg:leading-10  xmd:leading-2  md:leading-4 sm:tracking-tighter   xmd:w-3/4 sm:w-full items-center"
                 key={`content--${content.id}`}
               >
                 {content.serviceContent}
@@ -57,7 +57,7 @@ const HajjPackage: React.FC = () => {
         {title_intro_hajj.map((title) => (
           <Headings
             type={'heading_1'}
-            classname="text-left font-dejavu xmd:pb-8"
+            classname="text-left   xmd:pb-8"
             key={`heading_1--${title.id}`}
           >
             {title.intro_2}
@@ -73,7 +73,7 @@ const HajjPackage: React.FC = () => {
       <div className={`${whiteSpaces.paddingY}`}>
         <div className='xmd:pb-11'>
           <SlantDiv className="xmd:before:w-[100px]">
-            <Headings type="sectionName" classname="text-center font-dejavu pb-2">
+            <Headings type="sectionName" classname="text-center   pb-2">
               Scholarship Guidance
             </Headings>
           </SlantDiv>
@@ -93,7 +93,7 @@ const HajjPackage: React.FC = () => {
                 <div>
                   <span className='flex xmd:gap-4 md:gap-1' key={`${itm.id}-hi`}>
                     <Bullet className='md:w-[8px]'/>
-                    <Paragraph type='globalBold' classname='font-bold xmd:leading-5 text-body-clamp tracking-tight font-dejavu w-full pb-1' key={`${itm.id}-par`}>{itm.heading_content}</Paragraph>
+                    <Paragraph type='globalBold' classname='font-bold xmd:leading-5 text-body-clamp tracking-tight   w-full pb-1' key={`${itm.id}-par`}>{itm.heading_content}</Paragraph>
                   </span>
                   <Paragraph type='bodyParagraph' classname={`text-justify`} key={`${itm.id}-par`}>{why_scholarship_body?.why_scholarship_heading[index].heading_content}</Paragraph>
                 </div>
@@ -103,7 +103,7 @@ const HajjPackage: React.FC = () => {
         </div>
 
         {why_scholarship_NB?.why_scholarship_heading.map(itm => (
-          <Paragraph type='globalBold' classname='font-bold xmd:leading-5 text-body-clamp tracking-tight font-dejavu w-full italic mt-6' key={`${itm.id}===`}>{itm.heading_content}</Paragraph>
+          <Paragraph type='globalBold' classname='font-bold xmd:leading-5 text-body-clamp tracking-tight   w-full italic mt-6' key={`${itm.id}===`}>{itm.heading_content}</Paragraph>
         ))}
       </div>
     </>

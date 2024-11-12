@@ -16,7 +16,7 @@ const PackageTab = () => {
         label: string
     ) => (
         <button
-            className={`drop-shadow-white-ash md:px-5 md:text-purpose-clamp xmd:text-fz-xsm font-bold md:leading-[50px] tracking-[0.32px] rounded-ee-lg rounded-ss-lg xmd:py-2 xmd:px-2 mobile:px-4 mobile:py-4 mobile:text-fz-sm font-dejavu ${activeBtnServiceId?.current === ref.current
+            className={`drop-shadow-white-ash md:px-5 md:text-purpose-clamp xmd:text-fz-xsm font-bold md:leading-[50px] tracking-[0.32px] rounded-ee-lg rounded-ss-lg xmd:py-2 xmd:px-2 mobile:px-4 mobile:py-4 mobile:text-fz-sm   ${activeBtnServiceId?.current === ref.current
                 ? 'bg-hover-color text-white'
                 : 'bg-accordion text-[#333333]'
                 } transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400]`}

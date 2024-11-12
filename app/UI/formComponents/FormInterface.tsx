@@ -38,7 +38,7 @@ const FormInterface = ({ heading, sub_heading, children, mainImage, logoImage, l
                         />
                         <Image
                             src={'/logo.png'}
-                            alt='reg-img' 
+                            alt='reg-img'
                             height={80}
                             width={80}
                             //   layout='responsive'
@@ -49,17 +49,17 @@ const FormInterface = ({ heading, sub_heading, children, mainImage, logoImage, l
                     <div className={`${whiteSpaces.sectionMargin} ${whiteSpaces.paddingX} xmd:pt-16 md:pt-4 xl:mt-16 lg:mt-8`}>
                         <Headings
                             type='global'
-                            classname=' text-inherit xmd:pb-4 font-bold font-dejavu leading-[18px] tracking-tight text-account-clamp'
+                            classname=' text-inherit xmd:pb-4 font-bold   leading-[18px] tracking-tight text-account-clamp'
                         >{heading}</Headings>
 
                         <Paragraph
                             type='global'
-                            classname='text-Bold-1-clamp text-inherit xmd:pb-10  xl:pb-[5.5rem] lg:pb-[2.5rem] md:pb-[1.5rem] tracking-tight font-normal font-dejavu'
+                            classname='text-Bold-1-clamp text-inherit xmd:pb-10  xl:pb-[5.5rem] lg:pb-[2.5rem] md:pb-[1.5rem] tracking-tight font-normal  '
                         >{sub_heading}</Paragraph>
-                        
+
                         {children}
                     </div>
-                    
+
                 </main>
                 <footer className='mt-24 md:mt-2'>
                     <Footer />

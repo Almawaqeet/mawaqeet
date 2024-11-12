@@ -50,12 +50,12 @@ const SignIn = () => {
           <div className={`${whiteSpaces.sectionMargin} ${whiteSpaces.paddingX} xmd:pt-16 md:pt-4 xl:mt-16 lg:mt-8 `}>
             <Headings
               type='global'
-              classname=' text-inherit xmd:pb-10  md:pb-4 xl:pb-8 lg:pb-4 font-bold font-dejavu leading-[18px] tracking-tight text-account-clamp'
+              classname=' text-inherit xmd:pb-10  md:pb-4 xl:pb-8 lg:pb-4 font-bold   leading-[18px] tracking-tight text-account-clamp'
             >Sign In</Headings>
 
             <Paragraph
               type='global'
-              classname='text-Bold-1-clamp text-inherit xmd:pb-10  xl:pb-[5.5rem] lg:pb-[2.5rem] md:pb-[1.5rem] tracking-tight font-normal font-dejavu'
+              classname='text-Bold-1-clamp text-inherit xmd:pb-10  xl:pb-[5.5rem] lg:pb-[2.5rem] md:pb-[1.5rem] tracking-tight font-normal  '
             >Sign in with your details</Paragraph>
 
 
@@ -83,22 +83,22 @@ const SignIn = () => {
                       <Field name="password" component={CustomInputComponent} input_type="password" placeholder="Password" value={values.password} onChange={handleChange} onBlur={handleBlur} />
                     </FormContainer>
 
-                    <BtnGlobal className='font-dejavu xmd:py-[10px] xmd:px-[78px] md:py-4 md:px-[108px] m-auto text-white text-center rounded-lg bg-[#4B3938]' type='submit'>Sign Up</BtnGlobal>
+                    <BtnGlobal className='  xmd:py-[10px] xmd:px-[78px] md:py-4 md:px-[108px] m-auto text-white text-center rounded-lg bg-[#4B3938]' type='submit'>Sign Up</BtnGlobal>
 
                     <div className='flex justify-center xmd:gap-[50px] xmd:pb-14 md:pb-7 lg:pb-[106px] xmd:pt-[26px] lg:pt-[75px]'>
-                      <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#848484] font-dejavu'>Already have an account?</Paragraph>
+                      <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#848484]  '>Already have an account?</Paragraph>
 
-                      <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#87592A] font-dejavu'>Sign In</Paragraph>
+                      <Paragraph type='global' classname='text-team-clamp leading-[18px] tracking-tight font-normal text-[#87592A]  '>Sign In</Paragraph>
                     </div>
 
                     <div className=' xmd:pb-[22px] md:pb-[19px]'>
-                      <BtnGlobal icon={<FaFacebook className="text-white w-[27px] h-[27px] grid m-auto" />} className='bg-[#357AFF] text-fz-xss text-white text-center font-dejavu xmd:w-3/4 grid m-auto rounded-lg' btnStyle='justify-center xmd:gap-8 flex-row-reverse'>Continue with Facebook</BtnGlobal>
+                      <BtnGlobal icon={<FaFacebook className="text-white w-[27px] h-[27px] grid m-auto" />} className='bg-[#357AFF] text-fz-xss text-white text-center   xmd:w-3/4 grid m-auto rounded-lg' btnStyle='justify-center xmd:gap-8 flex-row-reverse'>Continue with Facebook</BtnGlobal>
                     </div>
 
                     <div>
                       <BtnGlobal
                         icon={<Image src='/images/googlelogo.png' alt='Google Logo' width={20} height={20} />}
-                        className='border-[0.5px] border-[#EB4335] text-fz-xss text-center font-dejavu text-[#333333] xmd:w-3/4 m-auto rounded-lg justify-center '
+                        className='border-[0.5px] border-[#EB4335] text-fz-xss text-center   text-[#333333] xmd:w-3/4 m-auto rounded-lg justify-center '
                         btnStyle='flex-row-reverse xmd:gap-8'>
                         Continue with Google
                       </BtnGlobal>

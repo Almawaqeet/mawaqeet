@@ -27,7 +27,7 @@ const UmrahPackage: React.FC<UmrahProps> = ({ image='' }) => {
           {title_intro_hajj.map((title) => (
             <Headings
               type="sectionName"
-              classname=" sm:text-left xmd:text-center mb-3 xmd:hidden sm:block font-dejavu"
+              classname=" sm:text-left xmd:text-center mb-3 xmd:hidden sm:block  "
               key={`title-${title.id}`}
             >
               {title.intro_1_1}
@@ -40,7 +40,7 @@ const UmrahPackage: React.FC<UmrahProps> = ({ image='' }) => {
                 key={`category-${category.id}`}
                 umrahbatch={category.umrahbatches}
                 icon={<FaArrowsDownToPeople className="text-hover-color " />}
-                
+
               />
             ))
           )}
@@ -61,7 +61,7 @@ const UmrahPackage: React.FC<UmrahProps> = ({ image='' }) => {
         {title_intro_hajj.map((title) => (
           <Headings
             type="heading_1"
-            classname="text-left sm:block xmd:hidden sm:pb-4 font-dejavu"
+            classname="text-left sm:block xmd:hidden sm:pb-4  "
             key={`heading_1-${title.id}`}
           >
             {title.intro_2}
@@ -69,9 +69,9 @@ const UmrahPackage: React.FC<UmrahProps> = ({ image='' }) => {
         ))}
       </div>
       <div className="grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]">
-       
+
             <PackagesContent morestyle='xmd:hidden' to='/registration-form/application/step1' />
-         
+
       </div>
     </>
   );

@@ -56,10 +56,8 @@ const config: Config = {
         "purpose-clamp": "clamp(0.625rem, 0.831rem + 0.1878vw, 1rem)",
         "account-clamp": "clamp(1rem, 0.8617rem + 1.2648vw, 2rem)"
       },
-
       fontFamily: {
-        "sahur-ramadan": ["Sahur Ramadhan", "sans-serif"],
-        dejavu: ["dejavu-sans", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
 
       screens: {

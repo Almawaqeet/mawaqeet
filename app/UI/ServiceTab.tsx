@@ -28,7 +28,7 @@ const ServiceTab: React.FC = () => {
     label: string
   ) => (
     <button
-      className={`drop-shadow-white-ash md:px-5 md:text-purpose-clamp xmd:text-fz-xsm font-bold md:leading-[50px] tracking-[0.32px] rounded-ee-lg rounded-ss-lg xmd:py-2 xmd:px-2 mobile:px-4 mobile:py-4 mobile:text-fz-sm font-dejavu ${activeBtnServiceId?.current === ref.current
+      className={`drop-shadow-white-ash md:px-5 md:text-purpose-clamp xmd:text-fz-xsm font-bold md:leading-[50px] tracking-[0.32px] rounded-ee-lg rounded-ss-lg xmd:py-2 xmd:px-2 mobile:px-4 mobile:py-4 mobile:text-fz-sm   ${activeBtnServiceId?.current === ref.current
         ? 'bg-hover-color text-white'
         : 'bg-accordion text-[#333333]'
         } transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400]`}
@@ -66,7 +66,7 @@ const ServiceTab: React.FC = () => {
           {/* Mobile */}
           <div className="flex justify-center xmd:h-16 md:hidden">
             <Dropdown className="flex xmd:w-3/4 justify-between items-center xmd:gap-4 xmd:px-5 xmd:py-3">
-              <Paragraph type="global" classname="text-fz-xss font-normal leading-5 tracking-tight font-dejavu">
+              <Paragraph type="global" classname="text-fz-xss font-normal leading-5 tracking-tight  ">
                 Select Services
               </Paragraph>
 
@@ -74,7 +74,7 @@ const ServiceTab: React.FC = () => {
                 className="bg-hover-color drop-shadow-white-ash shadow-sm flex gap-4 px-6 items-center rounded-lg"
                 onClick={() => setIsActive(!isActive)}
               >
-                <Paragraph type="global" classname="text-fz-xss font-normal leading-5 tracking-tight text-[#ffffff] font-dejavu">
+                <Paragraph type="global" classname="text-fz-xss font-normal leading-5 tracking-tight text-[#ffffff]  ">
                   {isTabDisplay === btn1Ref ? 'Hajj Services' :
                     isTabDisplay === btn2Ref ? 'Umrah Services' :
                       isTabDisplay === btn3Ref ? 'Complementary Service' :

@@ -57,7 +57,7 @@ const OnboardingEmail = () => {
 
                     </FormContainer>
 
-                    <BtnGlobal className='font-dejavu xmd:py-[10px] xmd:px-[78px] md:py-4 md:px-[108px] m-auto text-white text-center rounded-lg bg-[#4B3938]' type='submit' disable={isSubmitting}>Sign Up</BtnGlobal>
+                    <BtnGlobal className='  xmd:py-[10px] xmd:px-[78px] md:py-4 md:px-[108px] m-auto text-white text-center rounded-lg bg-[#4B3938]' type='submit' disable={isSubmitting}>Sign Up</BtnGlobal>
                   </Form>
                 </>
               )}

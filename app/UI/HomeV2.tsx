@@ -48,7 +48,7 @@ const HomeV2 = () => {
             <Headings
               type={'sectionName'}
               key={`${home.id}--head`}
-              classname="xmd:text-center xmd:mb-4 md:mb-2 font-dejavu"
+              classname="xmd:text-center xmd:mb-4 md:mb-2  "
             >
               {home.bold_text_2}
             </Headings>
@@ -136,7 +136,7 @@ const HomeV2 = () => {
             <Headings
               type={'sectionName'}
               key={`reach-${txt.id}`}
-              classname="mobile:mb-0 text-center text-white font-dejavu"
+              classname="mobile:mb-0 text-center text-white  "
             >
               {txt.reachout}
             </Headings>
@@ -146,7 +146,7 @@ const HomeV2 = () => {
             <Paragraph
               key={`${txt.id}-text`}
               type={'bodyParagraph'}
-              classname="sm:leading-7 mobile:leading-5 xmd:mb-4 mobile:mb-8 text-white text-center font-dejavu"
+              classname="sm:leading-7 mobile:leading-5 xmd:mb-4 mobile:mb-8 text-white text-center  "
             >
               {txt.dedicated}
             </Paragraph>
@@ -156,7 +156,7 @@ const HomeV2 = () => {
             <Paragraph
               key={`${txt.id}-text`}
               type={'bodyParagraph'}
-              classname="sm:leading-7 mobile:leading-5 italic text-white font-dejavu"
+              classname="sm:leading-7 mobile:leading-5 italic text-white  "
             >
               {txt.motto}
             </Paragraph>

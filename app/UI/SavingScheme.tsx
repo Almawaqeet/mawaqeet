@@ -33,7 +33,7 @@ const SavingScheme: React.FC = () => {
             {hajj_and_umrah_saving_scheme.map((subText, i) => (
               <p
                 key={`${i}list`}
-                className={`text-Bold-2-clamp   sm:text-left xmd:text-center text-white  font-dejavu ${
+                className={`text-Bold-2-clamp   sm:text-left xmd:text-center text-white    ${
                   i === 1 ? 'list-disc sm:list-none  sm:ml-0' : 'list-none'
                 }`}
               >
@@ -68,7 +68,7 @@ const SavingScheme: React.FC = () => {
           className="drop-shadow-black-white rounded-lg absolute xmd:h-[270px] sm:w-5/6 lg:w-5/6 xl:w-5/6 xmd:w-full md:w-[639px] xmd:left-1/2 xmd:transform sm:h-[270px] -translate-x-1/2 xmd:px-7 xmd:-bottom-7 md:h-[320px]  sm:px-0"
           width={300}
           height={300}
-         
+
            />
         </div>
       </div>
@@ -93,7 +93,7 @@ const SavingScheme: React.FC = () => {
           {hajj_and_umrah_saving_scheme.map((bdy) => (
             <p
               key={`body-${bdy.id}`}
-              className="text-Bold-2-clamp xmd:leading-5 md:leading-8 md:tracking-[0.24px] xmd:tracking-[0.12px] text-justify font-dejavu"
+              className="text-Bold-2-clamp xmd:leading-5 md:leading-8 md:tracking-[0.24px] xmd:tracking-[0.12px] text-justify  "
             >
               {bdy.scheme_card_body}
             </p>

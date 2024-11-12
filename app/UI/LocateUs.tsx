@@ -13,29 +13,29 @@ const LocateUs = () => {
 
                     <div className="flex flex-col xmd:gap-2 md:gap-8 xmd:pb-4 sm:pb-0">
                         <div className='flex justify-between items-center'>
-                            <label className="font-semibold xmd:text-fz-sm leading-8 tracking-[0.81px] text-[#333333] font-dejavu">
+                            <label className="font-semibold xmd:text-fz-sm leading-8 tracking-[0.81px] text-[#333333]  ">
                                 Office Address
                             </label>
                             <div
-                                className={`bg-[#FFEFDD]  rounded-full sm:h-[70px] sm:w-[70px] mobile:w-[40px] mobile:h-[40px] xmd:w-[40px] xmd:h-[40px] 
+                                className={`bg-[#FFEFDD]  rounded-full sm:h-[70px] sm:w-[70px] mobile:w-[40px] mobile:h-[40px] xmd:w-[40px] xmd:h-[40px]
                                     md:h-[50px]
                                     md:w-[50px]
                                     relative lg:w-[80px] xl:w-[80px] lg:h-[80px]`}
                             >
-                                <IoLocationOutline className="text-hover-color absolute left-1/2 transform -translate-x-1/2 top-1/4 xmd:w-[19.2px] xmd:h-[19.2px] 
+                                <IoLocationOutline className="text-hover-color absolute left-1/2 transform -translate-x-1/2 top-1/4 xmd:w-[19.2px] xmd:h-[19.2px]
                                 sm:w-[24px]
                                 sm:h-[24px]
 
                                 md:w-[22px] md:h-[22px] lg:w-[40px] lg:h-[40px]" />
                             </div>
                         </div>
-                        <p className="font-normal xmd:text-fz-xss xmd:leading-6 xmd:tracking-tight mobile:text-fz-xsm md:text-fz-sm md:leading-8 md:tracking-[0.18px] text-justify text-[#333333] font-dejavu ">
+                        <p className="font-normal xmd:text-fz-xss xmd:leading-6 xmd:tracking-tight mobile:text-fz-xsm md:text-fz-sm md:leading-8 md:tracking-[0.18px] text-justify text-[#333333]   ">
                             MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN
                         </p>
                         <div>
                             <BtnGlobal className={`bg-white rounded-lg xmd:px-9 xmd:py-3 md:py-[11px] md:px-[35px] grid m-auto items-baseline drop-shadow-transparent shadow-md`}>
                                 <h6
-                                    className={`font-normal xmd:text-fz-xss leading-8 tracking-[0.14px] text-center  text-hover-color font-dejavu`}
+                                    className={`font-normal xmd:text-fz-xss leading-8 tracking-[0.14px] text-center  text-hover-color  `}
                                 >
                                     Locate Us
                                 </h6>

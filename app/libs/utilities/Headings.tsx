@@ -20,13 +20,13 @@ const Headings: React.FC<HeadingsProps> = ({ children, type, classname }) => {
 
   const styles = {
     BrandText: `${Brand_clamp} font-sahur-ramadan font-normal mobile:leading-5 sm:leading-10`,
-    heroHeading: `${Hero_clamp} font-bold mobile:leading-8 md:leading-10 tracking-wide text-center font-dejavu`,
-    heading_1: `${Bold_1_clamp} font-bold tracking-tight xmd:leading-5 lg:leading-10 md:leading-8 font-dejavu`,
+    heroHeading: `${Hero_clamp} font-bold mobile:leading-8 md:leading-10 tracking-wide text-center  `,
+    heading_1: `${Bold_1_clamp} font-bold tracking-tight xmd:leading-5 lg:leading-10 md:leading-8  `,
     sectionName: `${sectionClamp} font-bold xmd:tracking-[0.18px]`,
-    heading_2: `${Bold_2_clamp} font-bold tracking-wide mobile:leading-[14px] sm:leading-[20px] font-dejavu`,
-    quoteText: `${quote} font-bold tracking-wide mobile:leading-5 sm:leading-6 md:leading-10 text-left font-dejavu`,
-    schemeText: `${scheme} font-bold mobile:tracking-normal text-white sm:tracking-[1.6px] mobile:leading-8 md:leading-12 text-center font-dejavu`,
-    global: `${global}`       
+    heading_2: `${Bold_2_clamp} font-bold tracking-wide mobile:leading-[14px] sm:leading-[20px]  `,
+    quoteText: `${quote} font-bold tracking-wide mobile:leading-5 sm:leading-6 md:leading-10 text-left  `,
+    schemeText: `${scheme} font-bold mobile:tracking-normal text-white sm:tracking-[1.6px] mobile:leading-8 md:leading-12 text-center  `,
+    global: `${global}`
   };
 
   const renderContent = () => {

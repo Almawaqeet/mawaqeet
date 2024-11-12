@@ -48,7 +48,7 @@ const Contact: React.FC<ContactProps> = ({
           <Headings
             key={`heading-${heading.id}`}
             type={'sectionName'}
-            classname={`md:leading-10 xmd:leading-6 xmd:text-center ${headingColor} xmd:mb-6 font-dejavu`}
+            classname={`md:leading-10 xmd:leading-6 xmd:text-center ${headingColor} xmd:mb-6  `}
           >
             {heading.contact_heading}
           </Headings>
@@ -65,13 +65,13 @@ const Contact: React.FC<ContactProps> = ({
                 <BsEnvelope className="text-hover-color absolute left-1/2 transform -translate-x-1/2 xmd:w-[21.33px] xmd:h-[16px] md:w-[42.63px] md:h-[32px] text-start" />
               </div>
               <div className="flex flex-col w-fit xmd:gap-3 overflow-x-hidden">
-                <label className="font-semibold xmd:xmd:text-end mobile:text-fz-sm xmd:text-fz-sm leading-8 tracking-[0.81px] text-[#333333] font-dejavu ">
+                <label className="font-semibold xmd:xmd:text-end mobile:text-fz-sm xmd:text-fz-sm leading-8 tracking-[0.81px] text-[#333333]   ">
                   Email Address
                 </label>
                 <BtnGlobal
                   className={`${btnColor} rounded-lg xmd:p-2  md:py-[11px] md:px-[15px] flex items-center`}
                 >
-                  <h6 className={`font-normal xmd:text-fz-xxs mobile:text-fz-sm leading-8 tracking-[0.14px] text-center font-dejavu ${textColor} `}>
+                  <h6 className={`font-normal xmd:text-fz-xxs mobile:text-fz-sm leading-8 tracking-[0.14px] text-center   ${textColor} `}>
                     almawaqeettravelsandtours@gmail.com
                   </h6>
                 </BtnGlobal>
@@ -85,7 +85,7 @@ const Contact: React.FC<ContactProps> = ({
                 <IoPhonePortraitOutline className="text-hover-color absolute left-1/2 transform -translate-x-1/2 xmd:w-[21.33px] xmd:h-[16px] md:w-[42.63px] md:h-[32px]" />
               </div>
               <div className="flex flex-col w-fit xmd:gap-3 overflow-x-hidden">
-                <label className="font-semibold  xmd:text-end mobile:text-fz-sm xmd:text-fz-sm leading-8 tracking-[0.81px] text-[#333333] font-dejavu">
+                <label className="font-semibold  xmd:text-end mobile:text-fz-sm xmd:text-fz-sm leading-8 tracking-[0.81px] text-[#333333]  ">
                   Phone Number
                 </label>
                 <BtnGlobal
@@ -93,7 +93,7 @@ const Contact: React.FC<ContactProps> = ({
                     'rounded-lg outline-number-color border-2 border-hover-color xmd:py-[10px] xmd:px-[37px] md:px-[11px] py-[67px]'
                   }
                 >
-                  <h6 className="font-normal xmd:text-fz-xss leading-8 tracking-[0.14px] text-center text-hover-color xmd:px-4 border-1 border-hover-color font-dejavu">
+                  <h6 className="font-normal xmd:text-fz-xss leading-8 tracking-[0.14px] text-center text-hover-color xmd:px-4 border-1 border-hover-color  ">
                     09115653889
                   </h6>
                 </BtnGlobal>
@@ -109,7 +109,7 @@ const Contact: React.FC<ContactProps> = ({
 
             <div className="flex flex-col xmd:gap-2 md:gap-8 xmd:pb-4 sm:pb-0">
               <div className='flex justify-between'>
-                <label className="font-semibold xmd:text-fz-sm leading-8 tracking-[0.81px] text-[#333333] font-dejavu">
+                <label className="font-semibold xmd:text-fz-sm leading-8 tracking-[0.81px] text-[#333333]  ">
                   Office Address
                 </label>
                 <div
@@ -118,14 +118,14 @@ const Contact: React.FC<ContactProps> = ({
                   <IoLocationOutline className="text-hover-color absolute left-1/2 transform -translate-x-1/2 xmd:w-[24px] xmd:h-[20px] md:w-[42.63px] md:h-[32px] text-start" />
                 </div>
               </div>
-              <p className="font-normal xmd:text-fz-xss xmd:leading-6 xmd:tracking-tight mobile:text-fz-xsm md:text-fz-sm md:leading-8 md:tracking-[0.18px] text-justify text-[#333333] font-dejavu ">
+              <p className="font-normal xmd:text-fz-xss xmd:leading-6 xmd:tracking-tight mobile:text-fz-xsm md:text-fz-sm md:leading-8 md:tracking-[0.18px] text-justify text-[#333333]   ">
                 MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN
               </p>
               <div>
                 <Link href='/contact-us/locate-us'>
                 <BtnGlobal className={`bg-white rounded-lg xmd:px-9 xmd:py-3 md:py-[11px] md:px-[35px] grid m-auto items-baseline drop-shadow-transparent shadow-md`}>
                   <h6
-                    className={`font-normal xmd:text-fz-xss leading-8 tracking-[0.14px] text-center  text-hover-color font-dejavu`}
+                    className={`font-normal xmd:text-fz-xss leading-8 tracking-[0.14px] text-center  text-hover-color  `}
                   >
                     Locate Us
                   </h6>

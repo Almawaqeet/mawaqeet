@@ -40,7 +40,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
                                   <Paragraph
                                       type='global'
                                       key={`${cont.id}--`}
-                                      classname={`font-dejavu xmd:pb-10 md:pb-[58px] cursor-pointer ${selectedNumber === index ? 'font-bold text-black text-Bold-1-clamp' : 'text-[#848484]'}`}
+                                      classname={`  xmd:pb-10 md:pb-[58px] cursor-pointer ${selectedNumber === index ? 'font-bold text-black text-Bold-1-clamp' : 'text-[#848484]'}`}
                                       onClick={() => handlePayment(index)}
                                   >
                                       {cont.item}

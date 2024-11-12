@@ -59,7 +59,7 @@ const AboutUsPage = () => {
                                     <Paragraph
                                         type={'global'}
                                         key={`main-${main.id}`}
-                                        classname="font-normal xmd:text-fz-xsm leading-5 tracking-tight text-justify md:w-11/12 lg:w-9/12 font-dejavu lg:text-fz-mz md:text-fz-sm md:leading-8 lg:leading-[45px]"
+                                        classname="font-normal xmd:text-fz-xsm leading-5 tracking-tight text-justify md:w-11/12 lg:w-9/12   lg:text-fz-mz md:text-fz-sm md:leading-8 lg:leading-[45px]"
                                     >
                                         {main.about_main_content}
                                     </Paragraph>

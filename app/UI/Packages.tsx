@@ -107,12 +107,12 @@ const Packages: React.FC<PackagesProps> = ({
               />
             </Form>)}
           </Formik>
-          <h1 className='xmd:pb-11 text-end font-dejavu font-bold'>{package_name}</h1>
+          <h1 className='xmd:pb-11 text-end   font-bold'>{package_name}</h1>
         </div>
 
         <div className={`${prices}`}>
 
-          <div className='flex flex-col xmd:gap-6 md:gap-8 text-end font-dejavu justify-center'>
+          <div className='flex flex-col xmd:gap-6 md:gap-8 text-end   justify-center'>
             <h4 className='font-bold text-start'>{type_upfront}</h4>
             <em className={`${hajj_show}`}>{hajjupfront}</em>
             <em className={umrah_show}>{umrahupfront}</em>
@@ -124,37 +124,37 @@ const Packages: React.FC<PackagesProps> = ({
         </div>
 
         {/* <div className={`${hajjupfront}`}>
-            <h1 className='xmd:pb-11 text-end font-dejavu font-bold'>{package_name}</h1>
-            <div className='flex flex-col xmd:gap-6 md:gap-8 text-end font-dejavu'>
+            <h1 className='xmd:pb-11 text-end   font-bold'>{package_name}</h1>
+            <div className='flex flex-col xmd:gap-6 md:gap-8 text-end  '>
               <em>{hajjamount}</em>
-              
+
             </div>
           </div> */}
 
         {/* <div className={`${umrahupfront}`}>
-            <h1 className='xmd:pb-11 text-end font-dejavu font-bold'>{package_name}</h1>
-            <div className='flex flex-col xmd:gap-6 md:gap-8 text-end font-dejavu'>
+            <h1 className='xmd:pb-11 text-end   font-bold'>{package_name}</h1>
+            <div className='flex flex-col xmd:gap-6 md:gap-8 text-end  '>
               <em>{umrahamount}</em>
             </div>
           </div> */}
       </div>
 
-      <h3 className={`text-fz-md text-center group-hover:text-accordion font-dejavu pb-14 ${offcontent}`}>
+      <h3 className={`text-fz-md text-center group-hover:text-accordion   pb-14 ${offcontent}`}>
         {title_head}
       </h3>
       <div className="grid xmd:gap-4 mobile:gap-5">
-        <p className={`text-team-clamp group-hover:text-accordion font-dejavu ${offcontent}`}>
+        <p className={`text-team-clamp group-hover:text-accordion   ${offcontent}`}>
           {title_intro}
         </p>
         <ul className="flex flex-col gap-6">
           {bullets.map((bullet, idx) => (
-            <li key={idx} className="flex gap-2 group-hover:text-accordion font-dejavu">
+            <li key={idx} className="flex gap-2 group-hover:text-accordion  ">
               <Bullet index={idx} /> {bullet}
             </li>
           ))}
         </ul>
       </div>
-      <p className={`text-team-clamp group-hover:text-accordion font-dejavu ${offcontent}`}>
+      <p className={`text-team-clamp group-hover:text-accordion   ${offcontent}`}>
         {title_conclusion}
       </p>
       <div className="grid m-auto">
@@ -167,7 +167,7 @@ const Packages: React.FC<PackagesProps> = ({
                 : index === 0
                   ? 'relative md:top-6 lg:top-0'
                   : ''
-              } rounded-full border-2 border-hover-color bg-white drop-shadow-white-ash shadow-sm hover:bg-number-color hover:border-white px-4 transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] font-dejavu w-[192px] grid m-auto text-center justify-center items-center ${offstyle}`}
+              } rounded-full border-2 border-hover-color bg-white drop-shadow-white-ash shadow-sm hover:bg-number-color hover:border-white px-4 transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400]   w-[192px] grid m-auto text-center justify-center items-center ${offstyle}`}
           >
             Select Package
           </BtnGlobal>
@@ -179,7 +179,7 @@ const Packages: React.FC<PackagesProps> = ({
               : index === 0
                 ? 'relative md:top-6 lg:top-0'
                 : ''
-            } rounded-full border-2 border-hover-color bg-white drop-shadow-white-ash shadow-sm hover:bg-number-color hover:border-white px-4 transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] font-dejavu w-[192px] grid m-auto text-center justify-center items-center ${offstyle}`}
+            } rounded-full border-2 border-hover-color bg-white drop-shadow-white-ash shadow-sm hover:bg-number-color hover:border-white px-4 transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400]   w-[192px] grid m-auto text-center justify-center items-center ${offstyle}`}
         >
           Select Package
         </BtnGlobal>}
