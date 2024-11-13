@@ -6,7 +6,7 @@ import HomeV2 from "./UI/HomeV2";
 import Homes from "./pages/Home";
 import { HeroSection } from "@/Components/PublicPages/LandingPage/HeroSection";
 import { Poppins } from 'next/font/google';
-import { brandColors } from "@/Constants/BrandConstants";
+import HeroSectionCarousel from "@/Components/PublicPages/LandingPage/HeroSectionCarousel";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -23,6 +23,7 @@ export default function LandingPage() {
         >
           <Navbar />
           <HeroSection />
+          <HeroSectionCarousel />
         </main>
     </MbisProvider>
   )

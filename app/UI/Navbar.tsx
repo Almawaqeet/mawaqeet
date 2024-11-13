@@ -180,7 +180,7 @@ const Navbar: React.FC = () => {
 
   return (
     <section className={`xmd:max-w-[375px] mobile:max-w-[700px] sm:max-w-[900px] lg:max-w-[2000px] tab_md:max-w-[1500px] m-auto relative z-50`}>
-      <nav className={`${whiteSpaces.paddingX} px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'drop-shadow-white-ash shadow-md' : ''} grid my-auto mobile:right-0 xmd:w-full tab_md:fixed tab_md:top-0`}>
+      <nav className={`${whiteSpaces.paddingX} px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed top-0 right-0 w-full z-50`}>
         <ul className="flex justify-between items-center lg:gap-12 md:gap-10 text-navbar-clamp font-normal md:leading-5">
           <Logo />
 

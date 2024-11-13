@@ -1,9 +1,12 @@
 import React from 'react'
 import AppButton from '@/Components/Ui/AppButton'
-import { IoMdArrowRoundForward, IoMdPlay } from "react-icons/io"
+import { IoMdArrowRoundForward } from "react-icons/io"
+import { FaPlay } from "react-icons/fa";
 import AppHeading from '@/Components/Ui/AppHeading'
 import { PiBookOpenThin } from "react-icons/pi"
 import { motion } from 'framer-motion'
+import { FaCreditCard } from "react-icons/fa";
+
 
 export const HeroSection = () => {
   const containerVariants = {
@@ -88,7 +91,7 @@ export const HeroSection = () => {
           <AppHeading
             variant="h1"
             align="left"
-            className="w-full mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl sm:text-center"
+            className="w-full mb-4 sm:mb-6 text-brand-color text-2xl sm:text-3xl md:text-4xl sm:text-center"
           >
             We offer flexible payment plans for Hajj and Umrah tours, with great support at every step of your pilgrimage.
           </AppHeading>
@@ -106,7 +109,7 @@ export const HeroSection = () => {
           className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-6 sm:mb-8 w-full sm:w-auto px-4"
         >
           <AppButton
-            icon={<IoMdArrowRoundForward className="w-5 h-5 sm:w-6 sm:h-5" />}
+            icon={<IoMdArrowRoundForward className="w-4 h-4 sm:w-5 sm:h-5" />}
             onClick={() => {}}
             className="w-full sm:w-auto"
           >
@@ -116,20 +119,21 @@ export const HeroSection = () => {
           <AppButton
             variant="secondary"
             iconPosition="start"
-            icon={<IoMdPlay className="w-5 h-5 sm:w-6 sm:h-5" />}
+            icon={<FaPlay className="w-3 h-3 sm:w-4 sm:h-4" />}
             onClick={() => {}}
             className="w-full sm:w-auto"
           >
             Learn more
           </AppButton>
         </motion.div>
-
-        <motion.p
-          variants={itemVariants}
-          className="text-xs sm:text-sm text-gray-500 font-medium text-left sm:text-center w-full px-4"
-        >
-          ✓ Varied payments accepted
-        </motion.p>
+        <motion.div variants={itemVariants} className="flex items-center justify-center gap-1">
+          <FaCreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-brand-color" />
+          <p
+            className="text-xs font-semibold sm:text-sm text-brand-color text-center sm:text-center w-full px-2"
+          >
+            Cancel payments anytime!
+          </p>
+        </motion.div>
       </motion.div>
     </motion.section>
   )
