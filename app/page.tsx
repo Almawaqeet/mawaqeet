@@ -6,6 +6,7 @@ import HomeV2 from "./UI/HomeV2";
 import Homes from "./pages/Home";
 import { HeroSection } from "@/Components/PublicPages/LandingPage/HeroSection";
 import { Poppins } from 'next/font/google';
+import { brandColors } from "@/Constants/BrandConstants";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -16,9 +17,10 @@ const poppins = Poppins({
 
 export default function LandingPage() {
   return (
-
     <MbisProvider>
-        <main className={poppins.className}>
+        <main
+          className={`${poppins.className} bg-brand-color-subtle`}
+        >
           <Navbar />
           <HeroSection />
         </main>

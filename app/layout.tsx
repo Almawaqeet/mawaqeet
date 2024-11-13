@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Poppins } from 'next/font/google';
-import { brandColors } from '@/Constants/BrandConstants';
+
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -25,10 +25,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href={metadata?.icons as string} />
       </head>
       <body
-        className={`${poppins.className} bg-[${brandColors.dark_brown}]`}
-        style={{ backgroundColor: brandColors.subtle_brown }}
+        className={`${poppins.className} bg-brand-color-subtle`}
       >
-        {children}
+        <div className="pt-[100px]">
+          {children}
+        </div>
       </body>
     </html>
   );

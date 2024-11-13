@@ -6,6 +6,13 @@
 /* Optional: If using the variable approach */
 :root {
   --font-poppins: 'Poppins', system-ui, sans-serif;
+  --brand-color: #251301;
+  --brand-color-subtle: #E5DBD0;
+  --brand-color-light: #D1BFAB;
+  --brand-color-main: #875929;
+  --brand-color-white: #ffffff;
+  --brand-color-black: #000000;
+  --brand-color-text: #686868;
 }
 
 body {

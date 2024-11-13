@@ -1,51 +1,136 @@
 import React from 'react'
-import Image from 'next/image'
 import AppButton from '@/Components/Ui/AppButton'
-import { IoMdArrowRoundForward } from "react-icons/io"
+import { IoMdArrowRoundForward, IoMdPlay } from "react-icons/io"
 import AppHeading from '@/Components/Ui/AppHeading'
 import { PiBookOpenThin } from "react-icons/pi"
-import { brandColors } from '@/Constants/BrandConstants'
+import { motion } from 'framer-motion'
 
 export const HeroSection = () => {
-  return (
-    <section className="w-full max-w-[6000px] m-auto px-[150px] py-[120px] flex items-center justify-center">
-      <div className="flex flex-col items-center text-center max-w-[800px] w-full">
-        <div className="flex items-center gap-4 mb-8 rounded-md p-2">
-            <div className='flex items-center gap-2  bg-white rounded-full px-4 py-2'>
-                <PiBookOpenThin className="w-5 h-5" />
-                <span className="text-sm text-gray-600 font-medium">Q3/45</span>
-            </div>
-          <span className="text-sm text-gray-600">And complete the Hajj and 'Umrah for Allah. But...</span>
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        staggerChildren: 0.2
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0
+    }
+  }
+
+  const QuoteCard = () => {
+    const verses = [
+      { ref: "Q2/197", text: "Hajj is [during] well-known months, so whoever has made Hajj obligatory upon himself therein [by entering the state of ihram], there is [to be for him] no sexual relations and no disobedience and no disputing during Hajj." },
+      { ref: "Q3/97", text: "And [due] to Allah from the people is a pilgrimage to the House - for whoever is able to find thereto a way." },
+      { ref: "Q2/196", text: "And complete the Hajj and 'Umrah for Allah. But if you are prevented, then [offer] what can be obtained with ease of sacrificial animals." }
+    ];
+
+    const [currentVerseIndex, setCurrentVerseIndex] = React.useState(0);
+
+    React.useEffect(() => {
+      const timer = setInterval(() => {
+        setCurrentVerseIndex((prev) => (prev + 1) % verses.length);
+      }, 5000);
+      return () => clearInterval(timer);
+    }, []);
+
+    return (
+      <motion.div
+          variants={itemVariants}
+          className="hidden md:flex flex-col md:flex-row items-center gap-2 mb-8 bg-[#D9CBBA] rounded-full p-2 border-[0.2px] border-brand-color-main hover:scale-105 transition-transform duration-300 w-full md:w-[500px] group"
+      >
+        <div className='flex items-center gap-2 bg-[#F2F2F2] rounded-full px-4 py-2 w-full md:w-auto'>
+          <PiBookOpenThin className="w-4 h-4 md:w-5 md:h-5 text-[#875929]" />
+          <span className="text-xs md:text-sm text-[#875929] font-medium">{verses[currentVerseIndex].ref}</span>
         </div>
-
-        <AppHeading
-          variant="h1"
-          align="center"
-          className="w-full mb-6"
+        <motion.div
+          key={currentVerseIndex}
+          className="relative w-full md:w-auto"
+          initial={{ opacity: 0, width: 0 }}
+          animate={{ opacity: 1, width: "auto" }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          We offer flexible payment plans for Hajj and Umrah tours, with great support at every step of your pilgrimage.
-        </AppHeading>
+          <span className="text-xs md:text-sm text-[#665544] line-clamp-1 px-2">
+            {verses[currentVerseIndex].text.substring(0, 70)}...
+          </span>
+          <div className="hidden group-hover:block absolute top-full left-0 mt-2 p-4 bg-white rounded-lg shadow-lg z-10 max-w-[300px] md:max-w-[400px]">
+            <span className="text-xs md:text-sm text-[#665544]">
+              {verses[currentVerseIndex].text}
+            </span>
+          </div>
+        </motion.div>
+      </motion.div>
+    )
+  }
 
-        <p className="text-lg text-gray-700 mb-12 max-w-[700px]">
+  return (
+    <motion.section
+      className="w-full max-w-[6000px] m-auto px-4 sm:px-6 md:px-[150px] py-8 sm:py-16 md:py-[120px] flex items-center justify-center"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.div
+        className="flex flex-col items-start sm:items-center text-left sm:text-center w-full max-w-[800px]"
+        variants={containerVariants}
+      >
+        <QuoteCard />
+
+        <motion.div variants={itemVariants} className="w-full">
+          <AppHeading
+            variant="h1"
+            align="left"
+            className="w-full mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl sm:text-center"
+          >
+            We offer flexible payment plans for Hajj and Umrah tours, with great support at every step of your pilgrimage.
+          </AppHeading>
+        </motion.div>
+
+        <motion.p
+          variants={itemVariants}
+          className="text-base sm:text-lg text-brand-color-text mb-8 sm:mb-12 max-w-[700px] px-2 text-left sm:text-center"
+        >
           Start your holy journey with us today. We make it easy - pay all at once or in smaller payments. Our team will help you every step of the way, from planning to completing your pilgrimage.
-        </p>
+        </motion.p>
 
-        <div className="flex gap-6 mb-8">
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-6 sm:mb-8 w-full sm:w-auto px-4"
+        >
           <AppButton
-            className="font-bold text-base"
-            icon={<IoMdArrowRoundForward className="w-6 h-5" />}
+            icon={<IoMdArrowRoundForward className="w-5 h-5 sm:w-6 sm:h-5" />}
             onClick={() => {}}
+            className="w-full sm:w-auto"
           >
             Get Started
           </AppButton>
 
-          <button className="px-8 py-3 border-2 border-gray-300 rounded-md hover:bg-gray-50 transition-colors duration-300 font-medium">
+          <AppButton
+            variant="secondary"
+            iconPosition="start"
+            icon={<IoMdPlay className="w-5 h-5 sm:w-6 sm:h-5" />}
+            onClick={() => {}}
+            className="w-full sm:w-auto"
+          >
             Learn more
-          </button>
-        </div>
+          </AppButton>
+        </motion.div>
 
-        <p className="text-sm text-gray-500 font-medium">✓ Varied payments accepted</p>
-      </div>
-    </section>
+        <motion.p
+          variants={itemVariants}
+          className="text-xs sm:text-sm text-gray-500 font-medium text-left sm:text-center w-full px-4"
+        >
+          ✓ Varied payments accepted
+        </motion.p>
+      </motion.div>
+    </motion.section>
   )
 }

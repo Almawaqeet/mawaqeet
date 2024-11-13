@@ -29,7 +29,15 @@ const config: Config = {
         "number-color": "#A88A69",
         "hero-color": "#0000004D",
         "body-color": "#333333",
+        "text-color": "var(--brand-color-text)",
         accordion: "#F8F8F8",
+        "brand-color": "var(--brand-color)",
+        "brand-color-subtle": "var(--brand-color-subtle)",
+        "brand-color-light": "var(--brand-color-light)",
+        "brand-color-main": "var(--brand-color-main)",
+        "brand-color-white": "var(--brand-color-white)",
+        "brand-color-black": "var(--brand-color-black)",
+        "brand-color-text": "var(--brand-color-text)",
       },
 
       fontSize: {

@@ -6,7 +6,7 @@ type WhiteSpaces = {
 
 export const whiteSpaces: WhiteSpaces = {
   paddingX:
-    "xmd:px-[16px] mobile:px-[24px] sm:px-[32px] md:px-[32px] lg:px-[48px]",
+    "xmd:px-[16px] mobile:px-2 sm:px-2 md:px-[32px] lg:px-[48px]",
   paddingY:
     "xmd:pt-[16px] mobile:pt-[24px] sm:pt-[32px] md:pt-[40px] lg:pt-[48px]",
   sectionMargin:
