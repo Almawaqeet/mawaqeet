@@ -6,7 +6,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import AppHeading from '@/Components/Reusables/Ui/AppHeading';
-import { whiteSpaces } from '@/app/libs/utilities/GlobalSpaces';
+import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces';
 
 const StepsToRegister = () => {
   const steps = [

@@ -1,17 +1,19 @@
 "use client"
 import React from 'react';
-import { motion } from 'framer-motion';
 import AppHeading from '@/Components/Reusables/Ui/AppHeading';
-import { whiteSpaces } from '@/app/libs/utilities/GlobalSpaces';
+import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces';
 import AppButton from '@/Components/Reusables/Ui/AppButton';
 import { IoMdCall } from "react-icons/io";
 import { Package } from '@/Components/Reusables/Package';
 
-
+import { usePackages } from '@/Api/Services/packages';
 
 const ActivePackages = () => {
-  const packages = [
-    {
+
+    //todo: update this when making actual api call
+    //const { data: packages, isLoading, isError } = usePackages();
+    const packages = [
+        {
       id: 1,
       type: 'HAJJ',
       tier: 'STANDARD',

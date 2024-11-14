@@ -1,19 +1,19 @@
 "use client"
 
 import React from 'react'
-import { about_hero, about_main_body, } from '../contents/about';
+import { about_hero, about_main_body, } from '../../OldPage/contents/about';
 import Image from 'next/image';
 
-import SlantDiv from '../UI/SlantDiv';
+import SlantDiv from '../../OldPage/UI/SlantDiv';
 
-import TeamContent from '../UI/TeamContent';
-import Services from '../UI/Services';
-import Hero from '../UI/Hero';
-import Headings from '../libs/utilities/Headings';
-import Paragraph from '../libs/utilities/Paragraph';
-import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
-import { MbisProvider } from '../libs/hooks/useContextProvider';
-import Navbar from '../UI/Navbar';
+import TeamContent from '../../OldPage/UI/TeamContent';
+import Services from '../../OldPage/UI/Services';
+import Hero from '../../OldPage/UI/Hero';
+import Headings from '../../OldPage/utilities/Headings';
+import Paragraph from '../../OldPage/utilities/Paragraph';
+import { whiteSpaces } from '../../OldPage/utilities/GlobalSpaces';
+import { MbisProvider } from '../../OldPage/hooks/useContextProvider';
+import Navbar from '../../Components/Reusables/Ui/Navbar';
 
 const AboutUsPage = () => {
     return (

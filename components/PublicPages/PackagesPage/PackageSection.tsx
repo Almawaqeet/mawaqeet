@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import { whiteSpaces } from '@/app/libs/utilities/GlobalSpaces';
+import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces';
 import AppHeading from '@/Components/Reusables/Ui/AppHeading';
 import { Package } from '@/Components/Reusables/Package';
 import { motion } from 'framer-motion';

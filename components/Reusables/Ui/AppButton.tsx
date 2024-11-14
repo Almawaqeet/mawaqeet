@@ -66,6 +66,7 @@ const AppButton: React.FC<ButtonProps> = ({
     rounded-full outline-none transition-all duration-300 select-none
     ${disabled || loading ? 'cursor-not-allowed' : 'cursor-pointer'}
     ${active ? 'shadow-md' : ''}
+    ${loading ? 'w-[40px] h-[45px] p-[10px] rounded-full' : `w-[${width}] h-[${height}] p-5 rounded-full`}
   `;
 
   const variantClasses = variant === 'secondary'
@@ -99,12 +100,6 @@ const AppButton: React.FC<ButtonProps> = ({
         ${variantClasses}
         ${className}
       `}
-      style={{
-        width: loading ? loadingSize : width,
-        height: loading ? loadingSize : height,
-        padding: loading ? '10px' : '20px',
-        borderRadius: loading ? '50%' : '9999px', // circular when loading
-      }}
       onClick={handleClick}
       title={disabled ? "Disabled" : ""}
       onMouseDown={handleMouseDown}

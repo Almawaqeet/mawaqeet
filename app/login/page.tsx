@@ -3,18 +3,18 @@ import React from 'react'
 import { FormikHelpers } from 'formik';
 
 import Image from 'next/image'
-import { whiteSpaces } from '../libs/utilities/GlobalSpaces'
-import Headings from '../libs/utilities/Headings'
-import Paragraph from '../libs/utilities/Paragraph'
-import BtnGlobal from '../UI/BtnGlobal'
+import { whiteSpaces } from '../../OldPage/utilities/GlobalSpaces'
+import Headings from '../../OldPage/utilities/Headings'
+import Paragraph from '../../OldPage/utilities/Paragraph'
+import BtnGlobal from '../../OldPage/UI/BtnGlobal'
 import { FaFacebook } from 'react-icons/fa6'
-import Footer from '../UI/Footer'
+import Footer from '../../Components/Reusables/Ui/Footer'
 import { IoEyeOutline } from 'react-icons/io5'
-import Navbar from '../UI/Navbar'
-import { MbisProvider } from '../libs/hooks/useContextProvider'
-import { useValidate } from '../libs/hooks/useValidate'
-import FormContainer from '../UI/formComponents/FormContainer';
-import CustomInputComponent from '../UI/formComponents/CustomInputComponent';
+import Navbar from '../../Components/Reusables/Ui/Navbar'
+import { MbisProvider } from '../../OldPage/hooks/useContextProvider'
+import { useValidate } from '../../OldPage/hooks/useValidate'
+import FormContainer from '../../OldPage/UI/formComponents/FormContainer';
+import CustomInputComponent from '../../OldPage/UI/formComponents/CustomInputComponent';
 
 interface IntialInputValues {
   email: string

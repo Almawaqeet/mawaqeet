@@ -8,9 +8,13 @@ import AppHeading from '@/Components/Reusables/Ui/AppHeading'
 import { PiBookOpenThin } from "react-icons/pi"
 import { motion } from 'framer-motion'
 import { FaCreditCard } from "react-icons/fa";
+import { useRouter } from 'next/navigation';
+
+
 
 
 export const HeroSection = () => {
+  const router = useRouter();
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -112,7 +116,7 @@ export const HeroSection = () => {
         >
           <AppButton
             icon={<IoMdArrowRoundForward className="w-4 h-4 sm:w-5 sm:h-5" />}
-            onClick={() => {}}
+            onClick={() => router.push('/onboarding/new-user')}
             className="w-full sm:w-auto"
           >
             Get Started
