@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${poppins.className} bg-brand-color-subtle`}
       >
-        <div className="pt-[100px]">
+        <div className="pt-[100px] max-w-screen-2xl mx-auto">
           {children}
         </div>
       </body>

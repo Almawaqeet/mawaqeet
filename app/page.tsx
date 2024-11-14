@@ -7,6 +7,9 @@ import Homes from "./pages/Home";
 import { HeroSection } from "@/Components/PublicPages/LandingPage/HeroSection";
 import { Poppins } from 'next/font/google';
 import HeroSectionCarousel from "@/Components/PublicPages/LandingPage/HeroSectionCarousel";
+import StepsToRegister from "@/Components/PublicPages/LandingPage/StepsToRegister";
+import ActivePackages from "@/Components/PublicPages/LandingPage/ActivePackages";
+import LiveCall from "@/Components/PublicPages/LandingPage/LiveCall";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -19,11 +22,14 @@ export default function LandingPage() {
   return (
     <MbisProvider>
         <main
-          className={`${poppins.className} bg-brand-color-subtle`}
+          className={`${poppins.className} bg-brand-color-subtle flex flex-col gap-4`}
         >
           <Navbar />
           <HeroSection />
           <HeroSectionCarousel />
+          <StepsToRegister />
+          <ActivePackages />
+          <LiveCall />
         </main>
     </MbisProvider>
   )

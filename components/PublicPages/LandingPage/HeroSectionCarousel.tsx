@@ -14,7 +14,7 @@ const HeroSectionCarousel = () => {
     },
     {
       id: 5,
-      src: 'https://images.pexels.com/photos/4346403/pexels-photo-4346403.jpeg',
+      src: 'https://images.pexels.com/photos/2767864/pexels-photo-2767864.jpeg',
       alt: 'Aerial view of gathering'
     },
     {
@@ -54,7 +54,7 @@ const HeroSectionCarousel = () => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="relative overflow-hidden py-8"
+      className="relative overflow-hidden py-4 mb-8 sm:py-8 sm:mb-16"
     >
       {/* Mobile View */}
       <div className="md:hidden">
