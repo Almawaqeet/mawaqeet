@@ -89,7 +89,7 @@ const MobileNavMenu = ({ isOpen, navItems, activeItem, setActiveItem, setIsOpen 
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className="fixed z-10 w-full md:w-[80%] bg-white min-h-svh h-screen max-h-[1000px] overflow-y-scroll drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16"
       >
-        <motion.ul 
+        <motion.ul
           className="text-fz-xs font-normal gap-6 flex flex-col justify-start items-center relative mt-8 p-6"
           initial="closed"
           animate="open"
@@ -135,9 +135,9 @@ const MobileNavMenu = ({ isOpen, navItems, activeItem, setActiveItem, setIsOpen 
               open: { y: 0, opacity: 1 },
               closed: { y: 20, opacity: 0 }
             }}
-            className="w-full pt-4"
+            className="w-full flex justify-center pt-4"
           >
-            <Link href={'/login'} className="block w-full">
+            <Link href={'/login'} className="w-full flex justify-center">
               <AppButton
                 className="text-fz-xs w-full"
                 icon={<IoMdArrowRoundForward />}
