@@ -76,7 +76,7 @@ export const HeroSection = () => {
 
   return (
     <motion.section
-      className="w-full max-w-[6000px] m-auto px-4 sm:px-6 md:px-[150px] py-8 sm:py-16 md:py-[120px] flex items-center justify-center"
+      className="w-full max-w-[6000px] m-auto px-4 sm:px-6 md:px-[150px] py-2 sm:py-4 md:py-[60px] flex  justify-center"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -126,10 +126,10 @@ export const HeroSection = () => {
             Learn more
           </AppButton>
         </motion.div>
-        <motion.div variants={itemVariants} className="flex items-center justify-center gap-1">
+        <motion.div variants={itemVariants} className="flex items-center justify-center gap-2 sm:justify-center w-full">
           <FaCreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-brand-color" />
           <p
-            className="text-xs font-semibold sm:text-sm text-brand-color text-center sm:text-center w-full px-2"
+            className="text-xs font-semibold sm:text-sm text-brand-color text-center"
           >
             Cancel payments anytime!
           </p>
