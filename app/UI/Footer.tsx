@@ -1,4 +1,5 @@
-import React, { MouseEventHandler } from 'react'
+"use client"
+import React from 'react'
 import Link from 'next/link';
 import { FiFacebook } from 'react-icons/fi';
 import { BsTwitterX } from 'react-icons/bs';
@@ -6,123 +7,111 @@ import { IoLogoInstagram } from 'react-icons/io5';
 import { FaSquareWhatsapp } from 'react-icons/fa6';
 import Image from 'next/image';
 
-
 import { brand } from '../contents/navbar';
 import { footerContent, footerText, useful_Links } from '../contents/footer';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import Headings from '../libs/utilities/Headings';
 
-
 const Footer: React.FC = () => {
-
   return (
-    <section
-      className={`  bg-[#4B3938] xmd:pt-[30px] xmd:pb-1`}
-    >
-      <div
-        className={`${whiteSpaces.paddingX} xmd:grid grid-cols-1 sm:justify-center md:justify-end m-auto md:grid-cols-[1fr_minmax(100px,_150px)_250px] lg:grid-cols-[1fr_minmax(180px,_250px)_300px]`}
-      >
-        <div>
-          <li className="flex gap-2 mobile:gap-3 tab_md:gap-[4px] items-center xmd:pb-6 ">
-            <div>
-              <Image
-                src={'/images/logo1.png'}
-                alt='whitelogo'
-                className="mobile:w-[20.31px] mobile:h-[20px] lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7"
-                width={20.31}
-                height={20}
-              />
-            </div>
+    <footer className="bg-black pt-12 pb-6">
+      <div className={`${whiteSpaces.paddingX} max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16`}>
+        {/* Brand & Description */}
+        <div className="space-y-6">
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/images/logo1.png"
+              alt="Brand Logo"
+              width={40}
+              height={40}
+              className="w-8 h-8 lg:w-10 lg:h-10"
+            />
             {brand.map((itm) => (
               <Headings
-                type={'BrandText'}
                 key={`itm-${itm.id}`}
-                classname="mobile:text-fz-md text-white  "
+                type="BrandText"
+                classname="text-xl text-white font-semibold"
               >
                 {itm.brand}
               </Headings>
             ))}
-          </li>
+          </Link>
 
           {footerText.map((text) => (
             <p
               key={`foot-${text.id}`}
-              className="text-align mobile:text-fz-xsm md:text-fz-sm   text-white font-normal xmd:leading-[20.97px] xmd:pb-7 md:pb-0 md:leading-[24.95px] tracking-[0.1px]"
+              className="text-gray-200 text-sm leading-relaxed"
             >
               {text.text}
             </p>
           ))}
         </div>
 
-        <div>
+        {/* Useful Links */}
+        <div className="space-y-6">
           {footerContent.map((cont) => (
-            <p
+            <h3
               key={`${cont.id}-cont`}
-              className="text-white xmd:pb-8 md:pb-4 font-normal text-contact-clamp leading-[20.95px] tracking-[0.09px] xmd:text-start md:text-end  "
+              className="text-white font-semibold text-lg"
             >
               {cont.content_2}
-            </p>
+            </h3>
           ))}
 
-          <ul className="flex flex-col xmd:gap-6 md:gap-4 md:text-end xmd:text-start md:justify-center text-contact-clamp  ">
+          <ul className="space-y-4">
             {useful_Links.map((link) =>
               link.usefulLinks.map((itm, i) => (
-                <>
-                  {i === 4 ? <Link href='/#faqs'><li key={`${itm.id}-itms-`} className="text-white md:text-end  " >
+                <li key={`${itm.id}-itms`}>
+                  <Link
+                    href={i === 4 ? '/#faqs' : `${i === 0 ? '/' : i === 1 ? '/about-us' : i === 2 ? '/contact-us' : i === 3 ? '/about-us#service-section' : '#'}`}
+                    className="text-gray-200 hover:text-white transition-colors"
+                  >
                     {itm.content}
-                  </li></Link> :
-                    <Link href={`${i === 0 ? '/' : i === 1 ? '/about-us' : i === 2 ? '/contact-us' : i === 3 ? '/about-us#service-section' : null}`}>
-                      <li key={`${itm.id}-itms-`} className="text-white md:text-end  ">
-                        {itm.content}
-                      </li>
-                    </Link>}
-
-                </>
+                  </Link>
+                </li>
               ))
             )}
           </ul>
         </div>
 
-        <div>
+        {/* Contact & Social */}
+        <div className="space-y-6">
           {footerContent.map((itm) => (
-            <p
+            <h3
               key={`${itm.id}-cont`}
-              className="text-white xmd:pb-8 md:pb-2 font-normal text-contact-clamp leading-[20.95px] tracking-[0.09px] md:text-end xmd:text-start  "
+              className="text-white font-semibold text-lg"
             >
               {itm.content_3}
-            </p>
+            </h3>
           ))}
 
-          <ul className="flex gap-[10px] xmd:justify-start md:justify-end xmd:mb-20  md:relative md:top-6">
-            <li>
-              <FiFacebook className="text-white" />
-            </li>
-            <li>
-              <BsTwitterX className="text-white" />
-            </li>
-            <li>
-              <IoLogoInstagram className="text-white" />
-            </li>
-            <li>
-              <FaSquareWhatsapp className="text-white" />
-            </li>
-          </ul>
+          <div className="flex gap-4 items-center">
+            <Link href="#" className="text-gray-200 hover:text-white transition-colors">
+              <FiFacebook className="w-6 h-6" />
+            </Link>
+            <Link href="#" className="text-gray-200 hover:text-white transition-colors">
+              <BsTwitterX className="w-6 h-6" />
+            </Link>
+            <Link href="#" className="text-gray-200 hover:text-white transition-colors">
+              <IoLogoInstagram className="w-6 h-6" />
+            </Link>
+            <Link href="#" className="text-gray-200 hover:text-white transition-colors">
+              <FaSquareWhatsapp className="w-6 h-6" />
+            </Link>
+          </div>
         </div>
       </div>
-      <div className={`${whiteSpaces.paddingX} `}>
-        <div>
-          <div className="border-[1px] border-white opacity-50 xmd:mb-[26px] md:mb-6 md:mt-16"></div>
-        </div>
 
-        <div className="flex xmd:gap-4 items-center justify-center">
-          <p className="xmd:text-[30px] text-white">&copy;</p>
-          <div className="border-[1px] xmd:h-[30px] border-white"></div>
-          <p className="font-normal xmd:text-fz-xss leading-5 tracking-wide text-white  ">
-            All rights reserved.
-          </p>
+      {/* Copyright */}
+      <div className={`${whiteSpaces.paddingX} max-w-7xl mx-auto mt-12`}>
+        <div className="border-t border-gray-500 opacity-50 mb-6"></div>
+        <div className="flex items-center justify-center gap-3 text-gray-200">
+          <span>&copy;</span>
+          <span className="w-px h-4 bg-gray-400"></span>
+          <p className="text-sm">All rights reserved.</p>
         </div>
       </div>
-    </section>
+    </footer>
   );
 };
 

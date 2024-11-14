@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Poppins } from 'next/font/google';
+import Navbar from './UI/Navbar';
+import Footer from './UI/Footer';
 
 
 const poppins = Poppins({
@@ -28,7 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={`${poppins.className} bg-brand-color-subtle`}
       >
         <div className="pt-[100px] max-w-screen-2xl mx-auto">
+          <Navbar />
           {children}
+          <Footer />
         </div>
       </body>
     </html>

@@ -4,31 +4,33 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { LiaTimesSolid } from 'react-icons/lia';
-import AppButton from '@/Components/Ui/AppButton';
-import { useMbisContext } from '../libs/hooks/useContextProvider';
+import AppButton from '@/Components/Reusables/Ui/AppButton';
 import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
 import { brandColors } from '@/Constants/BrandConstants';
 import { IoMdArrowRoundForward } from "react-icons/io";
-import { LogoProps, DesktopNavLinksProps, NavItem, MobileNavMenuProps, MobileNavListProps, MobileNavItemProps, DispatchAction } from '@/app/types/frontendTypes';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
-
+interface NavItem {
+  id: string;
+  content: string;
+}
 
 // Logo Component
-const Logo: React.FC<LogoProps> = () => (
+const Logo = () => (
   <Link href="/">
     <motion.li
       className="flex gap-2 mobile:gap-3 tab_md:gap-[4px] items-center group relative cursor-pointer"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-        <Image
-          src={'/images/logo.png'}
-          className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7"
-          alt="Brand Logo"
-          width={28}
-          height={28}
-        />
+      <Image
+        src={'/images/logo.png'}
+        className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7"
+        alt="Brand Logo"
+        width={28}
+        height={28}
+      />
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 0, x: -20 }}
@@ -42,17 +44,21 @@ const Logo: React.FC<LogoProps> = () => (
   </Link>
 );
 
+interface DesktopNavLinksProps {
+  navItems: NavItem[];
+  activeItem: string;
+  setActiveItem: (id: string) => void;
+}
+
 // Desktop Navigation Links Component
-const DesktopNavLinks: React.FC<DesktopNavLinksProps> = ({ navItems, activeIndex, dispatch }) => (
+const DesktopNavLinks = ({ navItems, activeItem, setActiveItem }: DesktopNavLinksProps) => (
   <div className="flex items-center justify-center ml-6 lg:gap-12 md:gap-10">
-    {navItems?.map((item: NavItem) => (
+    {navItems?.map((item) => (
       <li
-        key={`nav-${item.id}`}
-        onClick={() => {
-          dispatch({ type: 'setActiveIndex', payload: item.id });
-        }}
+        key={item.id}
+        onClick={() => setActiveItem(item.id)}
         className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${
-          item.id === activeIndex
+          item.id === activeItem
             ? 'text-hover-color font-bold'
             : `text-${brandColors.dark_brown}`
         }`}
@@ -65,118 +71,126 @@ const DesktopNavLinks: React.FC<DesktopNavLinksProps> = ({ navItems, activeIndex
   </div>
 );
 
-const MobileNavMenu: React.FC<MobileNavMenuProps> = ({ isActive, navItems, activeIndex, dispatch, dropdownmobile, arrow, dropdownItems, subNavActiveIndex, navbtn }) => (
-  isActive && (
-    <div
-      className={`fixed z-10 min-h-svh h-screen max-h-[1000px] overflow-y-scroll drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16 xmd:left-[20%] translate-x-0 ${
-        innerHeight > 1000 ? 'overflow-y-scroll' : 'overflow-y-hidden'
-      } ${
-        isActive
-          ? 'transition-all duration-[1.0s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[200] translate-x-0'
-          : '-translate-x-[100%] transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[200]'
-      }`}
-    >
-      <MobileNavList
-        navItems={navItems}
-        activeIndex={activeIndex}
-        dispatch={dispatch}
-        dropdownmobile={dropdownmobile}
-        arrow={arrow}
-        dropdownItems={dropdownItems}
-        subNavActiveIndex={subNavActiveIndex}
-        navbtn={navbtn}
-      />
-    </div>
-  )
-);
+interface MobileNavMenuProps {
+  isOpen: boolean;
+  navItems: NavItem[];
+  activeItem: string;
+  setActiveItem: (id: string) => void;
+  setIsOpen: (isOpen: boolean) => void;
+}
 
-// Mobile Navigation List Component
-const MobileNavList: React.FC<MobileNavListProps> = ({ navItems, activeIndex, dispatch, dropdownmobile, arrow, dropdownItems, subNavActiveIndex, navbtn }) => (
-  <ul className="text-fz-xs font-normal gap-4 flex flex-col justify-center items-center relative mt-8">
-    {navItems?.map((item: NavItem, i: number) => (
-      <MobileNavItem
-        key={`nav-${item.id}`}
-        item={item}
-        index={i}
-        activeIndex={activeIndex}
-        dispatch={dispatch}
-        dropdownmobile={dropdownmobile}
-        arrow={arrow}
-        dropdownItems={dropdownItems}
-        subNavActiveIndex={subNavActiveIndex}
-      />
-    ))}
-
-    <Link href={'/login'}>
-      <AppButton
-        onClick={() => dispatch({ type: 'togglenavbtn' })}
-        className="text-fz-xs"
-        icon={<IoMdArrowRoundForward />}
+const MobileNavMenu = ({ isOpen, navItems, activeItem, setActiveItem, setIsOpen }: MobileNavMenuProps) => (
+  <AnimatePresence>
+    {isOpen && (
+      <motion.div
+        initial={{ opacity: 0, x: "100%" }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: "100%" }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="fixed z-10 w-full md:w-[80%] bg-white min-h-svh h-screen max-h-[1000px] overflow-y-scroll drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16"
       >
-        Get Started
-      </AppButton>
-    </Link>
-  </ul>
+        <motion.ul 
+          className="text-fz-xs font-normal gap-6 flex flex-col justify-start items-center relative mt-8 p-6"
+          initial="closed"
+          animate="open"
+          variants={{
+            open: {
+              transition: {
+                staggerChildren: 0.1
+              }
+            },
+            closed: {
+              transition: {
+                staggerChildren: 0.05,
+                staggerDirection: -1
+              }
+            }
+          }}
+        >
+          {navItems?.map((item) => (
+            <motion.li
+              key={item.id}
+              variants={{
+                open: { y: 0, opacity: 1 },
+                closed: { y: 20, opacity: 0 }
+              }}
+              onClick={() => {
+                setActiveItem(item.id);
+                setIsOpen(false);
+              }}
+              className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${
+                item.id === activeItem
+                  ? 'text-hover-color font-bold'
+                  : `text-${brandColors.dark_brown}`
+              }`}
+            >
+              <Link href={`/${item.id}`}>
+                {item.content}
+              </Link>
+            </motion.li>
+          ))}
+
+          <motion.div
+            variants={{
+              open: { y: 0, opacity: 1 },
+              closed: { y: 20, opacity: 0 }
+            }}
+            className="w-full pt-4"
+          >
+            <Link href={'/login'} className="block w-full">
+              <AppButton
+                className="text-fz-xs w-full"
+                icon={<IoMdArrowRoundForward />}
+                onClick={() => {}}
+              >
+                Get Started
+              </AppButton>
+            </Link>
+          </motion.div>
+        </motion.ul>
+      </motion.div>
+    )}
+  </AnimatePresence>
 );
 
-// Mobile Navigation Item Component
-const MobileNavItem: React.FC<MobileNavItemProps> = ({ item, index, activeIndex, dispatch, dropdownmobile}) => (
-  <li
-    onClick={() => {
-      dispatch({ type: 'setActiveIndex', payload: item.id });
-      dispatch({ type: 'shownav', payload: false });
-    }}
-    className={`mobile:block tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-1 cursor-pointer ${
-      item.id === activeIndex
-        ? 'text-hover-color font-bold'
-        : `text-${brandColors.dark_brown}`
-    } ${index === 2 && dropdownmobile ? 'pb-40' : ''}`}
-  >
-    <Link href={`/${item.id}`}>
-      {item.content}
-    </Link>
-  </li>
-);
-
-// Main Navbar Component
-const Navbar: React.FC = () => {
-  const {
-    dispatch,
-    state: {
-      navbar_bar,
-      activeIndex,
-      navItems,
-      navbtn,
-      dropdown,
-      dropdownmobile,
-      subNavActiveIndex,
-      dropdownItems,
-      arrow,
-      isActive,
-    },
-  } = useMbisContext();
-
+const Navbar = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const [activeItem, setActiveItem] = useState(pathname === '/' ? '/' : pathname.slice(1));
+
+  const navItems: NavItem[] = [
+    { id: '/', content: 'Home' },
+    { id: 'about', content: 'About' },
+    { id: 'packages', content: 'Packages' },
+    { id: 'contact', content: 'Contact' }
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setHasScrolled(true);
-      } else {
-        setHasScrolled(false);
-      }
+      setHasScrolled(window.scrollY > 0);
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleToggleNav = () => {
-    dispatch({ type: 'togglenav' });
-    dispatch({ type: 'shownav', payload: true });
-  };
+  // Update active item when pathname changes
+  useEffect(() => {
+    setActiveItem(pathname === '/' ? '/' : pathname.slice(1));
+  }, [pathname]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
 
   return (
     <section className={`xmd:max-w-[375px] mobile:max-w-[700px] sm:max-w-[900px] lg:max-w-[2000px] tab_md:max-w-[1500px] m-auto relative z-50`}>
@@ -186,58 +200,42 @@ const Navbar: React.FC = () => {
 
           <DesktopNavLinks
             navItems={navItems}
-            activeIndex={activeIndex}
-            dispatch={dispatch as (action: DispatchAction) => void}
-            dropdown={dropdown}
-            arrow={arrow}
-            dropdownItems={dropdownItems}
-            subNavActiveIndex={subNavActiveIndex}
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}
           />
 
           <div className="flex items-center">
             <Link href={'/login'}>
               <AppButton
-                onClick={() => dispatch({ type: 'togglenavbtn' })}
                 className="mobile:hidden xmd:hidden tab_md:flex font-bold"
                 icon={<IoMdArrowRoundForward className="w-6 h-4" />}
-                // loading={true}
+                onClick={() => {}}
               >
                 Get Started
               </AppButton>
             </Link>
 
-            <li
+            <button
               className={`drop-shadow-white-ash bg-${brandColors.dark_brown} rounded-[5px] p-1 tab_md:hidden z-20`}
-              onClick={handleToggleNav}
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
             >
-              {navbar_bar ? (
-                <LiaTimesSolid
-                  className={`transform transition-all duration-220 w-8 h-5 text-${brandColors.white} ${
-                    navbar_bar ? 'rotate-225 delay-[500] ease-in-out' : ''
-                  } ${isActive ? 'grid m-auto' : ''}`}
-                />
+              {isOpen ? (
+                <LiaTimesSolid className={`w-8 h-5 text-${brandColors.white}`} />
               ) : (
-                <FaBarsStaggered
-                  className={`transform transition-all duration-220 w-8 h-5 text-${brandColors.white} ${
-                    navbar_bar ? 'rotate-225 delay-[400] ease-in-out' : ''
-                  } ${isActive ? 'relative right-1/2' : ''}`}
-                />
+                <FaBarsStaggered className={`w-8 h-5 text-${brandColors.white}`} />
               )}
-            </li>
+            </button>
           </div>
         </ul>
       </nav>
 
       <MobileNavMenu
-        isActive={isActive}
+        isOpen={isOpen}
         navItems={navItems}
-        activeIndex={activeIndex}
-        dispatch={dispatch as (action: DispatchAction) => void}
-        dropdownmobile={dropdownmobile}
-        arrow={arrow}
-        dropdownItems={dropdownItems}
-        subNavActiveIndex={subNavActiveIndex}
-        navbtn={navbtn}
+        activeItem={activeItem}
+        setActiveItem={setActiveItem}
+        setIsOpen={setIsOpen}
       />
     </section>
   );

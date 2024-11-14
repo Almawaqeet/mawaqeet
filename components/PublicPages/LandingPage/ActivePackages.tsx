@@ -1,9 +1,9 @@
 "use client"
 import React from 'react';
 import { motion } from 'framer-motion';
-import AppHeading from '@/Components/Ui/AppHeading';
+import AppHeading from '@/Components/Reusables/Ui/AppHeading';
 import { whiteSpaces } from '@/app/libs/utilities/GlobalSpaces';
-import AppButton from '@/Components/Ui/AppButton';
+import AppButton from '@/Components/Reusables/Ui/AppButton';
 import { IoMdCall } from "react-icons/io";
 import { Package } from '@/Components/Reusables/Package';
 

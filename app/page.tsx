@@ -1,36 +1,19 @@
-"use client"
-import { MbisProvider } from "./libs/hooks/useContextProvider";
-import HomeV1 from "./UI/HomeV1";
-import Navbar from "./UI/Navbar";
-import HomeV2 from "./UI/HomeV2";
-import Homes from "./pages/Home";
 import { HeroSection } from "@/Components/PublicPages/LandingPage/HeroSection";
-import { Poppins } from 'next/font/google';
 import HeroSectionCarousel from "@/Components/PublicPages/LandingPage/HeroSectionCarousel";
 import StepsToRegister from "@/Components/PublicPages/LandingPage/StepsToRegister";
 import ActivePackages from "@/Components/PublicPages/LandingPage/ActivePackages";
 import LiveCall from "@/Components/PublicPages/LandingPage/LiveCall";
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-poppins',
-  display: 'swap',
-});
-
 export default function LandingPage() {
   return (
-    <MbisProvider>
-        <main
-          className={`${poppins.className} bg-brand-color-subtle flex flex-col gap-4`}
-        >
-          <Navbar />
-          <HeroSection />
-          <HeroSectionCarousel />
-          <StepsToRegister />
-          <ActivePackages />
-          <LiveCall />
-        </main>
-    </MbisProvider>
+    <main
+      className="flex flex-col gap-8"
+    >
+      <HeroSection />
+      <HeroSectionCarousel />
+      <StepsToRegister />
+      <ActivePackages />
+      <LiveCall />
+    </main>
   )
 }

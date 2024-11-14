@@ -29,7 +29,7 @@ const HeroSectionCarousel = () => {
     },
     {
       id: 1,
-      src: 'https://images.pexels.com/photos/4346403/pexels-photo-4346403.jpeg',
+      src: 'https://images.pexels.com/photos/3627335/pexels-photo-3627335.jpeg',
       alt: 'Large crowd at holy site'
     },
   ];

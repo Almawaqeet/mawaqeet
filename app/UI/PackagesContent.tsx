@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Packages from './Packages';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/Components/Ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/Components/Reusables/Ui/carousel';
 import Bullet from './Bullet';
 import useSlider from '../libs/hooks/useSlider';
 import { packages } from '../contents/services';
