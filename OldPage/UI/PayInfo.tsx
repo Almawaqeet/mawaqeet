@@ -12,7 +12,7 @@ const PayInfo = () => {
     return (
         <>
             <section className='max-w-[2000px] m-auto relative'>
-                <div className={`${whiteSpaces.paddingX} xmd:pb-[87px] md:pb-[145px]`}>
+                <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:pb-[87px] md:pb-[145px]`}>
                     <div className={`bg-[#F8F8F8] drop-shadow-transparent shadow-lg xmd:px-5  `}>
                         <main className='xmd:pt-[17px] md:pt-[58px] '>
                             {paymentDetails.map((details, index) => (

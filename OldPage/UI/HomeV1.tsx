@@ -49,7 +49,7 @@ const HomeV1 = () => {
       <section
         className={`xmd:max-w-[375px] mobile:max-w-[700px] m-auto md:max-w-[1500px] lg:max-w-[2000px] ${whiteSpaces.paddingY} mt-6`}
       >
-        <main className={`${whiteSpaces.paddingX}`}>
+        <main className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px]`}>
           <div className="md:grid md:grid-cols-[400px_1fr] lg:grid-cols-[400px_1fr] xmd:gap-5 md:gap-10">
             {/* Static Images Section */}
             <div className="md:grid mobile:hidden xmd:hidden md:grid-cols-[200px_200px] md:gap-2 md:gap-y-0">

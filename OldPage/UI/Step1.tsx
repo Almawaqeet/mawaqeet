@@ -37,7 +37,7 @@ const Step1: React.FC = () => {
         Provide all the required Information
       </Paragraph>
 
-      <div className={`${whiteSpaces.paddingX} xmd:pb-[37px] lg:pb-[126px]`}>
+      <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:pb-[37px] lg:pb-[126px]`}>
         <div className='bg-[#F8F8F8] rounded-lg xmd:w-full xmd:p-7 flex xmd:flex-col md:grid md:grid-cols-[200px_minmax(_4px,_8px)_1fr] lg:grid-cols-[300px_minmax(_6px,_12px)_1fr] justify-cente md:gap-3'>
           <div>
             <Paragraph type='globalBold' classname='xmd:pb-7 md:pb-8 font-bold text-quote-clamp  '>Guideline:-</Paragraph>
@@ -99,7 +99,7 @@ const Step1: React.FC = () => {
           }}
         >
           {({ handleSubmit, values, errors, touched }) => (<Form onSubmit={handleSubmit}>
-            <div className={`${whiteSpaces.paddingX} grid xmd:grid-cols-1 md:grid-cols-2 md:gap-x-20`}>
+            <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] grid xmd:grid-cols-1 md:grid-cols-2 md:gap-x-20`}>
               <FormContainer label='First Name'>
                 <Field name="first_name" component={CustomInputComponent} input_type="text" placeholder="First Name" value={values.first_name} />
                 {errors.first_name && touched.first_name ? <FormError message={errors.first_name} className='text-red-700  ' /> : null}

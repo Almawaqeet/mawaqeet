@@ -49,7 +49,7 @@ const Step2: React.FC = () => {
 
   return (
     <section className=''>
-      <main className={`${whiteSpaces.paddingX} `}>
+      <main className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] `}>
         <Headings type='global' classname='font-bold xmd:leading-[18px] tracking-tight xmd:pb-3 md:pb-5 lg:pb-8 text-center  '>
           Select your Package
         </Headings>
@@ -100,7 +100,7 @@ const Step2: React.FC = () => {
         )
           : null}
 
-        <div className={`mt-14 w-full ${whiteSpaces.paddingX} m-auto`}>        <span className='flex gap-2 m-auto xmd:justify-center md:justify-end'>
+        <div className={`mt-14 w-full  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] m-auto`}>        <span className='flex gap-2 m-auto xmd:justify-center md:justify-end'>
           <BtnGlobal className='  bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg' onClick={handlePrevious}>
             Previous
           </BtnGlobal>

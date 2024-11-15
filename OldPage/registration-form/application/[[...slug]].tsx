@@ -21,7 +21,7 @@ const ApplicationForm = ({ pageSlug }:AppFormProps) => {
     return (
         <div>
             <section className='max-w-[2000px] m-auto'>
-                <main className={`${whiteSpaces.paddingX}`}>
+                <main className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px]`}>
 
                     <div className='grid justify-stretch xmd:pb-[55px]'>
                         <div className='grid grid-cols-3 xmd:w-full md:w-2/4 justify-center m-auto xmd:items-center'>

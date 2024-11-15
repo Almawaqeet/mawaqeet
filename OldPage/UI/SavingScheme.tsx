@@ -14,7 +14,7 @@ const SavingScheme: React.FC = () => {
       className={`bg-scheme -z-10 xmd:min-h-[600px]  savingscheme relative lg:min-h-[650px] sm:min-h-[400px] grid items-baseline md:min-h-[400px] gap-8 md:gap-10 w-full mt-20 max-w-[2000px] m-auto`}
     >
       <div
-        className={`sm:${whiteSpaces.paddingX} xmd:gap-8 lg:gap-8 xl:gap-20 sm:gap-4 xmd:grid-cols-1 xmd:grid sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr] justify-between sm:mt-10 lg:mt-16`}
+        className={`sm: xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:gap-8 lg:gap-8 xl:gap-20 sm:gap-4 xmd:grid-cols-1 xmd:grid sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr_1fr] justify-between sm:mt-10 lg:mt-16`}
       >
         <div className="grid gap-8 md:gap-1 ">
           <div className="xmd:grid h-fit md:gap-[1px] xmd:mt-8 sm:mt-0 ">
@@ -59,7 +59,7 @@ const SavingScheme: React.FC = () => {
         </div>
 
         <div
-          className={` xmd:grid xmd:grid-cols-1 relative   ${whiteSpaces.paddingX}`}
+          className={` xmd:grid xmd:grid-cols-1 relative    xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px]`}
         >
           <div className="bg-number-color opacity-85  min-h-56 md:min-h-[17rem] mobile:w-full sm:w-[269px] md:w-[350px] tab_md:w-[360px] lg:w-[450px] relative  sm:left-1/2 transform sm:-translate-x-1/2 tablg:w-[400px] tabxl:w-[435px] xl:w-[550px]"></div>
           <Image
@@ -74,7 +74,7 @@ const SavingScheme: React.FC = () => {
       </div>
 
       <div
-        className={`${whiteSpaces.paddingX} xmd:absolute xmd:-bottom-20 sm:bottom-30 md:-bottom-32 lg:bottom-0 lg:relative`}
+        className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:absolute xmd:-bottom-20 sm:bottom-30 md:-bottom-32 lg:bottom-0 lg:relative`}
       >
         <div
           className={`bg-white drop-shadow-trans-white rounded-lg  xmd:px-5 xmd:py-6 relative shadow-xl`}

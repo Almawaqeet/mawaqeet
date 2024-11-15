@@ -20,7 +20,7 @@ const HomeV2 = () => {
     <>
       <section className={` ${whiteSpaces.paddingY}  mt-6`}>
         <main className={`quote-img`}>
-          <div className={` xmd:py-12 ${whiteSpaces.paddingX} `}>
+          <div className={` xmd:py-12  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] `}>
             {quote.map((quote) => (
               <Headings
                 type={'quoteText'}
@@ -43,7 +43,7 @@ const HomeV2 = () => {
       </section>
 
       <section className={` xmd:max-w-[2000px] ${whiteSpaces.paddingY} mt-6`}>
-        <main className={` ${whiteSpaces.paddingX}`}>
+        <main className={`  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px]`}>
           {home.map((home) => (
             <Headings
               type={'sectionName'}
@@ -66,7 +66,7 @@ const HomeV2 = () => {
         </main>
 
         <main
-          className={`${whiteSpaces.paddingX} mt-6 grid xmd:grid-cols-1  ${whiteSpaces.paddingY} md:grid-cols-[1fr_1fr] grid-flow-row xmd:gap-4 sm:gap-6 md:gap-10 items-center `}
+          className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] mt-6 grid xmd:grid-cols-1  ${whiteSpaces.paddingY} md:grid-cols-[1fr_1fr] grid-flow-row xmd:gap-4 sm:gap-6 md:gap-10 items-center `}
         >
           <div className="">
             {home.map((text) => (
@@ -130,7 +130,7 @@ const HomeV2 = () => {
         className={`reach-us reach-us-img-1 reach-us-img bg-no-repeat bg-cover relative  max-w-[2000px] m-auto ${whiteSpaces.paddingY} mt-6`}
       >
         <div
-          className={`xmd:py-8 flex flex-col xmd:min-h-[400px] items-center justify-center ${whiteSpaces.paddingX} ${whiteSpaces.paddingY}`}
+          className={`xmd:py-8 flex flex-col xmd:min-h-[400px] items-center justify-center  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${whiteSpaces.paddingY}`}
         >
           {reach_out_to_us.map((txt) => (
             <Headings

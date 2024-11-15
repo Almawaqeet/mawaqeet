@@ -16,7 +16,7 @@ const TeamProfile: React.FC = () => {
         <Navbar />
         <main className={` bg-personality bg-cover h-screen`}>
           {about_us_team.map((team) => (
-            <div key={`${team.id}--team`} className={`grid lg:grid-cols-[200px_1fr] xmd:grid-rows-1 xmd:gap-10 items-center justify-center lg:gap-16 ${whiteSpaces.sectionMargin} ${whiteSpaces.paddingX}`}>
+            <div key={`${team.id}--team`} className={`grid lg:grid-cols-[200px_1fr] xmd:grid-rows-1 xmd:gap-10 items-center justify-center lg:gap-16 ${whiteSpaces.sectionMargin}  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px]`}>
               <div className='xmd:gap-5'>
                 <Headings type='heroHeading'>{team.fullname}</Headings>
                 <Paragraph type='globalBold' classname='text-Bold-1-clamp xmd:font-normal  '>{team.personality}</Paragraph>

@@ -22,7 +22,7 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({ team }) => {
     const { id, profile_1, profile_2, profile_3, profile_4, personality } = team
     return (
-        <div className={`${whiteSpaces.paddingX} xmd:pt-32 mobile:pt-44 sm:pt-64 lg:pt-20`} key={id}>
+        <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:pt-32 mobile:pt-44 sm:pt-64 lg:pt-20`} key={id}>
             <Headings type='sectionName' classname='text-center xmd:pb-11 lg:pb-20  '>{personality}</Headings>
             <Paragraph
                 type="global"

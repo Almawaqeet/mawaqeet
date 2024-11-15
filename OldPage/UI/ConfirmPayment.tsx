@@ -12,7 +12,7 @@ type ConfrmpaymentProps = {
 const ConfirmPayment: React.FC<ConfrmpaymentProps> = ({ className = '', image, imageStyle = '' }) => {
     return (
         <section className='max-w-[2000px] m-auto'>
-            <div className={`bg-white xmd:h-[345px] xmd:width-[324px] rounded-lg flex flex-col items-center justify-center absolute ${whiteSpaces.paddingX} ${className}`}>
+            <div className={`bg-white xmd:h-[345px] xmd:width-[324px] rounded-lg flex flex-col items-center justify-center absolute  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${className}`}>
                 <div>
                     <Image
                         src={image}

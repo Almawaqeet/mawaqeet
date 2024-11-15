@@ -60,7 +60,7 @@ const PackagesContent: React.FC<packProps> = ({ offstyle, offcontent, offheight,
       {isMobile ? (
         <>
           <section
-            className={` ${whiteSpaces.paddingX} ${whiteSpaces.paddingY} xmd:max-w-[2000px] m-auto `}
+            className={`  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${whiteSpaces.paddingY} xmd:max-w-[2000px] m-auto `}
           >
 
             <Carousel className={` xmd:w-full m-auto grid sm:h-[900px] lg:w-full md:w-full md:h-[870px] lg:h-[800px] ${offheight}`} setApi={setApi}>

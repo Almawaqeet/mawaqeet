@@ -41,7 +41,7 @@ const AboutUsPage = () => {
                     </Headings>
                 </SlantDiv>
 
-                <div className={`${whiteSpaces.paddingX} ${whiteSpaces.paddingY}`}>
+                <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${whiteSpaces.paddingY}`}>
                     <div className="xmd:gap-5 xmd:grid mobile:grid-cols-1 sm:grid-cols-[1fr_1fr] relative col-reverse items-center ">
                         <div className="sm:absolute sm:w-100 sm:left-1/3 lg:right-0 lg:w-8/12">
                             <div className="sm:bg-[#f7f7f7] rounded-lg sm:drop-shadow-trans-white sm:shadow-sm sm:px-8 sm:py-4 sm:flex sm:items-center sm:justify-between ">

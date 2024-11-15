@@ -23,7 +23,7 @@ const AppInfoContent: React.FC<AppInfoProps> = ({ index }) => {
             <section className='xmd:mt-[37px]'>
 
                 {selectedNumber === index && (
-                    <div className={`mt-14 w-full ${whiteSpaces.paddingX} m-auto`}>
+                    <div className={`mt-14 w-full  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] m-auto`}>
                         {index === 1 ? (
                             <span className='flex gap-2 m-auto xmd:justify-center md:justify-end'>
                                 <BtnGlobal className='  bg-[#4B3938] text-white xmd:px-[27px] xmd:py-[10px] rounded-lg' onClick={handlePrevious}>

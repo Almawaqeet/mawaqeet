@@ -27,12 +27,12 @@ const Step3: React.FC = () => {
     <React.Fragment>
       <Paragraph
         type='globalBold'
-        classname={`text-Bold-1-clamp font-bold tracking-tight leading-[18px] text-inherit xmd:pb-8   xmd:text-start ${whiteSpaces.paddingX}`}
+        classname={`text-Bold-1-clamp font-bold tracking-tight leading-[18px] text-inherit xmd:pb-8   xmd:text-start  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px]`}
       >
         Select Package
       </Paragraph>
 
-      <div className={`${whiteSpaces.paddingX} grid xmd:grid-cols-1 md:grid-cols-2 md:gap-x-20`}>
+      <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] grid xmd:grid-cols-1 md:grid-cols-2 md:gap-x-20`}>
         <Formik
           initialValues={{
             first_name: '',
@@ -55,7 +55,7 @@ const Step3: React.FC = () => {
           }}
         >
           {({ handleSubmit, values, errors, touched }) => (<Form onSubmit={handleSubmit}>
-            <div className={`${whiteSpaces.paddingX} grid xmd:grid-cols-1 md:grid-cols-2 md:gap-x-20`}>
+            <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] grid xmd:grid-cols-1 md:grid-cols-2 md:gap-x-20`}>
               <FormContainer label='First Name'>
                 <Field name="first_name" component={CustomInputComponent} input_type="text" placeholder="First Name" value={values.first_name} />
                 {errors.first_name && touched.first_name ? <FormError message={errors.first_name} className='text-red-700' /> : null}

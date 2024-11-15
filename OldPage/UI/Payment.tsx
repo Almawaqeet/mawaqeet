@@ -22,7 +22,7 @@ const Payment = () => {
   return (
     <div>
       <section className={`max-w-[2000px] m-auto ${whiteSpaces.paddingY}`}>
-        <main className={`${whiteSpaces.paddingX} xmd:pt-[89px] md:pt-[79px]`}>
+        <main className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:pt-[89px] md:pt-[79px]`}>
           {payment.map((itm) => (
             <div className='flex gap-9' key={itm.id}>
               {itm.content.map((cont) => (

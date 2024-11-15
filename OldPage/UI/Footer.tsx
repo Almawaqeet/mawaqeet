@@ -15,7 +15,7 @@ import Headings from '@/OldPage/utilities/Headings';
 const Footer: React.FC = () => {
   return (
     <footer className="bg-black pt-12 pb-6">
-      <div className={`${whiteSpaces.paddingX} max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16`}>
+      <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16`}>
         {/* Brand & Description */}
         <div className="space-y-6">
           <Link href="/" className="flex items-center gap-3">
@@ -103,7 +103,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Copyright */}
-      <div className={`${whiteSpaces.paddingX} max-w-7xl mx-auto mt-12`}>
+      <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] max-w-7xl mx-auto mt-12`}>
         <div className="border-t border-gray-500 opacity-50 mb-6"></div>
         <div className="flex items-center justify-center gap-3 text-gray-200">
           <span>&copy;</span>

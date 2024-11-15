@@ -54,7 +54,7 @@ const SignUp = () => {
                         />
                     </div>
 
-                    <div className={`${whiteSpaces.sectionMargin} ${whiteSpaces.paddingX} xmd:pt-16 md:pt-4 xl:mt-16 lg:mt-8`}>
+                    <div className={`${whiteSpaces.sectionMargin}  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:pt-16 md:pt-4 xl:mt-16 lg:mt-8`}>
                         <Headings
                             type='global'
                             classname=' text-inherit xmd:pb-10  md:pb-4 xl:pb-8 lg:pb-4 font-bold   leading-[18px] tracking-tight text-account-clamp'

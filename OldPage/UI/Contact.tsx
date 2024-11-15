@@ -43,7 +43,7 @@ const Contact: React.FC<ContactProps> = ({
 
   return (
     <main className={` ${bgColor} xmd:pb-[48px] sm:pb-[48px] md:pb-[56px] lg:pb-[48px] rounded-[20px] drop-shadow-transparent shadow-lg ${baseClassNames} ${position} xmd:w-11/12`} >
-      <div className={` ${whiteSpaces.paddingX} ${whiteSpaces.paddingY}`}>
+      <div className={`  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${whiteSpaces.paddingY}`}>
         {contact.map((heading) => (
           <Headings
             key={`heading-${heading.id}`}

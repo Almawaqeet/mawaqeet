@@ -14,7 +14,7 @@ import Headings from '@/OldPage/utilities/Headings';
 
 const Footer: React.FC = () => {
   return (
-    <footer className={`bg-black ${whiteSpaces.paddingX} py-12`}>
+    <footer className={`bg-black  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] py-12`}>
       <div className={`max-w-7xl w-full grid grid-cols-1 md:grid-cols-3 gap-12`}>
         {/* Brand & Description */}
         <div className="space-y-8">

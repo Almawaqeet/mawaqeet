@@ -26,7 +26,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
             <Navbar />
             <section className='max-w-[2000px] m-auto bg-personality xmd:pt-16 lg:pt-0'>
                 <main className=' md:pt-0 relative lg:h-screen'>
-                    <div key={teamMember.id} className={`xmd:grid lg:grid-cols-[1fr_1fr] xmd:grid-rows-1 lg:items-center lg:gap-16 lg:justify-between  xmd:h-[448px] md:h-[620px]  ${whiteSpaces.paddingX} `}>
+                    <div key={teamMember.id} className={`xmd:grid lg:grid-cols-[1fr_1fr] xmd:grid-rows-1 lg:items-center lg:gap-16 lg:justify-between  xmd:h-[448px] md:h-[620px]   xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] `}>
                         <div className='xmd:gap-5 flex xmd:flex-col lg:justify-center'>
                             <Headings type='heroHeading' classname='text-white xmd:pt-14'>{teamMember.fullname}</Headings>
                             <Paragraph type='globalBold' classname='text-Bold-1-clamp xmd:font-normal   text-white text-center'>{teamMember.post}</Paragraph>

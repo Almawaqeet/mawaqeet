@@ -13,7 +13,7 @@ const LocateUs = () => {
         <MbisProvider>
             <Navbar />
             <section className={`max-w-[2000px] m-auto flex flex-col`}>
-                <main className={` grid md:grid-cols-[1fr_minmax(10px,_20px)_1fr] xmd:grid-cols-1 xmd:gap-8 md:gap-2 lg:gap-8 ${whiteSpaces.paddingX} ${whiteSpaces.sectionMargin}`}>
+                <main className={` grid md:grid-cols-[1fr_minmax(10px,_20px)_1fr] xmd:grid-cols-1 xmd:gap-8 md:gap-2 lg:gap-8  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${whiteSpaces.sectionMargin}`}>
                     <div className={`flex flex-row-reverse items-center justify-between bg-[#F9F9F9] mobile:p-10 xmd:px-4 xmd:py-4 md:p-8 lg:p-4 rounded-lg rounded-b-none  xmd:mt-9 md:mt-0`}>
 
                         <div className="flex flex-col xmd:gap-2 md:gap-8 xmd:pb-4 sm:pb-0">
