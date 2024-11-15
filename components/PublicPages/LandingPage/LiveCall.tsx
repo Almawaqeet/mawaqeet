@@ -9,7 +9,7 @@ import { IoMdMail } from "react-icons/io";
 
 const LiveCall = () => {
   return (
-    <section className={`w-full ${whiteSpaces?.paddingX} py-16 bg-brand-color-subtle`}>
+    <section className={`w-full ${whiteSpaces?.paddingX} px-[10px] py-16 bg-brand-color-subtle`}>
       <div className="max-w-4xl mx-auto text-center">
         <AppHeading variant="h2" className="text-3xl md:text-4xl text-center mb-4">
           Want to Learn More About Us?

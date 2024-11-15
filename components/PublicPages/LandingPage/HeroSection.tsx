@@ -9,6 +9,7 @@ import { PiBookOpenThin } from "react-icons/pi"
 import { motion } from 'framer-motion'
 import { FaCreditCard } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
+import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces';
 
 
 
@@ -82,7 +83,7 @@ export const HeroSection = () => {
 
   return (
     <motion.section
-      className="w-full max-w-[6000px] m-auto px-4 sm:px-6 md:px-[150px] py-2 sm:py-4 md:py-[60px] flex  justify-center"
+      className={`w-full max-w-[6000px] m-auto ${whiteSpaces?.paddingX} py-2 sm:py-4 md:py-[60px] flex  justify-center`}
       initial="hidden"
       animate="visible"
       variants={containerVariants}

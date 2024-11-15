@@ -66,7 +66,7 @@ const NewUser = () => {
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <AppButton
               variant="primary"
-              className="w-full text-sm sm:text-base py-3"
+              className="w-full text-sm sm:text-base py-3 h-[50px]"
               onClick={handleGetStarted}
             >
               Yes I am new, Get Started
@@ -76,7 +76,7 @@ const NewUser = () => {
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <AppButton
               variant="secondary"
-              className="w-full text-sm sm:text-base py-3"
+              className="w-full text-sm sm:text-base h-[50px] py-3"
               onClick={handleLogin}
             >
               I already have an account, I want to Login

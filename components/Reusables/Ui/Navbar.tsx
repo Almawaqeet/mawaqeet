@@ -83,9 +83,11 @@ interface MobileNavMenuProps {
   setIsOpen: (isOpen: boolean) => void;
 }
 
-const MobileNavMenu = ({ isOpen, navItems, activeItem, setActiveItem, setIsOpen }: MobileNavMenuProps) => (
-  <AnimatePresence>
-    {isOpen && (
+const MobileNavMenu = ({ isOpen, navItems, activeItem, setActiveItem, setIsOpen }: MobileNavMenuProps) => {
+  const router = useRouter();
+  return (
+    <AnimatePresence>
+      {isOpen && (
       <motion.div
         initial={{ opacity: 0, x: "100%" }}
         animate={{ opacity: 1, x: 0 }}
@@ -145,7 +147,7 @@ const MobileNavMenu = ({ isOpen, navItems, activeItem, setActiveItem, setIsOpen 
               <AppButton
                 className="text-fz-xs w-full"
                 icon={<IoMdArrowRoundForward />}
-                onClick={() => {}}
+                onClick={() => {router.push('/onboarding/new-user')}}
               >
                 Get Started
               </AppButton>
@@ -154,8 +156,9 @@ const MobileNavMenu = ({ isOpen, navItems, activeItem, setActiveItem, setIsOpen 
         </motion.ul>
       </motion.div>
     )}
-  </AnimatePresence>
-);
+    </AnimatePresence>
+  );
+};
 
 const Navbar = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -198,7 +201,7 @@ const Navbar = () => {
 
   return (
     <section className={`xmd:max-w-[375px] mobile:max-w-[700px] sm:max-w-[900px] lg:max-w-[2000px] tab_md:max-w-[1500px] m-auto relative z-50`}>
-      <nav className={`${whiteSpaces.paddingX} px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed top-0 right-0 w-full z-50`}>
+      <nav className={`${whiteSpaces.paddingX} xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed top-0 right-0 w-full z-50`}>
         <ul className="flex justify-between items-center lg:gap-12 md:gap-10 text-navbar-clamp font-normal md:leading-5">
           <Logo />
 
@@ -209,7 +212,7 @@ const Navbar = () => {
           />
 
           <div className="flex items-center">
-            <Link href={'/login'}>
+            <Link href={'/onboarding/new-user'}>
               <AppButton
                 className="mobile:hidden xmd:hidden tab_md:flex font-bold"
                 icon={<IoMdArrowRoundForward className="w-6 h-4" />}
