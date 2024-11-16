@@ -13,9 +13,7 @@ import Headings from '@/OldPage/utilities/Headings';
 import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces';
 import Paragraph from '@/OldPage/utilities/Paragraph';
 import BtnGlobal from '../UI/BtnGlobal';
-
-import Footer from '../../Components/Reusables/Ui/Footer';
-
+import Footer from '@/Components/Reusables/Ui/Footer';
 import FormContainer from '../UI/formComponents/FormContainer';
 import CustomInputComponent from '../UI/formComponents/CustomInputComponent';
 

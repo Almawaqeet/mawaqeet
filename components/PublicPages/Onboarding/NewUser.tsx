@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/components/Reusables/Ui/AppHeading'
+import AppHeading from '@/Components/Reusables/Ui/AppHeading'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
@@ -35,7 +35,7 @@ const NewUser = () => {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => router.back()}
+            onClick={() => router.push('/')}
             className="w-10 h-10 rounded-full border-2 border-brand-color flex items-center justify-center"
           >
             <FaArrowLeft className="text-xl sm:text-2xl text-brand-color cursor-pointer" />

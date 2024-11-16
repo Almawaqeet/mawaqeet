@@ -4,7 +4,7 @@ import React from 'react'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
 import { IoMdArrowRoundForward } from "react-icons/io"
 import { FaPlay } from "react-icons/fa";
-import AppHeading from '@/components/Reusables/Ui/AppHeading'
+import AppHeading from '@/Components/Reusables/Ui/AppHeading'
 import { PiBookOpenThin } from "react-icons/pi"
 import { motion } from 'framer-motion'
 import { FaCreditCard } from "react-icons/fa";

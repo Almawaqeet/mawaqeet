@@ -1,10 +1,10 @@
 "use client"
 import React from 'react';
-import AppHeading from '@/components/Reusables/Ui/AppHeading';
+import AppHeading from '@/Components/Reusables/Ui/AppHeading';
 import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces';
 import AppButton from '@/Components/Reusables/Ui/AppButton';
 import { IoMdCall } from "react-icons/io";
-import { Package } from '@/components/Reusables/Package';
+import { Package } from '@/Components/Reusables/Package';
 
 import { usePackages } from '@/Api/Services/packages';
 

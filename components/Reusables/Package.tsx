@@ -54,7 +54,9 @@ export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
               {pkg.tier === 'VIP' && <span className={styles.text.primary}>👑</span>}
               {pkg.tier === 'DELUXE' && <span className={styles.text.primary}>💫</span>}
             </div>
-            <span className={`text-sm ${styles.text.tertiary} uppercase`}>{pkg.tier}</span>
+            <span className={`text-sm ${styles.text.tertiary} uppercase`}>
+              {pkg?.type} - {pkg.tier}
+            </span>
             {pkg.tier === 'VIP' && (
               <span className={`text-xs ${styles.badge} ${styles.text.primary} px-2 py-0.5 rounded`}>
                 MOST POPULAR

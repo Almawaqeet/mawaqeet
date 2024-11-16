@@ -5,22 +5,15 @@ import { FaArrowLeft } from "react-icons/fa6"
 import AppHeading from '@/Components/Reusables/Ui/AppHeading'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { useFormik } from 'formik'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
-import AppTextInput from '@/Components/Reusables/Ui/AppTextInput'
 
-const StepOneOnboarding = () => {
+const StepThreeOnboarding = () => {
   const router = useRouter()
 
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-    },
-    onSubmit: (values) => {
-      // Handle continue action with form values
-      console.log('Form submitted with values:', values);
-    },
-  });
+  const handlePayment = () => {
+    // Handle payment logic here
+    console.log('Processing payment...');
+  }
 
   return (
     <motion.div
@@ -39,7 +32,7 @@ const StepOneOnboarding = () => {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/onboarding/new-user/step-2')}
             className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-brand-color flex items-center justify-center"
           >
             <FaArrowLeft className="text-lg sm:text-xl md:text-2xl text-brand-color cursor-pointer" />
@@ -48,18 +41,26 @@ const StepOneOnboarding = () => {
             variant="h2"
             className="text-brand-color text-lg sm:text-xl md:text-2xl lg:text-3xl text-center sm:text-left"
           >
-            Onboarding 1/3
+            Onboarding 3/3
           </AppHeading>
         </motion.div>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-brand-color-text mb-6 sm:mb-8 text-center sm:text-left text-sm sm:text-base lg:text-lg"
+          className="text-center mb-8"
         >
-          Submit your active email
-        </motion.p>
+          <p className="text-brand-color-text text-sm sm:text-base lg:text-lg mb-2">
+            Your Registration Fee
+          </p>
+          <div className="text-4xl sm:text-5xl font-bold text-brand-color">
+            ₦50,000
+          </div>
+          <p className="text-gray-500 text-xs sm:text-sm mt-2">
+            One-time payment for account activation
+          </p>
+        </motion.div>
 
         <motion.div
           initial={{ y: 20, opacity: 0 }}
@@ -67,38 +68,39 @@ const StepOneOnboarding = () => {
           transition={{ delay: 0.7 }}
           className="w-full"
         >
-          <form onSubmit={formik.handleSubmit} className="space-y-4 sm:space-y-6">
-            <div className="space-y-2">
-              <AppTextInput
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-              />
-              <p className="text-xs sm:text-sm text-gray-500 text-left px-1">
-                Please make sure the email address you're inputting is a valid email
-              </p>
+          <div className="space-y-4">
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <div className="flex justify-between mb-2">
+                <span className="text-gray-600">Registration Fee</span>
+                <span className="font-medium">₦50,000</span>
+              </div>
+              <div className="flex justify-between text-sm text-gray-500">
+                <span>Processing Fee</span>
+                <span>₦0.00</span>
+              </div>
+              <div className="border-t mt-2 pt-2 flex justify-between font-bold">
+                <span>Total</span>
+                <span>₦50,000</span>
+              </div>
             </div>
 
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="pt-2 sm:pt-4"
             >
               <AppButton
                 variant="primary"
                 className="w-full min-h-[44px] sm:h-[50px] text-sm sm:text-base py-2 sm:py-3"
-                onClick={formik.handleSubmit}
+                onClick={handlePayment}
               >
-                Continue
+                Pay Now
               </AppButton>
             </motion.div>
-          </form>
+          </div>
         </motion.div>
       </div>
     </motion.div>
   )
 }
 
-export default StepOneOnboarding
+export default StepThreeOnboarding
