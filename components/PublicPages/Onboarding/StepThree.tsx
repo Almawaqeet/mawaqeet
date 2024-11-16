@@ -1,4 +1,3 @@
-
 "use client"
 
 import React from 'react'
@@ -7,9 +6,14 @@ import AppHeading from '@/Components/Reusables/Ui/AppHeading'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
+import { useGetOnboardingPaymentAmount } from '@/Api/Services/onboarding'
+import AppSkeleton from '@/Components/Reusables/Ui/AppSkeleton'
 
 const StepThreeOnboarding = () => {
-  const router = useRouter()
+    const { data, isPending } = useGetOnboardingPaymentAmount()
+    const router = useRouter()
+
+    const registrationFee = data?.registration_fee.toLocaleString() ?? 0
 
   const handlePayment = () => {
     // Handle payment logic here
@@ -55,9 +59,13 @@ const StepThreeOnboarding = () => {
           <p className="text-brand-color-text text-sm sm:text-base lg:text-lg mb-2">
             Your Registration Fee
           </p>
-          <div className="text-4xl sm:text-5xl font-bold text-brand-color">
-            ₦50,000
-          </div>
+          {isPending ? (
+            <AppSkeleton height="3rem" width="200px" className="mx-auto" />
+          ) : (
+            <div className="text-4xl sm:text-5xl font-bold text-brand-color">
+              ₦{registrationFee}
+            </div>
+          )}
           <p className="text-gray-500 text-xs sm:text-sm mt-2">
             One-time payment for account activation
           </p>
@@ -73,7 +81,11 @@ const StepThreeOnboarding = () => {
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="flex justify-between mb-2">
                 <span className="text-gray-600">Registration Fee</span>
-                <span className="font-medium">₦50,000</span>
+                {isPending ? (
+                  <AppSkeleton height="1.5rem" width="100px" />
+                ) : (
+                  <span className="font-medium">₦{registrationFee}</span>
+                )}
               </div>
               <div className="flex justify-between text-sm text-gray-500">
                 <span>Processing Fee</span>
@@ -81,7 +93,11 @@ const StepThreeOnboarding = () => {
               </div>
               <div className="border-t mt-2 pt-2 flex justify-between font-bold">
                 <span>Total</span>
-                <span>₦50,000</span>
+                {isPending ? (
+                  <AppSkeleton height="1.5rem" width="100px" />
+                ) : (
+                  <span>₦{registrationFee}</span>
+                )}
               </div>
             </div>
 
@@ -93,6 +109,7 @@ const StepThreeOnboarding = () => {
                 variant="primary"
                 className="w-full min-h-[44px] sm:h-[50px] text-sm sm:text-base py-2 sm:py-3"
                 onClick={handlePayment}
+                disabled={isPending}
               >
                 Pay Now
               </AppButton>

@@ -1,5 +1,6 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import axiosInstance from "@/Api/axios";
+import { methods } from "@/Constants/api-constants";
 
 
 /**
@@ -18,6 +19,8 @@ interface ApiHookConfig<T = any> {
   method?: ApiMethod;
   /** Array of strings used as cache key for react-query */
   queryKey?: string[];
+  /** Request body data */
+  body?: any;
 }
 
 /**
@@ -26,32 +29,54 @@ interface ApiHookConfig<T = any> {
  * @param {ApiHookConfig<T>} config The configuration object for the API request
  * @returns {UseQueryResult<T | null> | UseMutationResult<T | null>} Query or mutation result based on HTTP method
  */
-export const useApiHook = <T>({ url, method = 'GET', queryKey = ['default'] }: ApiHookConfig<T>) => {
+export const useApiHook = <T>({ url, method = 'GET', queryKey = ['default'], body }: ApiHookConfig<T>) => {
   const fetchData = async (): Promise<T | null> => {
-    let response;
-    if (method === 'GET') {
-      response = await axiosInstance.get<T>(url);
-    } else if (method === 'POST') {
-      response = await axiosInstance.post<T>(url);
-    } else if (method === 'PUT') {
-      response = await axiosInstance.put<T>(url);
-    } else if (method === 'DELETE') {
-      response = await axiosInstance.delete<T>(url);
-    } else if (method === 'PATCH') {
-      response = await axiosInstance.patch<T>(url);
+    try {
+      let response;
+
+      switch (method) {
+        case 'GET':
+          response = await axiosInstance.get<T>(url);
+          break;
+        case 'POST':
+          response = await axiosInstance.post<T>(url, body);
+          break;
+        case 'PUT':
+          response = await axiosInstance.put<T>(url, body);
+          break;
+        case 'DELETE':
+          response = await axiosInstance.delete<T>(url);
+          break;
+        case 'PATCH':
+          response = await axiosInstance.patch<T>(url, body);
+          break;
+        default:
+          throw new Error(`Unsupported HTTP method: ${method}`);
+      }
+
+      // Add null check for response
+      if (!response) {
+        console.warn('API response is null:', { url, method });
+        return null;
+      }
+
+      return response as T;
+    } catch (error) {
+      console.error('API request failed:', error);
+      throw error;
     }
-    return response?.data ?? null;
   };
 
-  if (method === 'GET') {
+  if (method === methods.GET) {
     return useQuery<T | null>({
       queryKey,
-      queryFn: fetchData
+      queryFn: fetchData,
+      refetchOnWindowFocus: true,
     });
   }
 
   return useMutation<T | null>({
-    mutationFn: fetchData
+    mutationFn: fetchData,
   });
 };
 
