@@ -15,7 +15,7 @@ const NewUser = () => {
   }
 
   const handleLogin = () => {
-    router.push('/login')
+    router.push('/auth/login')
   }
 
   return (
