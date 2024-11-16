@@ -1,19 +1,19 @@
 "use client"
 
 import React from 'react'
-import { about_hero, about_main_body, } from '../contents/about';
+import { about_hero, about_main_body, } from '../../OldPage/contents/about';
 import Image from 'next/image';
 
-import SlantDiv from '../UI/SlantDiv';
+import SlantDiv from '../../OldPage/UI/SlantDiv';
 
-import TeamContent from '../UI/TeamContent';
-import Services from '../UI/Services';
-import Hero from '../UI/Hero';
-import Headings from '../libs/utilities/Headings';
-import Paragraph from '../libs/utilities/Paragraph';
-import { whiteSpaces } from '../libs/utilities/GlobalSpaces';
-import { MbisProvider } from '../libs/hooks/useContextProvider';
-import Navbar from '../UI/Navbar';
+import TeamContent from '../../OldPage/UI/TeamContent';
+import Services from '../../OldPage/UI/Services';
+import Hero from '../../OldPage/UI/Hero';
+import Headings from '../../OldPage/utilities/Headings';
+import Paragraph from '../../OldPage/utilities/Paragraph';
+import { whiteSpaces } from '../../OldPage/utilities/GlobalSpaces';
+import { MbisProvider } from '../../OldPage/hooks/useContextProvider';
+import Navbar from '../../Components/Reusables/Ui/Navbar';
 
 const AboutUsPage = () => {
     return (
@@ -41,7 +41,7 @@ const AboutUsPage = () => {
                     </Headings>
                 </SlantDiv>
 
-                <div className={`${whiteSpaces.paddingX} ${whiteSpaces.paddingY}`}>
+                <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${whiteSpaces.paddingY}`}>
                     <div className="xmd:gap-5 xmd:grid mobile:grid-cols-1 sm:grid-cols-[1fr_1fr] relative col-reverse items-center ">
                         <div className="sm:absolute sm:w-100 sm:left-1/3 lg:right-0 lg:w-8/12">
                             <div className="sm:bg-[#f7f7f7] rounded-lg sm:drop-shadow-trans-white sm:shadow-sm sm:px-8 sm:py-4 sm:flex sm:items-center sm:justify-between ">
@@ -59,7 +59,7 @@ const AboutUsPage = () => {
                                     <Paragraph
                                         type={'global'}
                                         key={`main-${main.id}`}
-                                        classname="font-normal xmd:text-fz-xsm leading-5 tracking-tight text-justify md:w-11/12 lg:w-9/12 font-dejavu lg:text-fz-mz md:text-fz-sm md:leading-8 lg:leading-[45px]"
+                                        classname="font-normal xmd:text-fz-xsm leading-5 tracking-tight text-justify md:w-11/12 lg:w-9/12   lg:text-fz-mz md:text-fz-sm md:leading-8 lg:leading-[45px]"
                                     >
                                         {main.about_main_content}
                                     </Paragraph>
