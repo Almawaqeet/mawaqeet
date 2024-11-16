@@ -48,7 +48,7 @@ export const about_main_body: AboutMainBody[] = [
   {
     id: 'about_main',
     about_main_content:
-      'Al-Mawaqeet Travels and Tours is an Islamic travel agency specializing in spiritual pilgrimage and educational experiences, backed by a dedicated team of scholars and professionals.',
+      'At Almwaqeet, we make the sacred journeys of Hajj and Umrah accessible, comfortable, and fulfilling. With a focus on supporting pilgrims, we offer flexible payment plans, expert-guided tours, and seamless travel arrangements for every budget. We handle all the details—booking, transportation, and accommodations—so you can focus on your spiritual journey with complete peace of mind.',
   },
 ];
 

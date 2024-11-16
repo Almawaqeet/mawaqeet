@@ -8,9 +8,7 @@ import Headings from '../../OldPage/utilities/Headings'
 import Paragraph from '../../OldPage/utilities/Paragraph'
 import BtnGlobal from '../../OldPage/UI/BtnGlobal'
 import { FaFacebook } from 'react-icons/fa6'
-import Footer from '../../Components/Reusables/Ui/Footer'
 import { IoEyeOutline } from 'react-icons/io5'
-import Navbar from '../../Components/Reusables/Ui/Navbar'
 import { MbisProvider } from '../../OldPage/hooks/useContextProvider'
 import { useValidate } from '../../OldPage/hooks/useValidate'
 import FormContainer from '../../OldPage/UI/formComponents/FormContainer';
@@ -24,8 +22,6 @@ interface IntialInputValues {
 const SignIn = () => {
   const { Field, ErrorMessage, Form, Formik } = useValidate()
   return (
-    <MbisProvider>
-      <Navbar />
       <section className='max-w-[2000px] m-auto '>
         <main className='sm:grid md:grid-cols-[400px_1fr] lg:grid-cols-[500px_1fr] '>
           <div className='relative'>
@@ -109,11 +105,7 @@ const SignIn = () => {
             </Formik>
           </div>
         </main>
-        <footer className='mt-24 md:mt-2'>
-          <Footer />
-        </footer>
       </section >
-    </MbisProvider >
   )
 }
 
