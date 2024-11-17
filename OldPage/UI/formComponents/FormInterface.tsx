@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { useValidate } from '@/OldPage/hooks/useValidate';
 import { MbisProvider } from '@/OldPage/hooks/useContextProvider';
-import Navbar from '../../../Components/Reusables/Ui/Navbar'
+import Navbar from '../../../components/Reusables/Ui/Navbar'
 import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces'
 import Headings from '@/OldPage/utilities/Headings'
 import Paragraph from '@/OldPage/utilities/Paragraph'

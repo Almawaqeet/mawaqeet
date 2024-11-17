@@ -3,9 +3,9 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import AppHeading from '@/Components/Reusables/Ui/AppHeading'
-import AppButton from '@/Components/Reusables/Ui/AppButton'
-import AppTextInput from '@/Components/Reusables/Ui/AppTextInput'
+import AppHeading from '@/components/Reusables/Ui/AppHeading'
+import AppButton from '@/components/Reusables/Ui/AppButton'
+import AppTextInput from '@/components/Reusables/Ui/AppTextInput'
 import { IoEyeOutline } from "react-icons/io5"
 import { CLIENT_ROUTES } from '@/lib/routes'
 

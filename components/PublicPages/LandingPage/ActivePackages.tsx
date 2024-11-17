@@ -1,13 +1,13 @@
 "use client"
 import React from 'react';
-import AppHeading from '@/Components/Reusables/Ui/AppHeading';
+import AppHeading from '@/components/Reusables/Ui/AppHeading';
 import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces';
-import AppButton from '@/Components/Reusables/Ui/AppButton';
+import AppButton from '@/components/Reusables/Ui/AppButton';
 import { IoMdCall } from "react-icons/io";
-import { Package } from '@/Components/Reusables/Package';
+import { Package } from '@/components/Reusables/Package';
 
-import { useGetAllActivePackages } from '@/Api/Services/packages';
-import PackageSkeleton from '@/Components/Skeletons/PublicPages/PackageSkeleton';
+import { useGetAllActivePackages } from '@/api/Services/packages';
+import PackageSkeleton from '@/components/Skeletons/PublicPages/PackageSkeleton';
 
 const ActivePackages = () => {
 

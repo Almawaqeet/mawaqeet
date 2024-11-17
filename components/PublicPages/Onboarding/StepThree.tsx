@@ -2,12 +2,12 @@
 
 import React from 'react'
 import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/Components/Reusables/Ui/AppHeading'
+import AppHeading from '@/components/Reusables/Ui/AppHeading'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import AppButton from '@/Components/Reusables/Ui/AppButton'
-import { useGetOnboardingPaymentAmount } from '@/Api/Services/onboarding'
-import AppSkeleton from '@/Components/Reusables/Ui/AppSkeleton'
+import AppButton from '@/components/Reusables/Ui/AppButton'
+import { useGetOnboardingPaymentAmount } from '@/api/Services/onboarding'
+import AppSkeleton from '@/components/Reusables/Ui/AppSkeleton'
 import { CLIENT_ROUTES } from '@/lib/routes'
 
 

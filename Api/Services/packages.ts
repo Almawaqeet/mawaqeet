@@ -1,5 +1,5 @@
-import { useAppQuery } from "@/Api/constructor";
-import { routes } from "@/Api/routes";
+import { useAppQuery } from "@/api/constructor";
+import { routes } from "@/api/routes";
 
 export const useGetAllActivePackages = () => {
     return useAppQuery<Package[]>({

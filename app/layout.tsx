@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Poppins } from 'next/font/google';
-import ReactQueryProvider from '@/Providers/QueryClientProvider';
+import ReactQueryProvider from '@/providers/QueryClientProvider';
 
 
 const poppins = Poppins({

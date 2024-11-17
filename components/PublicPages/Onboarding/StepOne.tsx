@@ -2,18 +2,16 @@
 
 import React from 'react'
 import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/Components/Reusables/Ui/AppHeading'
+import AppHeading from '@/components/Reusables/Ui/AppHeading'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import AppButton from '@/Components/Reusables/Ui/AppButton'
-import AppTextInput from '@/Components/Reusables/Ui/AppTextInput'
-import { useCheckIfEmailAddressExist } from '@/Api/Services/onboarding'
+import AppButton from '@/components/Reusables/Ui/AppButton'
+import AppTextInput from '@/components/Reusables/Ui/AppTextInput'
+import { useCheckIfEmailAddressExist } from '@/api/Services/onboarding'
 import { CLIENT_ROUTES } from '@/lib/routes'
-
-
-
+import AppDialogBox from '@/components/Reusables/Ui/AppDialogBox'
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -25,10 +23,20 @@ const StepOneOnboarding = () => {
   const router = useRouter()
   const { mutate: checkEmail, isPending } = useCheckIfEmailAddressExist()
   const [showEmailExistsAlert, setShowEmailExistsAlert] = React.useState(false)
+  const [showStoredEmailDialog, setShowStoredEmailDialog] = React.useState(false)
+  const [storedEmail, setStoredEmail] = React.useState<string | null>(null)
+
+  React.useEffect(() => {
+    const email = localStorage.getItem('onboarding_email')
+    if (email) {
+      setStoredEmail(email)
+      setShowStoredEmailDialog(true)
+    }
+  }, [])
 
   const formik = useFormik({
     initialValues: {
-      email: typeof window !== 'undefined' ? localStorage.getItem('onboarding_email') ?? "" : "",
+      email: "",
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -57,6 +65,18 @@ const StepOneOnboarding = () => {
     formik.handleChange(e)
   }
 
+  const handleStoredEmailConfirm = () => {
+    if (storedEmail) {
+      formik.setFieldValue('email', storedEmail)
+      router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo)
+    }
+  }
+
+  const handleStoredEmailCancel = () => {
+    localStorage.removeItem('onboarding_email')
+    setShowStoredEmailDialog(false)
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -64,6 +84,18 @@ const StepOneOnboarding = () => {
       transition={{ duration: 0.6 }}
       className="min-h-screen flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-16 xl:px-0 py-16 sm:py-20 md:py-24 lg:py-32"
     >
+      <AppDialogBox
+        open={showStoredEmailDialog}
+        onOpenChange={setShowStoredEmailDialog}
+        trigger={<></>}
+        title="Continue with saved email?"
+        description={`We found a saved email (${storedEmail}). Would you like to continue with this email?`}
+        confirmText="Yes, continue"
+        cancelText="No, use different email"
+        onConfirm={handleStoredEmailConfirm}
+        onCancel={handleStoredEmailCancel}
+      />
+
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
         <motion.div
           initial={{ x: -20, opacity: 0 }}

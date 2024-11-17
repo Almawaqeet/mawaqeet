@@ -1,4 +1,4 @@
-import AppHeading from '@/Components/Reusables/Ui/AppHeading'
+import AppHeading from '@/components/Reusables/Ui/AppHeading'
 import { about_main_body } from '@/OldPage/contents/about'
 import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces'
 import Paragraph from '@/OldPage/utilities/Paragraph'

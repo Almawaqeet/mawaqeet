@@ -1,6 +1,6 @@
-import { useAppQuery, useAppMutation } from "@/Api/constructor";
-import { routes } from "@/Api/routes";
-import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingPaymentResponse } from "@/Api/types";
+import { useAppQuery, useAppMutation } from "@/api/constructor";
+import { routes } from "@/api/routes";
+import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingPaymentResponse } from "@/api/types";
 
 
 export const useCheckIfEmailAddressExist = (body?: {email: string}) => {

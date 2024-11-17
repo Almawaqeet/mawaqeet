@@ -2,17 +2,18 @@
 
 import React from 'react'
 import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/Components/Reusables/Ui/AppHeading'
+import AppHeading from '@/components/Reusables/Ui/AppHeading'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useFormik } from 'formik'
-import AppButton from '@/Components/Reusables/Ui/AppButton'
+import AppButton from '@/components/Reusables/Ui/AppButton'
 // import Autocomplete from "react-google-autocomplete"
-import AppTextInput from '@/Components/Reusables/Ui/AppTextInput'
-import AppPhoneInput from '@/Components/Reusables/Ui/AppPhoneInput'
-import { useCreateOnboardingUser } from '@/Api/Services/onboarding'
+import AppTextInput from '@/components/Reusables/Ui/AppTextInput'
+import AppPhoneInput from '@/components/Reusables/Ui/AppPhoneInput'
+import { useCreateOnboardingUser } from '@/api/Services/onboarding'
 import { CLIENT_ROUTES } from '@/lib/routes'
 import * as Yup from 'yup'
+import AppDialogBox from '@/components/Reusables/Ui/AppDialogBox'
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required('First name is required'),
@@ -28,6 +29,25 @@ const StepTwoOnboarding = () => {
   const router = useRouter()
   const { mutate: createOnboardingUser, isPending } = useCreateOnboardingUser()
   const [serverErrors, setServerErrors] = React.useState<{[key: string]: string[]}>({})
+  const [showDialog, setShowDialog] = React.useState(false)
+  const savedDetails = React.useMemo(() => {
+    const saved = localStorage.getItem('onboarding_details')
+    return saved ? JSON.parse(saved) : null
+  }, [])
+
+  React.useEffect(() => {
+    const email = localStorage.getItem('onboarding_email')
+    if (!email) {
+      router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
+      return
+    }
+  }, [router])
+
+  React.useEffect(() => {
+    if (savedDetails) {
+      setShowDialog(true)
+    }
+  }, [savedDetails])
 
   const formik = useFormik({
     initialValues: {
@@ -62,16 +82,6 @@ const StepTwoOnboarding = () => {
       createOnboardingUser(payload, {
         onSuccess: (data) => {
           if (data) {
-            // Save form details to localStorage
-            localStorage.setItem('onboarding_details', JSON.stringify({
-              firstName: values.firstName,
-              lastName: values.lastName,
-              address: values.address,
-              phoneNumber: values.phoneNumber,
-              nextOfKinName: values.nextOfKinName,
-              nextOfKinPhoneNumber: values.nextOfKinPhoneNumber,
-              nextOfKinAddress: values.nextOfKinAddress
-            }))
             router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree)
           }
         },
@@ -84,6 +94,27 @@ const StepTwoOnboarding = () => {
     },
   });
 
+  // Save form values to localStorage whenever they change
+  React.useEffect(() => {
+    const formValues = {
+      firstName: formik.values.firstName,
+      lastName: formik.values.lastName,
+      address: formik.values.address,
+      phoneNumber: formik.values.phoneNumber,
+      nextOfKinName: formik.values.nextOfKinName,
+      nextOfKinPhoneNumber: formik.values.nextOfKinPhoneNumber,
+      nextOfKinAddress: formik.values.nextOfKinAddress
+    }
+    localStorage.setItem('onboarding_details', JSON.stringify(formValues))
+  }, [formik.values])
+
+  const handleUseSavedDetails = () => {
+    if (savedDetails) {
+      formik.setValues(savedDetails)
+    }
+    setShowDialog(false)
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -91,6 +122,17 @@ const StepTwoOnboarding = () => {
       transition={{ duration: 0.6 }}
       className="min-h-screen flex flex-col items-center px-6 sm:px-8 md:px-12 lg:px-20 xl:px-4 py-8 sm:py-12 md:py-16 lg:py-20"
     >
+      <AppDialogBox
+        open={showDialog}
+        onOpenChange={setShowDialog}
+        title="Use Saved Details?"
+        description="We found your previously saved details. Would you like to continue with them?"
+        confirmText="Use Saved Details"
+        cancelText="Start Fresh"
+        onConfirm={handleUseSavedDetails}
+        onCancel={() => setShowDialog(false)}
+      />
+
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
         <motion.div
           initial={{ x: -20, opacity: 0 }}
@@ -161,6 +203,7 @@ const StepTwoOnboarding = () => {
                 error={formik.touched.address && formik.errors.address ? formik.errors.address : undefined}
               />
 
+              {/* this may be useful for one day... maybe if im not lazy to go to google and setup the api key */}
               {/* <Autocomplete
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 onPlaceSelected={(place) => {
