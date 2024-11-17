@@ -6,21 +6,52 @@ import AppHeading from '@/Components/Reusables/Ui/AppHeading'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
 import AppTextInput from '@/Components/Reusables/Ui/AppTextInput'
+import { useCheckIfEmailAddressExist } from '@/Api/Services/onboarding'
+
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required')
+})
 
 const StepOneOnboarding = () => {
   const router = useRouter()
+  const { mutate: checkEmail, isPending } = useCheckIfEmailAddressExist()
+  const [showEmailExistsAlert, setShowEmailExistsAlert] = React.useState(false)
 
   const formik = useFormik({
     initialValues: {
-      email: '',
+      email: typeof window !== 'undefined' ? localStorage.getItem('onboarding_email') ?? "" : "",
     },
-    onSubmit: (values) => {
-      // Handle continue action with form values
-      console.log('Form submitted with values:', values);
+    validationSchema,
+    onSubmit: async (values) => {
+      checkEmail(
+        { email: values.email },
+        {
+          onSuccess: (response) => {
+            if (!response) return;
+            if (response.exists) {
+              setShowEmailExistsAlert(true);
+              return;
+            }
+            localStorage.setItem('onboarding_email', values.email);
+            router.push("/onboarding/new-user/step-2");
+          },
+          onError: () => {
+            setShowEmailExistsAlert(true);
+          }
+        }
+      );
     },
-  });
+  })
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowEmailExistsAlert(false)
+    formik.handleChange(e)
+  }
 
   return (
     <motion.div
@@ -40,9 +71,9 @@ const StepOneOnboarding = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => router.push('/')}
-            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-brand-color flex items-center justify-center"
+            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-brand-color flex items-center justify-center cursor-pointer"
           >
-            <FaArrowLeft className="text-lg sm:text-xl md:text-2xl text-brand-color cursor-pointer" />
+            <FaArrowLeft className="text-lg sm:text-xl md:text-2xl text-brand-color" />
           </motion.div>
           <AppHeading
             variant="h2"
@@ -73,12 +104,25 @@ const StepOneOnboarding = () => {
                 type="email"
                 name="email"
                 placeholder="Email Address"
-                onChange={formik.handleChange}
+                onChange={handleEmailChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.email}
+                required
               />
-              <p className="text-xs sm:text-sm text-gray-500 text-left px-1">
-                Please make sure the email address you're inputting is a valid email
-              </p>
+              {formik.touched.email && formik.errors.email ? (
+                <p className="text-red-500 text-xs sm:text-sm px-1">
+                  {formik.errors.email}
+                </p>
+              ) : (
+                <p className="text-xs sm:text-sm text-gray-500 text-left px-1">
+                  Please make sure the email address you're inputting is a valid email
+                </p>
+              )}
+              {showEmailExistsAlert && (
+                <p className="text-red-500 text-xs sm:text-sm px-1">
+                  This email already exists. Please use a different email address.
+                </p>
+              )}
             </div>
 
             <motion.div
@@ -90,6 +134,8 @@ const StepOneOnboarding = () => {
                 variant="primary"
                 className="w-full min-h-[44px] sm:h-[50px] text-sm sm:text-base py-2 sm:py-3"
                 onClick={formik.handleSubmit}
+                disabled={isPending || !formik.isValid}
+                loading={isPending}
               >
                 Continue
               </AppButton>

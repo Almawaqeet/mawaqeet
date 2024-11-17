@@ -1,5 +1,5 @@
 export interface CheckIfEmailAddressExistResponse {
-    message: string;
+    exists: boolean;
 }
 
 

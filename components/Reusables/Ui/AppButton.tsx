@@ -64,14 +64,14 @@ const AppButton: React.FC<ButtonProps> = ({
     flex justify-${iconSpacing ? 'around' : 'center'} items-center
     text-sm font-normal
     rounded-full outline-none transition-all duration-300 select-none
-    ${disabled || loading ? 'cursor-not-allowed' : 'cursor-pointer'}
+    ${disabled || loading ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}
     ${active ? 'shadow-md' : ''}
     ${loading ? 'w-[40px] h-[45px] p-[10px] rounded-full' : `w-[${width}] h-[${height}] p-5 rounded-full`}
   `;
 
   const variantClasses = variant === 'secondary'
-    ? 'bg-brand-color-light text-brand-color border-[0.5px] border-brand-color hover:bg-brand-color-light hover:text-brand-color-main'
-    : 'bg-brand-color text-brand-color-white';
+    ? `bg-brand-color-light text-brand-color border-[0.5px] border-brand-color hover:bg-brand-color-light hover:text-brand-color-main ${disabled ? 'bg-opacity-70' : ''}`
+    : `bg-brand-color text-brand-color-white ${disabled ? 'bg-opacity-70' : ''}`;
 
   const renderContent = () => {
     if (loading) return <LoadingIcon />;

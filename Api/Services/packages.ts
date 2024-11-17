@@ -1,12 +1,9 @@
-import { ApiMethod, useApiHook } from "@/Api/constructor";
-import { methods } from "@/Constants/api-constants";
+import { useAppQuery } from "@/Api/constructor";
+import { routes } from "@/Api/routes";
 
-
-
-export const usePackages = () => {
-    return useApiHook<Package[]>({
-        url: '/core/customer/show-all-active-packages/',
-        queryKey: ['PACKAGES'],
-        method: methods.GET as ApiMethod
+export const useGetAllActivePackages = () => {
+    return useAppQuery<Package[]>({
+        apiRoute: routes.packages.showAllActivePackages,
+        queryKey: ['PACKAGES']
     });
 }
