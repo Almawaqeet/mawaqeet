@@ -7,6 +7,9 @@ import AppHeading from '@/Components/Reusables/Ui/AppHeading'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
 import AppTextInput from '@/Components/Reusables/Ui/AppTextInput'
 import { IoEyeOutline } from "react-icons/io5"
+import { CLIENT_ROUTES } from '@/lib/routes'
+
+
 
 
 const Login = () => {
@@ -60,7 +63,7 @@ const Login = () => {
               />
               <div className="text-right">
                 <span
-                  onClick={() => router.push('/auth/forgot-password')}
+                  onClick={() => router.push(CLIENT_ROUTES.PublicPages.auth.forgotPassword)}
                   className="text-sm text-brand-color cursor-pointer hover:underline"
                 >
                   Forgot Password?
@@ -86,7 +89,7 @@ const Login = () => {
             <p className="text-gray-600 mb-6">
               Are you new here?
               <span
-                onClick={() => router.push('/onboarding/new-user/step-1')}
+                onClick={() => router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)}
                 className="text-brand-color ml-2 cursor-pointer hover:underline"
               >
                 Get Started

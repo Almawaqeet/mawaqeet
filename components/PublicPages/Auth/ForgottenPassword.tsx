@@ -6,6 +6,10 @@ import { motion } from 'framer-motion'
 import AppHeading from '@/Components/Reusables/Ui/AppHeading'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
 import AppTextInput from '@/Components/Reusables/Ui/AppTextInput'
+import { CLIENT_ROUTES } from '@/lib/routes'
+
+
+
 
 const ForgottenPassword = () => {
   const router = useRouter()
@@ -66,7 +70,7 @@ const ForgottenPassword = () => {
             <p className="text-gray-600">
               Remember your password?
               <span
-                onClick={() => router.push('/auth/login')}
+                onClick={() => router.push(CLIENT_ROUTES.PublicPages.auth.login)}
                 className="text-brand-color ml-2 cursor-pointer hover:underline"
               >
                 Sign In

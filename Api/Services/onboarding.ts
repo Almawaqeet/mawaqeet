@@ -1,10 +1,9 @@
 import { useAppQuery, useAppMutation } from "@/Api/constructor";
 import { routes } from "@/Api/routes";
-import { CheckIfEmailAddressExistResponse, OnboardingPaymentResponse } from "@/Api/types";
+import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingPaymentResponse } from "@/Api/types";
 
 
 export const useCheckIfEmailAddressExist = (body?: {email: string}) => {
-    console.log('body', body)
     return useAppMutation<CheckIfEmailAddressExistResponse>({
         apiRoute: routes.onboarding.checkIfEmailAddressExist,
         method: 'POST',
@@ -22,6 +21,13 @@ export const useGetOnboardingPaymentAmount = () => {
     });
 }
 
+export const useCreateOnboardingUser = (body?: OnboardingCreateUserRequest) => {
+    return useAppMutation<OnboardingCreateUserResponse>({
+        apiRoute: routes.onboarding.createUser,
+        method: 'POST',
+        body: JSON.stringify(body)
+    });
+}
 
 export const useCreateOnboardingPayment = ({amount, email}: {amount: number, email: string}) => {
     return useAppMutation<OnboardingPaymentResponse>({

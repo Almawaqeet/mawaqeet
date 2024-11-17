@@ -6,6 +6,9 @@ import AppHeading from '@/Components/Reusables/Ui/AppHeading'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
+import { CLIENT_ROUTES } from '@/lib/routes'
+
+
 
 const NewUser = () => {
   const router = useRouter()
@@ -15,7 +18,7 @@ const NewUser = () => {
   }
 
   const handleLogin = () => {
-    router.push('/auth/login')
+    router.push(CLIENT_ROUTES.PublicPages.auth.login)
   }
 
   return (

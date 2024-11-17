@@ -8,6 +8,10 @@ import { motion } from 'framer-motion'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
 import { useGetOnboardingPaymentAmount } from '@/Api/Services/onboarding'
 import AppSkeleton from '@/Components/Reusables/Ui/AppSkeleton'
+import { CLIENT_ROUTES } from '@/lib/routes'
+
+
+
 
 const StepThreeOnboarding = () => {
     const { data, isPending } = useGetOnboardingPaymentAmount()
@@ -37,7 +41,7 @@ const StepThreeOnboarding = () => {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => router.push('/onboarding/new-user/step-2')}
+            onClick={() => router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo)}
             className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-brand-color flex items-center justify-center"
           >
             <FaArrowLeft className="text-lg sm:text-xl md:text-2xl text-brand-color cursor-pointer" />

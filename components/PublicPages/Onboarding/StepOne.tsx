@@ -10,6 +10,10 @@ import * as Yup from 'yup'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
 import AppTextInput from '@/Components/Reusables/Ui/AppTextInput'
 import { useCheckIfEmailAddressExist } from '@/Api/Services/onboarding'
+import { CLIENT_ROUTES } from '@/lib/routes'
+
+
+
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -38,7 +42,7 @@ const StepOneOnboarding = () => {
               return;
             }
             localStorage.setItem('onboarding_email', values.email);
-            router.push("/onboarding/new-user/step-2");
+            router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo);
           },
           onError: () => {
             setShowEmailExistsAlert(true);

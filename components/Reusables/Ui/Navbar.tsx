@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { LiaTimesSolid } from 'react-icons/lia';
 import AppButton from '@/Components/Reusables/Ui/AppButton';
-import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces';
 import { brandColors } from '@/Constants/brand-constants';
 import { IoMdArrowRoundForward } from "react-icons/io";
 import { motion, AnimatePresence } from 'framer-motion';

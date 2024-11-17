@@ -7,26 +7,80 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useFormik } from 'formik'
 import AppButton from '@/Components/Reusables/Ui/AppButton'
-import Autocomplete from "react-google-autocomplete"
+// import Autocomplete from "react-google-autocomplete"
 import AppTextInput from '@/Components/Reusables/Ui/AppTextInput'
 import AppPhoneInput from '@/Components/Reusables/Ui/AppPhoneInput'
+import { useCreateOnboardingUser } from '@/Api/Services/onboarding'
+import { CLIENT_ROUTES } from '@/lib/routes'
+import * as Yup from 'yup'
 
-
-
+const validationSchema = Yup.object({
+  firstName: Yup.string().required('First name is required'),
+  lastName: Yup.string().required('Last name is required'),
+  address: Yup.string().required('Address is required'),
+  phoneNumber: Yup.string().required('Phone number is required'),
+  nextOfKinName: Yup.string().required('Next of kin name is required'),
+  nextOfKinPhoneNumber: Yup.string().required('Next of kin phone number is required'),
+  nextOfKinAddress: Yup.string().required('Next of kin address is required')
+})
 
 const StepTwoOnboarding = () => {
   const router = useRouter()
+  const { mutate: createOnboardingUser, isPending } = useCreateOnboardingUser()
+  const [serverErrors, setServerErrors] = React.useState<{[key: string]: string[]}>({})
 
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
       address: '',
-      phoneNumber: ''
+      phoneNumber: '',
+      nextOfKinName: '',
+      nextOfKinPhoneNumber: '',
+      nextOfKinAddress: ''
     },
+    validationSchema,
     onSubmit: (values) => {
-      // Handle continue action with form values
-      console.log('Form submitted with values:', values);
+      setServerErrors({})
+      const email = localStorage.getItem('onboarding_email')
+      if (!email) {
+        router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
+        return
+      }
+
+      const payload = {
+        first_name: values.firstName,
+        last_name: values.lastName,
+        address: values.address,
+        phone_number: values.phoneNumber,
+        next_of_kin_name: values.nextOfKinName,
+        next_of_kin_phone_number: values.nextOfKinPhoneNumber,
+        next_of_kin_address: values.nextOfKinAddress,
+        email: email
+      }
+
+      createOnboardingUser(payload, {
+        onSuccess: (data) => {
+          if (data) {
+            // Save form details to localStorage
+            localStorage.setItem('onboarding_details', JSON.stringify({
+              firstName: values.firstName,
+              lastName: values.lastName,
+              address: values.address,
+              phoneNumber: values.phoneNumber,
+              nextOfKinName: values.nextOfKinName,
+              nextOfKinPhoneNumber: values.nextOfKinPhoneNumber,
+              nextOfKinAddress: values.nextOfKinAddress
+            }))
+            router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree)
+          }
+        },
+        onError: (error: any) => {
+          if (error?.response?.data) {
+            setServerErrors(error.response.data)
+          }
+        }
+      })
     },
   });
 
@@ -47,7 +101,7 @@ const StepTwoOnboarding = () => {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => router.push('/onboarding/new-user/step-1')}
+            onClick={() => router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)}
             className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-brand-color flex items-center justify-center"
           >
             <FaArrowLeft className="text-xl sm:text-2xl md:text-3xl text-brand-color cursor-pointer" />
@@ -84,6 +138,7 @@ const StepTwoOnboarding = () => {
                 onChange={formik.handleChange}
                 value={formik.values.firstName}
                 className="text-sm sm:text-base"
+                error={formik.touched.firstName && formik.errors.firstName ? formik.errors.firstName : undefined}
               />
 
               <AppTextInput
@@ -93,9 +148,20 @@ const StepTwoOnboarding = () => {
                 onChange={formik.handleChange}
                 value={formik.values.lastName}
                 className="text-sm sm:text-base"
+                error={formik.touched.lastName && formik.errors.lastName ? formik.errors.lastName : undefined}
               />
 
-              <Autocomplete
+              <AppTextInput
+                type="text"
+                name="address"
+                placeholder="Full Address"
+                onChange={formik.handleChange}
+                value={formik.values.address}
+                className="text-sm sm:text-base"
+                error={formik.touched.address && formik.errors.address ? formik.errors.address : undefined}
+              />
+
+              {/* <Autocomplete
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 onPlaceSelected={(place) => {
                   formik.setFieldValue('address', place?.formatted_address || '')
@@ -104,6 +170,9 @@ const StepTwoOnboarding = () => {
                 className="w-full px-4 py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-color focus:border-transparent transition-all duration-200"
                 placeholder="Full Address"
               />
+              {formik.touched.address && formik.errors.address && (
+                <div className="text-red-500 text-sm" style={{ marginTop: '4px' }}>{formik.errors.address}</div>
+              )} */}
 
               <AppPhoneInput
                 name="phoneNumber"
@@ -111,7 +180,65 @@ const StepTwoOnboarding = () => {
                 onChange={(value) => formik.setFieldValue('phoneNumber', value)}
                 value={formik.values.phoneNumber}
                 className="text-sm sm:text-base"
+                error={
+                  (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
+                  (serverErrors?.phone_number?.[0]) ?
+                  formik.errors.phoneNumber || serverErrors?.phone_number?.[0] :
+                  undefined
+                }
               />
+
+              <AppTextInput
+                type="text"
+                name="nextOfKinName"
+                placeholder="Next of Kin Name"
+                onChange={formik.handleChange}
+                value={formik.values.nextOfKinName}
+                className="text-sm sm:text-base"
+                error={formik.touched.nextOfKinName && formik.errors.nextOfKinName ? formik.errors.nextOfKinName : undefined}
+              />
+
+              <AppPhoneInput
+                name="nextOfKinPhoneNumber"
+                placeholder="Next of Kin Phone Number"
+                onChange={(value) => formik.setFieldValue('nextOfKinPhoneNumber', value)}
+                value={formik.values.nextOfKinPhoneNumber}
+                className="text-sm sm:text-base"
+                error={
+                  (formik.touched.nextOfKinPhoneNumber && formik.errors.nextOfKinPhoneNumber) ||
+                  (serverErrors?.next_of_kin_phone_number?.[0]) ?
+                  formik.errors.nextOfKinPhoneNumber || serverErrors?.next_of_kin_phone_number?.[0] :
+                  undefined
+                }
+              />
+
+              <AppTextInput
+                type="text"
+                name="nextOfKinAddress"
+                placeholder="Next of Kin Address"
+                onChange={formik.handleChange}
+                value={formik.values.nextOfKinAddress}
+                className="text-sm sm:text-base"
+                error={
+                  (formik.touched.nextOfKinAddress && formik.errors.nextOfKinAddress) ||
+                  (serverErrors?.next_of_kin_address?.[0]) ?
+                  formik.errors.nextOfKinAddress || serverErrors?.next_of_kin_address?.[0] :
+                  undefined
+                }
+              />
+
+              {/* <Autocomplete
+                apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                onPlaceSelected={(place) => {
+                  formik.setFieldValue('nextOfKinAddress', place?.formatted_address || '')
+                }}
+                defaultValue={formik.values.nextOfKinAddress}
+                className="w-full px-4 py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-color focus:border-transparent transition-all duration-200"
+                placeholder="Next of Kin Address"
+              />
+              {formik.touched.nextOfKinAddress && formik.errors.nextOfKinAddress && (
+                <div className="text-red-500 text-sm">{formik.errors.nextOfKinAddress}</div>
+              )} */}
             </div>
 
             <motion.div
@@ -123,6 +250,8 @@ const StepTwoOnboarding = () => {
                 variant="primary"
                 className="w-full min-h-[56px] sm:h-16 text-sm sm:text-base py-3 sm:py-4"
                 onClick={formik.handleSubmit}
+                disabled={isPending}
+                loading={isPending}
               >
                 Continue
               </AppButton>
