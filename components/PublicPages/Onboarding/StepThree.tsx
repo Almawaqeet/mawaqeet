@@ -1,32 +1,69 @@
 "use client"
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaArrowLeft } from "react-icons/fa6"
 import AppHeading from '@/components/Reusables/Ui/AppHeading'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import AppButton from '@/components/Reusables/Ui/AppButton'
-import { useGetOnboardingPaymentAmount } from '@/api/Services/onboarding'
+import { useGetOnboardingPaymentAmount, useInitiateOnboardingPayment, useVerifyOnboardingPayment } from '@/api/Services/onboarding'
 import AppSkeleton from '@/components/Reusables/Ui/AppSkeleton'
 import { CLIENT_ROUTES } from '@/lib/routes'
+import { usePaystack } from '@/third-party/Paystack'
+import { convertToKobo } from '@/lib/utils'
+import AppModal from '@/components/Reusables/Ui/AppModal'
+import SuccessLottie from '@/components/Reusables/Ui/SuccessLottie'
+import LoadingLottie from '@/components/Reusables/Ui/LoadingLottie'
+
+
+
 
 const StepThreeOnboarding = () => {
-    const { data, isPending } = useGetOnboardingPaymentAmount()
+    const [reference, setReference] = useState('')
+    const { data: registrationFeeData, isPending } = useGetOnboardingPaymentAmount()
+    const { mutate: initiatePayment, isPending: isInitiatingPayment } = useInitiateOnboardingPayment()
+    const { data: verifyPaymentData, isPending: isVerifyingPayment } = useVerifyOnboardingPayment(reference)
     const router = useRouter()
+    const onboardingId = localStorage.getItem('onboarding_user_id')
+    const email = localStorage.getItem('onboarding_email')
+
+    console.log(verifyPaymentData)
 
     React.useEffect(() => {
-      const onboardingId = localStorage.getItem('onboarding_user_id')
-      if (!onboardingId) {
+      if (!onboardingId || !email) {
         router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
         return
       }
     }, [router])
 
-    const registrationFee = data?.registration_fee?.toLocaleString() ?? 0
+
+    const registrationFee = registrationFeeData?.registration_fee?.toLocaleString() ?? 0
 
   const handlePayment = () => {
-    // Handle payment logic here
-    console.log('Processing payment...');
+    initiatePayment(
+      { onboarding_id: parseInt(onboardingId ?? '0') },
+      {
+        onSuccess: (data) => {
+          if (data?.data?.reference && data?.data?.authorization_url && email && registrationFeeData?.registration_fee) {
+            const { initializePayment } = usePaystack({
+              email: email,
+              amount: convertToKobo(registrationFeeData.registration_fee),
+              reference: data.data.reference,
+              onSuccess: () => {
+                setReference(data.data?.reference ?? '')
+              },
+              onClose: () => {
+                console.log('Payment closed')
+              }
+            })
+            initializePayment()
+          }
+        },
+        onError: (error) => {
+          console.log(error)
+        }
+      }
+    )
   }
 
   return (
@@ -36,6 +73,38 @@ const StepThreeOnboarding = () => {
       transition={{ duration: 0.6 }}
       className="min-h-screen flex flex-col items-center px-4 sm:px-6 md:px-8 lg:px-16 xl:px-0 py-16 sm:py-20 md:py-24 lg:py-32"
     >
+        <AppModal
+            open={isVerifyingPayment && reference !== ''}
+            title="Please hang on while we verify your payment"
+        >
+            <div className="flex flex-col items-center justify-center">
+                <LoadingLottie />
+            </div>
+        </AppModal>
+        <AppModal
+            open={verifyPaymentData?.status === 'success'}
+            title="Payment Successful"
+        >
+            <div className="flex flex-col items-center justify-center gap-4">
+                <SuccessLottie />
+                <p className="text-center text-gray-700 text-base font-medium">
+                    {verifyPaymentData?.message}
+                </p>
+                <p className="text-sm text-gray-500 text-center font-normal">
+                    Redirecting you to login page in a few seconds...
+                </p>
+                {verifyPaymentData?.receipt_url && (
+                    <a
+                        href={verifyPaymentData.receipt_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-brand-color hover:underline text-sm font-medium transition-colors duration-200 ease-in-out"
+                    >
+                        Download Receipt
+                    </a>
+                )}
+            </div>
+        </AppModal>
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
         <motion.div
           initial={{ x: -20, opacity: 0 }}
@@ -118,7 +187,8 @@ const StepThreeOnboarding = () => {
                 variant="primary"
                 className="w-full min-h-[44px] sm:h-[50px] text-sm sm:text-base py-2 sm:py-3"
                 onClick={handlePayment}
-                disabled={isPending}
+                disabled={isPending || isInitiatingPayment}
+                loading={isInitiatingPayment}
               >
                 Pay Now
               </AppButton>

@@ -1,6 +1,6 @@
 import { useAppQuery, useAppMutation } from "@/api/constructor";
 import { routes } from "@/api/routes";
-import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingPaymentResponse } from "@/api/types";
+import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingInitiatePaymentRequest, OnboardingInitiatePaymentResponse, OnboardingPaymentResponse, OnboardingVerifyPaymentResponse } from "@/api/types";
 
 
 export const useCheckIfEmailAddressExist = (body?: {email: string}) => {
@@ -29,13 +29,19 @@ export const useCreateOnboardingUser = (body?: OnboardingCreateUserRequest) => {
     });
 }
 
-export const useCreateOnboardingPayment = ({amount, email}: {amount: number, email: string}) => {
-    return useAppMutation<OnboardingPaymentResponse>({
+
+export const useInitiateOnboardingPayment = (body?: OnboardingInitiatePaymentRequest) => {
+    return useAppMutation<OnboardingInitiatePaymentResponse>({
         apiRoute: routes.onboarding.initiatePayment,
         method: 'POST',
-        body: {
-            amount,
-            email
-        }
+        body: JSON.stringify(body)
+    });
+}
+
+
+export const useVerifyOnboardingPayment = (reference: string) => {
+    return useAppQuery<OnboardingVerifyPaymentResponse>({
+        apiRoute: routes.onboarding.verifyPayment.replace(':reference', reference),
+        queryKey: ['VERIFY_ONBOARDING_PAYMENT', reference]
     });
 }

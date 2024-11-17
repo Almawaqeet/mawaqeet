@@ -9,6 +9,7 @@ export const routes = {
         initiatePayment: 'onboarding/customer/onboarding-payment/',
         createUser: 'onboarding/customer/',
         getOnboardingPaymentAmount: 'onboarding/customer/onboarding-payment/',
+        verifyPayment: 'onboarding/customer/verify-onboarding-payment/:reference/',
     },
 
     packages: {

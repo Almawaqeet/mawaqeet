@@ -27,3 +27,25 @@ export interface OnboardingCreateUserRequest {
     next_of_kin_phone_number: string;
     next_of_kin_address: string;
 }
+
+
+export interface OnboardingInitiatePaymentRequest {
+    onboarding_id: number;
+}
+
+export interface OnboardingInitiatePaymentResponse {
+    status: boolean;
+    message: string;
+    data: {
+        authorization_url: string;
+        access_code: string;
+        reference: string;
+    } | null;
+}
+
+
+export interface OnboardingVerifyPaymentResponse {
+    message: string;
+    receipt_url: string;
+    status: string;
+}
