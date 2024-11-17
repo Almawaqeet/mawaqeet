@@ -30,6 +30,7 @@ const StepTwoOnboarding = () => {
   const { mutate: createOnboardingUser, isPending } = useCreateOnboardingUser()
   const [serverErrors, setServerErrors] = React.useState<{[key: string]: string[]}>({})
   const [showDialog, setShowDialog] = React.useState(false)
+  const [showOnboardingDialog, setShowOnboardingDialog] = React.useState(false)
   const savedDetails = React.useMemo(() => {
     const saved = localStorage.getItem('onboarding_details')
     return saved ? JSON.parse(saved) : null
@@ -37,17 +38,33 @@ const StepTwoOnboarding = () => {
 
   React.useEffect(() => {
     const email = localStorage.getItem('onboarding_email')
+    const onboardingId = localStorage.getItem('onboarding_user_id')
+
     if (!email) {
       router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
       return
     }
-  }, [router])
 
-  React.useEffect(() => {
+    if (onboardingId) {
+      setShowOnboardingDialog(true)
+      return
+    }
+
     if (savedDetails) {
       setShowDialog(true)
     }
-  }, [savedDetails])
+  }, [router, savedDetails])
+
+  const handleContinueOnboarding = () => {
+    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree)
+  }
+
+  const handleRestartOnboarding = () => {
+    localStorage.removeItem('onboarding_user_id')
+    localStorage.removeItem('onboarding_details')
+    localStorage.removeItem('onboarding_email')
+    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -81,7 +98,10 @@ const StepTwoOnboarding = () => {
 
       createOnboardingUser(payload, {
         onSuccess: (data) => {
-          if (data) {
+          console.log(data?.message)
+          console.log(data?.payload?.onboarding_id)
+          if (data?.payload?.onboarding_id) {
+            localStorage.setItem('onboarding_user_id', data.payload.onboarding_id.toString())
             router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree)
           }
         },
@@ -131,6 +151,17 @@ const StepTwoOnboarding = () => {
         cancelText="Start Fresh"
         onConfirm={handleUseSavedDetails}
         onCancel={() => setShowDialog(false)}
+      />
+
+      <AppDialogBox
+        open={showOnboardingDialog}
+        onOpenChange={setShowOnboardingDialog}
+        title="Continue Onboarding?"
+        description={`We found that you have already started the onboarding process as ${localStorage.getItem('onboarding_email')}. Would you like to continue where you left off?`}
+        confirmText="Continue"
+        cancelText="Start Over"
+        onConfirm={handleContinueOnboarding}
+        onCancel={handleRestartOnboarding}
       />
 
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">

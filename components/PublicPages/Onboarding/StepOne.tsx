@@ -24,10 +24,18 @@ const StepOneOnboarding = () => {
   const { mutate: checkEmail, isPending } = useCheckIfEmailAddressExist()
   const [showEmailExistsAlert, setShowEmailExistsAlert] = React.useState(false)
   const [showStoredEmailDialog, setShowStoredEmailDialog] = React.useState(false)
+  const [showOnboardingDialog, setShowOnboardingDialog] = React.useState(false)
   const [storedEmail, setStoredEmail] = React.useState<string | null>(null)
 
   React.useEffect(() => {
     const email = localStorage.getItem('onboarding_email')
+    const onboardingId = localStorage.getItem('onboarding_user_id')
+
+    if (onboardingId) {
+      setShowOnboardingDialog(true)
+      return
+    }
+
     if (email) {
       setStoredEmail(email)
       setShowStoredEmailDialog(true)
@@ -77,6 +85,17 @@ const StepOneOnboarding = () => {
     setShowStoredEmailDialog(false)
   }
 
+  const handleContinueOnboarding = () => {
+    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo)
+  }
+
+  const handleRestartOnboarding = () => {
+    localStorage.removeItem('onboarding_user_id')
+    localStorage.removeItem('onboarding_details')
+    localStorage.removeItem('onboarding_email')
+    setShowOnboardingDialog(false)
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -94,6 +113,18 @@ const StepOneOnboarding = () => {
         cancelText="No, use different email"
         onConfirm={handleStoredEmailConfirm}
         onCancel={handleStoredEmailCancel}
+      />
+
+      <AppDialogBox
+        open={showOnboardingDialog}
+        onOpenChange={setShowOnboardingDialog}
+        trigger={<></>}
+        title="Continue Onboarding?"
+        description={`We found that you have already started the onboarding process as ${localStorage.getItem('onboarding_email')}. Would you like to continue where you left off?`}
+        confirmText="Continue"
+        cancelText="Start Over"
+        onConfirm={() => router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree)}
+        onCancel={handleRestartOnboarding}
       />
 
       <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">

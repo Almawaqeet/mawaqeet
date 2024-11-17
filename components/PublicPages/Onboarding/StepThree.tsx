@@ -10,14 +10,19 @@ import { useGetOnboardingPaymentAmount } from '@/api/Services/onboarding'
 import AppSkeleton from '@/components/Reusables/Ui/AppSkeleton'
 import { CLIENT_ROUTES } from '@/lib/routes'
 
-
-
-
 const StepThreeOnboarding = () => {
     const { data, isPending } = useGetOnboardingPaymentAmount()
     const router = useRouter()
 
-    const registrationFee = data?.registration_fee.toLocaleString() ?? 0
+    React.useEffect(() => {
+      const onboardingId = localStorage.getItem('onboarding_user_id')
+      if (!onboardingId) {
+        router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
+        return
+      }
+    }, [router])
+
+    const registrationFee = data?.registration_fee?.toLocaleString() ?? 0
 
   const handlePayment = () => {
     // Handle payment logic here

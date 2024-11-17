@@ -10,8 +10,10 @@ export interface OnboardingPaymentResponse {
 
 export interface OnboardingCreateUserResponse {
     message: string;
-    websocket_id: string;
-    onboarding_id: number;
+    payload: {
+        websocket_id: string;
+        onboarding_id: number;
+    }
 }
 
 
