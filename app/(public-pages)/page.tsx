@@ -1,8 +1,8 @@
-import { HeroSection } from "@/components/public-pages/landing-page/HeroSection";
-import HeroSectionCarousel from "@/components/public-pages/landing-page/HeroSectionCarousel";
-import StepsToRegister from "@/components/public-pages/landing-page/StepsToRegister";
-import ActivePackages from "@/components/public-pages/landing-page/ActivePackages";
-import LiveCall from "@/components/public-pages/landing-page/LiveCall";
+import { HeroSection } from "@/app/(public-pages)/_components/landing-page/HeroSection";
+import HeroSectionCarousel from "@/app/(public-pages)/_components/landing-page/HeroSectionCarousel";
+import StepsToRegister from "@/app/(public-pages)/_components/landing-page/StepsToRegister";
+import ActivePackages from "@/app/(public-pages)/_components/landing-page/ActivePackages";
+import LiveCall from "@/app/(public-pages)/_components/landing-page/LiveCall";
 
 export default function LandingPage() {
   return (

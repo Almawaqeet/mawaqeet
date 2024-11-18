@@ -13,7 +13,7 @@ import Headings from '../../old-pages/utilities/Headings';
 import Paragraph from '../../old-pages/utilities/Paragraph';
 import { whiteSpaces } from '../../old-pages/utilities/GlobalSpaces';
 import { MbisProvider } from '../../old-pages/hooks/useContextProvider';
-import Navbar from '../../components/reusables/ui/Navbar';
+import Navbar from '../../components/reusables/Navbar';
 
 const AboutUsPage = () => {
     return (

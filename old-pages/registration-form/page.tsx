@@ -4,7 +4,7 @@ import { MbisProvider } from "@/old-pages/hooks/useContextProvider";
 import { whiteSpaces } from "@/old-pages/utilities/GlobalSpaces";
 import Paragraph from "@/old-pages/utilities/Paragraph";
 import ApplicationForm from "@/old-pages/UI/ApplicationForm";
-import Navbar from "@/components/reusables/ui/Navbar";
+import Navbar from "@/components/reusables/Navbar";
 import PayInfo from "@/old-pages/UI/PayInfo";
 import { ReactNode, useEffect, useState } from "react";
 

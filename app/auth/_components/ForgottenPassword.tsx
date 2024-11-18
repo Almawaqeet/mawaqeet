@@ -3,9 +3,9 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import AppHeading from '@/components/reusables/ui/AppHeading'
-import AppButton from '@/components/reusables/ui/AppButton'
-import AppTextInput from '@/components/reusables/ui/AppTextInput'
+import AppHeading from '@/components/reusables/AppHeading'
+import AppButton from '@/components/reusables/AppButton'
+import AppTextInput from '@/components/reusables/AppTextInput'
 import { CLIENT_ROUTES } from '@/lib/routes'
 
 

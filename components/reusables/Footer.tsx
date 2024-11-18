@@ -9,7 +9,6 @@ import Image from 'next/image';
 
 import { brand } from '@/old-pages/contents/navbar';
 import { footerContent, footerText, useful_Links } from '@/old-pages/contents/footer';
-import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 import Headings from '@/old-pages/utilities/Headings';
 
 const Footer: React.FC = () => {

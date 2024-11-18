@@ -14,7 +14,7 @@ import BtnGlobal from './BtnGlobal'
 import { PiGreaterThanLight } from 'react-icons/pi'
 import { useAppInfo } from '../hooks/useAppInfo'
 import FormError from './formComponents/FormError'
-import AppDialogBox from '@/components/reusables/ui/AppDialogBox'
+import AppDialogBox from '@/components/reusables/AppDialogBox'
 
 interface Step1InitialValues {
   first_name: string,

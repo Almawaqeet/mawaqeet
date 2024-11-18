@@ -1,4 +1,4 @@
-import StepOneOnboarding from "@/components/public-pages/onboarding/StepOne";
+import StepOneOnboarding from "@/app/(public-pages)/_components/onboarding/StepOne";
 import { Metadata } from "next";
 
 

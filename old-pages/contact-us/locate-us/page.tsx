@@ -6,7 +6,7 @@ import { IoLocationOutline } from 'react-icons/io5'
 import { whiteSpaces } from '../../utilities/GlobalSpaces'
 import Footer from '../../UI/Footer'
 import { MbisProvider } from '@/old-pages/hooks/useContextProvider'
-import Navbar from '@/components/reusables/ui/Navbar'
+import Navbar from '@/components/reusables/Navbar'
 
 const LocateUs = () => {
     return (

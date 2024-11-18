@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { motion } from 'framer-motion';
-import AppHeading from '@/components/reusables/ui/AppHeading';
+import AppHeading from '@/components/reusables/AppHeading';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 
 const StepsToRegister = () => {

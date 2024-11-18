@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
-import AppHeading from '@/components/reusables/ui/AppHeading';
+import AppHeading from '@/components/reusables/AppHeading';
 import Image from 'next/image';
 import { IoMdCall } from "react-icons/io";
 import { IoLogoWhatsapp } from "react-icons/io5";

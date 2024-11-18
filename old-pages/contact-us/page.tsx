@@ -5,7 +5,7 @@ import Contact from '../UI/Contact'
 import { whiteSpaces } from '../utilities/GlobalSpaces'
 import Footer from '../UI/Footer'
 import { MbisProvider } from '../hooks/useContextProvider'
-import Navbar from '../../components/reusables/ui/Navbar'
+import Navbar from '../../components/reusables/Navbar'
 
 const ContactUs: React.FC = () => {
     return (

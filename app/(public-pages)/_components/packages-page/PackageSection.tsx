@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
-import AppHeading from '@/components/reusables/ui/AppHeading';
-import { Package } from '@/components/reusables/Package';
+import AppHeading from '@/components/reusables/AppHeading';
+import { Package } from '@/app/(public-pages)/_components/packages-page/Package';
 import { FaSearch } from 'react-icons/fa';
 
 

@@ -2,18 +2,18 @@
 
 import React from 'react'
 import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/components/reusables/ui/AppHeading'
+import AppHeading from '@/components/reusables/AppHeading'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import AppButton from '@/components/reusables/ui/AppButton'
-import AppTextInput from '@/components/reusables/ui/AppTextInput'
+import AppButton from '@/components/reusables/AppButton'
+import AppTextInput from '@/components/reusables/AppTextInput'
 import { useCheckIfEmailAddressExist } from '@/api/services/onboarding'
 import { CLIENT_ROUTES } from '@/lib/routes'
-import AppDialogBox from '@/components/reusables/ui/AppDialogBox'
+import AppDialogBox from '@/components/reusables/AppDialogBox'
 import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
-import { useAppToast } from '@/components/reusables/ui/AppToast'
+import { useAppToast } from '@/components/reusables/AppToast'
 
 
 

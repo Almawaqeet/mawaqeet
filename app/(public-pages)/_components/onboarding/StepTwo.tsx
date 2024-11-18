@@ -2,20 +2,20 @@
 
 import React from 'react'
 import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/components/reusables/ui/AppHeading'
+import AppHeading from '@/components/reusables/AppHeading'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useFormik } from 'formik'
-import AppButton from '@/components/reusables/ui/AppButton'
+import AppButton from '@/components/reusables/AppButton'
 // import Autocomplete from "react-google-autocomplete"
-import AppTextInput from '@/components/reusables/ui/AppTextInput'
-import AppPhoneInput from '@/components/reusables/ui/AppPhoneInput'
+import AppTextInput from '@/components/reusables/AppTextInput'
+import AppPhoneInput from '@/components/reusables/AppPhoneInput'
 import { useCreateOnboardingUser } from '@/api/services/onboarding'
 import { CLIENT_ROUTES } from '@/lib/routes'
 import * as Yup from 'yup'
-import AppDialogBox from '@/components/reusables/ui/AppDialogBox'
+import AppDialogBox from '@/components/reusables/AppDialogBox'
 import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
-import { useAppToast } from '@/components/reusables/ui/AppToast';
+import { useAppToast } from '@/components/reusables/AppToast';
 
 
 

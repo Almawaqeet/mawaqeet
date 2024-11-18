@@ -2,20 +2,20 @@
 
 import React, { useState } from 'react'
 import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/components/reusables/ui/AppHeading'
+import AppHeading from '@/components/reusables/AppHeading'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import AppButton from '@/components/reusables/ui/AppButton'
+import AppButton from '@/components/reusables/AppButton'
 import { useGetOnboardingPaymentAmount, useInitiateOnboardingPayment, useVerifyOnboardingPayment } from '@/api/services/onboarding'
-import AppSkeleton from '@/components/reusables/ui/AppSkeleton'
+import AppSkeleton from '@/components/reusables/AppSkeleton'
 import { CLIENT_ROUTES } from '@/lib/routes'
 import { usePaystack } from '@/third-party/Paystack'
 import { convertToKobo } from '@/lib/utils'
-import AppModal from '@/components/reusables/ui/AppModal'
-import SuccessLottie from '@/components/reusables/ui/SuccessLottie'
-import LoadingLottie from '@/components/reusables/ui/LoadingLottie'
+import AppModal from '@/components/reusables/AppModal'
+import SuccessLottie from '@/components/reusables/SuccessLottie'
+import LoadingLottie from '@/components/reusables/LoadingLottie'
 import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
-import { useAppToast } from '@/components/reusables/ui/AppToast'
+import { useAppToast } from '@/components/reusables/AppToast'
 
 const StepThreeOnboarding = () => {
   const [reference, setReference] = useState('')

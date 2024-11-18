@@ -7,7 +7,7 @@ import { about_us_team } from '@/old-pages/contents/about'
 import Profile from '@/old-pages/UI/Profile'
 import Footer from '@/old-pages/UI/Footer'
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces'
-import Navbar from '@/components/reusables/ui/Navbar'
+import Navbar from '@/components/reusables/Navbar'
 import { MbisProvider } from '@/old-pages/hooks/useContextProvider'
 
 interface PageProps {

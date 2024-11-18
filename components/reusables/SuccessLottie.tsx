@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Lottie from 'lottie-react'
-import successAnimation from '@/components/Assets/success.json'
+import successAnimation from '@/components/assets/lottie/success.json'
 
 interface SuccessLottieProps {
   width?: string | number

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Lottie from 'lottie-react'
-import loadingAnimation from '@/components/Assets/loading.json'
+import loadingAnimation from '@/components/assets/lottie/loading.json'
 
 interface LoadingLottieProps {
   width?: string | number

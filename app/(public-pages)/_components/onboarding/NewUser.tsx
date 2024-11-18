@@ -2,8 +2,8 @@
 
 import React from 'react'
 import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/components/reusables/ui/AppHeading'
-import AppButton from '@/components/reusables/ui/AppButton'
+import AppHeading from '@/components/reusables/AppHeading'
+import AppButton from '@/components/reusables/AppButton'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { CLIENT_ROUTES } from '@/lib/routes'

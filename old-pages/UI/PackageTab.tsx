@@ -1,5 +1,5 @@
 import React, { RefObject, useState } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/reusables/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/reusables/tabs"
 import { useTab } from '../hooks/useTab';
 import { useMbisContext } from '../hooks/useContextProvider';
 

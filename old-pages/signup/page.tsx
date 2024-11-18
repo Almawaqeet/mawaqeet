@@ -8,12 +8,12 @@ import { FaFacebook } from 'react-icons/fa6';
 
 import { useValidate } from '@/old-pages/hooks/useValidate';
 import { MbisProvider } from '@/old-pages/hooks/useContextProvider';
-import Navbar from '../../components/reusables/ui/Navbar';
+import Navbar from '../../components/reusables/Navbar';
 import Headings from '@/old-pages/utilities/Headings';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 import Paragraph from '@/old-pages/utilities/Paragraph';
 import BtnGlobal from '../UI/BtnGlobal';
-import Footer from '@/components/reusables/ui/Footer';
+import Footer from '@/components/reusables/Footer';
 import FormContainer from '../UI/formComponents/FormContainer';
 import CustomInputComponent from '../UI/formComponents/CustomInputComponent';
 

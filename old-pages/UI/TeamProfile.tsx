@@ -6,7 +6,7 @@ import Profile from './Profile'
 import Headings from '../utilities/Headings'
 import Image from 'next/image'
 import Paragraph from '../utilities/Paragraph'
-import Navbar from '../../components/reusables/ui/Navbar'
+import Navbar from '../../components/reusables/Navbar'
 
 const TeamProfile: React.FC = () => {
   return (

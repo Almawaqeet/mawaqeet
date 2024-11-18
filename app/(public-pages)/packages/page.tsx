@@ -1,5 +1,5 @@
 
-import PackageSection from "@/components/public-pages/packages-page/PackageSection";
+import PackageSection from "@/app/(public-pages)/_components/packages-page/PackageSection";
 
 export default function PackagesPage() {
   return (

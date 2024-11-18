@@ -1,10 +1,10 @@
 "use client"
 
 import React from 'react'
-import AppButton from '@/components/reusables/ui/AppButton'
+import AppButton from '@/components/reusables/AppButton'
 import { IoMdArrowRoundForward } from "react-icons/io"
 import { FaPlay } from "react-icons/fa";
-import AppHeading from '@/components/reusables/ui/AppHeading'
+import AppHeading from '@/components/reusables/AppHeading'
 import { PiBookOpenThin } from "react-icons/pi"
 import { motion } from 'framer-motion'
 import { FaCreditCard } from "react-icons/fa";
