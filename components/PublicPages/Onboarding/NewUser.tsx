@@ -3,20 +3,32 @@
 import React from 'react'
 import { FaArrowLeft } from "react-icons/fa6"
 import AppHeading from '@/components/Reusables/Ui/AppHeading'
-import AppButton from '@/Components/Reusables/Ui/AppButton'
+import AppButton from '@/components/Reusables/Ui/AppButton'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
+import { CLIENT_ROUTES } from '@/lib/routes'
+import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
+
+
 
 const NewUser = () => {
   const router = useRouter()
 
   const handleGetStarted = () => {
-    router.push('/onboarding/new-user/step-1')
+    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
   }
 
   const handleLogin = () => {
-    router.push('/login')
+    router.push(CLIENT_ROUTES.PublicPages.auth.login)
   }
+
+  React.useEffect(() => {
+    if (localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_COMPLETED_STATUS)) {
+      router.push(CLIENT_ROUTES.PublicPages.auth.login)
+    }
+  }, [])
+
+
 
   return (
     <motion.div
@@ -35,7 +47,7 @@ const NewUser = () => {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => router.back()}
+            onClick={() => router.push('/')}
             className="w-10 h-10 rounded-full border-2 border-brand-color flex items-center justify-center"
           >
             <FaArrowLeft className="text-xl sm:text-2xl text-brand-color cursor-pointer" />

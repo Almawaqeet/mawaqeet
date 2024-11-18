@@ -14,6 +14,7 @@ import BtnGlobal from './BtnGlobal'
 import { PiGreaterThanLight } from 'react-icons/pi'
 import { useAppInfo } from '../hooks/useAppInfo'
 import FormError from './formComponents/FormError'
+import AppDialogBox from '@/components/Reusables/Ui/AppDialogBox'
 
 interface Step1InitialValues {
   first_name: string,
@@ -26,9 +27,17 @@ interface Step1InitialValues {
 const Step1: React.FC = () => {
   const { Field, Form, Formik } = useValidate()
   const { handleNext } = useAppInfo()
+  const [existingEmail, setExistingEmail] = React.useState<string | null>("user@example.com") // Replace with actual existing email
+  const [showEmailDialog, setShowEmailDialog] = React.useState(false)
+
+  React.useEffect(() => {
+    if (existingEmail) {
+      setShowEmailDialog(true)
+    }
+  }, [existingEmail])
+
   return (
     <React.Fragment>
-
       <Headings type='global' classname='font-bold xmd:leading-[18px] tracking-tight xmd:pb-3 md:pb-5 lg:pb-8 text-center  '>
         Application Form
       </Headings>
@@ -77,16 +86,30 @@ const Step1: React.FC = () => {
       </div>
 
       <>
+        {showEmailDialog && existingEmail && (
+          <AppDialogBox
+            title="Existing Email Found"
+            description={`We found an existing email (${existingEmail}). Would you like to continue with this email or use a different one?`}
+            confirmText="Use Existing"
+            cancelText="Use Different"
+            onConfirm={() => setShowEmailDialog(false)}
+            onCancel={() => {
+              setExistingEmail(null)
+              setShowEmailDialog(false)
+            }}
+          />
+        )}
+
         <Formik
           initialValues={{
             first_name: '',
             last_name: '',
-            email: '',
+            email: existingEmail || '',
             phone_number: '',
             address: ''
           }}
           validationSchema={onboardingSchema}
-
+          enableReinitialize={true}
           onSubmit={(
             values: Step1InitialValues,
             { setSubmitting }: FormikHelpers<Step1InitialValues>
@@ -111,7 +134,7 @@ const Step1: React.FC = () => {
               </FormContainer>
 
               <FormContainer label='Email'>
-                <Field name="email" component={CustomInputComponent} input_type="email" placeholder="Your Email Address" value={values.email} />
+                <Field name="email" component={CustomInputComponent} input_type="email" placeholder="Your Email Address" value={values.email} disabled={!!existingEmail} />
                 {errors.email && touched.email ? <FormError message={errors.email} className='text-red-700  ' /> : null}
               </FormContainer>
 
@@ -134,8 +157,6 @@ const Step1: React.FC = () => {
           </Form>)}
         </Formik>
       </>
-
-
 
     </React.Fragment>
   )

@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import AppButton from '@/Components/Reusables/Ui/AppButton'
+import AppButton from '@/components/Reusables/Ui/AppButton'
 import { IoMdArrowRoundForward } from "react-icons/io"
 import { FaPlay } from "react-icons/fa";
 import AppHeading from '@/components/Reusables/Ui/AppHeading'

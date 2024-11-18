@@ -8,7 +8,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '../../Components/Reusables/Ui/carousel';
+} from '../../components/Reusables/Ui/carousel';
 
 import Team from './Team';
 import Bullet from './Bullet';

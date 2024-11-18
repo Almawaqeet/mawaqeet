@@ -1,72 +1,59 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
-import axiosInstance from "@/Api/axios";
+import { useQuery, useMutation, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
+import axios, { AxiosRequestConfig } from 'axios';
 
-
-/**
- * Type representing valid HTTP methods for API requests
- */
-export type ApiMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-
-/**
- * Configuration interface for the API hook
- * @template T The expected response data type
- */
-interface ApiHookConfig<T = any> {
-  /** The API endpoint URL */
-  url: string;
-  /** The HTTP method to use (defaults to GET) */
-  method?: ApiMethod;
-  /** Array of strings used as cache key for react-query */
-  queryKey?: string[];
-}
-
-/**
- * Custom hook for making API requests using react-query
- * @template T The expected response data type
- * @param {ApiHookConfig<T>} config The configuration object for the API request
- * @returns {UseQueryResult<T | null> | UseMutationResult<T | null>} Query or mutation result based on HTTP method
- */
-export const useApiHook = <T>({ url, method = 'GET', queryKey = ['default'] }: ApiHookConfig<T>) => {
-  const fetchData = async (): Promise<T | null> => {
-    let response;
-    if (method === 'GET') {
-      response = await axiosInstance.get<T>(url);
-    } else if (method === 'POST') {
-      response = await axiosInstance.post<T>(url);
-    } else if (method === 'PUT') {
-      response = await axiosInstance.put<T>(url);
-    } else if (method === 'DELETE') {
-      response = await axiosInstance.delete<T>(url);
-    } else if (method === 'PATCH') {
-      response = await axiosInstance.patch<T>(url);
-    }
-    return response?.data ?? null;
-  };
-
-  if (method === 'GET') {
-    return useQuery<T | null>({
-      queryKey,
-      queryFn: fetchData
-    });
-  }
-
-  return useMutation<T | null>({
-    mutationFn: fetchData
-  });
+type QueryConfig<TQueryKey, TData> = {
+  queryKey: TQueryKey;
+  apiRoute: string;
+  options?: Omit<AxiosRequestConfig, 'url' | 'method'>;
 };
 
-// // Example usage for packages
-// interface Package {
-//   id: number;
-//   name: string;
-//   description: string;
-//   price: number;
-// }
+type MutationConfig<TVariables, TData> = {
+  apiRoute: string;
+  method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+  body?: TVariables;
+  options?: Omit<AxiosRequestConfig, 'url' | 'method'> & {
+    enabled?: boolean;
+  };
+};
 
-//  export const usePackages = () => {
-//   return useApiHook<Package[]>({
-//     url: '/packages',
-//     queryKey: ['packages'],
-//     method: methods.GET as ApiMethod
-//   });
-//  };
+const axiosInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export function useAppQuery<TData = unknown, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(
+  config: QueryConfig<TQueryKey, TData>
+): UseQueryResult<TData, TError> {
+  const { apiRoute, queryKey, options } = config;
+
+  return useQuery({
+    queryKey,
+    queryFn: async () => {
+      const response = await axiosInstance.get<TData>(apiRoute, options);
+      return response?.data;
+    },
+    retry: 3,
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+  });
+}
+
+export function useAppMutation<TData = unknown, TError = unknown, TVariables = unknown>(
+  config: MutationConfig<TVariables, TData>
+): UseMutationResult<TData, TError, TVariables> {
+  const { apiRoute, method, body, options } = config;
+
+  return useMutation({
+    mutationFn: async (variables: TVariables) => {
+      const response = await axiosInstance.request<TData>({
+        url: apiRoute,
+        method,
+        data: body ?? variables,
+        ...options,
+      });
+      return response?.data;
+    },
+    retry: 0 // Only try once
+  });
+}

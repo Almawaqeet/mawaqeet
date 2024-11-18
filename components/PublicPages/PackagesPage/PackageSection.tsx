@@ -4,7 +4,6 @@ import React from 'react';
 import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces';
 import AppHeading from '@/components/Reusables/Ui/AppHeading';
 import { Package } from '@/components/Reusables/Package';
-import { motion } from 'framer-motion';
 import { FaSearch } from 'react-icons/fa';
 
 
