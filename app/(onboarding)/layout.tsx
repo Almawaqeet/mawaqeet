@@ -7,10 +7,8 @@ export default function PublicPagesLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen pt-[100px] bg-brand-color-subtle">
-      <Navbar />
+    <div className="min-h-screen bg-brand-color-subtle">
       {children}
-      <Footer />
     </div>
   )
 }

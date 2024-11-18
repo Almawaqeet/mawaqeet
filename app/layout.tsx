@@ -3,6 +3,9 @@ import './globals.css';
 import { Poppins } from 'next/font/google';
 import ReactQueryProvider from '@/providers/QueryClientProvider';
 import { Toaster } from '@/components/ui/toaster';
+import NextTopLoader from 'nextjs-toploader';
+
+
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -25,10 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="icon" href={metadata?.icons as string} />
       </head>
-      <body className={`${poppins.className} bg-brand-color-subtle`}>
+      <body className={`${poppins.className}`}>
+        <NextTopLoader showSpinner={false} />
         <Toaster />
         <ReactQueryProvider>
-          <div className="pt-[100px] max-w-screen-2xl mx-auto">
+          <div className="max-w-screen-2xl mx-auto bg-[#F1EBE5] text-brand-color">
             {children}
           </div>
         </ReactQueryProvider>
