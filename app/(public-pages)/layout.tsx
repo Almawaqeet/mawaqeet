@@ -1,5 +1,5 @@
-import Navbar from '@/components/Reusables/Ui/Navbar';
-import Footer from '@/components/Reusables/Ui/Footer';
+import Navbar from '@/components/reusables/ui/Navbar';
+import Footer from '@/components/reusables/ui/Footer';
 
 export default function PublicPagesLayout({
   children,

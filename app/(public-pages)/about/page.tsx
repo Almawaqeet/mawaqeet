@@ -1,7 +1,7 @@
-import AppHeading from '@/components/Reusables/Ui/AppHeading'
-import { about_main_body } from '@/OldPage/contents/about'
-import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces'
-import Paragraph from '@/OldPage/utilities/Paragraph'
+import AppHeading from '@/components/reusables/ui/AppHeading'
+import { about_main_body } from '@/old-pages/contents/about'
+import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces'
+import Paragraph from '@/old-pages/utilities/Paragraph'
 import React from 'react'
 
 const page = () => {

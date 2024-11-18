@@ -1,19 +1,19 @@
 "use client"
 
 import React from 'react'
-import { about_hero, about_main_body, } from '../../OldPage/contents/about';
+import { about_hero, about_main_body, } from '../../old-pages/contents/about';
 import Image from 'next/image';
 
-import SlantDiv from '../../OldPage/UI/SlantDiv';
+import SlantDiv from '../../old-pages/UI/SlantDiv';
 
-import TeamContent from '../../OldPage/UI/TeamContent';
-import Services from '../../OldPage/UI/Services';
-import Hero from '../../OldPage/UI/Hero';
-import Headings from '../../OldPage/utilities/Headings';
-import Paragraph from '../../OldPage/utilities/Paragraph';
-import { whiteSpaces } from '../../OldPage/utilities/GlobalSpaces';
-import { MbisProvider } from '../../OldPage/hooks/useContextProvider';
-import Navbar from '../../components/Reusables/Ui/Navbar';
+import TeamContent from '../../old-pages/UI/TeamContent';
+import Services from '../../old-pages/UI/Services';
+import Hero from '../../old-pages/UI/Hero';
+import Headings from '../../old-pages/utilities/Headings';
+import Paragraph from '../../old-pages/utilities/Paragraph';
+import { whiteSpaces } from '../../old-pages/utilities/GlobalSpaces';
+import { MbisProvider } from '../../old-pages/hooks/useContextProvider';
+import Navbar from '../../components/reusables/ui/Navbar';
 
 const AboutUsPage = () => {
     return (

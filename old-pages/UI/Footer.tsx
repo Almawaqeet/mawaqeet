@@ -6,25 +6,23 @@ import { BsTwitterX } from 'react-icons/bs';
 import { IoLogoInstagram } from 'react-icons/io5';
 import { FaSquareWhatsapp } from 'react-icons/fa6';
 import Image from 'next/image';
-
 import { brand } from '@/old-pages/contents/navbar';
 import { footerContent, footerText, useful_Links } from '@/old-pages/contents/footer';
-import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 import Headings from '@/old-pages/utilities/Headings';
 
 const Footer: React.FC = () => {
   return (
-    <footer className={`bg-black  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] py-12`}>
-      <div className={`max-w-7xl w-full grid grid-cols-1 md:grid-cols-3 gap-12`}>
+    <footer className="bg-black pt-12 pb-6">
+      <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16`}>
         {/* Brand & Description */}
-        <div className="space-y-8">
+        <div className="space-y-6">
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/images/logo1.png"
               alt="Brand Logo"
               width={40}
               height={40}
-              className="w-10 h-10"
+              className="w-8 h-8 lg:w-10 lg:h-10"
             />
             {brand.map((itm) => (
               <Headings
@@ -48,7 +46,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Useful Links */}
-        <div className="space-y-8">
+        <div className="space-y-6">
           {footerContent.map((cont) => (
             <h3
               key={`${cont.id}-cont`}
@@ -75,7 +73,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Contact & Social */}
-        <div className="space-y-8">
+        <div className="space-y-6">
           {footerContent.map((itm) => (
             <h3
               key={`${itm.id}-cont`}
@@ -85,7 +83,7 @@ const Footer: React.FC = () => {
             </h3>
           ))}
 
-          <div className="flex gap-6 items-center">
+          <div className="flex gap-4 items-center">
             <Link href="#" className="text-gray-200 hover:text-white transition-colors">
               <FiFacebook className="w-6 h-6" />
             </Link>
@@ -103,9 +101,9 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Copyright */}
-      <div className={`max-w-7xl w-full mt-12`}>
+      <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] max-w-7xl mx-auto mt-12`}>
         <div className="border-t border-gray-500 opacity-50 mb-6"></div>
-        <div className="flex items-center justify-center gap-4 text-gray-200">
+        <div className="flex items-center justify-center gap-3 text-gray-200">
           <span>&copy;</span>
           <span className="w-px h-4 bg-gray-400"></span>
           <p className="text-sm">All rights reserved.</p>

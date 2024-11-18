@@ -1,6 +1,6 @@
 
 
-import NewUser from '@/components/PublicPages/Onboarding/NewUser'
+import NewUser from '@/components/public-pages/onboarding/NewUser'
 
 export default function NewUserPage() {
   return (
