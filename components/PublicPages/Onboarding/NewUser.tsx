@@ -7,6 +7,7 @@ import AppButton from '@/components/Reusables/Ui/AppButton'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { CLIENT_ROUTES } from '@/lib/routes'
+import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
 
 
 
@@ -20,6 +21,14 @@ const NewUser = () => {
   const handleLogin = () => {
     router.push(CLIENT_ROUTES.PublicPages.auth.login)
   }
+
+  React.useEffect(() => {
+    if (localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_COMPLETED_STATUS)) {
+      router.push(CLIENT_ROUTES.PublicPages.auth.login)
+    }
+  }, [])
+
+
 
   return (
     <motion.div

@@ -49,3 +49,17 @@ export interface OnboardingVerifyPaymentResponse {
     receipt_url: string;
     status: string;
 }
+
+
+export interface LoginRequest {
+    email: string;
+    password: string;
+}
+
+export interface LoginResponse {
+    refresh: string;
+    access: string;
+    user_id: number;
+    email: string;
+    account_type: "ADMIN" | "USER";
+}

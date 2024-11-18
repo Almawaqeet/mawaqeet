@@ -1,24 +1,53 @@
-"use client"
+"use client";
 
-import React from 'react'
-import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import AppHeading from '@/components/Reusables/Ui/AppHeading'
-import AppButton from '@/components/Reusables/Ui/AppButton'
-import AppTextInput from '@/components/Reusables/Ui/AppTextInput'
-import { IoEyeOutline } from "react-icons/io5"
-import { CLIENT_ROUTES } from '@/lib/routes'
-
-
-
+import React from "react";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { useFormik } from "formik";
+import AppHeading from "@/components/Reusables/Ui/AppHeading";
+import AppButton from "@/components/Reusables/Ui/AppButton";
+import AppTextInput from "@/components/Reusables/Ui/AppTextInput";
+import { IoEyeOutline } from "react-icons/io5";
+import { CLIENT_ROUTES } from "@/lib/routes";
+import { signIn } from "next-auth/react";
 
 const Login = () => {
-  const router = useRouter()
+  const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle login logic here
-  }
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: async (values) => {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        const result = await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: false,
+        });
+
+        if (result?.error) {
+          setError(result.error);
+          return;
+        }
+
+        if (result?.ok) {
+          router.push(CLIENT_ROUTES.PublicPages.home);
+          router.refresh();
+        }
+      } catch (err) {
+        setError("An unexpected error occurred. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+  });
 
   return (
     <motion.div
@@ -34,23 +63,31 @@ const Login = () => {
         className="w-full px-4 sm:px-6 md:px-12 lg:px-24 xl:px-32 py-16"
       >
         <div className="max-w-md mx-auto">
-          <AppHeading
-            variant="h1"
-            className="text-3xl sm:text-4xl font-bold mb-4"
-          >
+          <AppHeading variant="h1" className="text-3xl sm:text-4xl font-bold mb-4">
             Sign In
           </AppHeading>
 
-          <p className="text-gray-600 mb-8">
-            Sign in with your details
-          </p>
+          <p className="text-gray-600 mb-8">Sign in with your details</p>
 
-          <form onSubmit={handleLogin} className="space-y-6">
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded shadow-sm"
+            >
+              {error}
+            </motion.div>
+          )}
+
+          <form onSubmit={formik.handleSubmit} className="space-y-6">
             <AppTextInput
               label="Email"
               type="email"
               placeholder="Your Email Address"
               required
+              name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
             />
 
             <div className="space-y-1">
@@ -60,6 +97,9 @@ const Login = () => {
                 placeholder="Password"
                 icon={<IoEyeOutline />}
                 required
+                name="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
               />
               <div className="text-right">
                 <span
@@ -71,14 +111,13 @@ const Login = () => {
               </div>
             </div>
 
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <AppButton
                 variant="primary"
                 className="w-full py-3"
-                onClick={() => console.log('Sign In')}
+                disabled={isLoading}
+                onClick={formik.handleSubmit}
+                loading={isLoading}
               >
                 Sign In
               </AppButton>
@@ -95,13 +134,11 @@ const Login = () => {
                 Get Started
               </span>
             </p>
-
-            {/* Social Login Later*/}
           </div>
         </div>
       </motion.div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

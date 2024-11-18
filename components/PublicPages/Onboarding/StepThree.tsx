@@ -34,6 +34,12 @@ const StepThreeOnboarding = () => {
     }
   }, [router, onboardingId, email])
 
+  React.useEffect(() => {
+    if (verifyPaymentData?.status === 'success') {
+      localStorage.setItem(LOCAL_STORAGE_KEYS.ONBOARDING_COMPLETED_STATUS, 'true')
+    }
+  }, [verifyPaymentData])
+
   const registrationFee = registrationFeeData?.registration_fee?.toLocaleString() ?? 0
 
   const handleRestartOnboarding = () => {
@@ -118,7 +124,7 @@ const StepThreeOnboarding = () => {
             {verifyPaymentData?.message}
           </p>
           <p className="text-sm text-gray-500 text-center font-normal">
-            Redirecting you to login page in a few seconds...
+            We have created your account successfully, we would be redirecting you to the login page in a few seconds. Click on the button below to download your receipt.
           </p>
           {verifyPaymentData?.receipt_url && (
             <a
