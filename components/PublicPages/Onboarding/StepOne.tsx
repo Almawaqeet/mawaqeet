@@ -13,6 +13,11 @@ import { useCheckIfEmailAddressExist } from '@/api/Services/onboarding'
 import { CLIENT_ROUTES } from '@/lib/routes'
 import AppDialogBox from '@/components/Reusables/Ui/AppDialogBox'
 import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
+import { useAppToast } from '@/components/Reusables/Ui/AppToast'
+
+
+
+
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -27,7 +32,7 @@ const StepOneOnboarding = () => {
   const [showStoredEmailDialog, setShowStoredEmailDialog] = React.useState(false)
   const [showOnboardingDialog, setShowOnboardingDialog] = React.useState(false)
   const [storedEmail, setStoredEmail] = React.useState<string | null>(null)
-
+  const { showToast } = useAppToast()
   React.useEffect(() => {
     const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
     const onboardingId = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
@@ -62,7 +67,15 @@ const StepOneOnboarding = () => {
             router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo);
           },
           onError: () => {
-            setShowEmailExistsAlert(true);
+            showToast({
+              title: "Error",
+              description: "An error occurred while checking if the email exists. its not you, its us. Please try again. If the issue persists, please contact support.",
+              variant: "destructive",
+              action: {
+                label: "Contact Support",
+                onClick: () => console.log("contact support")
+              }
+            })
           }
         }
       );
@@ -84,10 +97,6 @@ const StepOneOnboarding = () => {
   const handleStoredEmailCancel = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
     setShowStoredEmailDialog(false)
-  }
-
-  const handleContinueOnboarding = () => {
-    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo)
   }
 
   const handleRestartOnboarding = () => {

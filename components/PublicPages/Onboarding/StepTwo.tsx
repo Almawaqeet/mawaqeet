@@ -15,6 +15,7 @@ import { CLIENT_ROUTES } from '@/lib/routes'
 import * as Yup from 'yup'
 import AppDialogBox from '@/components/Reusables/Ui/AppDialogBox'
 import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
+import { useAppToast } from '@/components/Reusables/Ui/AppToast';
 
 
 
@@ -39,7 +40,7 @@ const StepTwoOnboarding = () => {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_DETAILS)
     return saved ? JSON.parse(saved) : null
   }, [])
-
+  const { showToast } = useAppToast()
   React.useEffect(() => {
     const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
     const onboardingId = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
@@ -112,6 +113,30 @@ const StepTwoOnboarding = () => {
         onError: (error: any) => {
           if (error?.response?.data) {
             setServerErrors(error.response.data)
+          }
+
+          const errorMessage = error?.response?.data?.message || error?.message || "An error occurred while initiating payment"
+
+          if (error?.status === 404 || error?.status === 400) {
+            showToast({
+              title: "Error",
+              description: errorMessage,
+              variant: "destructive",
+              action: {
+                label: "Restart Onboarding",
+                onClick: handleRestartOnboarding
+              }
+            })
+          } else {
+            showToast({
+              title: "Error",
+              description: errorMessage,
+              variant: "destructive",
+              action: {
+                label: "Contact Support",
+                onClick: () => console.log("contact support")
+              }
+            })
           }
         }
       })
@@ -215,7 +240,12 @@ const StepTwoOnboarding = () => {
                 onChange={formik.handleChange}
                 value={formik.values.firstName}
                 className="text-sm sm:text-base"
-                error={formik.touched.firstName && formik.errors.firstName ? formik.errors.firstName : undefined}
+                error={
+                  (formik.touched.firstName && formik.errors.firstName) ||
+                  (serverErrors?.first_name?.[0]) ?
+                  formik.errors.firstName || serverErrors?.first_name?.[0] :
+                  undefined
+                }
               />
 
               <AppTextInput
@@ -225,7 +255,12 @@ const StepTwoOnboarding = () => {
                 onChange={formik.handleChange}
                 value={formik.values.lastName}
                 className="text-sm sm:text-base"
-                error={formik.touched.lastName && formik.errors.lastName ? formik.errors.lastName : undefined}
+                error={
+                  (formik.touched.lastName && formik.errors.lastName) ||
+                  (serverErrors?.last_name?.[0]) ?
+                  formik.errors.lastName || serverErrors?.last_name?.[0] :
+                  undefined
+                }
               />
 
               <AppTextInput
@@ -235,7 +270,12 @@ const StepTwoOnboarding = () => {
                 onChange={formik.handleChange}
                 value={formik.values.address}
                 className="text-sm sm:text-base"
-                error={formik.touched.address && formik.errors.address ? formik.errors.address : undefined}
+                error={
+                  (formik.touched.address && formik.errors.address) ||
+                  (serverErrors?.address?.[0]) ?
+                  formik.errors.address || serverErrors?.address?.[0] :
+                  undefined
+                }
               />
 
               {/* this may be useful for one day... maybe if im not lazy to go to google and setup the api key */}
@@ -273,7 +313,12 @@ const StepTwoOnboarding = () => {
                 onChange={formik.handleChange}
                 value={formik.values.nextOfKinName}
                 className="text-sm sm:text-base"
-                error={formik.touched.nextOfKinName && formik.errors.nextOfKinName ? formik.errors.nextOfKinName : undefined}
+                error={
+                  (formik.touched.nextOfKinName && formik.errors.nextOfKinName) ||
+                  (serverErrors?.next_of_kin_name?.[0]) ?
+                  formik.errors.nextOfKinName || serverErrors?.next_of_kin_name?.[0] :
+                  undefined
+                }
               />
 
               <AppPhoneInput

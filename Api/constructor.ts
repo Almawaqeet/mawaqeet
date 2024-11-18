@@ -53,6 +53,7 @@ export function useAppMutation<TData = unknown, TError = unknown, TVariables = u
         ...options,
       });
       return response?.data;
-    }
+    },
+    retry: 0 // Only try once
   });
 }

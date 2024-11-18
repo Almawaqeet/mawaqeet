@@ -6,10 +6,8 @@ import { BsTwitterX } from 'react-icons/bs';
 import { IoLogoInstagram } from 'react-icons/io5';
 import { FaSquareWhatsapp } from 'react-icons/fa6';
 import Image from 'next/image';
-
 import { brand } from '@/OldPage/contents/navbar';
 import { footerContent, footerText, useful_Links } from '@/OldPage/contents/footer';
-import { whiteSpaces } from '@/OldPage/utilities/GlobalSpaces';
 import Headings from '@/OldPage/utilities/Headings';
 
 const Footer: React.FC = () => {

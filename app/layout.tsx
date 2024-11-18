@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Poppins } from 'next/font/google';
 import ReactQueryProvider from '@/providers/QueryClientProvider';
-
+import { Toaster } from '@/components/ui/toaster';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -26,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href={metadata?.icons as string} />
       </head>
       <body className={`${poppins.className} bg-brand-color-subtle`}>
+        <Toaster />
         <ReactQueryProvider>
           <div className="pt-[100px] max-w-screen-2xl mx-auto">
             {children}
