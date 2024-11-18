@@ -82,6 +82,7 @@ const StepThreeOnboarding = () => {
               variant: "destructive",
               action: {
                 label: "Contact Support",
+                // TODO: Add contact support functionality
                 onClick: () => console.log("contact support")
               }
             })
