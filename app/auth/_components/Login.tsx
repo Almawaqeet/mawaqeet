@@ -9,12 +9,24 @@ import AppButton from "@/components/reusables/AppButton";
 import AppTextInput from "@/components/reusables/AppTextInput";
 import { IoEyeOutline } from "react-icons/io5";
 import { CLIENT_ROUTES } from "@/lib/routes";
+import { ACCOUNT_TYPES } from "@/constants/generic";
 import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const Login = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const { data: session } = useSession();
+
+
+  const handleLoginRedirect = () => {
+    if (session?.user?.accountType === ACCOUNT_TYPES.ADMIN) {
+      router.push(CLIENT_ROUTES.PrivatePages.adminDashboard.home);
+    } else if (session?.user?.accountType === ACCOUNT_TYPES.USER) {
+      router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.home);
+    }
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -38,7 +50,7 @@ const Login = () => {
         }
 
         if (result?.ok) {
-          router.push(CLIENT_ROUTES.PublicPages.home);
+          handleLoginRedirect();
           router.refresh();
         }
       } catch (err) {

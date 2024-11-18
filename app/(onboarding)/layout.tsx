@@ -1,7 +1,5 @@
-import Navbar from '@/components/reusables/Navbar';
-import Footer from '@/components/reusables/Footer';
 
-export default function PublicPagesLayout({
+export default function OnboardingLayout({
   children,
 }: {
   children: React.ReactNode

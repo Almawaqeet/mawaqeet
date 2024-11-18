@@ -14,5 +14,13 @@ export const CLIENT_ROUTES = {
             login: '/auth/login',
             forgotPassword: '/auth/forgot-password'
         }
+    },
+    PrivatePages: {
+        clientDashboard: {
+            home: '/client-dashboard'
+        },
+        adminDashboard: {
+            home: '/admin-dashboard'
+        }
     }
 }

@@ -5,17 +5,17 @@ import { DataTableFilterBox } from '@/components/ui/table/data-table-filter-box'
 import { DataTableResetFilter } from '@/components/ui/table/data-table-reset-filter';
 import { DataTableSearch } from '@/components/ui/table/data-table-search';
 import { Employee } from '@/constants/data';
-import { columns } from '../employee-tables/columns';
 import {
-  GENDER_OPTIONS,
-  useEmployeeTableFilters
-} from './use-employee-table-filters';
+  useEmployeeTableFilters,
+  GENDER_OPTIONS
+} from '../employee-tables/use-employee-table-filters';
+import { columns } from './columns';
 
-export default function EmployeeTable({
+export default function CustomerTable({
   data,
   totalData
 }: {
-  data: Employee[];
+  data: any[];
   totalData: number;
 }) {
   const {

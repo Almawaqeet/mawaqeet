@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Poppins } from 'next/font/google';
-import ReactQueryProvider from '@/providers/QueryClientProvider';
+import ReactQueryProvider from '@/providers/query-client-provider';
 import { Toaster } from '@/components/ui/toaster';
 import NextTopLoader from 'nextjs-toploader';
+import { NextAuthProvider } from '@/providers/session-provider';
 
 
 
@@ -32,9 +33,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <NextTopLoader showSpinner={false} />
         <Toaster />
         <ReactQueryProvider>
-          <div className="max-w-screen-2xl mx-auto bg-[#F1EBE5] text-brand-color">
-            {children}
-          </div>
+          <NextAuthProvider>
+            <div className="max-w-screen-2xl mx-auto bg-[#F1EBE5] text-brand-color">
+              {children}
+            </div>
+          </NextAuthProvider>
         </ReactQueryProvider>
       </body>
     </html>

@@ -1,8 +1,8 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { Active, DataRef, Over } from '@dnd-kit/core';
-import { ColumnDragData } from '@/app/dashboard/kanban/_components/board-column';
-import { TaskDragData } from '@/app/dashboard/kanban/_components/task-card';
+import { ColumnDragData } from '@/app/(private-pages)/admin-dashboard/kanban/_components/board-column';
+import { TaskDragData } from '@/app/(private-pages)/admin-dashboard/kanban/_components/task-card';
 import CryptoJS from 'crypto-js';
 
 type DraggableData = ColumnDragData | TaskDragData;

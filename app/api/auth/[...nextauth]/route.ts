@@ -33,22 +33,20 @@ const handler = NextAuth({
           }
 
           const data = await res.json();
-
-          console.log("data pp", data);
-
+          
           if (data?.access && data?.refresh) {
             if (typeof window !== "undefined") {
-              localStorage.setItem(AUTH_LOCAL_STORAGE_KEYS.ACCESS, data.data.access);
-              localStorage.setItem(AUTH_LOCAL_STORAGE_KEYS.REFRESH, data.data.refresh);
+              localStorage.setItem(AUTH_LOCAL_STORAGE_KEYS.ACCESS, data.access);
+              localStorage.setItem(AUTH_LOCAL_STORAGE_KEYS.REFRESH, data.refresh);
             }
 
             return {
-              id: data?.data?.user?.id?.toString() ?? "",
-              email: data?.data?.user?.email ?? "",
-              name: data?.data?.user?.full_name ?? "",
-              accessToken: data?.data?.access,
-              refreshToken: data?.data?.refresh,
-              accountType: data?.data?.user?.account_type,
+              id: data?.user_id?.toString() ?? "",
+              email: data?.email ?? "",
+              name: data?.full_name ?? "",
+              accessToken: data?.access,
+              refreshToken: data?.refresh,
+              accountType: data?.account_type,
             };
           }
 

@@ -43,7 +43,7 @@ import {
   GalleryVerticalEnd,
   LogOut
 } from 'lucide-react';
-// import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
@@ -54,7 +54,7 @@ import ThemeToggle from './ThemeToggle/theme-toggle';
 import { UserNav } from './user-nav';
 
 export const company = {
-  name: 'Acme Inc',
+  name: 'Al-Mawaqeet Travels and Tours',
   logo: GalleryVerticalEnd,
   plan: 'Enterprise'
 };
@@ -65,7 +65,7 @@ export default function AppSidebar({
   children: React.ReactNode;
 }) {
   const [mounted, setMounted] = React.useState(false);
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
   const pathname = usePathname();
   // Only render after first client-side mount
   React.useEffect(() => {
@@ -78,10 +78,10 @@ export default function AppSidebar({
 
   return (
     <SidebarProvider>
-      <Sidebar collapsible="icon">
+      <Sidebar collapsible="icon" className="bg-[#1A1A1A] text-white">
         <SidebarHeader>
-          <div className="flex gap-2 py-2 text-sidebar-accent-foreground ">
-            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+          <div className="flex gap-2 py-2 text-white">
+            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-[#1A1A1A] text-white">
               <company.logo className="size-4" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
@@ -157,7 +157,7 @@ export default function AppSidebar({
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton
                     size="lg"
-                    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                    className="data-[state=open]:bg-[#1A1A1A] data-[state=open]:text-white"
                   >
                     <Avatar className="h-8 w-8 rounded-lg">
                       {/* <AvatarImage
@@ -165,7 +165,7 @@ export default function AppSidebar({
                         alt={session?.user?.name || ''}
                       /> */}
                       <AvatarFallback className="rounded-lg">
-                        {'CN'}
+                        {session?.user?.email?.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
@@ -174,15 +174,14 @@ export default function AppSidebar({
                         John Doe
                       </span>
                       <span className="truncate text-xs">
-                        {/* {session?.user?.email || ''} */}
-                        johndoe@mail.com
+                        {session?.user?.email || ''}
                       </span>
                     </div>
                     <ChevronsUpDown className="ml-auto size-4" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                  className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg bg-[#1A1A1A] text-white"
                   side="bottom"
                   align="end"
                   sideOffset={4}
@@ -239,7 +238,7 @@ export default function AppSidebar({
         <SidebarRail />
       </Sidebar>
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center justify-between gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+        <header className="flex h-16 shrink-0 items-center justify-between gap-2 bg-[#1A1A1A] text-white transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />

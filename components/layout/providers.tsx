@@ -1,7 +1,8 @@
 'use client';
 import React from 'react';
 import ThemeProvider from './ThemeToggle/theme-provider';
-import ReactQueryProvider from './react-query-provider';
+import ReactQueryProvider from '@/providers/query-client-provider';
+import { NextAuthProvider } from '@/providers/session-provider';
 // import { SessionProvider, SessionProviderProps } from 'next-auth/react';
 export default function Providers({
   // session,
