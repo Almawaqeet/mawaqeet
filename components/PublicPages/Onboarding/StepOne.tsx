@@ -12,6 +12,7 @@ import AppTextInput from '@/components/Reusables/Ui/AppTextInput'
 import { useCheckIfEmailAddressExist } from '@/api/Services/onboarding'
 import { CLIENT_ROUTES } from '@/lib/routes'
 import AppDialogBox from '@/components/Reusables/Ui/AppDialogBox'
+import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -28,8 +29,8 @@ const StepOneOnboarding = () => {
   const [storedEmail, setStoredEmail] = React.useState<string | null>(null)
 
   React.useEffect(() => {
-    const email = localStorage.getItem('onboarding_email')
-    const onboardingId = localStorage.getItem('onboarding_user_id')
+    const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
+    const onboardingId = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
 
     if (onboardingId) {
       setShowOnboardingDialog(true)
@@ -57,7 +58,7 @@ const StepOneOnboarding = () => {
               setShowEmailExistsAlert(true);
               return;
             }
-            localStorage.setItem('onboarding_email', values.email);
+            localStorage.setItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL, values.email);
             router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo);
           },
           onError: () => {
@@ -81,7 +82,7 @@ const StepOneOnboarding = () => {
   }
 
   const handleStoredEmailCancel = () => {
-    localStorage.removeItem('onboarding_email')
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
     setShowStoredEmailDialog(false)
   }
 
@@ -90,9 +91,9 @@ const StepOneOnboarding = () => {
   }
 
   const handleRestartOnboarding = () => {
-    localStorage.removeItem('onboarding_user_id')
-    localStorage.removeItem('onboarding_details')
-    localStorage.removeItem('onboarding_email')
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_DETAILS)
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
     setShowOnboardingDialog(false)
   }
 
@@ -120,7 +121,7 @@ const StepOneOnboarding = () => {
         onOpenChange={setShowOnboardingDialog}
         trigger={<></>}
         title="Continue Onboarding?"
-        description={`We found that you have already started the onboarding process as ${localStorage.getItem('onboarding_email')}. Would you like to continue where you left off?`}
+        description={`We found that you have already started the onboarding process as ${localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)}. Would you like to continue where you left off?`}
         confirmText="Continue"
         cancelText="Start Over"
         onConfirm={() => router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree)}

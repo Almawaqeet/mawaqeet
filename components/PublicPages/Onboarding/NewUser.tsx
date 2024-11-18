@@ -14,7 +14,7 @@ const NewUser = () => {
   const router = useRouter()
 
   const handleGetStarted = () => {
-    router.push('/onboarding/new-user/step-1')
+    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
   }
 
   const handleLogin = () => {

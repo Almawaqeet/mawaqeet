@@ -14,7 +14,7 @@ import { convertToKobo } from '@/lib/utils'
 import AppModal from '@/components/Reusables/Ui/AppModal'
 import SuccessLottie from '@/components/Reusables/Ui/SuccessLottie'
 import LoadingLottie from '@/components/Reusables/Ui/LoadingLottie'
-
+import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
 
 
 
@@ -24,8 +24,8 @@ const StepThreeOnboarding = () => {
     const { mutate: initiatePayment, isPending: isInitiatingPayment } = useInitiateOnboardingPayment()
     const { data: verifyPaymentData, isPending: isVerifyingPayment } = useVerifyOnboardingPayment(reference)
     const router = useRouter()
-    const onboardingId = localStorage.getItem('onboarding_user_id')
-    const email = localStorage.getItem('onboarding_email')
+    const onboardingId = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
+    const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
 
     console.log(verifyPaymentData)
 
