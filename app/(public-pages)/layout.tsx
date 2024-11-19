@@ -1,5 +1,5 @@
-import Navbar from '@/components/Reusables/Ui/Navbar';
-import Footer from '@/components/Reusables/Ui/Footer';
+import Navbar from '@/components/reusables/Navbar';
+import Footer from '@/components/reusables/Footer';
 
 export default function PublicPagesLayout({
   children,
@@ -7,7 +7,7 @@ export default function PublicPagesLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-[100px] bg-brand-color-subtle">
       <Navbar />
       {children}
       <Footer />

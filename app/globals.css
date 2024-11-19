@@ -3,37 +3,154 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-/* Optional: If using the variable approach */
-:root {
-  --font-poppins: 'Poppins', system-ui, sans-serif;
-  --brand-color: #251301;
-  --brand-color-subtle: #E5DBD0;
-  --brand-color-light: #D1BFAB;
-  --brand-color-main: #875929;
-  --brand-color-white: #ffffff;
-  --brand-color-black: #000000;
-  --brand-color-text: #686868;
+@layer base {
+  :root {
+    /* Base colors aligned with brand */
+    --background: #FDF5EA;  /* Light warm beige background */
+    --foreground: #251301;  /* Brand dark brown text */
+
+    /* Muted variants */
+    --muted: #E5DBD0;      /* Brand subtle color */
+    --muted-foreground: #4D3C2B;
+
+    /* Surface colors */
+    --popover: #FDF5EA;
+    --popover-foreground: #251301;
+    --card: #FDF5EA;
+    --card-foreground: #251301;
+
+    /* Borders and inputs */
+    --border: #D1BFAB;     /* Brand light color */
+    --input: #D1BFAB;
+
+    /* Primary colors using brand main */
+    --primary: #875929;     /* Brand main color */
+    --primary-foreground: #FFFFFF;
+
+    /* Secondary colors */
+    --secondary: #E5DBD0;   /* Brand subtle color */
+    --secondary-foreground: #875929;
+
+    /* Accent colors */
+    --accent: #D1BFAB;      /* Brand light color */
+    --accent-foreground: #875929;
+
+    /* System colors */
+    --destructive: #E63946;
+    --destructive-foreground: #FFFFFF;
+    --ring: #875929;
+    --radius: 0.5rem;
+
+    /* Chart colors using brand palette */
+    --chart-1: #875929;     /* brand-color-main */
+    --chart-2: #251301;     /* brand-color */
+    --chart-3: #D1BFAB;     /* brand-color-light */
+    --chart-4: #E5DBD0;     /* brand-color-subtle */
+    --chart-5: #6B4720;     /* darker brand variation */
+
+    /* Sidebar styling */
+    --sidebar-background: #FDF5EA;
+    --sidebar-foreground: #251301;
+    --sidebar-primary: #875929;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #D1BFAB;
+    --sidebar-accent-foreground: #251301;
+    --sidebar-border: #D1BFAB;
+    --sidebar-ring: #875929;
+
+    /* Brand colors */
+    --font-poppins: 'Poppins', system-ui, sans-serif;
+    --brand-color: #251301;
+    --brand-color-subtle: #E5DBD0;
+    --brand-color-light: #D1BFAB;
+    --brand-color-main: #875929;
+    --brand-color-white: #FFFFFF;
+    --brand-color-black: #000000;
+    --brand-color-text: #686868;
+
+    @layer base {
+        * {
+          @apply border-[#D1BFAB];
+        }
+        body {
+          @apply text-[#251301];
+        }
+      }
+  }
+
+  .dark {
+    --background: #251301;    /* Brand dark brown background */
+    --foreground: #FDF5EA;    /* Light warm text */
+
+    --muted: #3D2815;         /* Darker brown */
+    --muted-foreground: #D1BFAB;
+
+    --popover: #251301;
+    --popover-foreground: #FDF5EA;
+
+    --card: #2D1702;          /* Slightly lighter than background */
+    --card-foreground: #FDF5EA;
+
+    --border: #4D3C2B;        /* Medium brown border */
+    --input: #4D3C2B;
+
+    --primary: #875929;       /* Keep brand main color */
+    --primary-foreground: #FFFFFF;
+
+    --secondary: #3D2815;
+    --secondary-foreground: #FDF5EA;
+
+    --accent: #3D2815;
+    --accent-foreground: #FDF5EA;
+
+    --destructive: #E63946;
+    --destructive-foreground: #FFFFFF;
+
+    --ring: #875929;
+
+    --chart-1: #875929;      /* brand-color-main */
+    --chart-2: #FDF5EA;      /* light color */
+    --chart-3: #D1BFAB;      /* brand-color-light */
+    --chart-4: #E5DBD0;      /* brand-color-subtle */
+    --chart-5: #6B4720;      /* darker brand variation */
+
+    --sidebar-background: #2D1702;
+    --sidebar-foreground: #FDF5EA;
+    --sidebar-primary: #875929;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #3D2815;
+    --sidebar-accent-foreground: #FDF5EA;
+    --sidebar-border: #4D3C2B;
+    --sidebar-ring: #875929;
+  }
 }
 
-body {
-  font-family: var(--font-poppins);
+@layer base {
+  body {
+    font-family: var(--font-poppins);
+    margin: 0;
+    color: #333333;
+    background-color: #ffffff;
+    min-height: 100vh;
+    font-size: 1rem;
+  }
 }
+
 @layer utilities {
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  .h-screen {
+    height: 100vh;
+    height: 100dvh;
+  }
   .quote-img {
     background-image: url('../public/images/bg-quote.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
-}
-
-body {
-  margin: 0;
-  color: #333333;
-  background-color: #ffffff;
-  min-height: 100vh;
-  font-size: 1rem;
-  font-family: 'Poppins', sans-serif;
 }
 
 .package::before {
@@ -90,8 +207,6 @@ body {
   bottom: 0;
   background-image: url('../public/images/bg-img-1.png');
   z-index: -1;
-
-
 }
 
 .radiostyle[type='radio']:checked {
@@ -132,7 +247,6 @@ body {
   transition: all 0.1s ease-in-out;
 }
 
-
 .slantDiv::before {
   content: '';
   top: 92%;
@@ -147,8 +261,6 @@ body {
   display: grid;
   margin: auto;
 }
-
-
 
 .sectionDiv::before {
   content: '';
@@ -205,7 +317,6 @@ body {
   border-bottom-left-radius: 8px;
 }
 
-
 .live-chat::before {
   content: '';
   top: 89%;
@@ -218,7 +329,6 @@ body {
 }
 
 @media screen and (min-width: 769px) {
-
   .live-chat::after {
     content: '';
     top: 90%;
@@ -232,7 +342,6 @@ body {
     border-bottom-left-radius: 8px;
   }
 
-
   .live-chat::before {
     content: '';
     top: 89%;
@@ -244,7 +353,6 @@ body {
     background-color: #87592A;
   }
 }
-
 
 .reach-us::after {
   content: '';
@@ -258,18 +366,17 @@ body {
   z-index: -1;
 }
 
-/* globals.css or any CSS file */
 .reach-us-img {
   background-image: url('../public/images/bg-reach-us.png');
 }
 
-@media (min-width: 640px) { /* sm */
+@media (min-width: 640px) {
   .reach-us-img-1 {
     background-image: url('../public/images/reachus2.png');
   }
 }
 
-@media (min-width: 175px) { /* xmd */
+@media (min-width: 175px) {
   .reach-us-img {
     background-image: url('../public/images/bg-reach-us.png');
   }

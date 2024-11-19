@@ -9,6 +9,7 @@ declare module "next-auth" {
       accessToken?: string;
       refreshToken?: string;
       accountType?: string;
+      fullName?: string;
     };
   }
 
@@ -16,6 +17,7 @@ declare module "next-auth" {
     accessToken?: string;
     refreshToken?: string;
     accountType?: string;
+    fullName?: string;
   }
 
   interface User {
@@ -25,5 +27,6 @@ declare module "next-auth" {
     accessToken?: string;
     refreshToken?: string;
     accountType?: string;
+    fullName?: string;
   }
 }
