@@ -1,3 +1,5 @@
+'use client';
+
 import { AreaGraph } from './area-graph';
 import { BarGraph } from './bar-graph';
 import { PieGraph } from './pie-graph';
@@ -18,18 +20,16 @@ import { useSession } from 'next-auth/react';
 export default function OverViewPage() {
   const { data: session } = useSession();
 
-  console.log("session", session);
-
   return (
     <PageContainer scrollable>
       <div className="space-y-2">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-2xl font-bold tracking-tight">
-            Hi, Welcome back 👋 {session?.user?.fullName}
+            Hi, Welcome back 👋 {session?.user?.fullName ?? 'Admin'}
           </h2>
           <div className="hidden items-center space-x-2 md:flex">
-            <CalendarDateRangePicker />
-            <Button>Download</Button>
+            {/* <CalendarDateRangePicker />
+            <Button>Download Report</Button> */}
           </div>
         </div>
         <Tabs defaultValue="hajj" className="space-y-4">
@@ -45,7 +45,7 @@ export default function OverViewPage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Total Revenue
+                    Total Revenue (YTD)
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -61,16 +61,16 @@ export default function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">$45,231.89</div>
+                  <div className="text-2xl font-bold">₦0.00</div>
                   <p className="text-xs text-muted-foreground">
-                    +20.1% from last month
+                    +0% from last year
                   </p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Savings Program Users
+                    New Registrations
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -88,16 +88,41 @@ export default function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+2350</div>
+                  <div className="text-2xl font-bold">0</div>
                   <p className="text-xs text-muted-foreground">
-                    +180.1% from last month
+                    This month
                   </p>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Total No. of Customers
+                    Onboarding Progress
+                  </CardTitle>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    className="h-4 w-4 text-muted-foreground"
+                  >
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                  </svg>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">0%</div>
+                  <p className="text-xs text-muted-foreground">
+                    Of users completed KYC
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    Active Bookings
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -114,34 +139,9 @@ export default function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+12,234</div>
+                  <div className="text-2xl font-bold">0</div>
                   <p className="text-xs text-muted-foreground">
-                    +19% from last month
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Total No. of Active Customers
-                  </CardTitle>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="h-4 w-4 text-muted-foreground"
-                  >
-                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                  </svg>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">+573</div>
-                  <p className="text-xs text-muted-foreground">
-                    +201 since last hour
+                    For 2024 Hajj Season
                   </p>
                 </CardContent>
               </Card>
@@ -152,22 +152,15 @@ export default function OverViewPage() {
               </div>
               <Card className="col-span-4 md:col-span-3">
                 <CardHeader>
-                  <CardTitle>Recent Transactions</CardTitle>
+                  <CardTitle>Recent Onboarding</CardTitle>
                   <CardDescription>
-                    You made 265 sales this month.
-                    {/* profile of customers, the plan they signed up for, date of transaction and amount. */}
+                    Latest user registrations and KYC status
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <RecentSales />
                 </CardContent>
               </Card>
-              {/* <div className="col-span-4">
-                <AreaGraph />
-              </div>
-              <div className="col-span-4 md:col-span-3">
-                <PieGraph />
-              </div> */}
             </div>
           </TabsContent>
         </Tabs>

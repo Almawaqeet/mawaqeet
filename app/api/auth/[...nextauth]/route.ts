@@ -39,7 +39,7 @@ const handler = NextAuth({
               localStorage.setItem(AUTH_LOCAL_STORAGE_KEYS.ACCESS, data.access);
               localStorage.setItem(AUTH_LOCAL_STORAGE_KEYS.REFRESH, data.refresh);
             }
-            
+
             return {
               id: data?.user_id?.toString() ?? "",
               email: data?.email ?? "",

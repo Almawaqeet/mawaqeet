@@ -1,4 +1,7 @@
 'use client';
+
+
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Collapsible,
@@ -45,13 +48,18 @@ import {
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import * as React from 'react';
 import { Breadcrumbs } from '@/components/reusables/breadcrumbs';
 import { Icons } from '@/components/reusables/icons';
 import SearchInput from '@/components/reusables/search-input';
 import ThemeToggle from './ThemeToggle/theme-toggle';
 import { UserNav } from './user-nav';
+import { extractInitials } from '@/lib/utils';
+import { signOut } from 'next-auth/react';
+import { CLIENT_ROUTES } from '@/lib/routes';
+
+
 
 export const company = {
   name: 'Al-Mawaqeet Travels and Tours',
@@ -165,13 +173,12 @@ export default function AppSidebar({
                         alt={session?.user?.name || ''}
                       /> */}
                       <AvatarFallback className="rounded-lg">
-                        {session?.user?.email?.charAt(0)}
+                        {extractInitials(session?.user?.fullName ?? '')}
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-semibold">
-                        {/* {session?.user?.name || ''} */}
-                        John Doe
+                        {session?.user?.fullName || ''}
                       </span>
                       <span className="truncate text-xs">
                         {session?.user?.email || ''}
@@ -194,17 +201,15 @@ export default function AppSidebar({
                           alt={session?.user?.name || ''}
                         /> */}
                         <AvatarFallback className="rounded-lg">
-                          {'CN'}
+                          {extractInitials(session?.user?.fullName ?? '')}
                         </AvatarFallback>
                       </Avatar>
                       <div className="grid flex-1 text-left text-sm leading-tight">
                         <span className="truncate font-semibold">
-                          {/* {session?.user?.name || ''} */}
-                          John Doe
+                          {session?.user?.fullName || ''}
                         </span>
                         <span className="truncate text-xs">
-                          {/* {session?.user?.email || ''} */}
-                          johndoe@mail.com
+                          {session?.user?.email || ''}
                         </span>
                       </div>
                     </div>
@@ -213,21 +218,24 @@ export default function AppSidebar({
 
                   <DropdownMenuGroup>
                     <DropdownMenuItem>
-                      <BadgeCheck />
+                      <BadgeCheck className="size-4 mr-2"/>
                       Account
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    {/* <DropdownMenuItem>
                       <CreditCard />
                       Billing
-                    </DropdownMenuItem>
+                    </DropdownMenuItem> */}
                     <DropdownMenuItem>
-                      <Bell />
+                      <Bell className="size-4 mr-2"/>
                       Notifications
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <LogOut />
+                  <DropdownMenuItem onClick={() => {
+                    signOut();
+                    redirect(CLIENT_ROUTES.PublicPages.home);
+                  }}>
+                    <LogOut className="size-4 mr-2"/>
                     Log out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -245,11 +253,11 @@ export default function AppSidebar({
             <Breadcrumbs />
           </div>
           <div className=" hidden w-1/3 items-center gap-2 px-4 md:flex ">
-            <SearchInput />
+            {/* <SearchInput /> */}
           </div>
           <div className="flex items-center gap-2 px-4">
             <UserNav />
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </div>
         </header>
         {/* page main content */}

@@ -212,47 +212,47 @@ export const adminDashboardNavItems: NavItem[] = [
     items: [] // Empty array as there are no child items for Dashboard
   },
   {
-    title: 'Customers',
+    title: 'Users',
     url: CLIENT_ROUTES.PrivatePages.adminDashboard.customers,
     icon: 'user',
     isActive: false,
     items: [] // No child items
   },
   {
-    title: 'Team Management',
+    title: 'Onboarding',
     url: CLIENT_ROUTES.PrivatePages.adminDashboard.team,
     icon: 'user',
     isActive: false,
     items: [] // No child items
   },
   {
-    title: 'Product',
+    title: 'Packages',
     url: CLIENT_ROUTES.PrivatePages.adminDashboard.products,
     icon: 'product',
     isActive: false,
     items: [] // No child items
   },
   {
-    title: 'Package',
+    title: 'Bookings',
     url: CLIENT_ROUTES.PrivatePages.adminDashboard.packages,
     icon: 'userPen',
     isActive: false,
     items: [] // No child items
   },
   {
-    title: 'Payment',
+    title: 'Payments',
     url: CLIENT_ROUTES.PrivatePages.adminDashboard.payment,
     icon: 'userPen',
     isActive: false,
     items: [] // No child items
   },
-  {
-    title: 'Profile',
-    url: CLIENT_ROUTES.PrivatePages.adminDashboard.profile,
-    icon: 'userPen',
-    isActive: false,
-    items: [] // No child items
-  },
+//   {
+//     title: 'Profile',
+//     url: CLIENT_ROUTES.PrivatePages.adminDashboard.profile,
+//     icon: 'userPen',
+//     isActive: false,
+//     items: [] // No child items
+//   },
   {
     title: 'Settings',
     url: '/dashboard/',

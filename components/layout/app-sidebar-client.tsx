@@ -43,15 +43,16 @@ import {
   GalleryVerticalEnd,
   LogOut
 } from 'lucide-react';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import * as React from 'react';
 import { Breadcrumbs } from '@/components/reusables/breadcrumbs';
 import { Icons } from '@/components/reusables/icons';
 import { UserNav } from './user-nav';
 import { extractInitials } from '@/lib/utils';
 import { BellIcon } from 'lucide-react';
+import { CLIENT_ROUTES } from '@/lib/routes';
 
 
 
@@ -225,7 +226,10 @@ export default function AppSidebarClient({
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => {
+                    signOut();
+                    redirect(CLIENT_ROUTES.PublicPages.home);
+                  }}>
                     <LogOut className="size-4 mr-2" />
                     Log out
                   </DropdownMenuItem>
