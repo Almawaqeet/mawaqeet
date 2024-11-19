@@ -1,13 +1,5 @@
+import PackageSkeleton from '@/components/skeletons/public-pages/PackageSkeleton';
 import { Skeleton } from '@/components/ui/skeleton';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/ui/table';
-import { ScrollArea, ScrollBar } from '../scroll-area';
 
 export function DataTableSkeleton({
   columnCount = 1,
@@ -37,34 +29,10 @@ export function DataTableSkeleton({
           ) : null}
         </div>
       ) : null}
-      <div className="rounded-md border">
-        <ScrollArea className="h-[calc(80vh-220px)] rounded-md border  md:h-[calc(90dvh-220px)]">
-          <Table>
-            <TableHeader>
-              {Array.from({ length: 1 }).map((_, i) => (
-                <TableRow key={i} className="hover:bg-transparent">
-                  {Array.from({ length: columnCount }).map((_, i) => (
-                    <TableHead key={i}>
-                      <Skeleton className="h-8 w-full" />
-                    </TableHead>
-                  ))}
-                </TableRow>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {Array.from({ length: rowCount }).map((_, i) => (
-                <TableRow key={i} className="hover:bg-transparent">
-                  {Array.from({ length: columnCount }).map((_, i) => (
-                    <TableCell key={i}>
-                      <Skeleton className="h-8 w-full" />
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {Array.from({ length: rowCount }).map((_, index) => (
+          <PackageSkeleton key={index} theme="light" />
+        ))}
       </div>
       <div className="flex w-full flex-col items-center justify-between gap-4 overflow-auto px-2 py-1 sm:flex-row sm:gap-8">
         <div className="flex-1">

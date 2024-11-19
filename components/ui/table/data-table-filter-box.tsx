@@ -68,7 +68,7 @@ export function DataTableFilterBox({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="border-dashed">
+        <Button variant="outline" className="border-dashed text-black">
           <PlusCircledIcon className="mr-2 h-4 w-4" />
           {title}
           {selectedValuesSet.size > 0 && (
@@ -105,7 +105,7 @@ export function DataTableFilterBox({
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent className="w-[200px] p-0 bg-white" align="start">
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>

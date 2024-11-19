@@ -22,9 +22,9 @@ const Login = () => {
 
   const handleLoginRedirect = () => {
     if (session?.user?.accountType === ACCOUNT_TYPES.ADMIN) {
-      router.push(CLIENT_ROUTES.PrivatePages.adminDashboard.home);
+      router.push(CLIENT_ROUTES.PrivatePages.adminDashboard.overview);
     } else if (session?.user?.accountType === ACCOUNT_TYPES.USER) {
-      router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.home);
+      router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.overview);
     }
   }
 

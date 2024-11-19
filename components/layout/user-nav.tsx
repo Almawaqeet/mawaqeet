@@ -11,8 +11,11 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { useSession } from 'next-auth/react';
+import { extractInitials } from '@/lib/utils';
+
 export function UserNav() {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
 
   return (
     <DropdownMenu>
@@ -24,18 +27,23 @@ export function UserNav() {
               alt={session.user?.name ?? ''}
             /> */}
             <AvatarFallback>
-              {/* {session.user?.name?.[0]} */}
-              {'CN'}
+              {extractInitials(session?.user?.fullName ?? '')}
             </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
+      <DropdownMenuContent
+        className="w-56 bg-white"
+        align="end"
+        forceMount
+      >
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">John Doe</p>
+            <p className="text-sm font-medium leading-none">
+              {session?.user?.fullName}
+            </p>
             <p className="text-xs leading-none text-muted-foreground">
-              johndoe@mail.com
+              {session?.user?.email}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -46,7 +54,7 @@ export function UserNav() {
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            Billing
+            Wallet
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>

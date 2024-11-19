@@ -33,13 +33,13 @@ const handler = NextAuth({
           }
 
           const data = await res.json();
-          
+
           if (data?.access && data?.refresh) {
             if (typeof window !== "undefined") {
               localStorage.setItem(AUTH_LOCAL_STORAGE_KEYS.ACCESS, data.access);
               localStorage.setItem(AUTH_LOCAL_STORAGE_KEYS.REFRESH, data.refresh);
             }
-
+            
             return {
               id: data?.user_id?.toString() ?? "",
               email: data?.email ?? "",
@@ -47,6 +47,7 @@ const handler = NextAuth({
               accessToken: data?.access,
               refreshToken: data?.refresh,
               accountType: data?.account_type,
+              fullName: data?.full_name,
             };
           }
 
@@ -73,6 +74,7 @@ const handler = NextAuth({
           accessToken: token.accessToken as string,
           refreshToken: token.refreshToken as string,
           accountType: token.accountType as string,
+          fullName: token.fullName as string,
         };
       }
       return session;
@@ -82,6 +84,7 @@ const handler = NextAuth({
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
         token.accountType = user.accountType;
+        token.fullName = user.fullName;
       }
       return token;
     },

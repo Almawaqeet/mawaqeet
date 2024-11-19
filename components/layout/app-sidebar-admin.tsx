@@ -33,7 +33,7 @@ import {
   SidebarRail,
   SidebarTrigger
 } from '@/components/ui/sidebar';
-import { navItems } from '@/constants/data';
+import { adminDashboardNavItems } from '@/constants/data';
 import {
   BadgeCheck,
   Bell,
@@ -94,7 +94,7 @@ export default function AppSidebar({
           <SidebarGroup>
             <SidebarGroupLabel>Overview</SidebarGroupLabel>
             <SidebarMenu>
-              {navItems.map((item: any) => {
+              {adminDashboardNavItems.map((item: any) => {
                 const Icon = item?.icon && Icons[item.icon as keyof typeof Icons] ? Icons[item.icon as keyof typeof Icons] : Icons.logo;
                 return item?.items && item?.items?.length > 0 ? (
                   <Collapsible

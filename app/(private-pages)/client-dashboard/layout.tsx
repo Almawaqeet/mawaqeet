@@ -7,7 +7,7 @@ import { ACCOUNT_TYPES } from "@/constants/generic";
 
 
 
-export default function DashboardLayoutAdmin({
+export default function DashboardLayoutClient({
   children
 }: {
   children: React.ReactNode;
@@ -22,13 +22,11 @@ export default function DashboardLayoutAdmin({
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
-
-
   if (!session) {
     return redirect(CLIENT_ROUTES.PublicPages.auth.login);
   }
 
-  if (session.user.accountType !== ACCOUNT_TYPES.ADMIN) {
+  if (session.user.accountType !== ACCOUNT_TYPES.USER) {
     return redirect(CLIENT_ROUTES.PublicPages.auth.login);
   }
 }

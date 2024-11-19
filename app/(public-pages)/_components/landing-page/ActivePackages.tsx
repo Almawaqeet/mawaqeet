@@ -8,86 +8,12 @@ import { Package } from '@/app/(public-pages)/_components/packages-page/Package'
 
 import { useGetAllActivePackages } from '@/api/services/packages';
 import PackageSkeleton from '@/components/skeletons/public-pages/PackageSkeleton';
+import { packages } from '@/constants/data';
 
 const ActivePackages = () => {
 
     //todo: update this when making actual api call
     const { data: packageoo, isLoading, isError } = useGetAllActivePackages();
-    console.log('packageoo', packageoo)
-    const packages = [
-        {
-      id: 1,
-      type: 'HAJJ',
-      tier: 'STANDARD',
-      cohort: 'HAJJ COHORT 2024',
-      price: 'NGN 1,800,000.00',
-      paymentPlan: 'Payable in installment',
-      features: [
-        'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
-        'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
-      ]
-    },
-    {
-      id: 2,
-      type: 'HAJJ',
-      tier: 'VIP',
-      cohort: 'HAJJ COHORT 2024',
-      price: 'NGN 2,500,000.00',
-      paymentPlan: 'Payable in installment',
-      features: [
-        'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
-        'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
-      ]
-    },
-    {
-      id: 3,
-      type: 'HAJJ',
-      tier: 'DELUXE',
-      cohort: 'HAJJ COHORT 2024',
-      price: 'NGN 3,000,000.00',
-      paymentPlan: 'Payable in installment',
-      features: [
-        'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
-        'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
-      ]
-    },
-    {
-      id: 4,
-      type: 'UMRAH',
-      tier: 'STANDARD',
-      cohort: 'UMRAH COHORT 2024',
-      price: 'NGN 1,000,000.00',
-      paymentPlan: 'Payable in installment',
-      features: [
-        'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
-        'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
-      ]
-    },
-    {
-      id: 5,
-      type: 'UMRAH',
-      tier: 'VIP',
-      cohort: 'UMRAH COHORT 2024',
-      price: 'NGN 1,400,000.00',
-      paymentPlan: 'Payable in installment',
-      features: [
-        'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
-        'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
-      ]
-    },
-    {
-      id: 6,
-      type: 'UMRAH',
-      tier: 'DELUXE',
-      cohort: 'UMRAH COHORT 2024',
-      price: 'NGN 1,800,000.00',
-      paymentPlan: 'Payable in installment',
-      features: [
-        'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
-        'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
-      ]
-    }
-  ];
   return (
     <section className={`w-full ${whiteSpaces?.paddingX} py-4 md:py-16 bg-[#1A1A1A]`}>
       <div className="text-center mb-14 w-full flex  items-center justify-between">

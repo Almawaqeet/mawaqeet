@@ -1,3 +1,4 @@
+import { CLIENT_ROUTES } from '@/lib/routes';
 import { NavItem } from '@/types';
 
 export type User = {
@@ -123,52 +124,52 @@ export type Product = {
 
 // team members/management,payment,settings,profile
 
-export const navItems: NavItem[] = [
+export const clientDashboardNavItems: NavItem[] = [
   {
     title: 'Dashboard',
-    url: '/dashboard/overview',
+    url: CLIENT_ROUTES.PrivatePages.clientDashboard.overview,
     icon: 'dashboard',
     isActive: false,
     items: [] // Empty array as there are no child items for Dashboard
   },
+//   {
+//     title: 'Customers',
+//     url: CLIENT_ROUTES.PrivatePages.clientDashboard.customers,
+//     icon: 'user',
+//     isActive: false,
+//     items: [] // No child items
+//   },
+//   {
+//     title: 'Team Management',
+//     url: CLIENT_ROUTES.PrivatePages.clientDashboard.team,
+//     icon: 'user',
+//     isActive: false,
+//     items: [] // No child items
+//   },
   {
-    title: 'Customers',
-    url: '/dashboard/customer',
-    icon: 'user',
+    title: 'Packages',
+    url: CLIENT_ROUTES.PrivatePages.clientDashboard.products,
+    icon: 'product',
     isActive: false,
     items: [] // No child items
   },
-  {
-    title: 'Team Management',
-    url: '/dashboard/team',
-    icon: 'user',
-    isActive: false,
-    items: [] // No child items
-  },
-  // {
-  //   title: 'Product',
-  //   url: '/dashboard/product',
-  //   icon: 'product',
-  //   isActive: false,
-  //   items: [] // No child items
-  // },
-  {
-    title: 'Package',
-    url: '/dashboard/package',
-    icon: 'userPen',
-    isActive: false,
-    items: [] // No child items
-  },
-  {
-    title: 'Payment',
-    url: '/dashboard/payment',
-    icon: 'userPen',
-    isActive: false,
-    items: [] // No child items
-  },
+//   {
+//     title: 'Package',
+//     url: CLIENT_ROUTES.PrivatePages.clientDashboard.packages,
+//     icon: 'userPen',
+//     isActive: false,
+//     items: [] // No child items
+//   },
+//   {
+//     title: 'Payments',
+//     url: CLIENT_ROUTES.PrivatePages.clientDashboard.payment,
+//     icon: 'userPen',
+//     isActive: false,
+//     items: [] // No child items
+//   },
   {
     title: 'Profile',
-    url: '/dashboard/profile',
+    url: CLIENT_ROUTES.PrivatePages.clientDashboard.profile,
     icon: 'userPen',
     isActive: false,
     items: [] // No child items
@@ -192,11 +193,148 @@ export const navItems: NavItem[] = [
   //     }
   //   ]
   // },
+//   {
+//     title: 'Settings',
+//     url: '/dashboard/',
+//     icon: 'kanban',
+//     isActive: false,
+//     items: [] // No child items
+//   }
+];
+
+
+export const adminDashboardNavItems: NavItem[] = [
+  {
+    title: 'Dashboard',
+    url: CLIENT_ROUTES.PrivatePages.adminDashboard.overview,
+    icon: 'dashboard',
+    isActive: false,
+    items: [] // Empty array as there are no child items for Dashboard
+  },
+  {
+    title: 'Customers',
+    url: CLIENT_ROUTES.PrivatePages.adminDashboard.customers,
+    icon: 'user',
+    isActive: false,
+    items: [] // No child items
+  },
+  {
+    title: 'Team Management',
+    url: CLIENT_ROUTES.PrivatePages.adminDashboard.team,
+    icon: 'user',
+    isActive: false,
+    items: [] // No child items
+  },
+  {
+    title: 'Product',
+    url: CLIENT_ROUTES.PrivatePages.adminDashboard.products,
+    icon: 'product',
+    isActive: false,
+    items: [] // No child items
+  },
+  {
+    title: 'Package',
+    url: CLIENT_ROUTES.PrivatePages.adminDashboard.packages,
+    icon: 'userPen',
+    isActive: false,
+    items: [] // No child items
+  },
+  {
+    title: 'Payment',
+    url: CLIENT_ROUTES.PrivatePages.adminDashboard.payment,
+    icon: 'userPen',
+    isActive: false,
+    items: [] // No child items
+  },
+  {
+    title: 'Profile',
+    url: CLIENT_ROUTES.PrivatePages.adminDashboard.profile,
+    icon: 'userPen',
+    isActive: false,
+    items: [] // No child items
+  },
   {
     title: 'Settings',
-    url: '/dashboard/settings',
+    url: '/dashboard/',
     icon: 'kanban',
     isActive: false,
     items: [] // No child items
   }
+];
+
+
+
+export const packages = [
+    {
+  id: 1,
+  type: 'HAJJ',
+  tier: 'STANDARD',
+  cohort: 'HAJJ COHORT 2024',
+  price: 'NGN 1,800,000.00',
+  paymentPlan: 'Payable in installment',
+  features: [
+    'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
+    'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
+  ]
+},
+{
+  id: 2,
+  type: 'HAJJ',
+  tier: 'VIP',
+  cohort: 'HAJJ COHORT 2024',
+  price: 'NGN 2,500,000.00',
+  paymentPlan: 'Payable in installment',
+  features: [
+    'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
+    'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
+  ]
+},
+{
+  id: 3,
+  type: 'HAJJ',
+  tier: 'DELUXE',
+  cohort: 'HAJJ COHORT 2024',
+  price: 'NGN 3,000,000.00',
+  paymentPlan: 'Payable in installment',
+  features: [
+    'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
+    'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
+  ]
+},
+{
+  id: 4,
+  type: 'UMRAH',
+  tier: 'STANDARD',
+  cohort: 'UMRAH COHORT 2024',
+  price: 'NGN 1,000,000.00',
+  paymentPlan: 'Payable in installment',
+  features: [
+    'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
+    'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
+  ]
+},
+{
+  id: 5,
+  type: 'UMRAH',
+  tier: 'VIP',
+  cohort: 'UMRAH COHORT 2024',
+  price: 'NGN 1,400,000.00',
+  paymentPlan: 'Payable in installment',
+  features: [
+    'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
+    'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
+  ]
+},
+{
+  id: 6,
+  type: 'UMRAH',
+  tier: 'DELUXE',
+  cohort: 'UMRAH COHORT 2024',
+  price: 'NGN 1,800,000.00',
+  paymentPlan: 'Payable in installment',
+  features: [
+    'Luxurious rooms with en-suite bathrooms meticulously designed for your comfort',
+    'Unparalleled proximity to the Haram, ensuring a seamless spiritual journey'
+  ]
+}
 ];
