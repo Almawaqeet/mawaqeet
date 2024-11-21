@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useFormik } from "formik";
@@ -17,13 +17,19 @@ const Login = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
+  useEffect(() => {
+    if (status === "authenticated" && session?.user?.accountType) {
+      handleLoginRedirect();
+    }
+  }, [session, status]);
 
   const handleLoginRedirect = () => {
-    if (session?.user?.accountType === ACCOUNT_TYPES.ADMIN) {
+    if (!session?.user?.accountType) return;
+    if (session.user.accountType === ACCOUNT_TYPES.ADMIN) {
       router.push(CLIENT_ROUTES.PrivatePages.adminDashboard.overview);
-    } else if (session?.user?.accountType === ACCOUNT_TYPES.USER) {
+    } else if (session.user.accountType === ACCOUNT_TYPES.USER) {
       router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.overview);
     }
   }

@@ -30,15 +30,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href={metadata?.icons as string} />
       </head>
       <body className={`${poppins.className}`}>
-        <NextTopLoader showSpinner={false} />
-        <Toaster />
-        <ReactQueryProvider>
-          <NextAuthProvider>
-            <div className="max-w-screen-2xl mx-auto bg-[#F1EBE5] text-brand-color">
+        <NextAuthProvider>
+          <ReactQueryProvider>
+            <NextTopLoader showSpinner={false} color="#4B3938" />
+            <Toaster />
+              <div className="max-w-screen-2xl mx-auto bg-[#F1EBE5] text-brand-color suppressHydrationWarning={true}">
               {children}
             </div>
-          </NextAuthProvider>
-        </ReactQueryProvider>
+          </ReactQueryProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

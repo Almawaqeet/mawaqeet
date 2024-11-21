@@ -1,5 +1,11 @@
 import { toast } from 'sonner';
-import { IError } from './interface/api';
+
+
+interface IError {
+  error: string;
+  message: string;
+  status: number;
+}
 
 const processError = (err: IError) => {
   const { error, message, status } = err;
