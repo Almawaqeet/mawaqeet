@@ -227,8 +227,8 @@ export const adminDashboardNavItems: NavItem[] = [
   },
   {
     title: 'Packages',
-    url: CLIENT_ROUTES.PrivatePages.adminDashboard.products,
-    icon: 'product',
+    url: CLIENT_ROUTES.PrivatePages.adminDashboard.packages,
+    icon: 'package',
     isActive: false,
     items: [] // No child items
   },

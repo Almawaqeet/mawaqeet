@@ -21,9 +21,8 @@ export const authOptions: NextAuthOptions = {
           });
 
           if (!res.ok) {
-            const errorText = await res.text();
-            console.error("Error Response Text:", errorText);
-            throw new Error(`Request failed with status ${res.status}: ${errorText}`);
+            const errorData = await res.json();
+            throw new Error(errorData?.error || `Request failed with status ${res.status}`);
           }
 
           const contentType = res.headers.get("content-type");

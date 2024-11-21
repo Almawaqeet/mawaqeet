@@ -1,4 +1,6 @@
 import axios, { AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { getSession } from 'next-auth/react';
+
 
 // Create axios instance with base configuration
 const axiosInstance = axios.create({
@@ -10,8 +12,9 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem('access_token');
+  async (config: InternalAxiosRequestConfig) => {
+    const session = await getSession();
+    const token = session?.user?.accessToken;
     if (token) {
       config.headers.set('Authorization', `Bearer ${token}`);
     }
@@ -39,8 +42,7 @@ axiosInstance.interceptors.response.use(
 
       // Handle 401 Unauthorized errors
       if (error.response.status === 401) {
-        localStorage.removeItem('access_token');
-        // Redirect to login or handle auth error
+        
       }
     } else if (error.request) {
       // Request made but no response received
