@@ -60,7 +60,7 @@ export function DataTable<TData, TValue>({
     pageSize: pageSize
   };
 
-  const pageCount = Math.ceil(totalItems / pageSize);
+  const pageCount = Math.ceil((totalItems ?? 0) / pageSize);
 
   const handlePaginationChange = (
     updaterOrValue:
@@ -77,7 +77,7 @@ export function DataTable<TData, TValue>({
   };
 
   const table = useReactTable({
-    data,
+    data: data ?? [],
     columns,
     pageCount: pageCount,
     state: {
@@ -95,9 +95,9 @@ export function DataTable<TData, TValue>({
       <ScrollArea className="h-[calc(80vh-220px)] rounded-md border md:h-[calc(90dvh-240px)]">
         <Table className="relative">
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups()?.map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
+                {headerGroup.headers?.map((header) => (
                   <TableHead key={header.id}>
                     {header.isPlaceholder
                       ? null
@@ -117,7 +117,7 @@ export function DataTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                 >
-                  {row.getVisibleCells().map((cell) => (
+                  {row.getVisibleCells()?.map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -130,7 +130,7 @@ export function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={columns.length}
+                  colSpan={columns?.length ?? 0}
                   className="h-24 text-center"
                 >
                   No results.
@@ -145,13 +145,13 @@ export function DataTable<TData, TValue>({
       <div className="flex flex-col items-center justify-end gap-2 space-x-2 py-4 sm:flex-row">
         <div className="flex w-full items-center justify-between">
           <div className="flex-1 text-sm text-muted-foreground">
-            {totalItems > 0 ? (
+            {(totalItems ?? 0) > 0 ? (
               <>
                 Showing{' '}
                 {paginationState.pageIndex * paginationState.pageSize + 1} to{' '}
                 {Math.min(
                   (paginationState.pageIndex + 1) * paginationState.pageSize,
-                  totalItems
+                  totalItems ?? 0
                 )}{' '}
                 of {totalItems} entries
               </>
@@ -170,11 +170,11 @@ export function DataTable<TData, TValue>({
                   table.setPageSize(Number(value));
                 }}
               >
-                <SelectTrigger className="h-8 w-[70px]">
+                <SelectTrigger className="h-8 w-[70px] text-white">
                   <SelectValue placeholder={paginationState.pageSize} />
                 </SelectTrigger>
                 <SelectContent side="top">
-                  {pageSizeOptions.map((pageSize) => (
+                  {pageSizeOptions?.map((pageSize) => (
                     <SelectItem key={pageSize} value={`${pageSize}`}>
                       {pageSize}
                     </SelectItem>
@@ -186,7 +186,7 @@ export function DataTable<TData, TValue>({
         </div>
         <div className="flex w-full items-center justify-between gap-2 sm:justify-end">
           <div className="flex w-[150px] items-center justify-center text-sm font-medium">
-            {totalItems > 0 ? (
+            {(totalItems ?? 0) > 0 ? (
               <>
                 Page {paginationState.pageIndex + 1} of {table.getPageCount()}
               </>
@@ -198,7 +198,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to first page"
               variant="outline"
-              className="hidden h-8 w-8 p-0 lg:flex"
+              className="hidden h-8 w-8 p-0 lg:flex text-white"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
@@ -207,7 +207,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to previous page"
               variant="outline"
-              className="h-8 w-8 p-0"
+              className="h-8 w-8 p-0 text-white"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
@@ -216,7 +216,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to next page"
               variant="outline"
-              className="h-8 w-8 p-0"
+              className="h-8 w-8 p-0 text-white"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
@@ -225,7 +225,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to last page"
               variant="outline"
-              className="hidden h-8 w-8 p-0 lg:flex"
+              className="hidden h-8 w-8 p-0 lg:flex text-white"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >

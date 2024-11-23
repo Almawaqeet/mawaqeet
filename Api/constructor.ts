@@ -9,6 +9,10 @@ type QueryConfig<TQueryKey, TData> = {
   options?: Omit<AxiosRequestConfig, 'url' | 'method'>;
 };
 
+type QueryConfigWithParams<TQueryKey, TData> = QueryConfig<TQueryKey, TData> & {
+  params?: Record<string, string | number | boolean | null>;
+};
+
 type MutationConfig<TVariables, TData> = {
   apiRoute: string;
   method: 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -49,6 +53,56 @@ export function useAppQuery<TData = unknown, TError = unknown, TQueryKey extends
     staleTime: 1000 * 60 * 5, // Cache for 5 minutes
   });
 }
+
+
+export function useAppQueryWithPaginationAndParams<TData = unknown, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(
+    config: QueryConfigWithParams<TQueryKey, TData>
+): UseQueryResult<TData, TError> {
+  const { apiRoute, queryKey, options, params } = config;
+
+  return useQuery({
+    queryKey,
+    queryFn: async () => {
+      const session = await getSession();
+      const token = session?.user?.accessToken ?? '';
+
+
+      const queryParams = params ? Object.entries(params).reduce((acc, [key, value]) => {
+        if (value !== null && value !== undefined) {
+          acc[key] = typeof value === 'string' ? value.toLowerCase() : value;
+        }
+        return acc;
+      }, {} as Record<string, any>) : undefined;
+
+      const response = await axiosInstance
+        .get<{
+          count: number;
+          next: string | null;
+          previous: string | null;
+          results: TData[];
+        }>(apiRoute, {
+          ...options,
+          params: queryParams,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+      return response?.data ?? {
+        count: 0,
+        next: null,
+        previous: null,
+        results: []
+      };
+    },
+    retry: 3,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+
+
+
 
 export function useAppMutation<TData = unknown, TError = unknown, TVariables = unknown>(
   config: MutationConfig<TVariables, TData>

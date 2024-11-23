@@ -8,13 +8,8 @@ import { cn } from '@/lib/utils';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import ProductListingPage from './_components/product-listing';
 import PackageTableAction from './_components/package-tables/package-table-action';
 import { SearchParams } from 'nuqs';
-
-export const metadata = {
-  title: 'Dashboard: Packages'
-};
 
 type pageProps = {
   searchParams: SearchParams;
@@ -48,7 +43,7 @@ export default async function Page({ searchParams }: pageProps) {
           key={key}
           fallback={<DataTableSkeleton columnCount={5} rowCount={10} />}
         >
-          <ProductListingPage />
+            Pack
         </Suspense>
       </div>
     </PageContainer>

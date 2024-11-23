@@ -51,7 +51,7 @@ const initialValues = {
 
 export default function NewPackagePage() {
   const [currentStep, setCurrentStep] = useState(1);
-  const { mutate: createPackage, isPending } = useCreatePackage({} as Package); // Remove initialValues here
+  const { mutate: createPackage, isPending } = useCreatePackage();
   const { showToast } = useAppToast()
 
   const isBasicDetailsComplete = (values: typeof initialValues) => {
@@ -63,7 +63,6 @@ export default function NewPackagePage() {
   };
 
   const handleSubmit = async (values: typeof initialValues) => {
-    // Validate required fields before submission
     if (!values.name || !values.description || !values.package_type || !values.expiry_date) {
       showToast({
         title: "Error",
@@ -87,7 +86,7 @@ export default function NewPackagePage() {
     }
 
     try {
-      await createPackage(values, {
+      createPackage(values, {
         onSuccess: () => {
           showToast({
             title: "Success",

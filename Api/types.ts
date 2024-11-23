@@ -63,3 +63,11 @@ export interface LoginResponse {
     email: string;
     account_type: "ADMIN" | "USER";
 }
+
+
+export interface PaginatedResponse<T> {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: T[];
+}

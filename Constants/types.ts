@@ -1,10 +1,10 @@
 //todo: change this later. its here for props
-interface Package {
+export interface Package {
   id?: string;
   package_type: 'hajj' | 'umrah';
   description: string;
   name: string;
-  package_prices: Array<PackagePrice>;
+  price: Array<PackagePrice>;
   umrah_batches?: Array<UmrahBatch>;
   category_descriptions: Array<CategoryDescription>;
   slug?: string;
@@ -17,17 +17,34 @@ interface Package {
 }
 
 
-interface UmrahBatch {
+export interface UmrahBatch {
+  id?: string;
   batch_status: string;
   batch_start_date: string;
 }
 
-interface CategoryDescription {
+export interface CategoryDescription {
+  id?: string;
   category: string;
   description: string;
 }
 
-interface PackagePrice {
+export interface PackagePrice {
+  id?: string;
   price: string;
   category: string;
+  weekly_installment_fee?: string;
+  monthly_installment_fee?: string;
 }
+
+
+
+export type SegregatedPackage = {
+    id?: string;
+    type: 'hajj' | 'umrah';
+    tier: string;
+    cohort: string;
+    price: string;
+    paymentPlan: string;
+    features: string[];
+  }

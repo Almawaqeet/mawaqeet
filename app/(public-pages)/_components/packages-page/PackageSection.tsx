@@ -1,90 +1,86 @@
-"use client"
+"use client";
 
 import React from 'react';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 import AppHeading from '@/components/reusables/AppHeading';
 import { Package } from '@/app/(public-pages)/_components/packages-page/Package';
 import { FaSearch } from 'react-icons/fa';
-
-
+import { useGetAllActivePackages } from '@/api/services/packages';
+import { segregatePackageByItsPriceCategory } from '@/lib/utils';
+import PackageSkeleton from '@/components/skeletons/public-pages/PackageSkeleton';
+import { PackageIcon } from 'lucide-react';
 
 const PackageSection = () => {
-  const packages = [
-    {
-      id: 1,
-      type: 'HAJJ',
-      tier: 'STANDARD',
-      cohort: '2024',
-      price: 'NGN 3,500,000',
-      paymentPlan: 'Flexible payment options available',
-      features: [
-        'Luxurious rooms with en-suite bathrooms',
-        'Close proximity to the Haram',
-        'Dedicated support team',
-        'All meals included',
-        'Ground transportation',
-        'Visa processing assistance',
-        'Pre-departure orientation'
-      ]
-    },
-    {
-      id: 2,
-      type: 'HAJJ',
-      tier: 'VIP',
-      cohort: 'Hajj 2024',
-      price: 'NGN 4,500,000',
-      paymentPlan: 'Flexible payment options available',
-      features: [
-        'Premium rooms with en-suite bathrooms',
-        'Very close proximity to the Haram',
-        '24/7 dedicated support team',
-        'Premium dining options',
-        'Private ground transportation',
-        'Priority visa processing',
-        'Comprehensive orientation program',
-        'Exclusive prayer areas'
-      ]
-    },
-    {
-      id: 3,
-      type: 'HAJJ',
-      tier: 'DELUXE',
-      cohort: '2024',
-      price: 'NGN 5,500,000',
-      paymentPlan: 'Flexible payment options available',
-      features: [
-        'Luxury suite accommodation',
-        'Closest proximity to the Haram',
-        'VIP support service',
-        'Gourmet dining experience',
-        'Private luxury transportation',
-        'Express visa processing',
-        'Personal guide services',
-        'Access to VIP facilities',
-        'Premium prayer locations'
-      ]
-    }
-  ];
-
-  const [activeTab, setActiveTab] = React.useState('HAJJ');
+  const [activeTab, setActiveTab] = React.useState<'HAJJ' | 'UMRAH'>('HAJJ');
   const [searchTerm, setSearchTerm] = React.useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = React.useState('');
 
-  const filteredPackages = packages?.filter(pkg =>
-    pkg.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    pkg.tier.toLowerCase().includes(searchTerm.toLowerCase())
+  // Custom debounce implementation
+  const debounceSearch = React.useCallback((callback: (term: string) => void, delay: number) => {
+    let timeoutId: NodeJS.Timeout;
+    return (term: string) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => callback(term), delay);
+    };
+  }, []);
+
+  // Initialize debounced search with useCallback
+  const debouncedSetSearch = React.useCallback(
+    debounceSearch((term: string) => setDebouncedSearchTerm(term), 300),
+    []
+  );
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    debouncedSetSearch(term);
+  };
+
+  const handleTabChange = (tab: 'HAJJ' | 'UMRAH') => {
+    setActiveTab(tab);
+    setSearchTerm('');
+    setDebouncedSearchTerm(''); // Reset debounced search term on tab change
+  };
+
+  const { data: packages, isLoading } = useGetAllActivePackages({
+    package_type: activeTab,
+    search: debouncedSearchTerm.trim() || undefined,
+  });
+
+  // Memoize segregated packages to prevent unnecessary recalculations
+  const segregatedPackages = React.useMemo(() => {
+    if (!packages?.results) return [];
+    // Create a new array from the results to avoid mutation
+    const results = [...packages.results];
+    return segregatePackageByItsPriceCategory(results);
+  }, [packages?.results]);
+
+  const EmptyState = () => (
+    <div className="col-span-full flex flex-col items-center justify-center p-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
+      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+        <PackageIcon className="w-8 h-8 text-gray-400" />
+      </div>
+      <h3 className="text-lg font-semibold text-gray-700 mb-1">No Packages Found</h3>
+      <p className="text-sm text-gray-500 text-center max-w-sm">
+        {debouncedSearchTerm
+          ? "No packages match your search criteria. Try different keywords."
+          : "There are currently no packages available for this category."}
+      </p>
+    </div>
   );
 
   return (
-    <section className={`w-full ${whiteSpaces?.paddingX} py-16`}>
+    <section className={`w-full ${whiteSpaces?.paddingX ?? ''} py-16`}>
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center mb-12">
           <AppHeading variant="h2" className="text-3xl md:text-4xl text-center mb-4">
             Our Packages
           </AppHeading>
 
+          {/* Tabs for switching between categories */}
           <div className="flex gap-4 p-2 bg-gray-100 rounded-full mb-8">
             <button
-              onClick={() => setActiveTab('HAJJ')}
+              onClick={() => handleTabChange('HAJJ')}
               className={`px-6 py-2 rounded-full transition-colors ${
                 activeTab === 'HAJJ' ? 'bg-brand-color text-white' : 'hover:bg-gray-200'
               }`}
@@ -92,7 +88,7 @@ const PackageSection = () => {
               Hajj
             </button>
             <button
-              onClick={() => setActiveTab('UMRAH')}
+              onClick={() => handleTabChange('UMRAH')}
               className={`px-6 py-2 rounded-full transition-colors ${
                 activeTab === 'UMRAH' ? 'bg-brand-color text-white' : 'hover:bg-gray-200'
               }`}
@@ -101,12 +97,13 @@ const PackageSection = () => {
             </button>
           </div>
 
+          {/* Search input */}
           <div className="w-full max-w-md mb-8">
             <div className="relative">
               <input
                 type="text"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={handleSearch}
                 placeholder="Search for a package"
                 className="w-full px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-brand-color"
               />
@@ -117,10 +114,21 @@ const PackageSection = () => {
           </div>
         </div>
 
+        {/* Package grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPackages?.map((pkg, index) => (
-            <Package key={pkg.id} pkg={pkg} theme='light'/>
-          ))}
+          {isLoading ? (
+            <>
+              {[...Array(6)].map((_, index) => (
+                <PackageSkeleton key={index} theme="light" />
+              ))}
+            </>
+          ) : segregatedPackages?.length > 0 ? (
+            segregatedPackages.map((pkg) => (
+              <Package key={pkg.id} pkg={pkg} theme="light" />
+            ))
+          ) : (
+            <EmptyState />
+          )}
         </div>
       </div>
     </section>

@@ -1,13 +1,7 @@
+import { SegregatedPackage } from "@/constants/types";
+
 interface PackageProps {
-    pkg: {
-      id: number;
-      type: string;
-      tier: string;
-      cohort: string;
-      price: string;
-      paymentPlan: string;
-      features: string[];
-    };
+    pkg: SegregatedPackage;
     theme?: 'light' | 'dark';
   }
 
