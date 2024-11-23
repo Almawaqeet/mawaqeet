@@ -16,7 +16,7 @@ export const routes = {
     packages: {
         showAllActivePackages: 'core/customer/show-all-active-packages/',
         showAllInactivePackages: 'core/admin/get-inactive-packages/',
-        createPackage: '/api/core/admin/create-package/',
+        createPackage: 'core/admin/create-package/',
     },
 
 

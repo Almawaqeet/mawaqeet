@@ -1,6 +1,5 @@
 import axios, { AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { getSession } from 'next-auth/react';
-
+import { getSession, signOut } from 'next-auth/react';
 
 // Create axios instance with base configuration
 const axiosInstance = axios.create({
@@ -15,9 +14,7 @@ axiosInstance.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     const session = await getSession();
     const token = session?.user?.accessToken;
-    if (token) {
-      config.headers.set('Authorization', `Bearer ${token}`);
-    }
+    config.headers.set('Authorization', `Bearer ${token}`);
     return config;
   },
   (error: AxiosError) => {
@@ -42,7 +39,7 @@ axiosInstance.interceptors.response.use(
 
       // Handle 401 Unauthorized errors
       if (error.response.status === 401) {
-        
+        signOut()
       }
     } else if (error.request) {
       // Request made but no response received

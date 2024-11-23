@@ -16,7 +16,7 @@ export const useGetAllInactivePackages = () => {
 }
 
 
-export const createPackage = (data: Package) => {
+export const useCreatePackage = (data: Package) => {
     return useAppMutation<Package>({
         apiRoute: routes.packages.createPackage,
         method: 'POST',

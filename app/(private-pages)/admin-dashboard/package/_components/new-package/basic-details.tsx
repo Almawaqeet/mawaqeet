@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion';
 import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import RichTextEditor from '@/components/ui/rich-text-editor';
 import { Field } from 'formik';
-
+import AppTextInput from '@/components/reusables/AppTextInput';
 
 
 export const BasicDetailsForm = ({ errors, touched, values, setFieldValue }: any) => (
@@ -19,9 +18,11 @@ export const BasicDetailsForm = ({ errors, touched, values, setFieldValue }: any
         <div className="space-y-2">
           <Label htmlFor="name" className="text-sm">Package Name</Label>
           <Field
-            as={Input}
+            as={AppTextInput}
             id="name"
             name="name"
+            onChange={(e: any) => setFieldValue('name', e.target.value)}
+            value={values.name}
             placeholder="Enter package name"
             className={`text-base transition-all focus:ring-2 focus:ring-blue-500 ${
               errors.name && touched.name ? 'border-red-500' : ''

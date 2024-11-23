@@ -1,5 +1,7 @@
 import { useQuery, useMutation, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
 import axios, { AxiosRequestConfig } from 'axios';
+import { getSession } from 'next-auth/react';
+
 
 type QueryConfig<TQueryKey, TData> = {
   queryKey: TQueryKey;
@@ -31,7 +33,16 @@ export function useAppQuery<TData = unknown, TError = unknown, TQueryKey extends
   return useQuery({
     queryKey,
     queryFn: async () => {
-      const response = await axiosInstance.get<TData>(apiRoute, options);
+      const session = await getSession();
+      const token = session?.user?.accessToken ?? '';
+
+      const response = await axiosInstance
+        .get<TData>(apiRoute, {
+          ...options,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
       return response?.data;
     },
     retry: 3,
@@ -46,11 +57,17 @@ export function useAppMutation<TData = unknown, TError = unknown, TVariables = u
 
   return useMutation({
     mutationFn: async (variables: TVariables) => {
+      const session = await getSession();
+      const token = session?.user?.accessToken ?? '';
+
       const response = await axiosInstance.request<TData>({
         url: apiRoute,
         method,
         data: body ?? variables,
         ...options,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       return response?.data;
     },
