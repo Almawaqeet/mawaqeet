@@ -98,3 +98,23 @@ export const segregatePackageByItsPriceCategory = (packages: Array<Package>): Se
 
   return segregatedPackages;
 }
+
+
+
+
+export const addSearchParamsToUrl = (url: string, params: Record<string, string>) => {
+  const searchParams = new URLSearchParams(params);
+  return `${url}?${searchParams.toString()}`;
+}
+
+
+export const removeSearchParamsFromUrl = (url: string, params: Record<string, string>) => {
+  const searchParams = new URLSearchParams(params);
+  return url.split('?')[0];
+}
+
+
+export const getSearchParamsFromUrl = (url: string) => {
+  const searchParams = new URLSearchParams(url.split('?')[1]);
+  return Object.fromEntries(searchParams.entries());
+}

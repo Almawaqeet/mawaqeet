@@ -9,50 +9,55 @@ import { useGetAllActivePackages } from '@/api/services/packages';
 import { segregatePackageByItsPriceCategory } from '@/lib/utils';
 import PackageSkeleton from '@/components/skeletons/public-pages/PackageSkeleton';
 import { PackageIcon } from 'lucide-react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { addSearchParamsToUrl } from '@/lib/utils';
+import { PACKAGE_TYPES } from '@/constants/generic';
 
 const PackageSection = () => {
-  const [activeTab, setActiveTab] = React.useState<'HAJJ' | 'UMRAH'>('HAJJ');
-  const [searchTerm, setSearchTerm] = React.useState('');
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = React.useState('');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // Custom debounce implementation
-  const debounceSearch = React.useCallback((callback: (term: string) => void, delay: number) => {
-    let timeoutId: NodeJS.Timeout;
-    return (term: string) => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => callback(term), delay);
-    };
-  }, []);
+  const currentTab = searchParams?.get('type')?.toUpperCase() as typeof PACKAGE_TYPES[keyof typeof PACKAGE_TYPES];
+  const currentSearch = searchParams?.get('search') || '';
 
-  // Initialize debounced search with useCallback
-  const debouncedSetSearch = React.useCallback(
-    debounceSearch((term: string) => setDebouncedSearchTerm(term), 300),
-    []
-  );
+  const [activeTab, setActiveTab] = React.useState<typeof PACKAGE_TYPES[keyof typeof PACKAGE_TYPES]>(currentTab || PACKAGE_TYPES.HAJJ);
+  const [searchTerm, setSearchTerm] = React.useState(currentSearch);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Update URL with search params
+  const updateSearchParams = React.useCallback((type: string, search?: string) => {
+    const newUrl = addSearchParamsToUrl(pathname ?? '/', {
+      type: type.toLowerCase(),
+      search: search || ''
+    });
+    router.push(newUrl);
+  }, [pathname, router]);
+
+  // Debounced search handler
+  const handleSearch = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
     setSearchTerm(term);
-    debouncedSetSearch(term);
-  };
+    const timeoutId = setTimeout(() => {
+      updateSearchParams(activeTab, term.trim() || undefined);
+    }, 300);
+    return () => clearTimeout(timeoutId);
+  }, [activeTab, updateSearchParams]);
 
-  const handleTabChange = (tab: 'HAJJ' | 'UMRAH') => {
+  const handleTabChange = React.useCallback((tab: typeof PACKAGE_TYPES[keyof typeof PACKAGE_TYPES]) => {
     setActiveTab(tab);
     setSearchTerm('');
-    setDebouncedSearchTerm(''); // Reset debounced search term on tab change
-  };
+    updateSearchParams(tab);
+  }, [updateSearchParams]);
 
   const { data: packages, isLoading } = useGetAllActivePackages({
     package_type: activeTab,
-    search: debouncedSearchTerm.trim() || undefined,
+    search: searchTerm.trim() || undefined,
   });
 
-  // Memoize segregated packages to prevent unnecessary recalculations
+  // Memoize segregated packages
   const segregatedPackages = React.useMemo(() => {
-    if (!packages?.results) return [];
-    // Create a new array from the results to avoid mutation
-    const results = [...packages.results];
-    return segregatePackageByItsPriceCategory(results);
+    if (!packages?.results?.length) return [];
+    return segregatePackageByItsPriceCategory([...packages.results]);
   }, [packages?.results]);
 
   const EmptyState = () => (
@@ -62,7 +67,7 @@ const PackageSection = () => {
       </div>
       <h3 className="text-lg font-semibold text-gray-700 mb-1">No Packages Found</h3>
       <p className="text-sm text-gray-500 text-center max-w-sm">
-        {debouncedSearchTerm
+        {searchTerm
           ? "No packages match your search criteria. Try different keywords."
           : "There are currently no packages available for this category."}
       </p>
@@ -82,7 +87,7 @@ const PackageSection = () => {
             <button
               onClick={() => handleTabChange('HAJJ')}
               className={`px-6 py-2 rounded-full transition-colors ${
-                activeTab === 'HAJJ' ? 'bg-brand-color text-white' : 'hover:bg-gray-200'
+                activeTab === PACKAGE_TYPES.HAJJ ? 'bg-brand-color text-white' : 'hover:bg-gray-200'
               }`}
             >
               Hajj
@@ -90,7 +95,7 @@ const PackageSection = () => {
             <button
               onClick={() => handleTabChange('UMRAH')}
               className={`px-6 py-2 rounded-full transition-colors ${
-                activeTab === 'UMRAH' ? 'bg-brand-color text-white' : 'hover:bg-gray-200'
+                activeTab === PACKAGE_TYPES.UMRAH ? 'bg-brand-color text-white' : 'hover:bg-gray-200'
               }`}
             >
               Umrah
@@ -118,13 +123,13 @@ const PackageSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {isLoading ? (
             <>
-              {[...Array(6)].map((_, index) => (
+              {[...Array(3)].map((_, index) => (
                 <PackageSkeleton key={index} theme="light" />
               ))}
             </>
           ) : segregatedPackages?.length > 0 ? (
-            segregatedPackages.map((pkg) => (
-              <Package key={pkg.id} pkg={pkg} theme="light" />
+            segregatedPackages.map((pkg, index) => (
+              <Package key={index} pkg={pkg} theme="light" />
             ))
           ) : (
             <EmptyState />
