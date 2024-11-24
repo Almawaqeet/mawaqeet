@@ -54,6 +54,7 @@ export default function NewPackagePage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [dialogStep, setDialogStep] = useState(1);
   const [showDialog, setShowDialog] = useState(true);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const { mutate: createPackage, isPending } = useCreatePackage();
   const { showToast } = useAppToast()
 
@@ -102,11 +103,7 @@ export default function NewPackagePage() {
     try {
       createPackage(values, {
         onSuccess: () => {
-          showToast({
-            title: "Success",
-            description: "Package created successfully",
-            variant: "default"
-          });
+          setShowSuccessDialog(true);
         },
         onError: (error: unknown) => {
           const err = error as { data?: { message?: string } };
@@ -211,6 +208,26 @@ export default function NewPackagePage() {
           setDialogStep(1);
         }}
       />
+
+      <AppDialogBox
+        open={showSuccessDialog}
+        onOpenChange={setShowSuccessDialog}
+        title="Package Created Successfully"
+        description={
+          <div className="space-y-4">
+            <p>Your package has been created successfully but is currently inactive.</p>
+            <p>To make it visible to all users, you'll need to activate it from the package management dashboard.</p>
+          </div>
+        }
+        confirmText="Go to Dashboard"
+        cancelText="Close"
+        onConfirm={() => {
+          setShowSuccessDialog(false);
+          window.location.href = '/admin-dashboard/package';
+        }}
+        onCancel={() => setShowSuccessDialog(false)}
+      />
+
       <motion.h1
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

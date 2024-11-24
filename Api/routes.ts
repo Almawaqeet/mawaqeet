@@ -19,5 +19,8 @@ export const routes = {
         createPackage: 'core/admin/create-package/',
     },
 
+    package: {
+        viewPackage: (packageId: string) => `core/customer/view-package/${packageId}/`,
+    },
 
 }

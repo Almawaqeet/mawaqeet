@@ -1,4 +1,4 @@
-import { useAppMutation, useAppQueryWithPaginationAndParams } from "@/api/constructor";
+import { useAppMutation, useAppQuery, useAppQueryWithPaginationAndParams } from "@/api/constructor";
 import { routes } from "@/api/routes";
 import { Package } from "@/constants/types";
 import { PaginatedResponse } from "@/api/types";
@@ -28,5 +28,13 @@ export const useCreatePackage = (data?: Package) => {
         options: {
             enabled: !!data
         }
+    });
+}
+
+
+export const useViewPackage = (packageId: string) => {
+    return useAppQuery<Package>({
+        apiRoute: routes.package.viewPackage(packageId),
+        queryKey: ['VIEW_PACKAGE', packageId],
     });
 }

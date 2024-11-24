@@ -4,7 +4,7 @@ import { DataTable } from "@/components/ui/table/data-table";
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Edit, MoreHorizontal, Trash } from "lucide-react";
+import { Edit, MoreHorizontal, Trash, Eye } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -168,6 +168,11 @@ export default function PackageTable({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-44 sm:w-52 border-gray-200 shadow-lg rounded-lg bg-white">
               <DropdownMenuLabel className="text-gray-800 font-semibold px-3 py-2 sm:py-2.5 text-sm">Actions</DropdownMenuLabel>
+              <DropdownMenuItem asChild className="cursor-pointer hover:bg-brand-color-light/20 focus:bg-brand-color-light/20 px-3 py-2 sm:py-2.5">
+                <Link href={`/admin-dashboard/package/${id}`} className="flex items-center text-gray-700 text-sm">
+                  <Eye className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" /> View Package
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild className="cursor-pointer hover:bg-brand-color-light/20 focus:bg-brand-color-light/20 px-3 py-2 sm:py-2.5">
                 <Link href={`/admin-dashboard/package/${id}`} className="flex items-center text-gray-700 text-sm">
                   <Edit className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" /> Edit Package

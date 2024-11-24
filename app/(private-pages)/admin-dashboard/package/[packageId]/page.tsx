@@ -1,22 +1,22 @@
 import PageContainer from '@/components/layout/page-container';
 import { Suspense } from 'react';
-import ProductViewPage from '../_components/product-view-page';
+import ViewPackage from '../_components/viw-package';
+import ViewPackageSkeleton from '../_components/view-package-skeleton';
 
 export const metadata = {
-  title: 'Dashboard : Product View'
+  title: 'Dashboard : Package View'
 };
 
-type PageProps = { params: { productId: string } };
+type PageProps = { params: { packageId: string } };
 
 export default function Page({ params }: PageProps) {
   return (
     <PageContainer scrollable>
-      {/* <div className="flex-1 space-y-4">
-        <Suspense fallback={<FormCardSkeleton />}>
-          <ProductViewPage productId={params.productId} />
+      <div className="flex-1 space-y-4">
+        <Suspense fallback={<ViewPackageSkeleton />}>
+          <ViewPackage params={params} />
         </Suspense>
-      </div> */}
-      hello
+      </div>
     </PageContainer>
   );
 }
