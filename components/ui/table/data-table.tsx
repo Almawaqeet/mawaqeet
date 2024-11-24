@@ -92,11 +92,11 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <ScrollArea className="h-[calc(80vh-220px)] rounded-md border md:h-[calc(90dvh-240px)]">
+      <ScrollArea className="h-[calc(80vh-220px)] rounded-md border border-gray-300 md:h-[calc(90dvh-240px)] bg-white/60">
         <Table className="relative">
           <TableHeader>
             {table.getHeaderGroups()?.map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="border-b border-gray-300">
                 {headerGroup.headers?.map((header) => (
                   <TableHead key={header.id}>
                     {header.isPlaceholder
@@ -116,9 +116,10 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
+                  className="border-b border-gray-300 hover:bg-gray-50/70"
                 >
                   {row.getVisibleCells()?.map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="border-b border-gray-300">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -170,7 +171,7 @@ export function DataTable<TData, TValue>({
                   table.setPageSize(Number(value));
                 }}
               >
-                <SelectTrigger className="h-8 w-[70px] text-white">
+                <SelectTrigger className="h-8 w-[70px] bg-white/60 text-sm sm:text-base text-white">
                   <SelectValue placeholder={paginationState.pageSize} />
                 </SelectTrigger>
                 <SelectContent side="top">
@@ -198,7 +199,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to first page"
               variant="outline"
-              className="hidden h-8 w-8 p-0 lg:flex text-white"
+              className="hidden h-8 w-8 p-0 lg:flex bg-white/60 text-white"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
@@ -207,7 +208,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to previous page"
               variant="outline"
-              className="h-8 w-8 p-0 text-white"
+              className="h-8 w-8 p-0 bg-white/60 text-white"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
@@ -216,7 +217,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to next page"
               variant="outline"
-              className="h-8 w-8 p-0 text-white"
+              className="h-8 w-8 p-0 bg-white/60 text-white"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
@@ -225,7 +226,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to last page"
               variant="outline"
-              className="hidden h-8 w-8 p-0 lg:flex text-white"
+              className="hidden h-8 w-8 p-0 lg:flex bg-white/60 text-white"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >

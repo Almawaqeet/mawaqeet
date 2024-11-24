@@ -11,6 +11,7 @@ import AppButton from '@/components/reusables/AppButton';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useCreatePackage } from '@/api/services/packages';
 import { useAppToast } from '@/components/reusables/AppToast'
+import AppDialogBox from '@/components/reusables/AppDialogBox';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Package name is required'),
@@ -51,6 +52,8 @@ const initialValues = {
 
 export default function NewPackagePage() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [dialogStep, setDialogStep] = useState(1);
+  const [showDialog, setShowDialog] = useState(true);
   const { mutate: createPackage, isPending } = useCreatePackage();
   const { showToast } = useAppToast()
 
@@ -80,6 +83,17 @@ export default function NewPackagePage() {
       showToast({
         title: "Error",
         description: "Please fill in all category prices and descriptions",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Validate expiry date is not in the past
+    const expiryDate = new Date(values.expiry_date);
+    if (expiryDate < new Date()) {
+      showToast({
+        title: "Error",
+        description: "Expiry date cannot be in the past",
         variant: "destructive"
       });
       return;
@@ -122,12 +136,81 @@ export default function NewPackagePage() {
     }
   };
 
+  const handleDialogContinue = () => {
+    if (dialogStep < 3) {
+      setShowDialog(true);
+      setDialogStep(dialogStep + 1); // Increment step
+    } else {
+      setDialogStep(1); // Reset step
+    }
+  };
+
+  const getDialogContent = () => {
+    switch (dialogStep) {
+      case 1:
+        return {
+          title: "Package Creation Rules",
+          content: (
+            <div className="space-y-4">
+              <p className="font-medium">Please note the following rules when creating a package:</p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>Package name and description are required</li>
+                <li>Expiry date must not be in the past</li>
+                <li>All category prices must be filled in</li>
+                <li>Each category must have a detailed description</li>
+              </ul>
+            </div>
+          )
+        };
+      case 2:
+        return {
+          title: "Category Benefits - Part 1",
+          content: (
+            <div className="space-y-4">
+              <ul className="list-disc pl-5 space-y-2">
+                <li><span className="font-semibold">VIP:</span> Premium access to all features, priority support, exclusive events</li>
+                <li><span className="font-semibold">Deluxe:</span> Enhanced features, priority booking, special discounts</li>
+              </ul>
+            </div>
+          )
+        };
+      case 3:
+        return {
+          title: "Category Benefits - Part 2",
+          content: (
+            <div className="space-y-4">
+              <ul className="list-disc pl-5 space-y-2">
+                <li><span className="font-semibold">Standard:</span> Basic features, regular support, standard benefits</li>
+              </ul>
+            </div>
+          )
+        };
+      default:
+        return { title: "", content: null };
+    }
+  };
+
+  const dialogContent = getDialogContent();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="w-full max-w-5xl mx-auto py-12 px-6"
     >
+      <AppDialogBox
+        open={showDialog}
+        onOpenChange={setShowDialog}
+        title={dialogContent.title}
+        description={dialogContent.content}
+        confirmText={dialogStep === 3 ? "Get Started" : "Continue"}
+        cancelText="Skip"
+        onConfirm={handleDialogContinue}
+        onCancel={() => {
+          setShowDialog(false);
+          setDialogStep(1);
+        }}
+      />
       <motion.h1
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -11,10 +11,11 @@ export const useGetAllActivePackages = (params?: { package_type?: string, search
     });
 }
 
-export const useGetAllInactivePackages = () => {
+export const useGetAllInactivePackages = (params?: { package_type?: string, search?: string }) => {
     return useAppQueryWithPaginationAndParams<PaginatedResponse<Package>>({
         apiRoute: routes.packages.showAllInactivePackages,
-        queryKey: ['GET_ALL_INACTIVE_PACKAGES']
+        queryKey: ['GET_ALL_INACTIVE_PACKAGES', params?.package_type, params?.search],
+        params: params
     });
 }
 

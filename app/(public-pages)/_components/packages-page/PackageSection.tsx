@@ -8,10 +8,13 @@ import { FaSearch } from 'react-icons/fa';
 import { useGetAllActivePackages } from '@/api/services/packages';
 import { segregatePackageByItsPriceCategory } from '@/lib/utils';
 import PackageSkeleton from '@/components/skeletons/public-pages/PackageSkeleton';
-import { PackageIcon } from 'lucide-react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { addSearchParamsToUrl } from '@/lib/utils';
 import { PACKAGE_TYPES } from '@/constants/generic';
+import { PackagesEmptyState } from '@/components/reusables/PackagesEmptyState';
+
+
+
 
 const PackageSection = () => {
   const router = useRouter();
@@ -59,20 +62,6 @@ const PackageSection = () => {
     if (!packages?.results?.length) return [];
     return segregatePackageByItsPriceCategory([...packages.results]);
   }, [packages?.results]);
-
-  const EmptyState = () => (
-    <div className="col-span-full flex flex-col items-center justify-center p-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
-      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-        <PackageIcon className="w-8 h-8 text-gray-400" />
-      </div>
-      <h3 className="text-lg font-semibold text-gray-700 mb-1">No Packages Found</h3>
-      <p className="text-sm text-gray-500 text-center max-w-sm">
-        {searchTerm
-          ? "No packages match your search criteria. Try different keywords."
-          : "There are currently no packages available for this category."}
-      </p>
-    </div>
-  );
 
   return (
     <section className={`w-full ${whiteSpaces?.paddingX ?? ''} py-16`}>
@@ -132,7 +121,7 @@ const PackageSection = () => {
               <Package key={index} pkg={pkg} theme="light" />
             ))
           ) : (
-            <EmptyState />
+            <PackagesEmptyState searchTerm={searchTerm} />
           )}
         </div>
       </div>
