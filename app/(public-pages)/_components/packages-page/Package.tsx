@@ -1,11 +1,30 @@
+"use client";
+
 import { SegregatedPackage } from "@/constants/types";
+import { useRouter } from "next/navigation";
 
 interface PackageProps {
     pkg: SegregatedPackage;
     theme?: 'light' | 'dark';
   }
 
+
+  const extractUlFromFeature = (feature: string) => {
+    if (!feature) return '';
+    const ulMatch = feature.match(/<ul>(.*?)<\/ul>/);
+    if (ulMatch) {
+      return ulMatch[1].replace(/<\/?ul>/g, '').trim();
+    }
+    return feature;
+  }
+
+
+
+
+
+
 export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
+    const router = useRouter();
   const themeStyles = {
     light: {
         background: 'bg-white',
@@ -37,6 +56,8 @@ export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
 
     const styles = themeStyles[theme];
 
+    console.log(pkg);
+
     return (
       <div
         className={`${styles.background} p-6 rounded-lg border ${styles.border} ${styles.hoverBorder} transition-all duration-300 flex flex-col h-full`}
@@ -65,14 +86,15 @@ export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
           <ul className="space-y-4">
             {pkg.features?.map((feature, index) => (
               <li key={index} className={`text-sm ${styles.text.secondary} flex items-start gap-2`}>
-                <span className={styles.text.tertiary}>•</span>
-                {feature}
+                <div className="flex gap-2">
+                  <ul className="flex flex-col gap-2" dangerouslySetInnerHTML={{ __html: extractUlFromFeature(feature) }} />
+                </div>
               </li>
             ))}
           </ul>
         </div>
 
-        <button className={`w-full mt-6 py-2 text-sm font-medium ${styles.text.primary} bg-transparent border ${styles.border} rounded ${styles.button} transition-colors duration-300`}>
+        <button className={`w-full mt-6 py-2 text-sm font-medium ${styles.text.primary} bg-transparent border ${styles.border} rounded ${styles.button} transition-colors duration-300`} onClick={() => router.push(`/packages/${pkg.id}`)}>
           Learn more →
         </button>
       </div>

@@ -71,25 +71,34 @@ export const segregatePackageByItsPriceCategory = (packages: Array<Package>): Se
     if (!pkg?.price?.length) return [];
 
     return pkg.price.map((priceItem) => {
-      const categoryDescription = pkg.category_descriptions?.find(
+      const categoryDescription = pkg.category_description?.find(
         (desc) => desc.category === priceItem.category
       );
 
+      // Split description into bullet points if it contains line breaks
+      const descriptionPoints = categoryDescription?.description?.split('\n').filter(Boolean) ?? [];
+
+      // Extract text content from li tags if present
+      const processedPoints = descriptionPoints?.map(point => {
+        if (!point) return '';
+        const liMatch = point.match(/<li>([^<]+):([^<]+)<\/li>/);
+        if (liMatch?.[1] && liMatch?.[2]) {
+          return `${liMatch[1]}: ${liMatch[2].trim()}`;
+        }
+        return point;
+      }) ?? [];
+
       const allFeatures = [
-        categoryDescription?.description,
-        pkg.expiry_date ? `Package valid until ${new Date(pkg.expiry_date).toLocaleDateString()}` : null,
-        ...(pkg.description ? JSON.parse(pkg.description)
-          .ops.filter((op: any) => op.attributes?.list === 'bullet')
-          .map((op: any) => op.insert.replace(/^[^:]+:\s*/, '').trim())
-          .filter((text: string) => text) : [])
+        ...processedPoints,
+        pkg.expiry_date ? `Package valid until ${new Date(pkg.expiry_date).toLocaleDateString()}` : ''
       ].filter(Boolean);
 
       return {
-        id: pkg.id,
+        id: pkg.id ?? '',
         type: pkg.package_type,
         tier: priceItem.category.toUpperCase(),
-        cohort: pkg.name,
-        price: `₦${parseInt(priceItem.price).toLocaleString()}`,
+        cohort: pkg.name ?? '',
+        price: `₦${parseInt(priceItem.price ?? '0').toLocaleString()}`,
         paymentPlan: `Payable in installment`,
         features: allFeatures.slice(0, 4)
       };
@@ -98,7 +107,6 @@ export const segregatePackageByItsPriceCategory = (packages: Array<Package>): Se
 
   return segregatedPackages;
 }
-
 
 
 
