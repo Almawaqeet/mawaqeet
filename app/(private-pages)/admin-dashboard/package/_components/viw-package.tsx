@@ -1,7 +1,6 @@
 "use client";
 
 import { useViewPackage } from "@/api/services/packages";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
@@ -26,13 +25,18 @@ import {
 } from "lucide-react";
 import dynamic from 'next/dynamic';
 
-const ReactQuill = dynamic(() => import('react-quill'), {
+
+const RichTextEditor = dynamic(() => import("@/components/ui/rich-text-editor"), {
   ssr: false,
   loading: () => <p>Loading...</p>
 });
 
+
+
 export default function ViewPackage({ params }: { params: { packageId: string } }) {
     const { data: packageData, isLoading } = useViewPackage(params.packageId);
+
+    console.log("package data", packageData?.category_description?.[0]?.description);
 
     if (isLoading) {
         return <ViewPackageSkeleton />;
@@ -125,13 +129,10 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                               className="prose prose-sm sm:prose-base lg:prose-lg max-w-none text-gray-700 leading-relaxed"
                             >
                                 {packageData?.description ? (
-                                    <ReactQuill
+                                    <RichTextEditor
+                                        onChange={() => {}}
                                         value={packageData.description}
                                         readOnly={true}
-                                        theme="bubble"
-                                        modules={{
-                                            toolbar: false
-                                        }}
                                     />
                                 ) : (
                                     <p>No description available</p>
@@ -182,23 +183,20 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                         </TabsContent>
 
                         <TabsContent value="categories">
-                            {packageData?.category_descriptions?.length > 0 ? (
+                            {packageData?.category_description?.length > 0 ? (
                                 <motion.div {...fadeInUp}>
                                   <Accordion type="single" collapsible className="w-full space-y-3 sm:space-y-4">
-                                      {packageData.category_descriptions.map((category) => (
+                                      {packageData.category_description.map((category) => (
                                           <AccordionItem key={category?.id ?? ''} value={category?.id ?? ''} className="border rounded-lg px-3 sm:px-4">
                                               <AccordionTrigger className="text-lg sm:text-xl font-semibold capitalize text-gray-800">
                                                   {category?.category ?? 'Unnamed Category'}
                                               </AccordionTrigger>
                                               <AccordionContent>
                                                   {category?.description ? (
-                                                      <ReactQuill
+                                                      <RichTextEditor
+                                                          onChange={() => {}}
                                                           value={category.description}
                                                           readOnly={true}
-                                                          theme="bubble"
-                                                          modules={{
-                                                              toolbar: false
-                                                          }}
                                                       />
                                                   ) : (
                                                       <p className="text-gray-600 pt-2 pb-4 text-sm sm:text-base">No description available for this category</p>

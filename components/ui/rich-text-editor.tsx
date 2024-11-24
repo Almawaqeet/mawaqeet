@@ -8,9 +8,10 @@ interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  readOnly?: boolean;
 }
 
-const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) => {
+const RichTextEditor = ({ value, onChange, placeholder, readOnly }: RichTextEditorProps) => {
   // Dynamic import of ReactQuill to avoid SSR issues
   const ReactQuill = useMemo(
     () => dynamic(() => import('react-quill'), { ssr: false }),
@@ -23,7 +24,7 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
       ['bold', 'italic', 'underline', 'strike'],
       [{ list: 'ordered' }, { list: 'bullet' }],
       [{ align: [] }],
-      ['link'],
+      ['link', 'image'],
       ['clean']
     ]
   };
@@ -37,7 +38,8 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
     'list',
     'bullet',
     'align',
-    'link'
+    'link',
+    'image'
   ];
 
   return (
@@ -46,11 +48,17 @@ const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) =
         theme="snow"
         value={value ?? ''}
         onChange={onChange}
-        modules={modules}
+        modules={readOnly ? { toolbar: false } : modules}
         formats={formats}
         placeholder={placeholder}
-        className="min-h-[200px]"
+        className={`min-h-[20px] ${readOnly ? 'ql-editor-no-border' : ''}`}
+        readOnly={readOnly}
       />
+      <style jsx global>{`
+        .ql-editor-no-border .ql-container.ql-snow {
+          border: none !important;
+        }
+      `}</style>
     </div>
   );
 };
