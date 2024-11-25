@@ -1,6 +1,6 @@
 import PageContainer from '@/components/layout/page-container';
 import { Suspense } from 'react';
-import ViewPackage from '../_components/viw-package';
+import ViewPackage from '../_components/view-package';
 import ViewPackageSkeleton from '../_components/view-package-skeleton';
 
 export const metadata = {

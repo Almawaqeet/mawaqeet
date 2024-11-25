@@ -1,3 +1,12 @@
+export interface PaginatedResponse<T> {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: T[];
+}
+
+
+
 export interface CheckIfEmailAddressExistResponse {
     exists: boolean;
 }
@@ -65,9 +74,13 @@ export interface LoginResponse {
 }
 
 
-export interface PaginatedResponse<T> {
-    count: number;
-    next: string | null;
-    previous: string | null;
-    results: T[];
+
+
+export interface SimpleOnboardingUser {
+    email: string;
+    first_name: string;
+    last_name: string;
+    onboarding_fee_payment_check?: boolean;
+    is_completed?: boolean;
+    date_created?: string;
 }

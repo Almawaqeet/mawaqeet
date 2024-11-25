@@ -4,19 +4,13 @@ import { DataTable } from '@/components/ui/table/data-table';
 import { DataTableFilterBox } from '@/components/ui/table/data-table-filter-box';
 import { DataTableResetFilter } from '@/components/ui/table/data-table-reset-filter';
 import { DataTableSearch } from '@/components/ui/table/data-table-search';
-import { Employee } from '@/constants/data';
 import { searchParams } from '@/lib/searchparams';
 import { useQueryState } from 'nuqs';
 import { useCallback, useMemo } from 'react';
 import { columns } from './columns';
+import { useGetOnboardingUsers } from '@/api/services/onboarding';
 
-export default function TeamTable({
-  data,
-  totalData
-}: {
-  data: any[];
-  totalData: number;
-}) {
+export default function OnboardingTable() {
   const [searchQuery, setSearchQuery] = useQueryState(
     'q',
     searchParams.q
@@ -34,26 +28,21 @@ export default function TeamTable({
     searchParams.page.withDefault(1)
   );
 
+  const { data, isLoading } = useGetOnboardingUsers({
+    page: page ?? 1,
+    name: searchQuery ?? undefined,
+    email: genderFilter ?? undefined
+  });
+
   const resetFilters = useCallback(() => {
     setSearchQuery(null);
     setGenderFilter(null);
-
     setPage(1);
   }, [setSearchQuery, setGenderFilter, setPage]);
 
   const isAnyFilterActive = useMemo(() => {
     return !!searchQuery || !!genderFilter;
   }, [searchQuery, genderFilter]);
-
-  //   const {
-  //     genderFilter,
-  //     setGenderFilter,
-  //     isAnyFilterActive,
-  //     resetFilters,
-  //     searchQuery,
-  //     setPage,
-  //     setSearchQuery
-  //   } = useEmployeeTableFilters();
 
   return (
     <div className="space-y-4 ">
@@ -77,7 +66,11 @@ export default function TeamTable({
         />
       </div>
 
-      <DataTable columns={columns} data={data} totalItems={totalData} />
+      <DataTable
+        columns={columns}
+        data={data?.results ?? []}
+        totalItems={data?.count ?? 0}
+      />
     </div>
   );
 }

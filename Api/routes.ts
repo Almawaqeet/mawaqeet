@@ -11,6 +11,12 @@ export const routes = {
         createUser: 'onboarding/customer/',
         getOnboardingPaymentAmount: 'onboarding/customer/onboarding-payment/',
         verifyPayment: 'onboarding/customer/verify-onboarding-payment/:reference/',
+        getOnboardingUsers: 'core/admin/onboarding-admin/',
+        getRecentOnboardingUsers: 'core/admin/recent-onboarding-admin/',
+    },
+
+    users: {
+        getUsers: 'core/admin/user-admin/',
     },
 
     packages: {
