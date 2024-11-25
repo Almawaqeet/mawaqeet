@@ -12,8 +12,8 @@ const page = () => {
             </div>
 
             <div className=' mb-8'>
-                {about_main_body.map((itm) => (
-                    <Paragraph type='global' key={itm.id} classname='font-semibold text-fz-sm text-center leading-[21.94px] text-words-text-color'>{itm.about_main_content}</Paragraph>
+                {about_main_body?.map((itm) => (
+                    <Paragraph type='global' key={itm.id} classname='text-base sm:text-lg text-brand-color-text mb-8 sm:mb-12 max-w-[1000px] px-2 text-left sm:text-center'>{itm.about_main_content}</Paragraph>
                 ))}
             </div>
 

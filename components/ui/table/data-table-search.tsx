@@ -7,14 +7,14 @@ import { useTransition } from 'react';
 
 interface DataTableSearchProps {
   searchKey: string;
-  searchQuery: string;
+  searchQuery: string | null;
   setSearchQuery: (
-    value: string | ((old: string) => string | null) | null,
-    options?: Options<any> | undefined
+    value: string | ((old: string | null) => string | null) | null,
+    options?: Options | undefined
   ) => Promise<URLSearchParams>;
-  setPage: <Shallow>(
+  setPage: (
     value: number | ((old: number) => number | null) | null,
-    options?: Options<Shallow> | undefined
+    options?: Options | undefined
   ) => Promise<URLSearchParams>;
 }
 
@@ -33,7 +33,7 @@ export function DataTableSearch({
 
   return (
     <Input
-      placeholder={`Search ${searchKey}...`}
+      placeholder={`Search ${searchKey ?? ''}...`}
       value={searchQuery ?? ''}
       onChange={(e) => handleSearch(e.target.value)}
       className={cn('w-full md:max-w-sm', isLoading && 'animate-pulse')}

@@ -1,67 +1,64 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+'use client';
+
+import { useGetRecentOnboardingUsers } from '@/api/services/onboarding';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function RecentSales() {
+  const { data, isLoading } = useGetRecentOnboardingUsers();
+
+  if (isLoading) {
+    return (
+      <div className="space-y-8">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="flex items-center">
+            <Skeleton className="h-9 w-9 rounded-full bg-white" />
+            <div className="ml-4 space-y-1">
+              <Skeleton className="h-4 w-[200px] bg-white" />
+              <Skeleton className="h-4 w-[150px] bg-white" />
+            </div>
+            <div className="ml-auto">
+              <Skeleton className="h-6 w-[80px] rounded-full bg-white" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-8">
-      <div className="flex items-center">
-        <Avatar className="h-9 w-9">
-          <AvatarImage src="/avatars/01.png" alt="Avatar" />
-          <AvatarFallback>OM</AvatarFallback>
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">Olivia Martin</p>
-          <p className="text-sm text-muted-foreground">
-            olivia.martin@email.com
-          </p>
+      {data?.map((user) => (
+        <div key={user.email} className="flex items-center">
+          <Avatar className="h-9 w-9">
+            <AvatarFallback>
+              {user.first_name?.[0]}
+              {user.last_name?.[0]}
+            </AvatarFallback>
+          </Avatar>
+          <div className="ml-4 space-y-1">
+            <p className="text-sm font-medium leading-none">
+              {user.first_name} {user.last_name}
+            </p>
+            <p className="text-sm text-muted-foreground">{user.email}</p>
+          </div>
+          <div className="ml-auto">
+            <span className={`rounded-full px-2 py-1 text-xs ${
+              user?.onboarding_fee_payment_check === true
+                ? 'bg-green-100 text-green-800'
+                : 'bg-yellow-100 text-yellow-800'
+            }`}>
+              {user.onboarding_fee_payment_check ? 'COMPLETED' : 'PENDING'}
+            </span>
+          </div>
         </div>
-        <div className="ml-auto font-medium">+$1,999.00</div>
-      </div>
-      <div className="flex items-center">
-        <Avatar className="flex h-9 w-9 items-center justify-center space-y-0 border">
-          <AvatarImage src="/avatars/02.png" alt="Avatar" />
-          <AvatarFallback>JL</AvatarFallback>
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">Jackson Lee</p>
-          <p className="text-sm text-muted-foreground">jackson.lee@email.com</p>
+      ))}
+
+      {!data?.length && (
+        <div className="text-center text-sm text-muted-foreground">
+          No recent onboarding users found
         </div>
-        <div className="ml-auto font-medium">+$39.00</div>
-      </div>
-      <div className="flex items-center">
-        <Avatar className="h-9 w-9">
-          <AvatarImage src="/avatars/03.png" alt="Avatar" />
-          <AvatarFallback>IN</AvatarFallback>
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">Isabella Nguyen</p>
-          <p className="text-sm text-muted-foreground">
-            isabella.nguyen@email.com
-          </p>
-        </div>
-        <div className="ml-auto font-medium">+$299.00</div>
-      </div>
-      <div className="flex items-center">
-        <Avatar className="h-9 w-9">
-          <AvatarImage src="/avatars/04.png" alt="Avatar" />
-          <AvatarFallback>WK</AvatarFallback>
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">William Kim</p>
-          <p className="text-sm text-muted-foreground">will@email.com</p>
-        </div>
-        <div className="ml-auto font-medium">+$99.00</div>
-      </div>
-      <div className="flex items-center">
-        <Avatar className="h-9 w-9">
-          <AvatarImage src="/avatars/05.png" alt="Avatar" />
-          <AvatarFallback>SD</AvatarFallback>
-        </Avatar>
-        <div className="ml-4 space-y-1">
-          <p className="text-sm font-medium leading-none">Sofia Davis</p>
-          <p className="text-sm text-muted-foreground">sofia.davis@email.com</p>
-        </div>
-        <div className="ml-auto font-medium">+$39.00</div>
-      </div>
+      )}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import TeamTable from './table';
 
-export default function TeamListPage() {
+export default function OnboardingListPage() {
   const data = [
     {
       first_name: 'John',

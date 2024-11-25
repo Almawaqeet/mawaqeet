@@ -11,11 +11,22 @@ export const routes = {
         createUser: 'onboarding/customer/',
         getOnboardingPaymentAmount: 'onboarding/customer/onboarding-payment/',
         verifyPayment: 'onboarding/customer/verify-onboarding-payment/:reference/',
+        getOnboardingUsers: 'core/admin/onboarding-admin/',
+        getRecentOnboardingUsers: 'core/admin/recent-onboarding-admin/',
+    },
+
+    users: {
+        getUsers: 'core/admin/user-admin/',
     },
 
     packages: {
         showAllActivePackages: 'core/customer/show-all-active-packages/',
+        showAllInactivePackages: 'core/admin/get-inactive-packages/',
+        createPackage: 'core/admin/create-package/',
     },
 
+    package: {
+        viewPackage: (packageId: string) => `core/customer/view-package/${packageId}/`,
+    },
 
 }

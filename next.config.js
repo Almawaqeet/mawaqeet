@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['images.pexels.com', 'img.freepik.com', 'localhost', 'api.slingacademy.com']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.freepik.com'
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost'
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.slingacademy.com'
+      }
+    ]
   }
 }
 

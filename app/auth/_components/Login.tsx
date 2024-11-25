@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useFormik } from "formik";
@@ -8,6 +8,7 @@ import AppHeading from "@/components/reusables/AppHeading";
 import AppButton from "@/components/reusables/AppButton";
 import AppTextInput from "@/components/reusables/AppTextInput";
 import { IoEyeOutline } from "react-icons/io5";
+import { FaArrowLeft } from "react-icons/fa6";
 import { CLIENT_ROUTES } from "@/lib/routes";
 import { ACCOUNT_TYPES } from "@/constants/generic";
 import { signIn } from "next-auth/react";
@@ -17,13 +18,19 @@ const Login = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
+  useEffect(() => {
+    if (status === "authenticated" && session?.user?.accountType) {
+      handleLoginRedirect();
+    }
+  }, [session, status]);
 
   const handleLoginRedirect = () => {
-    if (session?.user?.accountType === ACCOUNT_TYPES.ADMIN) {
+    if (!session?.user?.accountType) return;
+    if (session.user.accountType === ACCOUNT_TYPES.ADMIN) {
       router.push(CLIENT_ROUTES.PrivatePages.adminDashboard.overview);
-    } else if (session?.user?.accountType === ACCOUNT_TYPES.USER) {
+    } else if (session.user.accountType === ACCOUNT_TYPES.USER) {
       router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.overview);
     }
   }
@@ -75,11 +82,22 @@ const Login = () => {
         className="w-full px-4 sm:px-6 md:px-12 lg:px-24 xl:px-32 py-16"
       >
         <div className="max-w-md mx-auto">
-          <AppHeading variant="h1" className="text-3xl sm:text-4xl font-bold mb-4">
+          <div className="flex justify-center sm:justify-start">
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => router.push('/')}
+              className="w-10 h-10 rounded-full border-2 border-brand-color flex items-center justify-center mb-6"
+            >
+              <FaArrowLeft className="text-xl sm:text-2xl text-brand-color cursor-pointer" />
+            </motion.div>
+          </div>
+
+          <AppHeading variant="h1" className="text-3xl sm:text-4xl font-bold mb-4 text-center sm:text-left">
             Sign In
           </AppHeading>
 
-          <p className="text-gray-600 mb-8">Sign in with your details</p>
+          <p className="text-gray-600 mb-8 text-center sm:text-left">Sign in with your details</p>
 
           {error && (
             <motion.div

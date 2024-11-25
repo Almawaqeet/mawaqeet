@@ -18,7 +18,7 @@ interface AppDialogBoxProps {
   title?: string
   open?: boolean
   onOpenChange?: (open: boolean) => void
-  description?: string
+  description?: string | React.ReactNode
   cancelText?: string
   confirmText?: string
   onConfirm?: () => void

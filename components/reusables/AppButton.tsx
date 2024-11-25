@@ -28,14 +28,16 @@ interface ButtonProps {
   iconPosition?: 'start' | 'end';
   marginBottom?: string;
   marginRight?: string;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
   className?: string;
   children: React.ReactNode;
   variant?: 'primary' | 'secondary';
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const AppButton: React.FC<ButtonProps> = ({
+  type,
   width = "auto",
   height = "45px",
   loading = false,
@@ -100,6 +102,7 @@ const AppButton: React.FC<ButtonProps> = ({
         ${variantClasses}
         ${className}
       `}
+      type={type}
       onClick={handleClick}
       title={disabled ? "Disabled" : ""}
       onMouseDown={handleMouseDown}

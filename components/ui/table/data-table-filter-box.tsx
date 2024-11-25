@@ -35,7 +35,7 @@ interface FilterBoxProps {
   options: FilterOption[];
   setFilterValue: (
     value: string | ((old: string) => string | null) | null,
-    options?: Options<any> | undefined
+    options?: Options | undefined
   ) => Promise<URLSearchParams>;
   filterValue: string;
 }
@@ -68,7 +68,10 @@ export function DataTableFilterBox({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="border-dashed text-black">
+        <Button
+          variant="outline"
+          className="border-dashed bg-brand-color text-white"
+        >
           <PlusCircledIcon className="mr-2 h-4 w-4" />
           {title}
           {selectedValuesSet.size > 0 && (
@@ -95,8 +98,8 @@ export function DataTableFilterBox({
                       key={value}
                       className="rounded-sm px-1 font-normal"
                     >
-                      {options.find((option) => option.value === value)
-                        ?.label || value}
+                      {options?.find((option) => option.value === value)
+                        ?.label ?? value}
                     </Badge>
                   ))
                 )}
@@ -111,7 +114,7 @@ export function DataTableFilterBox({
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup>
-              {options.map((option) => (
+              {options?.map((option) => (
                 <CommandItem
                   key={option.value}
                   onSelect={() => handleSelect(option.value)}

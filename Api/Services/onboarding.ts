@@ -1,6 +1,6 @@
-import { useAppQuery, useAppMutation } from "@/api/constructor";
+import { useAppQuery, useAppMutation, useAppQueryWithPaginationAndParams } from "@/api/constructor";
 import { routes } from "@/api/routes";
-import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingInitiatePaymentRequest, OnboardingInitiatePaymentResponse, OnboardingPaymentResponse, OnboardingVerifyPaymentResponse } from "@/api/types";
+import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingInitiatePaymentRequest, OnboardingInitiatePaymentResponse, OnboardingPaymentResponse, OnboardingVerifyPaymentResponse, SimpleOnboardingUser, PaginatedResponse } from "@/api/types";
 
 
 export const useCheckIfEmailAddressExist = (body?: {email: string}) => {
@@ -43,5 +43,22 @@ export const useVerifyOnboardingPayment = (reference: string) => {
     return useAppQuery<OnboardingVerifyPaymentResponse>({
         apiRoute: routes.onboarding.verifyPayment.replace(':reference', reference),
         queryKey: ['VERIFY_ONBOARDING_PAYMENT', reference]
+    });
+}
+
+
+export const useGetOnboardingUsers = (params?: {page: number, name?: string, email?: string}) => {
+    return useAppQueryWithPaginationAndParams<PaginatedResponse<SimpleOnboardingUser>>({
+        apiRoute: routes.onboarding.getOnboardingUsers,
+        queryKey: ['ONBOARDING_USERS', params?.page ?? 1, params?.name ?? '', params?.email ?? ''],
+        params
+    });
+}
+
+
+export const useGetRecentOnboardingUsers = () => {
+    return useAppQuery<SimpleOnboardingUser[]>({
+        apiRoute: routes.onboarding.getRecentOnboardingUsers,
+        queryKey: ['RECENT_ONBOARDING_USERS']
     });
 }

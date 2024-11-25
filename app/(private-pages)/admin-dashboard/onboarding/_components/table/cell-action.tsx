@@ -8,13 +8,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { Product } from '@/constants/data';
+import { Employee } from '@/constants/data';
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { SimpleOnboardingUser } from '@/api/types';
+
+
+
 
 interface CellActionProps {
-  data: Product;
+  data: SimpleOnboardingUser;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -43,7 +47,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/product/${data.id}`)}
+          //TODO: make this button functional
+        //   () => router.push(`/dashboard/user/${data.id}`)
+            onClick={() => {}}
           >
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

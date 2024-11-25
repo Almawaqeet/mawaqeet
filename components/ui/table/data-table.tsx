@@ -26,23 +26,36 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   PaginationState,
-  useReactTable
+  useReactTable,
+  getFilteredRowModel,
+  FilterFn
 } from '@tanstack/react-table';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { parseAsInteger, useQueryState } from 'nuqs';
+import { brandColors } from '@/constants/brand-constants';
+
+
+// Fuzzy search filter function
+const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
+  const searchValue = String(row.getValue(columnId) ?? '').toLowerCase();
+  const filterValue = String(value ?? '').toLowerCase();
+  return searchValue.includes(filterValue);
+};
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   totalItems: number;
   pageSizeOptions?: number[];
+  searchKey?: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   totalItems,
-  pageSizeOptions = [10, 20, 30, 40, 50]
+  pageSizeOptions = [10, 20, 30, 40, 50],
+  searchKey
 }: DataTableProps<TData, TValue>) {
   const [currentPage, setCurrentPage] = useQueryState(
     'page',
@@ -55,12 +68,17 @@ export function DataTable<TData, TValue>({
       .withDefault(10)
   );
 
+  const [globalFilter, setGlobalFilter] = useQueryState(
+    'q',
+    { defaultValue: '' }
+  );
+
   const paginationState = {
-    pageIndex: currentPage - 1, // zero-based index for React Table
-    pageSize: pageSize
+    pageIndex: (currentPage ?? 1) - 1,
+    pageSize: pageSize ?? 10
   };
 
-  const pageCount = Math.ceil(totalItems / pageSize);
+  const pageCount = Math.ceil((totalItems ?? 0) / (pageSize ?? 10));
 
   const handlePaginationChange = (
     updaterOrValue:
@@ -72,32 +90,36 @@ export function DataTable<TData, TValue>({
         ? updaterOrValue(paginationState)
         : updaterOrValue;
 
-    setCurrentPage(pagination.pageIndex + 1); // converting zero-based index to one-based
+    setCurrentPage(pagination.pageIndex + 1);
     setPageSize(pagination.pageSize);
   };
 
   const table = useReactTable({
-    data,
+    data: data ?? [],
     columns,
     pageCount: pageCount,
     state: {
-      pagination: paginationState
+      pagination: paginationState,
+      globalFilter
     },
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: fuzzyFilter,
     onPaginationChange: handlePaginationChange,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     manualPagination: true,
     manualFiltering: true
   });
 
   return (
     <div className="space-y-4">
-      <ScrollArea className="h-[calc(80vh-220px)] rounded-md border md:h-[calc(90dvh-240px)]">
+      <ScrollArea className="h-[calc(80vh-220px)] rounded-md border border-gray-300 md:h-[calc(90dvh-240px)] bg-white/60">
         <Table className="relative">
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
+            {table.getHeaderGroups()?.map((headerGroup) => (
+              <TableRow key={headerGroup.id} className="border-b border-gray-300">
+                {headerGroup.headers?.map((header) => (
                   <TableHead key={header.id}>
                     {header.isPlaceholder
                       ? null
@@ -111,14 +133,15 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {(table.getRowModel().rows?.length ?? 0) > 0 ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
+                  className="border-b border-gray-300 hover:bg-gray-50/70"
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                  {row.getVisibleCells()?.map((cell) => (
+                    <TableCell key={cell.id} className="border-b border-gray-300">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -130,7 +153,7 @@ export function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell
-                  colSpan={columns.length}
+                  colSpan={columns?.length ?? 0}
                   className="h-24 text-center"
                 >
                   No results.
@@ -145,13 +168,13 @@ export function DataTable<TData, TValue>({
       <div className="flex flex-col items-center justify-end gap-2 space-x-2 py-4 sm:flex-row">
         <div className="flex w-full items-center justify-between">
           <div className="flex-1 text-sm text-muted-foreground">
-            {totalItems > 0 ? (
+            {(totalItems ?? 0) > 0 ? (
               <>
                 Showing{' '}
                 {paginationState.pageIndex * paginationState.pageSize + 1} to{' '}
                 {Math.min(
                   (paginationState.pageIndex + 1) * paginationState.pageSize,
-                  totalItems
+                  totalItems ?? 0
                 )}{' '}
                 of {totalItems} entries
               </>
@@ -170,11 +193,11 @@ export function DataTable<TData, TValue>({
                   table.setPageSize(Number(value));
                 }}
               >
-                <SelectTrigger className="h-8 w-[70px]">
+                <SelectTrigger className="h-8 w-[70px] bg-white text-sm sm:text-base" style={{color: brandColors.dark_brown}}>
                   <SelectValue placeholder={paginationState.pageSize} />
                 </SelectTrigger>
                 <SelectContent side="top">
-                  {pageSizeOptions.map((pageSize) => (
+                  {pageSizeOptions?.map((pageSize) => (
                     <SelectItem key={pageSize} value={`${pageSize}`}>
                       {pageSize}
                     </SelectItem>
@@ -185,10 +208,10 @@ export function DataTable<TData, TValue>({
           </div>
         </div>
         <div className="flex w-full items-center justify-between gap-2 sm:justify-end">
-          <div className="flex w-[150px] items-center justify-center text-sm font-medium">
-            {totalItems > 0 ? (
+          <div className="flex w-[150px] items-center justify-center text-sm font-medium text-black">
+            {(totalItems ?? 0) > 0 ? (
               <>
-                Page {paginationState.pageIndex + 1} of {table.getPageCount()}
+                Page {paginationState.pageIndex + 1} of {table.getPageCount() ?? 1}
               </>
             ) : (
               'No pages'
@@ -198,7 +221,8 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to first page"
               variant="outline"
-              className="hidden h-8 w-8 p-0 lg:flex"
+              className="hidden h-8 w-8 p-0 lg:flex bg-white text-white"
+              style={{color: brandColors.dark_brown}}
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
@@ -207,7 +231,8 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to previous page"
               variant="outline"
-              className="h-8 w-8 p-0"
+              className="h-8 w-8 p-0 bg-white text-black"
+              style={{color: brandColors.dark_brown}}
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
@@ -216,7 +241,8 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to next page"
               variant="outline"
-              className="h-8 w-8 p-0"
+              className="h-8 w-8 p-0 bg-white text-black"
+              style={{color: brandColors.dark_brown}}
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
@@ -225,7 +251,8 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to last page"
               variant="outline"
-              className="hidden h-8 w-8 p-0 lg:flex"
+              className="hidden h-8 w-8 p-0 lg:flex bg-white text-black"
+              style={{color: brandColors.dark_brown}}
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
