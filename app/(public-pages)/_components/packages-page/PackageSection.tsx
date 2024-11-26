@@ -5,13 +5,14 @@ import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 import AppHeading from '@/components/reusables/AppHeading';
 import { Package } from '@/app/(public-pages)/_components/packages-page/Package';
 import { FaSearch } from 'react-icons/fa';
-import { useGetAllActivePackages } from '@/api/services/packages';
+
 import { segregatePackageByItsPriceCategory } from '@/lib/utils';
 import PackageSkeleton from '@/components/skeletons/public-pages/PackageSkeleton';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { addSearchParamsToUrl } from '@/lib/utils';
-import { PACKAGE_TYPES } from '@/constants/generic';
+import { PACKAGE_TYPES } from '@/Constants/generic';
 import { PackagesEmptyState } from '@/components/reusables/PackagesEmptyState';
+import { useGetAllActivePackages } from '@/Api/Services/packages';
 
 
 

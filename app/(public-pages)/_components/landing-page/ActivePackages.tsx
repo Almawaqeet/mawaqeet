@@ -6,11 +6,10 @@ import AppButton from '@/components/reusables/AppButton';
 import { IoMdCall } from "react-icons/io";
 import { Package } from '@/app/(public-pages)/_components/packages-page/Package';
 import { PackageIcon } from 'lucide-react';
-import { useGetAllActivePackages } from '@/api/services/packages';
 import PackageSkeleton from '@/components/skeletons/public-pages/PackageSkeleton';
-import { packages } from '@/constants/data';
-import { SegregatedPackage } from '@/constants/types';
+import { SegregatedPackage } from '@/Constants/types';
 import { segregatePackageByItsPriceCategory } from '@/lib/utils';
+import { useGetAllActivePackages } from '@/Api/Services/packages';
 
 const ActivePackages = () => {
     const { data: packages, isLoading } = useGetAllActivePackages();
@@ -39,6 +38,7 @@ const ActivePackages = () => {
             Our Packages
           </AppHeading>
           <div className="flex items-center justify-center">
+            <a href='tel:+2349115653889'>
             <AppButton
               variant="secondary"
               className="w-fit mx-auto"
@@ -50,6 +50,7 @@ const ActivePackages = () => {
               <IoMdCall className="w-4 h-4 mr-2" />
               Live call
             </AppButton>
+            </a>
           </div>
         </div>
 

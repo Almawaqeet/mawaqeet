@@ -1,7 +1,8 @@
-import { useAppMutation, useAppQuery, useAppQueryWithPaginationAndParams } from "@/api/constructor";
-import { routes } from "@/api/routes";
-import { Package } from "@/constants/types";
-import { PaginatedResponse } from "@/api/types";
+import { Package } from "@/Constants/types";
+import { useAppMutation, useAppQuery, useAppQueryWithPaginationAndParams } from "../constructor";
+import { PaginatedResponse } from "../types";
+import { routes } from "../routes";
+
 
 export const useGetAllActivePackages = (params?: { package_type?: string, search?: string }) => {
     return useAppQueryWithPaginationAndParams<PaginatedResponse<Package>>({

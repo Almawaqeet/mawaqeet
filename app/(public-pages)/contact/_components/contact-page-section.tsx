@@ -59,7 +59,7 @@ export const ContactPageSection = () => {
                   <FaPhone className="h-6 w-6 text-gray-400" aria-hidden="true" />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
-                  <p>+234 (800) 123-4567</p>
+                  <p>+234 (091) 15653889</p>
                   <p className="mt-1">Mon-Fri 8am to 6pm WAT</p>
                 </div>
               </motion.div>
@@ -71,7 +71,7 @@ export const ContactPageSection = () => {
                   <FaEnvelope className="h-6 w-6 text-gray-400" aria-hidden="true" />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
-                  <p>support@example.com</p>
+                  <p>almawaqeettravelsandtours@gmail.com</p>
                 </div>
               </motion.div>
               <motion.div
@@ -82,8 +82,8 @@ export const ContactPageSection = () => {
                   <FaMapMarkerAlt className="h-6 w-6 text-gray-400" aria-hidden="true" />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
-                  <p>123 Business Street</p>
-                  <p className="mt-1">Lagos, Nigeria</p>
+                  {/* <p>MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN</p> */}
+                  <p className="mt-1">Oyo State, Nigeria</p>
                 </div>
               </motion.div>
               <motion.div
@@ -95,8 +95,8 @@ export const ContactPageSection = () => {
                 </div>
                 <div className="ml-3 text-base text-gray-500">
                   <p>Main Office</p>
-                  <p className="mt-1">Floor 12, Business Tower</p>
-                  <p className="mt-1">Central Business District</p>
+                  <p>MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN</p>
+                  {/* <p className="mt-1">Central Business District</p> */}
                 </div>
               </motion.div>
             </div>

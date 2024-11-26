@@ -32,7 +32,7 @@ const axiosInstance = axios.create({
 export function useAppQuery<TData = unknown, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(
   config: QueryConfig<TQueryKey, TData>
 ): UseQueryResult<TData, TError> {
-  const { apiRoute, queryKey, options } = config;
+  const { queryKey, apiRoute, options } = config
 
   return useQuery({
     queryKey,

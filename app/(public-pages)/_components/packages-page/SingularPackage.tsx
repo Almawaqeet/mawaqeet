@@ -1,6 +1,6 @@
 "use client";
 
-import { useViewPackage } from "@/api/services/packages";
+
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LayersIcon, BanknoteIcon, CalendarIcon, CrownIcon, UserIcon, DiamondIcon } from "lucide-react";
 import AppButton from "@/components/reusables/AppButton";
 import SingularPackageSkeleton from "../SingularPackageSkeleton";
+import { useViewPackage } from "@/Api/Services/packages";
 
 const RichTextEditor = dynamic(() => import("@/components/ui/rich-text-editor"), {
     ssr: false,
