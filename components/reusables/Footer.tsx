@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
               link.usefulLinks.map((itm, i) => (
                 <li key={`${itm.id}-itms`}>
                   <Link
-                    href={i === 4 ? '/#faqs' : `${i === 0 ? '/' : i === 1 ? '/about-us' : i === 2 ? '/contact-us' : i === 3 ? '/about-us#service-section' : '#'}`}
+                    href={i === 4 ? '/#faqs' : `${i === 0 ? '/' : i === 1 ? '/about' : i === 2 ? '/contact' : i === 3 ? '/packages' : '#'}`}
                     className="text-gray-200 hover:text-white transition-colors"
                   >
                     {itm.content}
