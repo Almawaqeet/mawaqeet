@@ -1,10 +1,8 @@
 import React from 'react'
-import AboutSection from '../_components/about-page/AboutSection'
+import AboutPageSection from '../_components/about-page/AboutPageSection'
 
-const page = () => {
-    return (
-       <AboutSection />
-    )
+const AboutPage = () => {
+    return <AboutPageSection />
 }
 
-export default page
+export default AboutPage

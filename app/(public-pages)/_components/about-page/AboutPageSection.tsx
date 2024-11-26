@@ -4,7 +4,7 @@ import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces'
 import Paragraph from '@/old-pages/utilities/Paragraph'
 import React from 'react'
 
-const AboutSection = () => {
+const AboutPageSection = () => {
     return (
         <section className={`flex min-h-dvh items-center justify-center flex-col py-16 ${whiteSpaces.paddingX}`}>
             <div>
@@ -25,4 +25,4 @@ const AboutSection = () => {
     )
 }
 
-export default AboutSection
+export default AboutPageSection
