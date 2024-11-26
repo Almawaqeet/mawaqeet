@@ -36,8 +36,8 @@ export const columns: ColumnDef<SimpleOnboardingUser>[] = [
       return date ? new Date(date).toLocaleDateString() : '';
     }
   },
-  {
-    id: 'actions',
-    cell: ({ row }) => <CellAction data={row.original} />
-  }
+//   {
+//     id: 'actions',
+//     cell: ({ row }) => <CellAction data={row.original} />
+//   }
 ];

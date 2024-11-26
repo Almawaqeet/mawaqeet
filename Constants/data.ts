@@ -1,5 +1,14 @@
 import { CLIENT_ROUTES } from '@/lib/routes';
-import { NavItem } from '@/types';
+
+
+
+interface NavItem {
+  title: string;
+  url: string;
+  icon: string;
+  isActive: boolean;
+  items: NavItem[];
+}
 
 export type User = {
   id: number;
@@ -232,20 +241,20 @@ export const adminDashboardNavItems: NavItem[] = [
     isActive: false,
     items: [] // No child items
   },
-  {
-    title: 'Bookings',
-    url: CLIENT_ROUTES.PrivatePages.adminDashboard.packages,
-    icon: 'userPen',
-    isActive: false,
-    items: [] // No child items
-  },
-  {
-    title: 'Payments',
-    url: CLIENT_ROUTES.PrivatePages.adminDashboard.payment,
-    icon: 'userPen',
-    isActive: false,
-    items: [] // No child items
-  },
+//   {
+//     title: 'Bookings',
+//     url: CLIENT_ROUTES.PrivatePages.adminDashboard.packages,
+//     icon: 'userPen',
+//     isActive: false,
+//     items: [] // No child items
+//   },
+//   {
+//     title: 'Payments',
+//     url: CLIENT_ROUTES.PrivatePages.adminDashboard.payment,
+//     icon: 'userPen',
+//     isActive: false,
+//     items: [] // No child items
+//   },
 //   {
 //     title: 'Profile',
 //     url: CLIENT_ROUTES.PrivatePages.adminDashboard.profile,
@@ -253,13 +262,13 @@ export const adminDashboardNavItems: NavItem[] = [
 //     isActive: false,
 //     items: [] // No child items
 //   },
-  {
-    title: 'Settings',
-    url: '/dashboard/',
-    icon: 'kanban',
-    isActive: false,
-    items: [] // No child items
-  }
+//   {
+//     title: 'Settings',
+//     url: '/dashboard/',
+//     icon: 'kanban',
+//     isActive: false,
+//     items: [] // No child items
+//   }
 ];
 
 

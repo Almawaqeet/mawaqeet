@@ -32,7 +32,7 @@ import {
 } from '@tanstack/react-table';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { parseAsInteger, useQueryState } from 'nuqs';
-import { brandColors } from '@/constants/brand-constants';
+
 
 
 // Fuzzy search filter function

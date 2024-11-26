@@ -9,7 +9,6 @@ import { useQueryState } from 'nuqs';
 import { useCallback, useMemo } from 'react';
 import { columns } from './columns';
 import { useGetOnboardingUsers } from '@/api/services/onboarding';
-import { Skeleton } from '@/components/ui/skeleton';
 import TableIndexSkelton from './table-index-skelton';
 
 export default function OnboardingTable() {
@@ -33,7 +32,8 @@ export default function OnboardingTable() {
   const { data, isLoading } = useGetOnboardingUsers({
     page: page ?? 1,
     name: searchQuery ?? undefined,
-    status: statusFilter ?? undefined
+    status: statusFilter ?? undefined,
+    email: searchQuery ?? undefined
   });
 
   const resetFilters = useCallback(() => {
@@ -46,9 +46,6 @@ export default function OnboardingTable() {
     return !!searchQuery || !!statusFilter;
   }, [searchQuery, statusFilter]);
 
-  if (isLoading) {
-    return <TableIndexSkelton />;
-  }
 
   return (
     <div className="space-y-4 ">
@@ -62,7 +59,16 @@ export default function OnboardingTable() {
         <DataTableFilterBox
           filterKey="status"
           title="Payment Status"
-          options={[]}
+          options={[
+            {
+              label: 'Onboarding Payment Completed',
+              value: 'true'
+            },
+            {
+              label: 'Onboarding Payment Not Completed',
+              value: 'false'
+            }
+          ]}
           setFilterValue={setStatusFilter}
           filterValue={statusFilter}
         />
@@ -71,12 +77,15 @@ export default function OnboardingTable() {
           onReset={resetFilters}
         />
       </div>
-
-      <DataTable
-        columns={columns}
-        data={data?.results ?? []}
-        totalItems={data?.count ?? 0}
-      />
+      {
+        isLoading ? <TableIndexSkelton /> : (
+          <DataTable
+            columns={columns}
+            data={data?.results ?? []}
+            totalItems={data?.count ?? 0}
+          />
+        )
+      }
     </div>
   );
 }

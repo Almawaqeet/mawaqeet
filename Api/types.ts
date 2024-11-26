@@ -84,3 +84,15 @@ export interface SimpleOnboardingUser {
     is_completed?: boolean;
     date_created?: string;
 }
+
+
+
+export interface User {
+    email: string;
+    profile?: {
+        first_name?: string;
+        last_name?: string;
+        phone_number?: string;
+        address?: string;
+    } | null;
+}

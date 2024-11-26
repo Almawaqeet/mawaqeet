@@ -27,15 +27,20 @@ export function useEmployeeTableFilters() {
     searchParams.page.withDefault(1)
   );
 
+  const [limit, setLimit] = useQueryState(
+    'limit',
+    searchParams.limit.withDefault(10)
+  );
+
   const resetFilters = useCallback(() => {
     setSearchQuery(null);
     setGenderFilter(null);
-
     setPage(1);
-  }, [setSearchQuery, setGenderFilter, setPage]);
+    setLimit(10);
+  }, [setSearchQuery, setGenderFilter, setPage, setLimit]);
 
   const isAnyFilterActive = useMemo(() => {
-    return !!searchQuery || !!genderFilter;
+    return Boolean(searchQuery) || Boolean(genderFilter);
   }, [searchQuery, genderFilter]);
 
   return {
@@ -45,6 +50,8 @@ export function useEmployeeTableFilters() {
     setGenderFilter,
     page,
     setPage,
+    limit,
+    setLimit,
     resetFilters,
     isAnyFilterActive
   };
