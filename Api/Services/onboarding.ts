@@ -47,10 +47,10 @@ export const useVerifyOnboardingPayment = (reference: string) => {
 }
 
 
-export const useGetOnboardingUsers = (params?: {page: number, name?: string, email?: string}) => {
+export const useGetOnboardingUsers = (params?: {page: number, name?: string, email?: string, status?: string}) => {
     return useAppQueryWithPaginationAndParams<PaginatedResponse<SimpleOnboardingUser>>({
         apiRoute: routes.onboarding.getOnboardingUsers,
-        queryKey: ['ONBOARDING_USERS', params?.page ?? 1, params?.name ?? '', params?.email ?? ''],
+        queryKey: ['ONBOARDING_USERS', params?.page ?? 1, params?.name ?? '', params?.email ?? '', params?.status ?? ''],
         params
     });
 }
