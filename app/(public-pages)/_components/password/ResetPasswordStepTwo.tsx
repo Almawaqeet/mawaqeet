@@ -146,7 +146,7 @@ export default function ResetPasswordStepTwo() {
                     transition={{ delay: 0.5 }}
                     className="text-brand-color-text mb-6 sm:mb-8 text-center sm:text-left text-sm sm:text-base lg:text-lg"
                 >
-                    Enter the 4-digit code sent to your email
+                    Enter the 6-digit code sent to your email
                 </motion.p>
 
                 <motion.div
