@@ -14,11 +14,12 @@ import { convertToKobo } from '@/lib/utils'
 import AppModal from '@/components/reusables/AppModal'
 import SuccessLottie from '@/components/reusables/SuccessLottie'
 import LoadingLottie from '@/components/reusables/LoadingLottie'
-import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
+import { LOCAL_STORAGE_KEYS, SESSION_STORAGE_KEYS } from '@/constants/local-storage-keys'
 import { useAppToast } from '@/components/reusables/AppToast'
 
 const StepThreeOnboarding = () => {
   const [reference, setReference] = useState('')
+  const [countdown, setCountdown] = useState(5)
   const { data: registrationFeeData, isPending } = useGetOnboardingPaymentAmount()
   const { mutate: initiatePayment, isPending: isInitiatingPayment } = useInitiateOnboardingPayment()
   const { data: verifyPaymentData, isPending: isVerifyingPayment } = useVerifyOnboardingPayment(reference)
@@ -37,6 +38,21 @@ const StepThreeOnboarding = () => {
   React.useEffect(() => {
     if (verifyPaymentData?.status === 'success') {
       localStorage.setItem(LOCAL_STORAGE_KEYS.ONBOARDING_COMPLETED_STATUS, 'true')
+      sessionStorage.setItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL, email ?? '')
+
+      // Start countdown
+      const timer = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer)
+            router.push(CLIENT_ROUTES.PublicPages.auth.password.stepTwo)
+            return 0
+          }
+          return prev - 1
+        })
+      }, 1000)
+
+      return () => clearInterval(timer)
     }
   }, [verifyPaymentData])
 
@@ -124,7 +140,7 @@ const StepThreeOnboarding = () => {
             {verifyPaymentData?.message}
           </p>
           <p className="text-sm text-gray-500 text-center font-normal">
-            We have created your account successfully, we would be redirecting you to the login page in a few seconds. Click on the button below to download your receipt.
+            Your account has been created successfully! We've sent an OTP to your email for verification. You'll be redirected to set your password in {countdown} seconds. In the meantime, you can download your payment receipt using the button below.
           </p>
           {verifyPaymentData?.receipt_url && (
             <a

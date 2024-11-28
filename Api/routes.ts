@@ -2,7 +2,9 @@ export const routes = {
     auth: {
         login: '/auth/login/',
         register: '/auth/register/',
-        forgottenPassword: '/auth/forgotten-password/',
+        sendOtp: '/auth/forgot-password/',
+        verifyOtp: '/auth/verify-otp/',
+        changePassword: '/auth/reset-password/',
     },
 
     onboarding: {

@@ -65,6 +65,38 @@ export interface LoginRequest {
     password: string;
 }
 
+
+export interface OtpPasswordRequest {
+    email: string;
+    otp: string;
+}
+
+export interface SendOtpRequest {
+    email: string;
+}
+
+export interface SendOtpResponse {
+    message: string;
+}
+
+export interface VerifyOtpRequest {
+    email: string;
+    otp: string;
+}
+
+export interface VerifyOtpResponse {
+    message: string;
+}
+
+export interface ChangePasswordRequest {
+    email: string;
+    password: string;
+}
+
+export interface ChangePasswordResponse {
+    message: string;
+}
+
 export interface LoginResponse {
     refresh: string;
     access: string;

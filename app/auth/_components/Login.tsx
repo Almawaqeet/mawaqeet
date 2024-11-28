@@ -133,7 +133,7 @@ const Login = () => {
               />
               <div className="text-right">
                 <span
-                  onClick={() => router.push(CLIENT_ROUTES.PublicPages.auth.forgotPassword)}
+                  onClick={() => router.push(CLIENT_ROUTES.PublicPages.auth.password.stepOne)}
                   className="text-sm text-brand-color cursor-pointer hover:underline"
                 >
                   Forgot Password?

@@ -134,7 +134,7 @@ const StepTwoOnboarding = () => {
               variant: "destructive",
               action: {
                 label: "Contact Support",
-                onClick: () => console.log("contact support")
+                onClick: () => router.push(CLIENT_ROUTES.PublicPages.contact)
               }
             })
           }
