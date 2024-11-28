@@ -1,10 +1,16 @@
+'use client'
+
 import AppHeading from '@/components/reusables/AppHeading'
 import { about_main_body } from '@/old-pages/contents/about'
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces'
-import Paragraph from '@/old-pages/utilities/Paragraph'
+import dynamic from 'next/dynamic'
 import React from 'react'
 
-const AboutPageSection = () => {
+
+const Paragraph = dynamic(() => import('@/old-pages/utilities/Paragraph'), { ssr: false })
+
+
+export const AboutPageSection = () => {
     return (
         <section className={`flex min-h-dvh items-center justify-center flex-col py-16 ${whiteSpaces.paddingX}`}>
             <div>
@@ -18,11 +24,14 @@ const AboutPageSection = () => {
             </div>
 
             <div className='relative overflow-hidden w-full pt-[56.25%]'>
-                <iframe className='absolute inset-0 w-full h-full bg-black opacity-90' src='https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L' title='mawaqeet-welcoming-video'></iframe>
+                <iframe
+                    className='absolute inset-0 w-full h-full bg-black opacity-90'
+                    src='https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L'
+                    title='mawaqeet-welcoming-video'
+                    sandbox="allow-scripts allow-same-origin"
+                ></iframe>
             </div>
 
         </section>
     )
 }
-
-export default AboutPageSection

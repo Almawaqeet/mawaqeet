@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 import { Label } from '@/components/ui/label';
-import RichTextEditor from '@/components/ui/rich-text-editor';
+import dynamic from 'next/dynamic';
 import { Field } from 'formik';
 import AppTextInput from '@/components/reusables/AppTextInput';
+
+
+const RichTextEditor = dynamic(() => import('@/components/ui/rich-text-editor'), { ssr: false });
 
 
 export const BasicDetailsForm = ({ errors, touched, values, setFieldValue }: any) => (

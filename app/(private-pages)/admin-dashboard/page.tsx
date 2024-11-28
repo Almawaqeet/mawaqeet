@@ -4,6 +4,6 @@ import { CLIENT_ROUTES } from '@/lib/routes';
 
 
 
-export default async function AdminDashboard() {
+export default async function Page() {
   return redirect(CLIENT_ROUTES.PrivatePages.adminDashboard.overview);
 }

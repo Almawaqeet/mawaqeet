@@ -4,18 +4,22 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ring } from 'ldrs'
 
-ring.register()
+// Register the loading animation
+if (typeof window !== 'undefined') {
+  ring.register();
+}
 
 const LoadingIcon = () => {
-    return (
-        <l-ring
-            size="20"
-            stroke="4"
-            bg-opacity="0"
-            speed="2"
-            color="white"
-        ></l-ring>
-    )
+  if (typeof window === 'undefined') return null;
+  return (
+    <l-ring
+      size={20}
+      stroke={4}
+      speed={2}
+      color="white"
+      bg-opacity="0"
+    />
+  );
 }
 
 interface ButtonProps {

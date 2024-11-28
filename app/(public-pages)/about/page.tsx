@@ -1,8 +1,15 @@
 import React from 'react'
-import AboutPageSection from '../_components/about-page/AboutPageSection'
+import { Metadata } from 'next'
+import { AboutPageSection } from '@/app/(public-pages)/_components/about-page/AboutPageSection'
 
-const AboutPage = () => {
+export default function AboutPage() {
     return <AboutPageSection />
 }
 
-export default AboutPage
+
+
+export const metadata: Metadata = {
+    title: "About Us | Al-Mawaqeet Travels and Tours",
+    description: "Learn about Al-Mawaqeet Travels and Tours, your trusted partner for Hajj and Umrah services.",
+    keywords: "hajj, umrah, islamic travel, muslim pilgrimage, mecca travel, medina tours, religious tourism, travel agency",
+  };

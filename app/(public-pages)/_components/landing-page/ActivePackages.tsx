@@ -7,9 +7,9 @@ import { IoMdCall } from "react-icons/io";
 import { Package } from '@/app/(public-pages)/_components/packages-page/Package';
 import { PackageIcon } from 'lucide-react';
 import PackageSkeleton from '@/components/skeletons/public-pages/PackageSkeleton';
-import { SegregatedPackage } from '@/Constants/types';
+import { SegregatedPackage } from '@/constants/types';
 import { segregatePackageByItsPriceCategory } from '@/lib/utils';
-import { useGetAllActivePackages } from '@/Api/Services/packages';
+import { useGetAllActivePackages } from '@/api/services/packages';
 
 const ActivePackages = () => {
     const { data: packages, isLoading } = useGetAllActivePackages();

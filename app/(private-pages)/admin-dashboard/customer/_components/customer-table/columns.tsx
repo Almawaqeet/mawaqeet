@@ -27,7 +27,8 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: 'profile.first_name',
     header: 'NAME',
-    cell: ({ row }) => row.original.profile?.first_name + ' ' + row.original.profile?.last_name ?? '-'
+    cell: ({ row }) => (row.original.profile?.first_name && row.original.profile?.last_name) ?
+      `${row.original.profile.first_name} ${row.original.profile.last_name}` : '-'
   },
   {
     accessorKey: 'email',

@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LayersIcon, BanknoteIcon, CalendarIcon, CrownIcon, UserIcon, DiamondIcon } from "lucide-react";
 import AppButton from "@/components/reusables/AppButton";
 import SingularPackageSkeleton from "../SingularPackageSkeleton";
-import { useViewPackage } from "@/Api/Services/packages";
+import { useViewPackage } from "@/api/services/packages";
 
 const RichTextEditor = dynamic(() => import("@/components/ui/rich-text-editor"), {
     ssr: false,

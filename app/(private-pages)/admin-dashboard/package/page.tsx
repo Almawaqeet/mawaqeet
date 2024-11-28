@@ -12,7 +12,7 @@ type pageProps = {
   searchParams: SearchParams;
 };
 
-export default function PackagesPage({ searchParams }: pageProps) {
+export default function Page({ searchParams }: pageProps) {
   return (
     <PageContainer>
       <div className="space-y-4">

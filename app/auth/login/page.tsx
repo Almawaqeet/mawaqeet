@@ -1,10 +1,7 @@
-//mehn. women are scum!. ive spent 8 hours on this. only for somebody's daughter to come and bill me for urgent money.
-//how much is the pay for this website sef😅?
-import Login from "@/app/auth/_components/Login"
+import dynamic from 'next/dynamic'
 
+const Login = dynamic(() => import('@/app/auth/_components/Login'), { ssr: false })
 
-export const SignIn = () => {
+export default function Page() {
     return <Login />
 }
-
-export default SignIn

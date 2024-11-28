@@ -1,4 +1,4 @@
-import { Package } from "@/Constants/types";
+import { Package } from "@/constants/types";
 import { useAppMutation, useAppQuery, useAppQueryWithPaginationAndParams } from "../constructor";
 import { PaginatedResponse } from "../types";
 import { routes } from "../routes";

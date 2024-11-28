@@ -1,6 +1,8 @@
-import ForgottenPassword from "@/app/auth/_components/ForgottenPassword"
+import dynamic from 'next/dynamic'
 
-export default function ForgottenPasswordPage() {
+const ForgottenPassword = dynamic(() => import('@/app/auth/_components/ForgottenPassword'), { ssr: false })
+
+export default function Page() {
   return (
     <ForgottenPassword />
   )

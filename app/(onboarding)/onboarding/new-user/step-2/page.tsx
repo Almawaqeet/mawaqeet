@@ -1,5 +1,7 @@
-import StepTwoOnboarding from "@/app/(public-pages)/_components/onboarding/StepTwo";
+import dynamic from 'next/dynamic'
 import { Metadata } from "next";
+
+const StepTwoOnboarding = dynamic(() => import('@/app/(public-pages)/_components/onboarding/StepTwo'), { ssr: false })
 
 
 export default function StepTwoPage() {

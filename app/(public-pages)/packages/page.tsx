@@ -1,7 +1,9 @@
 
-import PackageSection from "@/app/(public-pages)/_components/packages-page/PackageSection";
+import dynamic from 'next/dynamic'
 
-export default function PackagesPage() {
+const PackageSection = dynamic(() => import('@/app/(public-pages)/_components/packages-page/PackageSection'), { ssr: false })
+
+export default function Page() {
   return (
     <PackageSection />
   )

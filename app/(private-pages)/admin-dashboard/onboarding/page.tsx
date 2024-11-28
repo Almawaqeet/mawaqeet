@@ -1,6 +1,8 @@
 import React from 'react';
-import OnboardingListPage from './_components';
+import dynamic from 'next/dynamic'
 
-export default function Page() {
-  return <OnboardingListPage />;
+const OnboardingList = dynamic(() => import('./_components'), { ssr: false })
+
+export default function OnboardingListPage() {
+  return <OnboardingList />;
 }

@@ -11,6 +11,7 @@ import AppButton from '@/components/reusables/AppButton';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useCreatePackage } from '@/api/services/packages';
 import { useAppToast } from '@/components/reusables/AppToast'
+import { useRouter } from 'next/navigation';
 import AppDialogBox from '@/components/reusables/AppDialogBox';
 
 const validationSchema = Yup.object().shape({
@@ -56,6 +57,7 @@ export default function NewPackagePage() {
   const [showDialog, setShowDialog] = useState(true);
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const { mutate: createPackage, isPending } = useCreatePackage();
+  const router = useRouter();
   const { showToast } = useAppToast()
 
   const isBasicDetailsComplete = (values: typeof initialValues) => {
@@ -223,7 +225,7 @@ export default function NewPackagePage() {
         cancelText="Close"
         onConfirm={() => {
           setShowSuccessDialog(false);
-          window.location.href = '/admin-dashboard/package';
+          router.push('/admin-dashboard/package');
         }}
         onCancel={() => setShowSuccessDialog(false)}
       />

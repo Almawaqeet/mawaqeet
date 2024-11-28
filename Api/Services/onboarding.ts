@@ -61,7 +61,3 @@ export const useGetRecentOnboardingUsers = () => {
         queryKey: ['RECENT_ONBOARDING_USERS']
     });
 }
-
-
-
-

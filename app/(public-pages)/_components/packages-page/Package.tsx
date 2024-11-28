@@ -1,6 +1,6 @@
 "use client";
 
-import { SegregatedPackage } from "@/Constants/types";
+import { SegregatedPackage } from "@/constants/types";
 import { useRouter } from "next/navigation";
 
 interface PackageProps {
