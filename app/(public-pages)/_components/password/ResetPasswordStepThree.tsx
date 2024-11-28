@@ -34,10 +34,12 @@ export default function ResetPasswordStepThree() {
     const { mutate: changePassword, isPending: isChangingPassword } = useChangePassword()
 
     useEffect(() => {
-        const email = sessionStorage.getItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL)
-        if (!email) {
-            router.push(CLIENT_ROUTES.PublicPages.auth.password.stepOne)
-            return
+        if (typeof window !== 'undefined') {
+            const email = sessionStorage.getItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL)
+            if (!email) {
+                router.push(CLIENT_ROUTES.PublicPages.auth.password.stepOne)
+                return
+            }
         }
     }, [router])
 
@@ -48,6 +50,8 @@ export default function ResetPasswordStepThree() {
         },
         validationSchema: passwordValidationSchema,
         onSubmit: (values) => {
+            if (typeof window === 'undefined') return;
+
             const email = sessionStorage.getItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL)
             if (!email) {
                 router.push(CLIENT_ROUTES.PublicPages.auth.password.stepOne)
@@ -55,7 +59,7 @@ export default function ResetPasswordStepThree() {
             }
 
             changePassword({
-                email,
+                email: email,
                 password: values.password
             }, {
                 onSuccess: (data) => {

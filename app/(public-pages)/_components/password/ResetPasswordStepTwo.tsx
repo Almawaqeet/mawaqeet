@@ -25,12 +25,12 @@ const otpValidationSchema = Yup.object({
 export default function ResetPasswordStepTwo() {
     const router = useRouter()
     const { showToast } = useAppToast()
-    const email = sessionStorage.getItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL)
+    const email = typeof window !== 'undefined' ? sessionStorage.getItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL) : null
     const { mutate: sendOtp, isPending: isSendingOtp } = useSendOtp()
     const { mutate: verifyOtp, isPending: isVerifyingOtp } = useVerifyOtp()
 
     useEffect(() => {
-        if (!email) {
+        if (typeof window !== 'undefined' && !email) {
             router.push(CLIENT_ROUTES.PublicPages.auth.password.stepOne)
             return
         }
@@ -53,7 +53,7 @@ export default function ResetPasswordStepTwo() {
             onError: (error: any) => {
                 showToast({
                     title: "Error",
-                        description: "Failed to resend OTP. Please try again.",
+                    description: "Failed to resend OTP. Please try again.",
                     variant: "destructive"
                 })
             }
@@ -100,8 +100,8 @@ export default function ResetPasswordStepTwo() {
                             description: "An error occurred while verifying OTP. Please try again.",
                             variant: "destructive",
                             action: {
-                            label: "Resend Code",
-                            onClick: handleResendOTP
+                                label: "Resend Code",
+                                onClick: handleResendOTP
                             }
                         })
                     }
@@ -127,7 +127,7 @@ export default function ResetPasswordStepTwo() {
                     <motion.div
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        onClick={() => router.push(CLIENT_ROUTES.PublicPages.auth.password.stepOne)}
+                        onClick={() => typeof window !== 'undefined' && router.push(CLIENT_ROUTES.PublicPages.auth.password.stepOne)}
                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-brand-color flex items-center justify-center cursor-pointer"
                     >
                         <FaArrowLeft className="text-lg sm:text-xl md:text-2xl text-brand-color" />

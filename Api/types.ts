@@ -105,7 +105,15 @@ export interface LoginResponse {
     account_type: "ADMIN" | "USER";
 }
 
+export interface PreBookPackageRequest {
+    packageId: string;
+    email: string;
+    category: string;
+}
 
+export interface PreBookPackageResponse {
+    message: string;
+}
 
 
 export interface SimpleOnboardingUser {

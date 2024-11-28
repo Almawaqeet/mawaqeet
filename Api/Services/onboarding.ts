@@ -1,6 +1,6 @@
 import { useAppQuery, useAppMutation, useAppQueryWithPaginationAndParams } from "@/api/constructor";
 import { routes } from "@/api/routes";
-import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingInitiatePaymentRequest, OnboardingInitiatePaymentResponse, OnboardingPaymentResponse, OnboardingVerifyPaymentResponse, PaginatedResponse, SimpleOnboardingUser } from "@/api/types";
+import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingInitiatePaymentRequest, OnboardingInitiatePaymentResponse, OnboardingPaymentResponse, OnboardingVerifyPaymentResponse, PaginatedResponse, PreBookPackageRequest, PreBookPackageResponse, SimpleOnboardingUser } from "@/api/types";
 
 
 export const useCheckIfEmailAddressExist = (body?: {email: string}) => {
@@ -59,5 +59,17 @@ export const useGetRecentOnboardingUsers = () => {
     return useAppQuery<SimpleOnboardingUser[]>({
         apiRoute: routes.onboarding.getRecentOnboardingUsers,
         queryKey: ['RECENT_ONBOARDING_USERS']
+    });
+}
+
+
+export const usePreBookPackage = (body?: PreBookPackageRequest) => {
+    return useAppMutation<PreBookPackageResponse>({
+        apiRoute: routes.package.preBookPackage(body?.packageId as string),
+        method: 'POST',
+        body: JSON.stringify(body),
+        options: {
+            enabled: !!body?.packageId && !!body?.email && !!body?.category
+        }
     });
 }
