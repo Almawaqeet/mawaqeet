@@ -104,7 +104,7 @@ export default function ResetPasswordStepThree() {
                     <motion.div
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        onClick={() => router.back()}
+                        onClick={() => router.push(CLIENT_ROUTES.PublicPages.auth.password.stepTwo)}
                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-brand-color flex items-center justify-center cursor-pointer"
                     >
                         <FaArrowLeft className="text-lg sm:text-xl md:text-2xl text-brand-color" />
