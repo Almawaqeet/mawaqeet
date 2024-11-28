@@ -13,7 +13,7 @@ import { CLIENT_ROUTES } from '@/lib/routes'
 import { useAppToast } from '@/components/reusables/AppToast'
 import { SESSION_STORAGE_KEYS } from '@/constants/local-storage-keys';
 import { useChangePassword } from '@/api/services/authentication';
-import { encodePassword } from '@/lib/utils';
+
 
 const passwordValidationSchema = Yup.object({
     password: Yup.string()
@@ -56,7 +56,7 @@ export default function ResetPasswordStepThree() {
 
             changePassword({
                 email,
-                password: encodePassword(values.password)
+                password: values.password
             }, {
                 onSuccess: (data) => {
                     if (data?.message) {

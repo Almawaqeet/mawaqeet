@@ -37,34 +37,27 @@ export default function ResetPasswordStepTwo() {
     }, [router, email])
 
     const handleResendOTP = async () => {
-        try {
-            if (!email) {
-                throw new Error("Email not found")
-            }
-
-            sendOtp({ email }, {
-                onSuccess: (data) => {
+        if (!email) {
+            throw new Error("Email not found")
+        }
+        sendOtp({ email }, {
+            onSuccess: (data) => {
+                if (data?.message) {
                     showToast({
                         title: "Success",
                         description: "OTP has been resent to your email",
                         variant: "default"
                     })
-                },
-                onError: (error) => {
-                    showToast({
-                        title: "Error",
+                }
+            },
+            onError: (error: any) => {
+                showToast({
+                    title: "Error",
                         description: "Failed to resend OTP. Please try again.",
-                        variant: "destructive"
-                    })
-                },
-            })
-        } catch (error) {
-            showToast({
-                title: "Error",
-                description: "Something went wrong. Please try again.",
-                variant: "destructive"
-            })
-        }
+                    variant: "destructive"
+                })
+            }
+        })
     }
 
     const otpFormik = useFormik({
@@ -94,16 +87,24 @@ export default function ResetPasswordStepTwo() {
                         })
                     }
                 },
-                onError: (error) => {
-                    showToast({
-                        title: "Error",
-                        description: "An error occurred while verifying OTP. Please try again.",
-                        variant: "destructive",
-                        action: {
+                onError: (error: any) => {
+                    //!THIS IS DIRTY!!! FIX LATER
+                    const errorMessage = error?.response?.data?.error
+                    if (errorMessage === "Invalid OTP, it doesn't exist or expired") {
+                        otpFormik.setErrors({
+                            otp: errorMessage
+                        })
+                    } else {
+                        showToast({
+                            title: "Error",
+                            description: "An error occurred while verifying OTP. Please try again.",
+                            variant: "destructive",
+                            action: {
                             label: "Resend Code",
                             onClick: handleResendOTP
-                        }
-                    })
+                            }
+                        })
+                    }
                 }
             })
         }

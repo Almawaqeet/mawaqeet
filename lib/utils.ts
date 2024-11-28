@@ -153,22 +153,3 @@ export const getSearchParamsFromUrl = (url: string) => {
 }
 
 
-
-export function encodePassword(password: string): string | null {
-    if (!password) {
-        return null;
-    }
-
-    try {
-        const { Fernet } = require('cryptography-fernet');
-        const secretKey = process.env.AUTH_SECRET_KEY?.slice(0, 32);
-        if (!secretKey) {
-            throw new Error('Secret key not found');
-        }
-        const f = new Fernet(secretKey);
-        const encryptedPassword = f.encrypt(password);
-        return encryptedPassword.toString();
-    } catch (error) {
-        return password;
-    }
-}
