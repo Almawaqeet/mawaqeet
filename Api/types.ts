@@ -106,7 +106,6 @@ export interface LoginResponse {
 }
 
 export interface PreBookPackageRequest {
-    packageId: string;
     email: string;
     category: string;
 }

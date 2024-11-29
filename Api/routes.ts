@@ -29,7 +29,7 @@ export const routes = {
 
     package: {
         viewPackage: (packageId: string) => `core/customer/view-package/${packageId}/`,
-        preBookPackage: (packageId: string) => `onboarding/customer/pre-book-package/${packageId}/`,
+        preBookPackage: (packageId: string) => `onboarding/customer/prebook-package/${packageId}/`,
     },
 
 }

@@ -63,13 +63,13 @@ export const useGetRecentOnboardingUsers = () => {
 }
 
 
-export const usePreBookPackage = (body?: PreBookPackageRequest) => {
+export const usePreBookPackage = (packageId: string, body?: PreBookPackageRequest) => {
     return useAppMutation<PreBookPackageResponse>({
-        apiRoute: routes.package.preBookPackage(body?.packageId as string),
+        apiRoute: routes.package.preBookPackage(packageId),
         method: 'POST',
         body: JSON.stringify(body),
         options: {
-            enabled: !!body?.packageId && !!body?.email && !!body?.category
+            enabled: !!packageId && !!body?.email && !!body?.category
         }
     });
 }

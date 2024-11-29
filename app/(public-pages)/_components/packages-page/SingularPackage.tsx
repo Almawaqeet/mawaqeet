@@ -48,7 +48,7 @@ export default function SingularPackage({ id }: { id: string }) {
     const { data: pkg, isLoading } = useViewPackage(id);
     const [isJoinWaitingListModalOpen, setIsJoinWaitingListModalOpen] = useState<boolean>(false);
     const [selectedCategory, setSelectedCategory] = useState<string>("");
-    const { mutate: preBookPackage, isPending: isPreBookingPackage } = usePreBookPackage();
+    const { mutate: preBookPackage, isPending: isPreBookingPackage } = usePreBookPackage(id);
 
     const closeModal = useCallback(() => {
         setIsJoinWaitingListModalOpen(false);
@@ -108,7 +108,6 @@ export default function SingularPackage({ id }: { id: string }) {
                 }
 
                 const data: PreBookPackageRequest = {
-                    packageId: id,
                     email: values.email,
                     category: selectedCategory,
                 };
