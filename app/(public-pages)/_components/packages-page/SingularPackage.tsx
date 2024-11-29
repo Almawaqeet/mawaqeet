@@ -18,6 +18,7 @@ import { useAppToast } from "@/components/reusables/AppToast";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { PreBookPackageRequest } from "@/api/types";
+import { extractUlFromFeature } from "./Package";
 
 const RichTextEditor = dynamic(() => import("@/components/ui/rich-text-editor"), {
     ssr: false,
@@ -49,6 +50,7 @@ export default function SingularPackage({ id }: { id: string }) {
     const [isJoinWaitingListModalOpen, setIsJoinWaitingListModalOpen] = useState<boolean>(false);
     const [selectedCategory, setSelectedCategory] = useState<string>("");
     const { mutate: preBookPackage, isPending: isPreBookingPackage } = usePreBookPackage(id);
+    const { showToast } = useAppToast();
 
     const closeModal = useCallback(() => {
         setIsJoinWaitingListModalOpen(false);
@@ -58,6 +60,46 @@ export default function SingularPackage({ id }: { id: string }) {
         setSelectedCategory(category);
         setIsJoinWaitingListModalOpen(true);
     }, []);
+
+    const formik = useFormik({
+        initialValues: {
+            email: typeof window !== 'undefined' ? localStorage.getItem(LOCAL_STORAGE_KEYS.ACTIVE_EMAIL) ?? "" : ""
+        },
+        validationSchema: waitingListSchema,
+        onSubmit: (values) => {
+            if (!selectedCategory) {
+                showToast({
+                    title: "Error",
+                    description: "Package category not found",
+                    variant: "destructive",
+                });
+                return;
+            }
+
+            const data: PreBookPackageRequest = {
+                email: values.email,
+                category: selectedCategory,
+            };
+
+            preBookPackage(data, {
+                onSuccess: () => {
+                    showToast({
+                        title: "Success",
+                        description: "Congratulations! You've been added to the waiting list🎊",
+                        variant: "default"
+                    });
+                    closeModal();
+                },
+                onError: () => {
+                    showToast({
+                        title: "Error",
+                        description: "An error occurred while adding you to the waiting list. Please try again later.",
+                        variant: "destructive",
+                    });
+                }
+            });
+        }
+    });
 
     if (isLoading) {
         return <SingularPackageSkeleton />;
@@ -79,66 +121,27 @@ export default function SingularPackage({ id }: { id: string }) {
 
         switch(category.toLowerCase()) {
             case 'vip':
-                return <CrownIcon className="h-6 w-6 text-yellow-500" />;
+                return <CrownIcon className="h-6 w-6 text-brand-color" />;
             case 'standard':
-                return <UserIcon className="h-5 w-5 text-blue-500" />;
+                return <UserIcon className="h-5 w-5 text-brand-color" />;
             case 'deluxe':
-                return <DiamondIcon className="h-5 w-5 text-purple-500" />;
+                return <DiamondIcon className="h-5 w-5 text-brand-color" />;
             default:
                 return null;
         }
     };
 
-    const JoinWaitingListModal = () => {
-        const { showToast } = useAppToast();
-
-        const formik = useFormik({
-            initialValues: {
-                email: typeof window !== 'undefined' ? localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL) ?? "" : ""
-            },
-            validationSchema: waitingListSchema,
-            onSubmit: (values) => {
-                if (!selectedCategory) {
-                    showToast({
-                        title: "Error",
-                        description: "Package category not found",
-                        variant: "destructive",
-                    });
-                    return;
-                }
-
-                const data: PreBookPackageRequest = {
-                    email: values.email,
-                    category: selectedCategory,
-                };
-
-                preBookPackage(data, {
-                    onSuccess: () => {
-                        showToast({
-                            title: "Success",
-                            description: "Congratulations! You've been added to the waiting list🎊",
-                            variant: "default"
-                        });
-                        closeModal();
-                    },
-                    onError: () => {
-                        showToast({
-                            title: "Error",
-                            description: "An error occurred while adding you to the waiting list. Please try again later.",
-                            variant: "destructive",
-                        });
-                    }
-                });
-            }
-        });
-
-        return (
+    return (
+        <motion.div
+            {...fadeInUp}
+            className="max-w-6xl mx-auto px-2 sm:px-4 py-4 sm:py-8"
+        >
             <AppModal
                 title="Join Waiting List"
                 open={isJoinWaitingListModalOpen}
                 onOpenChange={closeModal}
             >
-                <form onSubmit={formik.handleSubmit} className="space-y-6">
+                <form className="space-y-6">
                     <p className="text-brand-color-text text-center text-sm sm:text-base leading-relaxed">
                         Booking is not available yet. Join our waiting list, if you're interested in this package and we'll notify you when you can book this package.
                     </p>
@@ -162,22 +165,14 @@ export default function SingularPackage({ id }: { id: string }) {
                             className="w-full h-12 text-base font-medium transition-all duration-200 hover:opacity-90"
                             disabled={isPreBookingPackage || !formik.isValid || !formik.dirty}
                             loading={isPreBookingPackage}
-                            onClick={formik.handleSubmit}
+                            type="button"
+                            onClick={() => formik.handleSubmit()}
                         >
                             Join Waiting List
                         </AppButton>
                     </div>
                 </form>
             </AppModal>
-        );
-    };
-
-    return (
-        <motion.div
-            {...fadeInUp}
-            className="max-w-6xl mx-auto px-2 sm:px-4 py-4 sm:py-8"
-        >
-            {isJoinWaitingListModalOpen && <JoinWaitingListModal />}
             <Card className="overflow-hidden bg-white shadow-lg sm:shadow-2xl rounded-xl hover:shadow-xl sm:hover:shadow-3xl transition-shadow duration-300">
                 <div className="p-4 sm:p-8">
                     <motion.div
@@ -293,11 +288,11 @@ export default function SingularPackage({ id }: { id: string }) {
                                                     {matchingDescription?.description && (
                                                         <div className="mt-3 pt-3 border-t border-gray-200">
                                                             <div className="prose prose-sm max-w-none text-xs sm:text-sm">
-                                                                <RichTextEditor
-                                                                    value={matchingDescription.description}
-                                                                    onChange={() => {}}
-                                                                    readOnly={true}
-                                                                />
+                                                                <li className={`text-sm  flex items-start gap-2`}>
+                                                                    <div className="flex gap-2">
+                                                                        <ul className="flex flex-col gap-2" dangerouslySetInnerHTML={{ __html: extractUlFromFeature(matchingDescription.description) }} />
+                                                                    </div>
+                                                                </li>
                                                             </div>
                                                         </div>
                                                     )}

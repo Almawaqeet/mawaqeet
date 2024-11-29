@@ -39,6 +39,7 @@ const StepThreeOnboarding = () => {
     if (verifyPaymentData?.status === 'success') {
       localStorage.setItem(LOCAL_STORAGE_KEYS.ONBOARDING_COMPLETED_STATUS, 'true')
       sessionStorage.setItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL, email ?? '')
+      localStorage.setItem(LOCAL_STORAGE_KEYS.ACTIVE_EMAIL, email ?? '')
 
       // Start countdown
       const timer = setInterval(() => {
@@ -78,7 +79,6 @@ const StepThreeOnboarding = () => {
                 setReference(data.data?.reference ?? '')
               },
               onClose: () => {
-                console.log('Payment closed')
               }
             })
             initializePayment()
@@ -104,8 +104,7 @@ const StepThreeOnboarding = () => {
               variant: "destructive",
               action: {
                 label: "Contact Support",
-                // TODO: Add contact support functionality
-                onClick: () => console.log("contact support")
+                onClick: () => router.push(CLIENT_ROUTES.PublicPages.contact)
               }
             })
           }

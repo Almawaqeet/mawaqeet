@@ -10,7 +10,7 @@ interface PackageProps {
   }
 
 
-  const extractUlFromFeature = (feature: string) => {
+  export const extractUlFromFeature = (feature: string) => {
     if (!feature) return '';
     const ulMatch = feature.match(/<ul>(.*?)<\/ul>/);
     if (ulMatch) {
