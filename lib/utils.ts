@@ -5,23 +5,51 @@ import { authOptions } from "./token"
 
 import { CLIENT_ROUTES } from "./routes"
 import { redirect } from "next/navigation"
-import { Package, SegregatedPackage } from "@/Constants/types"
-import { ACCOUNT_TYPES } from "@/Constants/generic"
+import { Package, SegregatedPackage } from "@/constants/types"
+import { ACCOUNT_TYPES } from "@/constants/generic"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
 
-export const convertToKobo = (amount: number) => {
-  return amount * 100
-}
+export function formatBytes(
+    bytes: number,
+    opts: {
+      decimals?: number;
+      sizeType?: 'accurate' | 'normal';
+    } = {}
+  ) {
+    const { decimals = 0, sizeType = 'normal' } = opts;
+
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const accurateSizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB'];
+    if (bytes === 0) return '0 Byte';
+    const i = Math.floor(Math.log(bytes) / Math.log(1024));
+    return `${(bytes / Math.pow(1024, i)).toFixed(decimals)} ${
+      sizeType === 'accurate' ? accurateSizes[i] ?? 'Bytest' : sizes[i] ?? 'Bytes'
+    }`;
+  }
+
+  const SECRET_KEY = process.env.NEXT_PUBLIC_SECRET_KEY || 'default_secret_key';
+
+  export const encryptData = (data: string) => {
+    return CryptoJS.AES.encrypt(data, SECRET_KEY).toString();
+  };
+
+  export const decryptData = (ciphertext: string) => {
+    const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET_KEY);
+    return bytes.toString(CryptoJS.enc.Utf8);
+  };
 
 
 export const extractFirstName = (fullName: string) => {
   return fullName.split(' ')[0];
 }
 
+export const convertToKobo = (amount: number) => {
+  return amount * 100
+}
 
 export const extractInitials = (fullName: string) => {
   return fullName.split(' ').map(name => name.charAt(0)).join('');
@@ -123,3 +151,5 @@ export const getSearchParamsFromUrl = (url: string) => {
   const searchParams = new URLSearchParams(url.split('?')[1]);
   return Object.fromEntries(searchParams.entries());
 }
+
+

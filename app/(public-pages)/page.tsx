@@ -1,8 +1,13 @@
-import { HeroSection } from "@/app/(public-pages)/_components/landing-page/HeroSection";
-import HeroSectionCarousel from "@/app/(public-pages)/_components/landing-page/HeroSectionCarousel";
-import StepsToRegister from "@/app/(public-pages)/_components/landing-page/StepsToRegister";
-import ActivePackages from "@/app/(public-pages)/_components/landing-page/ActivePackages";
-import LiveCall from "@/app/(public-pages)/_components/landing-page/LiveCall";
+import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
+import { HeroSection } from '@/app/(public-pages)/_components/landing-page/HeroSection';
+import ActivePackages from '@/app/(public-pages)/_components/landing-page/ActivePackages';
+import HeroSectionCarousel from '@/app/(public-pages)/_components/landing-page/HeroSectionCarousel';
+import LiveCall from '@/app/(public-pages)/_components/landing-page/LiveCall';
+import StepsToRegister from '@/app/(public-pages)/_components/landing-page/StepsToRegister';
+
+
+
 
 export default function LandingPage() {
   return (
@@ -17,3 +22,10 @@ export default function LandingPage() {
     </main>
   )
 }
+
+
+export const metadata: Metadata = {
+    title: "Al-Mawaqeet Travels and Tours | Home",
+    description: "Your trusted partner for Hajj and Umrah services. We provide comprehensive travel packages, guidance and support for your spiritual journey.",
+    keywords: "hajj, umrah, islamic travel, muslim pilgrimage, mecca travel, medina tours, religious tourism, travel agency",
+  };

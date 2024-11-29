@@ -1,6 +1,7 @@
 "use client";
 
-import { SegregatedPackage } from "@/Constants/types";
+import { SegregatedPackage } from "@/constants/types";
+import { CLIENT_ROUTES } from "@/lib/routes";
 import { useRouter } from "next/navigation";
 
 interface PackageProps {
@@ -9,7 +10,7 @@ interface PackageProps {
   }
 
 
-  const extractUlFromFeature = (feature: string) => {
+  export const extractUlFromFeature = (feature: string) => {
     if (!feature) return '';
     const ulMatch = feature.match(/<ul>(.*?)<\/ul>/);
     if (ulMatch) {
@@ -94,7 +95,7 @@ export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
           </ul>
         </div>
 
-        <button className={`w-full mt-6 py-2 text-sm font-medium ${styles.text.primary} bg-transparent border ${styles.border} rounded ${styles.button} transition-colors duration-300`} onClick={() => router.push(`/packages/${pkg.id}`)}>
+        <button className={`w-full mt-6 py-2 text-sm font-medium ${styles.text.primary} bg-transparent border ${styles.border} rounded ${styles.button} transition-colors duration-300`} onClick={() => router.push(CLIENT_ROUTES.PublicPages.packages.details(pkg?.id ?? ''))}>
           Learn more →
         </button>
       </div>

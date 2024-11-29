@@ -1,6 +1,7 @@
-import StepThreeOnboarding from "@/app/(public-pages)/_components/onboarding/StepThree";
 import { Metadata } from "next";
+import dynamic from 'next/dynamic'
 
+const StepThreeOnboarding = dynamic(() => import('@/app/(public-pages)/_components/onboarding/StepThree'), { ssr: false })
 
 
 

@@ -32,7 +32,7 @@ import {
 } from '@tanstack/react-table';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { parseAsInteger, useQueryState } from 'nuqs';
-import { brandColors } from '@/constants/brand-constants';
+
 
 
 // Fuzzy search filter function
@@ -193,7 +193,7 @@ export function DataTable<TData, TValue>({
                   table.setPageSize(Number(value));
                 }}
               >
-                <SelectTrigger className="h-8 w-[70px] bg-white text-sm sm:text-base" style={{color: brandColors.dark_brown}}>
+                <SelectTrigger className="h-8 w-[70px] bg-white text-sm sm:text-base text-white">
                   <SelectValue placeholder={paginationState.pageSize} />
                 </SelectTrigger>
                 <SelectContent side="top">
@@ -222,7 +222,6 @@ export function DataTable<TData, TValue>({
               aria-label="Go to first page"
               variant="outline"
               className="hidden h-8 w-8 p-0 lg:flex bg-white text-white"
-              style={{color: brandColors.dark_brown}}
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
@@ -231,8 +230,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to previous page"
               variant="outline"
-              className="h-8 w-8 p-0 bg-white text-black"
-              style={{color: brandColors.dark_brown}}
+              className="h-8 w-8 p-0 bg-white text-white"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
@@ -241,8 +239,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to next page"
               variant="outline"
-              className="h-8 w-8 p-0 bg-white text-black"
-              style={{color: brandColors.dark_brown}}
+              className="h-8 w-8 p-0 bg-white text-white"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
@@ -251,8 +248,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to last page"
               variant="outline"
-              className="hidden h-8 w-8 p-0 lg:flex bg-white text-black"
-              style={{color: brandColors.dark_brown}}
+              className="hidden h-8 w-8 p-0 lg:flex bg-white text-white"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >

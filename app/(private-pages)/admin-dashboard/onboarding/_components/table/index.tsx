@@ -9,6 +9,7 @@ import { useQueryState } from 'nuqs';
 import { useCallback, useMemo } from 'react';
 import { columns } from './columns';
 import { useGetOnboardingUsers } from '@/api/services/onboarding';
+import TableIndexSkelton from './table-index-skelton';
 
 export default function OnboardingTable() {
   const [searchQuery, setSearchQuery] = useQueryState(
@@ -18,9 +19,9 @@ export default function OnboardingTable() {
       .withDefault('')
   );
 
-  const [genderFilter, setGenderFilter] = useQueryState(
-    'gender',
-    searchParams.gender.withOptions({ shallow: false }).withDefault('')
+  const [statusFilter, setStatusFilter] = useQueryState(
+    'status',
+    searchParams.q.withOptions({ shallow: false }).withDefault('')
   );
 
   const [page, setPage] = useQueryState(
@@ -31,18 +32,20 @@ export default function OnboardingTable() {
   const { data, isLoading } = useGetOnboardingUsers({
     page: page ?? 1,
     name: searchQuery ?? undefined,
-    email: genderFilter ?? undefined
+    status: statusFilter ?? undefined,
+    email: searchQuery ?? undefined
   });
 
   const resetFilters = useCallback(() => {
     setSearchQuery(null);
-    setGenderFilter(null);
+    setStatusFilter(null);
     setPage(1);
-  }, [setSearchQuery, setGenderFilter, setPage]);
+  }, [setSearchQuery, setStatusFilter, setPage]);
 
   const isAnyFilterActive = useMemo(() => {
-    return !!searchQuery || !!genderFilter;
-  }, [searchQuery, genderFilter]);
+    return !!searchQuery || !!statusFilter;
+  }, [searchQuery, statusFilter]);
+
 
   return (
     <div className="space-y-4 ">
@@ -54,23 +57,35 @@ export default function OnboardingTable() {
           setPage={setPage}
         />
         <DataTableFilterBox
-          filterKey="gender"
-          title="Gender"
-          options={[]}
-          setFilterValue={setGenderFilter}
-          filterValue={genderFilter}
+          filterKey="status"
+          title="Payment Status"
+          options={[
+            {
+              label: 'Onboarding Payment Completed',
+              value: 'true'
+            },
+            {
+              label: 'Onboarding Payment Not Completed',
+              value: 'false'
+            }
+          ]}
+          setFilterValue={setStatusFilter}
+          filterValue={statusFilter}
         />
         <DataTableResetFilter
           isFilterActive={isAnyFilterActive}
           onReset={resetFilters}
         />
       </div>
-
-      <DataTable
-        columns={columns}
-        data={data?.results ?? []}
-        totalItems={data?.count ?? 0}
-      />
+      {
+        isLoading ? <TableIndexSkelton /> : (
+          <DataTable
+            columns={columns}
+            data={data?.results ?? []}
+            totalItems={data?.count ?? 0}
+          />
+        )
+      }
     </div>
   );
 }

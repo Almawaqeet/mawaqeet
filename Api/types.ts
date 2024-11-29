@@ -65,6 +65,38 @@ export interface LoginRequest {
     password: string;
 }
 
+
+export interface OtpPasswordRequest {
+    email: string;
+    otp: string;
+}
+
+export interface SendOtpRequest {
+    email: string;
+}
+
+export interface SendOtpResponse {
+    message: string;
+}
+
+export interface VerifyOtpRequest {
+    email: string;
+    otp: string;
+}
+
+export interface VerifyOtpResponse {
+    message: string;
+}
+
+export interface ChangePasswordRequest {
+    email: string;
+    password: string;
+}
+
+export interface ChangePasswordResponse {
+    message: string;
+}
+
 export interface LoginResponse {
     refresh: string;
     access: string;
@@ -73,7 +105,14 @@ export interface LoginResponse {
     account_type: "ADMIN" | "USER";
 }
 
+export interface PreBookPackageRequest {
+    email: string;
+    category: string;
+}
 
+export interface PreBookPackageResponse {
+    message: string;
+}
 
 
 export interface SimpleOnboardingUser {
@@ -83,4 +122,16 @@ export interface SimpleOnboardingUser {
     onboarding_fee_payment_check?: boolean;
     is_completed?: boolean;
     date_created?: string;
+}
+
+
+
+export interface User {
+    email: string;
+    profile?: {
+        first_name?: string;
+        last_name?: string;
+        phone_number?: string;
+        address?: string;
+    } | null;
 }

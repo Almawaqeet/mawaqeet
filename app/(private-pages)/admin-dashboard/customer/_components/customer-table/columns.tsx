@@ -1,10 +1,10 @@
 'use client';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Employee } from '@/constants/data';
+import { User } from '@/api/types';
 import { ColumnDef } from '@tanstack/react-table';
-import { CellAction } from './cell-action';
+// import { CellAction } from './cell-action';
 
-export const columns: ColumnDef<Employee>[] = [
+export const columns: ColumnDef<User>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -25,31 +25,28 @@ export const columns: ColumnDef<Employee>[] = [
     enableHiding: false
   },
   {
-    accessorKey: 'first_name',
-    header: 'NAME'
+    accessorKey: 'profile.first_name',
+    header: 'NAME',
+    cell: ({ row }) => (row.original.profile?.first_name && row.original.profile?.last_name) ?
+      `${row.original.profile.first_name} ${row.original.profile.last_name}` : '-'
   },
   {
     accessorKey: 'email',
-    header: 'EMAIL'
+    header: 'EMAIL',
+    cell: ({ row }) => row.original.email ?? '-'
   },
   {
-    accessorKey: 'country',
-    header: 'PHONE'
+    accessorKey: 'profile.phone_number',
+    header: 'PHONE',
+    cell: ({ row }) => row.original.profile?.phone_number ?? '-'
   },
   {
-    accessorKey: 'address',
-    header: 'ADDRESS'
+    accessorKey: 'profile.address',
+    header: 'ADDRESS',
+    cell: ({ row }) => row.original.profile?.address ?? '-'
   },
-  {
-    accessorKey: 'gender',
-    header: 'GENDER'
-  },
-  {
-    accessorKey: 'plan',
-    header: 'PLAN'
-  },
-  {
-    id: 'actions',
-    cell: ({ row }) => <CellAction data={row.original} />
-  }
+//   {
+//     id: 'actions',
+//     cell: ({ row }) => <CellAction data={row.original} />
+//   }
 ];

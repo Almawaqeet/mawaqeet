@@ -1,6 +1,5 @@
 "use client";
 
-
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -9,7 +8,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LayersIcon, BanknoteIcon, CalendarIcon, CrownIcon, UserIcon, DiamondIcon } from "lucide-react";
 import AppButton from "@/components/reusables/AppButton";
 import SingularPackageSkeleton from "../SingularPackageSkeleton";
-import { useViewPackage } from "@/Api/Services/packages";
+import { useViewPackage } from "@/api/services/packages";
+import AppModal from "@/components/reusables/AppModal";
+import { useState, useCallback } from "react";
+import { LOCAL_STORAGE_KEYS } from "@/constants/local-storage-keys";
+import AppTextInput from "@/components/reusables/AppTextInput";
+import { usePreBookPackage } from "@/api/services/onboarding";
+import { useAppToast } from "@/components/reusables/AppToast";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { PreBookPackageRequest } from "@/api/types";
+import { extractUlFromFeature } from "./Package";
 
 const RichTextEditor = dynamic(() => import("@/components/ui/rich-text-editor"), {
     ssr: false,
@@ -30,13 +39,70 @@ const staggerChildren = {
     }
 };
 
+const waitingListSchema = Yup.object().shape({
+    email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required'),
+});
+
 export default function SingularPackage({ id }: { id: string }) {
     const { data: pkg, isLoading } = useViewPackage(id);
+    const [isJoinWaitingListModalOpen, setIsJoinWaitingListModalOpen] = useState<boolean>(false);
+    const [selectedCategory, setSelectedCategory] = useState<string>("");
+    const { mutate: preBookPackage, isPending: isPreBookingPackage } = usePreBookPackage(id);
+    const { showToast } = useAppToast();
+
+    const closeModal = useCallback(() => {
+        setIsJoinWaitingListModalOpen(false);
+    }, []);
+
+    const handleBookNowClick = useCallback((category: string) => {
+        setSelectedCategory(category);
+        setIsJoinWaitingListModalOpen(true);
+    }, []);
+
+    const formik = useFormik({
+        initialValues: {
+            email: typeof window !== 'undefined' ? localStorage.getItem(LOCAL_STORAGE_KEYS.ACTIVE_EMAIL) ?? "" : ""
+        },
+        validationSchema: waitingListSchema,
+        onSubmit: (values) => {
+            if (!selectedCategory) {
+                showToast({
+                    title: "Error",
+                    description: "Package category not found",
+                    variant: "destructive",
+                });
+                return;
+            }
+
+            const data: PreBookPackageRequest = {
+                email: values.email,
+                category: selectedCategory,
+            };
+
+            preBookPackage(data, {
+                onSuccess: () => {
+                    showToast({
+                        title: "Success",
+                        description: "Congratulations! You've been added to the waiting list🎊",
+                        variant: "default"
+                    });
+                    closeModal();
+                },
+                onError: () => {
+                    showToast({
+                        title: "Error",
+                        description: "An error occurred while adding you to the waiting list. Please try again later.",
+                        variant: "destructive",
+                    });
+                }
+            });
+        }
+    });
 
     if (isLoading) {
-        return (
-            <SingularPackageSkeleton />
-        );
+        return <SingularPackageSkeleton />;
     }
 
     if (!pkg) {
@@ -50,14 +116,16 @@ export default function SingularPackage({ id }: { id: string }) {
         );
     }
 
-    const getCategoryIcon = (category: string) => {
-        switch(category?.toLowerCase()) {
+    const getCategoryIcon = (category: string | undefined) => {
+        if (!category) return null;
+
+        switch(category.toLowerCase()) {
             case 'vip':
-                return <CrownIcon className="h-6 w-6 text-yellow-500" />;
+                return <CrownIcon className="h-6 w-6 text-brand-color" />;
             case 'standard':
-                return <UserIcon className="h-5 w-5 text-blue-500" />;
+                return <UserIcon className="h-5 w-5 text-brand-color" />;
             case 'deluxe':
-                return <DiamondIcon className="h-5 w-5 text-purple-500" />;
+                return <DiamondIcon className="h-5 w-5 text-brand-color" />;
             default:
                 return null;
         }
@@ -68,6 +136,43 @@ export default function SingularPackage({ id }: { id: string }) {
             {...fadeInUp}
             className="max-w-6xl mx-auto px-2 sm:px-4 py-4 sm:py-8"
         >
+            <AppModal
+                title="Join Waiting List"
+                open={isJoinWaitingListModalOpen}
+                onOpenChange={closeModal}
+            >
+                <form className="space-y-6">
+                    <p className="text-brand-color-text text-center text-sm sm:text-base leading-relaxed">
+                        Booking is not available yet. Join our waiting list, if you're interested in this package and we'll notify you when you can book this package.
+                    </p>
+                    <div className="space-y-4">
+                        <div>
+                            <AppTextInput
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email address"
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                className="w-full"
+                            />
+                            {formik.touched.email && formik.errors.email && (
+                                <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
+                            )}
+                        </div>
+                        <AppButton
+                            variant="primary"
+                            className="w-full h-12 text-base font-medium transition-all duration-200 hover:opacity-90"
+                            disabled={isPreBookingPackage || !formik.isValid || !formik.dirty}
+                            loading={isPreBookingPackage}
+                            type="button"
+                            onClick={() => formik.handleSubmit()}
+                        >
+                            Join Waiting List
+                        </AppButton>
+                    </div>
+                </form>
+            </AppModal>
             <Card className="overflow-hidden bg-white shadow-lg sm:shadow-2xl rounded-xl hover:shadow-xl sm:hover:shadow-3xl transition-shadow duration-300">
                 <div className="p-4 sm:p-8">
                     <motion.div
@@ -76,7 +181,7 @@ export default function SingularPackage({ id }: { id: string }) {
                     >
                         <motion.div variants={fadeInUp}>
                             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-                                {pkg?.name}
+                                {pkg?.name ?? 'Unnamed Package'}
                             </h1>
                             <div className="flex flex-wrap gap-2 mt-2">
                                 <Badge variant="secondary" className="px-3 py-1 text-xs sm:text-sm font-medium">
@@ -136,6 +241,8 @@ export default function SingularPackage({ id }: { id: string }) {
                                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
                                 >
                                     {pkg?.price?.map((price) => {
+                                        if (!price?.category) return null;
+
                                         const matchingDescription = pkg?.category_description?.find(
                                             desc => desc?.category?.toLowerCase() === price?.category?.toLowerCase()
                                         );
@@ -149,7 +256,7 @@ export default function SingularPackage({ id }: { id: string }) {
                                                         <div className="flex items-center justify-between mb-2 sm:mb-4">
                                                             <h3 className="text-lg sm:text-xl font-semibold capitalize text-gray-800 flex items-center gap-2">
                                                                 {getCategoryIcon(price?.category)}
-                                                                {price?.category ?? 'Unnamed Category'}
+                                                                {price?.category}
                                                             </h3>
                                                             {isVIP && <Badge className="bg-yellow-500">VIP</Badge>}
                                                         </div>
@@ -171,8 +278,8 @@ export default function SingularPackage({ id }: { id: string }) {
                                                             )}
                                                         </div>
                                                         <AppButton
-                                                            onClick={() => {}}
-                                                            disabled={!pkg?.is_active}
+                                                            variant="primary"
+                                                            onClick={() => handleBookNowClick(price.category)}
                                                         >
                                                             Book Now
                                                         </AppButton>
@@ -181,11 +288,11 @@ export default function SingularPackage({ id }: { id: string }) {
                                                     {matchingDescription?.description && (
                                                         <div className="mt-3 pt-3 border-t border-gray-200">
                                                             <div className="prose prose-sm max-w-none text-xs sm:text-sm">
-                                                                <RichTextEditor
-                                                                    value={matchingDescription.description}
-                                                                    onChange={() => {}}
-                                                                    readOnly={true}
-                                                                />
+                                                                <li className={`text-sm  flex items-start gap-2`}>
+                                                                    <div className="flex gap-2">
+                                                                        <ul className="flex flex-col gap-2" dangerouslySetInnerHTML={{ __html: extractUlFromFeature(matchingDescription.description) }} />
+                                                                    </div>
+                                                                </li>
                                                             </div>
                                                         </div>
                                                     )}

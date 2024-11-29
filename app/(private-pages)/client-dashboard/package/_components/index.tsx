@@ -4,7 +4,7 @@ import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import React from 'react';
 import PackageTable from './table';
-import NewPackageDialog from './new-package-dialog';
+
 
 export default function PackageListingPage() {
   const data = [
@@ -22,12 +22,9 @@ export default function PackageListingPage() {
       <div className="space-y-4">
         <div className="flex items-start justify-between">
           <Heading title={`Package`} description="Manage packages" />
-
-          <NewPackageDialog />
         </div>
         <Separator />
 
-        {/* <CustomerTable data={nData} totalData={totalUsers} /> */}
         <PackageTable data={data} totalData={data.length} />
       </div>
     </PageContainer>

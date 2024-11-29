@@ -1,4 +1,5 @@
-import { SearchParams } from 'nuqs/parsers';
+
+import { SearchParams } from 'nuqs/server';
 import ProfileViewPage from './_components/profile-view-page';
 
 type pageProps = {

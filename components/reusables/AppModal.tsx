@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { memo } from 'react'
 import {
   AlertDialog,
   AlertDialogContent,
@@ -18,7 +18,7 @@ interface AppModalProps {
   className?: string
 }
 
-const AppModal = ({
+const AppModal = memo(({
   trigger = "",
   title,
   open,
@@ -29,9 +29,7 @@ const AppModal = ({
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent
-        className={`
-          ${className}
-        `}
+        className={`${className ?? ''}`}
         style={{ backgroundColor: 'white', color: 'brand-color' }}
       >
         <AlertDialogHeader className="space-y-4">
@@ -47,6 +45,8 @@ const AppModal = ({
       </AlertDialogContent>
     </AlertDialog>
   )
-}
+})
+
+AppModal.displayName = 'AppModal'
 
 export default AppModal

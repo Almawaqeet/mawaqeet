@@ -2,7 +2,9 @@ export const routes = {
     auth: {
         login: '/auth/login/',
         register: '/auth/register/',
-        forgottenPassword: '/auth/forgotten-password/',
+        sendOtp: '/auth/forgot-password/',
+        verifyOtp: '/auth/verify-otp/',
+        changePassword: '/auth/reset-password/',
     },
 
     onboarding: {
@@ -17,7 +19,7 @@ export const routes = {
 
     users: {
         getUsers: 'core/admin/user-admin/',
-    },
+},
 
     packages: {
         showAllActivePackages: 'core/customer/show-all-active-packages/',
@@ -27,6 +29,7 @@ export const routes = {
 
     package: {
         viewPackage: (packageId: string) => `core/customer/view-package/${packageId}/`,
+        preBookPackage: (packageId: string) => `onboarding/customer/prebook-package/${packageId}/`,
     },
 
 }
