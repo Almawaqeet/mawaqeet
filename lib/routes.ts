@@ -8,7 +8,7 @@ export const CLIENT_ROUTES = {
         },
         packages: {
             index: '/packages',
-            details: '/packages/:packageId'
+            details: (packageId: string) => `/packages/${packageId}`
         },
         auth: {
             login: '/auth/login',

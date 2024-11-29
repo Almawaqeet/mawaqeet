@@ -10,7 +10,7 @@ import AppButton from "@/components/reusables/AppButton";
 import SingularPackageSkeleton from "../SingularPackageSkeleton";
 import { useViewPackage } from "@/api/services/packages";
 import AppModal from "@/components/reusables/AppModal";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { LOCAL_STORAGE_KEYS } from "@/constants/local-storage-keys";
 import AppTextInput from "@/components/reusables/AppTextInput";
 import { usePreBookPackage } from "@/api/services/onboarding";
@@ -50,14 +50,14 @@ export default function SingularPackage({ id }: { id: string }) {
     const [selectedCategory, setSelectedCategory] = useState<string>("");
     const { mutate: preBookPackage, isPending: isPreBookingPackage } = usePreBookPackage();
 
-    const closeModal = () => {
+    const closeModal = useCallback(() => {
         setIsJoinWaitingListModalOpen(false);
-    };
+    }, []);
 
-    const handleBookNowClick = (category: string) => {
+    const handleBookNowClick = useCallback((category: string) => {
         setSelectedCategory(category);
         setIsJoinWaitingListModalOpen(true);
-    };
+    }, []);
 
     if (isLoading) {
         return <SingularPackageSkeleton />;
@@ -159,11 +159,11 @@ export default function SingularPackage({ id }: { id: string }) {
                             )}
                         </div>
                         <AppButton
-                            type="submit"
                             variant="primary"
                             className="w-full h-12 text-base font-medium transition-all duration-200 hover:opacity-90"
                             disabled={isPreBookingPackage || !formik.isValid || !formik.dirty}
                             loading={isPreBookingPackage}
+                            onClick={formik.handleSubmit}
                         >
                             Join Waiting List
                         </AppButton>
