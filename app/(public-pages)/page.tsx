@@ -1,24 +1,26 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import { HeroSection } from '@/app/(public-pages)/_components/landing-page/HeroSection';
 import ActivePackages from '@/app/(public-pages)/_components/landing-page/ActivePackages';
 import HeroSectionCarousel from '@/app/(public-pages)/_components/landing-page/HeroSectionCarousel';
 import LiveCall from '@/app/(public-pages)/_components/landing-page/LiveCall';
 import StepsToRegister from '@/app/(public-pages)/_components/landing-page/StepsToRegister';
-
-
-
+import MeetTheTeam from '@/app/(public-pages)/_components/landing-page/MeetTheTeam';
+import WhyUs from '@/app/(public-pages)/_components/landing-page/WhyUs';
+import Benefits from '@/app/(public-pages)/_components/landing-page/Benefits';
 
 export default function LandingPage() {
   return (
     <main
       className="flex flex-col gap-8"
     >
-      <HeroSection />
-      <HeroSectionCarousel />
-      <StepsToRegister />
-      <ActivePackages />
-      <LiveCall />
+        <HeroSection />
+        <HeroSectionCarousel />
+        <WhyUs />
+        <Benefits />
+        <MeetTheTeam />
+        <StepsToRegister />
+        <ActivePackages />
+        <LiveCall />
     </main>
   )
 }
