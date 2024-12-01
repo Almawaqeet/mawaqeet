@@ -3,26 +3,46 @@
 import AppHeading from "@/components/reusables/AppHeading"
 import { whiteSpaces } from "@/old-pages/utilities/GlobalSpaces"
 import { motion, AnimatePresence } from "framer-motion"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
+import { Play } from "lucide-react"
 
 export default function MeetTheTeam() {
     const [hoveredMember, setHoveredMember] = useState<number | null>(null)
+    const [showOverlay, setShowOverlay] = useState(true)
+
+    useEffect(() => {
+        let timeout: NodeJS.Timeout
+        if (hoveredMember !== null) {
+            setShowOverlay(true)
+            timeout = setTimeout(() => {
+                setShowOverlay(false)
+            }, 2000)
+        } else {
+            setShowOverlay(true)
+        }
+
+        return () => {
+            if (timeout) clearTimeout(timeout)
+        }
+    }, [hoveredMember])
 
     const team = [
         {
-            name: "John Doe",
-            role: "CEO & Founder",
-            video: "https://videos.pexels.com/video-files/5935119/5935119-hd_1080_1920_25fps.mp4",
-            thumbnail: "/images/team/john-doe.jpg", // Add actual thumbnail path
-            bio: "20+ years experience in Hajj and Umrah services"
+            name: "Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi",
+            role: "Chief Executive Officer and Managing Director, Al-Mawaqeet Travels and Tours",
+            video: "https://utfs.io/f/iywkFYKVsyRUWtcoj8ZG2a5m6p9AMqPUzI4OujgdSQlcoXnB",
+            thumbnail: "/images/ceo.png",
+            bio: "20+ years experience in Hajj and Umrah services",
+            achievements: "Led over 1000+ successful pilgrimages, certified Hajj guide, fluent in Arabic and English"
         },
         {
-            name: "Jane Smith",
-            role: "Operations Director",
-            video: "https://videos.pexels.com/video-files/16182080/16182080-hd_1080_1920_30fps.mp4",
-            thumbnail: "/images/team/jane-smith.jpg", // Add actual thumbnail path
-            bio: "Expert in pilgrim logistics and coordination"
+            name: "Shaykh Abdullah Ma'ruf Oyelekan",
+            role: "Chief Managing Director Al-Mawaqeet Travels and Tours",
+            video: "https://utfs.io/f/iywkFYKVsyRU0ee0fLB2QUDtI9aTqmwWieroJsGgH3S7CEBM",
+            thumbnail: "/images/director.jpg",
+            bio: "Expert in pilgrim logistics and coordination",
+            achievements: "Coordinated logistics for 500+ pilgrims annually, developed innovative pilgrim tracking systems"
         }
     ]
 
@@ -45,48 +65,88 @@ export default function MeetTheTeam() {
     }
 
     return (
-        <section className={`w-full ${whiteSpaces?.paddingX} py-8 md:py-24`}>
+        <section className={`w-full ${whiteSpaces?.paddingX} py-8 md:py-24 bg-gray-50`}>
             <div className="max-w-7xl mx-auto">
                 <AppHeading
                     variant="h2"
-                    className="text-2xl sm:text-3xl md:text-4xl text-brand-color mb-16 text-center"
+                    className="text-2xl sm:text-3xl md:text-4xl text-brand-color mb-4 text-center"
                 >
-                    Meet The Team Behind Your Journey
+                    Meet Our Distinguished Team
                 </AppHeading>
+
+                <p className="text-center text-gray-600 max-w-2xl mx-auto mb-16">
+                    Our leadership team brings decades of combined experience in Hajj and Umrah services.
+                    With deep knowledge of Islamic traditions and modern logistics, they ensure every pilgrim's
+                    journey is spiritually fulfilling and seamlessly organized.
+                </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     {team?.map((member, index) => (
                         <div
                             key={member.name}
-                            className="relative"
+                            className="relative group"
                             onMouseEnter={() => setHoveredMember(index)}
                             onMouseLeave={() => setHoveredMember(null)}
                         >
-                            <div className="aspect-video w-full rounded-xl overflow-hidden bg-gray-100">
+                            <div className="aspect-[16/12] md:aspect-video w-full rounded-xl overflow-hidden bg-gray-100 shadow-lg transition-transform duration-300 group-hover:scale-[1.02]">
                                 {hoveredMember === index ? (
-                                    <video
-                                        autoPlay
-                                        muted
-                                        loop
-                                        className="w-full h-full object-cover"
-                                    >
-                                        <source src={member.video} type="video/mp4" />
-                                        Your browser does not support the video tag.
-                                    </video>
+                                    <div className="relative h-full">
+                                        <video
+                                            autoPlay
+                                            loop
+                                            className="w-full h-full object-cover"
+                                        >
+                                            <source src={member?.video} type="video/mp4" />
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <AnimatePresence>
+                                            {showOverlay && (
+                                                <motion.div
+                                                    initial={{ opacity: 1 }}
+                                                    exit={{ opacity: 0 }}
+                                                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-6 flex flex-col justify-end"
+                                                >
+                                                    <h3 className="text-lg md:text-xl font-semibold text-white mb-1 md:mb-2">
+                                                        {member?.name}
+                                                    </h3>
+                                                    <p className="text-sm md:text-base text-white/90 font-medium mb-1 md:mb-2">
+                                                        {member?.role}
+                                                    </p>
+                                                    <p className="text-xs md:text-sm text-white/80 mb-2">
+                                                        {member?.bio}
+                                                    </p>
+                                                    <p className="text-xs md:text-sm text-white/70 italic">
+                                                        {member?.achievements}
+                                                    </p>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
                                 ) : (
                                     <div className="relative w-full h-full">
-                                        {member.thumbnail && (
-                                            <Image
-                                                src={member.thumbnail}
-                                                alt={member.name}
-                                                fill
-                                                className="object-cover"
-                                                sizes="(max-width: 768px) 100vw, 50vw"
-                                            />
+                                        {member?.thumbnail && (
+                                            <>
+                                                <Image
+                                                    src={member.thumbnail}
+                                                    alt={member.name}
+                                                    fill
+                                                    className="object-cover"
+                                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                                />
+                                                <div className="absolute inset-0 bg-black/40" />
+                                            </>
                                         )}
-                                        <div className="absolute inset-0 bg-black/20 hover:bg-black/10 transition-colors flex items-center justify-center">
-                                            <p className="text-white font-medium bg-brand-color/80 px-4 py-2 rounded-lg">
-                                                Hover to meet {member.name}
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-transform hover:scale-110 cursor-pointer">
+                                                <Play className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                                            </div>
+                                        </div>
+                                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-6">
+                                            <h3 className="text-lg md:text-xl font-semibold text-white">
+                                                {member?.name}
+                                            </h3>
+                                            <p className="text-sm md:text-base text-white/90">
+                                                {member?.role}
                                             </p>
                                         </div>
                                     </div>
@@ -94,22 +154,25 @@ export default function MeetTheTeam() {
                             </div>
 
                             <AnimatePresence>
-                                {hoveredMember === index && (
+                                {hoveredMember === index && showOverlay && (
                                     <motion.div
                                         variants={slideVariants}
                                         initial="hidden"
                                         animate="visible"
                                         exit="exit"
-                                        className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-xl"
+                                        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-6 rounded-xl flex flex-col justify-end md:hidden"
                                     >
-                                        <h3 className="text-xl font-semibold text-white mb-2">
-                                            {member.name}
+                                        <h3 className="text-lg md:text-xl font-semibold text-white mb-1 md:mb-2">
+                                            {member?.name}
                                         </h3>
-                                        <p className="text-white/90 font-medium mb-2">
-                                            {member.role}
+                                        <p className="text-sm md:text-base text-white/90 font-medium mb-1 md:mb-2">
+                                            {member?.role}
                                         </p>
-                                        <p className="text-sm text-white/80">
-                                            {member.bio}
+                                        <p className="text-xs md:text-sm text-white/80 mb-2">
+                                            {member?.bio}
+                                        </p>
+                                        <p className="text-xs md:text-sm text-white/70 italic">
+                                            {member?.achievements}
                                         </p>
                                     </motion.div>
                                 )}
