@@ -127,7 +127,7 @@ export const HeroSection = () => {
             variant="secondary"
             iconPosition="start"
             icon={<FaPlay className="w-3 h-3 sm:w-4 sm:h-4" />}
-            onClick={() => {}}
+            onClick={() =>  router.push('/about')}
             className="w-full sm:w-auto"
           >
             Learn more

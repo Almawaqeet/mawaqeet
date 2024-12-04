@@ -1,29 +1,31 @@
 "use client"
-
+import Image, { StaticImageData } from "next/image"
 import { motion } from "framer-motion"
 import AppHeading from "@/components/reusables/AppHeading"
 import { whiteSpaces } from "@/old-pages/utilities/GlobalSpaces"
-import { Heart, Compass, Users, Star } from "lucide-react"
+import { icon_1, icon_2, icon_3 } from '@/public/images/index'
+
 
 export default function Benefits() {
     const benefits = [
         {
-            icon: Heart,
+            icon: icon_1 as StaticImageData,
             title: "Begin Your Sacred Journey",
-            description: "Take the first step towards a transformative spiritual experience with our meticulously planned Hajj and Umrah packages, designed to nurture your soul."
+            description: "Take the first step towards a transformative spiritual experience with our meticulously planned Hajj and Umrah packages, designed to nurture your soul.",
+         
         },
         {
-            icon: Compass,
+            icon: icon_2 as StaticImageData,
             title: "Navigate with Confidence",
             description: "Our experienced team handles everything from visa processing to accommodations, while providing spiritual guidance to enrich your pilgrimage experience."
         },
         {
-            icon: Users,
+            icon: icon_3 as StaticImageData,
             title: "Journey Your Way",
             description: "Whether you prefer luxury or simplicity, our flexible packages adapt to your preferences and budget, ensuring a comfortable and meaningful pilgrimage."
         },
         {
-            icon: Star,
+            icon: icon_2 as StaticImageData,
             title: "Experience Excellence",
             description: "Let our dedicated team and knowledgeable guides elevate your journey, combining spiritual enlightenment with seamless logistics for a truly blessed experience."
         }
@@ -82,7 +84,7 @@ export default function Benefits() {
                             className="p-8 bg-[#F2EDE8] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1"
                         >
                             <div className="w-16 h-16 bg-brand-color/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-color/20 transition-colors">
-                                <benefit.icon className="w-8 h-8 text-brand-color" />
+                                <Image src={benefit.icon} height={50} width={50} alt="icons" />
                             </div>
                             <h3 className="text-xl font-semibold text-gray-800 mb-3">
                                 {benefit.title}
