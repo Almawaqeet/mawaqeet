@@ -1,21 +1,23 @@
 import { Package } from "@/constants/types";
-import { useAppMutation, useAppQuery, useAppQueryWithPaginationAndParams } from "../constructor";
-import { PaginatedResponse } from "../types";
-import { routes } from "../routes";
+import { useAppMutation, useAppQuery, useAppQueryWithPaginationAndParams } from "@/api/client-constructor";
+import { PaginatedResponse } from "@/api/types";
+import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
 
 
 export const useGetAllActivePackages = (params?: { package_type?: string, search?: string }) => {
+    const baseQueryKey = generateBaseQueryKeyFromRoute(routes.packages.showAllActivePackages);
     return useAppQueryWithPaginationAndParams<PaginatedResponse<Package>>({
         apiRoute: routes.packages.showAllActivePackages,
-        queryKey: ['GET_ALL_ACTIVE_PACKAGES', params?.package_type, params?.search],
+        queryKey: [baseQueryKey, params?.package_type, params?.search],
         params: params
     });
 }
 
 export const useGetAllInactivePackages = (params?: { package_type?: string, search?: string }) => {
+    const baseQueryKey = generateBaseQueryKeyFromRoute(routes.packages.showAllInactivePackages);
     return useAppQueryWithPaginationAndParams<PaginatedResponse<Package>>({
         apiRoute: routes.packages.showAllInactivePackages,
-        queryKey: ['GET_ALL_INACTIVE_PACKAGES', params?.package_type, params?.search],
+        queryKey: [baseQueryKey, params?.package_type, params?.search],
         params: params
     });
 }
@@ -34,8 +36,9 @@ export const useCreatePackage = (data?: Package) => {
 
 
 export const useViewPackage = (packageId: string) => {
+    const baseQueryKey = generateBaseQueryKeyFromRoute(routes.package.viewPackage(packageId));
     return useAppQuery<Package>({
         apiRoute: routes.package.viewPackage(packageId),
-        queryKey: ['VIEW_PACKAGE', packageId],
+        queryKey: [baseQueryKey],
     });
 }

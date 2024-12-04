@@ -1,16 +1,32 @@
 import { Metadata } from "next";
 import dynamic from 'next/dynamic'
+import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
+import { createServerAxiosInstance } from "@/api/server-constructor";
+import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
 
 const StepThreeOnboarding = dynamic(() => import('@/app/(public-pages)/_components/onboarding/StepThree'), { ssr: false })
 
-
-
-export default function StepThreePage() {
-  return (
-    <StepThreeOnboarding />
-  )
+async function getInitialData() {
+  const queryClient = new QueryClient();
+  const route = routes.onboarding.getOnboardingPaymentAmount;
+  const baseQueryKey = generateBaseQueryKeyFromRoute(route);
+  const data = await createServerAxiosInstance(route);
+  await queryClient.prefetchQuery({
+    queryKey: [baseQueryKey],
+    queryFn: () => data
+  });
+  return queryClient;
 }
 
+export default async function StepThreePage() {
+  const queryClient = await getInitialData();
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <StepThreeOnboarding />
+    </HydrationBoundary>
+  )
+}
 
 export const metadata: Metadata = {
     title: "Complete Your Profile | Step 3",

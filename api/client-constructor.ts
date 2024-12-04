@@ -1,7 +1,7 @@
 import { useQuery, useMutation, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
 import axios, { AxiosRequestConfig } from 'axios';
 import { getSession } from 'next-auth/react';
-
+import { API_URL } from '@/environment-config';
 
 type QueryConfig<TQueryKey, TData> = {
   queryKey: TQueryKey;
@@ -23,7 +23,7 @@ type MutationConfig<TVariables, TData> = {
 };
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -1,6 +1,9 @@
-import { useAppQuery, useAppMutation, useAppQueryWithPaginationAndParams } from "@/api/constructor";
-import { routes } from "@/api/routes";
+import { useAppQuery, useAppMutation, useAppQueryWithPaginationAndParams } from "@/api/client-constructor";
+import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
 import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingInitiatePaymentRequest, OnboardingInitiatePaymentResponse, OnboardingPaymentResponse, OnboardingVerifyPaymentResponse, PaginatedResponse, PreBookPackageRequest, PreBookPackageResponse, SimpleOnboardingUser } from "@/api/types";
+
+
+
 
 
 export const useCheckIfEmailAddressExist = (body?: {email: string}) => {
@@ -15,9 +18,10 @@ export const useCheckIfEmailAddressExist = (body?: {email: string}) => {
 }
 
 export const useGetOnboardingPaymentAmount = () => {
+    const baseQueryKey = generateBaseQueryKeyFromRoute(routes.onboarding.getOnboardingPaymentAmount);
     return useAppQuery<OnboardingPaymentResponse>({
         apiRoute: routes.onboarding.getOnboardingPaymentAmount,
-        queryKey: ['ONBOARDING_PAYMENT_AMOUNT']
+        queryKey: [baseQueryKey]
     });
 }
 

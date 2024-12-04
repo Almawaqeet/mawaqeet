@@ -1,6 +1,6 @@
-import { useAppQueryWithPaginationAndParams } from "@/api/constructor";
+import { useAppQueryWithPaginationAndParams } from "@/api/client-constructor";
 import { routes } from "@/api/routes";
-import { PaginatedResponse, User } from "../types";
+import { PaginatedResponse, User } from "@/api/types";
 
 
 
