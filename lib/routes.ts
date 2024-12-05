@@ -19,7 +19,8 @@ export const CLIENT_ROUTES = {
                 stepThree: '/password/step-3'
             }
         },
-        contact: '/contact'
+        contact: '/contact',
+        about: '/about'
     },
     PrivatePages: {
         clientDashboard: {

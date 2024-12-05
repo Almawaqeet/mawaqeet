@@ -10,6 +10,7 @@ import { motion } from 'framer-motion'
 import { FaCreditCard } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
+import { CLIENT_ROUTES } from '@/lib/routes';
 
 
 
@@ -127,7 +128,7 @@ export const HeroSection = () => {
             variant="secondary"
             iconPosition="start"
             icon={<FaPlay className="w-3 h-3 sm:w-4 sm:h-4" />}
-            onClick={() =>  router.push('/about')}
+            onClick={() =>  router.push(`${CLIENT_ROUTES.PublicPages.about}`)}
             className="w-full sm:w-auto"
           >
             Learn more
