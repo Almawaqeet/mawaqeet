@@ -59,17 +59,17 @@ export const about_us_team: AboutUsTeam[] = [
     image: team4,
     imageProfile: Maruf, 
     fullname: 'Shaykh Abdullah Ma’ruf Oyelekan',
-    post: 'Chief Executive Officer and Managing Director, Al-Mawaqeet Travels and Tours',
+    post: 'Baba n Madeenah',
     personality: '{Ph.D. (in-view), Islamic Economics and Finance, Islamic University of Madeenah Kingdom of Saudi Arabia}',
     view_profile: 'View Profile',
     profile_1:
       'Shaykh Abdullah Ma’ruf Oyelekan is a distinguished Nigerian scholar currently pursuing a Ph.D. in Islamic Economics and Finance at the prestigious Islamic University of Madeenah in the Kingdom of Saudi Arabia. With over seven years of experience as a Hajj and Umrah guide, Shaykh Abdullah has earned a reputation for his deep knowledge, compassionate leadership, and unwavering commitment to the welfare of pilgrims.',
     profile_2:
-      'As the Chief Executive Officer of Al-Mawaqeet Travels and Tours, Shaykh Abdullah has been instrumental in facilitating transformative spiritual journeys for Muslims from around the world. His dedication to ensuring that every pilgrim’s experience is both spiritually enriching and logistically smooth has made him a trusted figure in the field of Islamic travel services. His expertise extends beyond just the technical aspects of guiding; he is known for his ability to provide insightful religious guidance and support, helping pilgrims understand and appreciate the deeper meanings of the rituals they perform.',
+      'As the Baba n Madeenah of Al-Mawaqeet Travels and Tours, Shaykh Abdullah has been instrumental in facilitating transformative spiritual journeys for Muslims from around the world. His dedication to ensuring that every pilgrim’s experience is both spiritually enriching and logistically smooth has made him a trusted figure in the field of Islamic travel services. His expertise extends beyond just the technical aspects of guiding; he is known for his ability to provide insightful religious guidance and support, helping pilgrims understand and appreciate the deeper meanings of the rituals they perform.',
     profile_3:
       'Shaykh Abdullah’s academic pursuits and practical experience are complemented by his passion for Islamic teachings and his commitment to serving the Ummah. His work in Islamic Economics and Finance aims to bridge the gap between traditional Islamic principles and contemporary economic challenges, offering innovative solutions that are rooted in Islamic values. He is a sought-after speaker and educator, known for his eloquence and ability to connect with diverse audiences.',
     profile_4:
-      'Through his leadership at Al-Mawaqeet Travels and Tours, Shaykh Abdullah continues to make significant contributions to the field of Islamic travel, ensuring that the journeys of Hajj and Umrah are accessible, safe, and spiritually fulfilling for all. His dedication to the welfare of pilgrims and his scholarly achievements make him a prominent and respected figure in the global Islamic community.',
+      'Through his leadership at Al-Mawaqeet Travels and Tours, Shaykh Abdullah continues to make significant contributions   to the field of Islamic travel, ensuring that the journeys of Hajj and Umrah are accessible, safe, and spiritually fulfilling for all. His dedication to the welfare of pilgrims and his scholarly achievements make him a prominent and respected figure in the global Islamic community.',
   },
   {
     id: 'img2',
@@ -77,20 +77,20 @@ export const about_us_team: AboutUsTeam[] = [
     image: team1,
     imageProfile: Kutubi,
     fullname: 'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi',
-    post: 'Chief Managing Director Al-Mawaqeet Travels and Tours',
-    personality: '{Director, Abū Hurayrah Islamic Institute, Shimawa, Ogun State, Nigeria}',
+    post: 'Ameerul Hajj',
+    personality: '{ Director, Ansarus-Sunnah Islamic Institute, Shimawa, Ogun State, Nigeria}',
     view_profile: 'View Profile',
     profile_1:
-      'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi is an esteemed Nigerian scholar and an influential figure in the realm of Islamic da’wah. He serves as the Director of the Abū Hurayrah Islamic Institute in Shimawa, Ogun State, where he has been instrumental in promoting the authentic teachings of Islam. With over a decade of dedication to calling people to the path of pristine Islam, Shaykh Abdul-Hakeem has established himself as a respected authority in Islamic education and outreach.',
+      'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi is an esteemed Nigerian scholar and an influential figure in the realm of Islamic da’wah. He serves as the Director of the Ansarus-Sunnah Islamic Institute in Shimawa, Ogun State, where he has been instrumental in promoting the authentic teachings of Islam. With over a decade of dedication to calling people to the path of pristine Islam, Shaykh Abdul-Hakeem has established himself as a respected authority in Islamic education and outreach.',
     profile_2:
-      'As the Managing director of Al-Mawaqeet Travels and Tours, Shaykh Abdul-Hakeem has leveraged his extensive experience—spanning more than six years—as a Hajj and Umrah guide. His passion for the welfare of pilgrims is evident in his meticulous planning and compassionate leadership, ensuring that each pilgrim’s spiritual journey is fulfilling and stress-free. His deep understanding of the rites and logistics of these sacred journeys has earned him a reputation for excellence and reliability among pilgrims and the wider Muslim community.',
+      'As the Ameerul Hajj of Al-Mawaqeet Travels and Tours, Shaykh Abdul-Hakeem has leveraged his extensive experience—spanning more than six years—as an Hajj and Umrah guide. His passion for the welfare of pilgrims is evident in his meticulous planning and compassionate leadership, ensuring that each pilgrim’s spiritual journey is fulfilling and stress-free. His deep understanding of the rites and logistics of these sacred journeys has earned him a reputation for excellence and reliability among pilgrims and the wider Muslim community.',
     profile_3:
       'Shaykh Abdul-Hakeem’s efforts extend beyond the confines of his institute. He has been a pivotal figure in numerous da’wah activities across Nigeria, tirelessly working to spread the message of Islam. His lectures, seminars, and workshops are known for their depth of knowledge, clarity, and relevance, touching on various aspects of faith, spirituality, and practical life.',
     profile_4:
       'With a deep commitment to Islamic principles and a passion for community service, Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi continues to be a beacon of guidance and inspiration for Muslims in Nigeria and beyond. His unwavering dedication to da’wah and the welfare of pilgrims cements his role as a leading figure in the Islamic community.',
   },
   {
-    id: 'img4',
+    id: 'img3',
     slug: 'Shaykh-Zahradeen',
     image: team3,
     imageProfile: Ramadan,
@@ -103,5 +103,21 @@ export const about_us_team: AboutUsTeam[] = [
       'Beyond his contributions to religious tourism, Shaykh Abdullah is an accomplished entrepreneur involved in the sale of medical equipment and rice production. His ventures reflect a deep commitment to community welfare and economic development, providing essential services and products.',
     profile_3:
       'Shaykh Abdullah’s dedication to the well-being of pilgrims is unparalleled. He is deeply invested in ensuring that each pilgrim’s journey is not only logistically smooth but also spiritually enriching. His dual roles in the medical and agricultural sectors, coupled with his leadership in travel services, showcase his diverse talents and his unwavering commitment to serving the community. Shaykh Abdullah Zahradeen Abū Ramadan stands as a multifaceted leader, devoted to both spiritual guidance and practical service.',
+  },
+
+  {
+    id: 'img4',
+    slug: ' Arch. Amodu Sheriff Adekola',
+    image: team3,
+    imageProfile: Ramadan,
+    fullname: ' Arch. Amodu Sheriff Adekola',
+    post: 'Chief Operating Officer, Al-Mawaqeet Travels and Tours',
+    view_profile: 'View Profile',
+    profile_1:
+      'Meet Amodu Sheriff Adekola: an architect, entrepreneur, and the dedicated Operations Manager at Al-Mawaaqeet Travels and Tours. With a background in architecture from YabaTech and a BSc and MSc from OAU, Adekola is registered with the Nigerian Institute of Architects and the Architects Registration Council of Nigeria. He’s a pro at building – whether it’s structures, businesses, or unforgettable travel experiences.',
+    profile_2:
+      'As the founder of SAA Studio Limited, he’s led numerous architectural projects with an eye for quality and precision. But Adekola didn’t stop there; he expanded his portfolio into the fast-moving consumer goods industry, establishing Khubz Bakery & Grills and Khubz Market. Through these ventures, he’s proven his knack for delivering top-notch products and services.',
+    profile_3:
+      'On a personal level, Adekola’s connection to spiritual journeys is deep-rooted. Having performed Hajj and Umrah multiple times with respected scholars, he’s well-versed in the nuances of these sacred experiences. Now, he brings that expertise to Al-Mawaaqeet Travels, ensuring each client’s pilgrimage is fulfilling, seamless, and impactful. With Adekola at the helm, clients are in expert hands for a journey that’s both memorable and meaningful.',
   },
 ];

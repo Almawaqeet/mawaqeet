@@ -1,9 +1,15 @@
 import React from 'react'
 import { Metadata } from 'next'
 import { AboutPageSection } from '@/app/(public-pages)/_components/about-page/AboutPageSection'
+import OurTeam from '../_components/about-page/OurTeam';
 
 export default function AboutPage() {
-    return <AboutPageSection />
+    return (
+        <main className="flex flex-col gap-8">
+            <AboutPageSection />
+            <OurTeam />
+        </main>
+    )
 }
 
 
@@ -12,4 +18,4 @@ export const metadata: Metadata = {
     title: "About Us | Al-Mawaqeet Travels and Tours",
     description: "Learn about Al-Mawaqeet Travels and Tours, your trusted partner for Hajj and Umrah services.",
     keywords: "hajj, umrah, islamic travel, muslim pilgrimage, mecca travel, medina tours, religious tourism, travel agency",
-  };
+};
