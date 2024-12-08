@@ -2,6 +2,7 @@ export const CLIENT_ROUTES = {
     PublicPages: {
         home: '/',
         onboarding: {
+            newUser: '/onboarding/new-user/',
             stepOne: '/onboarding/new-user/step-1',
             stepTwo: '/onboarding/new-user/step-2',
             stepThree: '/onboarding/new-user/step-3'

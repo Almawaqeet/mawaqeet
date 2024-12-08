@@ -1,11 +1,11 @@
 import { StaticImageData } from "next/image";
-import team1 from "../../public/images/team_1.png";
-import team3 from "../../public/images/team_3.png";
-import team4 from "../../public/images/team_4.png";
+import team1 from "@/public/images/team_1.png";
+import team3 from "@/public/images/team_3.png";
+import team4 from "@/public/images/team_4.png";
 
-import Maruf from "../../public/images/Rectangle1.png";
-import Kutubi from "../../public/images/Rectangle3.png";
-import Ramadan from "../../public/images/Rectangle2.png";
+import Maruf from "@/public/images/Rectangle1.png";
+import Kutubi from "@/public/images/Rectangle3.png";
+import Ramadan from "@/public/images/Rectangle2.png";
 
 interface AboutHero {
   id: string;
@@ -55,7 +55,7 @@ export const about_main_body: AboutMainBody[] = [
 
 export const about_us_team: AboutUsTeam[] = [
   {
-    id: "Baba n Madeenah",
+    id: "Baba-n-Madeenah",
     company: " Al-Mawaqeet Travels and Tours",
     image: team4,
     imageProfile: Maruf,
@@ -72,13 +72,13 @@ export const about_us_team: AboutUsTeam[] = [
           "As the Baba n Madeenah of Al-Mawaqeet Travels and Tours, Shaykh Abdullah has been instrumental in facilitating transformative spiritual journeys for Muslims from around the world. His dedication to ensuring that every pilgrim’s experience is both spiritually enriching and logistically smooth has made him a trusted figure in the field of Islamic travel services. His expertise extends beyond just the technical aspects of guiding; he is known for his ability to provide insightful religious guidance and support, helping pilgrims understand and appreciate the deeper meanings of the rituals they perform.",
         profile_3:
           "Shaykh Abdullah’s academic pursuits and practical experience are complemented by his passion for Islamic teachings and his commitment to serving the Ummah. His work in Islamic Economics and Finance aims to bridge the gap between traditional Islamic principles and contemporary economic challenges, offering innovative solutions that are rooted in Islamic values. He is a sought-after speaker and educator, known for his eloquence and ability to connect with diverse audiences.",
-        // profile_4:
-        //   "Through his leadership at Al-Mawaqeet Travels and Tours, Shaykh Abdullah continues to make significant contributions   to the field of Islamic travel, ensuring that the journeys of Hajj and Umrah are accessible, safe, and spiritually fulfilling for all. His dedication to the welfare of pilgrims and his scholarly achievements make him a prominent and respected figure in the global Islamic community.",
+        profile_4:
+          "Through his leadership at Al-Mawaqeet Travels and Tours, Shaykh Abdullah continues to make significant contributions   to the field of Islamic travel, ensuring that the journeys of Hajj and Umrah are accessible, safe, and spiritually fulfilling for all. His dedication to the welfare of pilgrims and his scholarly achievements make him a prominent and respected figure in the global Islamic community.",
       },
     ],
   },
   {
-    id: "Ameerul Hajj",
+    id: "Ameerul-Hajj",
     company: " Al-Mawaqeet Travels and Tours",
     image: team1,
     imageProfile: Kutubi,
@@ -95,19 +95,19 @@ export const about_us_team: AboutUsTeam[] = [
           "As the Ameerul Hajj of Al-Mawaqeet Travels and Tours, Shaykh Abdul-Hakeem has leveraged his extensive experience—spanning more than six years—as an Hajj and Umrah guide. His passion for the welfare of pilgrims is evident in his meticulous planning and compassionate leadership, ensuring that each pilgrim’s spiritual journey is fulfilling and stress-free. His deep understanding of the rites and logistics of these sacred journeys has earned him a reputation for excellence and reliability among pilgrims and the wider Muslim community.",
         profile_3:
           "Shaykh Abdul-Hakeem’s efforts extend beyond the confines of his institute. He has been a pivotal figure in numerous da’wah activities across Nigeria, tirelessly working to spread the message of Islam. His lectures, seminars, and workshops are known for their depth of knowledge, clarity, and relevance, touching on various aspects of faith, spirituality, and practical life.",
-        // profile_4:
-        //   "With a deep commitment to Islamic principles and a passion for community service, Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi continues to be a beacon of guidance and inspiration for Muslims in Nigeria and beyond. His unwavering dedication to da’wah and the welfare of pilgrims cements his role as a leading figure in the Islamic community.",
+        profile_4:
+          "With a deep commitment to Islamic principles and a passion for community service, Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi continues to be a beacon of guidance and inspiration for Muslims in Nigeria and beyond. His unwavering dedication to da’wah and the welfare of pilgrims cements his role as a leading figure in the Islamic community.",
       },
     ],
   },
   {
-    id: "Chief Operating Officer",
+    id: "Chief-Operating-Officer",
     company: " Al-Mawaqeet Travels and Tours",
     image: team3,
     imageProfile: Ramadan,
     fullname: "Shaykh Abdullah Zahradeen Abū Ramadan",
     post: "Chief Operating Officer",
-    personality: 'abcf',
+    // personality: 'Architect, BSc and MSc from OAU',
     view_profile: "View Profile",
     profile: [
       {
@@ -122,13 +122,13 @@ export const about_us_team: AboutUsTeam[] = [
   },
 
   {
-    id: "Operations Manager",
+    id: "Operations-Manager",
     company: " Al-Mawaqeet Travels and Tours",
     image: team3,
     imageProfile: Ramadan,
     fullname: " Arch. Amodu Sheriff Adekola",
     post: "Operations Manager",
-    personality: 'abcd',
+    personality: 'Architect, BSc and MSc from OAU',
     view_profile: "View Profile",
     profile: [
       {

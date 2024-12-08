@@ -23,7 +23,7 @@ const Complementary = () => {
                     </div>
                 </main>
 
-                <aside className='flex flex-col gap-8'>
+                <aside className='flex flex-col gap-16'>
                     <div>
                         <p className="text-start text-gray-700 max-w-2xl mb-6 text-2xl font-bold">
                             First Tier: Tours and Seminar
@@ -36,7 +36,7 @@ const Complementary = () => {
                                     <motion.div
                                         key={`${boldItem.id}-${index}`}
                                         whileHover={{ scale: 1.02 }}
-                                        className="bg-[#F9F4EF] hover:bg-[#F4EEE9] p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+                                        className={`bg-[#F9F4EF] hover:bg-[#F4EEE9] p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 ${index === 2 && 'sm:hidden md:block'}`}
                                     >
                                         <div className="flex flex-col items-center gap-4">
                                             {/* Image Section */}
@@ -83,13 +83,13 @@ const Complementary = () => {
                         </p>
 
                         <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
-                            {complementary_services.map((itm) =>
+                            {complementary_services.map((itm, index) =>
                                 itm.id === "complement" &&
                                 itm.highlights.map((boldItem, index) => (
                                     <motion.div
                                         key={`${boldItem.id}-${index}`}
                                         whileHover={{ scale: 1.02 }}
-                                        className="bg-[#F9F4EF] hover:bg-[#F4EEE9] p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+                                        className={`bg-[#F9F4EF] hover:bg-[#F4EEE9] p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 ${index === 2 && 'sm:hidden md:block'}`}
                                     >
                                         <div className="flex flex-col items-center gap-4">
                                             {/* Image Section */}

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/reusables/carousel';
+import { motion } from "framer-motion"
 import { about_us_team } from '@/old-pages/contents/about';
 import useSlider from '@/old-pages/hooks/useSlider';
 import Team from './Team';
-import Bullet from '@/old-pages/UI/Bullet';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 
 const TeamCarousel = () => {
@@ -12,8 +12,10 @@ const TeamCarousel = () => {
     return (
         <section className={`${whiteSpaces.paddingX} max-w-7xl m-auto`}>
 
+
             <Carousel setApi={setApi}>
                 <CarouselContent>
+              
                     {about_us_team.map((team,) => (
                         <CarouselItem className='xmd:basis-full sm:basis-3/4'>
                             <Team key={team.id} team={team} theme='light' />

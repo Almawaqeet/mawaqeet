@@ -1,8 +1,8 @@
 import React from 'react';
 import SingularTeam from '@/app/(public-pages)/_components/about-page/SingularTeam';
 
-export default function page ({ params }: { params: { slug: string } }) {
+export default function page ({ params }: { params: { teamId: string } }) {
 
-  <SingularTeam id={params.slug} />
+ return <SingularTeam id={params.teamId} />
 }
 

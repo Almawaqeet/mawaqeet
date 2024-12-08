@@ -118,7 +118,7 @@ export const HeroSection = () => {
         >
           <AppButton
             icon={<IoMdArrowRoundForward className="w-4 h-4 sm:w-5 sm:h-5" />}
-            onClick={() => router.push(`${CLIENT_ROUTES.PublicPages.onboarding.stepOne}`)}
+            onClick={() => router.push(`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`)}
             className="w-full sm:w-auto"
           >
             Get Started

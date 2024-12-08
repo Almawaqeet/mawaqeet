@@ -32,6 +32,11 @@ const config: Config = {
   			'brand-color-black': 'var(--brand-color-black)',
   			'brand-color-text': 'var(--brand-color-text)'
   		},
+
+		  backgroundImage: {
+			'static-image': "url('/images/personality.png')",
+		  },
+
   		fontSize: {
   			'fz-xxs': '10px',
   			'fz-xsm': '12px',
