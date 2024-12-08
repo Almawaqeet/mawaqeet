@@ -20,7 +20,10 @@ export const CLIENT_ROUTES = {
             }
         },
         contact: '/contact',
-        about: '/about'
+        about: {
+            index: '/about',
+            details: (teamId: string) => `/about/profile/${teamId}`
+        }
     },
     PrivatePages: {
         clientDashboard: {

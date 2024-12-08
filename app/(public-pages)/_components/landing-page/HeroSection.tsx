@@ -118,7 +118,7 @@ export const HeroSection = () => {
         >
           <AppButton
             icon={<IoMdArrowRoundForward className="w-4 h-4 sm:w-5 sm:h-5" />}
-            onClick={() => router.push('/onboarding/new-user')}
+            onClick={() => router.push(`${CLIENT_ROUTES.PublicPages.onboarding.stepOne}`)}
             className="w-full sm:w-auto"
           >
             Get Started
@@ -128,7 +128,7 @@ export const HeroSection = () => {
             variant="secondary"
             iconPosition="start"
             icon={<FaPlay className="w-3 h-3 sm:w-4 sm:h-4" />}
-            onClick={() =>  router.push(`${CLIENT_ROUTES.PublicPages.about}`)}
+            onClick={() =>  router.push(`${CLIENT_ROUTES.PublicPages.about.index}`)}
             className="w-full sm:w-auto"
           >
             Learn more
