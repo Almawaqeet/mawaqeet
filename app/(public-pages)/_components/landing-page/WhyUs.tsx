@@ -57,7 +57,7 @@ export default function WhyUs() {
     }
 
     return (
-        <section className={`w-full ${whiteSpaces?.paddingX} py-4 md:py-16 pt-16 bg-[#1A1A1A]`}>
+        <section className={`w-full bg-[#1A1A1A] py-16 ${whiteSpaces.paddingX}`}>
             <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -65,18 +65,18 @@ export default function WhyUs() {
                 variants={containerVariants}
                 className="max-w-7xl mx-auto"
             >
-                <div className="text-left md:text-center mb-12">
+                <div className="mb-12">
                     <AppHeading
                         variant="h2"
-                        className="text-2xl sm:text-3xl md:text-4xl text-white mb-4 text-left md:text-center"
+                        className="text-3xl sm:text-4xl md:text-5xl text-white mb-6 font-bold text-left"
                     >
                         Experience the Divine Journey
                     </AppHeading>
-                    <p className="text-gray-400 max-w-2xl md:mx-auto mb-4">
+                    <p className="text-gray-400 mb-6 text-lg leading-relaxed text-left">
                         Have you ever wished to experience the peace and calm of being close to Allah in the
-                        holiest cities of Islam, Makkah and Madinah? Experience the life-changing journey of Hajj and Umrah, the fifth pillar of Islam. Enjoy😊the joy of prayer at the Prophet's Mosque and the sense of togetherness with Muslims worldwide. They're big chances for personal growth and feeling closer to God.
+                        holiest cities of Islam, Makkah and Madinah? Experience the life-changing journey of Hajj and Umrah, the fifth pillar of Islam. Enjoy the joy of prayer at the Prophet's Mosque and the sense of togetherness with Muslims worldwide. They're big chances for personal growth and feeling closer to God.
                     </p>
-                    <p className="text-gray-400 max-w-2xl md:mx-auto text-lg md:text-xl lg:text-2xl leading-[1.6] md:leading-[1.5] lg:leading-[1.4]">
+                    <p className="text-gray-400 text-xl font-medium text-left">
                         They offer you the chance to:
                     </p>
                 </div>
@@ -89,15 +89,24 @@ export default function WhyUs() {
                         <motion.div
                             key={benefit.id}
                             variants={itemVariants}
-                            className="bg-[#2A2A2A] p-6 rounded-lg hover:shadow-lg transition-all duration-300 text-left md:text-center group hover:-translate-y-2 border border-gray-700"
+                            className="bg-[#2A2A2A] p-8 rounded-xl hover:shadow-xl transition-all duration-300 group hover:-translate-y-2 border border-gray-700/50"
                         >
-                            <div className="w-20 h-20 mb-4 md:mx-auto flex items-center justify-center">
-                                {benefit.icon && <Image src={benefit.icon} width={40} height={40} alt={`${benefit.id}`} quality={100} className="w-12 h-12 text-gray-200 group-hover:text-gray-400 transition-colors object-contain" />}
+                            <div className="w-20 h-20 mb-6 flex items-center justify-center bg-gray-800/50 rounded-full">
+                                {benefit.icon && (
+                                    <Image
+                                        src={benefit.icon}
+                                        width={40}
+                                        height={40}
+                                        alt={benefit.title}
+                                        quality={100}
+                                        className="w-12 h-12 text-gray-200 group-hover:scale-110 transition-transform duration-300 object-contain"
+                                    />
+                                )}
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-200 mb-2 group-hover:text-gray-400">
+                            <h3 className="text-xl font-semibold text-gray-200 mb-4 group-hover:text-white transition-colors text-left">
                                 {benefit.title}
                             </h3>
-                            <p className="text-gray-400 text-sm">
+                            <p className="text-gray-400 text-base leading-relaxed text-left">
                                 {benefit.description}
                             </p>
                         </motion.div>

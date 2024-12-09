@@ -12,7 +12,7 @@ const Paragraph = dynamic(() => import('@/old-pages/utilities/Paragraph'), { ssr
 
 export const AboutPageSection = () => {
     return (
-        <section className={`flex min-h-dvh items-center justify-center flex-col py-16 ${whiteSpaces.paddingX}`}>
+        <section className={`flex min-h-[30%] items-center justify-center flex-col py-8 ${whiteSpaces.paddingX}`}>
             <div>
                 <AppHeading variant='h1' className=' text-H1-text-color mb-4'>About Us</AppHeading>
             </div>

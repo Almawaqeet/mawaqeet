@@ -6,7 +6,7 @@ import Complementary from '@/app/(public-pages)/_components/about-page/Complemen
 
 export default function AboutPage() {
     return (
-        <main className="flex flex-col gap-8">
+        <main className="flex flex-col gap-2">
             <AboutPageSection />
             <OurTeam />
             <Complementary />

@@ -7,6 +7,7 @@ import { about_us_team } from "@/old-pages/contents/about";
 import Image from "next/image";
 import { FaArrowLeft } from "react-icons/fa6";
 import { CLIENT_ROUTES } from "@/lib/routes";
+import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 
 const SingularTeam = ({ id }: { id: string }) => {
   const teamMember = about_us_team.find((itm) => itm.id === id);
@@ -18,57 +19,86 @@ const SingularTeam = ({ id }: { id: string }) => {
   const router = useRouter();
 
   return (
-    <section className="mb-8">
+    <section className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header Section */}
-      <aside className="bg-static-image md:block xmd:flex justify-center items-center xmd:min-h-80 md:h-full relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-transparent z-10" />
-        <div className="max-w-7xl mx-auto w-full relative z-20">
-          <main className="grid md:grid-cols-[1fr_300px] sm:grid-cols-1 py-12 gap-8 h-full px-4">
-            <div className="flex flex-col gap-4">
-              <AppHeading
-                variant="h2"
-                className="text-3xl md:text-4xl text-white font-bold"
+      <div className="relative h-[40rem] sm:h-[20rem] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-transparent z-10" />
+        <div className="bg-static-image absolute inset-0 bg-cover bg-center transform scale-105 hover:scale-110 transition-transform duration-1000" />
+
+        <div className={`relative z-20 h-full max-w-7xl mx-auto ${whiteSpaces.paddingX}`}>
+          <div className="flex flex-col md:flex-row items-center justify-between h-full py-8 sm:py-16 gap-8 sm:gap-12">
+            <div className="flex-1 space-y-6 sm:space-y-8 text-center md:text-left">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
               >
-                {fullname}
-              </AppHeading>
-              <p className="text-lg text-gray-300">{personality}</p>
+                <AppHeading
+                  variant="h2"
+                  className="text-4xl sm:text-5xl md:text-6xl text-white font-bold drop-shadow-lg"
+                >
+                  {fullname}
+                </AppHeading>
+                <p className="text-xl sm:text-2xl text-gray-100 mt-4 sm:mt-6 max-w-2xl leading-relaxed font-light drop-shadow mx-auto md:mx-0">
+                  {personality}
+                </p>
+              </motion.div>
             </div>
-            <div className="w-full flex justify-center">
-              <Image
-                src={imageProfile}
-                height={200}
-                width={200}
-                className="rounded-lg object-cover shadow-lg"
-                quality={100}
-                alt={id}
-              />
-            </div>
-          </main>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative"
+            >
+              <div className="w-64 h-64 sm:w-72 sm:h-72 md:w-96 md:h-96 relative group">
+                <Image
+                  src={imageProfile}
+                  fill
+                  className="rounded-3xl object-cover shadow-2xl border-4 border-white/30 group-hover:border-white/50 transition-all duration-300 transform group-hover:scale-105"
+                  quality={100}
+                  alt={fullname}
+                  priority
+                />
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </aside>
+      </div>
 
       {/* Profile Details */}
-      <div className="max-w-7xl mx-auto space-y-6 px-4 mt-8">
-        {profile.map((item, index) => (
-          <div key={index} className="bg-gray-50 shadow-md rounded-lg p-4">
-            {Object.values(item).map((detail, i) => (
-              <p key={i} className="text-brand-color-text text-base leading-relaxed">
-                {detail}
-              </p>
-            ))}
-          </div>
-        ))}
+      <div className={`max-w-7xl mx-auto ${whiteSpaces.paddingX} py-12 sm:py-20`}>
+        <div className="grid grid-cols-1 gap-8 sm:gap-12 max-w-4xl mx-auto">
+          {profile.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
+              className="bg-white p-6 sm:p-10 duration-300 rounded-xl shadow-md hover:shadow-lg"
+            >
+              {Object.values(item).map((detail, i) => (
+                <p key={i} className="text-gray-700 text-lg sm:text-xl leading-relaxed mb-4 sm:mb-6 last:mb-0">
+                  {detail}
+                </p>
+              ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Back Button */}
-      <motion.div
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+      <motion.button
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => router.push(CLIENT_ROUTES.PublicPages.about.index)}
-        className="fixed bottom-4 right-4 w-12 h-12 bg-brand-color rounded-full shadow-md flex items-center justify-center cursor-pointer"
+        className="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 px-6 sm:px-8 py-3 sm:py-4 bg-brand-color text-white rounded-full shadow-xl hover:shadow-2xl flex items-center gap-2 sm:gap-3 hover:bg-brand-color/90 transition-all duration-300"
       >
-        <FaArrowLeft className="text-white text-2xl" />
-      </motion.div>
+        <FaArrowLeft className="text-lg sm:text-xl" />
+        <span className="font-semibold text-base sm:text-lg">Back to Team</span>
+      </motion.button>
     </section>
   );
 };

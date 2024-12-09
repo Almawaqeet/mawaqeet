@@ -1,7 +1,6 @@
 'use client'
 import { motion } from 'framer-motion';
 import AppHeading from '@/components/reusables/AppHeading'
-import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces'
 import { thumbnail } from '@/public/images'
 import Image from 'next/image'
 import React from 'react'
