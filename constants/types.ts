@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 //todo: change this later. its here for props
 export interface Package {
   id?: string;
@@ -50,4 +52,25 @@ export type SegregatedPackage = {
     price: string;
     paymentPlan: string;
     features: string[];
+  }
+
+  interface Profile {
+    profile_1: string;
+    profile_2: string;
+    profile_3: string;
+    profile_4?: string;
+    profile_5?: string;
+  }
+
+  export interface SegregatedTeam {
+    id: string;
+    company: string;
+    image: StaticImageData;
+    imageProfile: StaticImageData
+    fullname: string;
+    post: string;
+    slug?: string
+    personality?: string;
+    view_profile: string;
+    profile: [...Array<Profile>]
   }

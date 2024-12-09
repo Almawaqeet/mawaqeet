@@ -2,6 +2,7 @@ export const CLIENT_ROUTES = {
     PublicPages: {
         home: '/',
         onboarding: {
+            newUser: '/onboarding/new-user/',
             stepOne: '/onboarding/new-user/step-1',
             stepTwo: '/onboarding/new-user/step-2',
             stepThree: '/onboarding/new-user/step-3'
@@ -19,7 +20,11 @@ export const CLIENT_ROUTES = {
                 stepThree: '/password/step-3'
             }
         },
-        contact: '/contact'
+        contact: '/contact',
+        about: {
+            index: '/about',
+            details: (teamId: string) => `/about/profile/${teamId}`
+        }
     },
     PrivatePages: {
         clientDashboard: {

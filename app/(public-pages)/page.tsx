@@ -7,12 +7,12 @@ import StepsToRegister from '@/app/(public-pages)/_components/landing-page/Steps
 import MeetTheTeam from '@/app/(public-pages)/_components/landing-page/MeetTheTeam';
 import WhyUs from '@/app/(public-pages)/_components/landing-page/WhyUs';
 import Benefits from '@/app/(public-pages)/_components/landing-page/Benefits';
+import Faqs from './_components/landing-page/Faqs';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { HydrationBoundary } from '@tanstack/react-query';
 import { generateBaseQueryKeyFromRoute } from '@/api/routes';
 import { createServerAxiosInstance } from '@/api/server-constructor';
 import { routes } from '@/api/routes';
-
 
 async function getInitialData() {
   const queryClient = new QueryClient();
@@ -42,13 +42,14 @@ export default async function LandingPage() {
         <StepsToRegister />
         <ActivePackages />
         <LiveCall />
+        <Faqs />
       </main>
     </HydrationBoundary>
   )
 }
 
 export const metadata: Metadata = {
-    title: "Al-Mawaqeet Travels and Tours | Home",
-    description: "Your trusted partner for Hajj and Umrah services. We provide comprehensive travel packages, guidance and support for your spiritual journey.",
-    keywords: "hajj, umrah, islamic travel, muslim pilgrimage, mecca travel, medina tours, religious tourism, travel agency",
-  };
+  title: "Al-Mawaqeet Travels and Tours | Home",
+  description: "Your trusted partner for Hajj and Umrah services. We provide comprehensive travel packages, guidance and support for your spiritual journey.",
+  keywords: "hajj, umrah, islamic travel, muslim pilgrimage, mecca travel, medina tours, religious tourism, travel agency",
+};

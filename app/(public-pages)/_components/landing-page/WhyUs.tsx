@@ -4,8 +4,8 @@ import React from 'react';
 import { motion } from 'framer-motion'
 import AppHeading from '@/components/reusables/AppHeading'
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces'
-import { Heart, BookOpen, Users } from 'lucide-react'
-import { FaPeace } from 'react-icons/fa'
+import { icon_1, icon_2, icon_3, icon_4 } from '@/public/images';
+import Image, { StaticImageData } from 'next/image';
 
 export default function WhyUs() {
     const benefits = [
@@ -13,25 +13,25 @@ export default function WhyUs() {
             id: 1,
             title: "Cleanse your heart and soul",
             description: "Reconnect with Allah (SWT) and let go of life's daily hassles.",
-            icon: Heart
+            icon: icon_1 as StaticImageData
         },
         {
             id: 2,
             title: "Hone your faith",
             description: "Learn more about Islam and its important principles.",
-            icon: BookOpen
+            icon: icon_2 as StaticImageData
         },
         {
             id: 3,
             title: "Make friends for life",
             description: "Get to know Muslims from every place, all united by faith.",
-            icon: Users
+            icon: icon_3 as StaticImageData
         },
         {
             id: 4,
             title: "Find absolute peace",
             description: "Experience the true peace and quiet in Makkah and Madinah.",
-            icon: FaPeace
+            icon: icon_4 as StaticImageData
         }
     ]
 
@@ -72,9 +72,12 @@ export default function WhyUs() {
                     >
                         Experience the Divine Journey
                     </AppHeading>
-                    <p className="text-gray-400 max-w-2xl md:mx-auto">
+                    <p className="text-gray-400 max-w-2xl md:mx-auto mb-4">
                         Have you ever wished to experience the peace and calm of being close to Allah in the
-                        holiest cities of Islam, Makkah and Madinah? Experience the life-changing journey of Hajj and Umrah.
+                        holiest cities of Islam, Makkah and Madinah? Experience the life-changing journey of Hajj and Umrah, the fifth pillar of Islam. Enjoy😊the joy of prayer at the Prophet's Mosque and the sense of togetherness with Muslims worldwide. They're big chances for personal growth and feeling closer to God.
+                    </p>
+                    <p className="text-gray-400 max-w-2xl md:mx-auto text-lg md:text-xl lg:text-2xl leading-[1.6] md:leading-[1.5] lg:leading-[1.4]">
+                        They offer you the chance to:
                     </p>
                 </div>
 
@@ -89,7 +92,7 @@ export default function WhyUs() {
                             className="bg-[#2A2A2A] p-6 rounded-lg hover:shadow-lg transition-all duration-300 text-left md:text-center group hover:-translate-y-2 border border-gray-700"
                         >
                             <div className="w-20 h-20 mb-4 md:mx-auto flex items-center justify-center">
-                                {benefit.icon && <benefit.icon className="w-12 h-12 text-gray-200 group-hover:text-gray-400 transition-colors" />}
+                                {benefit.icon && <Image src={benefit.icon} width={40} height={40} alt={`${benefit.id}`} quality={100} className="w-12 h-12 text-gray-200 group-hover:text-gray-400 transition-colors object-contain" />}
                             </div>
                             <h3 className="text-lg font-semibold text-gray-200 mb-2 group-hover:text-gray-400">
                                 {benefit.title}

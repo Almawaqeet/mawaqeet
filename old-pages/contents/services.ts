@@ -1,3 +1,6 @@
+import { admission, appsupport, culture, preparation, university, ziyarah } from "@/public/images";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+
 // Define types for title and intro
 type TitleIntroHajj = {
   id: string;
@@ -23,7 +26,8 @@ type SavingScheme = {
 type ComplementaryServicesHighlight = {
   id: string;
   highlight?: string;
-  
+  note?: string
+  image?: StaticImport | string
 };
 
 type ComplementaryServices = {
@@ -294,38 +298,26 @@ export const complementary_services: ComplementaryServices[] = [
     highlights: [
       {
         id: "Ziyarah",
-        highlight: "Ziyarah Tours:",
+        highlight: "Ziyarah Tours",
+        note:
+        "Delve into the significant historical and religious sites within Makkah and Madinah.",
+        image: ziyarah 
       },
       {
         id: "Intensive",
-        highlight: "Intensive Pre-departure Seminars:",
+        highlight: "Intensive Pre-departure Seminars",
+        note:
+        "Acquire essential knowledge and insights to adequately prepare for your Hajj or Umrah.",
+        image: preparation
       },
       {
         id: "Special",
-        highlight: "Special Dietary Scheme:",
+        highlight: "Special Dietary Scheme",
+        note:
+        "Catering to specific dietary requirements, especially local and continental cuisine that may be difficult to find within the sphere of Haram, we guarantee a pilgrimage journey that is comfortable for everyone.",
+        image: culture 
       },
       
-    ],
-  },
-  {
-    id: "span",
-    highlights: [
-      {
-        id: "delve",
-        highlight:
-          "Delve into the significant historical and religious sites within Makkah and Madinah.",
-      },
-      {
-        id: "Acquire",
-        highlight:
-          "Acquire essential knowledge and insights to adequately prepare for your Hajj or Umrah.",
-      },
-      {
-        id: "Catering",
-        highlight:
-          "Catering to specific dietary requirements, especially local and continental cuisine that may be difficult to find within the sphere of Haram, we guarantee a pilgrimage journey that is comfortable for everyone.",
-      },
-     
     ],
   },
   {
@@ -339,7 +331,7 @@ export const complementary_services: ComplementaryServices[] = [
       {
         id: "Educational",
         highlight:
-          "Educational Tours: Embark on a Journey That Combines Academic Inquiry with Cultural Insight",
+          "Embark on a Journey That Combines Academic Inquiry with Cultural Insight",
       },
     ],
   },
@@ -360,53 +352,27 @@ export const complementary_services: ComplementaryServices[] = [
     highlights: [
       {
         id: "Explore",
-        highlight: "Explore Superior Universities:",
+        highlight: "Explore Superior Universities",
+        note:
+        "Visit distinguished universities such as Islamic University of Madeenah in Saudi Arabia, Islam University of Kuwait, Hamad Bin Khalifa University in Qatar, Universiti Brunei Darussalam in Brunei, and University of Bahrain in Bahrain.",
+        image: university
       },
       {
         id: "interact",
-        highlight: "Interact with Faculty and Admission Officers:",
+        highlight: "Interact with Faculty and Admission Officers",
+        note:
+        "Benefit from insightful discussions on academic programs, the application process, and the daily life of a student through interactions with professors and admissions officers.",
+        image: admission
       },
       {
         id: "Engage",
-        highlight: "Engage with the Local Culture:",
-      },
-      {
-        id: "relationship",
-        highlight: "Build Relationships with Peers:",
+        highlight: "Engage with the Local Culture",
+        note:
+        "Discover the essence of the region’s culture through its vibrant cities, historical monuments, and cultural artifacts, enriching your understanding of its profound heritage.",
+        image: appsupport
       },
     ]
   },
-
-  {
-    id: 'complement-body',
-    highlights: [
-      {
-        id: "Visitation",
-        highlight:
-          "Visit distinguished universities such as Islamic University of Madeenah in Saudi Arabia, Islam University of Kuwait, Hamad Bin Khalifa University in Qatar, Universiti Brunei Darussalam in Brunei, and University of Bahrain in Bahrain.",
-      },
-      {
-        id: "Benefit",
-        highlight:
-          "Benefit from insightful discussions on academic programs, the application process, and the daily life of a student through interactions with professors and admissions officers.",
-      },
-      {
-        id: "Discover",
-        highlight:
-          "Discover the essence of the region’s culture through its vibrant cities, historical monuments, and cultural artifacts, enriching your understanding of its profound heritage.",
-      },
-      {
-        id: "Connect",
-        highlight:
-          "Connect with students from across the globe, sharing your academic ambitions and forging lasting friendships.",
-      },
-      {
-        id: "exceptional",
-        highlight:
-          "“Our Educational Tours provide an exceptional platform for students to engage with the academic environment of these esteemed institutions, fostering a deeper connection and understanding of the region’s academic excellence.”",
-      },
-    ]
-  }
 ];
 
 
@@ -432,19 +398,19 @@ export const why_scholarship_guidance: WhyScholarshipGuidance[] = [
     why_scholarship_heading: [
       {
         id: "Identifying",
-        heading_content: "Identifying Scholarship Opportunities:",
+        heading_content: "Identifying Scholarship Opportunities",
       },
       {
         id: "Application",
-        heading_content: "Application Support:",
+        heading_content: "Application Support",
       },
       {
         id: "Accreditation",
-        heading_content: "Accreditation Support for Islamic Schools:",
+        heading_content: "Accreditation Support for Islamic Schools",
       },
       {
         id: "Preparation",
-        heading_content: "Preparation for Scholarship Interviews:",
+        heading_content: "Preparation for Scholarship Interviews",
       },
     ],
   },
