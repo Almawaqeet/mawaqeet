@@ -9,6 +9,7 @@ interface TeamProps {
     team: SegregatedTeam
     theme?: 'light' | 'dark';
 }
+
 const Team = ({ theme = "dark", team }: TeamProps) => {
     const router = useRouter()
     const {
@@ -31,11 +32,14 @@ const Team = ({ theme = "dark", team }: TeamProps) => {
     const postIcon = postIcons[post] || "❓";
 
     const containerVariants = {
-        hidden: { opacity: 0 },
+        hidden: { opacity: 0, y: 20 },
         visible: {
             opacity: 1,
+            y: 0,
             transition: {
-                staggerChildren: 0.2
+                duration: 0.6,
+                ease: "easeOut",
+                staggerChildren: 0.3
             }
         }
     }
@@ -45,27 +49,27 @@ const Team = ({ theme = "dark", team }: TeamProps) => {
             background: 'bg-white',
             border: 'border-gray-200',
             hoverBorder: 'hover:border-gray-300',
-            iconBg: 'bg-gray-100',
+            iconBg: 'bg-gray-50',
             text: {
                 primary: 'text-gray-900',
-                secondary: 'text-gray-600',
+                secondary: 'text-gray-700',
                 tertiary: 'text-gray-500'
             },
-            badge: 'bg-gray-100',
-            button: 'hover:bg-gray-100'
+            badge: 'bg-gray-50',
+            button: 'bg-gray-50 hover:bg-gray-100'
         },
         dark: {
-            background: 'bg-[#1A1A1A]',
-            border: 'border-[#333333]',
-            hoverBorder: 'hover:border-[#666666]',
-            iconBg: 'bg-[#333333]',
+            background: 'bg-gray-900',
+            border: 'border-gray-700',
+            hoverBorder: 'hover:border-gray-600',
+            iconBg: 'bg-gray-800',
             text: {
                 primary: 'text-white',
-                secondary: 'text-[#CCCCCC]',
-                tertiary: 'text-[#666666]'
+                secondary: 'text-gray-300',
+                tertiary: 'text-gray-400'
             },
-            badge: 'bg-[#333333]',
-            button: 'hover:bg-[#333333]'
+            badge: 'bg-gray-800',
+            button: 'bg-gray-800 hover:bg-gray-700'
         }
     };
 
@@ -75,58 +79,59 @@ const Team = ({ theme = "dark", team }: TeamProps) => {
         <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "50px" }}
             variants={containerVariants}
-            className="max-w-7xl mx-auto"
+            className="max-w-7xl mx-auto transform hover:scale-[1.01] transition-all duration-500 h-full"
         >
             <div
-                className={`${styles.background} p-6 rounded-lg border ${styles.border} ${styles.hoverBorder} transition-all duration-300 flex flex-col h-full`}
+                className={`${styles.background} p-8 rounded-2xl border ${styles.border} ${styles.hoverBorder} transition-all duration-300 flex flex-col h-full shadow-xl hover:shadow-2xl backdrop-blur-sm backdrop-filter`}
             >
-                <div className="flex-1 relative">
-                    <div className="flex items-center gap-2 mb-2">
-                        <div className={`w-6 h-6 rounded-full ${styles.iconBg} flex items-center justify-center`}>
-                            <span className={styles.text.primary}>{postIcon}</span>
+                <div className="flex-1 relative flex flex-col">
+                    {/* Team Member Image - Moved to top center */}
+                    <div className="flex justify-center -mt-16 mb-6">
+                        <div className="relative w-32 h-32 flex-shrink-0">
+                            <Image
+                                src={image}
+                                className="rounded-full border-4 border-white/90 shadow-2xl transform hover:scale-105 transition-all duration-500 object-cover"
+                                fill
+                                alt={`${fullname}-image`}
+                                onError={(e) => {
+                                    e.currentTarget.src = "error.png";
+                                }}
+                            />
                         </div>
-                        <span className={`text-sm ${styles.text.tertiary} uppercase`}>
-                            {post}
-                        </span>
                     </div>
 
-                    <h3 className={`text-lg font-semibold ${styles.text.primary} mb-1 truncate`} title={fullname}>
-                        {fullname}
-                    </h3>
-                    <p className={`text-2xl font-bold ${styles.text.primary} mb-4 truncate`} title={`${post}, ${company}`}>
-                        {`${post}, ${company}`}
-                    </p>
+                    {/* Name and Title Section - Centered */}
+                    <div className="text-center mb-8 flex-shrink-0">
+                        <h3 className={`text-2xl font-bold ${styles.text.primary} mb-2 truncate hover:text-clip transition-all duration-300`} title={fullname}>
+                            {fullname}
+                        </h3>
+                        <div className="flex items-center justify-center gap-2 mb-2">
+                            <span className={`${styles.text.primary} text-2xl`}>{postIcon}</span>
+                            <span className={`text-sm font-semibold ${styles.text.tertiary} uppercase tracking-wider`}>
+                                {post}
+                            </span>
+                        </div>
+                        <p className={`text-lg ${styles.text.secondary} truncate hover:text-clip transition-all duration-300`} title={`${company}`}>
+                            {company}
+                        </p>
+                    </div>
 
-                    <ul className="space-y-4">
+                    {/* Profile Section */}
+                    <div className="space-y-4 mb-8 flex-1">
                         {profile.map((item, index) => (
-                            <li key={`${id}-${index}`} className={`text-sm ${styles.text.secondary} flex items-start gap-2`}>
-                                <div className="flex flex-col gap-2">
-                                    {
-                                        <p key={`${id}+${index}`}>{item.profile_1}</p>
-
-                                    }
-                                </div>
-                            </li>
+                            <div key={`${id}-${index}`} className={`text-base ${styles.text.secondary} p-4 rounded-lg ${styles.iconBg}`}>
+                                <p className="leading-relaxed">
+                                    {item.profile_1}
+                                </p>
+                            </div>
                         ))}
-                    </ul>
-                    <div>
-                        <Image
-                            src={image}
-                            className="absolute md:-right-7 md:-top-9 -top-6 -right-6 rounded-full"
-                            width={50}
-                            height={50}
-                            alt={`${fullname}-image`}
-                            onError={(e) => {
-                                e.currentTarget.src = "error.png";
-                            }}
-                        />
                     </div>
                 </div>
 
                 <button
-                    className={`w-full mt-6 py-2 text-sm font-medium ${styles.text.primary} bg-transparent border ${styles.border} rounded ${styles.button} transition-colors duration-300`}
+                    className={`w-full py-4 text-base font-semibold ${styles.text.primary} ${styles.button} rounded-xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-opacity-50 mt-auto`}
                     aria-label={`View profile of ${fullname}`}
                     onClick={() => router.push(`${CLIENT_ROUTES.PublicPages.about.details(id)}`)}>
                     {view_profile}
