@@ -20,7 +20,7 @@ const SingularTeam = ({ id }: { id: string }) => {
   return (
     <section className="mb-8">
       {/* Header Section */}
-      <aside className="bg-static-image md:block xmd:flex justify-center items-center xmd:h-80 md:h-full relative">
+      <aside className="bg-static-image md:block xmd:flex justify-center items-center xmd:min-h-80 md:h-full relative">
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-transparent z-10" />
         <div className="max-w-7xl mx-auto w-full relative z-20">
           <main className="grid md:grid-cols-[1fr_300px] sm:grid-cols-1 py-12 gap-8 h-full px-4">

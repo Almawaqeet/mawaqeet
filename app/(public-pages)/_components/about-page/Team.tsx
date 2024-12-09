@@ -101,10 +101,10 @@ const Team = ({ theme = "dark", team }: TeamProps) => {
 
                     <ul className="space-y-4">
                         {profile.map((item, index) => (
-                            <li key={index} className={`text-sm ${styles.text.secondary} flex items-start gap-2`}>
+                            <li key={`${id}-${index}`} className={`text-sm ${styles.text.secondary} flex items-start gap-2`}>
                                 <div className="flex flex-col gap-2">
                                     {
-                                        <p key={index}>{item.profile_1}</p>
+                                        <p key={`${id}+${index}`}>{item.profile_1}</p>
 
                                     }
                                 </div>

@@ -55,7 +55,7 @@ export const about_main_body: AboutMainBody[] = [
 
 export const about_us_team: AboutUsTeam[] = [
   {
-    id: "Baba-n-Madeenah",
+    id: "baba-n-madeenah",
     company: " Al-Mawaqeet Travels and Tours",
     image: team4,
     imageProfile: Maruf,
@@ -78,7 +78,7 @@ export const about_us_team: AboutUsTeam[] = [
     ],
   },
   {
-    id: "Ameerul-Hajj",
+    id: "ameerul-hajj",
     company: " Al-Mawaqeet Travels and Tours",
     image: team1,
     imageProfile: Kutubi,
@@ -101,7 +101,7 @@ export const about_us_team: AboutUsTeam[] = [
     ],
   },
   {
-    id: "Chief-Operating-Officer",
+    id: "chief-operating-0fficer",
     company: " Al-Mawaqeet Travels and Tours",
     image: team3,
     imageProfile: Ramadan,
@@ -122,7 +122,7 @@ export const about_us_team: AboutUsTeam[] = [
   },
 
   {
-    id: "Operations-Manager",
+    id: "operations-manager",
     company: " Al-Mawaqeet Travels and Tours",
     image: team3,
     imageProfile: Ramadan,

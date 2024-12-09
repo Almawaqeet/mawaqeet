@@ -92,7 +92,7 @@ export default function WhyUs() {
                             className="bg-[#2A2A2A] p-6 rounded-lg hover:shadow-lg transition-all duration-300 text-left md:text-center group hover:-translate-y-2 border border-gray-700"
                         >
                             <div className="w-20 h-20 mb-4 md:mx-auto flex items-center justify-center">
-                                {benefit.icon && <Image src={benefit.icon} width={40} height={40} alt={`${benefit.id}`} className="w-12 h-12 text-gray-200 group-hover:text-gray-400 transition-colors" />}
+                                {benefit.icon && <Image src={benefit.icon} width={40} height={40} alt={`${benefit.id}`} quality={100} className="w-12 h-12 text-gray-200 group-hover:text-gray-400 transition-colors object-contain" />}
                             </div>
                             <h3 className="text-lg font-semibold text-gray-200 mb-2 group-hover:text-gray-400">
                                 {benefit.title}

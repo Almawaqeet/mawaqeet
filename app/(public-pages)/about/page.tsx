@@ -1,8 +1,8 @@
 import React from 'react'
 import { Metadata } from 'next'
 import { AboutPageSection } from '@/app/(public-pages)/_components/about-page/AboutPageSection'
-import OurTeam from '../_components/about-page/OurTeam';
-import Complementary from '../_components/about-page/Complementary';
+import OurTeam from '@/app/(public-pages)/_components/about-page/OurTeam';
+import Complementary from '@/app/(public-pages)/_components/about-page/Complementary';
 
 export default function AboutPage() {
     return (
