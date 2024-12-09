@@ -1,5 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import type { NextAuthOptions } from "next-auth";
+import { API_URL } from "@/environment-config";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -11,7 +12,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}auth/login/`, {
+          const res = await fetch(`${API_URL}auth/login/`, {
             method: "POST",
             body: JSON.stringify({
               email: credentials?.email,

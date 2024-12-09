@@ -1,7 +1,7 @@
 import ResetPasswordStepThree from '@/app/(public-pages)/_components/password/ResetPasswordStepThree'
 import { Metadata } from 'next';
 
-export default function StepThreePage() {
+export default async function StepThreePage() {
     return <ResetPasswordStepThree />
 }
 
