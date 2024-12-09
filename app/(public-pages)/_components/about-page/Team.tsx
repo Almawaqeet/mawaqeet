@@ -81,61 +81,63 @@ const Team = ({ theme = "dark", team }: TeamProps) => {
             whileInView="visible"
             viewport={{ once: true, margin: "50px" }}
             variants={containerVariants}
-            className="max-w-7xl mx-auto transform hover:scale-[1.01] transition-all duration-500 h-full"
+            className="w-full h-full transform hover:scale-[1.01] transition-all duration-500"
         >
-            <div
-                className={`${styles.background} p-8 rounded-2xl border ${styles.border} ${styles.hoverBorder} transition-all duration-300 flex flex-col h-full shadow-xl hover:shadow-2xl backdrop-blur-sm backdrop-filter`}
-            >
-                <div className="flex-1 relative flex flex-col">
-                    {/* Team Member Image - Moved to top center */}
-                    <div className="flex justify-center -mt-16 mb-6">
-                        <div className="relative w-32 h-32 flex-shrink-0">
-                            <Image
-                                src={image}
-                                className="rounded-full border-4 border-white/90 shadow-2xl transform hover:scale-105 transition-all duration-500 object-cover"
-                                fill
-                                alt={`${fullname}-image`}
-                                onError={(e) => {
-                                    e.currentTarget.src = "error.png";
-                                }}
-                            />
-                        </div>
-                    </div>
+            {/* Image positioned absolutely to overflow */}
+            <div className="relative -mb-16 z-10 flex justify-center">
+                <div className="relative w-24 h-24 md:w-32 md:h-32">
+                    <Image
+                        src={image}
+                        className="rounded-full border-4 border-white/90 shadow-2xl transform hover:scale-105 transition-all duration-500 object-cover"
+                        fill
+                        alt={`${fullname}-image`}
+                        onError={(e) => {
+                            e.currentTarget.src = "error.png";
+                        }}
+                    />
+                </div>
+            </div>
 
+            <div
+                className={`${styles.background} p-8 pt-20 rounded-2xl border ${styles.border} ${styles.hoverBorder} transition-all duration-300 flex flex-col shadow-xl hover:shadow-2xl backdrop-blur-sm backdrop-filter`}
+            >
+                <div className="flex-1 flex flex-col">
                     {/* Name and Title Section - Centered */}
-                    <div className="text-center mb-8 flex-shrink-0">
-                        <h3 className={`text-2xl font-bold ${styles.text.primary} mb-2 truncate hover:text-clip transition-all duration-300`} title={fullname}>
+                    <div className="text-center mb-6">
+                        <h3 className={`text-xl md:text-2xl font-bold ${styles.text.primary} mb-2 truncate`} title={fullname}>
                             {fullname}
                         </h3>
                         <div className="flex items-center justify-center gap-2 mb-2">
-                            <span className={`${styles.text.primary} text-2xl`}>{postIcon}</span>
-                            <span className={`text-sm font-semibold ${styles.text.tertiary} uppercase tracking-wider`}>
+                            <span className={`${styles.text.primary} text-xl`}>{postIcon}</span>
+                            <span className={`text-xs md:text-sm font-semibold ${styles.text.tertiary} uppercase tracking-wider`}>
                                 {post}
                             </span>
                         </div>
-                        <p className={`text-lg ${styles.text.secondary} truncate hover:text-clip transition-all duration-300`} title={`${company}`}>
+                        <p className={`text-base md:text-lg ${styles.text.secondary} truncate`} title={`${company}`}>
                             {company}
                         </p>
                     </div>
 
                     {/* Profile Section */}
-                    <div className="space-y-4 mb-8 flex-1">
-                        {profile.map((item, index) => (
-                            <div key={`${id}-${index}`} className={`text-base ${styles.text.secondary} p-4 rounded-lg ${styles.iconBg}`}>
-                                <p className="leading-relaxed">
-                                    {item.profile_1}
-                                </p>
-                            </div>
-                        ))}
+                    <div className="flex-1 min-h-0">
+                        <div className="h-full overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent pr-2">
+                            {profile.map((item, index) => (
+                                <div key={`${id}-${index}`} className={`text-sm md:text-base ${styles.text.secondary} p-3 rounded-lg ${styles.iconBg}`}>
+                                    <p className="leading-relaxed line-clamp-4">
+                                        {item.profile_1}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
 
-                <button
-                    className={`w-full py-4 text-base font-semibold ${styles.text.primary} ${styles.button} rounded-xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-opacity-50 mt-auto`}
-                    aria-label={`View profile of ${fullname}`}
-                    onClick={() => router.push(`${CLIENT_ROUTES.PublicPages.about.details(id)}`)}>
-                    {view_profile}
-                </button>
+                    <button
+                        className={`w-full py-3 text-sm md:text-base font-semibold ${styles.text.primary} ${styles.button} rounded-xl transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-opacity-50 mt-6`}
+                        aria-label={`View profile of ${fullname}`}
+                        onClick={() => router.push(`${CLIENT_ROUTES.PublicPages.about.details(id)}`)}>
+                        {view_profile}
+                    </button>
+                </div>
             </div>
         </motion.div>
     );
