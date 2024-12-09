@@ -3,19 +3,19 @@ import Image, { StaticImageData } from "next/image"
 import { motion } from "framer-motion"
 import AppHeading from "@/components/reusables/AppHeading"
 import { whiteSpaces } from "@/old-pages/utilities/GlobalSpaces"
-import { icon_1, icon_2, icon_3 } from '@/public/images/index'
+import { icon_1, icon_2, icon_3, people, vector } from '@/public/images/index'
 
 
 export default function Benefits() {
     const benefits = [
         {
-            icon: icon_1 as StaticImageData,
+            icon: vector as StaticImageData,
             title: "Begin Your Sacred Journey",
             description: "Take the first step towards a transformative spiritual experience with our meticulously planned Hajj and Umrah packages, designed to nurture your soul.",
          
         },
         {
-            icon: icon_2 as StaticImageData,
+            icon: people as StaticImageData,
             title: "Navigate with Confidence",
             description: "Our experienced team handles everything from visa processing to accommodations, while providing spiritual guidance to enrich your pilgrimage experience."
         },
