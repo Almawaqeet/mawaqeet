@@ -273,7 +273,7 @@ export const adminDashboardNavItems: NavItem[] = [
 
 
 
-export const packages = [
+export const my_packages = [
     {
   id: 1,
   type: 'HAJJ',

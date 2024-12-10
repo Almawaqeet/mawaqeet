@@ -1,9 +1,12 @@
 'use client';
 
+import { useGetAllActivePackages } from '@/api/services/packages';
+// import { my_packages } from '@/app/(public-pages)/_components/packages-page/Package';
 import { Input } from '@/components/ui/input';
+import { SegregatedPackage } from '@/constants/types';
 import { cn } from '@/lib/utils';
 import { Options } from 'nuqs';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 
 interface DataTableSearchProps {
   searchKey: string;
@@ -25,6 +28,7 @@ export function DataTableSearch({
   setPage
 }: DataTableSearchProps) {
   const [isLoading, startTransition] = useTransition();
+
 
   const handleSearch = (value: string) => {
     setSearchQuery(value, { startTransition });

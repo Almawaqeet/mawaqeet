@@ -29,7 +29,7 @@ export default async function Page({ searchParams }: pageProps) {
         <div className="flex items-start justify-between">
           <Heading
             title="Packages"
-            description="Manage packages (Server side table functionalities.)"
+            description="Manage your packages"
           />
         </div>
         <Separator />

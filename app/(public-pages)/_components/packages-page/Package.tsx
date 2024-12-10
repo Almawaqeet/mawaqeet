@@ -4,6 +4,56 @@ import { SegregatedPackage } from "@/constants/types";
 import { CLIENT_ROUTES } from "@/lib/routes";
 import { useRouter } from "next/navigation";
 
+
+// export const my_packages: SegregatedPackage[] = [
+//   {
+//     id: "1",
+//     type: "hajj", // Explicitly defined as "hajj"
+//     tier: "STANDARD",
+//     cohort: "2024 Cohort",
+//     price: "$5,000",
+//     paymentPlan: "Full payment or 3 installments",
+//     features: [
+//       "Round-trip airfare included",
+//       "Standard hotel accommodation",
+//       "Guided tours for all holy sites",
+//       "Daily meals provided",
+//       "Transportation between holy sites",
+//     ],
+//   },
+//   {
+//     id: "2",
+//     type: "hajj", // Explicitly defined as "hajj"
+//     tier: "VIP",
+//     cohort: "2024 VIP Cohort",
+//     price: "$10,000",
+//     paymentPlan: "Full payment or 5 installments",
+//     features: [
+//       "Round-trip business class airfare",
+//       "5-star hotel accommodation",
+//       "Private guided tours for all holy sites",
+//       "Gourmet meals provided",
+//       "VIP transportation with air-conditioned buses",
+//       "Access to exclusive VIP areas during rituals",
+//     ],
+//   },
+//   {
+//     id: "3",
+//     type: "umrah", // Explicitly defined as "umrah"
+//     tier: "DELUXE",
+//     cohort: "2024 Deluxe Cohort",
+//     price: "$7,500",
+//     paymentPlan: "Full payment or 4 installments",
+//     features: [
+//       "Round-trip premium airfare",
+//       "Deluxe hotel suites near the Haram",
+//       "Expert scholars providing lectures and guidance",
+//       "Daily meals with international cuisines",
+//       "Luxury transportation between sites",
+//     ],
+//   },
+// ];
+
 interface PackageProps {
     pkg: SegregatedPackage;
     theme?: 'light' | 'dark';
