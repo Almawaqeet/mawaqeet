@@ -10,14 +10,20 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '@radix-ui/react-accordion';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+
+interface Item {
+    question?: string;
+    question_1?: string;
+    answer?: string;
+    [key: `answer_${number}`]: string | undefined;
+}
 
 const Faqs = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
     const handleToggle = (idx: number) => {
-        setActiveIndex(activeIndex === idx ? activeIndex : idx);
-
+        setActiveIndex(activeIndex === idx ? null : idx);
     };
 
     const containerVariants = {
@@ -25,7 +31,7 @@ const Faqs = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2
+                staggerChildren: 0.15
             }
         }
     }
@@ -36,70 +42,89 @@ const Faqs = () => {
             opacity: 1,
             y: 0,
             transition: {
-                duration: 0.5
+                duration: 0.6,
+                ease: "easeOut"
             }
         }
     }
 
     return (
-        <section className={`${whiteSpaces.paddingX} py-4 md:py-16`}>
+        <section className={`${whiteSpaces.paddingX} py-16 md:py-24 bg-gray-50`}>
             <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-100px" }}
                 variants={containerVariants}
-                className="max-w-7xl mx-auto"
+                className="max-w-4xl mx-auto"
             >
-                <AppHeading
-                    variant="h2"
-                    className="text-2xl sm:text-3xl md:text-4xl text-brand-color text-center mb-4"
-                >
-                    FAQS
-                </AppHeading>
+                <div className="text-center mb-12">
+                    <AppHeading
+                        variant="h2"
+                        className="text-center"
+                    >
+                        Frequently Asked Questions
+                    </AppHeading>
+                    <p className="text-gray-600 text-lg">
+                        Find answers to common questions about our services
+                    </p>
+                </div>
 
-                {faqs.map((itm) =>
-                    itm.contents.map((eachitm, idx) => (
-                        <motion.div
-                            key={idx}
-                            variants={itemVariants}
-                           
-                        >
-                            <Accordion
-                                type="single"
-                                collapsible
-                                className="bg-white hover:bg-[#F2EDE8] p-2 rounded-lg hover:shadow-lg transition-shadow duration-300 lg:w-4/6 sm:w-full  grid m-auto xmd:mb-2 md:mb-4"
-                                key={`${eachitm.id}-${idx}`}
+                <div className="space-y-4">
+                    {faqs?.map((itm) =>
+                        itm?.contents?.map((eachitm: Item, idx) => (
+                            <motion.div
+                                key={idx}
+                                variants={itemVariants}
+                                className="rounded-xl overflow-hidden"
                             >
-                                <AccordionItem value={`item-${idx}`}>
-                                    <AccordionTrigger
-                                        className="flex justify-between w-full"
-                                        onClick={() => handleToggle(idx)}
+                                <Accordion
+                                    type="single"
+                                    collapsible
+                                    className="w-full"
+                                >
+                                    <AccordionItem
+                                        value={`item-${idx}`}
+                                        className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
                                     >
-                                        <h3 className="text-lg font-semibold text-brand-color xmd:text-start md:text-center">
-                                            {eachitm.question || eachitm.question_1}
-                                        </h3>
-                                        {activeIndex === idx ? <ChevronDown /> : <ChevronUp />}
-                                    </AccordionTrigger>
-                                    <AccordionContent className={`${activeIndex === idx && `border-t-[1px] border-t-brand-color`} text-sm text-start mb-1 pb-1`}>
-                                        {activeIndex === idx && (
-                                            <>
-                                                {eachitm.answer_1 && <li className='list-disc'>{eachitm.answer_1}</li>}
-                                                {eachitm.answer_2 && <li className='list-disc'>{eachitm.answer_2}</li>}
-                                                {eachitm.answer_3 && <li className='list-disc'>{eachitm.answer_3}</li>}
-                                                {eachitm.answer_4 && <li className='list-disc'>{eachitm.answer_4}</li>}
-                                                {eachitm.answer_5 && <li className='list-disc'>{eachitm.answer_5}</li>}
-                                                {eachitm.answer_6 && <li className='list-disc'>{eachitm.answer_6}</li>}
-                                                {eachitm.answer_7 && <li className='list-disc'>{eachitm.answer_7}</li>}
-                                                {eachitm.answer && <li className='list-disc'>{eachitm.answer}</li>}
-                                            </>
-                                        )}
-                                    </AccordionContent>
-                                </AccordionItem>
-                            </Accordion>
-                        </motion.div>
-                    ))
-                )}
+                                        <AccordionTrigger
+                                            onClick={() => handleToggle(idx)}
+                                            className="w-full px-6 py-4 flex items-center justify-between text-left"
+                                        >
+                                            <h3 className="text-lg font-medium text-gray-900">
+                                                {eachitm?.question || eachitm?.question_1}
+                                            </h3>
+                                            <ChevronDown
+                                                className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${
+                                                    activeIndex === idx ? 'rotate-180' : ''
+                                                }`}
+                                            />
+                                        </AccordionTrigger>
 
+                                        <AccordionContent className="px-6 pb-4">
+                                            <ul className="space-y-2 text-gray-600">
+                                                {eachitm?.answer && (
+                                                    <li className="flex items-start">
+                                                        <span className="h-1.5 w-1.5 rounded-full bg-brand-color mt-2 mr-2 flex-shrink-0"/>
+                                                        <span>{eachitm.answer}</span>
+                                                    </li>
+                                                )}
+                                                {[...Array(5)].map((_, num) => {
+                                                    const answerKey = `answer_${num}` as const;
+                                                    return eachitm[answerKey] && (
+                                                        <li key={num} className="flex items-start">
+                                                            <span className="h-1.5 w-1.5 rounded-full bg-brand-color mt-2 mr-2 flex-shrink-0"/>
+                                                            <span>{eachitm[answerKey]}</span>
+                                                        </li>
+                                                    );
+                                                })}
+                                            </ul>
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                </Accordion>
+                            </motion.div>
+                        ))
+                    )}
+                </div>
             </motion.div>
         </section>
     );

@@ -24,6 +24,5 @@ export const TeamEmptyState = () => (
       <ShieldHalf className="w-8 h-8 text-gray-400" />
     </div>
     <h3 className="text-lg font-semibold text-gray-700 mb-1">No Team Found</h3>
-
   </div>
 );

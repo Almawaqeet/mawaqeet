@@ -62,7 +62,7 @@ export const about_us_team: AboutUsTeam[] = [
     fullname: "Shaykh Abdullah Ma’ruf Oyelekan",
     post: "Baba n Madeenah",
     personality:
-      "{Ph.D. (in-view), Islamic Economics and Finance, Islamic University of Madeenah Kingdom of Saudi Arabia}",
+      "Ph.D. (in-view), Islamic Economics and Finance, Islamic University of Madeenah Kingdom of Saudi Arabia",
     view_profile: "View Profile",
     profile: [
       {
@@ -85,7 +85,7 @@ export const about_us_team: AboutUsTeam[] = [
     fullname: "Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi",
     post: "Ameerul Hajj",
     personality:
-      "{ Director, Ansarus-Sunnah Islamic Institute, Shimawa, Ogun State, Nigeria}",
+      "Director, Ansarus-Sunnah Islamic Institute, Shimawa, Ogun State, Nigeria",
     view_profile: "View Profile",
     profile: [
       {
