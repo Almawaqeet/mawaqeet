@@ -89,13 +89,21 @@ export async function checkAuth({pageType}: {pageType: typeof ACCOUNT_TYPES[keyo
  * - Limits features to maximum of 4 items
  * - Handles null/undefined values safely
  */
-export const segregatePackageByItsPriceCategory = (packages: Array<Package>): SegregatedPackage[] => {
+export const segregatePackageByItsPriceCategory = (packages: Array<Package>, searchQuery: string = ''): SegregatedPackage[] => {
   if (!packages?.length) return [];
 
-  const segregatedPackages = packages.flatMap((pkg) => {
+  // filter with parameter if provided
+ const normalizeInput = searchQuery.toLowerCase()
+return packages.filter(
+  (item) => item.price.map((tier) => tier.category.toLowerCase().includes(normalizeInput))
+   || item.name.toLowerCase().includes(normalizeInput))
+
+  .flatMap((pkg) => {
     if (!pkg?.price?.length) return [];
 
     return pkg.price.map((priceItem) => {
+      // if(tier?.toLowerCase() || priceItem.category.toLowerCase() !== tier?.toLowerCase() ) return null
+
       const categoryDescription = pkg.category_description?.find(
         (desc) => desc.category === priceItem.category
       );
@@ -118,6 +126,7 @@ export const segregatePackageByItsPriceCategory = (packages: Array<Package>): Se
         pkg.expiry_date ? `Package valid until ${new Date(pkg.expiry_date).toLocaleDateString()}` : ''
       ].filter(Boolean);
 
+    
       return {
         id: pkg.id ?? '',
         type: pkg.package_type,
@@ -129,11 +138,7 @@ export const segregatePackageByItsPriceCategory = (packages: Array<Package>): Se
       };
     });
   });
-
-  return segregatedPackages;
 }
-
-
 
 export const addSearchParamsToUrl = (url: string, params: Record<string, string>) => {
   const searchParams = new URLSearchParams(params);

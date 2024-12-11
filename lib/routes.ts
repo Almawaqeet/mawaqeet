@@ -22,6 +22,7 @@ export const CLIENT_ROUTES = {
         },
         contact: '/contact',
         about: {
+            parallel: '/about#team',
             index: '/about',
             details: (teamId: string) => `/about/profile/${teamId}`
         }

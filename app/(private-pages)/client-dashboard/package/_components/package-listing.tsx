@@ -5,11 +5,13 @@ import { fakeProducts } from '@/constants/mock-api';
 import { searchParamsCache } from '@/lib/searchparams';
 import { useGetAllActivePackages } from '@/api/services/packages';
 import { Package } from '@/app/(public-pages)/_components/packages-page/Package';
-import { packages } from '@/constants/data';
+import { my_packages } from '@/constants/data';
 import { PackageIcon } from 'lucide-react';
 import { segregatePackageByItsPriceCategory } from '@/lib/utils';
 import { SegregatedPackage } from '@/constants/types';
 import { DataTableSkeleton } from '@/components/ui/table/data-table-skeleton';
+import { useProductTableFilters } from './package-tables/use-product-table-filters';
+
 
 type ProductListingPage = {};
 
@@ -20,12 +22,15 @@ export default async function ProductListingPage({}: ProductListingPage) {
 //   const pageLimit = searchParamsCache.get('limit');
 //   const categories = searchParamsCache.get('categories');
   const { data: packages, isLoading } = useGetAllActivePackages();
+  const {
+    searchQuery,
+  } = useProductTableFilters();
 
   if (isLoading) {
     return <DataTableSkeleton columnCount={5} rowCount={10} />;
   }
 
-  const segregatedPackages = segregatePackageByItsPriceCategory(packages?.results || []);
+  const segregatedPackages = segregatePackageByItsPriceCategory(packages?.results || [], searchQuery);
 
   const EmptyState = () => (
     <div className="col-span-full flex flex-col items-center justify-center p-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">

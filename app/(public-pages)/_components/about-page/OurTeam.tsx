@@ -37,8 +37,7 @@ const OurTeam = () => {
                     {about_us_team.map((team, idx) => (
                         <motion.div
                             key={idx}
-
-                            className="p-8 bg-[#F2EDE8] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1 xmd:hidden md:block"
+                            className="p-8 bg-[#F2EDE8] rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1 xmd:hidden md:block" id='team'
                         >
                             <Team team={team} theme='light' key={idx} />
                         </motion.div>
