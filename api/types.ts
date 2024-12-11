@@ -5,7 +5,9 @@ export interface PaginatedResponse<T> {
     results: T[];
 }
 
-
+export interface CustomApiErrorResponse {
+    message?: string
+}
 
 export interface CheckIfEmailAddressExistResponse {
     exists: boolean;
@@ -134,4 +136,56 @@ export interface User {
         phone_number?: string;
         address?: string;
     } | null;
+}
+
+
+export interface CheckIfUserHasAWalletResponse {
+    message?: string;
+    has_wallet?: boolean;
+}
+
+
+export interface CheckWalletInformationResponse {
+    wallet?: {
+        balance?: string;
+        account_number?: string;
+        bank?: {
+            bank_code?: string;
+            name?: string;
+        };
+        is_verified?: boolean;
+    };
+}
+
+export interface CreateAndEditWalletRequest {
+    account_number?: string;
+    bank?: {
+        bank_code?: string;
+        name?: string;
+    };
+}
+
+
+export interface BankListResponse {
+    banks?: {
+        name?: string;
+        bank_code?: string;
+    }[];
+}
+
+
+export interface VerifyWalletAccountNumberRequest {
+    account_number: string;
+    bank_code: string;
+}
+
+
+export interface VerifyWalletAccountNumberResponse {
+    data?: {
+        account_name?: string;
+    };
+}
+
+export interface VerifyWalletAccountNumberErrorResponse {
+    message?: string
 }
