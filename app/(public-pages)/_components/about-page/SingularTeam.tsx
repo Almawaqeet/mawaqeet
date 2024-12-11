@@ -21,7 +21,7 @@ const SingularTeam = ({ id }: { id: string }) => {
   return (
     <section className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header Section */}
-      <div className="relative h-[40rem] sm:h-[20rem] overflow-hidden">
+      <div className="relative min-h-[40rem] sm:min-h-[20rem] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-transparent z-10" />
         <div className="bg-static-image absolute inset-0 bg-cover bg-center transform scale-105 hover:scale-110 transition-transform duration-1000" />
 
@@ -93,7 +93,7 @@ const SingularTeam = ({ id }: { id: string }) => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => router.push(CLIENT_ROUTES.PublicPages.about.index)}
+        onClick={() => router.push(CLIENT_ROUTES.PublicPages.about.parallel)}
         className="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 px-6 sm:px-8 py-3 sm:py-4 bg-brand-color text-white rounded-full shadow-xl hover:shadow-2xl flex items-center gap-2 sm:gap-3 hover:bg-brand-color/90 transition-all duration-300"
       >
         <FaArrowLeft className="text-lg sm:text-xl" />
