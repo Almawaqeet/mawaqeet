@@ -1,4 +1,4 @@
-import { useAppMutation } from "@/api/constructor";
+import { useAppMutation } from "@/api/client-constructor";
 import { routes } from "@/api/routes";
 import { ChangePasswordRequest, ChangePasswordResponse, LoginRequest, LoginResponse, SendOtpResponse, VerifyOtpRequest, SendOtpRequest, VerifyOtpResponse } from "@/api/types";
 

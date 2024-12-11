@@ -15,7 +15,7 @@ import AppDialogBox from '@/components/reusables/AppDialogBox'
 import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
 import { useAppToast } from '@/components/reusables/AppToast'
 
-
+import { API_URL } from '@/environment-config';
 
 
 
@@ -81,6 +81,7 @@ const StepOneOnboarding = () => {
       );
     },
   })
+
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShowEmailExistsAlert(false)

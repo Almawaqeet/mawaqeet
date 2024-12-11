@@ -162,6 +162,13 @@ export const clientDashboardNavItems: NavItem[] = [
     isActive: false,
     items: [] // No child items
   },
+  {
+    title: "Wallet",
+    url: CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet,
+    icon: 'wallet',
+    isActive: false,
+    items: [] // No child items
+  },
 //   {
 //     title: 'Package',
 //     url: CLIENT_ROUTES.PrivatePages.clientDashboard.packages,

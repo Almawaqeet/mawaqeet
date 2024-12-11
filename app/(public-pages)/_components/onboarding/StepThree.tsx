@@ -17,6 +17,7 @@ import LoadingLottie from '@/components/reusables/LoadingLottie'
 import { LOCAL_STORAGE_KEYS, SESSION_STORAGE_KEYS } from '@/constants/local-storage-keys'
 import { useAppToast } from '@/components/reusables/AppToast'
 
+
 const StepThreeOnboarding = () => {
   const [reference, setReference] = useState('')
   const [countdown, setCountdown] = useState(5)
@@ -27,6 +28,8 @@ const StepThreeOnboarding = () => {
   const { showToast } = useAppToast()
   const onboardingId = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
   const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
+
+
 
   React.useEffect(() => {
     if (!onboardingId || !email) {

@@ -6,7 +6,6 @@ import { PieGraph } from './pie-graph';
 import { CalendarDateRangePicker } from '@/components/reusables/date-range-picker';
 import PageContainer from '@/components/layout/page-container';
 import { RecentSales } from './recent-sales';
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -17,21 +16,65 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useSession } from 'next-auth/react';
 import { extractFirstName } from '@/lib/utils';
+import { useCheckIfUserHasAWallet } from '@/api/services/wallet';
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import AppDialogBox from '@/components/reusables/AppDialogBox';
+import { LoadingIcon } from '@/components/reusables/AppButton';
+import { LOCAL_STORAGE_KEYS } from "@/constants/local-storage-keys";
+import { CLIENT_ROUTES } from "@/lib/routes";
+
 
 export default function OverViewPage() {
-  const { data: session } = useSession();
+    const { data: session } = useSession();
+    const { data: checkIfUserHasWallet, isLoading } = useCheckIfUserHasAWallet();
+    const [showWalletModal, setShowWalletModal] = useState(false);
+    const router = useRouter();
+    const userWalletExists = window != undefined ? localStorage.getItem(LOCAL_STORAGE_KEYS.USER_WALLET_STATUS) : false;
 
-  return (
-    <PageContainer scrollable>
+
+    useEffect(() => {
+      if (!userWalletExists && isLoading && !checkIfUserHasWallet) {
+        setShowWalletModal(true);
+      }
+    }, [ isLoading, userWalletExists]);
+
+    useEffect(() => {
+        //? this is here because i want to save that the user already has a wallet so this does'nt disturb them on another page render
+        if (userWalletExists || checkIfUserHasWallet?.has_wallet) {
+            if (typeof window !== undefined) {
+                localStorage.setItem(LOCAL_STORAGE_KEYS.USER_WALLET_STATUS, 'found');
+            }
+        }
+    }, []);
+
+
+    if (isLoading && !userWalletExists && !userWalletExists) {
+      return (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/80">
+          <LoadingIcon color="white" />
+        </div>
+      );
+    }
+
+    return (
+      <PageContainer scrollable>
+        <AppDialogBox
+          open={showWalletModal}
+          onOpenChange={setShowWalletModal}
+          title="You don't have a wallet"
+          description="You need to create a wallet to start saving for Hajj/Umrah. Would you like to create one now?"
+          cancelText="Later"
+          confirmText="Create Wallet"
+          onCancel={() => setShowWalletModal(false)}
+          onConfirm={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.createWallet)}
+        />
+
       <div className="space-y-2">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-2xl font-bold tracking-tight">
             Hi {extractFirstName(session?.user?.fullName ?? '')}, Welcome back 👋
           </h2>
-          <div className="hidden items-center space-x-2 md:flex">
-            {/* <CalendarDateRangePicker />
-            <Button>Download</Button> */}
-          </div>
         </div>
         <Tabs defaultValue="hajj" className="space-y-4">
           <TabsList>

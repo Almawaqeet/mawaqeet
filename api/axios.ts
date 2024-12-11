@@ -1,9 +1,13 @@
 import axios, { AxiosResponse, AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { getSession, signOut } from 'next-auth/react';
+import { API_URL } from '@/environment-config';
+
+
+
 
 // Create axios instance with base configuration
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: API_URL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json'
@@ -14,10 +18,13 @@ axiosInstance.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     const session = await getSession();
     const token = session?.user?.accessToken;
-    config.headers.set('Authorization', `Bearer ${token}`);
+    if (token) {
+      config.headers.set('Authorization', `Bearer ${token}`);
+    }
     return config;
   },
   (error: AxiosError) => {
+    console.error('Request interceptor error:', error.message);
     return Promise.reject(error);
   }
 );
@@ -39,11 +46,14 @@ axiosInstance.interceptors.response.use(
 
       // Handle 401 Unauthorized errors
       if (error.response.status === 401) {
-        signOut()
+        signOut();
       }
     } else if (error.request) {
       // Request made but no response received
       console.error('Request error:', error.request);
+      if (error.code === 'ECONNREFUSED') {
+        console.error('Connection refused. Please check if the server is running and accessible.');
+      }
     } else {
       // Error in request setup
       console.error('Error:', error.message);
