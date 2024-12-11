@@ -17,6 +17,15 @@ export const routes = {
         getRecentOnboardingUsers: 'core/admin/recent-onboarding-admin/',
     },
 
+    wallet: {
+        checkIfUserHasWallet: "core/customer/check-user-wallet/",
+        checkWalletInformation: "payments/customer/wallet/",
+        createWallet: "payments/customer/wallet/",
+        editWallet: "payments/customer/wallet/",
+        getBanksOnWalletCreation: "payments/customer/get-banks/",
+        verifyWalletAccountNumber: "payments/customer/verify-account-number/"
+    },
+
     users: {
         getUsers: 'core/admin/user-admin/',
 },

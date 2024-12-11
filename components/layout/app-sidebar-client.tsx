@@ -217,10 +217,6 @@ export default function AppSidebarClient({
                       Account
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <CreditCard className="size-4 mr-2" />
-                      Wallet
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
                       <Bell className="size-4 mr-2" />
                       Notifications
                     </DropdownMenuItem>

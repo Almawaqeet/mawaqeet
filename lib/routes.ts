@@ -35,7 +35,11 @@ export const CLIENT_ROUTES = {
             products: '/client-dashboard/product',
             packages: '/client-dashboard/package',
             payment: '/client-dashboard/payment',
-            profile: '/client-dashboard/profile'
+            profile: '/client-dashboard/profile',
+            wallet: {
+                viewWallet : '/client-dashboard/wallet',
+                createWallet : '/client-dashboard/wallet/create'
+            }
         },
         adminDashboard: {
             home: '/admin-dashboard',

@@ -9,14 +9,14 @@ if (typeof window !== 'undefined') {
   ring.register();
 }
 
-const LoadingIcon = () => {
+export const LoadingIcon = ({ color = "white" }) => {
   if (typeof window === 'undefined') return null;
   return (
     <l-ring
       size={20}
       stroke={4}
       speed={2}
-      color="white"
+      color={color}
       bg-opacity="0"
     />
   );
