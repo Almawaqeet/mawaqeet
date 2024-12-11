@@ -10,7 +10,8 @@ import { PackageIcon } from 'lucide-react';
 import { segregatePackageByItsPriceCategory } from '@/lib/utils';
 import { SegregatedPackage } from '@/constants/types';
 import { DataTableSkeleton } from '@/components/ui/table/data-table-skeleton';
-import { useProductTableFilters } from './product-tables/use-product-table-filters';
+import { useProductTableFilters } from './package-tables/use-product-table-filters';
+
 
 type ProductListingPage = {};
 

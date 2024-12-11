@@ -157,7 +157,7 @@ export const clientDashboardNavItems: NavItem[] = [
 //   },
   {
     title: 'Packages',
-    url: CLIENT_ROUTES.PrivatePages.clientDashboard.products,
+    url: CLIENT_ROUTES.PrivatePages.clientDashboard.packages,
     icon: 'product',
     isActive: false,
     items: [] // No child items

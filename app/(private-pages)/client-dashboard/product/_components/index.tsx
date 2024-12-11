@@ -21,7 +21,7 @@ export default function PackageListingPage() {
     <PageContainer scrollable>
       <div className="space-y-4">
         <div className="flex items-start justify-between">
-          <Heading title={`Package`} description="Manage packages" />
+          <Heading title={`Package`} description="Manage packages(Server side table functionalities.)" />
         </div>
         <Separator />
 
