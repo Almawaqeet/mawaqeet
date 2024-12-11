@@ -22,7 +22,7 @@ import { useEffect, useState } from "react";
 import AppDialogBox from '@/components/reusables/AppDialogBox';
 import { LoadingIcon } from '@/components/reusables/AppButton';
 import { LOCAL_STORAGE_KEYS } from "@/constants/local-storage-keys";
-
+import { CLIENT_ROUTES } from "@/lib/routes";
 
 
 export default function OverViewPage() {
@@ -40,7 +40,7 @@ export default function OverViewPage() {
     }, [ isLoading, userWalletExists]);
 
     useEffect(() => {
-        //? this is here because i want to save that the user already has a wallet so this does'nt disturb them on another page render 
+        //? this is here because i want to save that the user already has a wallet so this does'nt disturb them on another page render
         if (userWalletExists || checkIfUserHasWallet?.has_wallet) {
             if (typeof window !== undefined) {
                 localStorage.setItem(LOCAL_STORAGE_KEYS.USER_WALLET_STATUS, 'found');
@@ -67,7 +67,7 @@ export default function OverViewPage() {
           cancelText="Later"
           confirmText="Create Wallet"
           onCancel={() => setShowWalletModal(false)}
-          onConfirm={() => router.push("/client-dashboard/wallet")}
+          onConfirm={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.createWallet)}
         />
 
       <div className="space-y-2">
