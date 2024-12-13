@@ -94,6 +94,7 @@ export default function PackageTable({
         return (
           <Badge variant="outline" className="px-2 sm:px-4 py-1 sm:py-1.5 capitalize text-xs sm:text-sm font-medium bg-brand-color-light/20 text-brand-color border-brand-color/30 rounded-full shadow-sm whitespace-nowrap">
             {row.original.package_type?.toLowerCase() ?? "N/A"}
+            
           </Badge>
         );
       }
