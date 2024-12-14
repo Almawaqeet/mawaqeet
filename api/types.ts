@@ -1,3 +1,5 @@
+import { Package, PackagePrice } from "@/constants/types";
+
 export interface PaginatedResponse<T> {
     count: number;
     next: string | null;
@@ -188,4 +190,19 @@ export interface VerifyWalletAccountNumberResponse {
 
 export interface VerifyWalletAccountNumberErrorResponse {
     message?: string
+}
+
+
+export interface SimpleBookingResponse {
+    bookings: {
+        id?: string;
+        expiry_date?: string;
+        created_at?: string;
+        selected_price?: PackagePrice;
+        payment_plan?: string;
+        status?: string;
+        package?: Package;
+        balance?: string;
+    }[]
+
 }

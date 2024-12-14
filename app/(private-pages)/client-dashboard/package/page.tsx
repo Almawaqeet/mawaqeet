@@ -17,10 +17,7 @@ type pageProps = {
 };
 
 export default async function Page({ searchParams }: pageProps) {
-  // Allow nested RSCs to access the search params (in a type-safe way)
   searchParamsCache.parse(searchParams);
-
-  // This key is used for invoke suspense if any of the search params changed (used for filters).
   const key = serialize({ ...searchParams });
 
   return (
@@ -29,7 +26,7 @@ export default async function Page({ searchParams }: pageProps) {
         <div className="flex items-start justify-between">
           <Heading
             title="Packages"
-            description="Manage your packages"
+            description="View all the active packages"
           />
         </div>
         <Separator />

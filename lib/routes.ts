@@ -38,6 +38,10 @@ export const CLIENT_ROUTES = {
             viewPackage: (packageId: string) => `/client-dashboard/package/${packageId}`,
             payment: '/client-dashboard/payment',
             profile: '/client-dashboard/profile',
+            booking: {
+                mainPage: '/client-dashboard/bookings',
+                initiateBooking: (packageId: string) => `/client-dashboard/bookings/initiate-booking/${packageId}`,
+            },
             wallet: {
                 viewWallet : '/client-dashboard/wallet',
                 createWallet : '/client-dashboard/wallet/create'

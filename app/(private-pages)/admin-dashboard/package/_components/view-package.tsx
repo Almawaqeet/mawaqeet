@@ -24,6 +24,11 @@ import {
   XCircleIcon
 } from "lucide-react";
 import dynamic from 'next/dynamic';
+import AppButton from "@/components/reusables/AppButton";
+import { useSession } from "next-auth/react";
+import { ACCOUNT_TYPES } from "@/constants/generic";
+import { useRouter } from "next/navigation";
+import { CLIENT_ROUTES } from "@/lib/routes";
 
 
 const RichTextEditor = dynamic(() => import("@/components/ui/rich-text-editor"), {
@@ -35,9 +40,8 @@ const RichTextEditor = dynamic(() => import("@/components/ui/rich-text-editor"),
 
 export default function ViewPackage({ params }: { params: { packageId: string } }) {
     const { data: packageData, isLoading } = useViewPackage(params.packageId);
-
-    console.log("package data", packageData?.category_description?.[0]?.description);
-
+    const { data: userAccount } = useSession();
+    const router = useRouter()
     if (isLoading) {
         return <ViewPackageSkeleton />;
     }
@@ -98,6 +102,18 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                                 </Badge>
                             </div>
                         </div>
+                        {
+                            userAccount?.user.accountType === ACCOUNT_TYPES.USER  && (
+                                <AppButton
+                                variant="primary"
+                                className="rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+                                onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.initiateBooking(packageData?.id as string))}
+                              >
+                                <span>Book Now</span>
+                                <span>→</span>
+                              </AppButton>
+                            )
+                        }
                     </div>
 
                     {/* Main Content Tabs */}

@@ -16,7 +16,6 @@ import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useQueryState, parseAsInteger } from "nuqs";
 import AppDialogBox from "@/components/reusables/AppDialogBox";
 import { useState } from "react";
 
@@ -31,15 +30,6 @@ export default function PackageTable({
   isLoadingActive?: boolean;
   isLoadingInactive?: boolean;
 }) {
-  const [currentPage, setCurrentPage] = useQueryState(
-    'page',
-    parseAsInteger.withOptions({ shallow: false }).withDefault(1)
-  );
-  const [pageSize, setPageSize] = useQueryState(
-    'limit',
-    parseAsInteger.withOptions({ shallow: false }).withDefault(10)
-  );
-
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const [packageToDelete, setPackageToDelete] = useState<Package | null>(null);
 
@@ -54,8 +44,6 @@ export default function PackageTable({
     try {
       // Add your delete API call here
       console.log("Deleting package:", packageToDelete.id);
-
-      // Close dialog after successful deletion
       setShowDeleteDialog(false);
       setPackageToDelete(null);
     } catch (error) {
