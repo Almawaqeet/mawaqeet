@@ -2,58 +2,8 @@
 
 import { SegregatedPackage } from "@/constants/types";
 import { CLIENT_ROUTES } from "@/lib/routes";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
-
-// export const my_packages: SegregatedPackage[] = [
-//   {
-//     id: "1",
-//     type: "hajj", // Explicitly defined as "hajj"
-//     tier: "STANDARD",
-//     cohort: "2024 Cohort",
-//     price: "$5,000",
-//     paymentPlan: "Full payment or 3 installments",
-//     features: [
-//       "Round-trip airfare included",
-//       "Standard hotel accommodation",
-//       "Guided tours for all holy sites",
-//       "Daily meals provided",
-//       "Transportation between holy sites",
-//     ],
-//   },
-//   {
-//     id: "2",
-//     type: "hajj", // Explicitly defined as "hajj"
-//     tier: "VIP",
-//     cohort: "2024 VIP Cohort",
-//     price: "$10,000",
-//     paymentPlan: "Full payment or 5 installments",
-//     features: [
-//       "Round-trip business class airfare",
-//       "5-star hotel accommodation",
-//       "Private guided tours for all holy sites",
-//       "Gourmet meals provided",
-//       "VIP transportation with air-conditioned buses",
-//       "Access to exclusive VIP areas during rituals",
-//     ],
-//   },
-//   {
-//     id: "3",
-//     type: "umrah", // Explicitly defined as "umrah"
-//     tier: "DELUXE",
-//     cohort: "2024 Deluxe Cohort",
-//     price: "$7,500",
-//     paymentPlan: "Full payment or 4 installments",
-//     features: [
-//       "Round-trip premium airfare",
-//       "Deluxe hotel suites near the Haram",
-//       "Expert scholars providing lectures and guidance",
-//       "Daily meals with international cuisines",
-//       "Luxury transportation between sites",
-//     ],
-//   },
-// ];
-
 interface PackageProps {
     pkg: SegregatedPackage;
     theme?: 'light' | 'dark';
@@ -76,6 +26,8 @@ interface PackageProps {
 
 export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
     const router = useRouter();
+    const { data: session } = useSession();
+
   const themeStyles = {
     light: {
         background: 'bg-white',
@@ -107,7 +59,15 @@ export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
 
     const styles = themeStyles[theme];
 
-    console.log(pkg);
+    const singlePackageLink =  CLIENT_ROUTES.PublicPages.packages.details(pkg?.id ?? '')
+
+    const handleClick = () => {
+      if (!session) {
+        router.push(singlePackageLink);
+        return;
+      }
+      router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.viewPackage(pkg?.id ?? ''))
+    };
 
     return (
       <div
@@ -145,7 +105,7 @@ export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
           </ul>
         </div>
 
-        <button className={`w-full mt-6 py-2 text-sm font-medium ${styles.text.primary} bg-transparent border ${styles.border} rounded ${styles.button} transition-colors duration-300`} onClick={() => router.push(CLIENT_ROUTES.PublicPages.packages.details(pkg?.id ?? ''))}>
+        <button className={`w-full mt-6 py-2 text-sm font-medium ${styles.text.primary} bg-transparent border ${styles.border} rounded ${styles.button} transition-colors duration-300`} onClick={handleClick}>
           Learn more →
         </button>
       </div>

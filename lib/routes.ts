@@ -35,6 +35,7 @@ export const CLIENT_ROUTES = {
             team: '/client-dashboard/onboarding',
             products: '/client-dashboard/product',
             packages: '/client-dashboard/package',
+            viewPackage: (packageId: string) => `/client-dashboard/package/${packageId}`,
             payment: '/client-dashboard/payment',
             profile: '/client-dashboard/profile',
             wallet: {
