@@ -11,6 +11,9 @@ export interface CustomApiErrorResponse {
     message?: string
 }
 
+export interface CustomApiResponse {
+    message?: string
+}
 export interface CheckIfEmailAddressExistResponse {
     exists: boolean;
 }
@@ -204,5 +207,10 @@ export interface SimpleBookingResponse {
         package?: Package;
         balance?: string;
     }[]
+}
 
+
+export interface InitiateBookingRequest {
+    payment_plan: string,
+    category: string
 }

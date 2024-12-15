@@ -44,6 +44,7 @@ export const routes = {
 
     bookings: {
         viewUserBookings: 'core/customer/view-user-bookings/',
+        initiateBooking: (packageId: string) => `core/customer/initiate-booking/${packageId}/`
     }
 }
 

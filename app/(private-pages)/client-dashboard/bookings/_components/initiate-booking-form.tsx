@@ -13,6 +13,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useViewPackage } from "@/api/services/packages";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useInitiateBooking } from "@/api/services/booking";
+import { useAppToast } from "@/components/reusables/AppToast";
+import { useRouter } from "next/navigation";
+import AppButton from "@/components/reusables/AppButton";
 
 const validationSchema = Yup.object({
   category: Yup.string().required("Please select a category"),
@@ -20,7 +24,11 @@ const validationSchema = Yup.object({
 });
 
 export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
+  const router = useRouter();
   const { data: packageData, isLoading } = useViewPackage(packageId);
+  const {mutate: initiateBooking, isPending: initiateBookingPending} = useInitiateBooking(packageId);
+  const { showToast } = useAppToast();
+
   const formik = useFormik({
     initialValues: {
       category: "",
@@ -28,14 +36,36 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      // Handle form submission
-      console.log(values);
+      initiateBooking({
+        payment_plan: values.paymentPlan,
+        category: values.category
+      }, {
+        onSuccess: (response) => {
+          if (response?.message) {
+            showToast({
+              title: "Success",
+              description: response.message,
+              variant: "default"
+            });
+            router.push('/client-dashboard/bookings');
+          }
+        },
+        onError: (error: any) => {
+          showToast({
+            title: "Error",
+            description: error?.message || "An error occurred while initiating booking",
+            variant: "destructive"
+          });
+        }
+      });
     },
   });
 
   const paymentPlans = [
     { id: "full", name: "Full Payment" },
-    { id: "deposit", name: "Deposit" },
+    { id: "installment_free", name: "Start with any payment" },
+    { id: "installment_weekly", name: "Weekly Installment" },
+    { id: "installment_monthly", name: "Monthly Installment" }
   ];
 
   if (isLoading) {
@@ -129,9 +159,13 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
               )}
             </div>
 
-            <Button type="submit" className="w-full text-sm sm:text-base py-4 sm:py-5 mt-4 bg-brand-color">
-              Continue Booking
-            </Button>
+            <AppButton
+              type="submit"
+              className="w-full text-sm sm:text-base py-4 sm:py-5 mt-4 bg-brand-color"
+              loading={initiateBookingPending}
+            >
+              {initiateBookingPending ? 'Processing...' : 'Continue Booking'}
+            </AppButton>
           </form>
         </CardContent>
       </Card>
