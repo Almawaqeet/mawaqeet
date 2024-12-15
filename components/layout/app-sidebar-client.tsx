@@ -53,6 +53,7 @@ import { UserNav } from './user-nav';
 import { extractInitials } from '@/lib/utils';
 import { BellIcon } from 'lucide-react';
 import { CLIENT_ROUTES } from '@/lib/routes';
+import SearchInput from '../reusables/search-input';
 
 
 
@@ -168,7 +169,7 @@ export default function AppSidebarClient({
                         alt={session?.user?.name || ''}
                       /> */}
                       <AvatarFallback className="rounded-lg">
-                        {extractInitials(session?.user?.fullName ?? '')}
+                        {extractInitials(session?.user.fullName ?? '')}
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
@@ -248,8 +249,6 @@ export default function AppSidebarClient({
           </div>
           <div className="flex items-center gap-2 px-4">
             <UserNav />
-
-
             {/* will navigate to navigation page */}
             <BellIcon className="size-4" />
             {/* <ThemeToggle /> */}
