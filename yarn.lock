@@ -756,7 +756,7 @@
 
 "@radix-ui/react-select@^2.1.2":
   version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@radix-ui/react-select/-/react-select-2.1.2.tgz#2346e118966db793940f6a866fd4cc5db2cc275e"
+  resolved "https://registry.npmjs.org/@radix-ui/react-select/-/react-select-2.1.2.tgz"
   integrity sha512-rZJtWmorC7dFRi0owDmoijm6nSJH1tVw64QGiNIZ9PNLyBDtG+iAq+XGsya052At4BfarzY/Dhv9wrrUr6IMZA==
   dependencies:
     "@radix-ui/number" "1.1.0"
@@ -3350,9 +3350,9 @@ mz@^2.7.0:
     thenify-all "^1.0.0"
 
 nanoid@^3.3.6, nanoid@^3.3.7:
-  version "3.3.7"
-  resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.7.tgz"
-  integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
+  version "3.3.8"
+  resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.8.tgz"
+  integrity sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==
 
 natural-compare@^1.4.0:
   version "1.4.0"
@@ -3481,11 +3481,6 @@ object-keys@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/object-keys/-/object-keys-1.1.1.tgz"
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
-
-object-path@0.6.0:
-  version "0.6.0"
-  resolved "https://registry.npmjs.org/object-path/-/object-path-0.6.0.tgz"
-  integrity sha512-fxrwsCFi3/p+LeLOAwo/wyRMODZxdGBtUlWRzsEpsUVrisZbEfZ21arxLGfaWfcnqb8oHPNihIb4XPE8CQPN5A==
 
 object.assign@^4.1.4, object.assign@^4.1.5:
   version "4.1.5"
@@ -4267,12 +4262,10 @@ sonner@^1.5.0:
   resolved "https://registry.npmjs.org/sonner/-/sonner-1.7.0.tgz"
   integrity sha512-W6dH7m5MujEPyug3lpI2l3TC3Pp1+LTgK0Efg+IHDrBbtEjyCmCHHo6yfNBOsf1tFZ6zf+jceWwB38baC8yO9g==
 
-sort-by@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/sort-by/-/sort-by-1.2.0.tgz"
-  integrity sha512-aRyW65r3xMnf4nxJRluCg0H/woJpksU1dQxRtXYzau30sNBOmf5HACpDd9MZDhKh7ALQ5FgSOfMPwZEtUmMqcg==
-  dependencies:
-    object-path "0.6.0"
+sort-by@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.npmjs.org/sort-by/-/sort-by-0.0.2.tgz"
+  integrity sha512-iOX5oHA4a0eqTMFiWrHYqv924UeRKFBLhym7iwSVG37Egg2wApgZKAjyzM9WZjMwKv6+8Zi+nIaJ7FYsO9EkoA==
 
 source-map-js@^1.0.2, source-map-js@^1.2.1:
   version "1.2.1"

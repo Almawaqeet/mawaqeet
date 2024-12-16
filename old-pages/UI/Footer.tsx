@@ -84,7 +84,7 @@ const Footer: React.FC = () => {
           ))}
 
           <div className="flex gap-4 items-center">
-            <Link href="#" className="text-gray-200 hover:text-white transition-colors">
+            <Link href="https://www.facebook.com/profile. php?id=61570372806546" className="text-gray-200 hover:text-white transition-colors">
               <FiFacebook className="w-6 h-6" />
             </Link>
             <Link href="#" className="text-gray-200 hover:text-white transition-colors">

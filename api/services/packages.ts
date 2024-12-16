@@ -13,6 +13,15 @@ export const useGetAllActivePackages = (params?: { package_type?: string, search
     });
 }
 
+export const useGetAllActivePackagesById = (id: string) => {
+    const baseQueryKey = generateBaseQueryKeyFromRoute(routes.packages.showAllActivePackagesById(id));
+    return useAppQueryWithPaginationAndParams<PaginatedResponse<Package>>({
+        apiRoute: routes.packages.showAllActivePackages,
+        queryKey: [baseQueryKey, id],
+    });
+}
+
+
 export const useGetAllInactivePackages = (params?: { package_type?: string, search?: string }) => {
     const baseQueryKey = generateBaseQueryKeyFromRoute(routes.packages.showAllInactivePackages);
     return useAppQueryWithPaginationAndParams<PaginatedResponse<Package>>({
