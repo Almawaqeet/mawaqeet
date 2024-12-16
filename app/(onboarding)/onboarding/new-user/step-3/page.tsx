@@ -10,14 +10,8 @@ async function getInitialData() {
   const queryClient = new QueryClient();
   const route = routes.onboarding.getOnboardingPaymentAmount;
 
-  // Validate route
-  if (!route) {
-    throw new Error("Route for onboarding payment amount is not defined.");
-  }
-  console.log("Route URL:", route);
 
   const baseQueryKey = generateBaseQueryKeyFromRoute(route);
-  console.log("Generated Query Key:", baseQueryKey);
 
   try {
     const data = await createServerAxiosInstance(route);

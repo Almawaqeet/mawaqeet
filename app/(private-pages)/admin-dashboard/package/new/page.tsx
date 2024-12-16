@@ -250,16 +250,14 @@ export default function NewPackagePage() {
         <div className="flex justify-between items-center">
           {[1, 2, 3].map((step) => (
             <div key={step} className="flex items-center">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-medium transition-all duration-300 ${
-                step === currentStep ? 'bg-brand-color text-white shadow-lg scale-110' :
-                step < currentStep ? 'bg-brand-color-light text-brand-color' : 'bg-gray-100 text-gray-400'
-              }`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-medium transition-all duration-300 ${step === currentStep ? 'bg-brand-color text-white shadow-lg scale-110' :
+                  step < currentStep ? 'bg-brand-color-light text-brand-color' : 'bg-gray-100 text-gray-400'
+                }`}>
                 {step}
               </div>
               {step < 3 && (
-                <div className={`w-32 h-1.5 rounded-full transition-all duration-300 ${
-                  step < currentStep ? 'bg-brand-color-light' : 'bg-gray-100'
-                }`} />
+                <div className={`w-32 h-1.5 rounded-full transition-all duration-300 ${step < currentStep ? 'bg-brand-color-light' : 'bg-gray-100'
+                  }`} />
               )}
             </div>
           ))}

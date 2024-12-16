@@ -175,7 +175,7 @@ export default function PackageTable({
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild className="cursor-pointer hover:bg-brand-color-light/20 focus:bg-brand-color-light/20 px-3 py-2 sm:py-2.5">
-                <Link href={`/admin-dashboard/package/${id}`} className="flex items-center text-gray-700 text-sm">
+                <Link href={`/admin-dashboard/package/edit/${id}`} className="flex items-center text-gray-700 text-sm">
                   <Edit className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" /> Edit Package
                 </Link>
               </DropdownMenuItem>
