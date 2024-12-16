@@ -54,10 +54,10 @@ export function UserNav() {
             Profile
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
-          {session?.user.accountType === ACCOUNT_TYPES.USER ? <DropdownMenuItem>
+          {session?.user.accountType === ACCOUNT_TYPES.USER && <DropdownMenuItem>
             Wallet
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem> : ''}
+          </DropdownMenuItem>}
           {session?.user.accountType === ACCOUNT_TYPES.ADMIN && <DropdownMenuItem>Team
           <DropdownMenuShortcut>⇧⌘T</DropdownMenuShortcut>
           </DropdownMenuItem>}
