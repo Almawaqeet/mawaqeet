@@ -82,6 +82,7 @@ export default function PackageTable({
         return (
           <Badge variant="outline" className="px-2 sm:px-4 py-1 sm:py-1.5 capitalize text-xs sm:text-sm font-medium bg-brand-color-light/20 text-brand-color border-brand-color/30 rounded-full shadow-sm whitespace-nowrap">
             {row.original.package_type?.toLowerCase() ?? "N/A"}
+            
           </Badge>
         );
       }
@@ -162,7 +163,7 @@ export default function PackageTable({
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild className="cursor-pointer hover:bg-brand-color-light/20 focus:bg-brand-color-light/20 px-3 py-2 sm:py-2.5">
-                <Link href={`/admin-dashboard/package/${id}`} className="flex items-center text-gray-700 text-sm">
+                <Link href={`/admin-dashboard/package/edit/${id}`} className="flex items-center text-gray-700 text-sm">
                   <Edit className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" /> Edit Package
                 </Link>
               </DropdownMenuItem>

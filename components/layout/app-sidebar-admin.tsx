@@ -173,7 +173,7 @@ export default function AppSidebar({
                         alt={session?.user?.name || ''}
                       /> */}
                       <AvatarFallback className="rounded-lg">
-                        {extractInitials(session?.user?.fullName ?? '')}
+                        {extractInitials(session?.user?.fullName || '')}
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">

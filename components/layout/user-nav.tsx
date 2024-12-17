@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useSession } from 'next-auth/react';
 import { extractInitials } from '@/lib/utils';
+import { ACCOUNT_TYPES } from '@/constants/generic';
 
 export function UserNav() {
   const { data: session } = useSession();
@@ -20,14 +21,14 @@ export function UserNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+        <Button variant='secondary' className="relative h-8 w-8 rounded-full text-white">
           <Avatar className="h-8 w-8">
             {/* <AvatarImage
               src={session.user?.image ?? ''}
               alt={session.user?.name ?? ''}
             /> */}
             <AvatarFallback>
-              {extractInitials(session?.user?.fullName ?? '')}
+              {extractInitials(session?.user?.email ?? '')}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -53,15 +54,13 @@ export function UserNav() {
             Profile
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          {session?.user.accountType === ACCOUNT_TYPES.USER ? <DropdownMenuItem>
             Wallet
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            Settings
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
+          </DropdownMenuItem> : ''}
+          {session?.user.accountType === ACCOUNT_TYPES.ADMIN && <DropdownMenuItem>Team
+          <DropdownMenuShortcut>⇧⌘T</DropdownMenuShortcut>
+          </DropdownMenuItem>}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
