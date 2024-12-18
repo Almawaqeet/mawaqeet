@@ -1,4 +1,4 @@
-import { Package } from "@/constants/types";
+import { EditPackageProps, Package } from "@/constants/types";
 import { useAppMutation, useAppQuery, useAppQueryWithPaginationAndParams } from "@/api/client-constructor";
 import { PaginatedResponse } from "@/api/types";
 import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
@@ -50,4 +50,13 @@ export const useViewPackage = (packageId: string) => {
         apiRoute: routes.package.viewPackage(packageId),
         queryKey: [baseQueryKey],
     });
+}
+
+export const useEditPackage = ( editedPackage: PaginatedResponse<Package>, id?: string) => {
+
+return useAppMutation<PaginatedResponse<Package>>({
+    apiRoute: routes.packages.editActivePackages(id),
+    method: 'PUT',
+    body: editedPackage
+})
 }

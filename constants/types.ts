@@ -17,7 +17,21 @@ export interface Package {
   reason_for_deactivation?: string | null;
   deactivated_at?: string | null;
 }
-
+export interface EditPackageProps {
+  name: string;
+  description: string;
+  package_type: string;
+  expiry_date: string;
+  package_prices: Array<{
+    category: 'vip' | 'deluxe' | 'standard';
+    price: string;
+  }>;
+  category_descriptions: Array<{
+    category: 'vip' | 'deluxe' | 'standard';
+    description: string;
+  }>;
+  is_active: boolean;
+}
 
 
 export interface UmrahBatch {

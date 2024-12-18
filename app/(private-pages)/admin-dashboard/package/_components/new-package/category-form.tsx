@@ -1,9 +1,17 @@
+'use client'
 import { motion } from "framer-motion";
 import { Label } from "@/components/ui/label";
 import AppTextInput from '@/components/reusables/AppTextInput';
 import { Field } from "formik";
 import dynamic from 'next/dynamic';
 import { Package, FileText, Star, Crown, Award } from 'lucide-react';
+import { ReactNode, useState } from "react";
+
+type PackageProps = {
+  category: any,
+  index: number,
+  price: string
+}
 
 const RichTextEditor = dynamic(() => import('@/components/ui/rich-text-editor'), {
   ssr: false
@@ -15,7 +23,10 @@ const categoryIcons = {
   standard: Award
 };
 
-export const CategoryForm = ({ values, errors, touched, setFieldValue }: any) => (
+export const CategoryForm = ({ values, errors, touched, setFieldValue, packagedetails }: any) => {
+
+
+  return (
     <motion.div
       key="pricing"
       initial={{ opacity: 0, x: -20 }}
@@ -31,7 +42,7 @@ export const CategoryForm = ({ values, errors, touched, setFieldValue }: any) =>
 
       {/* Category Cards */}
       <div className="space-y-8">
-        {values?.package_prices?.map((category: any, index: number) => {
+        { values?.package_prices?.map((category: any, index: number) => {
           const IconComponent = categoryIcons[category.category as keyof typeof categoryIcons];
 
           return (
@@ -110,4 +121,5 @@ export const CategoryForm = ({ values, errors, touched, setFieldValue }: any) =>
         })}
       </div>
     </motion.div>
-);
+  )
+};

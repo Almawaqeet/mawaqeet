@@ -101,9 +101,6 @@ export function useAppQueryWithPaginationAndParams<TData = unknown, TError = unk
 }
 
 
-
-
-
 export function useAppMutation<TData = unknown, TError = unknown, TVariables = unknown>(
   config: MutationConfig<TVariables, TData>
 ): UseMutationResult<TData, TError, TVariables> {
