@@ -48,7 +48,7 @@ export const routes = {
         initiateBooking: (packageId: string) => `core/customer/initiate-booking/${packageId}/`,
         viewAndEditBooking: (bookingId: string) => `core/customer/view-edit-booking/${bookingId}/`,
         initiateBookingPayment: (bookingId: string) => `core/customer/make-booking-payment/${bookingId}/`,
-        verifyBookingPayment: (reference: string|null) => `core/customer/verify-booking-payment/${reference}/`,
+        verifyBookingPayment: `core/customer/verify-booking-payment/:reference/`,
     }
 }
 

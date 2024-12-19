@@ -270,7 +270,13 @@ export interface BookingInformationResponse {
         date_payment_completed?: string | null;
         date_initiated?: string;
         total_amount_paid?: number;
-        transactions?: any[];
+        transactions?: {
+            id?: number;
+            amount_paid?: string;
+            transaction_date_initiated?: string;
+            transaction_status?: string;
+            receipt_url?: string
+        }[];
         percentage_completion?: {
             percentage_completion?: number;
         };

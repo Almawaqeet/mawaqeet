@@ -22,7 +22,7 @@ interface BookingPaymentProps {
 }
 
 export function BookingPayment({ id }: BookingPaymentProps) {
-    const [reference, setReference] = useState<string | null >(null)
+    const [reference, setReference] = useState<string>("")
     const [paymentAmount, setPaymentAmount] = useState('')
     const router = useRouter()
     const { showToast } = useAppToast()
@@ -36,10 +36,8 @@ export function BookingPayment({ id }: BookingPaymentProps) {
     const totalAmount = Number(booking?.balance) ?? 0
     const amountPaid = Number(booking?.total_amount_paid) ?? 0
     const remainingAmount = totalAmount - amountPaid
-    const isFullPayment = booking?.payment_plan?.toLowerCase() === 'full payment'
+    const isFullPayment = booking?.payment_plan?.toLowerCase() === 'full_payment'
 
-
-    console.log(reference)
 
     const handlePayment = () => {
         const amount = parseFloat(paymentAmount)
@@ -167,8 +165,6 @@ export function BookingPayment({ id }: BookingPaymentProps) {
                                     <span className="text-gray-600">Plan Category</span>
                                     <span className="font-medium">{(booking?.payment_plan?.toUpperCase() ?? '')}</span>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>

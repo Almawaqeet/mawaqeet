@@ -40,11 +40,9 @@ export const useInitiateBookingPayment = (bookingId: string, body?: InitiateBook
 }
 
 
-export const useVerifyBookingPayment = (reference: string | null, body?: {}) => {
-    console.log(reference)
-    return useAppMutation<BookingVerifyPaymentResponse>({
-        apiRoute: routes.bookings.verifyBookingPayment(reference),
-        method: 'POST',
-        body: JSON.stringify(body)
+export const useVerifyBookingPayment = (reference: string) => {
+    return useAppQuery<BookingVerifyPaymentResponse>({
+        apiRoute: routes.bookings.verifyBookingPayment.replace(':reference', reference),
+        queryKey: ['VERIFY_BOOKING_PAYMENT', reference]
     })
 }
