@@ -66,6 +66,12 @@ export interface OnboardingVerifyPaymentResponse {
     status: string;
 }
 
+export interface BookingVerifyPaymentResponse {
+    message: string;
+    receipt_url: string;
+    status: string;
+}
+
 
 export interface LoginRequest {
     email: string;
@@ -269,4 +275,9 @@ export interface BookingInformationResponse {
             percentage_completion?: number;
         };
     };
+}
+
+
+export interface InitiateBookingPaymentRequest {
+    amount: string
 }
