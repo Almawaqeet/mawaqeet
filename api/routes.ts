@@ -34,7 +34,7 @@ export const routes = {
         showAllActivePackages: 'core/customer/show-all-active-packages/',
         showAllInactivePackages: 'core/admin/get-inactive-packages/',
         createPackage: 'core/admin/create-package/',
-        showAllActivePackagesById: (editId: string) => `core/admin/get-active-packages/${editId}` 
+        showAllActivePackagesById: (editId: string) => `core/admin/get-active-packages/${editId}`
     },
 
     package: {
@@ -45,7 +45,8 @@ export const routes = {
 
     bookings: {
         viewUserBookings: 'core/customer/view-user-bookings/',
-        initiateBooking: (packageId: string) => `core/customer/initiate-booking/${packageId}/`
+        initiateBooking: (packageId: string) => `core/customer/initiate-booking/${packageId}/`,
+        viewAndEditBooking: (bookingId: string) => `core/customer/view-edit-booking/${bookingId}/`
     }
 }
 

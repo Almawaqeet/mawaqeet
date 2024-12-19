@@ -21,14 +21,14 @@ export function UserNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='secondary' className="relative h-8 w-8 rounded-full text-white">
+        <Button variant='secondary' className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             {/* <AvatarImage
               src={session.user?.image ?? ''}
               alt={session.user?.name ?? ''}
             /> */}
             <AvatarFallback>
-              {extractInitials(session?.user?.email ?? '')}
+              {extractInitials(session?.user?.fullName ?? '')}
             </AvatarFallback>
           </Avatar>
         </Button>

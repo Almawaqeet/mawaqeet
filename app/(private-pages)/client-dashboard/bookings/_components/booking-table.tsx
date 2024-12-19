@@ -24,9 +24,13 @@ import { InboxIcon, EyeIcon, CrownIcon, StarIcon, DiamondIcon, CalendarIcon, Dol
 import { cn } from "@/lib/utils";
 import { BookingTableSkeleton } from "./booking-table-skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { CLIENT_ROUTES } from "@/lib/routes";
+import { useRouter } from "next/navigation";
+
 
 export const BookingTable = () => {
   const { data: userBookings, isLoading } = getUserBookings();
+  const router = useRouter()
 
   const renderLoadingSkeleton = () => (
     <>
@@ -188,6 +192,7 @@ export const BookingTable = () => {
                               variant="ghost"
                               size="sm"
                               className="hover:bg-primary/10 text-primary transition-colors"
+                              onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.viewBooking(booking?.id ?? ''))}
                             >
                               <EyeIcon className="h-4 w-4 mr-1.5" />
                               <span className="hidden sm:inline">View Details</span>

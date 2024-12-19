@@ -47,7 +47,6 @@ import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { redirect, usePathname } from 'next/navigation';
 import * as React from 'react';
-import { Breadcrumbs } from '@/components/reusables/breadcrumbs';
 import { Icons } from '@/components/reusables/icons';
 import { UserNav } from './user-nav';
 import { extractInitials } from '@/lib/utils';
@@ -169,7 +168,7 @@ export default function AppSidebarClient({
                         alt={session?.user?.name || ''}
                       /> */}
                       <AvatarFallback className="rounded-lg">
-                        {extractInitials(session?.user.fullName ?? '')}
+                        {extractInitials(session?.user?.fullName ?? '')}
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
@@ -196,7 +195,7 @@ export default function AppSidebarClient({
                           src={session?.user?.image || ''}
                           alt={session?.user?.name || ''}
                         /> */}
-                        <AvatarFallback className="rounded-lg">
+                        <AvatarFallback className="rounded-lg bg-primary">
                           {extractInitials(session?.user?.fullName ?? '')}
                         </AvatarFallback>
                       </Avatar>

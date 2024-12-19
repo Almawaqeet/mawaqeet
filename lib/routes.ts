@@ -41,6 +41,7 @@ export const CLIENT_ROUTES = {
             booking: {
                 mainPage: '/client-dashboard/bookings',
                 initiateBooking: (packageId: string) => `/client-dashboard/bookings/initiate-booking/${packageId}`,
+                viewBooking: (bookingId: string) => `/client-dashboard/bookings/${bookingId}`
             },
             wallet: {
                 viewWallet : '/client-dashboard/wallet',

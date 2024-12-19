@@ -214,3 +214,59 @@ export interface InitiateBookingRequest {
     payment_plan: string,
     category: string
 }
+
+
+
+export interface BookingInformationResponse {
+    booking?: {
+        id?: string;
+        expiry_date?: string;
+        created_at?: string;
+        selected_price?: {
+            id?: string;
+            package?: string;
+            price?: string;
+            category?: string;
+            weekly_installment_fee?: string;
+            monthly_installment_fee?: string;
+        };
+        payment_plan?: string;
+        status?: string;
+        package?: {
+            id?: string;
+            price?: {
+                id?: string;
+                package?: string;
+                price?: string;
+                category?: string;
+                weekly_installment_fee?: string;
+                monthly_installment_fee?: string;
+            }[];
+            category_description?: {
+                id?: string;
+                package?: string;
+                category?: string;
+                description?: string;
+            }[];
+            umrah_batch?: any[];
+            description?: string;
+            slug?: string;
+            name?: string;
+            package_type?: string;
+            is_active?: boolean;
+            expiry_date?: string;
+            created_at?: string;
+            updated_at?: string;
+            reason_for_deactivation?: string;
+            deactivated_at?: string | null;
+        };
+        balance?: string;
+        date_payment_completed?: string | null;
+        date_initiated?: string;
+        total_amount_paid?: number;
+        transactions?: any[];
+        percentage_completion?: {
+            percentage_completion?: number;
+        };
+    };
+}
