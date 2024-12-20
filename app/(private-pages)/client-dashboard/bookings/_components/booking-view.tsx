@@ -13,6 +13,7 @@ import { useState} from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import Link from 'next/link';
 
 
 interface ConfirmationModalProps {
@@ -203,15 +204,15 @@ export function BookingView({ id }: BookingViewProps) {
                                     <span className="text-sm text-gray-600">Reference: {transaction?.reference ?? 'N/A'}</span>
                                 </div>
                                 {transaction.receipt_url && (
-                                    <a
-                                        href={transaction.receipt_url}
+                                    <Link
+                                        href={transaction?.receipt_url ?? '#'}
                                         target="_blank"
-                                        rel="noopener noreferrer"
+                                        rel="noopener noreferrer nofollow"
                                         className="text-brand-color hover:underline text-sm flex items-center gap-2"
                                     >
                                         <ReceiptIcon className="h-4 w-4" />
                                         Download Receipt
-                                    </a>
+                                    </Link>
                                 )}
                             </div>
                         ))

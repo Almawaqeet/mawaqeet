@@ -13,12 +13,15 @@ import { useAppToast } from '@/components/reusables/AppToast'
 import { CLIENT_ROUTES } from '@/lib/routes'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useGetBookingInformation, useInitiateBookingPayment, useVerifyBookingPayment } from '@/api/services/booking'
+import { useGetBookingInformation, useInitiateBookingPayment, useVerifyBookingPayment, useMakeBookingPaymentThroughWallet } from '@/api/services/booking'
 import { useSession } from 'next-auth/react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useCheckWalletInformation } from '@/api/services/wallet'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { CreditCard, Wallet, Calendar, Package2, Clock, Layers } from 'lucide-react'
+import { CreditCard, Wallet, Calendar, Package2, Layers } from 'lucide-react'
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+
 
 interface BookingPaymentProps {
   id: string;
@@ -35,13 +38,15 @@ export function BookingPayment({ id }: BookingPaymentProps) {
     const { data: walletInformation, isLoading: walletInformationLoading } = useCheckWalletInformation()
     const { mutate: initiatePayment, isPending: isInitiatingPayment } = useInitiateBookingPayment(id)
     const { data: verifyPaymentData, isPending: isVerifyingPayment } = useVerifyBookingPayment(reference)
+    const { mutate: makeBookingThroughWallet, data: payingThroughWalletData, isPending: isPayingThroughWallet} = useMakeBookingPaymentThroughWallet(id)
     const { data: session } = useSession();
+    const queryClient = useQueryClient()
 
     const booking = bookingData?.booking
     const totalAmount = Number(booking?.balance) ?? 0
     const amountPaid = Number(booking?.total_amount_paid) ?? 0
     const remainingAmount = totalAmount - amountPaid
-    const isFullPayment = booking?.payment_plan?.toLowerCase() === 'full_payment'
+    const isFullPayment = booking?.payment_plan?.toLowerCase() === 'full'
     const walletBalance = Number(walletInformation?.wallet?.balance ?? 0)
 
     const handlePayment = () => {
@@ -83,6 +88,41 @@ export function BookingPayment({ id }: BookingPaymentProps) {
             return
         }
 
+        if (paymentMethod === 'wallet') {
+            makeBookingThroughWallet(
+                { booking_id: id, amount },
+                {
+                    onSuccess: (data) => {
+                        if (data?.message === 'success') {
+                            setReference('wallet-payment-success')
+                            queryClient.invalidateQueries({
+                                queryKey: [generateBaseQueryKeyFromRoute(routes.wallet.checkWalletInformation)]
+                            })
+                            queryClient.invalidateQueries({
+                                queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.viewUserBookings)]
+                            })
+                            queryClient.invalidateQueries({
+                                queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.viewAndEditBooking(id))]
+                            })
+                        }
+                    },
+                    onError: (error: any) => {
+                        const errorMessage = error?.response?.data?.message || error?.message || "An error occurred while processing wallet payment"
+                        showToast({
+                            title: "Error",
+                            description: errorMessage,
+                            variant: "destructive",
+                            action: {
+                                label: "Contact Support",
+                                onClick: () => router.push(CLIENT_ROUTES.PublicPages.contact)
+                            }
+                        })
+                    }
+                }
+            )
+            return
+        }
+
         initiatePayment(
             { booking_id: id, amount, payment_method: paymentMethod },
             {
@@ -94,12 +134,19 @@ export function BookingPayment({ id }: BookingPaymentProps) {
                             reference: data?.data?.reference,
                             onSuccess: () => {
                                 setReference(data.data?.reference ?? '')
+                                queryClient.invalidateQueries({
+                                    queryKey: [generateBaseQueryKeyFromRoute(routes.wallet.checkWalletInformation)]
+                                })
+                                queryClient.invalidateQueries({
+                                    queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.viewUserBookings)]
+                                })
+                                queryClient.invalidateQueries({
+                                    queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.viewAndEditBooking(id))]
+                                })
                             },
                             onClose: () => {}
                         })
                         initializePayment()
-                    } else if (paymentMethod === 'wallet') {
-                        setReference(data.data?.reference ?? '')
                     }
                 },
                 onError: (error: any) => {
@@ -126,7 +173,7 @@ export function BookingPayment({ id }: BookingPaymentProps) {
             className="w-full max-w-4xl mx-auto mt-8"
         >
             <AppModal
-                open={isVerifyingPayment && reference !== ''}
+                open={(isVerifyingPayment || isPayingThroughWallet) && reference !== ''}
                 title="Please hang on while we verify your payment"
             >
                 <div className="flex flex-col items-center justify-center">
@@ -135,24 +182,31 @@ export function BookingPayment({ id }: BookingPaymentProps) {
             </AppModal>
 
             <AppModal
-                open={verifyPaymentData?.status === 'success'}
+                open={verifyPaymentData?.status === 'success' || reference === 'wallet-payment-success'}
                 title="Payment Successful"
             >
                 <div className="flex flex-col items-center justify-center gap-4">
                     <SuccessLottie />
                     <p className="text-center text-gray-700 text-base font-medium">
-                        {verifyPaymentData?.message}
+                        {verifyPaymentData?.message || "Payment processed successfully"}
                     </p>
-                    {verifyPaymentData?.receipt_url && (
+                    {verifyPaymentData?.receipt_url || payingThroughWalletData?.receipt_url ? (
                         <a
-                            href={verifyPaymentData.receipt_url}
+                            href={verifyPaymentData?.receipt_url ?? payingThroughWalletData?.receipt_url}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-brand-color hover:underline text-sm font-medium transition-colors duration-200 ease-in-out"
                         >
                             Download Receipt
                         </a>
-                    )}
+                    ) : null}
+                    <AppButton
+                        variant="primary"
+                        className="w-full h-12 text-base font-medium"
+                        onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.viewBooking(id))}
+                    >
+                        Go to Bookings
+                    </AppButton>
                 </div>
             </AppModal>
 
@@ -272,10 +326,10 @@ export function BookingPayment({ id }: BookingPaymentProps) {
                                         variant="primary"
                                         className="w-full h-12 text-base font-medium"
                                         onClick={handlePayment}
-                                        disabled={isInitiatingPayment || !paymentAmount}
-                                        loading={isInitiatingPayment}
+                                        disabled={isInitiatingPayment || isPayingThroughWallet || !paymentAmount}
+                                        loading={isInitiatingPayment || isPayingThroughWallet}
                                     >
-                                        {isInitiatingPayment ? 'Processing...' : 'Pay Now'}
+                                        {isInitiatingPayment || isPayingThroughWallet ? 'Processing...' : 'Pay Now'}
                                     </AppButton>
                                 </motion.div>
                             </div>

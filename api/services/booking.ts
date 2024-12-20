@@ -39,6 +39,16 @@ export const useInitiateBookingPayment = (bookingId: string, body?: InitiateBook
      })
 }
 
+export const useMakeBookingPaymentThroughWallet = (bookingId: string, body?: InitiateBookingPaymentRequest) => {
+    return useAppMutation<BookingVerifyPaymentResponse>(
+        {
+            apiRoute: routes.bookings.makeBookingThroughWallet(bookingId),
+            method: 'POST',
+            body: JSON.stringify(body)
+        }
+    )
+}
+
 
 export const useVerifyBookingPayment = (reference: string) => {
     return useAppQuery<BookingVerifyPaymentResponse>({

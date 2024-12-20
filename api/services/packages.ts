@@ -27,7 +27,7 @@ export const useCreatePackage = (data?: Package) => {
     return useAppMutation<Package>({
         apiRoute: routes.packages.createPackage,
         method: 'POST',
-        body: data,
+        body: JSON.stringify(data),
         options: {
             enabled: !!data
         }
