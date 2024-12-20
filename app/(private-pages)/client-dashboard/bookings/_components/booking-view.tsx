@@ -25,7 +25,7 @@ interface ConfirmationModalProps {
 
 function ConfirmationModal({ open, onClose, onConfirm, onCancel, message }: ConfirmationModalProps) {
     return (
-        <Dialog open={open} onOpenChange={onClose}>
+        <Dialog open={open} onOpenChange={() => {}} modal>
             <DialogContent className="bg-white">
                 <DialogHeader>
                     <DialogTitle>Confirmation</DialogTitle>
@@ -81,6 +81,26 @@ export function BookingView({ id }: BookingViewProps) {
 
     if (!booking) {
         return null;
+    }
+
+    if (booking?.is_active === false) {
+        return (
+            <Dialog open={true} onOpenChange={() => {}}>
+                <DialogContent className="bg-white">
+                    <DialogHeader>
+                        <DialogTitle>Booking Deactivated</DialogTitle>
+                        <DialogDescription>
+                            This booking page has been deactivated because the booking is no longer active.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage)}>
+                            Return to Bookings
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+        );
     }
 
     const progressPercentage = booking.percentage_completion?.percentage_completion ?? 0;
@@ -140,6 +160,9 @@ export function BookingView({ id }: BookingViewProps) {
                     })
                     queryClient.invalidateQueries({
                         queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.viewUserBookings)]
+                    })
+                    queryClient.invalidateQueries({
+                        queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.viewAndEditBooking(id))]
                     })
                 }
                 setShowCancelModal(false);

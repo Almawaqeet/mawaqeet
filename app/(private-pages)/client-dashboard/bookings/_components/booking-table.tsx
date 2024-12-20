@@ -20,7 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { getUserBookings } from "@/api/services/booking";
 import { format, differenceInDays } from "date-fns";
 import Link from "next/link";
-import { InboxIcon, EyeIcon, CrownIcon, StarIcon, DiamondIcon, CalendarIcon, DollarSignIcon, ClockIcon, PackageIcon } from "lucide-react";
+import { InboxIcon, EyeIcon, CrownIcon, StarIcon, DiamondIcon, CalendarIcon,  ClockIcon, PackageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BookingTableSkeleton } from "./booking-table-skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -94,7 +94,7 @@ export const BookingTable = () => {
                 Track and manage your travel experiences
               </CardDescription>
             </div>
-            <Link href="/client-dashboard/packages">
+            <Link href={CLIENT_ROUTES.PrivatePages.clientDashboard.packages}>
               <Button className="w-full sm:w-auto bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
                 <PackageIcon className="mr-2 h-4 w-4" />
                 Book New Package
@@ -127,7 +127,7 @@ export const BookingTable = () => {
                         </div>
                         <p className="text-muted-foreground text-lg font-medium">No bookings found</p>
                         <p className="text-sm text-muted-foreground mb-2">Start your journey by booking a package</p>
-                        <Link href="/client-dashboard/packages">
+                        <Link href={CLIENT_ROUTES.PrivatePages.clientDashboard.packages}>
                           <Button variant="outline" size="lg" className="mt-2 hover:bg-primary hover:text-white transition-colors">
                             Explore Packages
                           </Button>

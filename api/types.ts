@@ -233,6 +233,7 @@ export interface BookingInformationResponse {
         id?: string;
         expiry_date?: string;
         created_at?: string;
+        is_active: boolean;
         selected_price?: {
             id?: string;
             package?: string;
