@@ -3,13 +3,48 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button'
-import { useGetBookingInformation } from '@/api/services/booking';
+import { useGetBookingInformation, useCancelBooking } from '@/api/services/booking';
 import { PieChart, Pie, Cell } from 'recharts';
 import { CrownIcon, StarIcon, DiamondIcon, CalendarIcon, DollarSignIcon, ClockIcon, PackageIcon, CreditCardIcon, PercentIcon, XIcon, ReceiptIcon } from 'lucide-react';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { useRouter } from 'next/navigation';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { useState} from 'react';
+import { useToast } from '@/hooks/use-toast';
+import { useQueryClient } from '@tanstack/react-query';
+import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+
+
+interface ConfirmationModalProps {
+    open: boolean;
+    onClose: () => void;
+    onConfirm: () => void;
+    onCancel: () => void;
+    message: string;
+}
+
+function ConfirmationModal({ open, onClose, onConfirm, onCancel, message }: ConfirmationModalProps) {
+    return (
+        <Dialog open={open} onOpenChange={onClose}>
+            <DialogContent className="bg-white">
+                <DialogHeader>
+                    <DialogTitle>Confirmation</DialogTitle>
+                    <DialogDescription>
+                        {message}
+                    </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="flex gap-2">
+                    <Button variant="outline" onClick={onCancel}>
+                        Go to Bookings
+                    </Button>
+                    <Button onClick={onConfirm}>
+                        Go to Wallet
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+    );
+}
 
 interface BookingViewProps {
   id: string;
@@ -17,9 +52,24 @@ interface BookingViewProps {
 
 export function BookingView({ id }: BookingViewProps) {
     const router = useRouter()
+    const { toast } = useToast();
     const [showReceiptsModal, setShowReceiptsModal] = useState(false);
-    const { data: bookingData, isLoading } = useGetBookingInformation(id);
+    const [showCancelModal, setShowCancelModal] = useState(false);
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const { data: bookingData, isLoading, error: bookingError } = useGetBookingInformation(id);
+    const { mutate: cancelBooking, isPending: isCancelling } = useCancelBooking(id);
+    const queryClient = useQueryClient()
+
     const booking = bookingData?.booking;
+
+    if (bookingError) {
+        toast({
+            variant: "destructive",
+            title: "Error",
+            description: "Failed to fetch booking information. Please try again."
+        });
+        return null;
+    }
 
     if (isLoading) {
         return (
@@ -80,23 +130,54 @@ export function BookingView({ id }: BookingViewProps) {
         return status.replace(/_/g, ' ').toUpperCase();
     };
 
+    const handleCancelBooking = () => {
+        cancelBooking(undefined, {
+            onSuccess: (response) => {
+                if (response?.message) {
+                    setShowConfirmationModal(true);
+                    queryClient.invalidateQueries({
+                        queryKey: [generateBaseQueryKeyFromRoute(routes.wallet.checkWalletInformation)]
+                    })
+                    queryClient.invalidateQueries({
+                        queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.viewUserBookings)]
+                    })
+                }
+                setShowCancelModal(false);
+            },
+            onError: (error: any) => {
+                toast({
+                    variant: "destructive",
+                    title: "Error",
+                    description: error?.response?.message || "Failed to cancel booking. Please try again."
+                });
+            }
+        });
+    };
+
+    const handleConfirmation = (redirectTo: string) => {
+        router.push(redirectTo);
+    };
+
     return (
         <div className="container mx-auto max-w-6xl px-4 py-4 sm:py-8">
         <Dialog open={showReceiptsModal} onOpenChange={setShowReceiptsModal}>
-            <DialogContent className="max-w-3xl max-h-[400px] overflow-y-auto bg-white">
-                <DialogHeader className="sticky top-0 bg-white z-10 pb-4">
+            <DialogContent className="max-w-3xl max-h-[500px] overflow-y-auto bg-white">
+                <DialogHeader className="sticky top-0 z-10 pb-4">
                     <DialogTitle className="flex items-center gap-2">
                         <ReceiptIcon className="h-5 w-5 text-brand-color" />
                         Payment Receipts
                     </DialogTitle>
                 </DialogHeader>
-                <div className="space-y-4 px-1">
+                <div className="space-y-4 px-1 h-[200px] overflow-y-auto">
                     {booking.transactions?.length ? (
                         booking?.transactions.map((transaction) => (
                             <div key={transaction.id} className="p-4 border rounded-lg">
                                 <div className="flex justify-between items-center mb-2">
                                     <span className="font-medium">Amount: ₦{Number(transaction?.amount_paid).toLocaleString('en-NG', { minimumFractionDigits: 2 })}</span>
                                     <span className="text-sm text-gray-500">{new Date(transaction.transaction_date_initiated ?? '').toLocaleDateString()}</span>
+                                </div>
+                                <div className="flex justify-between items-center mb-2">
+                                    <span className="text-sm text-gray-600">Reference: {transaction?.reference ?? 'N/A'}</span>
                                 </div>
                                 {transaction.receipt_url && (
                                     <a
@@ -117,6 +198,43 @@ export function BookingView({ id }: BookingViewProps) {
                 </div>
             </DialogContent>
         </Dialog>
+
+        <Dialog open={showCancelModal} onOpenChange={setShowCancelModal}>
+            <DialogContent className="bg-white">
+                <DialogHeader>
+                    <DialogTitle>Cancel Booking</DialogTitle>
+                    <DialogDescription>
+                        Are you sure you want to cancel this booking? The amount you have paid (₦{booking.total_amount_paid?.toLocaleString('en-NG', { minimumFractionDigits: 2 })}) will be refunded to your wallet.
+                    </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="flex gap-2">
+                    <Button variant="outline" onClick={() => setShowCancelModal(false)} disabled={isCancelling}>
+                        No, Keep Booking
+                    </Button>
+                    <Button variant="destructive" onClick={handleCancelBooking} disabled={isCancelling}>
+                        {isCancelling ? (
+                            <>
+                                <div className="animate-spin rounded-full h-4 w-4 border-2 border-white mr-2"></div>
+                                Cancelling...
+                            </>
+                        ) : (
+                            <>
+                                <XIcon className="mr-2 h-4 w-4" />
+                                Yes, Cancel Booking
+                            </>
+                        )}
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+
+        <ConfirmationModal
+            open={showConfirmationModal}
+            onClose={() => setShowConfirmationModal(false)}
+            onConfirm={() => handleConfirmation(CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet)}
+            onCancel={() => handleConfirmation(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage)}
+            message="Booking cancellation is complete. Would you like to go to the wallet page or the booking page?"
+        />
 
         <div className="mb-4 sm:mb-8 flex items-center justify-between">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-3">
@@ -261,7 +379,7 @@ export function BookingView({ id }: BookingViewProps) {
                     <CreditCardIcon className="mr-2 h-4 w-4" />
                     Make Payment
                     </Button>
-                    <Button variant="destructive" className="flex-1">
+                    <Button variant="destructive" className="flex-1" onClick={() => setShowCancelModal(true)}>
                     <XIcon className="mr-2 h-4 w-4" />
                     Cancel Plan
                     </Button>

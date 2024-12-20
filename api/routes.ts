@@ -49,6 +49,7 @@ export const routes = {
         viewAndEditBooking: (bookingId: string) => `core/customer/view-edit-booking/${bookingId}/`,
         initiateBookingPayment: (bookingId: string) => `core/customer/make-booking-payment/${bookingId}/`,
         verifyBookingPayment: `core/customer/verify-booking-payment/:reference/`,
+        cancelBooking: (bookingId: string) => `core/customer/cancel-booking/${bookingId}/`
     }
 }
 

@@ -1,6 +1,6 @@
 import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
 import { useAppMutation, useAppQuery} from "@/api/client-constructor";
-import { BookingInformationResponse, BookingVerifyPaymentResponse, CustomApiResponse, InitiateBookingPaymentRequest, InitiateBookingRequest, SimpleBookingResponse } from "@/api/types";
+import { BookingInformationResponse, BookingVerifyPaymentResponse, CustomApiResponse, InitiateBookingApiResponse, InitiateBookingPaymentRequest, InitiateBookingRequest, InitiatePaymentResponse, SimpleBookingResponse } from "@/api/types";
 
 
 
@@ -23,7 +23,7 @@ export const useGetBookingInformation = (id: string) => {
 
 
 export const useInitiateBooking = (packageId: string, body?: InitiateBookingRequest) => {
-    return useAppMutation<CustomApiResponse>({
+    return useAppMutation<InitiateBookingApiResponse>({
         apiRoute: routes.bookings.initiateBooking(packageId),
         method: 'POST',
         body: JSON.stringify(body)
@@ -32,7 +32,7 @@ export const useInitiateBooking = (packageId: string, body?: InitiateBookingRequ
 
 
 export const useInitiateBookingPayment = (bookingId: string, body?: InitiateBookingPaymentRequest) => {
-    return useAppMutation<any>({
+    return useAppMutation<InitiatePaymentResponse>({
         apiRoute: routes.bookings.initiateBookingPayment(bookingId),
         method: 'POST',
         body: JSON.stringify(body)
@@ -44,5 +44,13 @@ export const useVerifyBookingPayment = (reference: string) => {
     return useAppQuery<BookingVerifyPaymentResponse>({
         apiRoute: routes.bookings.verifyBookingPayment.replace(':reference', reference),
         queryKey: ['VERIFY_BOOKING_PAYMENT', reference]
+    })
+}
+
+
+export const useCancelBooking = (bookingId?: string) => {
+    return useAppMutation<CustomApiResponse>({
+        apiRoute: routes.bookings.cancelBooking(bookingId as string),
+        method: 'POST'
     })
 }

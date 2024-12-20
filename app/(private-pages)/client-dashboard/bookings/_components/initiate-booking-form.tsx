@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+
 import {
   Select,
   SelectContent,
@@ -17,6 +17,9 @@ import { useInitiateBooking } from "@/api/services/booking";
 import { useAppToast } from "@/components/reusables/AppToast";
 import { useRouter } from "next/navigation";
 import AppButton from "@/components/reusables/AppButton";
+import { CLIENT_ROUTES } from "@/lib/routes";
+import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
+import { useQueryClient } from "@tanstack/react-query";
 
 const validationSchema = Yup.object({
   category: Yup.string().required("Please select a category"),
@@ -28,6 +31,7 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
   const { data: packageData, isLoading } = useViewPackage(packageId);
   const {mutate: initiateBooking, isPending: initiateBookingPending} = useInitiateBooking(packageId);
   const { showToast } = useAppToast();
+  const queryClient = useQueryClient()
 
   const formik = useFormik({
     initialValues: {
@@ -41,13 +45,16 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
         category: values.category
       }, {
         onSuccess: (response) => {
-          if (response?.message) {
+          if (response?.booking_id) {
             showToast({
               title: "Success",
               description: response.message,
               variant: "default"
             });
-            router.push('/client-dashboard/bookings');
+            queryClient.invalidateQueries({
+                queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.viewUserBookings)]
+            })
+            router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.viewBooking(response?.booking_id));
           }
         },
         onError: (error: any) => {

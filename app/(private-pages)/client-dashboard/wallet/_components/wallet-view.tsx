@@ -66,7 +66,7 @@ export default function WalletView() {
                             <CardContent className="flex flex-col gap-4 sm:gap-6 p-4 sm:p-6">
                                 <div className="rounded-lg p-4 sm:p-6 text-brand-color">
                                     <p className="mb-1 sm:mb-2 text-base sm:text-lg opacity-90">Available Balance</p>
-                                    <p className="text-3xl sm:text-4xl font-bold">{walletInformation.wallet?.balance ?? 'N/A'}</p>
+                                    <p className="text-3xl sm:text-4xl font-bold">₦{walletInformation.wallet?.balance ? Number(walletInformation.wallet.balance).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}</p>
                                 </div>
 
                                 <div className="grid gap-3 sm:gap-2 rounded-lg bg-white p-4">

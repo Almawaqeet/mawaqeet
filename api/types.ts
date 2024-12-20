@@ -14,6 +14,11 @@ export interface CustomApiErrorResponse {
 export interface CustomApiResponse {
     message?: string
 }
+
+export interface InitiateBookingApiResponse {
+    message: string;
+    booking_id: string
+}
 export interface CheckIfEmailAddressExistResponse {
     exists: boolean;
 }
@@ -49,7 +54,7 @@ export interface OnboardingInitiatePaymentRequest {
     onboarding_id: number;
 }
 
-export interface OnboardingInitiatePaymentResponse {
+export interface InitiatePaymentResponse {
     status: boolean;
     message: string;
     data: {
@@ -254,7 +259,7 @@ export interface BookingInformationResponse {
                 category?: string;
                 description?: string;
             }[];
-            umrah_batch?: any[];
+            umrah_batch?: any[]; //TODO:change this later when payload is ready
             description?: string;
             slug?: string;
             name?: string;
@@ -275,6 +280,7 @@ export interface BookingInformationResponse {
             amount_paid?: string;
             transaction_date_initiated?: string;
             transaction_status?: string;
+            reference: string;
             receipt_url?: string
         }[];
         percentage_completion?: {
