@@ -52,7 +52,7 @@ import { UserNav } from './user-nav';
 import { extractInitials } from '@/lib/utils';
 import { BellIcon } from 'lucide-react';
 import { CLIENT_ROUTES } from '@/lib/routes';
-import SearchInput from '../reusables/search-input';
+import { useQueryClient } from '@tanstack/react-query';
 
 
 
@@ -70,6 +70,7 @@ export default function AppSidebarClient({
   const [mounted, setMounted] = React.useState(false);
   const { data: session } = useSession();
   const pathname = usePathname();
+  const queryClient = useQueryClient()
   // Only render after first client-side mount
   React.useEffect(() => {
     setMounted(true);
@@ -223,6 +224,7 @@ export default function AppSidebarClient({
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => {
+                    queryClient.invalidateQueries()
                     signOut();
                     redirect(CLIENT_ROUTES.PublicPages.home);
                   }}>

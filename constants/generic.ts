@@ -8,3 +8,4 @@ export const PACKAGE_TYPES = {
   HAJJ: "HAJJ",
   UMRAH: "UMRAH"
 }
+
