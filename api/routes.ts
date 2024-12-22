@@ -34,13 +34,25 @@ export const routes = {
         showAllActivePackages: 'core/customer/show-all-active-packages/',
         showAllInactivePackages: 'core/admin/get-inactive-packages/',
         createPackage: 'core/admin/create-package/',
-        showAllActivePackagesById: (editId: string) => `core/admin/get-active-packages/${editId}` 
+        showAllActivePackagesById: (editId: string) => `core/admin/get-active-packages/${editId}`
     },
 
     package: {
         viewPackage: (packageId: string) => `core/customer/view-package/${packageId}/`,
         preBookPackage: (packageId: string) => `onboarding/customer/prebook-package/${packageId}/`,
     },
+
+
+    bookings: {
+        viewUserBookings: 'core/customer/view-user-bookings/',
+        initiateBooking: (packageId: string) => `core/customer/initiate-booking/${packageId}/`,
+        viewAndEditBooking: (bookingId: string) => `core/customer/view-edit-booking/${bookingId}/`,
+        initiateBookingPayment: (bookingId: string) => `core/customer/make-booking-payment/${bookingId}/`,
+        makeBookingThroughWallet: (bookingId: string) => `core/customer/make-booking-payment-through-wallet/${bookingId}/`,
+        verifyBookingPayment: `core/customer/verify-booking-payment/:reference/`,
+        cancelBooking: (bookingId: string) => `core/customer/cancel-booking/${bookingId}/`
+
+    }
 }
 
 

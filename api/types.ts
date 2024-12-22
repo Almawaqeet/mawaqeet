@@ -1,3 +1,5 @@
+import { Package, PackagePrice } from "@/constants/types";
+
 export interface PaginatedResponse<T> {
     count: number;
     next: string | null;
@@ -9,6 +11,14 @@ export interface CustomApiErrorResponse {
     message?: string
 }
 
+export interface CustomApiResponse {
+    message?: string
+}
+
+export interface InitiateBookingApiResponse {
+    message: string;
+    booking_id: string
+}
 export interface CheckIfEmailAddressExistResponse {
     exists: boolean;
 }
@@ -44,7 +54,7 @@ export interface OnboardingInitiatePaymentRequest {
     onboarding_id: number;
 }
 
-export interface OnboardingInitiatePaymentResponse {
+export interface InitiatePaymentResponse {
     status: boolean;
     message: string;
     data: {
@@ -56,6 +66,12 @@ export interface OnboardingInitiatePaymentResponse {
 
 
 export interface OnboardingVerifyPaymentResponse {
+    message: string;
+    receipt_url: string;
+    status: string;
+}
+
+export interface BookingVerifyPaymentResponse {
     message: string;
     receipt_url: string;
     status: string;
@@ -188,4 +204,93 @@ export interface VerifyWalletAccountNumberResponse {
 
 export interface VerifyWalletAccountNumberErrorResponse {
     message?: string
+}
+
+
+export interface SimpleBookingResponse {
+    bookings: {
+        id?: string;
+        expiry_date?: string;
+        created_at?: string;
+        selected_price?: PackagePrice;
+        payment_plan?: string;
+        status?: string;
+        package?: Package;
+        balance?: string;
+    }[]
+}
+
+
+export interface InitiateBookingRequest {
+    payment_plan: string,
+    category: string
+}
+
+
+
+export interface BookingInformationResponse {
+    booking?: {
+        id?: string;
+        expiry_date?: string;
+        created_at?: string;
+        is_active: boolean;
+        selected_price?: {
+            id?: string;
+            package?: string;
+            price?: string;
+            category?: string;
+            weekly_installment_fee?: string;
+            monthly_installment_fee?: string;
+        };
+        payment_plan?: string;
+        status?: string;
+        package?: {
+            id?: string;
+            price?: {
+                id?: string;
+                package?: string;
+                price?: string;
+                category?: string;
+                weekly_installment_fee?: string;
+                monthly_installment_fee?: string;
+            }[];
+            category_description?: {
+                id?: string;
+                package?: string;
+                category?: string;
+                description?: string;
+            }[];
+            umrah_batch?: any[]; //TODO:change this later when payload is ready
+            description?: string;
+            slug?: string;
+            name?: string;
+            package_type?: string;
+            is_active?: boolean;
+            expiry_date?: string;
+            created_at?: string;
+            updated_at?: string;
+            reason_for_deactivation?: string;
+            deactivated_at?: string | null;
+        };
+        balance?: string;
+        date_payment_completed?: string | null;
+        date_initiated?: string;
+        total_amount_paid?: number;
+        transactions?: {
+            id?: number;
+            amount_paid?: string;
+            transaction_date_initiated?: string;
+            transaction_status?: string;
+            reference: string;
+            receipt_url?: string
+        }[];
+        percentage_completion?: {
+            percentage_completion?: number;
+        };
+    };
+}
+
+
+export interface InitiateBookingPaymentRequest {
+    amount: string
 }

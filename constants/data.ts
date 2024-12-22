@@ -138,16 +138,9 @@ export const clientDashboardNavItems: NavItem[] = [
     title: 'Dashboard',
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.overview,
     icon: 'dashboard',
-    isActive: false,
-    items: [] // Empty array as there are no child items for Dashboard
+    isActive: true,
+    items: []
   },
-//   {
-//     title: 'Customers',
-//     url: CLIENT_ROUTES.PrivatePages.clientDashboard.customers,
-//     icon: 'user',
-//     isActive: false,
-//     items: [] // No child items
-//   },
 //   {
 //     title: 'Team Management',
 //     url: CLIENT_ROUTES.PrivatePages.clientDashboard.team,
@@ -158,24 +151,17 @@ export const clientDashboardNavItems: NavItem[] = [
   {
     title: 'Packages',
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.packages,
-    icon: 'product',
+    icon: 'package',
     isActive: false,
-    items: [] // No child items
+    items: []
   },
   {
     title: "Wallet",
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet,
-    icon: 'wallet',
+    icon: 'billing',
     isActive: false,
     items: [] // No child items
   },
-//   {
-//     title: 'Package',
-//     url: CLIENT_ROUTES.PrivatePages.clientDashboard.packages,
-//     icon: 'userPen',
-//     isActive: false,
-//     items: [] // No child items
-//   },
 //   {
 //     title: 'Payments',
 //     url: CLIENT_ROUTES.PrivatePages.clientDashboard.payment,
@@ -183,6 +169,14 @@ export const clientDashboardNavItems: NavItem[] = [
 //     isActive: false,
 //     items: [] // No child items
 //   },
+  {
+    title: 'Bookings',
+    url: CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage,
+    icon: 'booking',
+    isActive: false,
+    items: [] // No child items
+  },
+
   {
     title: 'Profile',
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.profile,

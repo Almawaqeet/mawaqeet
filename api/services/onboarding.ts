@@ -1,6 +1,6 @@
 import { useAppQuery, useAppMutation, useAppQueryWithPaginationAndParams } from "@/api/client-constructor";
 import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
-import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingInitiatePaymentRequest, OnboardingInitiatePaymentResponse, OnboardingPaymentResponse, OnboardingVerifyPaymentResponse, PaginatedResponse, PreBookPackageRequest, PreBookPackageResponse, SimpleOnboardingUser } from "@/api/types";
+import { CheckIfEmailAddressExistResponse, OnboardingCreateUserRequest, OnboardingCreateUserResponse, OnboardingInitiatePaymentRequest, InitiatePaymentResponse, OnboardingPaymentResponse, OnboardingVerifyPaymentResponse, PaginatedResponse, PreBookPackageRequest, PreBookPackageResponse, SimpleOnboardingUser } from "@/api/types";
 
 
 
@@ -35,7 +35,7 @@ export const useCreateOnboardingUser = (body?: OnboardingCreateUserRequest) => {
 
 
 export const useInitiateOnboardingPayment = (body?: OnboardingInitiatePaymentRequest) => {
-    return useAppMutation<OnboardingInitiatePaymentResponse>({
+    return useAppMutation<InitiatePaymentResponse>({
         apiRoute: routes.onboarding.initiatePayment,
         method: 'POST',
         body: JSON.stringify(body)

@@ -35,8 +35,15 @@ export const CLIENT_ROUTES = {
             team: '/client-dashboard/onboarding',
             products: '/client-dashboard/product',
             packages: '/client-dashboard/package',
+            viewPackage: (packageId: string) => `/client-dashboard/package/${packageId}`,
             payment: '/client-dashboard/payment',
             profile: '/client-dashboard/profile',
+            booking: {
+                mainPage: '/client-dashboard/bookings',
+                initiateBooking: (packageId: string) => `/client-dashboard/bookings/initiate-booking/${packageId}`,
+                viewBooking: (bookingId: string) => `/client-dashboard/bookings/${bookingId}`,
+                initiatePayment: (bookingId: string) => `/client-dashboard/bookings/${bookingId}/payment`
+            },
             wallet: {
                 viewWallet : '/client-dashboard/wallet',
                 createWallet : '/client-dashboard/wallet/create'
