@@ -294,3 +294,58 @@ export interface BookingInformationResponse {
 export interface InitiateBookingPaymentRequest {
     amount: string
 }
+
+export interface Routes {
+    auth: {
+      login: string;
+      register: string;
+      sendOtp: string;
+      verifyOtp: string;
+      changePassword: string;
+    };
+  
+    onboarding: {
+      checkIfEmailAddressExist: string;
+      initiatePayment: string;
+      createUser: string;
+      getOnboardingPaymentAmount: string;
+      verifyPayment: (reference: string) => string;
+      getOnboardingUsers: string;
+      getRecentOnboardingUsers: string;
+    };
+  
+    wallet: {
+      checkIfUserHasWallet: string;
+      checkWalletInformation: string;
+      createWallet: string;
+      editWallet: string;
+      getBanksOnWalletCreation: string;
+      verifyWalletAccountNumber: string;
+    };
+  
+    users: {
+      getUsers: string;
+    };
+  
+    packages: {
+      showAllActivePackages: string;
+      showAllInactivePackages: string;
+      createPackage: string;
+      showAllActivePackagesById: (editId: string) => string;
+    };
+  
+    package: {
+      viewPackage: (packageId: string) => string;
+      preBookPackage: (packageId: string) => string;
+    };
+  
+    bookings: {
+      viewUserBookings: string;
+      initiateBooking: (packageId: string) => string;
+      viewAndEditBooking: (bookingId: string) => string;
+      initiateBookingPayment: (bookingId: string) => string;
+      verifyBookingPayment: string;
+      cancelBooking: (bookingId: string) => string;
+    };
+  }
+  

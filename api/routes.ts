@@ -1,3 +1,5 @@
+import { Routes } from "./types";
+
 export const routes = {
     auth: {
         login: '/auth/login/',
@@ -53,9 +55,16 @@ export const routes = {
         cancelBooking: (bookingId: string) => `core/customer/cancel-booking/${bookingId}/`
 
     }
-}
+} 
 
 
+// export type ExtractAllRouteKeyValues<T> = T extends string 
+// ? T : 
+// T extends (...args: any[]) => infer R
+//  ? R extends string ? R : never 
+
+// //  recursive call that checks and extract all key values from routes
+//  : { [K in keyof T]: ExtractAllRouteKeyValues<T[K]> }[keyof T];
 
 
 /**
@@ -80,3 +89,4 @@ export const generateBaseQueryKeyFromRoute = (route: string) => {
 
     return pascalCaseKey;
 }
+
