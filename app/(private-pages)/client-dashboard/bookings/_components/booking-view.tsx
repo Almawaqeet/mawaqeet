@@ -5,47 +5,18 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button'
 import { useGetBookingInformation, useCancelBooking } from '@/api/services/booking';
 import { PieChart, Pie, Cell } from 'recharts';
-import { CrownIcon, StarIcon, DiamondIcon, CalendarIcon, DollarSignIcon, ClockIcon, PackageIcon, CreditCardIcon, PercentIcon, XIcon, ReceiptIcon } from 'lucide-react';
+import { CrownIcon, StarIcon, DiamondIcon, CalendarIcon, DollarSignIcon, ClockIcon, PackageIcon, CreditCardIcon, PercentIcon, XIcon, ReceiptIcon} from 'lucide-react';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { useRouter } from 'next/navigation';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
-import Link from 'next/link';
-
-
-interface ConfirmationModalProps {
-    open: boolean;
-    onClose: () => void;
-    onConfirm: () => void;
-    onCancel: () => void;
-    message: string;
-}
-
-function ConfirmationModal({ open, onClose, onConfirm, onCancel, message }: ConfirmationModalProps) {
-    return (
-        <Dialog open={open} onOpenChange={() => {}} modal>
-            <DialogContent className="bg-white">
-                <DialogHeader>
-                    <DialogTitle>Confirmation</DialogTitle>
-                    <DialogDescription>
-                        {message}
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter className="flex gap-2">
-                    <Button variant="outline" onClick={onCancel}>
-                        Go to Bookings
-                    </Button>
-                    <Button onClick={onConfirm}>
-                        Go to Wallet
-                    </Button>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
-    );
-}
+import CompletionModal from './booking-completion-modal';
+import CancelModal from './booking-cancel-modal';
+import ConfirmationModal from './booking-confirmation-modal';
+import ReceiptsModal from './booking-reciept-modal';
 
 interface BookingViewProps {
   id: string;
@@ -54,14 +25,21 @@ interface BookingViewProps {
 export function BookingView({ id }: BookingViewProps) {
     const router = useRouter()
     const { toast } = useToast();
+    const { data: bookingData, isLoading, error: bookingError } = useGetBookingInformation(id);
     const [showReceiptsModal, setShowReceiptsModal] = useState(false);
     const [showCancelModal, setShowCancelModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-    const { data: bookingData, isLoading, error: bookingError } = useGetBookingInformation(id);
+    const [showCompletionModal, setShowCompletionModal] = useState(false);
+    const booking = bookingData?.booking;
     const { mutate: cancelBooking, isPending: isCancelling } = useCancelBooking(id);
     const queryClient = useQueryClient()
 
-    const booking = bookingData?.booking;
+    // Handle completion modal visibility when booking data changes
+    useEffect(() => {
+        if (booking?.status?.toLowerCase() === 'payment_completed') {
+            setShowCompletionModal(true);
+        }
+    }, [booking?.status]);
 
     if (bookingError) {
         toast({
@@ -87,7 +65,7 @@ export function BookingView({ id }: BookingViewProps) {
     if (booking?.is_active === false) {
         return (
             <Dialog open={true} onOpenChange={() => {}}>
-                <DialogContent className="bg-white">
+                <DialogContent className="bg-white mx-4">
                     <DialogHeader>
                         <DialogTitle>Booking Deactivated</DialogTitle>
                         <DialogDescription>
@@ -95,7 +73,7 @@ export function BookingView({ id }: BookingViewProps) {
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
-                        <Button onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage)}>
+                        <Button onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage)} className="w-full">
                             Return to Bookings
                         </Button>
                     </DialogFooter>
@@ -182,290 +160,275 @@ export function BookingView({ id }: BookingViewProps) {
         router.push(redirectTo);
     };
 
+    const handleRequestCard = () => {
+        // Handle card request logic
+        toast({
+            title: "Request Submitted",
+            description: "Your payment card request has been submitted successfully."
+        });
+    };
+
+    const handleDownloadPortfolio = () => {
+        // Handle portfolio download logic
+        toast({
+            title: "Download Started",
+            description: "Your booking portfolio is being downloaded."
+        });
+    };
+
+    const handleLiveCall = () => {
+        // Handle live call logic
+        toast({
+            title: "Call Request Sent",
+            description: "Our representative will contact you shortly."
+        });
+    };
+
     return (
         <div className="container mx-auto max-w-6xl px-4 py-4 sm:py-8">
-        <Dialog open={showReceiptsModal} onOpenChange={setShowReceiptsModal}>
-            <DialogContent className="max-w-3xl max-h-[500px] overflow-y-auto bg-white">
-                <DialogHeader className="sticky top-0 z-10 pb-4">
-                    <DialogTitle className="flex items-center gap-2">
-                        <ReceiptIcon className="h-5 w-5 text-brand-color" />
-                        Payment Receipts
-                    </DialogTitle>
-                </DialogHeader>
-                <div className="space-y-4 px-1 h-[200px] overflow-y-auto">
-                    {booking.transactions?.length ? (
-                        booking?.transactions.map((transaction) => (
-                            <div key={transaction.id} className="p-4 border rounded-lg">
-                                <div className="flex justify-between items-center mb-2">
-                                    <span className="font-medium">Amount: ₦{Number(transaction?.amount_paid).toLocaleString('en-NG', { minimumFractionDigits: 2 })}</span>
-                                    <span className="text-sm text-gray-500">{new Date(transaction.transaction_date_initiated ?? '').toLocaleDateString()}</span>
-                                </div>
-                                <div className="flex justify-between items-center mb-2">
-                                    <span className="text-sm text-gray-600">Reference: {transaction?.reference ?? 'N/A'}</span>
-                                </div>
-                                {transaction.receipt_url && (
-                                    <Link
-                                        href={transaction?.receipt_url ?? '#'}
-                                        target="_blank"
-                                        rel="noopener noreferrer nofollow"
-                                        className="text-brand-color hover:underline text-sm flex items-center gap-2"
-                                    >
-                                        <ReceiptIcon className="h-4 w-4" />
-                                        Download Receipt
-                                    </Link>
-                                )}
-                            </div>
-                        ))
-                    ) : (
-                        <p className="text-center text-gray-500">No payment receipts available</p>
-                    )}
-                </div>
-            </DialogContent>
-        </Dialog>
+            <CompletionModal
+                open={showCompletionModal}
+                onOpenChange={setShowCompletionModal}
+                onRequestCard={handleRequestCard}
+                onDownloadPortfolio={handleDownloadPortfolio}
+                onLiveCall={handleLiveCall}
+            />
 
-        <Dialog open={showCancelModal} onOpenChange={setShowCancelModal}>
-            <DialogContent className="bg-white">
-                <DialogHeader>
-                    <DialogTitle>Cancel Booking</DialogTitle>
-                    <DialogDescription>
-                        Are you sure you want to cancel this booking? The amount you have paid (₦{booking.total_amount_paid?.toLocaleString('en-NG', { minimumFractionDigits: 2 })}) will be refunded to your wallet.
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogFooter className="flex gap-2">
-                    <Button variant="outline" onClick={() => setShowCancelModal(false)} disabled={isCancelling}>
-                        No, Keep Booking
-                    </Button>
-                    <Button variant="destructive" onClick={handleCancelBooking} disabled={isCancelling}>
-                        {isCancelling ? (
-                            <>
-                                <div className="animate-spin rounded-full h-4 w-4 border-2 border-white mr-2"></div>
-                                Cancelling...
-                            </>
-                        ) : (
-                            <>
-                                <XIcon className="mr-2 h-4 w-4" />
-                                Yes, Cancel Booking
-                            </>
-                        )}
-                    </Button>
-                </DialogFooter>
-            </DialogContent>
-        </Dialog>
+            <ReceiptsModal
+                open={showReceiptsModal}
+                onOpenChange={setShowReceiptsModal}
+                transactions={booking.transactions || []}
+            />
 
-        <ConfirmationModal
-            open={showConfirmationModal}
-            onClose={() => setShowConfirmationModal(false)}
-            onConfirm={() => handleConfirmation(CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet)}
-            onCancel={() => handleConfirmation(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage)}
-            message="Booking cancellation is complete. Would you like to go to the wallet page or the booking page?"
-        />
+            <CancelModal
+                open={showCancelModal}
+                onOpenChange={setShowCancelModal}
+                onConfirm={handleCancelBooking}
+                totalAmountPaid={booking.total_amount_paid || 0}
+                isCancelling={isCancelling}
+            />
 
-        <div className="mb-4 sm:mb-8 flex items-center justify-between">
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-3">
-            <PackageIcon className="h-6 w-6 text-brand-color" />
-            {booking.package?.name ?? 'Booking Details'}
-            <Badge
-                variant={getStatusColor(booking.status) as "default" | "destructive" | "outline" | "secondary"}
-                className="ml-4 px-3 py-1 text-base font-medium rounded-full"
-            >
-                {formatStatus(booking.status)}
-            </Badge>
-            </h2>
-            <Button
-                variant="outline"
-                onClick={() => setShowReceiptsModal(true)}
-                className="flex items-center gap-2"
-            >
-                <ReceiptIcon className="h-4 w-4" />
-                View Receipts
-            </Button>
-        </div>
+            <ConfirmationModal
+                open={showConfirmationModal}
+                onClose={() => setShowConfirmationModal(false)}
+                onConfirm={() => handleConfirmation(CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet)}
+                onCancel={() => handleConfirmation(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage)}
+                message="Booking cancellation is complete. Would you like to go to the wallet page or the booking page?"
+            />
 
-        <div className="grid gap-4 sm:gap-8 md:grid-cols-3">
-            <Card className="md:col-span-2">
-            <CardHeader className="space-y-2 p-4 sm:p-6">
-                <CardTitle className="text-xl sm:text-2xl flex items-center gap-2">
-                <PackageIcon className="h-5 w-5 text-brand-color" />
-                Package Information
-                </CardTitle>
-                <CardDescription>View your package details and specifications</CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4 sm:gap-6 p-4 sm:p-6">
-                <div className="grid gap-3 sm:gap-4 rounded-lg bg-white p-4">
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
-                    <span className="font-medium text-gray-600 flex items-center gap-2">
-                    <PackageIcon className="h-4 w-4 text-gray-400" />
-                    Package Name
-                    </span>
-                    <span className="font-semibold text-gray-900">{booking.package?.name ?? 'N/A'}</span>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
-                    <span className="font-medium text-gray-600 flex items-center gap-2">
-                    <PackageIcon className="h-4 w-4 text-gray-400" />
-                    Package Type
-                    </span>
-                    <span className="font-semibold text-gray-900">{booking.package?.package_type ?? 'N/A'}</span>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
-                    <span className="font-medium text-gray-600 flex items-center gap-2">
-                    {getCategoryIcon(booking.selected_price?.category)}
-                    Package Category
-                    </span>
-                    <span className="font-semibold text-gray-900">{(booking.selected_price?.category ?? 'N/A').toUpperCase()}</span>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
-                    <span className="font-medium text-gray-600 flex items-center gap-2">
-                    <CreditCardIcon className="h-4 w-4 text-gray-400" />
-                    Payment Plan
-                    </span>
-                    <span className="font-semibold text-gray-900">{(booking.payment_plan ?? 'N/A').toUpperCase()}</span>
-                </div>
-                </div>
-            </CardContent>
-            </Card>
-
-            <Card>
-            <CardHeader className="space-y-2 p-4 sm:p-6">
-                <CardTitle className="text-xl sm:text-2xl flex items-center gap-2">
-                <PercentIcon className="h-5 w-5 text-brand-color" />
-                Payment Progress
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 sm:p-6">
-                <div className="w-48 h-48 mx-auto relative">
-                <PieChart width={192} height={192}>
-                    <Pie
-                    data={data}
-                    cx={96}
-                    cy={96}
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#A88A69"
-                    paddingAngle={0}
-                    dataKey="value"
+            <div className="mb-4 sm:mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight flex flex-wrap items-center gap-3">
+                    <PackageIcon className="h-6 w-6 text-brand-color" />
+                    <span className="break-all">{booking.package?.name ?? 'Booking Details'}</span>
+                    <Badge
+                        variant={getStatusColor(booking.status) as "default" | "destructive" | "outline" | "secondary"}
+                        className="px-3 py-1 text-sm sm:text-base font-medium rounded-full"
                     >
-                    {data.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                    </Pie>
-                </PieChart>
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-2xl font-bold text-brand-color">{progressPercentage}%</span>
-                </div>
-                </div>
-                <div className="mt-6 text-center">
-                <p className="text-lg font-semibold text-gray-900">
-                    ₦{remainingBalance.toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </p>
-                <p className="text-sm text-gray-600">Remaining Balance</p>
-                </div>
-            </CardContent>
-            </Card>
+                        {formatStatus(booking.status)}
+                    </Badge>
+                </h2>
+                <Button
+                    variant="outline"
+                    onClick={() => setShowReceiptsModal(true)}
+                    className="w-full sm:w-auto flex items-center justify-center gap-2"
+                >
+                    <ReceiptIcon className="h-4 w-4" />
+                    View Receipts
+                </Button>
+            </div>
 
-            <Card className="md:col-span-3">
-            <CardHeader className="space-y-2 p-4 sm:p-6">
-                <CardTitle className="text-xl sm:text-2xl flex items-center gap-2">
-                <DollarSignIcon className="h-5 w-5 text-brand-color" />
-                Payment Details
-                </CardTitle>
-                <CardDescription>Track your payment progress and balance</CardDescription>
-            </CardHeader>
-            <CardContent className="grid md:grid-cols-3 gap-4 sm:gap-6 p-4 sm:p-6">
-                <div className="rounded-lg p-4 bg-gray-50">
-                <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <CreditCardIcon className="h-4 w-4 text-gray-400" />
-                    Selected Price
-                </p>
-                <p className="text-xl font-bold mt-1">
-                    ₦{booking.selected_price?.price ? Number(booking.selected_price.price).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}
-                </p>
-                </div>
-                <div className="rounded-lg p-4 bg-gray-50">
-                <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <CreditCardIcon className="h-4 w-4 text-gray-400" />
-                    Payment Plan
-                </p>
-                <p className="text-xl font-bold mt-1 capitalize">{booking.payment_plan?.toLowerCase() ?? 'N/A'}</p>
-                </div>
-                <div className="rounded-lg p-4 bg-gray-50">
-                <p className="text-sm text-gray-600 flex items-center gap-2">
-                    <DollarSignIcon className="h-4 w-4 text-gray-400" />
-                    Total Amount Paid
-                </p>
-                <p className="text-xl font-bold mt-1">
-                    ₦{booking.total_amount_paid ? Number(booking.total_amount_paid).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
-                </p>
-                </div>
+            <div className="grid gap-4 sm:gap-8 md:grid-cols-3">
+                <Card className="md:col-span-2">
+                    <CardHeader className="space-y-2 p-4 sm:p-6">
+                        <CardTitle className="text-lg sm:text-xl md:text-2xl flex items-center gap-2">
+                            <PackageIcon className="h-5 w-5 text-brand-color" />
+                            Package Information
+                        </CardTitle>
+                        <CardDescription>View your package details and specifications</CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex flex-col gap-4 sm:gap-6 p-4 sm:p-6">
+                        <div className="grid gap-3 sm:gap-4 rounded-lg bg-white p-4">
+                            <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
+                                <span className="font-medium text-gray-600 flex items-center gap-2">
+                                    <PackageIcon className="h-4 w-4 text-gray-400" />
+                                    Package Name
+                                </span>
+                                <span className="font-semibold text-gray-900 break-all">{booking.package?.name ?? 'N/A'}</span>
+                            </div>
+                            <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
+                                <span className="font-medium text-gray-600 flex items-center gap-2">
+                                    <PackageIcon className="h-4 w-4 text-gray-400" />
+                                    Package Type
+                                </span>
+                                <span className="font-semibold text-gray-900">{booking.package?.package_type ?? 'N/A'}</span>
+                            </div>
+                            <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
+                                <span className="font-medium text-gray-600 flex items-center gap-2">
+                                    {getCategoryIcon(booking.selected_price?.category)}
+                                    Package Category
+                                </span>
+                                <span className="font-semibold text-gray-900">{(booking.selected_price?.category ?? 'N/A').toUpperCase()}</span>
+                            </div>
+                            <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
+                                <span className="font-medium text-gray-600 flex items-center gap-2">
+                                    <CreditCardIcon className="h-4 w-4 text-gray-400" />
+                                    Payment Plan
+                                </span>
+                                <span className="font-semibold text-gray-900">{(booking.payment_plan ?? 'N/A').toUpperCase()}</span>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
 
-                {booking.status !== 'CONFIRMED' && (
-                <div className="md:col-span-3 flex gap-4">
-                    <Button className="flex-1 bg-brand-color" onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.initiatePayment(booking.id ?? ''))}>
-                    <CreditCardIcon className="mr-2 h-4 w-4" />
-                    Make Payment
-                    </Button>
-                    <Button variant="destructive" className="flex-1" onClick={() => setShowCancelModal(true)}>
-                    <XIcon className="mr-2 h-4 w-4" />
-                    Cancel Plan
-                    </Button>
-                </div>
-                )}
-            </CardContent>
-            </Card>
+                <Card>
+                    <CardHeader className="space-y-2 p-4 sm:p-6">
+                        <CardTitle className="text-lg sm:text-xl md:text-2xl flex items-center gap-2">
+                            <PercentIcon className="h-5 w-5 text-brand-color" />
+                            Payment Progress
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-4 sm:p-6">
+                        <div className="w-36 h-36 sm:w-48 sm:h-48 mx-auto relative">
+                            <PieChart width={192} height={192}>
+                                <Pie
+                                    data={data}
+                                    cx={96}
+                                    cy={96}
+                                    innerRadius={60}
+                                    outerRadius={80}
+                                    fill="#A88A69"
+                                    paddingAngle={0}
+                                    dataKey="value"
+                                >
+                                    {data.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                    ))}
+                                </Pie>
+                            </PieChart>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <span className="text-xl sm:text-2xl font-bold text-brand-color">{progressPercentage}%</span>
+                            </div>
+                        </div>
+                        <div className="mt-4 sm:mt-6 text-center">
+                            <p className="text-base sm:text-lg font-semibold text-gray-900">
+                                ₦{remainingBalance.toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                            </p>
+                            <p className="text-xs sm:text-sm text-gray-600">Remaining Balance</p>
+                        </div>
+                    </CardContent>
+                </Card>
 
-            <Card className="md:col-span-3">
-            <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                <CalendarIcon className="h-5 w-5 text-primary" />
-                Timeline
-                <span className="rounded-full bg-gray-100 px-3 py-1 text-sm font-normal">Important Dates</span>
-                </CardTitle>
-                <CardDescription>Track important dates and milestones</CardDescription>
-            </CardHeader>
-            <CardContent className="p-4 sm:p-6">
-                <div className="grid md:grid-cols-3 gap-4 rounded-lg bg-gray-50 p-4">
-                <div className="p-4 bg-white rounded-lg">
-                    <span className=" text-sm text-gray-600 mb-1 flex items-center gap-2">
-                    <CalendarIcon className="h-4 w-4 text-gray-400" />
-                    Date Initiated
-                    </span>
-                    <span className="font-semibold">
-                    {booking.date_initiated ? new Date(booking.date_initiated).toLocaleDateString('en-US', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric'
-                    }) : 'N/A'}
-                    </span>
-                </div>
-                <div className="p-4 bg-white rounded-lg">
-                    <span className="text-sm text-gray-600 mb-1 flex items-center gap-2">
-                    <ClockIcon className="h-4 w-4 text-gray-400" />
-                    Expiry Date
-                    </span>
-                    <span className="font-semibold">
-                    {booking.expiry_date ? new Date(booking.expiry_date).toLocaleDateString('en-US', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric'
-                    }) : 'N/A'}
-                    </span>
-                </div>
-                <div className="p-4 bg-white rounded-lg">
-                    <span className="text-sm text-gray-600 mb-1 flex items-center gap-2">
-                    <DollarSignIcon className="h-4 w-4 text-gray-400" />
-                    Payment Completion
-                    </span>
-                    <span className="font-semibold">
-                    {booking.date_payment_completed ? new Date(booking.date_payment_completed).toLocaleDateString('en-US', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric'
-                    }) : 'Pending'}
-                    </span>
-                </div>
-                </div>
-            </CardContent>
-            </Card>
-        </div>
+                <Card className="md:col-span-3">
+                    <CardHeader className="space-y-2 p-4 sm:p-6">
+                        <CardTitle className="text-lg sm:text-xl md:text-2xl flex items-center gap-2">
+                            <DollarSignIcon className="h-5 w-5 text-brand-color" />
+                            Payment Details
+                        </CardTitle>
+                        <CardDescription>Track your payment progress and balance</CardDescription>
+                    </CardHeader>
+                    <CardContent className="grid md:grid-cols-3 gap-4 sm:gap-6 p-4 sm:p-6">
+                        <div className="rounded-lg p-4 bg-gray-50">
+                            <p className="text-sm text-gray-600 flex items-center gap-2">
+                                <CreditCardIcon className="h-4 w-4 text-gray-400" />
+                                Selected Price
+                            </p>
+                            <p className="text-lg sm:text-xl font-bold mt-1">
+                                ₦{booking.selected_price?.price ? Number(booking.selected_price.price).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'N/A'}
+                            </p>
+                        </div>
+                        <div className="rounded-lg p-4 bg-gray-50">
+                            <p className="text-sm text-gray-600 flex items-center gap-2">
+                                <CreditCardIcon className="h-4 w-4 text-gray-400" />
+                                Payment Plan
+                            </p>
+                            <p className="text-lg sm:text-xl font-bold mt-1 capitalize">{booking.payment_plan?.toLowerCase() ?? 'N/A'}</p>
+                        </div>
+                        <div className="rounded-lg p-4 bg-gray-50">
+                            <p className="text-sm text-gray-600 flex items-center gap-2">
+                                <DollarSignIcon className="h-4 w-4 text-gray-400" />
+                                Total Amount Paid
+                            </p>
+                            <p className="text-lg sm:text-xl font-bold mt-1">
+                                ₦{booking.total_amount_paid ? Number(booking.total_amount_paid).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+                            </p>
+                        </div>
+
+                        {booking.status !== 'CONFIRMED' && (
+                            <div className="md:col-span-3 flex flex-col sm:flex-row gap-4">
+                                {booking.status?.toLowerCase() === 'payment_completed' ? (
+                                    <Button className="w-full sm:flex-1 bg-brand-color" onClick={() => setShowCompletionModal(true)}>
+                                        <CreditCardIcon className="mr-2 h-4 w-4" />
+                                        View Completion Details
+                                    </Button>
+                                ) : (
+                                    <Button className="w-full sm:flex-1 bg-brand-color" onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.initiatePayment(booking.id ?? ''))}>
+                                        <CreditCardIcon className="mr-2 h-4 w-4" />
+                                        Make Payment
+                                    </Button>
+                                )}
+                                <Button variant="destructive" className="w-full sm:flex-1" onClick={() => setShowCancelModal(true)}>
+                                    <XIcon className="mr-2 h-4 w-4" />
+                                    Cancel Plan
+                                </Button>
+                            </div>
+                        )}
+                    </CardContent>
+                </Card>
+
+                <Card className="md:col-span-3">
+                    <CardHeader className="p-4 sm:p-6">
+                        <CardTitle className="flex flex-col sm:flex-row items-start sm:items-center gap-2 text-lg sm:text-xl md:text-2xl">
+                            <CalendarIcon className="h-5 w-5 text-primary" />
+                            Timeline
+                            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs sm:text-sm font-normal">Important Dates</span>
+                        </CardTitle>
+                        <CardDescription>Track important dates and milestones</CardDescription>
+                    </CardHeader>
+                    <CardContent className="p-4 sm:p-6">
+                        <div className="grid md:grid-cols-3 gap-4 rounded-lg bg-gray-50 p-4">
+                            <div className="p-4 bg-white rounded-lg">
+                                <span className="text-xs sm:text-sm text-gray-600 mb-1 flex items-center gap-2">
+                                    <CalendarIcon className="h-4 w-4 text-gray-400" />
+                                    Date Initiated
+                                </span>
+                                <span className="text-sm sm:text-base font-semibold">
+                                    {booking.date_initiated ? new Date(booking.date_initiated).toLocaleDateString('en-US', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    }) : 'N/A'}
+                                </span>
+                            </div>
+                            <div className="p-4 bg-white rounded-lg">
+                                <span className="text-xs sm:text-sm text-gray-600 mb-1 flex items-center gap-2">
+                                    <ClockIcon className="h-4 w-4 text-gray-400" />
+                                    Expiry Date
+                                </span>
+                                <span className="text-sm sm:text-base font-semibold">
+                                    {booking.expiry_date ? new Date(booking.expiry_date).toLocaleDateString('en-US', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    }) : 'N/A'}
+                                </span>
+                            </div>
+                            <div className="p-4 bg-white rounded-lg">
+                                <span className="text-xs sm:text-sm text-gray-600 mb-1 flex items-center gap-2">
+                                    <DollarSignIcon className="h-4 w-4 text-gray-400" />
+                                    Payment Completion
+                                </span>
+                                <span className="text-sm sm:text-base font-semibold">
+                                    {booking.date_payment_completed ? new Date(booking.date_payment_completed).toLocaleDateString('en-US', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric'
+                                    }) : 'Pending'}
+                                </span>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
     );
 }
