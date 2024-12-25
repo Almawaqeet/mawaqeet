@@ -294,3 +294,70 @@ export interface BookingInformationResponse {
 export interface InitiateBookingPaymentRequest {
     amount: string
 }
+
+
+
+export interface PackageBookingListResponse {
+    id?: string;
+    user?: {
+        email?: string;
+        profile?: {
+            first_name?: string;
+            last_name?: string;
+            phone_number?: string;
+            address?: string;
+        };
+    };
+    expiry_date?: string;
+    created_at?: string;
+    selected_price?: {
+        id?: string;
+        package?: string;
+        price?: string;
+        category?: string;
+        weekly_installment_fee?: string;
+        monthly_installment_fee?: string;
+    };
+    status?: string;
+    balance?: string;
+    payment_plan?: string;
+    payment_summary?: {
+        amount_to_be_paid?: number;
+        amount_paid?: number;
+        balance?: number;
+    };
+    is_active?: boolean;
+}
+
+
+export interface BookingFinancialSummaryResponse {
+    summary?: {
+        VIP?: {
+            total_amount_paid?: string;
+            total_amount_due?: string;
+            total_bookings?: {
+                completed?: string;
+                installment?: string;
+                no_payment?: string;
+            };
+        };
+        DELUXE?: {
+            total_amount_paid?: string;
+            total_amount_due?: string;
+            total_bookings?: {
+                completed?: string;
+                installment?: string;
+                no_payment?: string;
+            };
+        };
+        STANDARD?: {
+            total_amount_paid?: string;
+            total_amount_due?: string;
+            total_bookings?: {
+                completed?: string;
+                installment?: string;
+                no_payment?: string;
+            };
+        };
+    };
+}

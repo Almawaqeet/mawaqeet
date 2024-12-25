@@ -50,8 +50,12 @@ export const routes = {
         initiateBookingPayment: (bookingId: string) => `core/customer/make-booking-payment/${bookingId}/`,
         makeBookingThroughWallet: (bookingId: string) => `core/customer/make-booking-payment-through-wallet/${bookingId}/`,
         verifyBookingPayment: `core/customer/verify-booking-payment/:reference/`,
-        cancelBooking: (bookingId: string) => `core/customer/cancel-booking/${bookingId}/`
+        cancelBooking: (bookingId: string) => `core/customer/cancel-booking/${bookingId}/`,
 
+
+        //specifically for admin
+        bookingsForPackage: (packageId: string) =>  `core/admin/get-bookings-for-package/${packageId}/`,
+        bookingFinancialSummaryForASpecificPackage: (packageId: string) => `core/admin/get-summary-for-package/${packageId}/`
     }
 }
 

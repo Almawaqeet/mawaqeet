@@ -147,7 +147,7 @@ export function DataTable<TData, TValue>({
                         cell.getContext()
                       )}
 
-                  
+
                     </TableCell>
                   ))}
                 </TableRow>
@@ -186,7 +186,7 @@ export function DataTable<TData, TValue>({
           </div>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
             <div className="flex items-center space-x-2">
-              <p className="whitespace-nowrap text-sm font-medium">
+              <p className="whitespace-nowrap text-sm font-medium text-brand-color">
                 Rows per page
               </p>
               <Select
@@ -195,7 +195,7 @@ export function DataTable<TData, TValue>({
                   table.setPageSize(Number(value));
                 }}
               >
-                <SelectTrigger className="h-8 w-[70px] bg-white text-sm sm:text-base text-white">
+                <SelectTrigger className="h-8 w-[70px] bg-white text-sm sm:text-base text-brand-color">
                   <SelectValue placeholder={paginationState.pageSize} />
                 </SelectTrigger>
                 <SelectContent side="top">
@@ -223,7 +223,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to first page"
               variant="outline"
-              className="hidden h-8 w-8 p-0 lg:flex bg-white text-white"
+              className="hidden h-8 w-8 p-0 lg:flex bg-white text-black"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
@@ -232,7 +232,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to previous page"
               variant="outline"
-              className="h-8 w-8 p-0 bg-white text-white"
+              className="h-8 w-8 p-0 bg-white text-black"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
@@ -241,7 +241,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to next page"
               variant="outline"
-              className="h-8 w-8 p-0 bg-white text-white"
+              className="h-8 w-8 p-0 bg-white text-black"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
@@ -250,7 +250,7 @@ export function DataTable<TData, TValue>({
             <Button
               aria-label="Go to last page"
               variant="outline"
-              className="hidden h-8 w-8 p-0 lg:flex bg-white text-white"
+              className="hidden h-8 w-8 p-0 lg:flex bg-white text-black"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >

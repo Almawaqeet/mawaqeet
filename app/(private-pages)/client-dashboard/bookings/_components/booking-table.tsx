@@ -27,8 +27,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { CLIENT_ROUTES } from "@/lib/routes";
 import { useRouter } from "next/navigation";
 
+interface BookingTableProps {
+  packageId?: string;
+}
 
-export const BookingTable = () => {
+export const BookingTable = ({ packageId }: BookingTableProps) => {
   const { data: userBookings, isLoading } = getUserBookings();
   const router = useRouter()
 

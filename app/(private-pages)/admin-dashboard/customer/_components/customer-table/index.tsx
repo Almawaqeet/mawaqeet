@@ -8,7 +8,7 @@ import {
 } from '../employee-tables/use-employee-table-filters';
 import { columns } from './columns';
 import { useGetAllRegisteredUsers } from '@/api/services/admin-analytics';
-import TableIndexSkelton from '../../../onboarding/_components/table/table-index-skelton';
+import TableIndexSkelton from '@/app/(private-pages)/admin-dashboard/onboarding/_components/table/table-index-skelton';
 import { useQueryState } from 'nuqs';
 
 export default function CustomerTable() {

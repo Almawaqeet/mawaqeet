@@ -1,7 +1,13 @@
-export const methods = {
-    GET: 'GET',
-    POST: 'POST',
-    PUT: 'PUT',
-    DELETE: 'DELETE',
-    PATCH: 'PATCH'
+export const booking_payment_status_constant = {
+    COMPLETED: "payment_completed",
+    INSTALMENT: "paying_installment",
+    NO_PAYMENT: "no_payment",
+    CANCELLED: "cancelled"
+}
+
+
+export const package_price_category = {
+    VIP: "vip",
+    STANDARD: "standard",
+    DELUXE: "deluxe"
 }

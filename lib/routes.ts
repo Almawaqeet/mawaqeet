@@ -36,7 +36,7 @@ export const CLIENT_ROUTES = {
             products: '/client-dashboard/product',
             packages: '/client-dashboard/package',
             viewPackage: (packageId: string) => `/client-dashboard/package/${packageId}`,
-            payment: '/client-dashboard/payment',
+            payment: '/client-dashboard/payments',
             profile: '/client-dashboard/profile',
             booking: {
                 mainPage: '/client-dashboard/bookings',
@@ -53,7 +53,12 @@ export const CLIENT_ROUTES = {
             home: '/admin-dashboard',
             overview: '/admin-dashboard/overview',
             customers: '/admin-dashboard/customer',
-            team: '/admin-dashboard/onboarding',
+            onboarding: '/admin-dashboard/onboarding',
+            bookings: {
+                mainPage: '/admin-dashboard/bookings',
+                viewBookingsForPackage: (packageId: string) => `/admin-dashboard/bookings/${packageId}`
+            },
+
             products: '/admin-dashboard/product',
             packages: '/admin-dashboard/package',
             payment: '/admin-dashboard/payment',

@@ -21,10 +21,12 @@ import {
   CalendarIcon,
   PencilIcon,
   CheckCircleIcon,
-  XCircleIcon
+  XCircleIcon,
+  BookOpenIcon,
+  EditIcon
 } from "lucide-react";
 import dynamic from 'next/dynamic';
-import AppButton from "@/components/reusables/AppButton";
+import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { ACCOUNT_TYPES } from "@/constants/generic";
 import { useRouter } from "next/navigation";
@@ -102,18 +104,38 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                                 </Badge>
                             </div>
                         </div>
-                        {
-                            userAccount?.user.accountType === ACCOUNT_TYPES.USER  && (
-                                <AppButton
-                                variant="primary"
-                                className="rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
-                                onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.initiateBooking(packageData?.id as string))}
-                              >
-                                <span>Book Now</span>
-                                <span>→</span>
-                              </AppButton>
-                            )
-                        }
+                        <div className="flex gap-3">
+                            {userAccount?.user.accountType === ACCOUNT_TYPES.USER && (
+                                <Button
+                                    variant="default"
+                                    className="rounded-md flex items-center justify-center gap-2"
+                                    onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.initiateBooking(packageData?.id as string))}
+                                >
+                                    <span>Book Now</span>
+                                    <span>→</span>
+                                </Button>
+                            )}
+                            {userAccount?.user.accountType === ACCOUNT_TYPES.ADMIN && (
+                                <>
+                                    <Button
+                                        variant="outline"
+                                        className="rounded-md flex items-center justify-center gap-2"
+                                        onClick={() => router.push(`/admin-dashboard/package/edit/${packageData?.id}`)}
+                                    >
+                                        <EditIcon className="h-4 w-4" />
+                                        <span>Edit Package</span>
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        className="rounded-md flex items-center justify-center gap-2"
+                                        onClick={() => router.push(CLIENT_ROUTES.PrivatePages.adminDashboard.bookings.viewBookingsForPackage(packageData?.id as string))}
+                                    >
+                                        <BookOpenIcon className="h-4 w-4" />
+                                        <span>View Bookings</span>
+                                    </Button>
+                                </>
+                            )}
+                        </div>
                     </div>
 
                     {/* Main Content Tabs */}

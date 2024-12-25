@@ -3,7 +3,7 @@ import PageContainer from '@/components/layout/page-container';
 import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
-import PaymentTable from './payment-table';
+
 
 export default function PaymentPage() {
   const data = [
@@ -28,7 +28,7 @@ export default function PaymentPage() {
           </div>
         </div>
         <Separator />
-        <PaymentTable data={data} totalData={1} />
+        {/* <PaymentTable data={data} totalData={1} /> */}
       </div>
     </PageContainer>
   );
