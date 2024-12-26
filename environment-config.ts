@@ -21,8 +21,7 @@ const getEnv = () => {
 export const env = getEnv();
 
 
-//? This is really weird, but it's working, ill just leave it here for now
-console.log("env API_URL", env.API_URL);
+
+console.log("env API_URL", String(env.API_URL ?? '').replace(/[a-zA-Z]/g, '-'));
 
 export const API_URL = env.API_URL;
-

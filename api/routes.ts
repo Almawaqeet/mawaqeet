@@ -53,15 +53,21 @@ export const routes = {
         makeBookingThroughWallet: (bookingId: string) => `core/customer/make-booking-payment-through-wallet/${bookingId}/`,
         verifyBookingPayment: `core/customer/verify-booking-payment/:reference/`,
         cancelBooking: (bookingId: string) => `core/customer/cancel-booking/${bookingId}/`
+    },
 
+
+    analytics: {
+        getUpcomingHajjAndUmrahPackage: "core/customer/get-upcoming-hajj-and-umrah-cohort/",
+        getRecentPayments: "core/customer/get-recent-payments/",
+        getUserFinancialSummary: "core/customer/get-financial-summary/"
     }
-} 
+}
 
 
-// export type ExtractAllRouteKeyValues<T> = T extends string 
-// ? T : 
+// export type ExtractAllRouteKeyValues<T> = T extends string
+// ? T :
 // T extends (...args: any[]) => infer R
-//  ? R extends string ? R : never 
+//  ? R extends string ? R : never
 
 // //  recursive call that checks and extract all key values from routes
 //  : { [K in keyof T]: ExtractAllRouteKeyValues<T[K]> }[keyof T];
@@ -89,4 +95,3 @@ export const generateBaseQueryKeyFromRoute = (route: string) => {
 
     return pascalCaseKey;
 }
-

@@ -227,6 +227,22 @@ export interface InitiateBookingRequest {
 }
 
 
+export interface SimpleTransactionResponse
+    {
+        id?: number;
+        amount_paid?: string;
+        transaction_date_initiated?: string;
+        transaction_status?: string;
+        reference: string;
+        receipt_url?: string;
+        package_name?: string
+    }
+
+
+export interface UserTransactionResponse {
+    payments: SimpleTransactionResponse[]
+}
+
 
 export interface BookingInformationResponse {
     booking?: {
@@ -276,14 +292,7 @@ export interface BookingInformationResponse {
         date_payment_completed?: string | null;
         date_initiated?: string;
         total_amount_paid?: number;
-        transactions?: {
-            id?: number;
-            amount_paid?: string;
-            transaction_date_initiated?: string;
-            transaction_status?: string;
-            reference: string;
-            receipt_url?: string
-        }[];
+        transactions?: SimpleTransactionResponse[];
         percentage_completion?: {
             percentage_completion?: number;
         };
@@ -303,7 +312,7 @@ export interface Routes {
       verifyOtp: string;
       changePassword: string;
     };
-  
+
     onboarding: {
       checkIfEmailAddressExist: string;
       initiatePayment: string;
@@ -313,7 +322,7 @@ export interface Routes {
       getOnboardingUsers: string;
       getRecentOnboardingUsers: string;
     };
-  
+
     wallet: {
       checkIfUserHasWallet: string;
       checkWalletInformation: string;
@@ -322,23 +331,23 @@ export interface Routes {
       getBanksOnWalletCreation: string;
       verifyWalletAccountNumber: string;
     };
-  
+
     users: {
       getUsers: string;
     };
-  
+
     packages: {
       showAllActivePackages: string;
       showAllInactivePackages: string;
       createPackage: string;
       showAllActivePackagesById: (editId: string) => string;
     };
-  
+
     package: {
       viewPackage: (packageId: string) => string;
       preBookPackage: (packageId: string) => string;
     };
-  
+
     bookings: {
       viewUserBookings: string;
       initiateBooking: (packageId: string) => string;
@@ -348,4 +357,29 @@ export interface Routes {
       cancelBooking: (bookingId: string) => string;
     };
   }
-  
+
+
+  export interface UpcomingPackageResponse {
+    hajj?: {
+        id: string;
+        name: string;
+        expiry_date: string;
+    } | null;
+    umrah?: {
+        id: string;
+        name: string;
+        expiry_date: string;
+    } | null;
+  }
+
+
+  export interface UserFinancialSummaryResponse {
+    total_spent?: number | null;
+    total_remaining?: number | null;
+    active_booking?: {
+      package_name?: string | null;
+      total_price?: number | null;
+      amount_paid?: number | null;
+      completion_percentage?: number | null;
+    } | null;
+  }

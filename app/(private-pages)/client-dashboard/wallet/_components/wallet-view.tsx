@@ -3,7 +3,7 @@
 import { useCheckIfUserHasAWallet, useCheckWalletInformation } from "@/api/services/wallet";
 import { useSession } from "next-auth/react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import AppButton, { LoadingIcon } from "@/components/reusables/AppButton";
+import AppButton from "@/components/reusables/AppButton";
 import { extractFirstName } from "@/lib/utils";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -27,7 +27,7 @@ export default function WalletView() {
     if (isLoading || walletInformationLoading) {
         return (
             <div className="fixed inset-0 flex items-center justify-center bg-black/80">
-                <LoadingIcon color="white" />
+                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-white"></div>
             </div>
         );
     }
