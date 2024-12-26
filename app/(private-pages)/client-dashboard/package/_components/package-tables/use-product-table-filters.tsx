@@ -5,8 +5,8 @@ import { useQueryState } from 'nuqs';
 import { useCallback, useMemo } from 'react';
 
 export const CATEGORY_OPTIONS = [
-  { value: 'Umrah - VIP', label: 'Umrah - VIP' },
-  { value: 'Hajj - VIP', label: 'Hajj - VIP' },
+  { value: 'Umrah', label: 'Umrah' },
+  { value: 'Hajj', label: 'Hajj' },
 ];
 export function useProductTableFilters() {
   const [searchQuery, setSearchQuery] = useQueryState(

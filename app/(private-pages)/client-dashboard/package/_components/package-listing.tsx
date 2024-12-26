@@ -8,7 +8,7 @@ import { SegregatedPackage } from '@/constants/types';
 import { DataTableSkeleton } from '@/components/ui/table/data-table-skeleton';
 import { useProductTableFilters } from './package-tables/use-product-table-filters';
 import { useInView } from 'react-intersection-observer';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 type ProductListingPage = {};
 
@@ -16,8 +16,12 @@ export default function ProductListingPage({}: ProductListingPage) {
   const [currentPage, setCurrentPage] = useState(1);
   const [allPackages, setAllPackages] = useState<SegregatedPackage[]>([]);
   const [hasMore, setHasMore] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
-  const { ref, inView } = useInView();
+  const { ref, inView } = useInView({
+    threshold: 0,
+    rootMargin: '100px'
+  });
 
   const {
     searchQuery,
@@ -31,34 +35,40 @@ export default function ProductListingPage({}: ProductListingPage) {
     search: searchTerm ?? undefined
   });
 
-  useEffect(() => {
-    if (packages?.results) {
-      if (currentPage === 1) {
-        setAllPackages(segregatePackageByItsPriceCategory(packages.results, searchQuery ?? ''));
-      } else {
-        setAllPackages(prev => [
-          ...prev,
-          ...segregatePackageByItsPriceCategory(packages.results, searchQuery ?? '')
-        ]);
-      }
-
-      setHasMore(packages.next !== null);
-    }
-  }, [packages, searchQuery]);
-
-  useEffect(() => {
-    if (inView && hasMore && !isFetching) {
-      setCurrentPage(prev => prev + 1);
-    }
-  }, [inView, hasMore, isFetching]);
-
-  useEffect(() => {
-    // Reset when filters change
+  const resetList = useCallback(() => {
     setCurrentPage(1);
     setAllPackages([]);
-  }, [selectedCategories, searchTerm]);
+    setHasMore(true);
+    setIsInitialLoad(true);
+  }, []);
 
-  if (isLoading && currentPage === 1) {
+  useEffect(() => {
+    if (packages?.results) {
+      const segregatedPackages = segregatePackageByItsPriceCategory(
+        packages.results,
+        searchQuery ?? ''
+      );
+
+      setAllPackages(prev =>
+        currentPage === 1 ? segregatedPackages : [...prev, ...segregatedPackages]
+      );
+
+      setHasMore(packages.next !== null);
+      setIsInitialLoad(false);
+    }
+  }, [packages, searchQuery, currentPage]);
+
+  useEffect(() => {
+    if (inView && hasMore && !isFetching && !isInitialLoad) {
+      setCurrentPage(prev => prev + 1);
+    }
+  }, [inView, hasMore, isFetching, isInitialLoad]);
+
+  useEffect(() => {
+    resetList();
+  }, [selectedCategories, searchTerm, resetList]);
+
+  if (isLoading && isInitialLoad) {
     return <DataTableSkeleton columnCount={5} rowCount={10} />;
   }
 
@@ -77,17 +87,17 @@ export default function ProductListingPage({}: ProductListingPage) {
   return (
     <div className="relative">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {allPackages && allPackages.length > 0 ? (
+        {allPackages?.length > 0 ? (
           <>
             {allPackages.map((pkg: SegregatedPackage) => (
-              <Package key={pkg?.id} pkg={pkg} theme="light" />
+              <Package key={`${pkg?.id}`} pkg={pkg} theme="light" />
             ))}
-            {isFetching && (
+            {isFetching && !isInitialLoad && (
               <div className="col-span-full">
                 <DataTableSkeleton columnCount={5} rowCount={3} />
               </div>
             )}
-            <div ref={ref} style={{ height: '10px' }} />
+            {hasMore && <div ref={ref} className="h-10 w-full" />}
           </>
         ) : (
           <EmptyState />
