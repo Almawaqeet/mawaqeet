@@ -137,8 +137,8 @@ export default function OverViewPage() {
         </div>
         <Tabs defaultValue="hajj" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="hajj" onClick={() => { setShowHajjWelcomeBanner(true); setShowUmrahWelcomeBanner(false)}}>Hajj</TabsTrigger>
-            <TabsTrigger value="umrah" onClick={() => { setShowUmrahWelcomeBanner(true); setShowHajjWelcomeBanner(false)}}>
+            <TabsTrigger value="hajj" onClick={() => { setShowHajjWelcomeBanner(true); setShowUmrahWelcomeBanner(false)}} className="data-[state=active]:bg-white">Hajj</TabsTrigger>
+            <TabsTrigger value="umrah" onClick={() => { setShowUmrahWelcomeBanner(true); setShowHajjWelcomeBanner(false)}} className="data-[state=active]:bg-white">
               Umrah
             </TabsTrigger>
           </TabsList>
