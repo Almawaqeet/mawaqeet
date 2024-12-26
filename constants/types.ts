@@ -17,7 +17,38 @@ export interface Package {
   reason_for_deactivation?: string | null;
   deactivated_at?: string | null;
 }
-
+export interface UserBookingListView {
+  id: string;
+  expiry_date: string;
+  created_at: string;
+  selected_price: {
+    id: string;
+    package: string;
+    price: string;
+    category: string;
+    weekly_installment_fee: string;
+    monthly_installment_fee: string;
+  };
+  payment_plan: "full" | "installment";
+  status: "no_payment" | "partial_payment" | "paid";
+  package: {
+    id: string;
+    price: string;
+    category_description: string;
+    umrah_batch: string;
+    description: string;
+    slug: string;
+    name: string;
+    package_type: "hajj" | "umrah";
+    is_active: boolean;
+    expiry_date: string;
+    created_at: string;
+    updated_at: string;
+    reason_for_deactivation: string;
+    deactivated_at: string;
+  };
+  balance: string;
+};
 
 
 export interface UmrahBatch {
