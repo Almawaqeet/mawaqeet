@@ -34,7 +34,7 @@ export const routes = {
         showAllActivePackages: 'core/customer/show-all-active-packages/',
         showAllInactivePackages: 'core/admin/get-inactive-packages/',
         createPackage: 'core/admin/create-package/',
-        showAllActivePackagesById: (editId: string) => `core/admin/get-active-packages/${editId}`
+        editPackage: (packageId: string) => `core/admin/edit-package/${packageId}/`
     },
 
     package: {

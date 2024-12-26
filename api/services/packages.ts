@@ -1,6 +1,6 @@
 import { Package } from "@/constants/types";
 import { useAppMutation, useAppQuery, useAppQueryWithPaginationAndParams } from "@/api/client-constructor";
-import { PaginatedResponse } from "@/api/types";
+import { CustomApiResponse, PaginatedResponse } from "@/api/types";
 import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
 
 
@@ -30,6 +30,18 @@ export const useCreatePackage = (data?: Package) => {
         body: JSON.stringify(data),
         options: {
             enabled: !!data
+        }
+    });
+}
+
+
+export const useEditPackage = (packageId: string, data?: Package) => {
+    return useAppMutation<CustomApiResponse>({
+        apiRoute: routes.packages.editPackage(packageId),
+        method: 'PATCH',
+        body: JSON.stringify(data),
+        options: {
+            enabled: !!data && !!packageId
         }
     });
 }

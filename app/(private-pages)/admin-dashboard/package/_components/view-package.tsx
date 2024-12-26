@@ -1,6 +1,6 @@
 "use client";
 
-import { useViewPackage } from "@/api/services/packages";
+import { useViewPackage, useEditPackage } from "@/api/services/packages";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
@@ -23,7 +23,8 @@ import {
   CheckCircleIcon,
   XCircleIcon,
   BookOpenIcon,
-  EditIcon
+  EditIcon,
+  SaveIcon
 } from "lucide-react";
 import dynamic from 'next/dynamic';
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,11 @@ import { useSession } from "next-auth/react";
 import { ACCOUNT_TYPES } from "@/constants/generic";
 import { useRouter } from "next/navigation";
 import { CLIENT_ROUTES } from "@/lib/routes";
+import { useState, useEffect } from "react";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/hooks/use-toast";
+
 
 
 const RichTextEditor = dynamic(() => import("@/components/ui/rich-text-editor"), {
@@ -38,12 +44,21 @@ const RichTextEditor = dynamic(() => import("@/components/ui/rich-text-editor"),
   loading: () => <p>Loading...</p>
 });
 
-
-
 export default function ViewPackage({ params }: { params: { packageId: string } }) {
     const { data: packageData, isLoading } = useViewPackage(params.packageId);
+    const editPackageMutation = useEditPackage(params.packageId);
     const { data: userAccount } = useSession();
-    const router = useRouter()
+    const router = useRouter();
+    const [isEditMode, setIsEditMode] = useState(false);
+    const [editedPackage, setEditedPackage] = useState(packageData ?? null);
+    const { toast } = useToast();
+
+    useEffect(() => {
+        if (packageData) {
+            setEditedPackage(packageData);
+        }
+    }, [packageData]);
+
     if (isLoading) {
         return <ViewPackageSkeleton />;
     }
@@ -66,6 +81,39 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
       transition: { duration: 0.5 }
     };
 
+    const handleSave = async () => {
+        if (!editedPackage) return;
+
+        try {
+            await editPackageMutation.mutateAsync({
+                id: packageData.id,
+                ...editedPackage
+            });
+            setIsEditMode(false);
+            toast({
+              title: "Success",
+              description: "Package updated successfully",
+              variant: "default"
+            });
+        } catch (error) {
+            toast({
+              title: "Error",
+              description: "Failed to update package. Please try again.",
+              variant: "destructive"
+            });
+        }
+    };
+
+    const handleEdit = (field: string, value: any) => {
+        setEditedPackage(prev => {
+            if (!prev) return null;
+            return {
+                ...prev,
+                [field]: value
+            };
+        });
+    };
+
     return (
         <motion.div
           initial={{ opacity: 0 }}
@@ -77,13 +125,20 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                     {/* Header Section */}
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
                         <div className="space-y-2 sm:space-y-3 w-full sm:w-auto">
-                            <motion.h1
-                              {...fadeInUp}
-                              className="text-2xl sm:text-3xl font-bold text-gray-800 tracking-tight break-words"
-                            >
-                              <BoxIcon className="mr-2 sm:mr-3 text-brand-color inline-block h-6 w-6 sm:h-7 sm:w-7" />
-                              {packageData?.name ?? 'Unnamed Package'}
-                            </motion.h1>
+                            <motion.div {...fadeInUp} className="flex items-center gap-2">
+                                <BoxIcon className="text-brand-color h-6 w-6 sm:h-7 sm:w-7" />
+                                {isEditMode ? (
+                                    <Input
+                                        value={editedPackage?.name ?? ''}
+                                        onChange={(e) => handleEdit('name', e.target.value)}
+                                        className="text-2xl sm:text-3xl font-bold"
+                                    />
+                                ) : (
+                                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 tracking-tight break-words">
+                                        {packageData?.name ?? 'Unnamed Package'}
+                                    </h1>
+                                )}
+                            </motion.div>
                             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                                 <Badge
                                     variant={packageData?.package_type === 'hajj' ? 'default' : 'secondary'}
@@ -91,17 +146,27 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                                 >
                                     {packageData?.package_type?.toUpperCase() ?? 'NO TYPE'}
                                 </Badge>
-                                <Badge
-                                    variant={packageData?.is_active ? "default" : "destructive"}
-                                    className="text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-full font-medium"
-                                >
-                                    {packageData?.is_active ? (
-                                      <CheckCircleIcon className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 inline-block" />
-                                    ) : (
-                                      <XCircleIcon className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 inline-block" />
-                                    )}
-                                    {packageData?.is_active ? "Active" : "Inactive"}
-                                </Badge>
+                                {isEditMode ? (
+                                    <div className="flex items-center gap-2">
+                                        <span>Active:</span>
+                                        <Switch
+                                            checked={editedPackage?.is_active ?? false}
+                                            onCheckedChange={(checked) => handleEdit('is_active', checked)}
+                                        />
+                                    </div>
+                                ) : (
+                                    <Badge
+                                        variant={packageData?.is_active ? "default" : "destructive"}
+                                        className="text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-full font-medium"
+                                    >
+                                        {packageData?.is_active ? (
+                                            <CheckCircleIcon className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 inline-block" />
+                                        ) : (
+                                            <XCircleIcon className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4 inline-block" />
+                                        )}
+                                        {packageData?.is_active ? "Active" : "Inactive"}
+                                    </Badge>
+                                )}
                             </div>
                         </div>
                         <div className="flex gap-3">
@@ -117,14 +182,26 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                             )}
                             {userAccount?.user.accountType === ACCOUNT_TYPES.ADMIN && (
                                 <>
-                                    <Button
-                                        variant="outline"
-                                        className="rounded-md flex items-center justify-center gap-2"
-                                        onClick={() => router.push(`/admin-dashboard/package/edit/${packageData?.id}`)}
-                                    >
-                                        <EditIcon className="h-4 w-4" />
-                                        <span>Edit Package</span>
-                                    </Button>
+                                    {isEditMode ? (
+                                        <Button
+                                            variant="default"
+                                            className="rounded-md flex items-center justify-center gap-2"
+                                            onClick={handleSave}
+                                            disabled={editPackageMutation.isPending}
+                                        >
+                                            <SaveIcon className="h-4 w-4" />
+                                            <span>{editPackageMutation.isPending ? 'Saving...' : 'Save Changes'}</span>
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            variant="outline"
+                                            className="rounded-md flex items-center justify-center gap-2"
+                                            onClick={() => setIsEditMode(true)}
+                                        >
+                                            <EditIcon className="h-4 w-4" />
+                                            <span>Edit Mode</span>
+                                        </Button>
+                                    )}
                                     <Button
                                         variant="outline"
                                         className="rounded-md flex items-center justify-center gap-2"
@@ -153,7 +230,7 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                               <LayersIcon className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                               Categories
                             </TabsTrigger>
-                            {packageData?.umrah_batches && packageData.umrah_batches.length > 0 && (
+                            {packageData?.umrah_batch && packageData.umrah_batch.length > 0 && (
                                 <TabsTrigger value="batches" className="rounded-md text-sm sm:text-base">
                                   <ClockIcon className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                                   Batches
@@ -166,15 +243,11 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                               {...fadeInUp}
                               className="prose prose-sm sm:prose-base lg:prose-lg max-w-none text-gray-700 leading-relaxed"
                             >
-                                {packageData?.description ? (
-                                    <RichTextEditor
-                                        onChange={() => {}}
-                                        value={packageData.description}
-                                        readOnly={true}
-                                    />
-                                ) : (
-                                    <p>No description available</p>
-                                )}
+                                <RichTextEditor
+                                    onChange={(value) => isEditMode ? handleEdit('description', value) : null}
+                                    value={editedPackage?.description ?? ''}
+                                    readOnly={!isEditMode}
+                                />
                             </motion.div>
                         </TabsContent>
 
@@ -227,18 +300,29 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                                       {packageData.category_description.map((category) => (
                                           <AccordionItem key={category?.id ?? ''} value={category?.id ?? ''} className="border rounded-lg px-3 sm:px-4">
                                               <AccordionTrigger className="text-lg sm:text-xl font-semibold capitalize text-gray-800">
-                                                  {category?.category ?? 'Unnamed Category'}
-                                              </AccordionTrigger>
-                                              <AccordionContent>
-                                                  {category?.description ? (
-                                                      <RichTextEditor
-                                                          onChange={() => {}}
-                                                          value={category.description}
-                                                          readOnly={true}
+                                                  {isEditMode ? (
+                                                      <Input
+                                                          value={category?.category ?? ''}
+                                                          onChange={(e) => handleEdit('category_description',
+                                                              packageData.category_description.map(cat =>
+                                                                  cat.id === category.id ? {...cat, category: e.target.value} : cat
+                                                              )
+                                                          )}
                                                       />
                                                   ) : (
-                                                      <p className="text-gray-600 pt-2 pb-4 text-sm sm:text-base">No description available for this category</p>
+                                                      category?.category ?? 'Unnamed Category'
                                                   )}
+                                              </AccordionTrigger>
+                                              <AccordionContent>
+                                                  <RichTextEditor
+                                                      onChange={(value) => isEditMode ? handleEdit('category_description',
+                                                          packageData.category_description.map(cat =>
+                                                              cat.id === category.id ? {...cat, description: value} : cat
+                                                          )
+                                                      ) : null}
+                                                      value={category?.description ?? ''}
+                                                      readOnly={!isEditMode}
+                                                  />
                                               </AccordionContent>
                                           </AccordionItem>
                                       ))}
@@ -250,12 +334,12 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                         </TabsContent>
 
                         <TabsContent value="batches">
-                            {packageData?.umrah_batches && (
+                            {packageData?.umrah_batch && (
                                 <motion.div
                                   {...fadeInUp}
                                   className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
                                 >
-                                    {packageData.umrah_batches.map((batch) => (
+                                    {packageData.umrah_batch.map((batch) => (
                                         <motion.div
                                           whileHover={{ scale: 1.02 }}
                                           key={batch?.id ?? ''}
@@ -264,7 +348,7 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                                           <Card className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg sm:rounded-xl overflow-hidden border border-gray-100">
                                               <div className="p-4 sm:p-6">
                                                   <div className="flex items-center justify-between mb-3 sm:mb-4">
-                                                      <h3 className="text-lg sm:text-xl font-semibold text-gray-800">Batch Details</h3>
+                                                      <h3 className="text-lg sm:text-xl font-semibold text-gray-800">{batch?.batch_name}</h3>
                                                       <Badge variant="outline" className="capitalize text-xs sm:text-sm">
                                                           {batch?.batch_status ?? 'No Status'}
                                                       </Badge>
@@ -288,10 +372,18 @@ export default function ViewPackage({ params }: { params: { packageId: string } 
                       className="mt-6 sm:mt-10 pt-4 sm:pt-6 border-t border-gray-200"
                     >
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600">
-                            <p className="flex items-center">
-                              <CalendarIcon className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                              Expiry Date: {packageData?.expiry_date ? format(new Date(packageData.expiry_date), 'PPP') : 'No expiry date'}
-                            </p>
+                            <div className="flex items-center">
+                                <CalendarIcon className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                                {isEditMode ? (
+                                    <Input
+                                        type="date"
+                                        value={editedPackage?.expiry_date ?? ''}
+                                        onChange={(e) => handleEdit('expiry_date', e.target.value)}
+                                    />
+                                ) : (
+                                    <p>Expiry Date: {packageData?.expiry_date ? format(new Date(packageData.expiry_date), 'PPP') : 'No expiry date'}</p>
+                                )}
+                            </div>
                             {packageData?.created_at && (
                                 <p className="flex items-center">
                                   <PencilIcon className="mr-1.5 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
