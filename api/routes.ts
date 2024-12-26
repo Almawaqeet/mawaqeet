@@ -61,7 +61,10 @@ export const routes = {
 
     analytics: {
         financialSummary: 'analytics/admin/company-financial-view/',
-        packageSummaryMonthly: 'analytics/admin/booking-summary-monthly/'
+        packageSummaryMonthly: 'analytics/admin/booking-summary-monthly/',
+        getUpcomingHajjAndUmrahPackage: "core/customer/get-upcoming-hajj-and-umrah-cohort/",
+        getRecentPayments: "core/customer/get-recent-payments/",
+        getUserFinancialSummary: "core/customer/get-financial-summary/"
     }
 }
 

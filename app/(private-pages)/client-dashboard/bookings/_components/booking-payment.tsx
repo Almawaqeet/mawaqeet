@@ -19,7 +19,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useCheckWalletInformation } from '@/api/services/wallet'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { CreditCard, Wallet, Calendar, Package2, Layers } from 'lucide-react'
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 
 
@@ -104,6 +104,12 @@ export function BookingPayment({ id }: BookingPaymentProps) {
                             queryClient.invalidateQueries({
                                 queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.viewAndEditBooking(id))]
                             })
+                            queryClient.invalidateQueries({
+                                queryKey: [generateBaseQueryKeyFromRoute(routes.analytics.getRecentPayments)]
+                            })
+                            queryClient.invalidateQueries({
+                                queryKey: [generateBaseQueryKeyFromRoute(routes.analytics.getUserFinancialSummary)]
+                            })
                         }
                     },
                     onError: (error: any) => {
@@ -142,6 +148,12 @@ export function BookingPayment({ id }: BookingPaymentProps) {
                                 })
                                 queryClient.invalidateQueries({
                                     queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.viewAndEditBooking(id))]
+                                })
+                                queryClient.invalidateQueries({
+                                    queryKey: [generateBaseQueryKeyFromRoute(routes.analytics.getRecentPayments)]
+                                })
+                                queryClient.invalidateQueries({
+                                    queryKey: [generateBaseQueryKeyFromRoute(routes.analytics.getUserFinancialSummary)]
                                 })
                             },
                             onClose: () => {}
