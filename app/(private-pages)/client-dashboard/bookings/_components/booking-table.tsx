@@ -128,7 +128,7 @@ export const BookingTable = () => {
                         <p className="text-muted-foreground text-lg font-medium">No bookings found</p>
                         <p className="text-sm text-muted-foreground mb-2">Start your journey by booking a package</p>
                         <Link href={CLIENT_ROUTES.PrivatePages.clientDashboard.packages}>
-                          <Button variant="outline" size="lg" className="mt-2 hover:bg-primary hover:text-white transition-colors">
+                          <Button variant="outline" size="lg" className="mt-2 hover:bg-primary transition-colors">
                             Explore Packages
                           </Button>
                         </Link>

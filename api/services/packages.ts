@@ -1,4 +1,4 @@
-import { Package } from "@/constants/types";
+import { Package, UserBookingListView } from "@/constants/types";
 import { useAppMutation, useAppQuery, useAppQueryWithPaginationAndParams } from "@/api/client-constructor";
 import { PaginatedResponse } from "@/api/types";
 import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
@@ -42,3 +42,12 @@ export const useViewPackage = (packageId: string) => {
         queryKey: [baseQueryKey],
     });
 }
+
+export const useViewUserBooking = () => {
+    const baseQueryKey = generateBaseQueryKeyFromRoute(routes.bookings.viewUserBookings);
+    return useAppQuery<UserBookingListView>({
+        apiRoute: routes.bookings.viewUserBookings,
+        queryKey: [baseQueryKey],
+    });
+}
+
