@@ -1,4 +1,4 @@
-import { Package, PackagePrice } from "@/constants/types";
+import { Package, PackagePrice, UmrahBatch } from "@/constants/types";
 
 export interface PaginatedResponse<T> {
     count: number;
@@ -259,6 +259,7 @@ export interface BookingInformationResponse {
             monthly_installment_fee?: string;
         };
         payment_plan?: string;
+        selected_batch?: UmrahBatch;
         status?: string;
         package?: {
             id?: string;
@@ -276,7 +277,7 @@ export interface BookingInformationResponse {
                 category?: string;
                 description?: string;
             }[];
-            umrah_batch?: any[]; //TODO:change this later when payload is ready
+            umrah_batch?: UmrahBatch[];
             description?: string;
             slug?: string;
             name?: string;
@@ -319,6 +320,7 @@ export interface PackageBookingListResponse {
     };
     expiry_date?: string;
     created_at?: string;
+    selected_batch: UmrahBatch;
     selected_price?: {
         id?: string;
         package?: string;

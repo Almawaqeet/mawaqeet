@@ -1,6 +1,6 @@
 import { Package } from "@/constants/types";
 import { useAppMutation, useAppQuery, useAppQueryWithPaginationAndParams } from "@/api/client-constructor";
-import { PaginatedResponse } from "@/api/types";
+import { CustomApiResponse, PaginatedResponse } from "@/api/types";
 import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
 
 
@@ -35,10 +35,55 @@ export const useCreatePackage = (data?: Package) => {
 }
 
 
+export const useEditPackage = (packageId: string, data?: Package) => {
+    return useAppMutation<CustomApiResponse>({
+        apiRoute: routes.package.editPackage(packageId),
+        method: 'PATCH',
+        body: JSON.stringify(data),
+        options: {
+            enabled: !!data && !!packageId
+        }
+    });
+}
+
+
+export const useActivatePackage = (packageId: string) => {
+    return useAppMutation<CustomApiResponse>({
+        apiRoute: routes.package.activatePackage(packageId),
+        method: 'POST',
+        options: {
+            enabled: !!packageId
+        }
+    });
+}
+
+export const useDeactivatePackage = (packageId: string) => {
+    return useAppMutation<CustomApiResponse>({
+        apiRoute: routes.package.deactivatePackage(packageId),
+        method: 'POST',
+        options: {
+            enabled: !!packageId
+        }
+    });
+}
+
+
+
 export const useViewPackage = (packageId: string) => {
     const baseQueryKey = generateBaseQueryKeyFromRoute(routes.package.viewPackage(packageId));
     return useAppQuery<Package>({
         apiRoute: routes.package.viewPackage(packageId),
         queryKey: [baseQueryKey],
+    });
+}
+
+
+export const useDeletePackage = (packageId: string) => {
+    return useAppMutation<CustomApiResponse>({
+        apiRoute: routes.package.deletePackage(packageId),
+        method: 'DELETE',
+        options: {
+            enabled: !!packageId
+        }
     });
 }

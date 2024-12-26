@@ -17,6 +17,7 @@ import CompletionModal from './booking-completion-modal';
 import CancelModal from './booking-cancel-modal';
 import ConfirmationModal from './booking-confirmation-modal';
 import ReceiptsModal from './booking-reciept-modal';
+import { PACKAGE_TYPES } from '@/constants/generic';
 
 interface BookingViewProps {
   id: string;
@@ -269,6 +270,17 @@ export function BookingView({ id }: BookingViewProps) {
                                 </span>
                                 <span className="font-semibold text-gray-900">{(booking.selected_price?.category ?? 'N/A').toUpperCase()}</span>
                             </div>
+                            {booking.package?.package_type?.toUpperCase() === PACKAGE_TYPES.UMRAH && booking.selected_batch && (
+                                <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
+                                    <span className="font-medium text-gray-600 flex items-center gap-2">
+                                        <CalendarIcon className="h-4 w-4 text-gray-400" />
+                                        Selected Batch
+                                    </span>
+                                    <span className="font-semibold text-gray-900">
+                                        {booking.selected_batch?.batch_name ?? 'N/A'} - Starting {new Date(booking.selected_batch?.batch_start_date ?? '').toLocaleDateString()}
+                                    </span>
+                                </div>
+                            )}
                             <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
                                 <span className="font-medium text-gray-600 flex items-center gap-2">
                                     <CreditCardIcon className="h-4 w-4 text-gray-400" />

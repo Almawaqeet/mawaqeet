@@ -1,6 +1,5 @@
 "use client";
 
-
 import {
   Select,
   SelectContent,
@@ -20,10 +19,16 @@ import AppButton from "@/components/reusables/AppButton";
 import { CLIENT_ROUTES } from "@/lib/routes";
 import { generateBaseQueryKeyFromRoute, routes } from "@/api/routes";
 import { useQueryClient } from "@tanstack/react-query";
+import { PACKAGE_TYPES } from "@/constants/generic";
 
 const validationSchema = Yup.object({
   category: Yup.string().required("Please select a category"),
   paymentPlan: Yup.string().required("Please select a payment plan"),
+  umrahBatch: Yup.string().when('packageType', {
+    is: (val: string) => val?.toUpperCase() === PACKAGE_TYPES.UMRAH,
+    then: () => Yup.string().required("Please select a batch"),
+    otherwise: () => Yup.string()
+  })
 });
 
 export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
@@ -37,13 +42,19 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
     initialValues: {
       category: "",
       paymentPlan: "",
+      umrahBatch: "",
+      packageType: packageData?.package_type || ""
     },
     validationSchema,
+    enableReinitialize: true,
     onSubmit: (values) => {
-      initiateBooking({
+      const payload = {
         payment_plan: values.paymentPlan,
-        category: values.category
-      }, {
+        category: values.category,
+        ...(packageData?.package_type?.toUpperCase() === PACKAGE_TYPES.UMRAH && { batch_id: values.umrahBatch })
+      };
+
+      initiateBooking(payload, {
         onSuccess: (response) => {
           if (response?.booking_id) {
             showToast({
@@ -142,6 +153,31 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
                 <div className="text-xs text-red-500 mt-1">{formik.errors.category}</div>
               )}
             </div>
+
+            {packageData?.package_type?.toUpperCase() === PACKAGE_TYPES.UMRAH && packageData?.umrah_batch && (
+              <div>
+                <label className="block text-sm font-medium mb-1">Select Batch</label>
+                <Select
+                  name="umrahBatch"
+                  onValueChange={(value) => formik.setFieldValue("umrahBatch", value)}
+                  value={formik.values.umrahBatch}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Choose a batch" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {packageData?.umrah_batch?.map((batch) => (
+                      <SelectItem key={batch.id} value={batch.id ?? ''}>
+                        {batch?.batch_name as string} - Starting {new Date(batch.batch_start_date).toLocaleDateString()}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {formik.touched.umrahBatch && formik.errors.umrahBatch && (
+                  <div className="text-xs text-red-500 mt-1">{formik.errors.umrahBatch}</div>
+                )}
+              </div>
+            )}
 
             <div>
               <label className="block text-sm font-medium mb-1">Payment Plan</label>

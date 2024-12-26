@@ -7,7 +7,7 @@ export interface Package {
   description: string;
   name: string;
   price: Array<PackagePrice>;
-  umrah_batches?: Array<UmrahBatch>;
+  umrah_batch?: Array<UmrahBatch>;
   category_description: Array<CategoryDescription>;
   slug?: string;
   is_active?: boolean;
@@ -56,6 +56,7 @@ export interface UmrahBatch {
   batch_status: string;
   batch_start_date: string;
   package?: string;
+  batch_name?: string
 }
 
 export interface CategoryDescription {
