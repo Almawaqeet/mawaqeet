@@ -1,5 +1,3 @@
-import { Routes } from "./types";
-
 export const routes = {
     auth: {
         login: '/auth/login/',
@@ -65,13 +63,13 @@ export const routes = {
         financialSummary: 'analytics/admin/company-financial-view/',
         packageSummaryMonthly: 'analytics/admin/booking-summary-monthly/'
     }
-} 
+}
 
 
-// export type ExtractAllRouteKeyValues<T> = T extends string 
-// ? T : 
+// export type ExtractAllRouteKeyValues<T> = T extends string
+// ? T :
 // T extends (...args: any[]) => infer R
-//  ? R extends string ? R : never 
+//  ? R extends string ? R : never
 
 // //  recursive call that checks and extract all key values from routes
 //  : { [K in keyof T]: ExtractAllRouteKeyValues<T[K]> }[keyof T];
@@ -99,4 +97,3 @@ export const generateBaseQueryKeyFromRoute = (route: string) => {
 
     return pascalCaseKey;
 }
-
