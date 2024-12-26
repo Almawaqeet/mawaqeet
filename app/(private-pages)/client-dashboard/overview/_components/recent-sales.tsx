@@ -1,64 +1,66 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+'use client';
 
-export function RecentSales() {
-  const recentSales: any[] = [
-    // {
-    //   id: 'TX-2024-001',
-    //   avatar: '/avatars/01.png',
-    //   package: 'Umrah Package - Basic',
-    //   amount: '₦500,000.00'
-    // },
-    // {
-    //   id: 'TX-2024-002',
-    //   avatar: '/avatars/02.png',
-    //   package: 'Hajj Package - Premium',
-    //   amount: '₦2,500,000.00'
-    // },
-    // {
-    //   id: 'TX-2024-003',
-    //   avatar: '/avatars/03.png',
-    //   package: 'Umrah Package - Premium',
-    //   amount: '₦750,000.00'
-    // },
-    // {
-    //   id: 'TX-2024-004',
-    //   avatar: '/avatars/04.png',
-    //   package: 'Hajj Package - Basic',
-    //   amount: '₦2,000,000.00'
-    // },
-    // {
-    //   id: 'TX-2024-005',
-    //   avatar: '/avatars/05.png',
-    //   package: 'Umrah Package - Basic',
-    //   amount: '₦500,000.00'
-    // }
-  ];
+import { useGetRecentPayments } from '@/api/services/user-anaalytics';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Skeleton } from '@/components/ui/skeleton';
 
-  if (!recentSales?.length) {
+export function RecentSales({ type }: { type: string }) {
+  const { data, isLoading } = useGetRecentPayments(type);
+
+  if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center h-[300px] space-y-3">
-        <p className="text-sm text-muted-foreground">No recent payments made</p>
+      <div className="space-y-8">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="flex items-center">
+            <Skeleton className="h-9 w-9 rounded-full bg-white" />
+            <div className="ml-4 space-y-1">
+              <Skeleton className="h-4 w-[200px] bg-white" />
+              <Skeleton className="h-4 w-[150px] bg-white" />
+            </div>
+            <div className="ml-auto">
+              <Skeleton className="h-6 w-[80px] rounded-full bg-white" />
+            </div>
+          </div>
+        ))}
       </div>
     );
   }
 
   return (
     <div className="space-y-8">
-      {recentSales.map((sale) => (
-        <div key={sale.id} className="flex items-center">
+      {data?.payments?.map((payment) => (
+        <div key={payment?.id} className="flex items-center">
           <Avatar className="h-9 w-9">
-            <AvatarImage src={sale.avatar} alt="Avatar" />
             <AvatarFallback>TX</AvatarFallback>
           </Avatar>
           <div className="ml-4 space-y-1">
-            <p className="text-sm font-medium leading-none">{sale.id}</p>
+            <p className="text-sm font-medium leading-none">
+              {payment?.reference ?? 'N/A'}
+            </p>
             <p className="text-sm text-muted-foreground">
-              {sale.package}
+              {payment?.package_name ?? 'N/A'}
             </p>
           </div>
-          <div className="ml-auto font-medium">{sale.amount}</div>
+          <div className="ml-auto">
+            <span className={`rounded-full px-2 py-1 text-xs ${
+              payment?.transaction_status === 'completed'
+                ? 'bg-green-100 text-green-800'
+                : 'bg-yellow-100 text-yellow-800'
+            }`}>
+              {Number(payment?.amount_paid ?? 0).toLocaleString('en-NG', {
+                style: 'currency',
+                currency: 'NGN'
+              })}
+            </span>
+          </div>
         </div>
       ))}
+
+      {!data?.payments?.length && (
+        <div className="text-center text-sm text-muted-foreground">
+          No recent payments found
+        </div>
+      )}
     </div>
   );
 }
