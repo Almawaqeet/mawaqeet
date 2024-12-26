@@ -42,6 +42,3 @@ export const useViewPackage = (packageId: string) => {
         queryKey: [baseQueryKey],
     });
 }
-
-
-

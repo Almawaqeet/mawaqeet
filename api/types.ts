@@ -383,3 +383,4 @@ export interface PackageBookingFinancialSummaryResponse {
         umrah?: number;
     }[];
 }
+

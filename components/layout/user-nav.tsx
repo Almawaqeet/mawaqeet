@@ -14,9 +14,12 @@ import {
 import { useSession } from 'next-auth/react';
 import { extractInitials } from '@/lib/utils';
 import { ACCOUNT_TYPES } from '@/constants/generic';
+import { useRouter } from 'next/navigation';
+import { CLIENT_ROUTES } from '@/lib/routes';
 
 export function UserNav() {
   const { data: session } = useSession();
+  const router = useRouter()
 
   return (
     <DropdownMenu>
@@ -50,11 +53,11 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.profile)}>
             Profile
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
-          {session?.user.accountType === ACCOUNT_TYPES.USER ? <DropdownMenuItem>
+          {session?.user.accountType === ACCOUNT_TYPES.USER ? <DropdownMenuItem onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.createWallet)}>
             Wallet
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem> : ''}
