@@ -361,3 +361,25 @@ export interface BookingFinancialSummaryResponse {
         };
     };
 }
+
+
+export interface FinancialSummaryResponse {
+    summary?: {
+        company_balance?: {
+            currency?: string;
+            balance?: number;
+        }[];
+        company_amount_in_debt?: number;
+        total_amount_due?: number;
+        active_bookings?: number
+    };
+}
+
+
+export interface PackageBookingFinancialSummaryResponse {
+    summary?: {
+        date?: string;
+        hajj?: number;
+        umrah?: number;
+    }[];
+}

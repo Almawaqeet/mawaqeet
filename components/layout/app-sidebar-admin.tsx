@@ -2,7 +2,7 @@
 
 
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   Collapsible,
   CollapsibleContent,
@@ -250,7 +250,6 @@ export default function AppSidebar({
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumbs />
           </div>
           <div className=" hidden w-1/3 items-center gap-2 px-4 md:flex ">
             {/* <SearchInput /> */}
