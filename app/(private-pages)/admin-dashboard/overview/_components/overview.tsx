@@ -1,12 +1,8 @@
 'use client';
 
-import { AreaGraph } from './area-graph';
 import { BarGraph } from './bar-graph';
-import { PieGraph } from './pie-graph';
-import { CalendarDateRangePicker } from '@/components/reusables/date-range-picker';
 import PageContainer from '@/components/layout/page-container';
 import { RecentSales } from './recent-sales';
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -14,34 +10,27 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { useSession } from 'next-auth/react';
+import { useGetFinancialSummary } from '@/api/services/admin-analytics';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function OverViewPage() {
   const { data: session } = useSession();
+  const { data: financialSummary, isLoading: financialSummaryLoading } = useGetFinancialSummary();
 
   return (
     <PageContainer scrollable>
-      <div className="space-y-2">
-        <div className="flex items-center justify-between space-y-2">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold tracking-tight">
             Hi, Welcome back 👋 {session?.user?.fullName ?? 'Admin'}
           </h2>
-          <div className="hidden items-center space-x-2 md:flex">
-            {/* <CalendarDateRangePicker />
-            <Button>Download Report</Button> */}
-          </div>
         </div>
-        <Tabs defaultValue="hajj" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="hajj">Hajj</TabsTrigger>
-            <TabsTrigger value="umrah" disabled>
-              Umrah
-            </TabsTrigger>
-          </TabsList>
 
-          <TabsContent value="hajj" className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Tabs defaultValue="hajj" className="space-y-6">
+          <TabsContent value="hajj" className="space-y-6">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
@@ -61,16 +50,20 @@ export default function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">₦0.00</div>
-                  <p className="text-xs text-muted-foreground">
-                    +0% from last year
-                  </p>
+                  {financialSummaryLoading ? (
+                    <Skeleton className="h-8 w-[100px]" />
+                  ) : (
+                    <div className="text-2xl font-bold">
+                      ₦{financialSummary?.summary?.company_balance?.[0]?.balance?.toLocaleString() ?? '0.00'}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
+
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    New Registrations
+                    Expected Revenue
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -88,16 +81,23 @@ export default function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">0</div>
+                  {financialSummaryLoading ? (
+                    <Skeleton className="h-8 w-[100px]" />
+                  ) : (
+                    <div className="text-2xl font-bold">
+                      ₦{financialSummary?.summary?.total_amount_due?.toLocaleString() ?? '0'}
+                    </div>
+                  )}
                   <p className="text-xs text-muted-foreground">
-                    This month
+                    Total pending payments from all active bookings
                   </p>
                 </CardContent>
               </Card>
+
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Onboarding Progress
+                    Outstanding Debt
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -113,12 +113,19 @@ export default function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">0%</div>
+                  {financialSummaryLoading ? (
+                    <Skeleton className="h-8 w-[100px]" />
+                  ) : (
+                    <div className="text-2xl font-bold">
+                      ₦{financialSummary?.summary?.company_amount_in_debt?.toLocaleString() ?? '0'}
+                    </div>
+                  )}
                   <p className="text-xs text-muted-foreground">
-                    Of users completed KYC
+                    Total unpaid refunds from cancelled bookings
                   </p>
                 </CardContent>
               </Card>
+
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
@@ -139,22 +146,29 @@ export default function OverViewPage() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">0</div>
+                  {financialSummaryLoading ? (
+                    <Skeleton className="h-8 w-[100px]" />
+                  ) : (
+                    <div className="text-2xl font-bold">
+                      {financialSummary?.summary?.active_bookings?.toLocaleString() ?? '0'}
+                    </div>
+                  )}
                   <p className="text-xs text-muted-foreground">
-                    For 2024 Hajj Season
+                    Total active bookings across all packages
                   </p>
                 </CardContent>
               </Card>
             </div>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
               <div className="col-span-4">
                 <BarGraph />
               </div>
               <Card className="col-span-4 md:col-span-3">
                 <CardHeader>
-                  <CardTitle>Recent Onboarding</CardTitle>
+                  <CardTitle>Recent Registrations</CardTitle>
                   <CardDescription>
-                    Latest user registrations and KYC status
+                    Latest customer sign-ups and verification status
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
