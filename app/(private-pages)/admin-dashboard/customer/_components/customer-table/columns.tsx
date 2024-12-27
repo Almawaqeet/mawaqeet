@@ -22,31 +22,33 @@ export const columns: ColumnDef<User>[] = [
       />
     ),
     enableSorting: false,
-    enableHiding: false
+    enableHiding: false,
   },
   {
     accessorKey: 'profile.first_name',
     header: 'NAME',
-    cell: ({ row }) => (row.original.profile?.first_name && row.original.profile?.last_name) ?
-      `${row.original.profile.first_name} ${row.original.profile.last_name}` : '-'
+    cell: ({ row }) =>
+      row.original.profile?.first_name && row.original.profile?.last_name
+        ? `${row.original.profile.first_name} ${row.original.profile.last_name}`
+        : '-',
   },
   {
     accessorKey: 'email',
     header: 'EMAIL',
-    cell: ({ row }) => row.original.email ?? '-'
+    cell: ({ row }) => row.original.email ?? '-',
   },
   {
     accessorKey: 'profile.phone_number',
     header: 'PHONE',
-    cell: ({ row }) => row.original.profile?.phone_number ?? '-'
+    cell: ({ row }) => row.original.profile?.phone_number ?? '-',
   },
   {
     accessorKey: 'profile.address',
     header: 'ADDRESS',
-    cell: ({ row }) => row.original.profile?.address ?? '-'
+    cell: ({ row }) => row.original.profile?.address ?? '-',
   },
-//   {
-//     id: 'actions',
-//     cell: ({ row }) => <CellAction data={row.original} />
-//   }
+  //   {
+  //     id: 'actions',
+  //     cell: ({ row }) => <CellAction data={row.original} />
+  //   }
 ];

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import * as React from 'react';
 import Dropzone, {
   type DropzoneProps,
-  type FileRejection
+  type FileRejection,
 } from 'react-dropzone';
 import { toast } from 'sonner';
 
@@ -109,7 +109,7 @@ export function FileUploader(props: FileUploaderProps) {
 
   const [files, setFiles] = useControllableState({
     prop: valueProp,
-    onChange: onValueChange
+    onChange: onValueChange,
   });
 
   const onDrop = React.useCallback(
@@ -126,7 +126,7 @@ export function FileUploader(props: FileUploaderProps) {
 
       const newFiles = acceptedFiles.map((file) =>
         Object.assign(file, {
-          preview: URL.createObjectURL(file)
+          preview: URL.createObjectURL(file),
         })
       );
 
@@ -154,7 +154,7 @@ export function FileUploader(props: FileUploaderProps) {
             setFiles([]);
             return `${target} uploaded`;
           },
-          error: `Failed to upload ${target}`
+          error: `Failed to upload ${target}`,
         });
       }
     },

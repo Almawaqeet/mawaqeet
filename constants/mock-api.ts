@@ -45,7 +45,7 @@ export const fakeUsers = {
         'Marketing Manager',
         'Graphic Designer',
         'Sales Manager',
-        'Product Manager'
+        'Product Manager',
       ];
       const cities = [
         'San Francisco',
@@ -60,7 +60,7 @@ export const fakeUsers = {
         'Dallas',
         'San Jose',
         'Austin',
-        'Jacksonville'
+        'Jacksonville',
       ];
       const states = [
         'California',
@@ -72,7 +72,7 @@ export const fakeUsers = {
         'Ohio',
         'Georgia',
         'North Carolina',
-        'Michigan'
+        'Michigan',
       ];
 
       return {
@@ -98,7 +98,7 @@ export const fakeUsers = {
           .toISOString()
           .split('T')[0],
         job: faker.helpers.arrayElement(jobs),
-        profile_picture: `https://api.slingacademy.com/public/sample-users/${id}.png`
+        profile_picture: `https://api.slingacademy.com/public/sample-users/${id}.png`,
       };
     }
 
@@ -113,7 +113,7 @@ export const fakeUsers = {
   // Get all users with optional gender filtering and search
   async getAll({
     genders = [],
-    search
+    search,
   }: {
     genders?: string[];
     search?: string;
@@ -136,8 +136,8 @@ export const fakeUsers = {
           'city',
           'street',
           'state',
-          'country'
-        ]
+          'country',
+        ],
       });
     }
 
@@ -149,7 +149,7 @@ export const fakeUsers = {
     page = 1,
     limit = 10,
     genders,
-    search
+    search,
   }: {
     page?: number;
     limit?: number;
@@ -176,9 +176,9 @@ export const fakeUsers = {
       total_users: totalUsers,
       offset,
       limit,
-      users: paginatedUsers
+      users: paginatedUsers,
     };
-  }
+  },
 };
 
 // Initialize sample users
@@ -212,7 +212,7 @@ export const fakeProducts = {
         'Groceries',
         'Books',
         'Jewelry',
-        'Beauty Products'
+        'Beauty Products',
       ];
 
       return {
@@ -225,7 +225,7 @@ export const fakeProducts = {
         price: parseFloat(faker.commerce.price({ min: 5, max: 500, dec: 2 })),
         photo_url: `https://api.slingacademy.com/public/sample-products/${id}.png`,
         category: faker.helpers.arrayElement(categories),
-        updated_at: faker.date.recent().toISOString()
+        updated_at: faker.date.recent().toISOString(),
       };
     }
 
@@ -240,7 +240,7 @@ export const fakeProducts = {
   // Get all products with optional category filtering and search
   async getAll({
     categories = [],
-    search
+    search,
   }: {
     categories?: string[];
     search?: string;
@@ -257,7 +257,7 @@ export const fakeProducts = {
     // Search functionality across multiple fields
     if (search) {
       products = matchSorter(products, search, {
-        keys: ['name', 'description', 'category']
+        keys: ['name', 'description', 'category'],
       });
     }
 
@@ -269,7 +269,7 @@ export const fakeProducts = {
     page = 1,
     limit = 10,
     categories,
-    search
+    search,
   }: {
     page?: number;
     limit?: number;
@@ -280,7 +280,7 @@ export const fakeProducts = {
     const categoriesArray = categories ? categories.split('.') : [];
     const allProducts = await this.getAll({
       categories: categoriesArray,
-      search
+      search,
     });
     const totalProducts = allProducts.length;
 
@@ -299,7 +299,7 @@ export const fakeProducts = {
       total_products: totalProducts,
       offset,
       limit,
-      products: paginatedProducts
+      products: paginatedProducts,
     };
   },
 
@@ -313,7 +313,7 @@ export const fakeProducts = {
     if (!product) {
       return {
         success: false,
-        message: `Product with ID ${id} not found`
+        message: `Product with ID ${id} not found`,
       };
     }
 
@@ -324,9 +324,9 @@ export const fakeProducts = {
       success: true,
       time: currentTime,
       message: `Product with ID ${id} found`,
-      product
+      product,
     };
-  }
+  },
 };
 
 // Initialize sample products

@@ -1,7 +1,5 @@
 import { CLIENT_ROUTES } from '@/lib/routes';
 
-
-
 interface NavItem {
   title: string;
   url: string;
@@ -10,42 +8,41 @@ interface NavItem {
   items: NavItem[];
 }
 
-
 export const clientDashboardNavItems: NavItem[] = [
   {
     title: 'Dashboard',
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.overview,
     icon: 'dashboard',
     isActive: true,
-    items: []
+    items: [],
   },
   {
     title: 'Packages',
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.packages,
     icon: 'package',
     isActive: false,
-    items: []
+    items: [],
   },
   {
-    title: "Wallet",
+    title: 'Wallet',
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet,
     icon: 'billing',
     isActive: false,
-    items: [] // No child items
+    items: [], // No child items
   },
   {
     title: 'Payments',
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.payment,
     icon: 'userPen',
     isActive: false,
-    items: [] // No child items
+    items: [], // No child items
   },
   {
     title: 'Bookings',
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage,
     icon: 'booking',
     isActive: false,
-    items: [] // No child items
+    items: [], // No child items
   },
 
   {
@@ -53,7 +50,7 @@ export const clientDashboardNavItems: NavItem[] = [
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.profile,
     icon: 'userPen',
     isActive: false,
-    items: []
+    items: [],
   },
   // {
   //   title: 'Account',
@@ -74,15 +71,14 @@ export const clientDashboardNavItems: NavItem[] = [
   //     }
   //   ]
   // },
-//   {
-//     title: 'Settings',
-//     url: '/dashboard/',
-//     icon: 'kanban',
-//     isActive: false,
-//     items: [] // No child items
-//   }
+  //   {
+  //     title: 'Settings',
+  //     url: '/dashboard/',
+  //     icon: 'kanban',
+  //     isActive: false,
+  //     items: [] // No child items
+  //   }
 ];
-
 
 export const adminDashboardNavItems: NavItem[] = [
   {
@@ -90,55 +86,55 @@ export const adminDashboardNavItems: NavItem[] = [
     url: CLIENT_ROUTES.PrivatePages.adminDashboard.overview,
     icon: 'dashboard',
     isActive: false,
-    items: []
+    items: [],
   },
   {
     title: 'Users',
     url: CLIENT_ROUTES.PrivatePages.adminDashboard.customers,
     icon: 'user',
     isActive: false,
-    items: []
+    items: [],
   },
   {
     title: 'Onboarding',
     url: CLIENT_ROUTES.PrivatePages.adminDashboard.onboarding,
     icon: 'user',
     isActive: false,
-    items: []
+    items: [],
   },
   {
     title: 'Packages',
     url: CLIENT_ROUTES.PrivatePages.adminDashboard.packages,
     icon: 'package',
     isActive: false,
-    items: []
+    items: [],
   },
   {
     title: 'Bookings',
     url: CLIENT_ROUTES.PrivatePages.adminDashboard.bookings.mainPage,
     icon: 'booking',
     isActive: false,
-    items: []
+    items: [],
   },
-//   {
-//     title: 'Payments',
-//     url: CLIENT_ROUTES.PrivatePages.adminDashboard.payment,
-//     icon: 'userPen',
-//     isActive: false,
-//     items: [] // No child items
-//   },
-//   {
-//     title: 'Profile',
-//     url: CLIENT_ROUTES.PrivatePages.adminDashboard.profile,
-//     icon: 'userPen',
-//     isActive: false,
-//     items: [] // No child items
-//   },
-//   {
-//     title: 'Settings',
-//     url: '/dashboard/',
-//     icon: 'kanban',
-//     isActive: false,
-//     items: [] // No child items
-//   }
+  //   {
+  //     title: 'Payments',
+  //     url: CLIENT_ROUTES.PrivatePages.adminDashboard.payment,
+  //     icon: 'userPen',
+  //     isActive: false,
+  //     items: [] // No child items
+  //   },
+  //   {
+  //     title: 'Profile',
+  //     url: CLIENT_ROUTES.PrivatePages.adminDashboard.profile,
+  //     icon: 'userPen',
+  //     isActive: false,
+  //     items: [] // No child items
+  //   },
+  //   {
+  //     title: 'Settings',
+  //     url: '/dashboard/',
+  //     icon: 'kanban',
+  //     isActive: false,
+  //     items: [] // No child items
+  //   }
 ];

@@ -1,13 +1,12 @@
-"use client";
+'use client';
 
-import { useToast } from "@/hooks/use-toast";
-import { ToastAction } from "@/components/ui/toast";
-
+import { useToast } from '@/hooks/use-toast';
+import { ToastAction } from '@/components/ui/toast';
 
 interface AppToastProps {
   title?: string;
   description?: string;
-  variant?: "default" | "destructive";
+  variant?: 'default' | 'destructive';
   duration?: number;
   className?: string;
   action?: {
@@ -22,7 +21,7 @@ export const useAppToast = () => {
   const showToast = ({
     title,
     description,
-    variant = "default",
+    variant = 'default',
     duration = 3000,
     className,
     action,

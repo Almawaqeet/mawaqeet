@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 
-
 export default function PaymentPage() {
   const data = [
     {
@@ -14,8 +13,8 @@ export default function PaymentPage() {
       plan: 'plan',
       pilgrimage: 'pilgrimage',
       date: 'date',
-      status: 'status'
-    }
+      status: 'status',
+    },
   ];
   return (
     <PageContainer scrollable>

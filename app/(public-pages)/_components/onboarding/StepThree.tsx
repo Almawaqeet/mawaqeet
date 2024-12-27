@@ -1,122 +1,142 @@
-"use client"
+'use client';
 
-import React, { useState } from 'react'
-import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/components/reusables/AppHeading'
-import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import AppButton from '@/components/reusables/AppButton'
-import { useGetOnboardingPaymentAmount, useInitiateOnboardingPayment, useVerifyOnboardingPayment } from '@/api/services/onboarding'
-import AppSkeleton from '@/components/reusables/AppSkeleton'
-import { CLIENT_ROUTES } from '@/lib/routes'
-import { usePaystack } from '@/third-party/Paystack'
-import { convertToKobo } from '@/lib/utils'
-import AppModal from '@/components/reusables/AppModal'
-import SuccessLottie from '@/components/reusables/SuccessLottie'
-import LoadingLottie from '@/components/reusables/LoadingLottie'
-import { LOCAL_STORAGE_KEYS, SESSION_STORAGE_KEYS } from '@/constants/local-storage-keys'
-import { useAppToast } from '@/components/reusables/AppToast'
-
+import React, { useState } from 'react';
+import { FaArrowLeft } from 'react-icons/fa6';
+import AppHeading from '@/components/reusables/AppHeading';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import AppButton from '@/components/reusables/AppButton';
+import {
+  useGetOnboardingPaymentAmount,
+  useInitiateOnboardingPayment,
+  useVerifyOnboardingPayment,
+} from '@/api/services/onboarding';
+import AppSkeleton from '@/components/reusables/AppSkeleton';
+import { CLIENT_ROUTES } from '@/lib/routes';
+import { usePaystack } from '@/third-party/Paystack';
+import { convertToKobo } from '@/lib/utils';
+import AppModal from '@/components/reusables/AppModal';
+import SuccessLottie from '@/components/reusables/SuccessLottie';
+import LoadingLottie from '@/components/reusables/LoadingLottie';
+import {
+  LOCAL_STORAGE_KEYS,
+  SESSION_STORAGE_KEYS,
+} from '@/constants/local-storage-keys';
+import { useAppToast } from '@/components/reusables/AppToast';
 
 const StepThreeOnboarding = () => {
-  const [reference, setReference] = useState('')
-  const [countdown, setCountdown] = useState(5)
-  const { data: registrationFeeData, isPending } = useGetOnboardingPaymentAmount()
-  const { mutate: initiatePayment, isPending: isInitiatingPayment } = useInitiateOnboardingPayment()
-  const { data: verifyPaymentData, isPending: isVerifyingPayment } = useVerifyOnboardingPayment(reference)
-  const router = useRouter()
-  const { showToast } = useAppToast()
-  const onboardingId = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
-  const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
-
-
+  const [reference, setReference] = useState('');
+  const [countdown, setCountdown] = useState(5);
+  const { data: registrationFeeData, isPending } =
+    useGetOnboardingPaymentAmount();
+  const { mutate: initiatePayment, isPending: isInitiatingPayment } =
+    useInitiateOnboardingPayment();
+  const { data: verifyPaymentData, isPending: isVerifyingPayment } =
+    useVerifyOnboardingPayment(reference);
+  const router = useRouter();
+  const { showToast } = useAppToast();
+  const onboardingId = localStorage.getItem(
+    LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID
+  );
+  const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL);
 
   React.useEffect(() => {
     if (!onboardingId || !email) {
-      router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
-      return
+      router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne);
+      return;
     }
-  }, [router, onboardingId, email])
+  }, [router, onboardingId, email]);
 
   React.useEffect(() => {
     if (verifyPaymentData?.status === 'success') {
-      localStorage.setItem(LOCAL_STORAGE_KEYS.ONBOARDING_COMPLETED_STATUS, 'true')
-      sessionStorage.setItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL, email ?? '')
-      localStorage.setItem(LOCAL_STORAGE_KEYS.ACTIVE_EMAIL, email ?? '')
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.ONBOARDING_COMPLETED_STATUS,
+        'true'
+      );
+      sessionStorage.setItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL, email ?? '');
+      localStorage.setItem(LOCAL_STORAGE_KEYS.ACTIVE_EMAIL, email ?? '');
 
       // Start countdown
       const timer = setInterval(() => {
         setCountdown((prev) => {
           if (prev <= 1) {
-            clearInterval(timer)
-            router.push(CLIENT_ROUTES.PublicPages.auth.password.stepTwo)
-            return 0
+            clearInterval(timer);
+            router.push(CLIENT_ROUTES.PublicPages.auth.password.stepTwo);
+            return 0;
           }
-          return prev - 1
-        })
-      }, 1000)
+          return prev - 1;
+        });
+      }, 1000);
 
-      return () => clearInterval(timer)
+      return () => clearInterval(timer);
     }
-  }, [verifyPaymentData, email, router])
+  }, [verifyPaymentData, email, router]);
 
-  const registrationFee = registrationFeeData?.registration_fee?.toLocaleString() ?? 0
+  const registrationFee =
+    registrationFeeData?.registration_fee?.toLocaleString() ?? 0;
 
   const handleRestartOnboarding = () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
-    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
-  }
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL);
+    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne);
+  };
 
   const handlePayment = () => {
     initiatePayment(
       { onboarding_id: parseInt(onboardingId ?? '0') },
       {
         onSuccess: (data) => {
-          if (data?.data?.reference && data?.data?.authorization_url && email && registrationFeeData?.registration_fee) {
+          if (
+            data?.data?.reference &&
+            data?.data?.authorization_url &&
+            email &&
+            registrationFeeData?.registration_fee
+          ) {
             const paystackConfig = {
               email,
               amount: convertToKobo(registrationFeeData.registration_fee),
               reference: data.data.reference,
               onSuccess: () => {
-                setReference(data.data?.reference ?? '')
+                setReference(data.data?.reference ?? '');
               },
-              onClose: () => {
-              }
-            }
+              onClose: () => {},
+            };
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            const { initializePayment } = usePaystack(paystackConfig)
-            initializePayment()
+            const { initializePayment } = usePaystack(paystackConfig);
+            initializePayment();
           }
         },
         onError: (error: any) => {
-          const errorMessage = error?.response?.data?.message || error?.message || "An error occurred while initiating payment"
+          const errorMessage =
+            error?.response?.data?.message ||
+            error?.message ||
+            'An error occurred while initiating payment';
 
           if (error?.status === 404 || error?.status === 400) {
             showToast({
-              title: "Error",
+              title: 'Error',
               description: errorMessage,
-              variant: "destructive",
+              variant: 'destructive',
               action: {
-                label: "Restart Onboarding",
-                onClick: handleRestartOnboarding
-              }
-            })
+                label: 'Restart Onboarding',
+                onClick: handleRestartOnboarding,
+              },
+            });
           } else {
             showToast({
-              title: "Error",
+              title: 'Error',
               description: errorMessage,
-              variant: "destructive",
+              variant: 'destructive',
               action: {
-                label: "Contact Support",
-                onClick: () => router.push(CLIENT_ROUTES.PublicPages.contact)
-              }
-            })
+                label: 'Contact Support',
+                onClick: () => router.push(CLIENT_ROUTES.PublicPages.contact),
+              },
+            });
           }
-        }
+        },
       }
-    )
-  }
+    );
+  };
 
   return (
     <motion.div
@@ -144,7 +164,10 @@ const StepThreeOnboarding = () => {
             {verifyPaymentData?.message}
           </p>
           <p className="text-sm text-gray-500 text-center font-normal">
-            Your account has been created successfully! We&apos;ve sent an OTP to your email for verification. You&apos;ll be redirected to set your password in {countdown} seconds. In the meantime, you can download your payment receipt using the button below.
+            Your account has been created successfully! We&apos;ve sent an OTP
+            to your email for verification. You&apos;ll be redirected to set
+            your password in {countdown} seconds. In the meantime, you can
+            download your payment receipt using the button below.
           </p>
           {verifyPaymentData?.receipt_url && (
             <a
@@ -169,7 +192,9 @@ const StepThreeOnboarding = () => {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo)}
+            onClick={() =>
+              router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo)
+            }
             className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-brand-color flex items-center justify-center"
           >
             <FaArrowLeft className="text-lg sm:text-xl md:text-2xl text-brand-color cursor-pointer" />
@@ -233,10 +258,7 @@ const StepThreeOnboarding = () => {
               </div>
             </div>
 
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <AppButton
                 variant="primary"
                 className="w-full min-h-[44px] sm:h-[50px] text-sm sm:text-base py-2 sm:py-3"
@@ -251,7 +273,7 @@ const StepThreeOnboarding = () => {
         </motion.div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default StepThreeOnboarding
+export default StepThreeOnboarding;

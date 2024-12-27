@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { useGetAllActivePackages } from '@/api/services/packages';
 import { Package } from '@/app/(public-pages)/_components/packages-page/Package';
@@ -20,19 +20,23 @@ export default function ProductListingPage({}: ProductListingPage) {
 
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: '100px'
+    rootMargin: '100px',
   });
 
   const {
     searchQuery,
     categoriesFilter: selectedCategories,
-    searchQuery: searchTerm
+    searchQuery: searchTerm,
   } = useProductTableFilters();
 
-  const { data: packages, isLoading, isFetching } = useGetAllActivePackages({
+  const {
+    data: packages,
+    isLoading,
+    isFetching,
+  } = useGetAllActivePackages({
     package_type: selectedCategories ?? undefined,
     page: currentPage,
-    search: searchTerm ?? undefined
+    search: searchTerm ?? undefined,
   });
 
   const resetList = useCallback(() => {
@@ -49,8 +53,10 @@ export default function ProductListingPage({}: ProductListingPage) {
         searchQuery ?? ''
       );
 
-      setAllPackages(prev =>
-        currentPage === 1 ? segregatedPackages : [...prev, ...segregatedPackages]
+      setAllPackages((prev) =>
+        currentPage === 1
+          ? segregatedPackages
+          : [...prev, ...segregatedPackages]
       );
 
       setHasMore(packages.next !== null);
@@ -60,7 +66,7 @@ export default function ProductListingPage({}: ProductListingPage) {
 
   useEffect(() => {
     if (inView && hasMore && !isFetching && !isInitialLoad) {
-      setCurrentPage(prev => prev + 1);
+      setCurrentPage((prev) => prev + 1);
     }
   }, [inView, hasMore, isFetching, isInitialLoad]);
 
@@ -77,9 +83,12 @@ export default function ProductListingPage({}: ProductListingPage) {
       <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
         <PackageIcon className="w-8 h-8 text-gray-400" />
       </div>
-      <h3 className="text-lg font-semibold text-gray-900 mb-1">No Packages Found</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-1">
+        No Packages Found
+      </h3>
       <p className="text-sm text-gray-500 text-center max-w-sm">
-        There are currently no active packages available. New packages will appear here once they are added to the system.
+        There are currently no active packages available. New packages will
+        appear here once they are added to the system.
       </p>
     </div>
   );

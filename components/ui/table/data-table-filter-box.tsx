@@ -9,12 +9,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator
+  CommandSeparator,
 } from '@/components/ui/command';
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger
+  PopoverTrigger,
 } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
@@ -45,7 +45,7 @@ export function DataTableFilterBox({
   title,
   options,
   setFilterValue,
-  filterValue
+  filterValue,
 }: FilterBoxProps) {
   const selectedValuesSet = React.useMemo(() => {
     if (!filterValue) return new Set<string>();

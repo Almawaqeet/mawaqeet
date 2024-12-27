@@ -32,8 +32,8 @@ export default function BookingsTable() {
   );
 
   const { data, isLoading } = useGetBookingsForAPackage(packageId as string, {
-    search: searchQuery ?? "",
-    page: page ?? 1
+    search: searchQuery ?? '',
+    page: page ?? 1,
   });
 
   const resetFilters = useCallback(() => {
@@ -61,16 +61,16 @@ export default function BookingsTable() {
           options={[
             {
               label: 'Confirmed',
-              value: 'confirmed'
+              value: 'confirmed',
             },
             {
               label: 'Pending',
-              value: 'pending'
+              value: 'pending',
             },
             {
               label: 'Cancelled',
-              value: 'cancelled'
-            }
+              value: 'cancelled',
+            },
           ]}
           setFilterValue={setStatusFilter}
           filterValue={statusFilter}
@@ -80,15 +80,15 @@ export default function BookingsTable() {
           onReset={resetFilters}
         />
       </div>
-      {
-        isLoading ? <TableIndexSkelton /> : (
-          <DataTable
-            columns={columns}
-            data={data?.results ?? []}
-            totalItems={data?.count ?? 0}
-          />
-        )
-      }
+      {isLoading ? (
+        <TableIndexSkelton />
+      ) : (
+        <DataTable
+          columns={columns}
+          data={data?.results ?? []}
+          totalItems={data?.count ?? 0}
+        />
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
@@ -14,44 +14,54 @@ import { PACKAGE_TYPES } from '@/constants/generic';
 import { PackagesEmptyState } from '@/components/reusables/PackagesEmptyState';
 import { useGetAllActivePackages } from '@/api/services/packages';
 
-
-
-
 const PackageSection = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const currentTab = searchParams?.get('type')?.toUpperCase() as typeof PACKAGE_TYPES[keyof typeof PACKAGE_TYPES];
+  const currentTab = searchParams
+    ?.get('type')
+    ?.toUpperCase() as (typeof PACKAGE_TYPES)[keyof typeof PACKAGE_TYPES];
   const currentSearch = searchParams?.get('search') || '';
 
-  const [activeTab, setActiveTab] = React.useState<typeof PACKAGE_TYPES[keyof typeof PACKAGE_TYPES]>(currentTab || PACKAGE_TYPES.HAJJ);
+  const [activeTab, setActiveTab] = React.useState<
+    (typeof PACKAGE_TYPES)[keyof typeof PACKAGE_TYPES]
+  >(currentTab || PACKAGE_TYPES.HAJJ);
   const [searchTerm, setSearchTerm] = React.useState(currentSearch);
 
   // Update URL with search params
-  const updateSearchParams = React.useCallback((type: string, search?: string) => {
-    const newUrl = addSearchParamsToUrl(pathname ?? '/', {
-      type: type.toLowerCase(),
-      search: search || ''
-    });
-    router.push(newUrl);
-  }, [pathname, router]);
+  const updateSearchParams = React.useCallback(
+    (type: string, search?: string) => {
+      const newUrl = addSearchParamsToUrl(pathname ?? '/', {
+        type: type.toLowerCase(),
+        search: search || '',
+      });
+      router.push(newUrl);
+    },
+    [pathname, router]
+  );
 
   // Debounced search handler
-  const handleSearch = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const term = e.target.value;
-    setSearchTerm(term);
-    const timeoutId = setTimeout(() => {
-      updateSearchParams(activeTab, term.trim() || undefined);
-    }, 300);
-    return () => clearTimeout(timeoutId);
-  }, [activeTab, updateSearchParams]);
+  const handleSearch = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const term = e.target.value;
+      setSearchTerm(term);
+      const timeoutId = setTimeout(() => {
+        updateSearchParams(activeTab, term.trim() || undefined);
+      }, 300);
+      return () => clearTimeout(timeoutId);
+    },
+    [activeTab, updateSearchParams]
+  );
 
-  const handleTabChange = React.useCallback((tab: typeof PACKAGE_TYPES[keyof typeof PACKAGE_TYPES]) => {
-    setActiveTab(tab);
-    setSearchTerm('');
-    updateSearchParams(tab);
-  }, [updateSearchParams]);
+  const handleTabChange = React.useCallback(
+    (tab: (typeof PACKAGE_TYPES)[keyof typeof PACKAGE_TYPES]) => {
+      setActiveTab(tab);
+      setSearchTerm('');
+      updateSearchParams(tab);
+    },
+    [updateSearchParams]
+  );
 
   const { data: packages, isLoading } = useGetAllActivePackages({
     package_type: activeTab,
@@ -68,7 +78,10 @@ const PackageSection = () => {
     <section className={`w-full ${whiteSpaces?.paddingX ?? ''} py-16`}>
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center mb-12">
-          <AppHeading variant="h2" className="text-3xl md:text-4xl text-center mb-4">
+          <AppHeading
+            variant="h2"
+            className="text-3xl md:text-4xl text-center mb-4"
+          >
             Our Packages
           </AppHeading>
 
@@ -77,7 +90,9 @@ const PackageSection = () => {
             <button
               onClick={() => handleTabChange('HAJJ')}
               className={`px-6 py-2 rounded-full transition-colors ${
-                activeTab === PACKAGE_TYPES.HAJJ ? 'bg-brand-color text-white' : 'hover:bg-gray-200'
+                activeTab === PACKAGE_TYPES.HAJJ
+                  ? 'bg-brand-color text-white'
+                  : 'hover:bg-gray-200'
               }`}
             >
               Hajj
@@ -85,7 +100,9 @@ const PackageSection = () => {
             <button
               onClick={() => handleTabChange('UMRAH')}
               className={`px-6 py-2 rounded-full transition-colors ${
-                activeTab === PACKAGE_TYPES.UMRAH ? 'bg-brand-color text-white' : 'hover:bg-gray-200'
+                activeTab === PACKAGE_TYPES.UMRAH
+                  ? 'bg-brand-color text-white'
+                  : 'hover:bg-gray-200'
               }`}
             >
               Umrah

@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import Link from 'next/link';
 import { FaExclamationTriangle } from 'react-icons/fa';
@@ -18,9 +18,12 @@ export default function Error({
         </div>
 
         <div className="animate-fade-in-up space-y-4">
-          <h1 className="text-4xl font-bold text-gray-900">Something went wrong!</h1>
+          <h1 className="text-4xl font-bold text-gray-900">
+            Something went wrong!
+          </h1>
           <p className="text-gray-600 max-w-md mx-auto">
-            We apologize for the inconvenience. Please try again or contact our support team for assistance.
+            We apologize for the inconvenience. Please try again or contact our
+            support team for assistance.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">

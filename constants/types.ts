@@ -1,4 +1,4 @@
-import { StaticImageData } from "next/image";
+import { StaticImageData } from 'next/image';
 
 //todo: change this later. its here for props
 export interface Package {
@@ -29,8 +29,8 @@ export interface UserBookingListView {
     weekly_installment_fee: string;
     monthly_installment_fee: string;
   };
-  payment_plan: "full" | "installment";
-  status: "no_payment" | "partial_payment" | "paid";
+  payment_plan: 'full' | 'installment';
+  status: 'no_payment' | 'partial_payment' | 'paid';
   package: {
     id: string;
     price: string;
@@ -39,7 +39,7 @@ export interface UserBookingListView {
     description: string;
     slug: string;
     name: string;
-    package_type: "hajj" | "umrah";
+    package_type: 'hajj' | 'umrah';
     is_active: boolean;
     expiry_date: string;
     created_at: string;
@@ -48,15 +48,14 @@ export interface UserBookingListView {
     deactivated_at: string;
   };
   balance: string;
-};
-
+}
 
 export interface UmrahBatch {
   id?: string;
   batch_status: string;
   batch_start_date: string;
   package?: string;
-  batch_name?: string
+  batch_name?: string;
 }
 
 export interface CategoryDescription {
@@ -75,35 +74,33 @@ export interface PackagePrice {
   package?: string;
 }
 
-
-
 export type SegregatedPackage = {
-    id?: string;
-    type: 'hajj' | 'umrah';
-    tier: string;
-    cohort: string;
-    price: string;
-    paymentPlan: string;
-    features: string[];
-  }
+  id?: string;
+  type: 'hajj' | 'umrah';
+  tier: string;
+  cohort: string;
+  price: string;
+  paymentPlan: string;
+  features: string[];
+};
 
-  interface Profile {
-    profile_1: string;
-    profile_2: string;
-    profile_3: string;
-    profile_4?: string;
-    profile_5?: string;
-  }
+interface Profile {
+  profile_1: string;
+  profile_2: string;
+  profile_3: string;
+  profile_4?: string;
+  profile_5?: string;
+}
 
-  export interface SegregatedTeam {
-    id: string;
-    company: string;
-    image: StaticImageData;
-    imageProfile: StaticImageData
-    fullname: string;
-    post: string;
-    slug?: string
-    personality?: string;
-    view_profile: string;
-    profile: [...Array<Profile>]
-  }
+export interface SegregatedTeam {
+  id: string;
+  company: string;
+  image: StaticImageData;
+  imageProfile: StaticImageData;
+  fullname: string;
+  post: string;
+  slug?: string;
+  personality?: string;
+  view_profile: string;
+  profile: [...Array<Profile>];
+}

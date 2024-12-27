@@ -6,7 +6,7 @@ import { NextAuthProvider } from '@/providers/session-provider';
 // import { SessionProvider, SessionProviderProps } from 'next-auth/react';
 export default function Providers({
   // session,
-  children
+  children,
 }: {
   // session: SessionProviderProps['session'];
   children: React.ReactNode;

@@ -1,4 +1,9 @@
-import { useQuery, useMutation, UseQueryResult, UseMutationResult } from '@tanstack/react-query';
+import {
+  useQuery,
+  useMutation,
+  UseQueryResult,
+  UseMutationResult,
+} from '@tanstack/react-query';
 import axios, { AxiosRequestConfig } from 'axios';
 import { getSession } from 'next-auth/react';
 import { API_URL } from '@/environment-config';
@@ -29,10 +34,12 @@ const axiosInstance = axios.create({
   },
 });
 
-export function useAppQuery<TData = unknown, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(
-  config: QueryConfig<TQueryKey, TData>
-): UseQueryResult<TData, TError> {
-  const { queryKey, apiRoute, options } = config
+export function useAppQuery<
+  TData = unknown,
+  TError = unknown,
+  TQueryKey extends Array<unknown> = unknown[],
+>(config: QueryConfig<TQueryKey, TData>): UseQueryResult<TData, TError> {
+  const { queryKey, apiRoute, options } = config;
 
   return useQuery({
     queryKey,
@@ -40,13 +47,12 @@ export function useAppQuery<TData = unknown, TError = unknown, TQueryKey extends
       const session = await getSession();
       const token = session?.user?.accessToken ?? '';
 
-      const response = await axiosInstance
-        .get<TData>(apiRoute, {
-          ...options,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      const response = await axiosInstance.get<TData>(apiRoute, {
+        ...options,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return response?.data;
     },
     retry: 3,
@@ -54,9 +60,12 @@ export function useAppQuery<TData = unknown, TError = unknown, TQueryKey extends
   });
 }
 
-
-export function useAppQueryWithPaginationAndParams<TData = unknown, TError = unknown, TQueryKey extends Array<unknown> = unknown[]>(
-    config: QueryConfigWithParams<TQueryKey, TData>
+export function useAppQueryWithPaginationAndParams<
+  TData = unknown,
+  TError = unknown,
+  TQueryKey extends Array<unknown> = unknown[],
+>(
+  config: QueryConfigWithParams<TQueryKey, TData>
 ): UseQueryResult<TData, TError> {
   const { apiRoute, queryKey, options, params } = config;
 
@@ -66,45 +75,51 @@ export function useAppQueryWithPaginationAndParams<TData = unknown, TError = unk
       const session = await getSession();
       const token = session?.user?.accessToken ?? '';
 
+      const queryParams = params
+        ? Object.entries(params).reduce(
+            (acc, [key, value]) => {
+              if (value !== null && value !== undefined) {
+                acc[key] =
+                  typeof value === 'string' ? value.toLowerCase() : value;
+              }
+              return acc;
+            },
+            {} as Record<string, any>
+          )
+        : undefined;
 
-      const queryParams = params ? Object.entries(params).reduce((acc, [key, value]) => {
-        if (value !== null && value !== undefined) {
-          acc[key] = typeof value === 'string' ? value.toLowerCase() : value;
+      const response = await axiosInstance.get<{
+        count: number;
+        next: string | null;
+        previous: string | null;
+        results: TData[];
+      }>(apiRoute, {
+        ...options,
+        params: queryParams,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return (
+        response?.data ?? {
+          count: 0,
+          next: null,
+          previous: null,
+          results: [],
         }
-        return acc;
-      }, {} as Record<string, any>) : undefined;
-
-      const response = await axiosInstance
-        .get<{
-          count: number;
-          next: string | null;
-          previous: string | null;
-          results: TData[];
-        }>(apiRoute, {
-          ...options,
-          params: queryParams,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-      return response?.data ?? {
-        count: 0,
-        next: null,
-        previous: null,
-        results: []
-      };
+      );
     },
     retry: 3,
     staleTime: 1000 * 60 * 5,
   });
 }
 
-
-
-
-
-export function useAppMutation<TData = unknown, TError = unknown, TVariables = unknown>(
+export function useAppMutation<
+  TData = unknown,
+  TError = unknown,
+  TVariables = unknown,
+>(
   config: MutationConfig<TVariables, TData>
 ): UseMutationResult<TData, TError, TVariables> {
   const { apiRoute, method, body, options } = config;
@@ -125,6 +140,6 @@ export function useAppMutation<TData = unknown, TError = unknown, TVariables = u
       });
       return response?.data;
     },
-    retry: 0 // Only try once
+    retry: 0, // Only try once
   });
 }

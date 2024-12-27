@@ -1,6 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-import { scholarship_guidance, title_intro_hajj, why_scholarship_guidance } from '../contents/services';
+import {
+  scholarship_guidance,
+  title_intro_hajj,
+  why_scholarship_guidance,
+} from '../contents/services';
 
 import PackagesContent from './PackagesContent';
 import Headings from '../utilities/Headings';
@@ -11,16 +15,21 @@ import SlantDiv from './SlantDiv';
 import Bullet from './Bullet';
 
 const HajjPackage: React.FC = () => {
-  const why_scholarship_heading = why_scholarship_guidance.find(itm => itm.id === 'why_scholarship_heading');
-  const why_scholarship_body = why_scholarship_guidance.find(itm => itm.id === 'why_scholarship_body')
-  const why_scholarship_NB = why_scholarship_guidance.find(itm => itm.id === 'scholarship-NB')
+  const why_scholarship_heading = why_scholarship_guidance.find(
+    (itm) => itm.id === 'why_scholarship_heading'
+  );
+  const why_scholarship_body = why_scholarship_guidance.find(
+    (itm) => itm.id === 'why_scholarship_body'
+  );
+  const why_scholarship_NB = why_scholarship_guidance.find(
+    (itm) => itm.id === 'scholarship-NB'
+  );
   return (
     <>
-
       <div
         className={`sm:grid md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_500px]  lg:gap-12 md:gap-10 mobile:gap-2 sm:gap-4 xmd:w-full sm:grid-cols-[1fr_1fr] items-center mt-20`}
       >
-        <div className='flex flex-col '>
+        <div className="flex flex-col ">
           {title_intro_hajj.map((title) => (
             <Headings
               type={'sectionName'}
@@ -30,7 +39,7 @@ const HajjPackage: React.FC = () => {
               {title.intro_1}
             </Headings>
           ))}
-          <div className=''>
+          <div className="">
             {title_intro_hajj.map((content) => (
               <Paragraph
                 type={'bodyParagraph'}
@@ -44,12 +53,12 @@ const HajjPackage: React.FC = () => {
         </div>
         <div>
           <Image
-            src='/images/hajj.png'
-            alt='hajj-img'
+            src="/images/hajj.png"
+            alt="hajj-img"
             className={`mobile:h-full mt-11 xmd:pb-[71px]`}
             height={100}
             width={100}
-            layout='responsive'
+            layout="responsive"
           />
         </div>
       </div>
@@ -64,14 +73,17 @@ const HajjPackage: React.FC = () => {
           </Headings>
         ))}
       </div>
-      <div className={`grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]`}>
-
-        <PackagesContent morestyle='xmd:hidden' to='/registration-form/application/step1' />
-
+      <div
+        className={`grid xmd:grid-cols-1 items-center xmd:gap-8 mobile:grid-flow-row w-full lg:grid-cols-[1fr_1fr_1fr]`}
+      >
+        <PackagesContent
+          morestyle="xmd:hidden"
+          to="/registration-form/application/step1"
+        />
       </div>
 
       <div className={`${whiteSpaces.paddingY}`}>
-        <div className='xmd:pb-11'>
+        <div className="xmd:pb-11">
           <SlantDiv className="xmd:before:w-[100px]">
             <Headings type="sectionName" classname="text-center   pb-2">
               Scholarship Guidance
@@ -79,31 +91,69 @@ const HajjPackage: React.FC = () => {
           </SlantDiv>
         </div>
 
-        {scholarship_guidance.map(sch => (
+        {scholarship_guidance.map((sch) => (
           <>
-            <Paragraph type='bodyParagraph' classname={`text-center xmd:pb-0`} key={`${sch.id}fhfhg`}>{sch.center_text}</Paragraph>
-            <Paragraph type='bodyParagraph' classname={`text-justify xmd:pb-8`} key={`${sch.id}fhf`}>{sch.align_text}</Paragraph>
+            <Paragraph
+              type="bodyParagraph"
+              classname={`text-center xmd:pb-0`}
+              key={`${sch.id}fhfhg`}
+            >
+              {sch.center_text}
+            </Paragraph>
+            <Paragraph
+              type="bodyParagraph"
+              classname={`text-justify xmd:pb-8`}
+              key={`${sch.id}fhf`}
+            >
+              {sch.align_text}
+            </Paragraph>
           </>
         ))}
 
-        <div className='sm:grid sm:grid-cols-[1fr_1fr]  xmd:gap-8 md:gap-16'>
-          {why_scholarship_heading?.why_scholarship_heading.map((itm, index) => (
-            < React.Fragment>
-              <div className='xmd:pb-8 md:pb-0' key={`${itm.id}${index}`}>
-                <div>
-                  <span className='flex xmd:gap-4 md:gap-1' key={`${itm.id}-hi`}>
-                    <Bullet className='md:w-[8px]'/>
-                    <Paragraph type='globalBold' classname='font-bold xmd:leading-5 text-body-clamp tracking-tight   w-full pb-1' key={`${itm.id}-par`}>{itm.heading_content}</Paragraph>
-                  </span>
-                  <Paragraph type='bodyParagraph' classname={`text-justify`} key={`${itm.id}-par`}>{why_scholarship_body?.why_scholarship_heading[index].heading_content}</Paragraph>
+        <div className="sm:grid sm:grid-cols-[1fr_1fr]  xmd:gap-8 md:gap-16">
+          {why_scholarship_heading?.why_scholarship_heading.map(
+            (itm, index) => (
+              <React.Fragment>
+                <div className="xmd:pb-8 md:pb-0" key={`${itm.id}${index}`}>
+                  <div>
+                    <span
+                      className="flex xmd:gap-4 md:gap-1"
+                      key={`${itm.id}-hi`}
+                    >
+                      <Bullet className="md:w-[8px]" />
+                      <Paragraph
+                        type="globalBold"
+                        classname="font-bold xmd:leading-5 text-body-clamp tracking-tight   w-full pb-1"
+                        key={`${itm.id}-par`}
+                      >
+                        {itm.heading_content}
+                      </Paragraph>
+                    </span>
+                    <Paragraph
+                      type="bodyParagraph"
+                      classname={`text-justify`}
+                      key={`${itm.id}-par`}
+                    >
+                      {
+                        why_scholarship_body?.why_scholarship_heading[index]
+                          .heading_content
+                      }
+                    </Paragraph>
+                  </div>
                 </div>
-              </div>
-            </React.Fragment>
-          ))}
+              </React.Fragment>
+            )
+          )}
         </div>
 
-        {why_scholarship_NB?.why_scholarship_heading.map(itm => (
-          <Paragraph type='globalBold' classname='font-bold xmd:leading-5 text-body-clamp tracking-tight   w-full italic mt-6' key={`${itm.id}===`}>{itm.heading_content}</Paragraph>
+        {why_scholarship_NB?.why_scholarship_heading.map((itm) => (
+          <Paragraph
+            type="globalBold"
+            classname="font-bold xmd:leading-5 text-body-clamp tracking-tight   w-full italic mt-6"
+            key={`${itm.id}===`}
+          >
+            {itm.heading_content}
+          </Paragraph>
         ))}
       </div>
     </>

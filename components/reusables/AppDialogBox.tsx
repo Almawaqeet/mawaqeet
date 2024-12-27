@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import React from 'react'
+import React from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,39 +11,42 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from '@/components/ui/alert-dialog';
 
 interface AppDialogBoxProps {
-  trigger?: React.ReactNode
-  title?: string
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
-  description?: string | React.ReactNode
-  cancelText?: string
-  confirmText?: string
-  onConfirm?: () => void
-  onCancel?: () => void
-  children?: React.ReactNode
+  trigger?: React.ReactNode;
+  title?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  description?: string | React.ReactNode;
+  cancelText?: string;
+  confirmText?: string;
+  onConfirm?: () => void;
+  onCancel?: () => void;
+  children?: React.ReactNode;
 }
 
 const AppDialogBox = ({
-  trigger = "",
-  title = "Are you absolutely sure?",
-  description = "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
-  cancelText = "Cancel",
-  confirmText = "Continue",
+  trigger = '',
+  title = 'Are you absolutely sure?',
+  description = 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+  cancelText = 'Cancel',
+  confirmText = 'Continue',
   onConfirm,
   onCancel,
   open,
   onOpenChange,
-  children
+  children,
 }: AppDialogBoxProps) => {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogTrigger asChild>
         {typeof trigger === 'string' ? <button>{trigger}</button> : trigger}
       </AlertDialogTrigger>
-      <AlertDialogContent className="bg-white border border-gray-200 rounded-lg shadow-lg" style={{ backgroundColor: "white" }}>
+      <AlertDialogContent
+        className="bg-white border border-gray-200 rounded-lg shadow-lg"
+        style={{ backgroundColor: 'white' }}
+      >
         <AlertDialogHeader>
           <AlertDialogTitle className="text-gray-900 text-xl font-semibold">
             {title}
@@ -57,13 +60,17 @@ const AppDialogBox = ({
           <AlertDialogCancel
             className="border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors focus:ring-0 focus:ring-offset-0"
             onClick={onCancel}
-            style={{ backgroundColor: "white", borderColor: "white", color: "black" }}
+            style={{
+              backgroundColor: 'white',
+              borderColor: 'white',
+              color: 'black',
+            }}
           >
             {cancelText}
           </AlertDialogCancel>
           <AlertDialogAction
             className="bg-gray-900 text-white hover:bg-gray-800 transition-colors focus:ring-0 focus:ring-offset-0"
-            style={{ backgroundColor: "var(--brand-color)", color: "white" }}
+            style={{ backgroundColor: 'var(--brand-color)', color: 'white' }}
             onClick={onConfirm}
           >
             {confirmText}
@@ -71,7 +78,7 @@ const AppDialogBox = ({
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
-}
+  );
+};
 
-export default AppDialogBox
+export default AppDialogBox;

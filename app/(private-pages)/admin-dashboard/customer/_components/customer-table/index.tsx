@@ -3,9 +3,7 @@
 import { DataTable } from '@/components/ui/table/data-table';
 import { DataTableResetFilter } from '@/components/ui/table/data-table-reset-filter';
 import { DataTableSearch } from '@/components/ui/table/data-table-search';
-import {
-  useEmployeeTableFilters,
-} from '../employee-tables/use-employee-table-filters';
+import { useEmployeeTableFilters } from '../employee-tables/use-employee-table-filters';
 import { columns } from './columns';
 import { useGetAllRegisteredUsers } from '@/api/services/admin-analytics';
 import TableIndexSkelton from '@/app/(private-pages)/admin-dashboard/onboarding/_components/table/table-index-skelton';
@@ -17,7 +15,7 @@ export default function CustomerTable() {
     resetFilters,
     searchQuery,
     setPage,
-    setSearchQuery
+    setSearchQuery,
   } = useEmployeeTableFilters();
 
   const [page] = useQueryState('page');
@@ -26,15 +24,17 @@ export default function CustomerTable() {
   const { data, isLoading } = useGetAllRegisteredUsers({
     page: Number(page) || 1,
     name: searchQuery ?? undefined,
-    email: searchQuery ?? undefined
+    email: searchQuery ?? undefined,
   });
 
-  const truncatedData = data?.results?.map(user => ({
+  const truncatedData = data?.results?.map((user) => ({
     ...user,
     profile: {
       ...user.profile,
-      address: user.profile?.address ? `${user.profile.address.slice(0, 30)}${user.profile.address.length > 30 ? '...' : ''}` : '-'
-    }
+      address: user.profile?.address
+        ? `${user.profile.address.slice(0, 30)}${user.profile.address.length > 30 ? '...' : ''}`
+        : '-',
+    },
   }));
 
   return (

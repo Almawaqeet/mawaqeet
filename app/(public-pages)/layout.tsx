@@ -5,7 +5,7 @@ import InlineNavigation from '@/components/reusables/InlineNavigation';
 export default function PublicPagesLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <div className="min-h-screen pt-[100px] bg-brand-color-subtle">
@@ -14,5 +14,5 @@ export default function PublicPagesLayout({
       {children}
       <Footer />
     </div>
-  )
+  );
 }

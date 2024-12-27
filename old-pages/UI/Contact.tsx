@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { BsEnvelope } from 'react-icons/bs';
 import { IoPhonePortraitOutline } from 'react-icons/io5';
-import { IoLocationOutline } from "react-icons/io5";
+import { IoLocationOutline } from 'react-icons/io5';
 import { contact } from '../contents/contact';
 import BtnGlobal from './BtnGlobal';
 
@@ -16,8 +16,8 @@ interface ContactProps {
   textColor?: string; // Text color
   btnColor?: string; // Button color
   lineColor?: string;
-  headingColor?: string,
-  position?: string
+  headingColor?: string;
+  position?: string;
 }
 
 const Contact: React.FC<ContactProps> = ({
@@ -27,7 +27,7 @@ const Contact: React.FC<ContactProps> = ({
   btnColor = 'bg-[#87592A]', // Default button color
   lineColor = 'bg-white',
   headingColor = 'text-white',
-  position = 'xmd:relative'
+  position = 'xmd:relative',
 }) => {
   const baseClassNames = 'mobile:max-w-[2000px] m-auto  ';
   const ClassName = classNames(
@@ -38,12 +38,16 @@ const Contact: React.FC<ContactProps> = ({
     btnColor,
     lineColor,
     headingColor,
-    position,
+    position
   );
 
   return (
-    <main className={` ${bgColor} xmd:pb-[48px] sm:pb-[48px] md:pb-[56px] lg:pb-[48px] rounded-[20px] drop-shadow-transparent shadow-lg ${baseClassNames} ${position} xmd:w-11/12`} >
-      <div className={`  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${whiteSpaces.paddingY}`}>
+    <main
+      className={` ${bgColor} xmd:pb-[48px] sm:pb-[48px] md:pb-[56px] lg:pb-[48px] rounded-[20px] drop-shadow-transparent shadow-lg ${baseClassNames} ${position} xmd:w-11/12`}
+    >
+      <div
+        className={`  xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${whiteSpaces.paddingY}`}
+      >
         {contact.map((heading) => (
           <Headings
             key={`heading-${heading.id}`}
@@ -71,7 +75,9 @@ const Contact: React.FC<ContactProps> = ({
                 <BtnGlobal
                   className={`${btnColor} rounded-lg xmd:p-2  md:py-[11px] md:px-[15px] flex items-center`}
                 >
-                  <h6 className={`font-normal xmd:text-fz-xxs mobile:text-fz-sm leading-8 tracking-[0.14px] text-center   ${textColor} `}>
+                  <h6
+                    className={`font-normal xmd:text-fz-xxs mobile:text-fz-sm leading-8 tracking-[0.14px] text-center   ${textColor} `}
+                  >
                     almawaqeettravelsandtours@gmail.com
                   </h6>
                 </BtnGlobal>
@@ -105,10 +111,11 @@ const Contact: React.FC<ContactProps> = ({
             className={` border-[0.1px] w-1/4 m-auto md:w-0 md:h-2/3 md:grid bg-${lineColor} `}
           ></div>
 
-          <div className={`flex flex-row-reverse items-center justify-between bg-[#F9F9F9] mobile:p-10 xmd:px-4 xmd:py-4 md:p-8 lg:p-4 rounded-lg rounded-b-none  xmd:mt-9 md:mt-0`}>
-
+          <div
+            className={`flex flex-row-reverse items-center justify-between bg-[#F9F9F9] mobile:p-10 xmd:px-4 xmd:py-4 md:p-8 lg:p-4 rounded-lg rounded-b-none  xmd:mt-9 md:mt-0`}
+          >
             <div className="flex flex-col xmd:gap-2 md:gap-8 xmd:pb-4 sm:pb-0">
-              <div className='flex justify-between'>
+              <div className="flex justify-between">
                 <label className="font-semibold xmd:text-fz-sm leading-8 tracking-[0.81px] text-[#333333]  ">
                   Office Address
                 </label>
@@ -119,17 +126,20 @@ const Contact: React.FC<ContactProps> = ({
                 </div>
               </div>
               <p className="font-normal xmd:text-fz-xss xmd:leading-6 xmd:tracking-tight mobile:text-fz-xsm md:text-fz-sm md:leading-8 md:tracking-[0.18px] text-justify text-[#333333]   ">
-                MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN
+                MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE
+                AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN
               </p>
               <div>
-                <Link href='/contact-us/locate-us'>
-                <BtnGlobal className={`bg-white rounded-lg xmd:px-9 xmd:py-3 md:py-[11px] md:px-[35px] grid m-auto items-baseline drop-shadow-transparent shadow-md`}>
-                  <h6
-                    className={`font-normal xmd:text-fz-xss leading-8 tracking-[0.14px] text-center  text-hover-color  `}
+                <Link href="/contact-us/locate-us">
+                  <BtnGlobal
+                    className={`bg-white rounded-lg xmd:px-9 xmd:py-3 md:py-[11px] md:px-[35px] grid m-auto items-baseline drop-shadow-transparent shadow-md`}
                   >
-                    Locate Us
-                  </h6>
-                </BtnGlobal>
+                    <h6
+                      className={`font-normal xmd:text-fz-xss leading-8 tracking-[0.14px] text-center  text-hover-color  `}
+                    >
+                      Locate Us
+                    </h6>
+                  </BtnGlobal>
                 </Link>
               </div>
             </div>

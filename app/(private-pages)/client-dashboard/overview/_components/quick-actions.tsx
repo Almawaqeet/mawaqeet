@@ -2,7 +2,14 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { Wallet, Calendar, PlayCircle, BookOpen, History, HelpCircle } from 'lucide-react';
+import {
+  Wallet,
+  Calendar,
+  PlayCircle,
+  BookOpen,
+  History,
+  HelpCircle,
+} from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import {
@@ -10,7 +17,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '@/components/ui/card';
 import BookingDemo from './booking-demo-video';
 import AppDialogBox from '@/components/reusables/AppDialogBox';
@@ -22,38 +29,38 @@ const shortcuts = [
     description: 'Watch our step-by-step booking guide',
     icon: <PlayCircle className="h-6 w-6" />,
     isVideo: true,
-    link: "https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L"
+    link: 'https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L',
   },
   {
     title: 'View & Book Packages',
     description: 'Browse and book Hajj or Umrah packages',
     icon: <Calendar className="h-6 w-6" />,
-    route: CLIENT_ROUTES.PrivatePages.clientDashboard.packages
+    route: CLIENT_ROUTES.PrivatePages.clientDashboard.packages,
   },
   {
     title: 'Learn Our Process',
     description: 'Understand what happens after booking a package',
     icon: <BookOpen className="h-6 w-6" />,
     isVideo: true,
-    link: "https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L"
+    link: 'https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L',
   },
   {
     title: 'Booking Manager',
     description: 'View and manage upcoming bookings',
     icon: <History className="h-6 w-6" />,
-    route: CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage
+    route: CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage,
   },
   {
     title: 'Wallet Manager',
     description: 'Manage your wallet payments and transactions',
     icon: <Wallet className="h-6 w-6" />,
-    route: CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet
+    route: CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet,
   },
   {
     title: 'Help and Support',
     description: 'Are you stuck? Get help from our support team',
     icon: <HelpCircle className="h-6 w-6" />,
-    isSupport: true
+    isSupport: true,
   },
 ];
 
@@ -61,26 +68,26 @@ export function QuickActions() {
   const router = useRouter();
   const [showVideo, setShowVideo] = React.useState(false);
   const [showSupportModal, setShowSupportModal] = React.useState(false);
-  const [selectedVideoLink, setSelectedVideoLink] = React.useState<string>("");
+  const [selectedVideoLink, setSelectedVideoLink] = React.useState<string>('');
 
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    show: { opacity: 1, y: 0 },
   };
 
-  const handleClick = (shortcut: typeof shortcuts[0]) => {
+  const handleClick = (shortcut: (typeof shortcuts)[0]) => {
     if (shortcut.isVideo) {
-      setSelectedVideoLink(shortcut.link ?? "");
+      setSelectedVideoLink(shortcut.link ?? '');
       setShowVideo(true);
     } else if (shortcut.isSupport) {
       setShowSupportModal(true);
@@ -106,7 +113,10 @@ export function QuickActions() {
       />
 
       {showVideo ? (
-        <BookingDemo onClose={() => setShowVideo(false)} link={selectedVideoLink}/>
+        <BookingDemo
+          onClose={() => setShowVideo(false)}
+          link={selectedVideoLink}
+        />
       ) : (
         <div>
           <CardHeader>

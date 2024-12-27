@@ -1,12 +1,10 @@
 'use client';
 
-
-
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   Collapsible,
   CollapsibleContent,
-  CollapsibleTrigger
+  CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import {
   DropdownMenu,
@@ -15,7 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -34,7 +32,7 @@ import {
   SidebarMenuSubItem,
   SidebarProvider,
   SidebarRail,
-  SidebarTrigger
+  SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { adminDashboardNavItems } from '@/constants/data';
 import {
@@ -44,7 +42,7 @@ import {
   ChevronsUpDown,
   CreditCard,
   GalleryVerticalEnd,
-  LogOut
+  LogOut,
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -59,16 +57,14 @@ import { extractInitials } from '@/lib/utils';
 import { signOut } from 'next-auth/react';
 import { CLIENT_ROUTES } from '@/lib/routes';
 
-
-
 export const company = {
   name: 'Al-Mawaqeet Travels and Tours',
   logo: GalleryVerticalEnd,
-  plan: 'Enterprise'
+  plan: 'Enterprise',
 };
 
 export default function AppSidebar({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
@@ -103,7 +99,10 @@ export default function AppSidebar({
             <SidebarGroupLabel>Overview</SidebarGroupLabel>
             <SidebarMenu>
               {adminDashboardNavItems.map((item: any) => {
-                const Icon = item?.icon && Icons[item.icon as keyof typeof Icons] ? Icons[item.icon as keyof typeof Icons] : Icons.logo;
+                const Icon =
+                  item?.icon && Icons[item.icon as keyof typeof Icons]
+                    ? Icons[item.icon as keyof typeof Icons]
+                    : Icons.logo;
                 return item?.items && item?.items?.length > 0 ? (
                   <Collapsible
                     key={item.title}
@@ -218,7 +217,7 @@ export default function AppSidebar({
 
                   <DropdownMenuGroup>
                     <DropdownMenuItem>
-                      <BadgeCheck className="size-4 mr-2"/>
+                      <BadgeCheck className="size-4 mr-2" />
                       Account
                     </DropdownMenuItem>
                     {/* <DropdownMenuItem>
@@ -226,16 +225,18 @@ export default function AppSidebar({
                       Billing
                     </DropdownMenuItem> */}
                     <DropdownMenuItem>
-                      <Bell className="size-4 mr-2"/>
+                      <Bell className="size-4 mr-2" />
                       Notifications
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => {
-                    signOut();
-                    redirect(CLIENT_ROUTES.PublicPages.home);
-                  }}>
-                    <LogOut className="size-4 mr-2"/>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      signOut();
+                      redirect(CLIENT_ROUTES.PublicPages.home);
+                    }}
+                  >
+                    <LogOut className="size-4 mr-2" />
                     Log out
                   </DropdownMenuItem>
                 </DropdownMenuContent>

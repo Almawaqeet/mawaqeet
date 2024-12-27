@@ -14,7 +14,6 @@
 // import Paragraph from '../utilities/Paragraph';
 // import Link from 'next/link';
 
-
 // const HomeV2 = () => {
 //   return (
 //     <>

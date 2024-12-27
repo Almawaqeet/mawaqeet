@@ -6,7 +6,7 @@ export function DataTableSkeleton({
   rowCount = 10,
   searchableColumnCount = 0,
   filterableColumnCount = 0,
-  showViewOptions = false
+  showViewOptions = false,
 }) {
   return (
     <div className="w-full space-y-3 overflow-auto">

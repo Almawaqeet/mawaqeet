@@ -13,19 +13,19 @@ const AppSkeleton: React.FC<AppSkeletonProps> = ({
   height = '1rem',
   className = '',
   borderRadius = '0.375rem',
-  animation = 'pulse'
+  animation = 'pulse',
 }) => {
   const baseClasses = 'bg-gray-200';
   const animationClasses = {
     pulse: 'animate-pulse',
     wave: 'animate-shimmer',
-    none: ''
+    none: '',
   };
 
   const style = {
     width,
     height,
-    borderRadius
+    borderRadius,
   };
 
   return (

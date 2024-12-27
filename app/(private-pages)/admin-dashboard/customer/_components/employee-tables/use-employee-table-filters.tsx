@@ -6,7 +6,7 @@ import { useCallback, useMemo } from 'react';
 
 export const GENDER_OPTIONS = [
   { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' }
+  { value: 'female', label: 'Female' },
 ];
 
 export function useEmployeeTableFilters() {
@@ -53,6 +53,6 @@ export function useEmployeeTableFilters() {
     limit,
     setLimit,
     resetFilters,
-    isAnyFilterActive
+    isAnyFilterActive,
   };
 }

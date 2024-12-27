@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import React from 'react';
 import SlantDiv from './SlantDiv';
 
@@ -8,15 +8,13 @@ import { whiteSpaces } from '../utilities/GlobalSpaces';
 import Headings from '../utilities/Headings';
 import Footer from './Footer';
 
-
-
 const Services: React.FC = () => {
-
-
   return (
     <section className="relative">
       <main className="xmd:max-w-[575px] mobile:max-w-[1000px] m-auto sm:max-w-[900px] md:max-w-[1200px] lg:max-w-[2000px] mb-4">
-        <div className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${whiteSpaces.sectionMargin}`}>
+        <div
+          className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] ${whiteSpaces.sectionMargin}`}
+        >
           <SlantDiv className="xmd:before:w-[60px]">
             <Headings type="sectionName" classname="text-center  ">
               Our Services

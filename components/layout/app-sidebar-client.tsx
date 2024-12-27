@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   Collapsible,
   CollapsibleContent,
-  CollapsibleTrigger
+  CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import {
   DropdownMenu,
@@ -12,7 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
 import {
@@ -31,7 +31,7 @@ import {
   SidebarMenuSubItem,
   SidebarProvider,
   SidebarRail,
-  SidebarTrigger
+  SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { clientDashboardNavItems } from '@/constants/data';
 import {
@@ -41,7 +41,7 @@ import {
   ChevronsUpDown,
   CreditCard,
   GalleryVerticalEnd,
-  LogOut
+  LogOut,
 } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -54,23 +54,21 @@ import { BellIcon } from 'lucide-react';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { useQueryClient } from '@tanstack/react-query';
 
-
-
 export const company = {
   name: 'Al-Mawaqeet Travels and Tours',
   logo: GalleryVerticalEnd,
-  plan: 'Client'
+  plan: 'Client',
 };
 
 export default function AppSidebarClient({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
   const [mounted, setMounted] = React.useState(false);
   const { data: session } = useSession();
   const pathname = usePathname();
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   // Only render after first client-side mount
   React.useEffect(() => {
     setMounted(true);
@@ -99,7 +97,10 @@ export default function AppSidebarClient({
             <SidebarGroupLabel>Overview</SidebarGroupLabel>
             <SidebarMenu>
               {clientDashboardNavItems.map((item: any) => {
-                const Icon = item?.icon && Icons[item.icon as keyof typeof Icons] ? Icons[item.icon as keyof typeof Icons] : Icons.logo;
+                const Icon =
+                  item?.icon && Icons[item.icon as keyof typeof Icons]
+                    ? Icons[item.icon as keyof typeof Icons]
+                    : Icons.logo;
                 return item?.items && item?.items?.length > 0 ? (
                   <Collapsible
                     key={item.title}
@@ -223,11 +224,13 @@ export default function AppSidebarClient({
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => {
-                    queryClient.invalidateQueries()
-                    signOut();
-                    redirect(CLIENT_ROUTES.PublicPages.home);
-                  }}>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      queryClient.invalidateQueries();
+                      signOut();
+                      redirect(CLIENT_ROUTES.PublicPages.home);
+                    }}
+                  >
                     <LogOut className="size-4 mr-2" />
                     Log out
                   </DropdownMenuItem>

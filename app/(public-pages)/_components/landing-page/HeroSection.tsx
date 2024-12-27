@@ -1,19 +1,16 @@
-"use client"
+'use client';
 
-import React from 'react'
-import AppButton from '@/components/reusables/AppButton'
-import { IoMdArrowRoundForward } from "react-icons/io"
-import { FaPlay } from "react-icons/fa";
-import AppHeading from '@/components/reusables/AppHeading'
-import { PiBookOpenThin } from "react-icons/pi"
-import { motion } from 'framer-motion'
-import { FaCreditCard } from "react-icons/fa";
+import React from 'react';
+import AppButton from '@/components/reusables/AppButton';
+import { IoMdArrowRoundForward } from 'react-icons/io';
+import { FaPlay } from 'react-icons/fa';
+import AppHeading from '@/components/reusables/AppHeading';
+import { PiBookOpenThin } from 'react-icons/pi';
+import { motion } from 'framer-motion';
+import { FaCreditCard } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 import { CLIENT_ROUTES } from '@/lib/routes';
-
-
-
 
 export const HeroSection = () => {
   const router = useRouter();
@@ -24,24 +21,33 @@ export const HeroSection = () => {
       y: 0,
       transition: {
         duration: 0.6,
-        staggerChildren: 0.2
-      }
-    }
-  }
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
-      y: 0
-    }
-  }
+      y: 0,
+    },
+  };
 
   const QuoteCard = () => {
     const verses = [
-      { ref: "Q2/197", text: "Hajj is [during] well-known months, so whoever has made Hajj obligatory upon himself therein [by entering the state of ihram], there is [to be for him] no sexual relations and no disobedience and no disputing during Hajj." },
-      { ref: "Q3/97", text: "And [due] to Allah from the people is a pilgrimage to the House - for whoever is able to find thereto a way." },
-      { ref: "Q2/196", text: "And complete the Hajj and 'Umrah for Allah. But if you are prevented, then [offer] what can be obtained with ease of sacrificial animals." }
+      {
+        ref: 'Q2/197',
+        text: 'Hajj is [during] well-known months, so whoever has made Hajj obligatory upon himself therein [by entering the state of ihram], there is [to be for him] no sexual relations and no disobedience and no disputing during Hajj.',
+      },
+      {
+        ref: 'Q3/97',
+        text: 'And [due] to Allah from the people is a pilgrimage to the House - for whoever is able to find thereto a way.',
+      },
+      {
+        ref: 'Q2/196',
+        text: "And complete the Hajj and 'Umrah for Allah. But if you are prevented, then [offer] what can be obtained with ease of sacrificial animals.",
+      },
     ];
 
     const [currentVerseIndex, setCurrentVerseIndex] = React.useState(0);
@@ -55,19 +61,21 @@ export const HeroSection = () => {
 
     return (
       <motion.div
-          variants={itemVariants}
-          className="hidden md:flex flex-col md:flex-row items-center gap-2 mb-8 bg-[#D9CBBA] rounded-full p-2 border-[0.2px] border-brand-color-main hover:scale-105 transition-transform duration-300 w-full md:w-[500px] group"
+        variants={itemVariants}
+        className="hidden md:flex flex-col md:flex-row items-center gap-2 mb-8 bg-[#D9CBBA] rounded-full p-2 border-[0.2px] border-brand-color-main hover:scale-105 transition-transform duration-300 w-full md:w-[500px] group"
       >
-        <div className='flex items-center gap-2 bg-[#F2F2F2] rounded-full px-4 py-2 w-full md:w-auto'>
+        <div className="flex items-center gap-2 bg-[#F2F2F2] rounded-full px-4 py-2 w-full md:w-auto">
           <PiBookOpenThin className="w-4 h-4 md:w-5 md:h-5 text-[#875929]" />
-          <span className="text-xs md:text-sm text-[#875929] font-medium">{verses[currentVerseIndex].ref}</span>
+          <span className="text-xs md:text-sm text-[#875929] font-medium">
+            {verses[currentVerseIndex].ref}
+          </span>
         </div>
         <motion.div
           key={currentVerseIndex}
           className="relative w-full md:w-auto"
           initial={{ opacity: 0, width: 0 }}
-          animate={{ opacity: 1, width: "auto" }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
+          animate={{ opacity: 1, width: 'auto' }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
         >
           <span className="text-xs md:text-sm text-[#665544] line-clamp-1 px-2">
             {verses[currentVerseIndex].text.substring(0, 70)}...
@@ -79,8 +87,8 @@ export const HeroSection = () => {
           </div>
         </motion.div>
       </motion.div>
-    )
-  }
+    );
+  };
 
   return (
     <motion.section
@@ -101,7 +109,8 @@ export const HeroSection = () => {
             align="left"
             className="w-full mb-4 sm:mb-6 text-brand-color text-2xl sm:text-3xl md:text-4xl sm:text-center"
           >
-            We offer flexible payment plans for Hajj and Umrah tours, with great support at every step of your pilgrimage.
+            We offer flexible payment plans for Hajj and Umrah tours, with great
+            support at every step of your pilgrimage.
           </AppHeading>
         </motion.div>
 
@@ -109,7 +118,9 @@ export const HeroSection = () => {
           variants={itemVariants}
           className="text-base sm:text-lg text-brand-color-text mb-8 sm:mb-12 max-w-[700px] px-2 text-left sm:text-center"
         >
-          Start your holy journey with us today. We make it easy - pay all at once or in smaller payments. Our team will help you every step of the way, from planning to completing your pilgrimage.
+          Start your holy journey with us today. We make it easy - pay all at
+          once or in smaller payments. Our team will help you every step of the
+          way, from planning to completing your pilgrimage.
         </motion.p>
 
         <motion.div
@@ -118,7 +129,9 @@ export const HeroSection = () => {
         >
           <AppButton
             icon={<IoMdArrowRoundForward className="w-4 h-4 sm:w-5 sm:h-5" />}
-            onClick={() => router.push(`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`)}
+            onClick={() =>
+              router.push(`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`)
+            }
             className="w-full sm:w-auto"
           >
             Get Started
@@ -128,21 +141,24 @@ export const HeroSection = () => {
             variant="secondary"
             iconPosition="start"
             icon={<FaPlay className="w-3 h-3 sm:w-4 sm:h-4" />}
-            onClick={() =>  router.push(`${CLIENT_ROUTES.PublicPages.about.index}`)}
+            onClick={() =>
+              router.push(`${CLIENT_ROUTES.PublicPages.about.index}`)
+            }
             className="w-full sm:w-auto"
           >
             Learn more
           </AppButton>
         </motion.div>
-        <motion.div variants={itemVariants} className="flex items-center justify-center gap-2 sm:justify-center w-full">
+        <motion.div
+          variants={itemVariants}
+          className="flex items-center justify-center gap-2 sm:justify-center w-full"
+        >
           <FaCreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-brand-color" />
-          <p
-            className="text-xs font-semibold sm:text-sm text-brand-color text-center"
-          >
+          <p className="text-xs font-semibold sm:text-sm text-brand-color text-center">
             Cancel payments anytime!
           </p>
         </motion.div>
       </motion.div>
     </motion.section>
-  )
-}
+  );
+};

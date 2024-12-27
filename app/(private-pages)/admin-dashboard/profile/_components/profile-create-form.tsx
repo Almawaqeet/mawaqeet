@@ -3,7 +3,7 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger
+  AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,7 +12,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from '@/components/ui/form';
 import { Heading } from '@/components/ui/heading';
 import { Input } from '@/components/ui/input';
@@ -21,7 +21,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { profileSchema, type ProfileFormValues } from '@/lib/form-schema';
@@ -38,7 +38,7 @@ interface ProfileFormType {
 }
 const ProfileCreateForm: React.FC<ProfileFormType> = ({
   initialData,
-  categories
+  categories,
 }) => {
   const params = useParams();
   const router = useRouter();
@@ -64,25 +64,25 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
         startdate: '',
         enddate: '',
         jobcountry: '',
-        jobcity: ''
-      }
-    ]
+        jobcity: '',
+      },
+    ],
   };
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
     defaultValues,
-    mode: 'onChange'
+    mode: 'onChange',
   });
 
   const {
     control,
-    formState: { errors }
+    formState: { errors },
   } = form;
 
   const { append, remove, fields } = useFieldArray({
     control,
-    name: 'jobs'
+    name: 'jobs',
   });
 
   const onSubmit = async (data: ProfileFormValues) => {
@@ -128,7 +128,14 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
     {
       id: 'Step 1',
       name: 'Personal Information',
-      fields: ['firstname', 'lastname', 'email', 'contactno', 'country', 'city']
+      fields: [
+        'firstname',
+        'lastname',
+        'email',
+        'contactno',
+        'country',
+        'city',
+      ],
     },
     {
       id: 'Step 2',
@@ -141,19 +148,19 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
           `jobs.${index}.startdate`,
           `jobs.${index}.enddate`,
           `jobs.${index}.jobcountry`,
-          `jobs.${index}.jobcity`
+          `jobs.${index}.jobcity`,
           // Add other field names as needed
         ])
-        .flat()
+        .flat(),
     },
-    { id: 'Step 3', name: 'Complete' }
+    { id: 'Step 3', name: 'Complete' },
   ];
 
   const next = async () => {
     const fields = steps[currentStep].fields;
 
     const output = await form.trigger(fields as FieldName[], {
-      shouldFocus: true
+      shouldFocus: true,
     });
 
     if (!output) return;
@@ -569,7 +576,7 @@ const ProfileCreateForm: React.FC<ProfileFormType> = ({
                         startdate: '',
                         enddate: '',
                         jobcountry: '',
-                        jobcity: ''
+                        jobcity: '',
                       })
                     }
                   >

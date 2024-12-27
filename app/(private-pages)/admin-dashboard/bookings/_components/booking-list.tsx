@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { useGetAllActivePackages } from "@/api/services/packages";
-import { Card } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { CLIENT_ROUTES } from "@/lib/routes";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { SearchIcon, PackageIcon } from "lucide-react";
+import { useGetAllActivePackages } from '@/api/services/packages';
+import { Card } from '@/components/ui/card';
+import { motion } from 'framer-motion';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import { CLIENT_ROUTES } from '@/lib/routes';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import { SearchIcon, PackageIcon } from 'lucide-react';
 
 export default function PackageBookingList() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const { data: packages, isLoading } = useGetAllActivePackages({
     search: searchQuery,
-    package_type: undefined
+    package_type: undefined,
   });
   const router = useRouter();
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5 }
+    transition: { duration: 0.5 },
   };
 
   return (
@@ -35,8 +35,12 @@ export default function PackageBookingList() {
       {/* Header and Search Section */}
       <div className="space-y-6">
         <div className="space-y-2">
-          <h1 className="text-2xl font-bold text-gray-900">Package Bookings Overview</h1>
-          <p className="text-gray-600">Manage and track all package reservations in one place</p>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Package Bookings Overview
+          </h1>
+          <p className="text-gray-600">
+            Manage and track all package reservations in one place
+          </p>
         </div>
 
         <div className="relative max-w-xl">
@@ -79,7 +83,13 @@ export default function PackageBookingList() {
                   <Card
                     key={pkg.id}
                     className="p-4 hover:shadow-md transition-all duration-300 cursor-pointer border border-gray-100 hover:border-brand-color rounded-lg group"
-                    onClick={() => router.push(CLIENT_ROUTES.PrivatePages.adminDashboard.bookings.viewBookingsForPackage(pkg?.id as string))}
+                    onClick={() =>
+                      router.push(
+                        CLIENT_ROUTES.PrivatePages.adminDashboard.bookings.viewBookingsForPackage(
+                          pkg?.id as string
+                        )
+                      )
+                    }
                   >
                     <div className="flex items-start gap-3">
                       <div className="bg-brand-color/10 p-2 rounded-lg group-hover:bg-brand-color/20 transition-colors">
@@ -90,14 +100,17 @@ export default function PackageBookingList() {
                           {pkg?.name ?? 'Unnamed Package'}
                         </h3>
                         <div className="flex flex-wrap gap-2">
-                          <Badge variant="outline" className="capitalize px-2 py-0.5 text-sm">
+                          <Badge
+                            variant="outline"
+                            className="capitalize px-2 py-0.5 text-sm"
+                          >
                             {pkg?.package_type}
                           </Badge>
                           <Badge
-                            variant={pkg?.is_active ? "default" : "secondary"}
+                            variant={pkg?.is_active ? 'default' : 'secondary'}
                             className="px-2 py-0.5 text-sm"
                           >
-                            {pkg?.is_active ? "Active" : "Inactive"}
+                            {pkg?.is_active ? 'Active' : 'Inactive'}
                           </Badge>
                         </div>
                         <Button
@@ -115,7 +128,9 @@ export default function PackageBookingList() {
               {packages?.results?.length === 0 && (
                 <div className="text-center py-8 space-y-2">
                   <PackageIcon className="h-12 w-12 text-gray-300 mx-auto" />
-                  <p className="text-gray-500">No packages found matching your search.</p>
+                  <p className="text-gray-500">
+                    No packages found matching your search.
+                  </p>
                 </div>
               )}
             </>

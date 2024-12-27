@@ -6,7 +6,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 import {
   Table,
@@ -14,11 +14,11 @@ import {
   TableCell,
   TableHead,
   TableHeader,
-  TableRow
+  TableRow,
 } from '@/components/ui/table';
 import {
   DoubleArrowLeftIcon,
-  DoubleArrowRightIcon
+  DoubleArrowRightIcon,
 } from '@radix-ui/react-icons';
 import {
   ColumnDef,
@@ -28,12 +28,10 @@ import {
   PaginationState,
   useReactTable,
   getFilteredRowModel,
-  FilterFn
+  FilterFn,
 } from '@tanstack/react-table';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { parseAsInteger, useQueryState } from 'nuqs';
-
-
 
 // Fuzzy search filter function
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
@@ -55,7 +53,7 @@ export function DataTable<TData, TValue>({
   data,
   totalItems,
   pageSizeOptions = [10, 20, 30, 40, 50],
-  searchKey
+  searchKey,
 }: DataTableProps<TData, TValue>) {
   const [currentPage, setCurrentPage] = useQueryState(
     'page',
@@ -68,14 +66,13 @@ export function DataTable<TData, TValue>({
       .withDefault(10)
   );
 
-  const [globalFilter, setGlobalFilter] = useQueryState(
-    'q',
-    { defaultValue: '' }
-  );
+  const [globalFilter, setGlobalFilter] = useQueryState('q', {
+    defaultValue: '',
+  });
 
   const paginationState = {
     pageIndex: (currentPage ?? 1) - 1,
-    pageSize: pageSize ?? 10
+    pageSize: pageSize ?? 10,
   };
 
   const pageCount = Math.ceil((totalItems ?? 0) / (pageSize ?? 10));
@@ -100,7 +97,7 @@ export function DataTable<TData, TValue>({
     pageCount: pageCount,
     state: {
       pagination: paginationState,
-      globalFilter
+      globalFilter,
     },
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: fuzzyFilter,
@@ -109,7 +106,7 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     manualPagination: true,
-    manualFiltering: true
+    manualFiltering: true,
   });
 
   return (
@@ -118,7 +115,10 @@ export function DataTable<TData, TValue>({
         <Table className="relative">
           <TableHeader>
             {table.getHeaderGroups()?.map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="border-b border-gray-300">
+              <TableRow
+                key={headerGroup.id}
+                className="border-b border-gray-300"
+              >
                 {headerGroup.headers?.map((header) => (
                   <TableHead key={header.id}>
                     {header.isPlaceholder
@@ -141,13 +141,14 @@ export function DataTable<TData, TValue>({
                   className="border-b border-gray-300 hover:bg-gray-50/70"
                 >
                   {row.getVisibleCells()?.map((cell) => (
-                    <TableCell key={cell.id} className="border-b border-gray-300">
+                    <TableCell
+                      key={cell.id}
+                      className="border-b border-gray-300"
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
-
-
                     </TableCell>
                   ))}
                 </TableRow>
@@ -213,7 +214,8 @@ export function DataTable<TData, TValue>({
           <div className="flex w-[150px] items-center justify-center text-sm font-medium text-black">
             {(totalItems ?? 0) > 0 ? (
               <>
-                Page {paginationState.pageIndex + 1} of {table.getPageCount() ?? 1}
+                Page {paginationState.pageIndex + 1} of{' '}
+                {table.getPageCount() ?? 1}
               </>
             ) : (
               'No pages'

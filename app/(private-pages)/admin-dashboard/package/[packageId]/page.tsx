@@ -4,7 +4,7 @@ import ViewPackage from '../_components/view-package';
 import ViewPackageSkeleton from '../_components/view-package-skeleton';
 
 export const metadata = {
-  title: 'Dashboard : Package View'
+  title: 'Dashboard : Package View',
 };
 
 type PageProps = { params: { packageId: string } };

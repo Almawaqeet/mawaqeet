@@ -2,10 +2,8 @@ import AppSidebarClient from '@/components/layout/app-sidebar-client';
 import { ACCOUNT_TYPES } from '@/constants/generic';
 import { checkAuth } from '@/lib/utils';
 
-
-
 export default async function DashboardLayoutClient({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {

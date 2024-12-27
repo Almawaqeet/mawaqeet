@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const PackageInfo = () => {
-  return (
-    <div>PackageInfo</div>
-  )
-}
+  return <div>PackageInfo</div>;
+};
 
-export default PackageInfo
+export default PackageInfo;

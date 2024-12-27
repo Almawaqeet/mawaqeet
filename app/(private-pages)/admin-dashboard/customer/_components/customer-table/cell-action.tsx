@@ -6,7 +6,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { User } from '@/api/types';
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
@@ -43,7 +43,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
           <DropdownMenuItem
-            onClick={() => router.push(`/admin-dashboard/customer/${data?.email}`)}
+            onClick={() =>
+              router.push(`/admin-dashboard/customer/${data?.email}`)
+            }
           >
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>

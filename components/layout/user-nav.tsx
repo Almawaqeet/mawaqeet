@@ -9,7 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useSession } from 'next-auth/react';
 import { extractInitials } from '@/lib/utils';
@@ -19,12 +19,12 @@ import { CLIENT_ROUTES } from '@/lib/routes';
 
 export function UserNav() {
   const { data: session } = useSession();
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='secondary' className="relative h-8 w-8 rounded-full">
+        <Button variant="secondary" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             {/* <AvatarImage
               src={session.user?.image ?? ''}
@@ -36,11 +36,7 @@ export function UserNav() {
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent
-        className="w-56 bg-white"
-        align="end"
-        forceMount
-      >
+      <DropdownMenuContent className="w-56 bg-white" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">
@@ -53,17 +49,34 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.profile)}>
+          <DropdownMenuItem
+            onClick={() =>
+              router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.profile)
+            }
+          >
             Profile
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
-          {session?.user.accountType === ACCOUNT_TYPES.USER ? <DropdownMenuItem onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.createWallet)}>
-            Wallet
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem> : ''}
-          {session?.user.accountType === ACCOUNT_TYPES.ADMIN && <DropdownMenuItem>Team
-          <DropdownMenuShortcut>⇧⌘T</DropdownMenuShortcut>
-          </DropdownMenuItem>}
+          {session?.user.accountType === ACCOUNT_TYPES.USER ? (
+            <DropdownMenuItem
+              onClick={() =>
+                router.push(
+                  CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.createWallet
+                )
+              }
+            >
+              Wallet
+              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          ) : (
+            ''
+          )}
+          {session?.user.accountType === ACCOUNT_TYPES.ADMIN && (
+            <DropdownMenuItem>
+              Team
+              <DropdownMenuShortcut>⇧⌘T</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>

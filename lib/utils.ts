@@ -1,59 +1,62 @@
-import { type ClassValue, clsx } from "clsx"
-import { getServerSession } from "next-auth"
-import { twMerge } from "tailwind-merge"
-import { authOptions } from "./token"
+import { type ClassValue, clsx } from 'clsx';
+import { getServerSession } from 'next-auth';
+import { twMerge } from 'tailwind-merge';
+import { authOptions } from './token';
 
-import { CLIENT_ROUTES } from "./routes"
-import { redirect } from "next/navigation"
-import { Package, SegregatedPackage } from "@/constants/types"
-import { ACCOUNT_TYPES } from "@/constants/generic"
+import { CLIENT_ROUTES } from './routes';
+import { redirect } from 'next/navigation';
+import { Package, SegregatedPackage } from '@/constants/types';
+import { ACCOUNT_TYPES } from '@/constants/generic';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
-
 export function formatBytes(
-    bytes: number,
-    opts: {
-      decimals?: number;
-      sizeType?: 'accurate' | 'normal';
-    } = {}
-  ) {
-    const { decimals = 0, sizeType = 'normal' } = opts;
+  bytes: number,
+  opts: {
+    decimals?: number;
+    sizeType?: 'accurate' | 'normal';
+  } = {}
+) {
+  const { decimals = 0, sizeType = 'normal' } = opts;
 
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    const accurateSizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB'];
-    if (bytes === 0) return '0 Byte';
-    const i = Math.floor(Math.log(bytes) / Math.log(1024));
-    return `${(bytes / Math.pow(1024, i)).toFixed(decimals)} ${
-      sizeType === 'accurate' ? accurateSizes[i] ?? 'Bytest' : sizes[i] ?? 'Bytes'
-    }`;
-  }
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  const accurateSizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB'];
+  if (bytes === 0) return '0 Byte';
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+  return `${(bytes / Math.pow(1024, i)).toFixed(decimals)} ${
+    sizeType === 'accurate'
+      ? (accurateSizes[i] ?? 'Bytest')
+      : (sizes[i] ?? 'Bytes')
+  }`;
+}
 
-  const SECRET_KEY = process.env.NEXT_PUBLIC_SECRET_KEY || 'default_secret_key';
+const SECRET_KEY = process.env.NEXT_PUBLIC_SECRET_KEY || 'default_secret_key';
 
-  export const encryptData = (data: string) => {
-    return CryptoJS.AES.encrypt(data, SECRET_KEY).toString();
-  };
+export const encryptData = (data: string) => {
+  return CryptoJS.AES.encrypt(data, SECRET_KEY).toString();
+};
 
-  export const decryptData = (ciphertext: string) => {
-    const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET_KEY);
-    return bytes.toString(CryptoJS.enc.Utf8);
-  };
-
+export const decryptData = (ciphertext: string) => {
+  const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET_KEY);
+  return bytes.toString(CryptoJS.enc.Utf8);
+};
 
 export const extractFirstName = (fullName: string) => {
   return fullName.split(' ')[0];
-}
+};
 
 export const convertToKobo = (amount: number) => {
-  return amount * 100
-}
+  return amount * 100;
+};
 
 export const extractInitials = (fullName: string) => {
-  return fullName.split(' ').map(name => name.charAt(0)).join('');
-}
+  return fullName
+    .split(' ')
+    .map((name) => name.charAt(0))
+    .join('');
+};
 
 /**
  * Checks if the user is authenticated and has admin privileges
@@ -62,19 +65,24 @@ export const extractInitials = (fullName: string) => {
  * - User is not an admin
  * @throws {Redirect} Redirects to login page if authentication fails
  */
-export async function checkAuth({pageType}: {pageType: typeof ACCOUNT_TYPES[keyof typeof ACCOUNT_TYPES]}) {
+export async function checkAuth({
+  pageType,
+}: {
+  pageType: (typeof ACCOUNT_TYPES)[keyof typeof ACCOUNT_TYPES];
+}) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
     redirect(CLIENT_ROUTES.PublicPages.auth.login);
   }
 
-  if (pageType === "ADMIN" && session.user?.accountType !== ACCOUNT_TYPES.ADMIN) {
+  if (
+    pageType === 'ADMIN' &&
+    session.user?.accountType !== ACCOUNT_TYPES.ADMIN
+  ) {
     redirect(CLIENT_ROUTES.PublicPages.auth.login);
   }
 }
-
-
 
 /**
  * Transforms an array of Package objects into SegregatedPackage objects with formatted pricing and features
@@ -89,72 +97,84 @@ export async function checkAuth({pageType}: {pageType: typeof ACCOUNT_TYPES[keyo
  * - Limits features to maximum of 4 items
  * - Handles null/undefined values safely
  */
-export const segregatePackageByItsPriceCategory = (packages: Array<Package>, searchQuery: string = ''): SegregatedPackage[] => {
+export const segregatePackageByItsPriceCategory = (
+  packages: Array<Package>,
+  searchQuery: string = ''
+): SegregatedPackage[] => {
   if (!packages?.length) return [];
 
   // filter with parameter if provided
- const normalizeInput = searchQuery.toLowerCase()
-return packages.filter(
-  (item) => item.price.map((tier) => tier.category.toLowerCase().includes(normalizeInput))
-   || item.name.toLowerCase().includes(normalizeInput))
+  const normalizeInput = searchQuery.toLowerCase();
+  return packages
+    .filter(
+      (item) =>
+        item.price.map((tier) =>
+          tier.category.toLowerCase().includes(normalizeInput)
+        ) || item.name.toLowerCase().includes(normalizeInput)
+    )
 
-  .flatMap((pkg) => {
-    if (!pkg?.price?.length) return [];
+    .flatMap((pkg) => {
+      if (!pkg?.price?.length) return [];
 
-    return pkg.price.map((priceItem) => {
-      // if(tier?.toLowerCase() || priceItem.category.toLowerCase() !== tier?.toLowerCase() ) return null
+      return pkg.price.map((priceItem) => {
+        // if(tier?.toLowerCase() || priceItem.category.toLowerCase() !== tier?.toLowerCase() ) return null
 
-      const categoryDescription = pkg.category_description?.find(
-        (desc) => desc.category === priceItem.category
-      );
+        const categoryDescription = pkg.category_description?.find(
+          (desc) => desc.category === priceItem.category
+        );
 
-      // Split description into bullet points if it contains line breaks
-      const descriptionPoints = categoryDescription?.description?.split('\n').filter(Boolean) ?? [];
+        // Split description into bullet points if it contains line breaks
+        const descriptionPoints =
+          categoryDescription?.description?.split('\n').filter(Boolean) ?? [];
 
-      // Extract text content from li tags if present
-      const processedPoints = descriptionPoints?.map(point => {
-        if (!point) return '';
-        const liMatch = point.match(/<li>([^<]+):([^<]+)<\/li>/);
-        if (liMatch?.[1] && liMatch?.[2]) {
-          return `${liMatch[1]}: ${liMatch[2].trim()}`;
-        }
-        return point;
-      }) ?? [];
+        // Extract text content from li tags if present
+        const processedPoints =
+          descriptionPoints?.map((point) => {
+            if (!point) return '';
+            const liMatch = point.match(/<li>([^<]+):([^<]+)<\/li>/);
+            if (liMatch?.[1] && liMatch?.[2]) {
+              return `${liMatch[1]}: ${liMatch[2].trim()}`;
+            }
+            return point;
+          }) ?? [];
 
-      const allFeatures = [
-        ...processedPoints,
-        pkg.expiry_date ? `Package valid until ${new Date(pkg.expiry_date).toLocaleDateString()}` : ''
-      ].filter(Boolean);
+        const allFeatures = [
+          ...processedPoints,
+          pkg.expiry_date
+            ? `Package valid until ${new Date(pkg.expiry_date).toLocaleDateString()}`
+            : '',
+        ].filter(Boolean);
 
-    
-      return {
-        id: pkg.id ?? '',
-        type: pkg.package_type,
-        tier: priceItem.category.toUpperCase(),
-        cohort: pkg.name ?? '',
-        price: `₦${parseInt(priceItem.price ?? '0').toLocaleString()}`,
-        paymentPlan: `Payable in installment`,
-        features: allFeatures.slice(0, 4)
-      };
+        return {
+          id: pkg.id ?? '',
+          type: pkg.package_type,
+          tier: priceItem.category.toUpperCase(),
+          cohort: pkg.name ?? '',
+          price: `₦${parseInt(priceItem.price ?? '0').toLocaleString()}`,
+          paymentPlan: `Payable in installment`,
+          features: allFeatures.slice(0, 4),
+        };
+      });
     });
-  });
-}
+};
 
-export const addSearchParamsToUrl = (url: string, params: Record<string, string>) => {
+export const addSearchParamsToUrl = (
+  url: string,
+  params: Record<string, string>
+) => {
   const searchParams = new URLSearchParams(params);
   return `${url}?${searchParams.toString()}`;
-}
+};
 
-
-export const removeSearchParamsFromUrl = (url: string, params: Record<string, string>) => {
+export const removeSearchParamsFromUrl = (
+  url: string,
+  params: Record<string, string>
+) => {
   const searchParams = new URLSearchParams(params);
   return url.split('?')[0];
-}
-
+};
 
 export const getSearchParamsFromUrl = (url: string) => {
   const searchParams = new URLSearchParams(url.split('?')[1]);
   return Object.fromEntries(searchParams.entries());
-}
-
-
+};

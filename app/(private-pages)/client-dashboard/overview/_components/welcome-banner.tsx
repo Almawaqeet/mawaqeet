@@ -1,20 +1,26 @@
-import React from 'react'
-import { X } from 'lucide-react'
-import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
-import { CLIENT_ROUTES } from '@/lib/routes'
+import React from 'react';
+import { X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import { CLIENT_ROUTES } from '@/lib/routes';
 
 type WelcomeBannerProps = {
-  onClose: () => void
-  title: string
-  description: string
-  buttonAction: () => void
-  buttonText?: string
-}
+  onClose: () => void;
+  title: string;
+  description: string;
+  buttonAction: () => void;
+  buttonText?: string;
+};
 
-const WelcomeBanner = ({ onClose, title, description, buttonAction, buttonText = 'Book Now' }: WelcomeBannerProps) => {
-  const router = useRouter()
+const WelcomeBanner = ({
+  onClose,
+  title,
+  description,
+  buttonAction,
+  buttonText = 'Book Now',
+}: WelcomeBannerProps) => {
+  const router = useRouter();
 
   return (
     <motion.div
@@ -28,9 +34,7 @@ const WelcomeBanner = ({ onClose, title, description, buttonAction, buttonText =
         <p className="text-sm">{description}</p>
       </div>
       <div className="flex gap-2">
-        <Button onClick={buttonAction}>
-          {buttonText}
-        </Button>
+        <Button onClick={buttonAction}>{buttonText}</Button>
         <button
           onClick={onClose}
           className="p-2 hover:bg-yellow-300 rounded-full"
@@ -39,7 +43,7 @@ const WelcomeBanner = ({ onClose, title, description, buttonAction, buttonText =
         </button>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default WelcomeBanner
+export default WelcomeBanner;

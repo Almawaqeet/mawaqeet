@@ -1,127 +1,126 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     /* Base colors aligned with brand */
-    --background: #FDF5EA;  /* Light warm beige background */
-    --foreground: #251301;  /* Brand dark brown text */
+    --background: #fdf5ea; /* Light warm beige background */
+    --foreground: #251301; /* Brand dark brown text */
 
     /* Muted variants */
-    --muted: #E5DBD0;      /* Brand subtle color */
-    --muted-foreground: #4D3C2B;
+    --muted: #e5dbd0; /* Brand subtle color */
+    --muted-foreground: #4d3c2b;
 
     /* Surface colors */
-    --popover: #FDF5EA;
+    --popover: #fdf5ea;
     --popover-foreground: #251301;
-    --card: #FDF5EA;
+    --card: #fdf5ea;
     --card-foreground: #251301;
 
     /* Borders and inputs */
-    --border: #D1BFAB;     /* Brand light color */
-    --input: #D1BFAB;
+    --border: #d1bfab; /* Brand light color */
+    --input: #d1bfab;
 
     /* Primary colors using brand main */
-    --primary: #875929;     /* Brand main color */
-    --primary-foreground: #FFFFFF;
+    --primary: #875929; /* Brand main color */
+    --primary-foreground: #ffffff;
 
     /* Secondary colors */
-    --secondary: #E5DBD0;   /* Brand subtle color */
+    --secondary: #e5dbd0; /* Brand subtle color */
     --secondary-foreground: #875929;
 
     /* Accent colors */
-    --accent: #D1BFAB;      /* Brand light color */
+    --accent: #d1bfab; /* Brand light color */
     --accent-foreground: #875929;
 
     /* System colors */
-    --destructive: #E63946;
-    --destructive-foreground: #FFFFFF;
+    --destructive: #e63946;
+    --destructive-foreground: #ffffff;
     --ring: #875929;
     --radius: 0.5rem;
 
     /* Chart colors using brand palette */
-    --chart-1: #875929;     /* brand-color-main */
-    --chart-2: #251301;     /* brand-color */
-    --chart-3: #D1BFAB;     /* brand-color-light */
-    --chart-4: #E5DBD0;     /* brand-color-subtle */
-    --chart-5: #6B4720;     /* darker brand variation */
+    --chart-1: #875929; /* brand-color-main */
+    --chart-2: #251301; /* brand-color */
+    --chart-3: #d1bfab; /* brand-color-light */
+    --chart-4: #e5dbd0; /* brand-color-subtle */
+    --chart-5: #6b4720; /* darker brand variation */
 
     /* Sidebar styling */
-    --sidebar-background: #FDF5EA;
+    --sidebar-background: #fdf5ea;
     --sidebar-foreground: #251301;
     --sidebar-primary: #875929;
-    --sidebar-primary-foreground: #FFFFFF;
-    --sidebar-accent: #D1BFAB;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #d1bfab;
     --sidebar-accent-foreground: #251301;
-    --sidebar-border: #D1BFAB;
+    --sidebar-border: #d1bfab;
     --sidebar-ring: #875929;
 
     /* Brand colors */
     --font-poppins: 'Poppins', system-ui, sans-serif;
     --brand-color: #251301;
-    --brand-color-subtle: #E5DBD0;
-    --brand-color-light: #D1BFAB;
+    --brand-color-subtle: #e5dbd0;
+    --brand-color-light: #d1bfab;
     --brand-color-main: #875929;
-    --brand-color-white: #FFFFFF;
+    --brand-color-white: #ffffff;
     --brand-color-black: #000000;
     --brand-color-text: #686868;
 
     @layer base {
-        * {
-          @apply border-[#D1BFAB];
-        }
-        body {
-          @apply text-[#251301];
-        }
+      * {
+        @apply border-[#D1BFAB];
       }
+      body {
+        @apply text-[#251301];
+      }
+    }
   }
 
   .dark {
-    --background: #251301;    /* Brand dark brown background */
-    --foreground: #FDF5EA;    /* Light warm text */
+    --background: #251301; /* Brand dark brown background */
+    --foreground: #fdf5ea; /* Light warm text */
 
-    --muted: #3D2815;         /* Darker brown */
-    --muted-foreground: #D1BFAB;
+    --muted: #3d2815; /* Darker brown */
+    --muted-foreground: #d1bfab;
 
     --popover: #251301;
-    --popover-foreground: #FDF5EA;
+    --popover-foreground: #fdf5ea;
 
-    --card: #2D1702;          /* Slightly lighter than background */
-    --card-foreground: #FDF5EA;
+    --card: #2d1702; /* Slightly lighter than background */
+    --card-foreground: #fdf5ea;
 
-    --border: #4D3C2B;        /* Medium brown border */
-    --input: #4D3C2B;
+    --border: #4d3c2b; /* Medium brown border */
+    --input: #4d3c2b;
 
-    --primary: #875929;       /* Keep brand main color */
-    --primary-foreground: #FFFFFF;
+    --primary: #875929; /* Keep brand main color */
+    --primary-foreground: #ffffff;
 
-    --secondary: #3D2815;
-    --secondary-foreground: #FDF5EA;
+    --secondary: #3d2815;
+    --secondary-foreground: #fdf5ea;
 
-    --accent: #3D2815;
-    --accent-foreground: #FDF5EA;
+    --accent: #3d2815;
+    --accent-foreground: #fdf5ea;
 
-    --destructive: #E63946;
-    --destructive-foreground: #FFFFFF;
+    --destructive: #e63946;
+    --destructive-foreground: #ffffff;
 
     --ring: #875929;
 
-    --chart-1: #875929;      /* brand-color-main */
-    --chart-2: #FDF5EA;      /* light color */
-    --chart-3: #D1BFAB;      /* brand-color-light */
-    --chart-4: #E5DBD0;      /* brand-color-subtle */
-    --chart-5: #6B4720;      /* darker brand variation */
+    --chart-1: #875929; /* brand-color-main */
+    --chart-2: #fdf5ea; /* light color */
+    --chart-3: #d1bfab; /* brand-color-light */
+    --chart-4: #e5dbd0; /* brand-color-subtle */
+    --chart-5: #6b4720; /* darker brand variation */
 
-    --sidebar-background: #2D1702;
-    --sidebar-foreground: #FDF5EA;
+    --sidebar-background: #2d1702;
+    --sidebar-foreground: #fdf5ea;
     --sidebar-primary: #875929;
-    --sidebar-primary-foreground: #FFFFFF;
-    --sidebar-accent: #3D2815;
-    --sidebar-accent-foreground: #FDF5EA;
-    --sidebar-border: #4D3C2B;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #3d2815;
+    --sidebar-accent-foreground: #fdf5ea;
+    --sidebar-border: #4d3c2b;
     --sidebar-ring: #875929;
   }
 }
@@ -162,7 +161,7 @@
   right: 40%;
   font-family: 'Poppins', sans-serif;
   bottom: 0;
-  background-color: #87592A;
+  background-color: #87592a;
   transform-origin: top right;
   display: grid;
   margin: auto;
@@ -183,7 +182,7 @@
   left: 40%;
   right: 40%;
   bottom: 0;
-  background-color: #87592A;
+  background-color: #87592a;
   transform-origin: top right;
   display: grid;
   margin: auto;
@@ -196,7 +195,7 @@
   left: 40%;
   right: 45%;
   bottom: 0;
-  background-color: #87592A;
+  background-color: #87592a;
 }
 
 .home::before {
@@ -224,7 +223,7 @@
   width: 90%;
   height: 90%;
   margin: auto;
-  background-color: #87592A;
+  background-color: #87592a;
   border-radius: 100%;
   transition: all 0.1s ease-in-out;
 }
@@ -243,7 +242,7 @@
   width: 90%;
   height: 90%;
   margin: auto;
-  background-color: #87592A;
+  background-color: #87592a;
   border-radius: 100%;
   transition: all 0.1s ease-in-out;
 }
@@ -254,7 +253,7 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: #87592A;
+  background-color: #87592a;
   position: absolute;
   transform-origin: top right;
   transform: skewX(32deg);
@@ -269,7 +268,7 @@
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: #87592A;
+  background-color: #87592a;
   position: absolute;
   transform-origin: top right;
   transform: skewX(32deg);
@@ -289,14 +288,14 @@
   z-index: -1;
 }
 
-.bg-scheme{
-  background-image: url("../public//images/bg-scheme.png");
+.bg-scheme {
+  background-image: url('../public//images/bg-scheme.png');
 }
 
 .savingscheme::after {
   content: '';
   position: absolute;
-  background-color: #87592A;
+  background-color: #87592a;
   opacity: 85%;
   top: 0;
   bottom: 0;
@@ -313,7 +312,7 @@
   bottom: -12%;
   position: absolute;
   z-index: 1;
-  background-color: #A88A69;
+  background-color: #a88a69;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
 }
@@ -326,7 +325,7 @@
   bottom: 0;
   position: absolute;
   z-index: 1;
-  background-color: #87592A;
+  background-color: #87592a;
 }
 
 @media screen and (min-width: 769px) {
@@ -338,7 +337,7 @@
     bottom: -1%;
     position: absolute;
     z-index: 1;
-    background-color: #A88A69;
+    background-color: #a88a69;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
   }
@@ -351,7 +350,7 @@
     bottom: 0;
     position: absolute;
     z-index: 1;
-    background-color: #87592A;
+    background-color: #87592a;
   }
 }
 

@@ -1,21 +1,23 @@
-import axiosInstance from "@/api/axios";
-
+import axiosInstance from '@/api/axios';
 
 interface ServerGetConfig {
   params?: Record<string, any>;
   headers?: Record<string, any>;
 }
 
-export const createServerAxiosInstance = async (url: string, config?: ServerGetConfig) => {
+export const createServerAxiosInstance = async (
+  url: string,
+  config?: ServerGetConfig
+) => {
   try {
     if (!url) throw new Error('URL is required');
 
     const response = await axiosInstance.get(`${url}`, {
       headers: {
         'Content-Type': 'application/json',
-        ...config?.headers
+        ...config?.headers,
       },
-      params: config?.params
+      params: config?.params,
     });
 
     return response;

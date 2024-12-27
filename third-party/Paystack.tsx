@@ -8,14 +8,20 @@ interface UsePaystackConfig {
   onClose?: () => void;
 }
 
-export const usePaystack = ({ email, amount, reference, onSuccess, onClose }: UsePaystackConfig) => {
+export const usePaystack = ({
+  email,
+  amount,
+  reference,
+  onSuccess,
+  onClose,
+}: UsePaystackConfig) => {
   const config = {
     reference: reference ?? '',
     email: email ?? '',
     amount: amount ?? 0,
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY ?? '',
     onSuccess: onSuccess ?? (() => {}),
-    onClose: onClose ?? (() => {})
+    onClose: onClose ?? (() => {}),
   };
 
   const initializePayment = () => {
@@ -24,6 +30,6 @@ export const usePaystack = ({ email, amount, reference, onSuccess, onClose }: Us
   };
 
   return {
-    initializePayment
+    initializePayment,
   };
 };

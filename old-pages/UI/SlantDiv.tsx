@@ -8,7 +8,9 @@ interface SlantDivProps {
 
 // Functional component with props typed
 const SlantDiv: React.FC<SlantDivProps> = ({ children, className }) => {
-  return <div className={`slantDiv relative ${className || ''}`}>{children}</div>;
+  return (
+    <div className={`slantDiv relative ${className || ''}`}>{children}</div>
+  );
 };
 
 export default SlantDiv;

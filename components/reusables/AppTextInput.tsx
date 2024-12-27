@@ -1,6 +1,7 @@
 import React from 'react';
 
-interface AppTextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface AppTextInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
   icon?: React.ReactNode;
@@ -16,7 +17,9 @@ const AppTextInput: React.FC<AppTextInputProps> = ({
   return (
     <div className="w-full">
       {label && (
-        <label className={`block text-sm font-medium mb-1 ${error ? 'text-red-500' : 'text-gray-700'}`}>
+        <label
+          className={`block text-sm font-medium mb-1 ${error ? 'text-red-500' : 'text-gray-700'}`}
+        >
           {label}
         </label>
       )}
@@ -31,7 +34,9 @@ const AppTextInput: React.FC<AppTextInputProps> = ({
           {...props}
         />
         {icon && (
-          <div className={`absolute right-4 top-1/2 -translate-y-1/2 ${error ? 'text-red-500' : 'text-gray-500'}`}>
+          <div
+            className={`absolute right-4 top-1/2 -translate-y-1/2 ${error ? 'text-red-500' : 'text-gray-500'}`}
+          >
             {icon}
           </div>
         )}

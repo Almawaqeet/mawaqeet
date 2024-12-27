@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Image from 'next/image';
 
 import { hajj_and_umrah_saving_scheme } from '../contents/services';
@@ -63,13 +63,12 @@ const SavingScheme: React.FC = () => {
         >
           <div className="bg-number-color opacity-85  min-h-56 md:min-h-[17rem] mobile:w-full sm:w-[269px] md:w-[350px] tab_md:w-[360px] lg:w-[450px] relative  sm:left-1/2 transform sm:-translate-x-1/2 tablg:w-[400px] tabxl:w-[435px] xl:w-[550px]"></div>
           <Image
-          src={'/images/scheme.png'}
-          alt='scheme'
-          className="drop-shadow-black-white rounded-lg absolute xmd:h-[270px] sm:w-5/6 lg:w-5/6 xl:w-5/6 xmd:w-full md:w-[639px] xmd:left-1/2 xmd:transform sm:h-[270px] -translate-x-1/2 xmd:px-7 xmd:-bottom-7 md:h-[320px]  sm:px-0"
-          width={300}
-          height={300}
-
-           />
+            src={'/images/scheme.png'}
+            alt="scheme"
+            className="drop-shadow-black-white rounded-lg absolute xmd:h-[270px] sm:w-5/6 lg:w-5/6 xl:w-5/6 xmd:w-full md:w-[639px] xmd:left-1/2 xmd:transform sm:h-[270px] -translate-x-1/2 xmd:px-7 xmd:-bottom-7 md:h-[320px]  sm:px-0"
+            width={300}
+            height={300}
+          />
         </div>
       </div>
 

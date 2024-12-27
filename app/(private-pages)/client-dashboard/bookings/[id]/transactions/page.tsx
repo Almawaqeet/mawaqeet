@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import React from 'react'
+import React from 'react';
 
 const BookingTransactionsPage = () => {
   return (
@@ -11,7 +11,7 @@ const BookingTransactionsPage = () => {
         {/* Transaction details will be added here */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BookingTransactionsPage
+export default BookingTransactionsPage;

@@ -5,14 +5,14 @@ import { FieldProps } from 'formik';
 type InputProps = {
   inputstyle?: string;
   input_type: string;
-  placeholder: InputHTMLAttributes<HTMLInputElement>['placeholder']
+  placeholder: InputHTMLAttributes<HTMLInputElement>['placeholder'];
 };
 
 const CustomInputComponent: React.FC<InputProps & FieldProps> = ({
   field,
   inputstyle,
   input_type,
-  placeholder
+  placeholder,
 }) => {
   return (
     <input

@@ -1,22 +1,28 @@
-"use client"
+'use client';
 import React from 'react';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 import AppHeading from '@/components/reusables/AppHeading';
 import Image from 'next/image';
-import { IoMdCall } from "react-icons/io";
-import { IoLogoWhatsapp } from "react-icons/io5";
-import { IoMdMail } from "react-icons/io";
+import { IoMdCall } from 'react-icons/io';
+import { IoLogoWhatsapp } from 'react-icons/io5';
+import { IoMdMail } from 'react-icons/io';
 
 const LiveCall = () => {
   return (
-    <section className={`w-full ${whiteSpaces?.paddingX} px-[10px] py-16 bg-brand-color-subtle`}>
+    <section
+      className={`w-full ${whiteSpaces?.paddingX} px-[10px] py-16 bg-brand-color-subtle`}
+    >
       <div className="max-w-4xl mx-auto text-center">
-        <AppHeading variant="h2" className="text-3xl md:text-4xl text-center mb-4">
+        <AppHeading
+          variant="h2"
+          className="text-3xl md:text-4xl text-center mb-4"
+        >
           Want to Learn More About Us?
         </AppHeading>
 
         <p className="text-brand-color-text mb-8">
-          Do you Need More Information About Our Company and Services? Connect with Our Consultants for a Live Session via the Contact Options Below.
+          Do you Need More Information About Our Company and Services? Connect
+          with Our Consultants for a Live Session via the Contact Options Below.
         </p>
 
         <div className="flex flex-col items-center">
@@ -46,9 +52,15 @@ const LiveCall = () => {
                 className="w-12 h-12 rounded-full bg-[#1A1A1A] hover:bg-gray-800 transition-colors flex items-center justify-center"
                 onClick={() => console.log(`Contact via ${option}`)}
               >
-                {option === 'phone' && <IoMdCall className="w-6 h-6 text-brand-color-subtle" />}
-                {option === 'whatsapp' && <IoLogoWhatsapp className="w-6 h-6 text-brand-color-subtle" />}
-                {option === 'email' && <IoMdMail className="w-6 h-6 text-brand-color-subtle" />}
+                {option === 'phone' && (
+                  <IoMdCall className="w-6 h-6 text-brand-color-subtle" />
+                )}
+                {option === 'whatsapp' && (
+                  <IoLogoWhatsapp className="w-6 h-6 text-brand-color-subtle" />
+                )}
+                {option === 'email' && (
+                  <IoMdMail className="w-6 h-6 text-brand-color-subtle" />
+                )}
               </button>
             ))}
           </div>

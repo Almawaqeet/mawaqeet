@@ -1,26 +1,18 @@
-"use client"
+'use client';
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { ring } from 'ldrs'
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ring } from 'ldrs';
 
 // Register the loading animation
 if (typeof window !== 'undefined') {
   ring.register();
 }
 
-export const LoadingIcon = ({ color = "white" }) => {
+export const LoadingIcon = ({ color = 'white' }) => {
   if (typeof window === 'undefined') return null;
-  return (
-    <l-ring
-      size={20}
-      stroke={4}
-      speed={2}
-      color={color}
-      bg-opacity="0"
-    />
-  );
-}
+  return <l-ring size={20} stroke={4} speed={2} color={color} bg-opacity="0" />;
+};
 
 interface ButtonProps {
   width?: string;
@@ -42,10 +34,10 @@ interface ButtonProps {
 
 const AppButton: React.FC<ButtonProps> = ({
   type,
-  width = "auto",
-  height = "45px",
+  width = 'auto',
+  height = '45px',
   loading = false,
-  loadingSize = "40px",
+  loadingSize = '40px',
   iconSpacing = false,
   icon,
   iconPosition = 'end',
@@ -53,7 +45,7 @@ const AppButton: React.FC<ButtonProps> = ({
   onClick,
   disabled = false,
   children,
-  variant = 'primary'
+  variant = 'primary',
 }) => {
   const [active, setActive] = useState(false);
 
@@ -75,9 +67,10 @@ const AppButton: React.FC<ButtonProps> = ({
     ${loading ? 'w-[40px] h-[45px] p-[10px] rounded-full' : `w-[${width}] h-[${height}] p-5 rounded-full`}
   `;
 
-  const variantClasses = variant === 'secondary'
-    ? `bg-brand-color-light text-brand-color border-[0.5px] border-brand-color hover:bg-brand-color-light hover:text-brand-color-main ${disabled ? 'bg-opacity-70' : ''}`
-    : `bg-brand-color text-brand-color-white ${disabled ? 'bg-opacity-70' : ''}`;
+  const variantClasses =
+    variant === 'secondary'
+      ? `bg-brand-color-light text-brand-color border-[0.5px] border-brand-color hover:bg-brand-color-light hover:text-brand-color-main ${disabled ? 'bg-opacity-70' : ''}`
+      : `bg-brand-color text-brand-color-white ${disabled ? 'bg-opacity-70' : ''}`;
 
   const renderContent = () => {
     if (loading) return <LoadingIcon />;
@@ -108,7 +101,7 @@ const AppButton: React.FC<ButtonProps> = ({
       `}
       type={type}
       onClick={handleClick}
-      title={disabled ? "Disabled" : ""}
+      title={disabled ? 'Disabled' : ''}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}

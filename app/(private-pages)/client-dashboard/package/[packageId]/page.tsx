@@ -3,9 +3,8 @@ import ViewPackageSkeleton from '@/app/(private-pages)/admin-dashboard/package/_
 import PageContainer from '@/components/layout/page-container';
 import { Suspense } from 'react';
 
-
 export const metadata = {
-  title: 'Dashboard : Package View'
+  title: 'Dashboard : Package View',
 };
 
 type PageProps = { params: { packageId: string } };

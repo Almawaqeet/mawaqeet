@@ -1,16 +1,16 @@
 'use client';
-import AppHeading from "@/components/reusables/AppHeading";
-import { TeamEmptyState } from "@/components/reusables/PackagesEmptyState";
+import AppHeading from '@/components/reusables/AppHeading';
+import { TeamEmptyState } from '@/components/reusables/PackagesEmptyState';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { about_us_team } from "@/old-pages/contents/about";
-import Image from "next/image";
-import { FaArrowLeft } from "react-icons/fa6";
-import { CLIENT_ROUTES } from "@/lib/routes";
+import { about_us_team } from '@/old-pages/contents/about';
+import Image from 'next/image';
+import { FaArrowLeft } from 'react-icons/fa6';
+import { CLIENT_ROUTES } from '@/lib/routes';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 
 const SingularTeam = ({ id }: { id: string }) => {
-    const router = useRouter();
+  const router = useRouter();
   const teamMember = about_us_team.find((itm) => itm.id === id);
 
   if (!teamMember) return <TeamEmptyState />;
@@ -24,13 +24,15 @@ const SingularTeam = ({ id }: { id: string }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-transparent z-10" />
         <div className="bg-static-image absolute inset-0 bg-cover bg-center transform scale-105 hover:scale-110 transition-transform duration-1000" />
 
-        <div className={`relative z-20 h-full max-w-7xl mx-auto ${whiteSpaces.paddingX}`}>
+        <div
+          className={`relative z-20 h-full max-w-7xl mx-auto ${whiteSpaces.paddingX}`}
+        >
           <div className="flex flex-col md:flex-row items-center justify-between h-full py-8 sm:py-16 gap-8 sm:gap-12">
             <div className="flex-1 space-y-6 sm:space-y-8 text-center md:text-left">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
               >
                 <AppHeading
                   variant="h2"
@@ -47,7 +49,7 @@ const SingularTeam = ({ id }: { id: string }) => {
             <motion.div
               initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
               className="relative"
             >
               <div className="w-64 h-64 sm:w-72 sm:h-72 md:w-96 md:h-96 relative group">
@@ -67,19 +69,24 @@ const SingularTeam = ({ id }: { id: string }) => {
       </div>
 
       {/* Profile Details */}
-      <div className={`max-w-7xl mx-auto ${whiteSpaces.paddingX} py-12 sm:py-20`}>
+      <div
+        className={`max-w-7xl mx-auto ${whiteSpaces.paddingX} py-12 sm:py-20`}
+      >
         <div className="grid grid-cols-1 gap-8 sm:gap-12 max-w-4xl mx-auto">
           {profile.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               className="bg-white p-6 sm:p-10 duration-300 rounded-xl shadow-md hover:shadow-lg"
             >
               {Object.values(item).map((detail, i) => (
-                <p key={i} className="text-gray-700 text-lg sm:text-xl leading-relaxed mb-4 sm:mb-6 last:mb-0">
+                <p
+                  key={i}
+                  className="text-gray-700 text-lg sm:text-xl leading-relaxed mb-4 sm:mb-6 last:mb-0"
+                >
                   {detail}
                 </p>
               ))}

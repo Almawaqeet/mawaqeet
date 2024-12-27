@@ -1,27 +1,31 @@
-"use client"
+'use client';
 
 interface PackageSkeletonProps {
   theme?: 'light' | 'dark';
 }
 
-const PackageSkeleton: React.FC<PackageSkeletonProps> = ({ theme = 'dark' }) => {
+const PackageSkeleton: React.FC<PackageSkeletonProps> = ({
+  theme = 'dark',
+}) => {
   const themeStyles = {
     light: {
       background: 'bg-white',
       border: 'border-gray-200',
-      skeleton: 'bg-gray-100'
+      skeleton: 'bg-gray-100',
     },
     dark: {
       background: 'bg-[#1A1A1A]',
       border: 'border-[#333333]',
-      skeleton: 'bg-[#333333]'
-    }
+      skeleton: 'bg-[#333333]',
+    },
   };
 
   const styles = themeStyles[theme];
 
   return (
-    <div className={`${styles.background} p-6 rounded-lg border ${styles.border} flex flex-col h-full animate-pulse`}>
+    <div
+      className={`${styles.background} p-6 rounded-lg border ${styles.border} flex flex-col h-full animate-pulse`}
+    >
       <div className="flex-1">
         <div className="flex items-center gap-2 mb-2">
           <div className={`w-6 h-6 rounded-full ${styles.skeleton}`} />

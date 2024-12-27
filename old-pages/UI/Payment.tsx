@@ -1,33 +1,36 @@
-import React, { ReactNode, useState, useEffect } from 'react'
-import { whiteSpaces } from '../utilities/GlobalSpaces'
-import { payment } from '../contents/payment'
-import Paragraph from '../utilities/Paragraph'
-import PayInfo from './PayInfo'
-import AppInfo from './ApplicationForm'
+import React, { ReactNode, useState, useEffect } from 'react';
+import { whiteSpaces } from '../utilities/GlobalSpaces';
+import { payment } from '../contents/payment';
+import Paragraph from '../utilities/Paragraph';
+import PayInfo from './PayInfo';
+import AppInfo from './ApplicationForm';
 
 const Payment = () => {
-  const [selectedComponent, setSelectedComponent] = useState<ReactNode>(<PayInfo />);
+  const [selectedComponent, setSelectedComponent] = useState<ReactNode>(
+    <PayInfo />
+  );
   const [selectedNumber, setSelectedNumber] = useState<number>(0);
 
   useEffect(() => {
-
     setSelectedComponent(<PayInfo />);
   }, []);
 
   const handlePayment = (i: number) => {
     setSelectedNumber(i);
     setSelectedComponent(i === 1 ? <PayInfo /> : <AppInfo />);
-  }
+  };
 
   return (
     <div>
       <section className={`max-w-[2000px] m-auto ${whiteSpaces.paddingY}`}>
-        <main className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:pt-[89px] md:pt-[79px]`}>
+        <main
+          className={` xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:pt-[89px] md:pt-[79px]`}
+        >
           {payment.map((itm) => (
-            <div className='flex gap-9' key={itm.id}>
+            <div className="flex gap-9" key={itm.id}>
               {itm.content.map((cont) => (
                 <Paragraph
-                  type='global'
+                  type="global"
                   key={`${cont.id}--`}
                   classname={`  xmd:pb-10 md:pb-[58px] cursor-pointer ${selectedNumber === itm.id ? 'font-bold text-black text-Bold-1-clamp' : 'text-[#848484]'}`}
                   onClick={() => handlePayment(itm.id)}
@@ -45,7 +48,7 @@ const Payment = () => {
       </section>
       {selectedNumber && selectedComponent ? <PayInfo /> : <AppInfo />}
     </div>
-  )
-}
+  );
+};
 
 export default Payment;

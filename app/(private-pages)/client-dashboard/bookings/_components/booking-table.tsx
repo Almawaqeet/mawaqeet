@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -15,17 +15,30 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { getUserBookings } from "@/api/services/booking";
-import { format, differenceInDays } from "date-fns";
-import Link from "next/link";
-import { InboxIcon, EyeIcon, CrownIcon, StarIcon, DiamondIcon, CalendarIcon,  ClockIcon, PackageIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { BookingTableSkeleton } from "./booking-table-skeleton";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { CLIENT_ROUTES } from "@/lib/routes";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { getUserBookings } from '@/api/services/booking';
+import { format, differenceInDays } from 'date-fns';
+import Link from 'next/link';
+import {
+  InboxIcon,
+  EyeIcon,
+  CrownIcon,
+  StarIcon,
+  DiamondIcon,
+  CalendarIcon,
+  ClockIcon,
+  PackageIcon,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { BookingTableSkeleton } from './booking-table-skeleton';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { CLIENT_ROUTES } from '@/lib/routes';
+import { useRouter } from 'next/navigation';
 
 interface BookingTableProps {
   packageId?: string;
@@ -33,7 +46,7 @@ interface BookingTableProps {
 
 export const BookingTable = ({ packageId }: BookingTableProps) => {
   const { data: userBookings, isLoading } = getUserBookings();
-  const router = useRouter()
+  const router = useRouter();
 
   const renderLoadingSkeleton = () => (
     <>
@@ -64,15 +77,22 @@ export const BookingTable = ({ packageId }: BookingTableProps) => {
   };
 
   const getCategoryIcon = (category: string | undefined) => {
-    if (!category) return <StarIcon className="h-5 w-5 transition-all duration-200" />;
+    if (!category)
+      return <StarIcon className="h-5 w-5 transition-all duration-200" />;
 
-    switch(category.toLowerCase()) {
+    switch (category.toLowerCase()) {
       case 'vip':
-        return <CrownIcon className="h-5 w-5 text-yellow-500 drop-shadow-md transition-all duration-200 hover:scale-110" />;
+        return (
+          <CrownIcon className="h-5 w-5 text-yellow-500 drop-shadow-md transition-all duration-200 hover:scale-110" />
+        );
       case 'deluxe':
-        return <DiamondIcon className="h-5 w-5 text-purple-500 drop-shadow-md transition-all duration-200 hover:scale-110" />;
+        return (
+          <DiamondIcon className="h-5 w-5 text-purple-500 drop-shadow-md transition-all duration-200 hover:scale-110" />
+        );
       case 'standard':
-        return <StarIcon className="h-5 w-5 text-blue-500 drop-shadow-md transition-all duration-200 hover:scale-110" />;
+        return (
+          <StarIcon className="h-5 w-5 text-blue-500 drop-shadow-md transition-all duration-200 hover:scale-110" />
+        );
       default:
         return <StarIcon className="h-5 w-5 transition-all duration-200" />;
     }
@@ -110,28 +130,51 @@ export const BookingTable = ({ packageId }: BookingTableProps) => {
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/50">
-                  <TableHead className="font-bold p-2 md:p-4">Package Details</TableHead>
-                  <TableHead className="font-bold p-2 md:p-4 hidden sm:table-cell">Booking Date</TableHead>
+                  <TableHead className="font-bold p-2 md:p-4">
+                    Package Details
+                  </TableHead>
+                  <TableHead className="font-bold p-2 md:p-4 hidden sm:table-cell">
+                    Booking Date
+                  </TableHead>
                   <TableHead className="font-bold p-2 md:p-4">Status</TableHead>
-                  <TableHead className="font-bold p-2 md:p-4 hidden md:table-cell">Amount</TableHead>
-                  <TableHead className="font-bold p-2 md:p-4 hidden lg:table-cell">Expiry Date</TableHead>
-                  <TableHead className="font-bold p-2 md:p-4">Actions</TableHead>
+                  <TableHead className="font-bold p-2 md:p-4 hidden md:table-cell">
+                    Amount
+                  </TableHead>
+                  <TableHead className="font-bold p-2 md:p-4 hidden lg:table-cell">
+                    Expiry Date
+                  </TableHead>
+                  <TableHead className="font-bold p-2 md:p-4">
+                    Actions
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {isLoading ? (
                   renderLoadingSkeleton()
-                ) : !userBookings?.bookings || userBookings.bookings.length === 0 ? (
+                ) : !userBookings?.bookings ||
+                  userBookings.bookings.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={6} className="text-center py-12">
                       <div className="flex flex-col items-center gap-3">
                         <div className="rounded-full bg-muted p-3">
                           <InboxIcon className="h-8 w-8 text-muted-foreground" />
                         </div>
-                        <p className="text-muted-foreground text-lg font-medium">No bookings found</p>
-                        <p className="text-sm text-muted-foreground mb-2">Start your journey by booking a package</p>
-                        <Link href={CLIENT_ROUTES.PrivatePages.clientDashboard.packages}>
-                          <Button variant="outline" size="lg" className="mt-2 hover:bg-primary transition-colors">
+                        <p className="text-muted-foreground text-lg font-medium">
+                          No bookings found
+                        </p>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          Start your journey by booking a package
+                        </p>
+                        <Link
+                          href={
+                            CLIENT_ROUTES.PrivatePages.clientDashboard.packages
+                          }
+                        >
+                          <Button
+                            variant="outline"
+                            size="lg"
+                            className="mt-2 hover:bg-primary transition-colors"
+                          >
                             Explore Packages
                           </Button>
                         </Link>
@@ -140,16 +183,22 @@ export const BookingTable = ({ packageId }: BookingTableProps) => {
                   </TableRow>
                 ) : (
                   userBookings?.bookings.map((booking) => (
-                    <TableRow key={booking?.id ?? 'unknown'} className="hover:bg-muted/30 transition-colors">
+                    <TableRow
+                      key={booking?.id ?? 'unknown'}
+                      className="hover:bg-muted/30 transition-colors"
+                    >
                       <TableCell className="font-medium p-4 text-sm sm:text-base">
                         <div className="flex items-center gap-3">
                           <div className="bg-muted rounded-lg p-2">
                             {getCategoryIcon(booking?.selected_price?.category)}
                           </div>
                           <div>
-                            <span className="font-semibold text-base">{booking?.package?.name ?? 'Unnamed Package'}</span>
+                            <span className="font-semibold text-base">
+                              {booking?.package?.name ?? 'Unnamed Package'}
+                            </span>
                             <span className="text-xs text-muted-foreground mt-1 block font-medium">
-                              {booking?.selected_price?.category ?? 'No category'}
+                              {booking?.selected_price?.category ??
+                                'No category'}
                             </span>
                           </div>
                         </div>
@@ -158,34 +207,59 @@ export const BookingTable = ({ packageId }: BookingTableProps) => {
                         <div className="flex items-center gap-2">
                           <CalendarIcon className="h-4 w-4 text-muted-foreground" />
                           <span className="text-sm">
-                            {booking.created_at ? format(new Date(booking?.created_at), 'MMM dd, yyyy') : 'No date'}
+                            {booking.created_at
+                              ? format(
+                                  new Date(booking?.created_at),
+                                  'MMM dd, yyyy'
+                                )
+                              : 'No date'}
                           </span>
                         </div>
                       </TableCell>
                       <TableCell className="p-4">
                         <Badge
-                          variant={getStatusColor(booking?.status) as "default" | "destructive" | "outline" | "secondary"}
+                          variant={
+                            getStatusColor(booking?.status) as
+                              | 'default'
+                              | 'destructive'
+                              | 'outline'
+                              | 'secondary'
+                          }
                           className="text-xs font-medium px-3 py-1 rounded-full"
                         >
                           {formatStatus(booking?.status)}
                         </Badge>
                       </TableCell>
                       <TableCell className="p-4 hidden md:table-cell">
-                          <span className="font-semibold">
-                            ₦{booking.balance ? Number(booking.balance).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
-                          </span>
+                        <span className="font-semibold">
+                          ₦
+                          {booking.balance
+                            ? Number(booking.balance).toLocaleString('en-NG', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              })
+                            : '0.00'}
+                        </span>
                       </TableCell>
                       <TableCell className="p-4 hidden lg:table-cell">
                         <div className="flex items-center gap-2">
                           <ClockIcon className="h-4 w-4 text-muted-foreground" />
                           {booking?.expiry_date ? (
-                            <span className={cn(
-                              "text-sm",
-                              isExpiryClose(booking.expiry_date) && "text-red-500 font-medium"
-                            )}>
-                              {format(new Date(booking.expiry_date), 'MMM dd, yyyy')}
+                            <span
+                              className={cn(
+                                'text-sm',
+                                isExpiryClose(booking.expiry_date) &&
+                                  'text-red-500 font-medium'
+                              )}
+                            >
+                              {format(
+                                new Date(booking.expiry_date),
+                                'MMM dd, yyyy'
+                              )}
                             </span>
-                          ) : 'No expiry date'}
+                          ) : (
+                            'No expiry date'
+                          )}
                         </div>
                       </TableCell>
                       <TableCell className="p-4">
@@ -195,10 +269,18 @@ export const BookingTable = ({ packageId }: BookingTableProps) => {
                               variant="ghost"
                               size="sm"
                               className="hover:bg-primary/10 text-primary transition-colors"
-                              onClick={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.booking.viewBooking(booking?.id ?? ''))}
+                              onClick={() =>
+                                router.push(
+                                  CLIENT_ROUTES.PrivatePages.clientDashboard.booking.viewBooking(
+                                    booking?.id ?? ''
+                                  )
+                                )
+                              }
                             >
                               <EyeIcon className="h-4 w-4 mr-1.5" />
-                              <span className="hidden sm:inline">View Details</span>
+                              <span className="hidden sm:inline">
+                                View Details
+                              </span>
                               <span className="sm:hidden">View</span>
                             </Button>
                           </TooltipTrigger>

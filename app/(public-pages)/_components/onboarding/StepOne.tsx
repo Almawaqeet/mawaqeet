@@ -1,56 +1,57 @@
-"use client"
+'use client';
 
-import React from 'react'
-import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/components/reusables/AppHeading'
-import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import AppButton from '@/components/reusables/AppButton'
-import AppTextInput from '@/components/reusables/AppTextInput'
-import { useCheckIfEmailAddressExist } from '@/api/services/onboarding'
-import { CLIENT_ROUTES } from '@/lib/routes'
-import AppDialogBox from '@/components/reusables/AppDialogBox'
-import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
-import { useAppToast } from '@/components/reusables/AppToast'
+import React from 'react';
+import { FaArrowLeft } from 'react-icons/fa6';
+import AppHeading from '@/components/reusables/AppHeading';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import AppButton from '@/components/reusables/AppButton';
+import AppTextInput from '@/components/reusables/AppTextInput';
+import { useCheckIfEmailAddressExist } from '@/api/services/onboarding';
+import { CLIENT_ROUTES } from '@/lib/routes';
+import AppDialogBox from '@/components/reusables/AppDialogBox';
+import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys';
+import { useAppToast } from '@/components/reusables/AppToast';
 
 import { API_URL } from '@/environment-config';
-
-
 
 const validationSchema = Yup.object({
   email: Yup.string()
     .email('Invalid email address')
-    .required('Email is required')
-})
+    .required('Email is required'),
+});
 
 const StepOneOnboarding = () => {
-  const router = useRouter()
-  const { mutate: checkEmail, isPending } = useCheckIfEmailAddressExist()
-  const [showEmailExistsAlert, setShowEmailExistsAlert] = React.useState(false)
-  const [showStoredEmailDialog, setShowStoredEmailDialog] = React.useState(false)
-  const [showOnboardingDialog, setShowOnboardingDialog] = React.useState(false)
-  const [storedEmail, setStoredEmail] = React.useState<string | null>(null)
-  const { showToast } = useAppToast()
+  const router = useRouter();
+  const { mutate: checkEmail, isPending } = useCheckIfEmailAddressExist();
+  const [showEmailExistsAlert, setShowEmailExistsAlert] = React.useState(false);
+  const [showStoredEmailDialog, setShowStoredEmailDialog] =
+    React.useState(false);
+  const [showOnboardingDialog, setShowOnboardingDialog] = React.useState(false);
+  const [storedEmail, setStoredEmail] = React.useState<string | null>(null);
+  const { showToast } = useAppToast();
   React.useEffect(() => {
-    const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
-    const onboardingId = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
+    const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL);
+    const onboardingId = localStorage.getItem(
+      LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID
+    );
 
     if (onboardingId) {
-      setShowOnboardingDialog(true)
-      return
+      setShowOnboardingDialog(true);
+      return;
     }
 
     if (email) {
-      setStoredEmail(email)
-      setShowStoredEmailDialog(true)
+      setStoredEmail(email);
+      setShowStoredEmailDialog(true);
     }
-  }, [])
+  }, []);
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      email: '',
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -63,49 +64,52 @@ const StepOneOnboarding = () => {
               setShowEmailExistsAlert(true);
               return;
             }
-            localStorage.setItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL, values.email);
+            localStorage.setItem(
+              LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL,
+              values.email
+            );
             router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo);
           },
           onError: () => {
             showToast({
-              title: "Error",
-              description: "An error occurred while checking if the email exists. its not you, its us. Please try again. If the issue persists, please contact support.",
-              variant: "destructive",
+              title: 'Error',
+              description:
+                'An error occurred while checking if the email exists. its not you, its us. Please try again. If the issue persists, please contact support.',
+              variant: 'destructive',
               action: {
-                label: "Contact Support",
-                onClick: () => router.push(CLIENT_ROUTES.PublicPages.contact)
-              }
-            })
-          }
+                label: 'Contact Support',
+                onClick: () => router.push(CLIENT_ROUTES.PublicPages.contact),
+              },
+            });
+          },
         }
       );
     },
-  })
-
+  });
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setShowEmailExistsAlert(false)
-    formik.handleChange(e)
-  }
+    setShowEmailExistsAlert(false);
+    formik.handleChange(e);
+  };
 
   const handleStoredEmailConfirm = () => {
     if (storedEmail) {
-      formik.setFieldValue('email', storedEmail)
-      router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo)
+      formik.setFieldValue('email', storedEmail);
+      router.push(CLIENT_ROUTES.PublicPages.onboarding.stepTwo);
     }
-  }
+  };
 
   const handleStoredEmailCancel = () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
-    setShowStoredEmailDialog(false)
-  }
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL);
+    setShowStoredEmailDialog(false);
+  };
 
   const handleRestartOnboarding = () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_DETAILS)
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
-    setShowOnboardingDialog(false)
-  }
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_DETAILS);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL);
+    setShowOnboardingDialog(false);
+  };
 
   return (
     <motion.div
@@ -134,7 +138,9 @@ const StepOneOnboarding = () => {
         description={`We found that you have already started the onboarding process as ${localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)}. Would you like to continue where you left off?`}
         confirmText="Continue"
         cancelText="Start Over"
-        onConfirm={() => router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree)}
+        onConfirm={() =>
+          router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree)
+        }
         onCancel={handleRestartOnboarding}
       />
 
@@ -176,7 +182,10 @@ const StepOneOnboarding = () => {
           transition={{ delay: 0.7 }}
           className="w-full"
         >
-          <form onSubmit={formik.handleSubmit} className="space-y-4 sm:space-y-6">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="space-y-4 sm:space-y-6"
+          >
             <div className="space-y-2">
               <AppTextInput
                 type="email"
@@ -193,12 +202,14 @@ const StepOneOnboarding = () => {
                 </p>
               ) : (
                 <p className="text-xs sm:text-sm text-gray-500 text-left px-1">
-                  Please make sure the email address you&apos;re inputting is a valid email
+                  Please make sure the email address you&apos;re inputting is a
+                  valid email
                 </p>
               )}
               {showEmailExistsAlert && (
                 <p className="text-red-500 text-xs sm:text-sm px-1">
-                  This email already exists. Please use a different email address.
+                  This email already exists. Please use a different email
+                  address.
                 </p>
               )}
             </div>
@@ -222,7 +233,7 @@ const StepOneOnboarding = () => {
         </motion.div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default StepOneOnboarding
+export default StepOneOnboarding;

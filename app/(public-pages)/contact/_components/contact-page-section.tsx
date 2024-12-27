@@ -1,6 +1,14 @@
 'use client';
 
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaInstagram, FaTwitter, FaBuilding } from 'react-icons/fa';
+import {
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaBuilding,
+} from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 export const ContactPageSection = () => {
@@ -9,9 +17,9 @@ export const ContactPageSection = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: 0.2,
+      },
+    },
   };
 
   const itemVariants = {
@@ -20,9 +28,9 @@ export const ContactPageSection = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5
-      }
-    }
+        duration: 0.5,
+      },
+    },
   };
 
   const socialVariants = {
@@ -30,25 +38,24 @@ export const ContactPageSection = () => {
     visible: {
       scale: 1,
       transition: {
-        type: "spring",
+        type: 'spring',
         stiffness: 200,
-        damping: 10
-      }
-    }
+        damping: 10,
+      },
+    },
   };
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
+    <motion.div initial="hidden" animate="visible" variants={containerVariants}>
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto md:max-w-none md:grid md:grid-cols-2 md:gap-8">
           <motion.div variants={itemVariants}>
-            <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight">Get in touch</h2>
+            <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight">
+              Get in touch
+            </h2>
             <p className="mt-3 text-lg text-gray-500">
-              Have questions about our services? We&apos;re here to help. Send us a message and we&apos;ll respond as soon as possible.
+              Have questions about our services? We&apos;re here to help. Send
+              us a message and we&apos;ll respond as soon as possible.
             </p>
             <div className="mt-9">
               <motion.div
@@ -56,7 +63,10 @@ export const ContactPageSection = () => {
                 whileHover={{ x: 10 }}
               >
                 <div className="flex-shrink-0">
-                  <FaPhone className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                  <FaPhone
+                    className="h-6 w-6 text-gray-400"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
                   <p>+234 (091) 15653889</p>
@@ -68,7 +78,10 @@ export const ContactPageSection = () => {
                 whileHover={{ x: 10 }}
               >
                 <div className="flex-shrink-0">
-                  <FaEnvelope className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                  <FaEnvelope
+                    className="h-6 w-6 text-gray-400"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
                   <p>almawaqeettravelsandtours@gmail.com</p>
@@ -79,7 +92,10 @@ export const ContactPageSection = () => {
                 whileHover={{ x: 10 }}
               >
                 <div className="flex-shrink-0">
-                  <FaMapMarkerAlt className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                  <FaMapMarkerAlt
+                    className="h-6 w-6 text-gray-400"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
                   {/* <p>MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN</p> */}
@@ -91,40 +107,41 @@ export const ContactPageSection = () => {
                 whileHover={{ x: 10 }}
               >
                 <div className="flex-shrink-0">
-                  <FaBuilding className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                  <FaBuilding
+                    className="h-6 w-6 text-gray-400"
+                    aria-hidden="true"
+                  />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
                   <p>Main Office</p>
-                  <p>MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN</p>
+                  <p>
+                    MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE
+                    AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN
+                  </p>
                   {/* <p className="mt-1">Central Business District</p> */}
                 </div>
               </motion.div>
             </div>
           </motion.div>
           <motion.div className="mt-12 md:mt-0" variants={itemVariants}>
-            <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight">Office Hours</h2>
+            <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight">
+              Office Hours
+            </h2>
             <div className="mt-3">
-              <motion.p
-                className="text-lg text-gray-500"
-                whileHover={{ x: 5 }}
-              >
+              <motion.p className="text-lg text-gray-500" whileHover={{ x: 5 }}>
                 Monday - Friday: 8:00 AM - 6:00 PM
               </motion.p>
-              <motion.p
-                className="text-lg text-gray-500"
-                whileHover={{ x: 5 }}
-              >
+              <motion.p className="text-lg text-gray-500" whileHover={{ x: 5 }}>
                 Saturday: 9:00 AM - 1:00 PM
               </motion.p>
-              <motion.p
-                className="text-lg text-gray-500"
-                whileHover={{ x: 5 }}
-              >
+              <motion.p className="text-lg text-gray-500" whileHover={{ x: 5 }}>
                 Sunday: Closed
               </motion.p>
             </div>
             <div className="mt-9">
-              <h3 className="text-lg font-medium text-gray-900">Follow us on social media</h3>
+              <h3 className="text-lg font-medium text-gray-900">
+                Follow us on social media
+              </h3>
               <div className="mt-4 flex space-x-6">
                 <motion.a
                   href="#"

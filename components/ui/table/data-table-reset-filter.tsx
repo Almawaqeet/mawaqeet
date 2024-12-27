@@ -8,12 +8,16 @@ type DataTableResetFilterProps = {
 
 export function DataTableResetFilter({
   isFilterActive,
-  onReset
+  onReset,
 }: DataTableResetFilterProps) {
   return (
     <>
       {isFilterActive ? (
-        <Button variant="outline" className="text-brand-color" onClick={onReset}>
+        <Button
+          variant="outline"
+          className="text-brand-color"
+          onClick={onReset}
+        >
           Reset Filters
         </Button>
       ) : null}

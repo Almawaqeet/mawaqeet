@@ -1,6 +1,5 @@
 import { toast } from 'sonner';
 
-
 interface IError {
   error: string;
   message: string;
@@ -11,7 +10,7 @@ const processError = (err: IError) => {
   const { error, message, status } = err;
   if (error && message) {
     toast.error(error, {
-      description: message
+      description: message,
     });
   } else {
     toast.error(message);

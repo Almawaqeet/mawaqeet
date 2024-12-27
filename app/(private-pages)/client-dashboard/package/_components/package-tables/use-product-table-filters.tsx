@@ -45,6 +45,6 @@ export function useProductTableFilters() {
     resetFilters,
     isAnyFilterActive,
     categoriesFilter,
-    setCategoriesFilter
+    setCategoriesFilter,
   };
 }

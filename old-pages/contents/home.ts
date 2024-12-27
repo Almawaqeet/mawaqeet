@@ -1,9 +1,9 @@
 // Importing icons
 import { StaticImageData } from 'next/image';
 import icon_1 from '../../public/images/icon_1.png';
-  import icon_2 from '../../public/images/icon_2.png';
-  import icon_3 from '../../public/images/icon_3.png';
-  import icon_4 from '../../public/images/icon_4.png';
+import icon_2 from '../../public/images/icon_2.png';
+import icon_3 from '../../public/images/icon_3.png';
+import icon_4 from '../../public/images/icon_4.png';
 
 // Define types for home content
 type HomeContentItem = {
@@ -35,17 +35,17 @@ type WhyReasonsItem = {
 
 type WhyReasons = {
   id: string;
-  reasons: WhyReasonsItem[] ;
+  reasons: WhyReasonsItem[];
 };
 
 // Define types for why_image
 type WhyImageItem = {
   id: string;
   content: {
-      id: string,
-      img: StaticImageData
-    }[]
-}
+    id: string;
+    img: StaticImageData;
+  }[];
+};
 
 // Define types for reach_out_to_us
 type ReachOutItem = {
@@ -68,7 +68,7 @@ export const home: HomeContentItem[] = [
   {
     id: 'bold_text',
     bold_text:
-      "Have you ever wished to experience the peace and calm of being close to Allah in the holiest cities of Islam, Makkah and Madinah?",
+      'Have you ever wished to experience the peace and calm of being close to Allah in the holiest cities of Islam, Makkah and Madinah?',
   },
   {
     id: 'light_text',
@@ -83,7 +83,7 @@ export const home: HomeContentItem[] = [
   {
     id: 'light_text_2',
     light_text_2:
-      "Our Hajj and Umrah Savings Scheme offers a hassle-free, rewarding experience for planning big trips, ensuring a seamless and rewarding experience for our skilled professionals.",
+      'Our Hajj and Umrah Savings Scheme offers a hassle-free, rewarding experience for planning big trips, ensuring a seamless and rewarding experience for our skilled professionals.',
   },
   {
     id: 'bold_text_1',
@@ -164,7 +164,6 @@ export const why_hajj_umrah: WhyReasons[] = [
       },
     ],
   },
-  
 ];
 
 export const whyImages: WhyImageItem[] = [
@@ -173,7 +172,7 @@ export const whyImages: WhyImageItem[] = [
     content: [
       {
         id: 'img_1',
-        img: icon_4 ,
+        img: icon_4,
       },
       {
         id: 'img_2',
@@ -181,15 +180,15 @@ export const whyImages: WhyImageItem[] = [
       },
       {
         id: 'img_3',
-        img: icon_3 ,
+        img: icon_3,
       },
       {
         id: 'img_4',
-        img: icon_4 ,
+        img: icon_4,
       },
     ],
   },
-]
+];
 
 // Data for reach_out_to_us
 export const reach_out_to_us: ReachOutItem[] = [

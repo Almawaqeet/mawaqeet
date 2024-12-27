@@ -2,8 +2,7 @@
 
 import { useCallback, useRef } from 'react';
 import 'react-quill/dist/quill.snow.css';
-import ReactQuill from "react-quill";
-
+import ReactQuill from 'react-quill';
 
 interface RichTextEditorProps {
   value: string;
@@ -12,9 +11,12 @@ interface RichTextEditorProps {
   readOnly?: boolean;
 }
 
-const RichTextEditor = ({ value, onChange, placeholder, readOnly }: RichTextEditorProps) => {
-
-
+const RichTextEditor = ({
+  value,
+  onChange,
+  placeholder,
+  readOnly,
+}: RichTextEditorProps) => {
   const reactQuillRef = useRef<ReactQuill>(null);
 
   const uploadToCloudinary = async (file: File): Promise<string> => {
@@ -26,13 +28,13 @@ const RichTextEditor = ({ value, onChange, placeholder, readOnly }: RichTextEdit
     }
 
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", uploadPreset);
+    formData.append('file', file);
+    formData.append('upload_preset', uploadPreset);
 
     try {
       const res = await fetch(
         `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
-        { method: "POST", body: formData }
+        { method: 'POST', body: formData }
       );
 
       if (!res.ok) {
@@ -55,9 +57,9 @@ const RichTextEditor = ({ value, onChange, placeholder, readOnly }: RichTextEdit
   };
 
   const imageHandler = useCallback(() => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
     input.click();
     input.onchange = async () => {
       if (input !== null && input.files !== null) {
@@ -67,7 +69,7 @@ const RichTextEditor = ({ value, onChange, placeholder, readOnly }: RichTextEdit
           const quill = reactQuillRef.current;
           if (quill) {
             const range = quill.getEditor().getSelection();
-            range && quill.getEditor().insertEmbed(range.index, "image", url);
+            range && quill.getEditor().insertEmbed(range.index, 'image', url);
           }
         } catch (error) {
           console.error('Error uploading image:', error);
@@ -85,15 +87,15 @@ const RichTextEditor = ({ value, onChange, placeholder, readOnly }: RichTextEdit
         [{ list: 'ordered' }, { list: 'bullet' }],
         [{ align: [] }],
         ['link', 'image', 'video'],
-        ['clean']
+        ['clean'],
       ],
       handlers: {
-        image: imageHandler
-      }
+        image: imageHandler,
+      },
     },
     clipboard: {
       matchVisual: false,
-    }
+    },
   };
 
   const formats = [
@@ -107,7 +109,7 @@ const RichTextEditor = ({ value, onChange, placeholder, readOnly }: RichTextEdit
     'align',
     'link',
     'image',
-    'video'
+    'video',
   ];
 
   return (

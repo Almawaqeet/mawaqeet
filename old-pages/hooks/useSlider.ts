@@ -1,6 +1,5 @@
-import { CarouselApi } from "@/components/reusables/carousel";
-import React from "react";
-
+import { CarouselApi } from '@/components/reusables/carousel';
+import React from 'react';
 
 const useSlider = () => {
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
@@ -15,20 +14,18 @@ const useSlider = () => {
     setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap() + 0);
 
-
     const onSelect = () => {
       setCurrent(api.selectedScrollSnap() + 0);
     };
 
     api.on('select', onSelect);
 
-
     return () => {
       api.off('select', onSelect);
     };
   }, [api]);
 
-  return { count, setApi, setCount, current, setCurrent, api }
+  return { count, setApi, setCount, current, setCurrent, api };
 };
 
 export default useSlider;

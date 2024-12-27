@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 import ProductListingPage from './_components/package-listing';
 
 export const metadata = {
-  title: 'Dashboard: Products'
+  title: 'Dashboard: Products',
 };
 import { SearchParams } from 'nuqs/server';
 import ProductTableAction from './_components/package-tables/product-table-action';

@@ -8,44 +8,54 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useSession } from 'next-auth/react';
 import { extractFirstName } from '@/lib/utils';
 import { useCheckIfUserHasAWallet } from '@/api/services/wallet';
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import AppDialogBox from '@/components/reusables/AppDialogBox';
-import { LOCAL_STORAGE_KEYS } from "@/constants/local-storage-keys";
-import { CLIENT_ROUTES } from "@/lib/routes";
+import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys';
+import { CLIENT_ROUTES } from '@/lib/routes';
 import WelcomeBanner from './welcome-banner';
-import { useGetUpcomingHajjAndUmrahPackage, useGetUserFinancialSummary } from '@/api/services/user-anaalytics';
+import {
+  useGetUpcomingHajjAndUmrahPackage,
+  useGetUserFinancialSummary,
+} from '@/api/services/user-anaalytics';
 import { PACKAGE_TYPES } from '@/constants/generic';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function OverViewPage() {
   const { data: session } = useSession();
-  const { data: checkIfUserHasWallet, isLoading: isWalletLoading } = useCheckIfUserHasAWallet();
-  const { data: upcomingPackages, isLoading: isPackagesLoading } = useGetUpcomingHajjAndUmrahPackage();
-  const { data: hajjFinancialSummary, isLoading: isHajjSummaryLoading } = useGetUserFinancialSummary(PACKAGE_TYPES.HAJJ);
-  const { data: umrahFinancialSummary, isLoading: isUmrahSummaryLoading } = useGetUserFinancialSummary(PACKAGE_TYPES.UMRAH);
+  const { data: checkIfUserHasWallet, isLoading: isWalletLoading } =
+    useCheckIfUserHasAWallet();
+  const { data: upcomingPackages, isLoading: isPackagesLoading } =
+    useGetUpcomingHajjAndUmrahPackage();
+  const { data: hajjFinancialSummary, isLoading: isHajjSummaryLoading } =
+    useGetUserFinancialSummary(PACKAGE_TYPES.HAJJ);
+  const { data: umrahFinancialSummary, isLoading: isUmrahSummaryLoading } =
+    useGetUserFinancialSummary(PACKAGE_TYPES.UMRAH);
   const [showWalletModal, setShowWalletModal] = useState(false);
   const [showTermsAndPolicyModal, setShowTermsAndPolicyModal] = useState(false);
   const [showHajjWelcomeBanner, setShowHajjWelcomeBanner] = useState(true);
   const [showUmrahWelcomeBanner, setShowUmrahWelcomeBanner] = useState(false);
 
   const router = useRouter();
-  const userWalletExists = window != undefined ? localStorage.getItem(LOCAL_STORAGE_KEYS.USER_WALLET_STATUS) : false;
+  const userWalletExists =
+    window != undefined
+      ? localStorage.getItem(LOCAL_STORAGE_KEYS.USER_WALLET_STATUS)
+      : false;
 
   useEffect(() => {
     if (!userWalletExists && isWalletLoading && !checkIfUserHasWallet) {
       const intervalModalCall = setInterval(() => {
         setShowWalletModal(true);
-        setShowTermsAndPolicyModal(true)
-      }, 2000)
+        setShowTermsAndPolicyModal(true);
+      }, 2000);
 
-      return () => clearInterval(intervalModalCall)
+      return () => clearInterval(intervalModalCall);
     }
   }, [isWalletLoading, userWalletExists, checkIfUserHasWallet]);
 
@@ -60,9 +70,9 @@ export default function OverViewPage() {
 
   if (isWalletLoading && !userWalletExists && !userWalletExists) {
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/80">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-white"></div>
-        </div>
+      <div className="fixed inset-0 flex items-center justify-center bg-black/80">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-white"></div>
+      </div>
     );
   }
 
@@ -93,7 +103,13 @@ export default function OverViewPage() {
           onClose={() => setShowHajjWelcomeBanner(false)}
           title={`Next Hajj Cohort: ${upcomingPackages?.hajj?.name}`}
           description={`Begin your spiritual journey to the holy lands. Book your Hajj package today! Expires on ${upcomingPackages?.hajj?.expiry_date ? new Date(upcomingPackages.hajj.expiry_date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) : 'N/A'}`}
-          buttonAction={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.viewPackage(upcomingPackages?.hajj?.id as string))}
+          buttonAction={() =>
+            router.push(
+              CLIENT_ROUTES.PrivatePages.clientDashboard.viewPackage(
+                upcomingPackages?.hajj?.id as string
+              )
+            )
+          }
           buttonText="Book Now"
         />
       )}
@@ -104,7 +120,13 @@ export default function OverViewPage() {
           onClose={() => setShowUmrahWelcomeBanner(false)}
           title={`Plan Your Umrah Journey: ${upcomingPackages.umrah.name}`}
           description={`Explore our Umrah packages and start your blessed journey to the holy lands today. Expires on ${upcomingPackages?.umrah?.expiry_date ? new Date(upcomingPackages.umrah.expiry_date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) : 'N/A'}`}
-          buttonAction={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.viewPackage(upcomingPackages?.umrah?.id as string))}
+          buttonAction={() =>
+            router.push(
+              CLIENT_ROUTES.PrivatePages.clientDashboard.viewPackage(
+                upcomingPackages?.umrah?.id as string
+              )
+            )
+          }
           buttonText="View Packages"
         />
       )}
@@ -117,7 +139,11 @@ export default function OverViewPage() {
         cancelText="Later"
         confirmText="Create Wallet"
         onCancel={() => setShowWalletModal(false)}
-        onConfirm={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.createWallet)}
+        onConfirm={() =>
+          router.push(
+            CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.createWallet
+          )
+        }
       />
 
       <AppDialogBox
@@ -131,13 +157,30 @@ export default function OverViewPage() {
       <div className="space-y-2 relative">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-2xl font-bold tracking-tight">
-            Hi {extractFirstName(session?.user?.fullName ?? '')}, Welcome back 👋
+            Hi {extractFirstName(session?.user?.fullName ?? '')}, Welcome back
+            👋
           </h2>
         </div>
         <Tabs defaultValue="hajj" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="hajj" onClick={() => { setShowHajjWelcomeBanner(true); setShowUmrahWelcomeBanner(false)}} className="data-[state=active]:bg-white">Hajj</TabsTrigger>
-            <TabsTrigger value="umrah" onClick={() => { setShowUmrahWelcomeBanner(true); setShowHajjWelcomeBanner(false)}} className="data-[state=active]:bg-white">
+            <TabsTrigger
+              value="hajj"
+              onClick={() => {
+                setShowHajjWelcomeBanner(true);
+                setShowUmrahWelcomeBanner(false);
+              }}
+              className="data-[state=active]:bg-white"
+            >
+              Hajj
+            </TabsTrigger>
+            <TabsTrigger
+              value="umrah"
+              onClick={() => {
+                setShowUmrahWelcomeBanner(true);
+                setShowHajjWelcomeBanner(false);
+              }}
+              className="data-[state=active]:bg-white"
+            >
               Umrah
             </TabsTrigger>
           </TabsList>
@@ -167,7 +210,11 @@ export default function OverViewPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">₦{hajjFinancialSummary?.total_spent?.toLocaleString() ?? '0.00'}</div>
+                    <div className="text-2xl font-bold">
+                      ₦
+                      {hajjFinancialSummary?.total_spent?.toLocaleString() ??
+                        '0.00'}
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       Total amount invested so far
                     </p>
@@ -196,7 +243,11 @@ export default function OverViewPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">₦{hajjFinancialSummary?.active_booking?.total_price?.toLocaleString() ?? '0.00'}</div>
+                    <div className="text-2xl font-bold">
+                      ₦
+                      {hajjFinancialSummary?.active_booking?.total_price?.toLocaleString() ??
+                        '0.00'}
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       Target amount to be saved
                     </p>
@@ -224,7 +275,11 @@ export default function OverViewPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{hajjFinancialSummary?.active_booking?.completion_percentage ?? 0}%</div>
+                    <div className="text-2xl font-bold">
+                      {hajjFinancialSummary?.active_booking
+                        ?.completion_percentage ?? 0}
+                      %
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       Percentage of Hajj target reached
                     </p>
@@ -260,18 +315,20 @@ export default function OverViewPage() {
               </div>
             )}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <div className="col-span-4" id='demo-video'>
-                <QuickActions  />
+              <div className="col-span-4" id="demo-video">
+                <QuickActions />
               </div>
               <Card className="col-span-4 md:col-span-3">
                 <CardHeader>
                   <CardTitle>Recent Hajj Transactions</CardTitle>
-                  <CardDescription>Summary of your recent package payment</CardDescription>
-                  </CardHeader>
-                  <CardContent>
+                  <CardDescription>
+                    Summary of your recent package payment
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
                   <RecentSales type={PACKAGE_TYPES.HAJJ} />
                 </CardContent>
-                </Card>
+              </Card>
             </div>
           </TabsContent>
 
@@ -299,7 +356,11 @@ export default function OverViewPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">₦{umrahFinancialSummary?.total_spent?.toLocaleString() ?? '0.00'}</div>
+                    <div className="text-2xl font-bold">
+                      ₦
+                      {umrahFinancialSummary?.total_spent?.toLocaleString() ??
+                        '0.00'}
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       Total amount invested for Umrah
                     </p>
@@ -326,7 +387,11 @@ export default function OverViewPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">₦{umrahFinancialSummary?.active_booking?.total_price?.toLocaleString() ?? '0.00'}</div>
+                    <div className="text-2xl font-bold">
+                      ₦
+                      {umrahFinancialSummary?.active_booking?.total_price?.toLocaleString() ??
+                        '0.00'}
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       Target amount for Umrah
                     </p>
@@ -352,7 +417,11 @@ export default function OverViewPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">{umrahFinancialSummary?.active_booking?.completion_percentage ?? 0}%</div>
+                    <div className="text-2xl font-bold">
+                      {umrahFinancialSummary?.active_booking
+                        ?.completion_percentage ?? 0}
+                      %
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       Percentage of Umrah target reached
                     </p>
@@ -386,8 +455,8 @@ export default function OverViewPage() {
               </div>
             )}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <div className="col-span-4" id='demo-video'>
-              <QuickActions  />
+              <div className="col-span-4" id="demo-video">
+                <QuickActions />
               </div>
               <Card className="col-span-4 md:col-span-3">
                 <CardHeader>
@@ -397,7 +466,7 @@ export default function OverViewPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <RecentSales type={PACKAGE_TYPES.UMRAH}/>
+                  <RecentSales type={PACKAGE_TYPES.UMRAH} />
                 </CardContent>
               </Card>
             </div>

@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import { Metadata } from 'next';
 import { HeroSection } from '@/app/(public-pages)/_components/landing-page/HeroSection';
 import ActivePackages from '@/app/(public-pages)/_components/landing-page/ActivePackages';
 import HeroSectionCarousel from '@/app/(public-pages)/_components/landing-page/HeroSectionCarousel';
@@ -21,7 +21,7 @@ async function getInitialData() {
   const data = await createServerAxiosInstance(route);
   await queryClient.prefetchQuery({
     queryKey: [baseQueryKey],
-    queryFn: () => data
+    queryFn: () => data,
   });
   return queryClient;
 }
@@ -31,9 +31,7 @@ export default async function LandingPage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <main
-        className="flex flex-col gap-8"
-      >
+      <main className="flex flex-col gap-8">
         <HeroSection />
         <HeroSectionCarousel />
         <WhyUs />
@@ -45,11 +43,13 @@ export default async function LandingPage() {
         <Faqs />
       </main>
     </HydrationBoundary>
-  )
+  );
 }
 
 export const metadata: Metadata = {
-  title: "Al-Mawaqeet Travels and Tours | Home",
-  description: "Your trusted partner for Hajj and Umrah services. We provide comprehensive travel packages, guidance and support for your spiritual journey.",
-  keywords: "hajj, umrah, islamic travel, muslim pilgrimage, mecca travel, medina tours, religious tourism, travel agency",
+  title: 'Al-Mawaqeet Travels and Tours | Home',
+  description:
+    'Your trusted partner for Hajj and Umrah services. We provide comprehensive travel packages, guidance and support for your spiritual journey.',
+  keywords:
+    'hajj, umrah, islamic travel, muslim pilgrimage, mecca travel, medina tours, religious tourism, travel agency',
 };

@@ -1,34 +1,30 @@
-"use client"
+'use client';
 
-import React from 'react'
-import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/components/reusables/AppHeading'
-import AppButton from '@/components/reusables/AppButton'
-import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { CLIENT_ROUTES } from '@/lib/routes'
-import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
-
-
+import React from 'react';
+import { FaArrowLeft } from 'react-icons/fa6';
+import AppHeading from '@/components/reusables/AppHeading';
+import AppButton from '@/components/reusables/AppButton';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { CLIENT_ROUTES } from '@/lib/routes';
+import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys';
 
 const NewUser = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const handleGetStarted = () => {
-    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
-  }
+    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne);
+  };
 
   const handleLogin = () => {
-    router.push(CLIENT_ROUTES.PublicPages.auth.login)
-  }
+    router.push(CLIENT_ROUTES.PublicPages.auth.login);
+  };
 
   React.useEffect(() => {
     if (localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_COMPLETED_STATUS)) {
-      router.push(CLIENT_ROUTES.PublicPages.auth.login)
+      router.push(CLIENT_ROUTES.PublicPages.auth.login);
     }
-  }, [router])
-
-
+  }, [router]);
 
   return (
     <motion.div
@@ -66,7 +62,8 @@ const NewUser = () => {
           transition={{ delay: 0.5 }}
           className="text-brand-color-text mb-8 text-center sm:text-left text-sm sm:text-base"
         >
-          If you&apos;re new to this portal, please click the &quot;Get Started&quot; button below to begin the onboarding process
+          If you&apos;re new to this portal, please click the &quot;Get
+          Started&quot; button below to begin the onboarding process
         </motion.p>
 
         <motion.div
@@ -97,7 +94,7 @@ const NewUser = () => {
         </motion.div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default NewUser
+export default NewUser;

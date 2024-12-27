@@ -1,5 +1,4 @@
-""
-
+('');
 
 import PageContainer from '@/components/layout/page-container';
 import { Heading } from '@/components/ui/heading';
@@ -22,23 +21,17 @@ export default async function EmployeeListingPage({}: TEmployeeListingPage) {
     page,
     limit: pageLimit,
     ...(search && { search }),
-    ...(gender && { genders: gender })
+    ...(gender && { genders: gender }),
   };
-
-
-
 
   return (
     <PageContainer scrollable>
       <div className="space-y-4">
         <div className="flex items-start justify-between">
-          <Heading
-            title={`Users`}
-            description="See all registered users"
-          />
+          <Heading title={`Users`} description="See all registered users" />
         </div>
         <Separator />
-        <CustomerTable  />
+        <CustomerTable />
       </div>
     </PageContainer>
   );

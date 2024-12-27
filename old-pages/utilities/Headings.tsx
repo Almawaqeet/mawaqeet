@@ -4,7 +4,15 @@ import React from 'react';
 
 interface HeadingsProps {
   children: React.ReactNode | StaticImageData | null;
-  type: 'BrandText' | 'heroHeading' | 'heading_1' | 'heading_2' | 'quoteText' | 'schemeText' | 'sectionName'| 'global';
+  type:
+    | 'BrandText'
+    | 'heroHeading'
+    | 'heading_1'
+    | 'heading_2'
+    | 'quoteText'
+    | 'schemeText'
+    | 'sectionName'
+    | 'global';
   classname?: string;
 }
 
@@ -26,11 +34,11 @@ const Headings: React.FC<HeadingsProps> = ({ children, type, classname }) => {
     heading_2: `${Bold_2_clamp} font-bold tracking-wide mobile:leading-[14px] sm:leading-[20px]  `,
     quoteText: `${quote} font-bold tracking-wide mobile:leading-5 sm:leading-6 md:leading-10 text-left  `,
     schemeText: `${scheme} font-bold mobile:tracking-normal text-white sm:tracking-[1.6px] mobile:leading-8 md:leading-12 text-center  `,
-    global: `${global}`
+    global: `${global}`,
   };
 
   const renderContent = () => {
-    if(!children) return null
+    if (!children) return null;
     if (typeof children === 'object' && 'src' in children) {
       // If the child is an image, render it as an Image component
       return <Image src={children} alt="" className={classname} />;
@@ -62,8 +70,8 @@ const Headings: React.FC<HeadingsProps> = ({ children, type, classname }) => {
     case 'sectionName':
       return <h4 className={styles[type]}>{renderContent()}</h4>;
 
-      case 'global':
-        return <h4 className={styles[type]}>{renderContent()}</h4>;
+    case 'global':
+      return <h4 className={styles[type]}>{renderContent()}</h4>;
 
     default:
       return null;

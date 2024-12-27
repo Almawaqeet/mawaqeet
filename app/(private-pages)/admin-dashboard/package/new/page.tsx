@@ -10,7 +10,7 @@ import { CategoryForm } from '../_components/new-package/category-form';
 import AppButton from '@/components/reusables/AppButton';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useCreatePackage } from '@/api/services/packages';
-import { useAppToast } from '@/components/reusables/AppToast'
+import { useAppToast } from '@/components/reusables/AppToast';
 import { useRouter } from 'next/navigation';
 import AppDialogBox from '@/components/reusables/AppDialogBox';
 
@@ -19,18 +19,22 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().required('Package description is required'),
   package_type: Yup.string().required('Package type is required'),
   expiry_date: Yup.string().required('Expiry date is required'),
-  package_prices: Yup.array().of(
-    Yup.object().shape({
-      category: Yup.string().required(),
-      price: Yup.string().required('Price is required')
-    })
-  ).required('Package prices are required'),
-  category_descriptions: Yup.array().of(
-    Yup.object().shape({
-      category: Yup.string().required(),
-      description: Yup.string().required('Category description is required')
-    })
-  ).required('Category descriptions are required')
+  package_prices: Yup.array()
+    .of(
+      Yup.object().shape({
+        category: Yup.string().required(),
+        price: Yup.string().required('Price is required'),
+      })
+    )
+    .required('Package prices are required'),
+  category_descriptions: Yup.array()
+    .of(
+      Yup.object().shape({
+        category: Yup.string().required(),
+        description: Yup.string().required('Category description is required'),
+      })
+    )
+    .required('Category descriptions are required'),
 });
 
 const initialValues = {
@@ -41,14 +45,14 @@ const initialValues = {
   package_prices: [
     { category: 'vip', price: '' },
     { category: 'deluxe', price: '' },
-    { category: 'standard', price: '' }
+    { category: 'standard', price: '' },
   ],
   category_descriptions: [
     { category: 'vip', description: '' },
     { category: 'deluxe', description: '' },
-    { category: 'standard', description: '' }
+    { category: 'standard', description: '' },
   ],
-  is_active: true
+  is_active: true,
 };
 
 export default function NewPackagePage() {
@@ -58,7 +62,7 @@ export default function NewPackagePage() {
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const { mutate: createPackage, isPending } = useCreatePackage();
   const router = useRouter();
-  const { showToast } = useAppToast()
+  const { showToast } = useAppToast();
 
   const isBasicDetailsComplete = (values: typeof initialValues) => {
     return values.name && values.description;
@@ -69,24 +73,31 @@ export default function NewPackagePage() {
   };
 
   const handleSubmit = async (values: typeof initialValues) => {
-    if (!values.name || !values.description || !values.package_type || !values.expiry_date) {
+    if (
+      !values.name ||
+      !values.description ||
+      !values.package_type ||
+      !values.expiry_date
+    ) {
       showToast({
-        title: "Error",
-        description: "Please fill in all required fields",
-        variant: "destructive"
+        title: 'Error',
+        description: 'Please fill in all required fields',
+        variant: 'destructive',
       });
       return;
     }
 
     // Validate package prices and descriptions
-    const hasEmptyPrices = values.package_prices.some(price => !price.price);
-    const hasEmptyDescriptions = values.category_descriptions.some(desc => !desc.description);
+    const hasEmptyPrices = values.package_prices.some((price) => !price.price);
+    const hasEmptyDescriptions = values.category_descriptions.some(
+      (desc) => !desc.description
+    );
 
     if (hasEmptyPrices || hasEmptyDescriptions) {
       showToast({
-        title: "Error",
-        description: "Please fill in all category prices and descriptions",
-        variant: "destructive"
+        title: 'Error',
+        description: 'Please fill in all category prices and descriptions',
+        variant: 'destructive',
       });
       return;
     }
@@ -95,9 +106,9 @@ export default function NewPackagePage() {
     const expiryDate = new Date(values.expiry_date);
     if (expiryDate < new Date()) {
       showToast({
-        title: "Error",
-        description: "Expiry date cannot be in the past",
-        variant: "destructive"
+        title: 'Error',
+        description: 'Expiry date cannot be in the past',
+        variant: 'destructive',
       });
       return;
     }
@@ -110,11 +121,11 @@ export default function NewPackagePage() {
         onError: (error: unknown) => {
           const err = error as { data?: { message?: string } };
           showToast({
-            title: "Error",
+            title: 'Error',
             description: err?.data?.message || 'An error occurred',
-            variant: "destructive"
+            variant: 'destructive',
           });
-        }
+        },
       });
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -148,10 +159,12 @@ export default function NewPackagePage() {
     switch (dialogStep) {
       case 1:
         return {
-          title: "Package Creation Rules",
+          title: 'Package Creation Rules',
           content: (
             <div className="space-y-4">
-              <p className="font-medium">Please note the following rules when creating a package:</p>
+              <p className="font-medium">
+                Please note the following rules when creating a package:
+              </p>
               <ul className="list-disc pl-5 space-y-2">
                 <li>Package name and description are required</li>
                 <li>Expiry date must not be in the past</li>
@@ -159,33 +172,42 @@ export default function NewPackagePage() {
                 <li>Each category must have a detailed description</li>
               </ul>
             </div>
-          )
+          ),
         };
       case 2:
         return {
-          title: "Category Benefits - Part 1",
+          title: 'Category Benefits - Part 1',
           content: (
             <div className="space-y-4">
               <ul className="list-disc pl-5 space-y-2">
-                <li><span className="font-semibold">VIP:</span> Premium access to all features, priority support, exclusive events</li>
-                <li><span className="font-semibold">Deluxe:</span> Enhanced features, priority booking, special discounts</li>
+                <li>
+                  <span className="font-semibold">VIP:</span> Premium access to
+                  all features, priority support, exclusive events
+                </li>
+                <li>
+                  <span className="font-semibold">Deluxe:</span> Enhanced
+                  features, priority booking, special discounts
+                </li>
               </ul>
             </div>
-          )
+          ),
         };
       case 3:
         return {
-          title: "Category Benefits - Part 2",
+          title: 'Category Benefits - Part 2',
           content: (
             <div className="space-y-4">
               <ul className="list-disc pl-5 space-y-2">
-                <li><span className="font-semibold">Standard:</span> Basic features, regular support, standard benefits</li>
+                <li>
+                  <span className="font-semibold">Standard:</span> Basic
+                  features, regular support, standard benefits
+                </li>
               </ul>
             </div>
-          )
+          ),
         };
       default:
-        return { title: "", content: null };
+        return { title: '', content: null };
     }
   };
 
@@ -202,7 +224,7 @@ export default function NewPackagePage() {
         onOpenChange={setShowDialog}
         title={dialogContent.title}
         description={dialogContent.content}
-        confirmText={dialogStep === 3 ? "Get Started" : "Continue"}
+        confirmText={dialogStep === 3 ? 'Get Started' : 'Continue'}
         cancelText="Skip"
         onConfirm={handleDialogContinue}
         onCancel={() => {
@@ -217,8 +239,14 @@ export default function NewPackagePage() {
         title="Package Created Successfully"
         description={
           <div className="space-y-4">
-            <p>Your package has been created successfully but is currently inactive.</p>
-            <p>To make it visible to all users, you&apos;ll need to activate it from the package management dashboard.</p>
+            <p>
+              Your package has been created successfully but is currently
+              inactive.
+            </p>
+            <p>
+              To make it visible to all users, you&apos;ll need to activate it
+              from the package management dashboard.
+            </p>
           </div>
         }
         confirmText="Go to Dashboard"
@@ -250,22 +278,43 @@ export default function NewPackagePage() {
         <div className="flex justify-between items-center">
           {[1, 2, 3].map((step) => (
             <div key={step} className="flex items-center">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-medium transition-all duration-300 ${step === currentStep ? 'bg-brand-color text-white shadow-lg scale-110' :
-                  step < currentStep ? 'bg-brand-color-light text-brand-color' : 'bg-gray-100 text-gray-400'
-                }`}>
+              <div
+                className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-medium transition-all duration-300 ${
+                  step === currentStep
+                    ? 'bg-brand-color text-white shadow-lg scale-110'
+                    : step < currentStep
+                      ? 'bg-brand-color-light text-brand-color'
+                      : 'bg-gray-100 text-gray-400'
+                }`}
+              >
                 {step}
               </div>
               {step < 3 && (
-                <div className={`w-32 h-1.5 rounded-full transition-all duration-300 ${step < currentStep ? 'bg-brand-color-light' : 'bg-gray-100'
-                  }`} />
+                <div
+                  className={`w-32 h-1.5 rounded-full transition-all duration-300 ${
+                    step < currentStep ? 'bg-brand-color-light' : 'bg-gray-100'
+                  }`}
+                />
               )}
             </div>
           ))}
         </div>
         <div className="flex justify-between mt-4">
-          <span className={`text-base font-medium transition-all duration-300 ${currentStep === 1 ? 'text-brand-color' : 'text-gray-500'}`}>Basic Details</span>
-          <span className={`text-base font-medium transition-all duration-300 ${currentStep === 2 ? 'text-brand-color' : 'text-gray-500'}`}>Package Details</span>
-          <span className={`text-base font-medium transition-all duration-300 ${currentStep === 3 ? 'text-brand-color' : 'text-gray-500'}`}>Categories</span>
+          <span
+            className={`text-base font-medium transition-all duration-300 ${currentStep === 1 ? 'text-brand-color' : 'text-gray-500'}`}
+          >
+            Basic Details
+          </span>
+          <span
+            className={`text-base font-medium transition-all duration-300 ${currentStep === 2 ? 'text-brand-color' : 'text-gray-500'}`}
+          >
+            Package Details
+          </span>
+          <span
+            className={`text-base font-medium transition-all duration-300 ${currentStep === 3 ? 'text-brand-color' : 'text-gray-500'}`}
+          >
+            Categories
+          </span>
         </div>
       </div>
 
@@ -287,10 +336,7 @@ export default function NewPackagePage() {
               )}
 
               {currentStep === 2 && (
-                <PackageDetailsForm
-                  errors={errors}
-                  touched={touched}
-                />
+                <PackageDetailsForm errors={errors} touched={touched} />
               )}
 
               {currentStep === 3 && (

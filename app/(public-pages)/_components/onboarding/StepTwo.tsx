@@ -1,24 +1,21 @@
-"use client"
+'use client';
 
-import React from 'react'
-import { FaArrowLeft } from "react-icons/fa6"
-import AppHeading from '@/components/reusables/AppHeading'
-import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { useFormik } from 'formik'
-import AppButton from '@/components/reusables/AppButton'
+import React from 'react';
+import { FaArrowLeft } from 'react-icons/fa6';
+import AppHeading from '@/components/reusables/AppHeading';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { useFormik } from 'formik';
+import AppButton from '@/components/reusables/AppButton';
 // import Autocomplete from "react-google-autocomplete"
-import AppTextInput from '@/components/reusables/AppTextInput'
-import AppPhoneInput from '@/components/reusables/AppPhoneInput'
-import { useCreateOnboardingUser } from '@/api/services/onboarding'
-import { CLIENT_ROUTES } from '@/lib/routes'
-import * as Yup from 'yup'
-import AppDialogBox from '@/components/reusables/AppDialogBox'
-import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys'
+import AppTextInput from '@/components/reusables/AppTextInput';
+import AppPhoneInput from '@/components/reusables/AppPhoneInput';
+import { useCreateOnboardingUser } from '@/api/services/onboarding';
+import { CLIENT_ROUTES } from '@/lib/routes';
+import * as Yup from 'yup';
+import AppDialogBox from '@/components/reusables/AppDialogBox';
+import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys';
 import { useAppToast } from '@/components/reusables/AppToast';
-
-
-
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required('First name is required'),
@@ -26,50 +23,56 @@ const validationSchema = Yup.object({
   address: Yup.string().required('Address is required'),
   phoneNumber: Yup.string().required('Phone number is required'),
   nextOfKinName: Yup.string().required('Next of kin name is required'),
-  nextOfKinPhoneNumber: Yup.string().required('Next of kin phone number is required'),
-  nextOfKinAddress: Yup.string().required('Next of kin address is required')
-})
+  nextOfKinPhoneNumber: Yup.string().required(
+    'Next of kin phone number is required'
+  ),
+  nextOfKinAddress: Yup.string().required('Next of kin address is required'),
+});
 
 const StepTwoOnboarding = () => {
-  const router = useRouter()
-  const { mutate: createOnboardingUser, isPending } = useCreateOnboardingUser()
-  const [serverErrors, setServerErrors] = React.useState<{[key: string]: string[]}>({})
-  const [showDialog, setShowDialog] = React.useState(false)
-  const [showOnboardingDialog, setShowOnboardingDialog] = React.useState(false)
+  const router = useRouter();
+  const { mutate: createOnboardingUser, isPending } = useCreateOnboardingUser();
+  const [serverErrors, setServerErrors] = React.useState<{
+    [key: string]: string[];
+  }>({});
+  const [showDialog, setShowDialog] = React.useState(false);
+  const [showOnboardingDialog, setShowOnboardingDialog] = React.useState(false);
   const savedDetails = React.useMemo(() => {
-    const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_DETAILS)
-    return saved ? JSON.parse(saved) : null
-  }, [])
-  const { showToast } = useAppToast()
+    const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_DETAILS);
+    return saved ? JSON.parse(saved) : null;
+  }, []);
+  const { showToast } = useAppToast();
   React.useEffect(() => {
-    const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
-    const onboardingId = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
+    const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL);
+    const onboardingId = localStorage.getItem(
+      LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID
+    );
 
     if (!email) {
-      router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
-      return
+      router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne);
+      return;
     }
 
     if (onboardingId) {
-      setShowOnboardingDialog(true)
-      return
+      setShowOnboardingDialog(true);
+      return;
     }
 
     if (savedDetails) {
-      setShowDialog(true)
+      setShowDialog(true);
     }
-  }, [router, savedDetails])
+  }, [router, savedDetails]);
 
   const handleContinueOnboarding = () => {
-    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree)
-  }
+    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree);
+  };
 
   const handleRestartOnboarding = () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID)
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_DETAILS)
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
-    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
-  }
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_DETAILS);
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL);
+    router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -79,15 +82,15 @@ const StepTwoOnboarding = () => {
       phoneNumber: '',
       nextOfKinName: '',
       nextOfKinPhoneNumber: '',
-      nextOfKinAddress: ''
+      nextOfKinAddress: '',
     },
     validationSchema,
     onSubmit: (values) => {
-      setServerErrors({})
-      const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL)
+      setServerErrors({});
+      const email = localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_EMAIL);
       if (!email) {
-        router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
-        return
+        router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne);
+        return;
       }
 
       const payload = {
@@ -98,48 +101,54 @@ const StepTwoOnboarding = () => {
         next_of_kin_name: values.nextOfKinName,
         next_of_kin_phone_number: values.nextOfKinPhoneNumber,
         next_of_kin_address: values.nextOfKinAddress,
-        email: email
-      }
+        email: email,
+      };
 
       createOnboardingUser(payload, {
         onSuccess: (data) => {
-          console.log(data?.message)
-          console.log(data?.payload?.onboarding_id)
+          console.log(data?.message);
+          console.log(data?.payload?.onboarding_id);
           if (data?.payload?.onboarding_id) {
-            localStorage.setItem(LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID, data.payload.onboarding_id.toString())
-            router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree)
+            localStorage.setItem(
+              LOCAL_STORAGE_KEYS.ONBOARDING_USER_ID,
+              data.payload.onboarding_id.toString()
+            );
+            router.push(CLIENT_ROUTES.PublicPages.onboarding.stepThree);
           }
         },
         onError: (error: any) => {
           if (error?.response?.data) {
-            setServerErrors(error.response.data)
+            setServerErrors(error.response.data);
           }
 
-          const errorMessage = error?.response?.data?.message || error?.message || "An error occurred while initiating payment"
+          const errorMessage =
+            error?.response?.data?.message ||
+            error?.message ||
+            'An error occurred while initiating payment';
 
           if (error?.status === 404 || error?.status === 400) {
             showToast({
-              title: "Error",
+              title: 'Error',
               description: errorMessage,
-              variant: "destructive",
+              variant: 'destructive',
               action: {
-                label: "Restart Onboarding",
-                onClick: handleRestartOnboarding
-              }
-            })
+                label: 'Restart Onboarding',
+                onClick: handleRestartOnboarding,
+              },
+            });
           } else {
             showToast({
-              title: "Error",
+              title: 'Error',
               description: errorMessage,
-              variant: "destructive",
+              variant: 'destructive',
               action: {
-                label: "Contact Support",
-                onClick: () => router.push(CLIENT_ROUTES.PublicPages.contact)
-              }
-            })
+                label: 'Contact Support',
+                onClick: () => router.push(CLIENT_ROUTES.PublicPages.contact),
+              },
+            });
           }
-        }
-      })
+        },
+      });
     },
   });
 
@@ -152,17 +161,20 @@ const StepTwoOnboarding = () => {
       phoneNumber: formik.values.phoneNumber,
       nextOfKinName: formik.values.nextOfKinName,
       nextOfKinPhoneNumber: formik.values.nextOfKinPhoneNumber,
-      nextOfKinAddress: formik.values.nextOfKinAddress
-    }
-    localStorage.setItem(LOCAL_STORAGE_KEYS.ONBOARDING_DETAILS, JSON.stringify(formValues))
-  }, [formik.values])
+      nextOfKinAddress: formik.values.nextOfKinAddress,
+    };
+    localStorage.setItem(
+      LOCAL_STORAGE_KEYS.ONBOARDING_DETAILS,
+      JSON.stringify(formValues)
+    );
+  }, [formik.values]);
 
   const handleUseSavedDetails = () => {
     if (savedDetails) {
-      formik.setValues(savedDetails)
+      formik.setValues(savedDetails);
     }
-    setShowDialog(false)
-  }
+    setShowDialog(false);
+  };
 
   return (
     <motion.div
@@ -203,7 +215,9 @@ const StepTwoOnboarding = () => {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)}
+            onClick={() =>
+              router.push(CLIENT_ROUTES.PublicPages.onboarding.stepOne)
+            }
             className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-brand-color flex items-center justify-center"
           >
             <FaArrowLeft className="text-xl sm:text-2xl md:text-3xl text-brand-color cursor-pointer" />
@@ -222,7 +236,8 @@ const StepTwoOnboarding = () => {
           transition={{ delay: 0.5 }}
           className="text-brand-color-text mb-8 sm:mb-10 text-center sm:text-left text-sm sm:text-base lg:text-lg"
         >
-          We need your personal information, for storing your records on our database
+          We need your personal information, for storing your records on our
+          database
         </motion.p>
 
         <motion.div
@@ -231,7 +246,10 @@ const StepTwoOnboarding = () => {
           transition={{ delay: 0.7 }}
           className="w-full"
         >
-          <form onSubmit={formik.handleSubmit} className="space-y-6 sm:space-y-8">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="space-y-6 sm:space-y-8"
+          >
             <div className="space-y-6">
               <AppTextInput
                 type="text"
@@ -242,9 +260,9 @@ const StepTwoOnboarding = () => {
                 className="text-sm sm:text-base"
                 error={
                   (formik.touched.firstName && formik.errors.firstName) ||
-                  (serverErrors?.first_name?.[0]) ?
-                  formik.errors.firstName || serverErrors?.first_name?.[0] :
-                  undefined
+                  serverErrors?.first_name?.[0]
+                    ? formik.errors.firstName || serverErrors?.first_name?.[0]
+                    : undefined
                 }
               />
 
@@ -257,9 +275,9 @@ const StepTwoOnboarding = () => {
                 className="text-sm sm:text-base"
                 error={
                   (formik.touched.lastName && formik.errors.lastName) ||
-                  (serverErrors?.last_name?.[0]) ?
-                  formik.errors.lastName || serverErrors?.last_name?.[0] :
-                  undefined
+                  serverErrors?.last_name?.[0]
+                    ? formik.errors.lastName || serverErrors?.last_name?.[0]
+                    : undefined
                 }
               />
 
@@ -272,9 +290,9 @@ const StepTwoOnboarding = () => {
                 className="text-sm sm:text-base"
                 error={
                   (formik.touched.address && formik.errors.address) ||
-                  (serverErrors?.address?.[0]) ?
-                  formik.errors.address || serverErrors?.address?.[0] :
-                  undefined
+                  serverErrors?.address?.[0]
+                    ? formik.errors.address || serverErrors?.address?.[0]
+                    : undefined
                 }
               />
 
@@ -300,9 +318,10 @@ const StepTwoOnboarding = () => {
                 className="text-sm sm:text-base"
                 error={
                   (formik.touched.phoneNumber && formik.errors.phoneNumber) ||
-                  (serverErrors?.phone_number?.[0]) ?
-                  formik.errors.phoneNumber || serverErrors?.phone_number?.[0] :
-                  undefined
+                  serverErrors?.phone_number?.[0]
+                    ? formik.errors.phoneNumber ||
+                      serverErrors?.phone_number?.[0]
+                    : undefined
                 }
               />
 
@@ -314,24 +333,30 @@ const StepTwoOnboarding = () => {
                 value={formik.values.nextOfKinName}
                 className="text-sm sm:text-base"
                 error={
-                  (formik.touched.nextOfKinName && formik.errors.nextOfKinName) ||
-                  (serverErrors?.next_of_kin_name?.[0]) ?
-                  formik.errors.nextOfKinName || serverErrors?.next_of_kin_name?.[0] :
-                  undefined
+                  (formik.touched.nextOfKinName &&
+                    formik.errors.nextOfKinName) ||
+                  serverErrors?.next_of_kin_name?.[0]
+                    ? formik.errors.nextOfKinName ||
+                      serverErrors?.next_of_kin_name?.[0]
+                    : undefined
                 }
               />
 
               <AppPhoneInput
                 name="nextOfKinPhoneNumber"
                 placeholder="Next of Kin Phone Number"
-                onChange={(value) => formik.setFieldValue('nextOfKinPhoneNumber', value)}
+                onChange={(value) =>
+                  formik.setFieldValue('nextOfKinPhoneNumber', value)
+                }
                 value={formik.values.nextOfKinPhoneNumber}
                 className="text-sm sm:text-base"
                 error={
-                  (formik.touched.nextOfKinPhoneNumber && formik.errors.nextOfKinPhoneNumber) ||
-                  (serverErrors?.next_of_kin_phone_number?.[0]) ?
-                  formik.errors.nextOfKinPhoneNumber || serverErrors?.next_of_kin_phone_number?.[0] :
-                  undefined
+                  (formik.touched.nextOfKinPhoneNumber &&
+                    formik.errors.nextOfKinPhoneNumber) ||
+                  serverErrors?.next_of_kin_phone_number?.[0]
+                    ? formik.errors.nextOfKinPhoneNumber ||
+                      serverErrors?.next_of_kin_phone_number?.[0]
+                    : undefined
                 }
               />
 
@@ -343,10 +368,12 @@ const StepTwoOnboarding = () => {
                 value={formik.values.nextOfKinAddress}
                 className="text-sm sm:text-base"
                 error={
-                  (formik.touched.nextOfKinAddress && formik.errors.nextOfKinAddress) ||
-                  (serverErrors?.next_of_kin_address?.[0]) ?
-                  formik.errors.nextOfKinAddress || serverErrors?.next_of_kin_address?.[0] :
-                  undefined
+                  (formik.touched.nextOfKinAddress &&
+                    formik.errors.nextOfKinAddress) ||
+                  serverErrors?.next_of_kin_address?.[0]
+                    ? formik.errors.nextOfKinAddress ||
+                      serverErrors?.next_of_kin_address?.[0]
+                    : undefined
                 }
               />
 
@@ -383,7 +410,7 @@ const StepTwoOnboarding = () => {
         </motion.div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default StepTwoOnboarding
+export default StepTwoOnboarding;

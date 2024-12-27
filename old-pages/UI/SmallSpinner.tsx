@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { BiLoaderAlt } from 'react-icons/bi';
 
 const SmallSpinner = () => {

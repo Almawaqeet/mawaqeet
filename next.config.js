@@ -4,22 +4,22 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.pexels.com'
+        hostname: 'images.pexels.com',
       },
       {
         protocol: 'https',
-        hostname: 'img.freepik.com'
+        hostname: 'img.freepik.com',
       },
       {
         protocol: 'http',
-        hostname: 'localhost'
+        hostname: 'localhost',
       },
       {
         protocol: 'https',
-        hostname: 'api.slingacademy.com'
-      }
-    ]
-  }
-}
+        hostname: 'api.slingacademy.com',
+      },
+    ],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

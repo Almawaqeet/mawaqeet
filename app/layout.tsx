@@ -5,9 +5,7 @@ import ReactQueryProvider from '@/providers/query-client-provider';
 import { Toaster } from '@/components/ui/toaster';
 import NextTopLoader from 'nextjs-toploader';
 import { NextAuthProvider } from '@/providers/session-provider';
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
-
-
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -24,7 +22,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <head>
@@ -34,11 +36,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <NextAuthProvider>
           <ReactQueryProvider>
             <NuqsAdapter>
-            <NextTopLoader showSpinner={false} color="#4B3938" />
-            <Toaster />
+              <NextTopLoader showSpinner={false} color="#4B3938" />
+              <Toaster />
               <div className="max-w-screen-2xl mx-auto bg-[#F1EBE5] text-brand-color suppressHydrationWarning={true}">
-              {children}
-            </div>
+                {children}
+              </div>
             </NuqsAdapter>
           </ReactQueryProvider>
         </NextAuthProvider>

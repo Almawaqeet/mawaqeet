@@ -8,13 +8,13 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '@/components/ui/card';
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent
+  ChartTooltipContent,
 } from '@/components/ui/chart';
 import { useGetPackageSummaryMonthly } from '@/api/services/admin-analytics';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -23,16 +23,16 @@ export const description = 'Booking statistics chart';
 
 const chartConfig = {
   views: {
-    label: 'Total Bookings'
+    label: 'Total Bookings',
   },
   hajj: {
     label: 'Hajj Bookings',
-    color: 'hsl(var(--chart-1))'
+    color: 'hsl(var(--chart-1))',
   },
   umrah: {
     label: 'Umrah Bookings',
-    color: 'hsl(var(--chart-2))'
-  }
+    color: 'hsl(var(--chart-2))',
+  },
 } satisfies ChartConfig;
 
 export function BarGraph() {
@@ -48,7 +48,7 @@ export function BarGraph() {
   const total = React.useMemo(
     () => ({
       hajj: chartData.reduce((acc, curr) => acc + (curr?.hajj ?? 0), 0),
-      umrah: chartData.reduce((acc, curr) => acc + (curr?.umrah ?? 0), 0)
+      umrah: chartData.reduce((acc, curr) => acc + (curr?.umrah ?? 0), 0),
     }),
     [chartData]
   );
@@ -119,7 +119,7 @@ export function BarGraph() {
             data={chartData}
             margin={{
               left: 12,
-              right: 12
+              right: 12,
             }}
           >
             <CartesianGrid vertical={false} />
@@ -133,7 +133,7 @@ export function BarGraph() {
                 const date = new Date(value);
                 return date.toLocaleDateString('en-US', {
                   month: 'short',
-                  day: 'numeric'
+                  day: 'numeric',
                 });
               }}
             />
@@ -146,7 +146,7 @@ export function BarGraph() {
                     return new Date(value).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
-                      year: 'numeric'
+                      year: 'numeric',
                     });
                   }}
                 />

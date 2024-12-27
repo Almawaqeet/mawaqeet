@@ -1,6 +1,4 @@
-"use client"
-
-
+'use client';
 
 import React from 'react';
 import { Montserrat } from 'next/font/google';
@@ -30,7 +28,7 @@ const AppHeading = ({
     h1: 'text-2xl md:text-3xl lg:text-4xl leading-[1.5] md:leading-[1.4] lg:leading-[1.3]',
     h2: 'text-xl md:text-2xl lg:text-3xl leading-[1.5] md:leading-[1.4] lg:leading-[1.3]',
     h3: 'text-lg md:text-xl lg:text-2xl leading-[1.6] md:leading-[1.5] lg:leading-[1.4]',
-    h4: 'text-base md:text-lg lg:text-xl leading-[1.7] md:leading-[1.6] lg:leading-[1.5]'
+    h4: 'text-base md:text-lg lg:text-xl leading-[1.7] md:leading-[1.6] lg:leading-[1.5]',
   };
 
   const Component = variant;

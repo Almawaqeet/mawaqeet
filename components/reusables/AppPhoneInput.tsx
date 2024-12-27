@@ -1,6 +1,6 @@
-import "react-phone-input-2/lib/style.css";
-import PhoneInput from "react-phone-input-2";
-import React from "react";
+import 'react-phone-input-2/lib/style.css';
+import PhoneInput from 'react-phone-input-2';
+import React from 'react';
 
 interface AppPhoneInputProps {
   value?: string;
@@ -25,7 +25,7 @@ const AppPhoneInput: React.FC<AppPhoneInputProps> = ({
   className = '',
   name,
   id,
-  onBlur
+  onBlur,
 }) => {
   const inputStyle = {
     width: '100%',
@@ -34,7 +34,7 @@ const AppPhoneInput: React.FC<AppPhoneInputProps> = ({
     border: error ? '1px solid #EF4444' : '1px solid #D1D5DB',
     transition: 'all 200ms',
     backgroundColor: 'rgb(255 255 255)',
-    padding: '0.5rem 3.2rem'
+    padding: '0.5rem 3.2rem',
   };
 
   const buttonStyle = {
@@ -42,7 +42,7 @@ const AppPhoneInput: React.FC<AppPhoneInputProps> = ({
     borderRight: 'none',
     borderTopLeftRadius: '0.5rem',
     borderBottomLeftRadius: '0.5rem',
-    backgroundColor: error ? 'rgb(255 255 255)' : 'transparent'
+    backgroundColor: error ? 'rgb(255 255 255)' : 'transparent',
   };
 
   const handleChange = (value: string) => {
@@ -54,7 +54,9 @@ const AppPhoneInput: React.FC<AppPhoneInputProps> = ({
   return (
     <div className="w-full">
       {label && (
-        <label className={`block text-sm font-medium mb-1 ${error ? 'text-red-500' : 'text-gray-700'}`}>
+        <label
+          className={`block text-sm font-medium mb-1 ${error ? 'text-red-500' : 'text-gray-700'}`}
+        >
           {label}
         </label>
       )}
@@ -68,7 +70,7 @@ const AppPhoneInput: React.FC<AppPhoneInputProps> = ({
             id: id,
             placeholder: placeholder,
             className: `focus:outline-none pl-4 focus:ring-2 focus:ring-brand-color focus:border-transparent h-10 sm:h-12 md:h-14 ${className}`,
-            onBlur: onBlur
+            onBlur: onBlur,
           }}
           disabled={disabled}
           inputStyle={inputStyle}

@@ -1,13 +1,12 @@
 import React from 'react';
 interface NumItem {
   id: number;
-  
 }
 
 type ComponentProps = {
   className?: string;
-  position?: number
-}
+  position?: number;
+};
 
 const ComplementNum: React.FC<ComponentProps> = ({ position, className }) => {
   const numArray: NumItem[] = [
@@ -24,8 +23,12 @@ const ComplementNum: React.FC<ComponentProps> = ({ position, className }) => {
 
   return (
     <>
-      <div className={`rounded-full lg:w-[75px] lg:h-[75px] bg-number-color relative flex justify-center items-center xmd:h-8 xmd:w-8 ${className}`}>
-        <h6 className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>{index + 1}</h6>
+      <div
+        className={`rounded-full lg:w-[75px] lg:h-[75px] bg-number-color relative flex justify-center items-center xmd:h-8 xmd:w-8 ${className}`}
+      >
+        <h6 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          {index + 1}
+        </h6>
       </div>
     </>
   );

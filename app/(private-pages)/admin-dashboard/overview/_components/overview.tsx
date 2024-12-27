@@ -8,7 +8,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from '@/components/ui/card';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { useSession } from 'next-auth/react';
@@ -17,7 +17,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function OverViewPage() {
   const { data: session } = useSession();
-  const { data: financialSummary, isLoading: financialSummaryLoading } = useGetFinancialSummary();
+  const { data: financialSummary, isLoading: financialSummaryLoading } =
+    useGetFinancialSummary();
 
   return (
     <PageContainer scrollable>
@@ -54,7 +55,9 @@ export default function OverViewPage() {
                     <Skeleton className="h-8 w-[100px]" />
                   ) : (
                     <div className="text-2xl font-bold">
-                      ₦{financialSummary?.summary?.company_balance?.[0]?.balance?.toLocaleString() ?? '0.00'}
+                      ₦
+                      {financialSummary?.summary?.company_balance?.[0]?.balance?.toLocaleString() ??
+                        '0.00'}
                     </div>
                   )}
                 </CardContent>
@@ -85,7 +88,9 @@ export default function OverViewPage() {
                     <Skeleton className="h-8 w-[100px]" />
                   ) : (
                     <div className="text-2xl font-bold">
-                      ₦{financialSummary?.summary?.total_amount_due?.toLocaleString() ?? '0'}
+                      ₦
+                      {financialSummary?.summary?.total_amount_due?.toLocaleString() ??
+                        '0'}
                     </div>
                   )}
                   <p className="text-xs text-muted-foreground">
@@ -117,7 +122,9 @@ export default function OverViewPage() {
                     <Skeleton className="h-8 w-[100px]" />
                   ) : (
                     <div className="text-2xl font-bold">
-                      ₦{financialSummary?.summary?.company_amount_in_debt?.toLocaleString() ?? '0'}
+                      ₦
+                      {financialSummary?.summary?.company_amount_in_debt?.toLocaleString() ??
+                        '0'}
                     </div>
                   )}
                   <p className="text-xs text-muted-foreground">
@@ -150,7 +157,8 @@ export default function OverViewPage() {
                     <Skeleton className="h-8 w-[100px]" />
                   ) : (
                     <div className="text-2xl font-bold">
-                      {financialSummary?.summary?.active_bookings?.toLocaleString() ?? '0'}
+                      {financialSummary?.summary?.active_bookings?.toLocaleString() ??
+                        '0'}
                     </div>
                   )}
                   <p className="text-xs text-muted-foreground">

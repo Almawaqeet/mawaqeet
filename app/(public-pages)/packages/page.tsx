@@ -1,12 +1,14 @@
-
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { HydrationBoundary } from '@tanstack/react-query';
 import { generateBaseQueryKeyFromRoute } from '@/api/routes';
 import { createServerAxiosInstance } from '@/api/server-constructor';
 import { routes } from '@/api/routes';
 
-const PackageSection = dynamic(() => import('@/app/(public-pages)/_components/packages-page/PackageSection'), { ssr: false })
+const PackageSection = dynamic(
+  () => import('@/app/(public-pages)/_components/packages-page/PackageSection'),
+  { ssr: false }
+);
 
 async function getInitialData() {
   const queryClient = new QueryClient();
@@ -15,7 +17,7 @@ async function getInitialData() {
   const data = await createServerAxiosInstance(route);
   await queryClient.prefetchQuery({
     queryKey: [baseQueryKey],
-    queryFn: () => data
+    queryFn: () => data,
   });
   return queryClient;
 }
@@ -27,5 +29,5 @@ export default async function Page() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <PackageSection />
     </HydrationBoundary>
-  )
+  );
 }

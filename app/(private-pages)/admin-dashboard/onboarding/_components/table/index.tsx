@@ -33,7 +33,7 @@ export default function OnboardingTable() {
     page: page ?? 1,
     name: searchQuery ?? undefined,
     status: statusFilter ?? undefined,
-    email: searchQuery ?? undefined
+    email: searchQuery ?? undefined,
   });
 
   const resetFilters = useCallback(() => {
@@ -45,7 +45,6 @@ export default function OnboardingTable() {
   const isAnyFilterActive = useMemo(() => {
     return !!searchQuery || !!statusFilter;
   }, [searchQuery, statusFilter]);
-
 
   return (
     <div className="space-y-4 ">
@@ -62,12 +61,12 @@ export default function OnboardingTable() {
           options={[
             {
               label: 'Onboarding Payment Completed',
-              value: 'true'
+              value: 'true',
             },
             {
               label: 'Onboarding Payment Not Completed',
-              value: 'false'
-            }
+              value: 'false',
+            },
           ]}
           setFilterValue={setStatusFilter}
           filterValue={statusFilter}
@@ -77,15 +76,15 @@ export default function OnboardingTable() {
           onReset={resetFilters}
         />
       </div>
-      {
-        isLoading ? <TableIndexSkelton /> : (
-          <DataTable
-            columns={columns}
-            data={data?.results ?? []}
-            totalItems={data?.count ?? 0}
-          />
-        )
-      }
+      {isLoading ? (
+        <TableIndexSkelton />
+      ) : (
+        <DataTable
+          columns={columns}
+          data={data?.results ?? []}
+          totalItems={data?.count ?? 0}
+        />
+      )}
     </div>
   );
 }

@@ -1,7 +1,6 @@
 // import React from 'react';
 // import { about_us_team } from '../contents/about';
 
-
 // import {
 //   Carousel,
 //   CarouselContent,

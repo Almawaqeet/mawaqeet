@@ -27,10 +27,10 @@ A web application for managing Hajj and Umrah services.
 - RESTful API integration
 
 ## Project Structure
+
 - `app` - Next.js app directory
 - `Api` - API services and types
 - `components` - Reusable UI components
 - `lib` - Utility functions and constants
 - `public` - Static assets
 - `styles` - Global CSS and Tailwind CSS
-

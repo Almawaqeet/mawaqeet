@@ -5,7 +5,7 @@ import { DataTableResetFilter } from '@/components/ui/table/data-table-reset-fil
 import { DataTableSearch } from '@/components/ui/table/data-table-search';
 import {
   CATEGORY_OPTIONS,
-  useProductTableFilters
+  useProductTableFilters,
 } from './use-product-table-filters';
 
 export default function ProductTableAction() {
@@ -16,7 +16,7 @@ export default function ProductTableAction() {
     resetFilters,
     searchQuery,
     setPage,
-    setSearchQuery
+    setSearchQuery,
   } = useProductTableFilters();
   return (
     <div className="flex flex-wrap items-center gap-4">

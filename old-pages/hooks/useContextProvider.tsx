@@ -1,6 +1,11 @@
-
 import { navbar } from '@/old-pages/contents/navbar';
-import React, { useReducer, createContext, ReactNode, RefObject, useContext } from 'react';
+import React, {
+  useReducer,
+  createContext,
+  ReactNode,
+  RefObject,
+  useContext,
+} from 'react';
 
 // Define types for the state and actions
 type State = {
@@ -19,17 +24,17 @@ type State = {
   isLoading: boolean;
   isSelected: boolean | null;
   selectedNumber: number;
-  selectedComponent: ReactNode
-  openModal: boolean
+  selectedComponent: ReactNode;
+  openModal: boolean;
 };
 
 type Action =
   | { type: 'togglenav' }
   | { type: 'setSelected'; payload: boolean | null }
   | { type: 'togglenavbtn' }
-  | { type: 'toggledropdown', payload: boolean }
-  | { type: 'toggledropdownmobile', payload: boolean }
-  | { type: 'togglearrow', payload: boolean }
+  | { type: 'toggledropdown'; payload: boolean }
+  | { type: 'toggledropdownmobile'; payload: boolean }
+  | { type: 'togglearrow'; payload: boolean }
   | { type: 'setshowpackage'; payload: RefObject<HTMLButtonElement> }
   | { type: 'setActiveIndex'; payload: number }
   | { type: 'setSubNavActiveIndex'; payload: number }
@@ -38,13 +43,15 @@ type Action =
   | { type: 'setIsLoading'; payload: boolean }
   | { type: 'setselectedNumber'; payload: number }
   | { type: 'setSelectedComponent'; payload: ReactNode }
-  | { type: 'openModal', payload: boolean }
+  | { type: 'openModal'; payload: boolean };
 
-
-const mbisContext = createContext<{
-  state: State;
-  dispatch: React.Dispatch<Action>;
-} | undefined>(undefined);
+const mbisContext = createContext<
+  | {
+      state: State;
+      dispatch: React.Dispatch<Action>;
+    }
+  | undefined
+>(undefined);
 
 const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Find nav items in array
@@ -68,7 +75,7 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     isSelected: null,
     selectedNumber: 0,
     selectedComponent: null,
-    openModal: false
+    openModal: false,
   };
 
   const reducer = (state: State, action: Action): State => {
@@ -80,25 +87,49 @@ const MbisProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       case 'togglenavbtn':
         return { ...state, navbtn: !state.navbtn };
       case 'toggledropdown':
-        return { ...state, dropdown: action.payload !== state.dropdown ? action.payload : !state.dropdown };
+        return {
+          ...state,
+          dropdown:
+            action.payload !== state.dropdown
+              ? action.payload
+              : !state.dropdown,
+        };
       case 'toggledropdownmobile':
-        return { ...state, dropdownmobile: action.payload !== state.dropdownmobile ? action.payload : !state.dropdownmobile };
+        return {
+          ...state,
+          dropdownmobile:
+            action.payload !== state.dropdownmobile
+              ? action.payload
+              : !state.dropdownmobile,
+        };
       case 'togglearrow':
-        return { ...state, arrow: action.payload !== !state.arrow ? action.payload : !state.arrow };
+        return {
+          ...state,
+          arrow:
+            action.payload !== !state.arrow ? action.payload : !state.arrow,
+        };
       case 'setshowpackage':
         return { ...state, showPackage: action.payload };
       case 'setActiveIndex': {
-        const newActiveIndex = state.activeIndex === action.payload ? -1 : action.payload;
+        const newActiveIndex =
+          state.activeIndex === action.payload ? -1 : action.payload;
         return { ...state, activeIndex: newActiveIndex };
       }
       case 'setSubNavActiveIndex': {
-        const newSubNavActiveIndex = state.subNavActiveIndex === action.payload ? -1 : action.payload;
+        const newSubNavActiveIndex =
+          state.subNavActiveIndex === action.payload ? -1 : action.payload;
         return { ...state, subNavActiveIndex: newSubNavActiveIndex };
       }
       case 'setactiveBtnService':
         return { ...state, activeBtnServiceId: action.payload };
       case 'shownav':
-        return { ...state, isActive: action.payload !== state.isActive ? action.payload : !state.isActive };
+        return {
+          ...state,
+          isActive:
+            action.payload !== state.isActive
+              ? action.payload
+              : !state.isActive,
+        };
       case 'setIsLoading':
         return { ...state, isLoading: action.payload };
       case 'setselectedNumber':

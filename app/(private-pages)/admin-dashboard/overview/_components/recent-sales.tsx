@@ -43,11 +43,13 @@ export function RecentSales() {
             <p className="text-sm text-muted-foreground">{user.email}</p>
           </div>
           <div className="ml-auto">
-            <span className={`rounded-full px-2 py-1 text-xs ${
-              user?.onboarding_fee_payment_check === true
-                ? 'bg-green-100 text-green-800'
-                : 'bg-yellow-100 text-yellow-800'
-            }`}>
+            <span
+              className={`rounded-full px-2 py-1 text-xs ${
+                user?.onboarding_fee_payment_check === true
+                  ? 'bg-green-100 text-green-800'
+                  : 'bg-yellow-100 text-yellow-800'
+              }`}
+            >
               {user.onboarding_fee_payment_check ? 'COMPLETED' : 'PENDING'}
             </span>
           </div>

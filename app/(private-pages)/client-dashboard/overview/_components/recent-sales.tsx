@@ -42,14 +42,16 @@ export function RecentSales({ type }: { type: string }) {
             </p>
           </div>
           <div className="ml-auto">
-            <span className={`rounded-full px-2 py-1 text-xs ${
-              payment?.transaction_status === 'completed'
-                ? 'bg-green-100 text-green-800'
-                : 'bg-yellow-100 text-yellow-800'
-            }`}>
+            <span
+              className={`rounded-full px-2 py-1 text-xs ${
+                payment?.transaction_status === 'completed'
+                  ? 'bg-green-100 text-green-800'
+                  : 'bg-yellow-100 text-yellow-800'
+              }`}
+            >
               {Number(payment?.amount_paid ?? 0).toLocaleString('en-NG', {
                 style: 'currency',
-                currency: 'NGN'
+                currency: 'NGN',
               })}
             </span>
           </div>

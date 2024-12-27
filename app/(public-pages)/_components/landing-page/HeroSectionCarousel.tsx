@@ -1,8 +1,8 @@
-"use client"
+'use client';
 import React from 'react';
 import Image from 'next/image';
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import { motion } from 'framer-motion';
 
 const HeroSectionCarousel = () => {
@@ -10,43 +10,43 @@ const HeroSectionCarousel = () => {
     {
       id: 2,
       src: 'https://images.pexels.com/photos/12607981/pexels-photo-12607981.jpeg',
-      alt: 'Holy Kaaba exterior view'
+      alt: 'Holy Kaaba exterior view',
     },
     {
       id: 5,
       src: 'https://images.pexels.com/photos/2767864/pexels-photo-2767864.jpeg',
-      alt: 'Aerial view of gathering'
+      alt: 'Aerial view of gathering',
     },
     {
       id: 3,
       src: 'https://images.pexels.com/photos/20184064/pexels-photo-20184064/free-photo-of-man-kneeling-and-pilgrims-walking-at-great-mosque-in-mecca.jpeg',
-      alt: 'Pilgrims performing Tawaf'
+      alt: 'Pilgrims performing Tawaf',
     },
     {
       id: 4,
       src: 'https://images.pexels.com/photos/20184065/pexels-photo-20184065/free-photo-of-great-mosque-in-mecca.jpeg',
-      alt: 'Masjid al-Haram exterior'
+      alt: 'Masjid al-Haram exterior',
     },
     {
       id: 1,
       src: 'https://images.pexels.com/photos/3627335/pexels-photo-3627335.jpeg',
-      alt: 'Large crowd at holy site'
+      alt: 'Large crowd at holy site',
     },
   ];
 
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      items: 5,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3
+      items: 3,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2
-    }
+      items: 2,
+    },
   };
 
   return (
@@ -95,9 +95,14 @@ const HeroSectionCarousel = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{
-                scale: (index === 0 || index === Math.floor(images.length / 2) || index === images.length - 1) ? 0.9 : 1.05,
+                scale:
+                  index === 0 ||
+                  index === Math.floor(images.length / 2) ||
+                  index === images.length - 1
+                    ? 0.9
+                    : 1.05,
                 rotateY: 5,
-                filter: "brightness(1.1)"
+                filter: 'brightness(1.1)',
               }}
             >
               <Image
@@ -105,9 +110,13 @@ const HeroSectionCarousel = () => {
                 alt={image.alt}
                 fill
                 className={`object-cover rounded-lg shadow-lg transition-all duration-500
-                  ${(index === 0 || index === Math.floor(images.length / 2) || index === images.length - 1)
-                    ? 'md:scale-75'
-                    : ''} hover:shadow-2xl w-full`}
+                  ${
+                    index === 0 ||
+                    index === Math.floor(images.length / 2) ||
+                    index === images.length - 1
+                      ? 'md:scale-75'
+                      : ''
+                  } hover:shadow-2xl w-full`}
                 sizes="(max-width: 1200px) 50vw, 33vw"
                 priority={index === 1}
               />
