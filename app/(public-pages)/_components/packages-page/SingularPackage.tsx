@@ -143,7 +143,7 @@ export default function SingularPackage({ id }: { id: string }) {
             >
                 <form className="space-y-6">
                     <p className="text-brand-color-text text-center text-sm sm:text-base leading-relaxed">
-                        Booking is not available yet. Join our waiting list, if you're interested in this package and we'll notify you when you can book this package.
+                        Booking is not available yet. Join our waiting list, if you&apos;re interested in this package and we&apos;ll notify you when you can book this package.
                     </p>
                     <div className="space-y-4">
                         <div>

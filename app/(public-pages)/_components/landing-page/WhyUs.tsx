@@ -74,7 +74,7 @@ export default function WhyUs() {
                     </AppHeading>
                     <p className="text-gray-400 mb-6 text-lg leading-relaxed text-left">
                         Have you ever wished to experience the peace and calm of being close to Allah in the
-                        holiest cities of Islam, Makkah and Madinah? Experience the life-changing journey of Hajj and Umrah, the fifth pillar of Islam. Enjoy the joy of prayer at the Prophet's Mosque and the sense of togetherness with Muslims worldwide. They're big chances for personal growth and feeling closer to God.
+                        holiest cities of Islam, Makkah and Madinah? Experience the life-changing journey of Hajj and Umrah, the fifth pillar of Islam. Enjoy the joy of prayer at the Prophet&apos;s Mosque and the sense of togetherness with Muslims worldwide. They&apos;re big chances for personal growth and feeling closer to God.
                     </p>
                     <p className="text-gray-400 text-xl font-medium text-left">
                         They offer you the chance to:

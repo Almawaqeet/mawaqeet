@@ -51,7 +51,7 @@ export const HeroSection = () => {
         setCurrentVerseIndex((prev) => (prev + 1) % verses.length);
       }, 5000);
       return () => clearInterval(timer);
-    }, []);
+    }, [verses.length]);
 
     return (
       <motion.div

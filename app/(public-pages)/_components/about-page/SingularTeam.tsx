@@ -10,13 +10,12 @@ import { CLIENT_ROUTES } from "@/lib/routes";
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 
 const SingularTeam = ({ id }: { id: string }) => {
+    const router = useRouter();
   const teamMember = about_us_team.find((itm) => itm.id === id);
 
   if (!teamMember) return <TeamEmptyState />;
 
   const { fullname, personality, imageProfile, profile } = teamMember;
-
-  const router = useRouter();
 
   return (
     <section className="min-h-screen bg-gradient-to-b from-gray-50 to-white">

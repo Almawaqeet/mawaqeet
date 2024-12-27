@@ -12,7 +12,7 @@ export default function Benefits() {
             icon: vector as StaticImageData,
             title: "Begin Your Sacred Journey",
             description: "Take the first step towards a transformative spiritual experience with our meticulously planned Hajj and Umrah packages, designed to nurture your soul.",
-         
+
         },
         {
             icon: people as StaticImageData,
@@ -69,7 +69,7 @@ export default function Benefits() {
                         Your Journey to Divine Connection
                     </AppHeading>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Every Muslim dreams of answering Allah's call to His sacred house. At Al-Mawaqeet Travels and Tours, we make this divine journey accessible, comfortable, and profoundly meaningful.
+                        Every Muslim dreams of answering Allah&apos;s call to His sacred house. At Al-Mawaqeet Travels and Tours, we make this divine journey accessible, comfortable, and profoundly meaningful.
                     </p>
                 </div>
 

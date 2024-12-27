@@ -76,7 +76,7 @@ export default function MeetTheTeam() {
 
                 <p className="text-center text-gray-600 max-w-2xl mx-auto mb-16">
                     Our leadership team brings decades of combined experience in Hajj and Umrah services.
-                    With deep knowledge of Islamic traditions and modern logistics, they ensure every pilgrim's
+                    With deep knowledge of Islamic traditions and modern logistics, they ensure every pilgrim&apos;s
                     journey is spiritually fulfilling and seamlessly organized.
                 </p>
 

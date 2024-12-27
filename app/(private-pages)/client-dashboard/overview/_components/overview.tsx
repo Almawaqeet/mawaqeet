@@ -41,14 +41,13 @@ export default function OverViewPage() {
   useEffect(() => {
     if (!userWalletExists && isWalletLoading && !checkIfUserHasWallet) {
       const intervalModalCall = setInterval(() => {
-        // use this logic for intallment payment plan
         setShowWalletModal(true);
         setShowTermsAndPolicyModal(true)
       }, 2000)
 
       return () => clearInterval(intervalModalCall)
     }
-  }, [isWalletLoading, userWalletExists]);
+  }, [isWalletLoading, userWalletExists, checkIfUserHasWallet]);
 
   useEffect(() => {
     //? this is here because i want to save that the user already has a wallet so this does'nt disturb them on another page render
@@ -57,7 +56,7 @@ export default function OverViewPage() {
         localStorage.setItem(LOCAL_STORAGE_KEYS.USER_WALLET_STATUS, 'found');
       }
     }
-  }, []);
+  }, [userWalletExists, checkIfUserHasWallet]);
 
   if (isWalletLoading && !userWalletExists && !userWalletExists) {
     return (

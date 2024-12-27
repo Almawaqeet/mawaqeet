@@ -193,7 +193,7 @@ const StepOneOnboarding = () => {
                 </p>
               ) : (
                 <p className="text-xs sm:text-sm text-gray-500 text-left px-1">
-                  Please make sure the email address you're inputting is a valid email
+                  Please make sure the email address you&apos;re inputting is a valid email
                 </p>
               )}
               {showEmailExistsAlert && (

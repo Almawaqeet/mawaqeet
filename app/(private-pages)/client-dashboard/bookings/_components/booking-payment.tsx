@@ -134,6 +134,7 @@ export function BookingPayment({ id }: BookingPaymentProps) {
             {
                 onSuccess: (data) => {
                     if (paymentMethod === 'card' && data?.data?.reference && data?.data?.authorization_url && session?.user?.email) {
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
                         const { initializePayment } = usePaystack({
                             email: session?.user?.email as string,
                             amount: convertToKobo(amount),

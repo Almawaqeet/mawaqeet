@@ -218,7 +218,7 @@ export default function NewPackagePage() {
         description={
           <div className="space-y-4">
             <p>Your package has been created successfully but is currently inactive.</p>
-            <p>To make it visible to all users, you'll need to activate it from the package management dashboard.</p>
+            <p>To make it visible to all users, you&apos;ll need to activate it from the package management dashboard.</p>
           </div>
         }
         confirmText="Go to Dashboard"

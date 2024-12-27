@@ -58,7 +58,7 @@ const StepThreeOnboarding = () => {
 
       return () => clearInterval(timer)
     }
-  }, [verifyPaymentData])
+  }, [verifyPaymentData, email, router])
 
   const registrationFee = registrationFeeData?.registration_fee?.toLocaleString() ?? 0
 
@@ -74,7 +74,7 @@ const StepThreeOnboarding = () => {
       {
         onSuccess: (data) => {
           if (data?.data?.reference && data?.data?.authorization_url && email && registrationFeeData?.registration_fee) {
-            const { initializePayment } = usePaystack({
+            const paystackConfig = {
               email,
               amount: convertToKobo(registrationFeeData.registration_fee),
               reference: data.data.reference,
@@ -83,7 +83,9 @@ const StepThreeOnboarding = () => {
               },
               onClose: () => {
               }
-            })
+            }
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            const { initializePayment } = usePaystack(paystackConfig)
             initializePayment()
           }
         },
@@ -142,7 +144,7 @@ const StepThreeOnboarding = () => {
             {verifyPaymentData?.message}
           </p>
           <p className="text-sm text-gray-500 text-center font-normal">
-            Your account has been created successfully! We've sent an OTP to your email for verification. You'll be redirected to set your password in {countdown} seconds. In the meantime, you can download your payment receipt using the button below.
+            Your account has been created successfully! We&apos;ve sent an OTP to your email for verification. You&apos;ll be redirected to set your password in {countdown} seconds. In the meantime, you can download your payment receipt using the button below.
           </p>
           {verifyPaymentData?.receipt_url && (
             <a

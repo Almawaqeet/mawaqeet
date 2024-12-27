@@ -42,7 +42,7 @@ export default function CreateWallet() {
         if (checkIfUserHasWallet?.has_wallet) {
             router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet)
         }
-    }, [checkIfUserHasWallet]);
+    }, [checkIfUserHasWallet?.has_wallet, router]);
 
     const formik = useFormik({
         initialValues: {

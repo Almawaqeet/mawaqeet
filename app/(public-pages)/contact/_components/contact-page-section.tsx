@@ -48,7 +48,7 @@ export const ContactPageSection = () => {
           <motion.div variants={itemVariants}>
             <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight">Get in touch</h2>
             <p className="mt-3 text-lg text-gray-500">
-              Have questions about our services? We're here to help. Send us a message and we'll respond as soon as possible.
+              Have questions about our services? We&apos;re here to help. Send us a message and we&apos;ll respond as soon as possible.
             </p>
             <div className="mt-9">
               <motion.div

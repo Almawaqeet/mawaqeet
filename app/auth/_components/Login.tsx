@@ -24,7 +24,7 @@ const Login = () => {
     if (status === "authenticated" && session?.user?.accountType) {
       handleLoginRedirect();
     }
-  }, [session, status]);
+  }, [session, status,]);
 
   const handleLoginRedirect = () => {
     if (!session?.user?.accountType) return;

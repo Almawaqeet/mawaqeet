@@ -26,7 +26,7 @@ const NewUser = () => {
     if (localStorage.getItem(LOCAL_STORAGE_KEYS.ONBOARDING_COMPLETED_STATUS)) {
       router.push(CLIENT_ROUTES.PublicPages.auth.login)
     }
-  }, [])
+  }, [router])
 
 
 
@@ -66,7 +66,7 @@ const NewUser = () => {
           transition={{ delay: 0.5 }}
           className="text-brand-color-text mb-8 text-center sm:text-left text-sm sm:text-base"
         >
-          If you're new to this portal, please click the "Get Started" button below to begin the onboarding process
+          If you&apos;re new to this portal, please click the &quot;Get Started&quot; button below to begin the onboarding process
         </motion.p>
 
         <motion.div
