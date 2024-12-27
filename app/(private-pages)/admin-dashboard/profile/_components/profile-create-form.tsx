@@ -12,7 +12,6 @@ import { Heading } from '@/components/ui/heading';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useEditProfile, useViewProfile } from '@/api/services/authentication';
@@ -24,7 +23,7 @@ const profileSchema = z.object({
   first_name: z.string().min(1, 'First name is required').nullable(),
   last_name: z.string().min(1, 'Last name is required').nullable(),
   phone_number: z.string().min(1, 'Phone number is required').nullable(),
-  address: z.string().min(1, 'Address is required').nullable()
+  address: z.string().min(1, 'Address is required').nullable(),
 });
 
 type ProfileFormValues = z.infer<typeof profileSchema>;
@@ -41,8 +40,8 @@ const ProfileCreateForm = () => {
       first_name: null,
       last_name: null,
       phone_number: null,
-      address: null
-    }
+      address: null,
+    },
   });
 
   useEffect(() => {
@@ -51,7 +50,7 @@ const ProfileCreateForm = () => {
         first_name: profile.profile.first_name ?? null,
         last_name: profile.profile.last_name ?? null,
         phone_number: profile.profile.phone_number ?? null,
-        address: profile.profile.address ?? null
+        address: profile.profile.address ?? null,
       });
     }
   }, [profile, form]);
@@ -62,23 +61,23 @@ const ProfileCreateForm = () => {
         first_name: data.first_name ?? undefined,
         last_name: data.last_name ?? undefined,
         phone_number: data.phone_number ?? undefined,
-        address: data.address ?? undefined
+        address: data.address ?? undefined,
       },
       {
         onSuccess: () => {
           showToast({
-            title: "Success",
-            description: "Profile updated successfully"
+            title: 'Success',
+            description: 'Profile updated successfully',
           });
         },
         onError: (error) => {
           console.error(error);
           showToast({
-            title: "Error",
-            description: "An error occurred while updating profile",
-            variant: "destructive"
+            title: 'Error',
+            description: 'An error occurred while updating profile',
+            variant: 'destructive',
           });
-        }
+        },
       }
     );
   };

@@ -45,12 +45,11 @@ export const useChangePassword = (body?: ChangePasswordRequest) => {
   });
 };
 
-
 export const useViewProfile = () => {
   const baseQueryKey = generateBaseQueryKeyFromRoute(routes.auth.viewProfile);
   return useAppQuery<UserProfile>({
     apiRoute: routes.auth.viewProfile,
-    queryKey: [baseQueryKey]
+    queryKey: [baseQueryKey],
   });
 };
 
@@ -58,6 +57,6 @@ export const useEditProfile = (body?: EditUserProfileRequest) => {
   return useAppMutation<UserProfile>({
     apiRoute: routes.auth.editProfile,
     method: 'PATCH',
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
   });
 };

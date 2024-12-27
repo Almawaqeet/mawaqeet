@@ -6,7 +6,7 @@ export const routes = {
     verifyOtp: '/auth/verify-otp/',
     changePassword: '/auth/reset-password/',
     viewProfile: '/auth/view-profile/',
-    editProfile: '/auth/edit-profile/'
+    editProfile: '/auth/edit-profile/',
   },
 
   onboarding: {

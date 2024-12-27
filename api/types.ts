@@ -392,7 +392,6 @@ export interface UserFinancialSummaryResponse {
   } | null;
 }
 
-
 export interface UserProfile {
   profile?: {
     first_name?: string | null;
@@ -402,10 +401,9 @@ export interface UserProfile {
   };
 }
 
-
 export interface EditUserProfileRequest {
-    first_name?: string | null;
-    last_name?: string | null;
-    phone_number?: string | null;
-    address?: string | null;
-  };
+  first_name?: string | null;
+  last_name?: string | null;
+  phone_number?: string | null;
+  address?: string | null;
+}

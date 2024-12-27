@@ -5,7 +5,7 @@ export default function ProfileViewPage() {
   return (
     <PageContainer>
       <div className="space-y-4">
-        <ProfileCreateForm  />
+        <ProfileCreateForm />
       </div>
     </PageContainer>
   );
