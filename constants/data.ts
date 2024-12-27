@@ -116,13 +116,13 @@ export const adminDashboardNavItems: NavItem[] = [
   //     isActive: false,
   //     items: [] // No child items
   //   },
-    {
-      title: 'Profile',
-      url: CLIENT_ROUTES.PrivatePages.adminDashboard.profile,
-      icon: 'userPen',
-      isActive: false,
-      items: [] // No child items
-    },
+  {
+    title: 'Profile',
+    url: CLIENT_ROUTES.PrivatePages.adminDashboard.profile,
+    icon: 'userPen',
+    isActive: false,
+    items: [], // No child items
+  },
   //   {
   //     title: 'Settings',
   //     url: '/dashboard/',
