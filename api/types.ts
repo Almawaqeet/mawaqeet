@@ -391,3 +391,21 @@ export interface UserFinancialSummaryResponse {
     completion_percentage?: number | null;
   } | null;
 }
+
+
+export interface UserProfile {
+  profile?: {
+    first_name?: string | null;
+    last_name?: string | null;
+    phone_number?: string | null;
+    address?: string | null;
+  };
+}
+
+
+export interface EditUserProfileRequest {
+    first_name?: string | null;
+    last_name?: string | null;
+    phone_number?: string | null;
+    address?: string | null;
+  };

@@ -1,5 +1,5 @@
-import { useAppMutation } from '@/api/client-constructor';
-import { routes } from '@/api/routes';
+import { useAppMutation, useAppQuery } from '@/api/client-constructor';
+import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 import {
   ChangePasswordRequest,
   ChangePasswordResponse,
@@ -9,6 +9,8 @@ import {
   VerifyOtpRequest,
   SendOtpRequest,
   VerifyOtpResponse,
+  UserProfile,
+  EditUserProfileRequest,
 } from '@/api/types';
 
 export const useLogin = (body?: LoginRequest) => {
@@ -40,5 +42,22 @@ export const useChangePassword = (body?: ChangePasswordRequest) => {
     apiRoute: routes.auth.changePassword,
     method: 'POST',
     body: JSON.stringify(body),
+  });
+};
+
+
+export const useViewProfile = () => {
+  const baseQueryKey = generateBaseQueryKeyFromRoute(routes.auth.viewProfile);
+  return useAppQuery<UserProfile>({
+    apiRoute: routes.auth.viewProfile,
+    queryKey: [baseQueryKey]
+  });
+};
+
+export const useEditProfile = (body?: EditUserProfileRequest) => {
+  return useAppMutation<UserProfile>({
+    apiRoute: routes.auth.editProfile,
+    method: 'PATCH',
+    body: JSON.stringify(body)
   });
 };

@@ -18,10 +18,11 @@ import {
   SimpleBookingResponse,
 } from '@/api/types';
 
-export const getUserBookings = () => {
+export const useGetUserBookings = () => {
   const baseQueryKey = generateBaseQueryKeyFromRoute(
     routes.bookings.viewUserBookings
   );
+
   return useAppQuery<SimpleBookingResponse>({
     apiRoute: routes.bookings.viewUserBookings,
     queryKey: [baseQueryKey],

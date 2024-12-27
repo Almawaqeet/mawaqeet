@@ -5,6 +5,8 @@ export const routes = {
     sendOtp: '/auth/forgot-password/',
     verifyOtp: '/auth/verify-otp/',
     changePassword: '/auth/reset-password/',
+    viewProfile: '/auth/view-profile/',
+    editProfile: '/auth/edit-profile/'
   },
 
   onboarding: {
