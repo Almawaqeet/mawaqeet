@@ -189,7 +189,6 @@ export default function ResetPasswordStepThree() {
               <AppButton
                 variant="primary"
                 className="w-full min-h-[44px] sm:h-[50px] text-sm sm:text-base py-2 sm:py-3"
-                onClick={passwordFormik.handleSubmit}
                 disabled={!passwordFormik.isValid || isChangingPassword}
                 loading={isChangingPassword}
               >

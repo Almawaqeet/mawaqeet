@@ -17,7 +17,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { getUserBookings } from '@/api/services/booking';
+import { useGetUserBookings } from '@/api/services/booking';
 import { format, differenceInDays } from 'date-fns';
 import Link from 'next/link';
 import {
@@ -45,7 +45,7 @@ interface BookingTableProps {
 }
 
 export const BookingTable = ({ packageId }: BookingTableProps) => {
-  const { data: userBookings, isLoading } = getUserBookings();
+  const { data: userBookings, isLoading } = useGetUserBookings();
   const router = useRouter();
 
   const renderLoadingSkeleton = () => (
