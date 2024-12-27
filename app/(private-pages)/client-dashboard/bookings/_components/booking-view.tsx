@@ -46,6 +46,7 @@ import CancelModal from './booking-cancel-modal';
 import ConfirmationModal from './booking-confirmation-modal';
 import ReceiptsModal from './booking-reciept-modal';
 import { PACKAGE_TYPES } from '@/constants/generic';
+import { removeNoneAlphanumericEntity } from '@/lib/utils';
 
 interface BookingViewProps {
   id: string;
@@ -378,7 +379,7 @@ export function BookingView({ id }: BookingViewProps) {
                   Payment Plan
                 </span>
                 <span className="font-semibold text-gray-900">
-                  {(booking.payment_plan ?? 'N/A').toUpperCase()}
+                  {removeNoneAlphanumericEntity((booking.payment_plan ?? 'N/A').toUpperCase())}
                 </span>
               </div>
             </div>
@@ -466,7 +467,7 @@ export function BookingView({ id }: BookingViewProps) {
                 Payment Plan
               </p>
               <p className="text-lg sm:text-xl font-bold mt-1 capitalize">
-                {booking.payment_plan?.toLowerCase() ?? 'N/A'}
+                {removeNoneAlphanumericEntity(booking.payment_plan?.toLowerCase() ?? 'N/A')}
               </p>
             </div>
             <div className="rounded-lg p-4 bg-gray-50">
