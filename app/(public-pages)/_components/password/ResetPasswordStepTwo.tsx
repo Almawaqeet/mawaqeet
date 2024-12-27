@@ -209,7 +209,6 @@ export default function ResetPasswordStepTwo() {
               <AppButton
                 variant="primary"
                 className="w-full min-h-[44px] sm:h-[50px] text-sm sm:text-base py-2 sm:py-3"
-                onClick={otpFormik.handleSubmit}
                 disabled={!otpFormik.isValid || isVerifyingOtp}
                 loading={isVerifyingOtp}
               >
