@@ -13,12 +13,24 @@ const poppins = Poppins({
   variable: '--font-poppins',
   display: 'swap',
 });
-
 export const metadata: Metadata = {
   title: 'Al-Mawaqeet Travels and Tours',
   description: 'Your Reliable Companion in Adventurous Journeys',
   icons: {
     icon: '/images/logo.png',
+  },
+  openGraph: {
+    title: 'Al-Mawaqeet Travels and Tours',
+    description: 'Your Reliable Companion in Adventurous Journeys',
+    images: [
+      {
+        url: '/images/og-img.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Al-Mawaqeet Travels and Tours',
+      },
+    ],
+    type: 'website',
   },
 };
 
