@@ -29,10 +29,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function OverViewPage() {
   const { data: session } = useSession();
-  const { data: checkIfUserHasWallet} =
-    useCheckIfUserHasAWallet();
-  const { data: upcomingPackages } =
-    useGetUpcomingHajjAndUmrahPackage();
+  const { data: checkIfUserHasWallet } = useCheckIfUserHasAWallet();
+  const { data: upcomingPackages } = useGetUpcomingHajjAndUmrahPackage();
   const { data: hajjFinancialSummary, isLoading: isHajjSummaryLoading } =
     useGetUserFinancialSummary(PACKAGE_TYPES.HAJJ);
   const { data: umrahFinancialSummary, isLoading: isUmrahSummaryLoading } =
@@ -44,14 +42,11 @@ export default function OverViewPage() {
 
   const router = useRouter();
 
-
-
   useEffect(() => {
     if (checkIfUserHasWallet?.has_wallet === false) {
       setShowWalletModal(true);
     }
   }, [checkIfUserHasWallet]);
-
 
   const renderCardSkeleton = () => (
     <Card>

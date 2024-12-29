@@ -40,7 +40,8 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
     useInitiateBooking(packageId);
   const { showToast } = useAppToast();
   const queryClient = useQueryClient();
-  const { data: checkIfUserHasWallet, isLoading: walletLoading } = useCheckIfUserHasAWallet();
+  const { data: checkIfUserHasWallet, isLoading: walletLoading } =
+    useCheckIfUserHasAWallet();
 
   const formik = useFormik({
     initialValues: {
@@ -107,8 +108,14 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
         description="You need to create a wallet before you can book any packages. Would you like to create one now?"
         cancelText="Later"
         confirmText="Create Wallet"
-        onCancel={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.packages)}
-        onConfirm={() => router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.createWallet)}
+        onCancel={() =>
+          router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.packages)
+        }
+        onConfirm={() =>
+          router.push(
+            CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.createWallet
+          )
+        }
       />
     );
   }
