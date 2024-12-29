@@ -36,27 +36,39 @@ const axiosInstance = axios.create({
 
 export function useAppQuery<
   TData = unknown,
-  TError = unknown,
+  TError = Error,
   TQueryKey extends Array<unknown> = unknown[],
 >(config: QueryConfig<TQueryKey, TData>): UseQueryResult<TData, TError> {
   const { queryKey, apiRoute, options } = config;
 
-  return useQuery({
+  return useQuery<TData, TError>({
     queryKey,
     queryFn: async () => {
       const session = await getSession();
       const token = session?.user?.accessToken ?? '';
 
-      const response = await axiosInstance.get<TData>(apiRoute, {
-        ...options,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return response?.data;
+      try {
+        const response = await axiosInstance.get<TData>(apiRoute, {
+          ...options,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.data;
+      } catch (error: any) {
+
+        const errorMessage =
+          error?.response?.data?.message ||
+          error?.response?.message ||
+          'An error occurred while fetching data.';
+        throw new Error(errorMessage);
+      }
     },
-    retry: 3,
-    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+    
+    throwOnError: true, 
+
+    retry: 3, // Retry up to 3 times on failure
+    staleTime: 1000 * 60 * 5, // Data is fresh for 5 minutes
   });
 }
 
