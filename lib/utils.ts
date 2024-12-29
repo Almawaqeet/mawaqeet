@@ -180,6 +180,5 @@ export const getSearchParamsFromUrl = (url: string) => {
 };
 
 export const removeNoneAlphanumericEntity = (str: string) => {
-  return str.replace(/[^a-z0-9]/gi, ' '); 
+  return str.replace(/[^a-z0-9]/gi, ' ');
 };
-
