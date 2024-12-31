@@ -51,6 +51,8 @@ export const routes = {
       `core/admin/deactivate-package/${packageId}/`,
     deletePackage: (packageId: string) =>
       `core/admin/delete-package/${packageId}/`,
+    checkSettlementStatus: (packageId: string) =>
+      `core/admin/check-package-settlement-status/${packageId}/`,
   },
 
   bookings: {
@@ -66,6 +68,7 @@ export const routes = {
     verifyBookingPayment: `core/customer/verify-booking-payment/:reference/`,
     cancelBooking: (bookingId: string) =>
       `core/customer/cancel-booking/${bookingId}/`,
+    completeBooking: 'core/admin/process-package-settlement/',
 
     //specifically for admin
     bookingsForPackage: (packageId: string) =>

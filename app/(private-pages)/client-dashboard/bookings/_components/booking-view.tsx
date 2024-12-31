@@ -395,15 +395,15 @@ export function BookingView({ id }: BookingViewProps) {
               Payment Progress
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-4 sm:p-6">
-            <div className="w-36 h-36 sm:w-48 sm:h-48 mx-auto relative">
+          <CardContent className="p-4 sm:p-6 flex flex-col items-center justify-center">
+            <div className="w-36 h-36 sm:w-48 sm:h-48 relative flex items-center justify-center">
               <PieChart width={192} height={192}>
                 <Pie
                   data={data}
                   cx={96}
                   cy={96}
-                  innerRadius={60}
-                  outerRadius={80}
+                  innerRadius={70}
+                  outerRadius={95}
                   fill="#A88A69"
                   paddingAngle={0}
                   dataKey="value"
