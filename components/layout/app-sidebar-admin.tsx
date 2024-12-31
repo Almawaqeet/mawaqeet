@@ -53,7 +53,6 @@ import { signOut } from 'next-auth/react';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import Image from 'next/image';
 
-
 export const company = {
   name: 'Al-Mawaqeet Travels and Tours',
   logo: '/images/logo.jpg',

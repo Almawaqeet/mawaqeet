@@ -131,14 +131,10 @@ export const useGetBookingFinancialSummaryForASpecificPackage = (
   });
 };
 
-
 export const useCompleteBooking = (body: CompleteBookingRequest) => {
-    return useAppMutation<CompleteBookingResponse>({
-      apiRoute: routes.bookings.completeBooking,
-      method: 'POST',
-      body: JSON.stringify(body)
-    });
-  };
-
-
-  
+  return useAppMutation<CompleteBookingResponse>({
+    apiRoute: routes.bookings.completeBooking,
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+};

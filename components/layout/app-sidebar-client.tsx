@@ -85,7 +85,7 @@ export default function AppSidebarClient({
         <SidebarHeader>
           <div className="flex gap-2 py-2 text-white">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-[#1A1A1A] text-white">
-            <Image
+              <Image
                 src={company.logo}
                 alt={company.name}
                 width={32}

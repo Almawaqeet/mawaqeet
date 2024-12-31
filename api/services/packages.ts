@@ -118,7 +118,6 @@ export const useCheckPackageSettlementStatus = (packageId: string) => {
     routes.package.checkSettlementStatus(packageId)
   );
 
-  
   return useAppQuery<PackageSettlementResponse>({
     apiRoute: routes.package.checkSettlementStatus(packageId),
     queryKey: [baseQueryKey],

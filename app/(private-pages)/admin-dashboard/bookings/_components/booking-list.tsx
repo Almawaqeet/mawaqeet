@@ -1,6 +1,9 @@
 'use client';
 
-import { useGetAllActivePackages, useGetAllInactivePackages } from '@/api/services/packages';
+import {
+  useGetAllActivePackages,
+  useGetAllInactivePackages,
+} from '@/api/services/packages';
 import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -14,14 +17,16 @@ import { SearchIcon, PackageIcon } from 'lucide-react';
 
 export default function PackageBookingList() {
   const [searchQuery, setSearchQuery] = useState('');
-  const { data: activePackages, isLoading: isLoadingActive } = useGetAllActivePackages({
-    search: searchQuery,
-    package_type: undefined,
-  });
-  const { data: inactivePackages, isLoading: isLoadingInactive } = useGetAllInactivePackages({
-    search: searchQuery,
-    package_type: undefined,
-  });
+  const { data: activePackages, isLoading: isLoadingActive } =
+    useGetAllActivePackages({
+      search: searchQuery,
+      package_type: undefined,
+    });
+  const { data: inactivePackages, isLoading: isLoadingInactive } =
+    useGetAllInactivePackages({
+      search: searchQuery,
+      package_type: undefined,
+    });
   const router = useRouter();
 
   const fadeInUp = {

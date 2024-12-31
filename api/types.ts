@@ -408,26 +408,24 @@ export interface EditUserProfileRequest {
   address?: string | null;
 }
 
-
 export interface CompleteBookingRequest {
-    package_id: string
+  package_id: string;
 }
 
 export interface CompleteBookingResponse {
-    message: string;
-    total_completed: number;
-    total_refunded: number;
+  message: string;
+  total_completed: number;
+  total_refunded: number;
 }
 
-
 export interface PackageSettlementResponse {
-    has_settlement: boolean;
-    settlement_details?: {
-        total_completed?: number | null;
-        total_refunded?: number | null;
-        total_amount_generated?: number | null;
-        total_amount_refunded?: number | null;
-        has_credited_wallets?: boolean | null;
-        date_initiated?: string | null;
-    } | null;
+  has_settlement: boolean;
+  settlement_details?: {
+    total_completed?: number | null;
+    total_refunded?: number | null;
+    total_amount_generated?: number | null;
+    total_amount_refunded?: number | null;
+    has_credited_wallets?: boolean | null;
+    date_initiated?: string | null;
+  } | null;
 }

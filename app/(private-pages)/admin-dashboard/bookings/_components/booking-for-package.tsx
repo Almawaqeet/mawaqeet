@@ -1,6 +1,9 @@
 'use client';
 
-import { useViewPackage, useCheckPackageSettlementStatus } from '@/api/services/packages';
+import {
+  useViewPackage,
+  useCheckPackageSettlementStatus,
+} from '@/api/services/packages';
 import {
   useGetBookingFinancialSummaryForASpecificPackage,
   useGetBookingsForAPackage,
@@ -57,12 +60,12 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useAppToast } from '@/components/reusables/AppToast';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 
-
 export default function BookingsForSpecificPackage() {
   const { packageId } = useParams();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSettlementDialogOpen, setIsSettlementDialogOpen] = useState(false);
-  const [isWalletDetailsDialogOpen, setIsWalletDetailsDialogOpen] = useState(false);
+  const [isWalletDetailsDialogOpen, setIsWalletDetailsDialogOpen] =
+    useState(false);
   const queryClient = useQueryClient();
   const { showToast } = useAppToast();
 
@@ -92,7 +95,8 @@ export default function BookingsForSpecificPackage() {
     packageId as string
   );
 
-  const { data: settlementData, isLoading: settlementLoading } = useCheckPackageSettlementStatus(packageId as string);
+  const { data: settlementData, isLoading: settlementLoading } =
+    useCheckPackageSettlementStatus(packageId as string);
 
   const { data: bookingsData, isLoading: bookingsLoading } =
     useGetBookingsForAPackage(packageId as string, {
@@ -106,7 +110,7 @@ export default function BookingsForSpecificPackage() {
     useGetBookingFinancialSummaryForASpecificPackage(packageId as string);
 
   const completeBookingMutation = useCompleteBooking({
-    package_id: packageId as string
+    package_id: packageId as string,
   });
 
   const resetFilters = useCallback(() => {
@@ -130,27 +134,29 @@ export default function BookingsForSpecificPackage() {
       }
 
       await completeBookingMutation.mutateAsync({
-        package_id: packageId as string
+        package_id: packageId as string,
       });
 
       // Invalidate settlement status query
       queryClient.invalidateQueries({
-        queryKey: [generateBaseQueryKeyFromRoute(
-          routes.package.checkSettlementStatus(packageId as string)
-        )]
+        queryKey: [
+          generateBaseQueryKeyFromRoute(
+            routes.package.checkSettlementStatus(packageId as string)
+          ),
+        ],
       });
 
       showToast({
-        title: "Success",
-        description: "Package completed successfully",
-        variant: "default"
+        title: 'Success',
+        description: 'Package completed successfully',
+        variant: 'default',
       });
       setIsDialogOpen(false);
     } catch (error) {
       showToast({
-        title: "Error",
-        description: "Failed to complete package. Please try again.",
-        variant: "destructive"
+        title: 'Error',
+        description: 'Failed to complete package. Please try again.',
+        variant: 'destructive',
       });
     }
   };
@@ -364,11 +370,17 @@ export default function BookingsForSpecificPackage() {
             <Skeleton className="h-10 w-32" />
           ) : settlementData?.has_settlement ? (
             <div className="flex items-center gap-4">
-              <Badge variant="outline" className="px-3 py-2 bg-green-50 text-green-700 border-green-200">
+              <Badge
+                variant="outline"
+                className="px-3 py-2 bg-green-50 text-green-700 border-green-200"
+              >
                 <CheckCircle2 className="h-4 w-4 mr-2" />
                 Package Completed
               </Badge>
-              <Dialog open={isWalletDetailsDialogOpen} onOpenChange={setIsWalletDetailsDialogOpen}>
+              <Dialog
+                open={isWalletDetailsDialogOpen}
+                onOpenChange={setIsWalletDetailsDialogOpen}
+              >
                 <DialogTrigger asChild>
                   <Badge
                     variant="outline"
@@ -379,7 +391,9 @@ export default function BookingsForSpecificPackage() {
                     }`}
                   >
                     <Wallet className="h-4 w-4 mr-2" />
-                    {settlementData?.settlement_details?.has_credited_wallets ? 'Wallets Credited' : 'Wallets Crediting Pending'}
+                    {settlementData?.settlement_details?.has_credited_wallets
+                      ? 'Wallets Credited'
+                      : 'Wallets Crediting Pending'}
                   </Badge>
                 </DialogTrigger>
                 <DialogContent className="bg-white max-w-md">
@@ -391,29 +405,46 @@ export default function BookingsForSpecificPackage() {
                     <DialogDescription className="pt-4">
                       <div className="space-y-4">
                         <div className="bg-gray-50 p-4 rounded-lg">
-                          <p className="text-sm text-gray-600 mb-2">Total Amount Generated</p>
+                          <p className="text-sm text-gray-600 mb-2">
+                            Total Amount Generated
+                          </p>
                           <p className="text-lg font-medium text-gray-900">
-                            ₦{settlementData?.settlement_details?.total_amount_generated?.toLocaleString() ?? '0'}
+                            ₦
+                            {settlementData?.settlement_details?.total_amount_generated?.toLocaleString() ??
+                              '0'}
                           </p>
                         </div>
                         <div className="bg-gray-50 p-4 rounded-lg">
-                          <p className="text-sm text-gray-600 mb-2">Settlement Status</p>
+                          <p className="text-sm text-gray-600 mb-2">
+                            Settlement Status
+                          </p>
                           <Badge
                             variant="outline"
                             className={`${
-                              settlementData?.settlement_details?.has_credited_wallets
+                              settlementData?.settlement_details
+                                ?.has_credited_wallets
                                 ? 'bg-green-50 text-green-700 border-green-200'
                                 : 'bg-yellow-50 text-yellow-700 border-yellow-200'
                             }`}
                           >
-                            {settlementData?.settlement_details?.has_credited_wallets ? 'Completed' : 'Pending'}
+                            {settlementData?.settlement_details
+                              ?.has_credited_wallets
+                              ? 'Completed'
+                              : 'Pending'}
                           </Badge>
                         </div>
                         {settlementData?.settlement_details?.date_initiated && (
                           <div className="bg-gray-50 p-4 rounded-lg">
-                            <p className="text-sm text-gray-600 mb-2">Settlement Date</p>
+                            <p className="text-sm text-gray-600 mb-2">
+                              Settlement Date
+                            </p>
                             <p className="text-base text-gray-900">
-                              {format(new Date(settlementData.settlement_details.date_initiated), 'PPP')}
+                              {format(
+                                new Date(
+                                  settlementData.settlement_details.date_initiated
+                                ),
+                                'PPP'
+                              )}
                             </p>
                           </div>
                         )}
@@ -421,7 +452,10 @@ export default function BookingsForSpecificPackage() {
                     </DialogDescription>
                   </DialogHeader>
                   <DialogFooter className="mt-6">
-                    <Button variant="default" onClick={() => setIsWalletDetailsDialogOpen(false)}>
+                    <Button
+                      variant="default"
+                      onClick={() => setIsWalletDetailsDialogOpen(false)}
+                    >
                       Close
                     </Button>
                   </DialogFooter>
@@ -443,25 +477,34 @@ export default function BookingsForSpecificPackage() {
                     <div className="flex items-start gap-3 bg-amber-50 p-4 rounded-lg">
                       <Clock className="h-5 w-5 text-amber-600 mt-0.5" />
                       <div>
-                        <p className="text-amber-900 font-medium mb-1">Refund Schedule</p>
+                        <p className="text-amber-900 font-medium mb-1">
+                          Refund Schedule
+                        </p>
                         <p className="text-amber-700 text-sm">
-                          Any pending refunds will be automatically processed tomorrow at 12:00 AM.
+                          Any pending refunds will be automatically processed
+                          tomorrow at 12:00 AM.
                         </p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3 bg-gray-50 p-4 rounded-lg">
                       <CheckCircle2 className="h-5 w-5 text-gray-600 mt-0.5" />
                       <div>
-                        <p className="text-gray-900 font-medium mb-1">Package Status</p>
+                        <p className="text-gray-900 font-medium mb-1">
+                          Package Status
+                        </p>
                         <p className="text-gray-600 text-sm">
-                          Once completed, this package will no longer be available for booking.
+                          Once completed, this package will no longer be
+                          available for booking.
                         </p>
                       </div>
                     </div>
                   </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="mt-6">
-                  <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+                  <Button
+                    variant="outline"
+                    onClick={() => setIsDialogOpen(false)}
+                  >
                     Cancel
                   </Button>
                   <Button
@@ -469,14 +512,19 @@ export default function BookingsForSpecificPackage() {
                     onClick={handleCompletePackage}
                     disabled={completeBookingMutation.isPending}
                   >
-                    {completeBookingMutation.isPending ? 'Completing...' : 'Complete Package'}
+                    {completeBookingMutation.isPending
+                      ? 'Completing...'
+                      : 'Complete Package'}
                   </Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
           )}
 
-          <Dialog open={isSettlementDialogOpen} onOpenChange={setIsSettlementDialogOpen}>
+          <Dialog
+            open={isSettlementDialogOpen}
+            onOpenChange={setIsSettlementDialogOpen}
+          >
             <DialogContent className="bg-white max-w-md">
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-2 text-xl">
@@ -487,16 +535,22 @@ export default function BookingsForSpecificPackage() {
                   <div className="flex items-start gap-3 bg-green-50 p-4 rounded-lg">
                     <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5" />
                     <div>
-                      <p className="text-green-900 font-medium mb-1">Settlement Complete</p>
+                      <p className="text-green-900 font-medium mb-1">
+                        Settlement Complete
+                      </p>
                       <p className="text-green-700 text-sm">
-                        This package has already been settled and completed. No further actions are required.
+                        This package has already been settled and completed. No
+                        further actions are required.
                       </p>
                     </div>
                   </div>
                 </DialogDescription>
               </DialogHeader>
               <DialogFooter className="mt-6">
-                <Button variant="default" onClick={() => setIsSettlementDialogOpen(false)}>
+                <Button
+                  variant="default"
+                  onClick={() => setIsSettlementDialogOpen(false)}
+                >
                   Close
                 </Button>
               </DialogFooter>
