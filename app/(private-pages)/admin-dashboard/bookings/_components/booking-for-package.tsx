@@ -201,7 +201,9 @@ export default function BookingsForSpecificPackage() {
             <div className="flex items-center gap-2">
               <CreditCard className="h-4 w-4 text-gray-500" />
               <span className="text-sm text-gray-600">
-                {removeNoneAlphanumericEntity(row.original?.payment_plan ?? 'N/A')}
+                {removeNoneAlphanumericEntity(
+                  row.original?.payment_plan ?? 'N/A'
+                )}
               </span>
             </div>
           </div>

@@ -20,6 +20,8 @@ import { CLIENT_ROUTES } from '@/lib/routes';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 import { useQueryClient } from '@tanstack/react-query';
 import { PACKAGE_TYPES } from '@/constants/generic';
+import { useCheckIfUserHasAWallet } from '@/api/services/wallet';
+import AppDialogBox from '@/components/reusables/AppDialogBox';
 
 const validationSchema = Yup.object({
   category: Yup.string().required('Please select a category'),
@@ -38,6 +40,8 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
     useInitiateBooking(packageId);
   const { showToast } = useAppToast();
   const queryClient = useQueryClient();
+  const { data: checkIfUserHasWallet, isLoading: walletLoading } =
+    useCheckIfUserHasAWallet();
 
   const formik = useFormik({
     initialValues: {
@@ -87,6 +91,34 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
       });
     },
   });
+  if (walletLoading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-black/80">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-white"></div>
+      </div>
+    );
+  }
+
+  if (checkIfUserHasWallet?.has_wallet === false) {
+    return (
+      <AppDialogBox
+        open={true}
+        onOpenChange={() => {}}
+        title="You don't have a wallet"
+        description="You need to create a wallet before you can book any packages. Would you like to create one now?"
+        cancelText="Later"
+        confirmText="Create Wallet"
+        onCancel={() =>
+          router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.packages)
+        }
+        onConfirm={() =>
+          router.push(
+            CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.createWallet
+          )
+        }
+      />
+    );
+  }
 
   const paymentPlans = [
     { id: 'full', name: 'Full Payment' },

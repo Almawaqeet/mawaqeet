@@ -15,11 +15,14 @@ import { PackagesEmptyState } from '@/components/reusables/PackagesEmptyState';
 import { useGetAllActivePackages } from '@/api/services/packages';
 import { useAppToast } from '@/components/reusables/AppToast';
 
-
 const PackageSection = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+<<<<<<< HEAD
+=======
+  const { showToast } = useAppToast();
+>>>>>>> e369123837fd1300250c474ba9d724141b238cb1
 
   const currentTab = searchParams
     ?.get('type')
@@ -65,7 +68,16 @@ const PackageSection = () => {
     [updateSearchParams]
   );
 
+<<<<<<< HEAD
   const { data: packages, isLoading } = useGetAllActivePackages({
+=======
+  const {
+    data: packages,
+    isLoading,
+    isError,
+    error,
+  } = useGetAllActivePackages({
+>>>>>>> e369123837fd1300250c474ba9d724141b238cb1
     package_type: activeTab,
     search: searchTerm.trim() || undefined,
   });
@@ -130,7 +142,6 @@ const PackageSection = () => {
 
         {/* Package grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
           {isLoading ? (
             <>
               {[...Array(3)].map((_, index) => (

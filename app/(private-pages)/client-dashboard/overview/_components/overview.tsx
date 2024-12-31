@@ -29,10 +29,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function OverViewPage() {
   const { data: session } = useSession();
-  const { data: checkIfUserHasWallet, isLoading: isWalletLoading } =
-    useCheckIfUserHasAWallet();
-  const { data: upcomingPackages, isLoading: isPackagesLoading } =
-    useGetUpcomingHajjAndUmrahPackage();
+  const { data: checkIfUserHasWallet } = useCheckIfUserHasAWallet();
+  const { data: upcomingPackages } = useGetUpcomingHajjAndUmrahPackage();
   const { data: hajjFinancialSummary, isLoading: isHajjSummaryLoading } =
     useGetUserFinancialSummary(PACKAGE_TYPES.HAJJ);
   const { data: umrahFinancialSummary, isLoading: isUmrahSummaryLoading } =
@@ -43,38 +41,12 @@ export default function OverViewPage() {
   const [showUmrahWelcomeBanner, setShowUmrahWelcomeBanner] = useState(false);
 
   const router = useRouter();
-  const userWalletExists =
-    window != undefined
-      ? localStorage.getItem(LOCAL_STORAGE_KEYS.USER_WALLET_STATUS)
-      : false;
 
   useEffect(() => {
-    if (!userWalletExists && isWalletLoading && !checkIfUserHasWallet) {
-      const intervalModalCall = setInterval(() => {
-        setShowWalletModal(true);
-        setShowTermsAndPolicyModal(true);
-      }, 2000);
-
-      return () => clearInterval(intervalModalCall);
+    if (checkIfUserHasWallet?.has_wallet === false) {
+      setShowWalletModal(true);
     }
-  }, [isWalletLoading, userWalletExists, checkIfUserHasWallet]);
-
-  useEffect(() => {
-    //? this is here because i want to save that the user already has a wallet so this does'nt disturb them on another page render
-    if (userWalletExists || checkIfUserHasWallet?.has_wallet) {
-      if (typeof window !== undefined) {
-        localStorage.setItem(LOCAL_STORAGE_KEYS.USER_WALLET_STATUS, 'found');
-      }
-    }
-  }, [userWalletExists, checkIfUserHasWallet]);
-
-  if (isWalletLoading && !userWalletExists && !userWalletExists) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-black/80">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-white"></div>
-      </div>
-    );
-  }
+  }, [checkIfUserHasWallet]);
 
   const renderCardSkeleton = () => (
     <Card>

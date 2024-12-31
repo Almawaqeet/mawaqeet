@@ -146,12 +146,17 @@ const MobileNavMenu = ({
               }}
               className="w-full flex justify-center pt-4"
             >
-              <Link href={`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`} className="w-full flex justify-center">
+              <Link
+                href={`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`}
+                className="w-full flex justify-center"
+              >
                 <AppButton
                   className="text-fz-xs w-full"
                   icon={<IoMdArrowRoundForward />}
                   onClick={() => {
-                    router.push(`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`);
+                    router.push(
+                      `${CLIENT_ROUTES.PublicPages.onboarding.newUser}`
+                    );
                   }}
                 >
                   Get Started
@@ -227,7 +232,9 @@ const Navbar = () => {
               <AppButton
                 className="mobile:hidden xmd:hidden tab_md:flex font-bold"
                 icon={<IoMdArrowRoundForward className="w-6 h-4" />}
-                onClick={() => router.push(`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`)}
+                onClick={() =>
+                  router.push(`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`)
+                }
               >
                 Get Started
               </AppButton>
