@@ -27,7 +27,7 @@ const Logo = () => (
     >
       <Image
         src={'/images/logo.png'}
-        className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7"
+        className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 bg-white"
         alt="Brand Logo"
         width={28}
         height={28}
@@ -36,7 +36,7 @@ const Logo = () => (
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 0, x: -20 }}
         whileHover={{ opacity: 1, x: 0 }}
-        className="hidden lg:group-hover:block absolute left-full ml-2 bg-white px-3 py-1 rounded-lg shadow-md whitespace-nowrap"
+        className="hidden lg:group-hover:block absolute left-full ml-2  px-3 py-1 rounded-lg shadow-md whitespace-nowrap"
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
         Al-Mawaqeet Travels and Tours

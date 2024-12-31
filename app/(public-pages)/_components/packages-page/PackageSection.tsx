@@ -20,7 +20,6 @@ const PackageSection = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { showToast } = useAppToast()
 
   const currentTab = searchParams
     ?.get('type')
@@ -66,7 +65,7 @@ const PackageSection = () => {
     [updateSearchParams]
   );
 
-  const { data: packages, isLoading, isError, error } = useGetAllActivePackages({
+  const { data: packages, isLoading } = useGetAllActivePackages({
     package_type: activeTab,
     search: searchTerm.trim() || undefined,
   });

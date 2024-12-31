@@ -44,6 +44,7 @@ export const useGetAllInactivePackages = (params?: {
       params?.page,
     ],
     params: params,
+    
   });
 };
 

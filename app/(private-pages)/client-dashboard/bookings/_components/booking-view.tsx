@@ -47,6 +47,7 @@ import ConfirmationModal from './booking-confirmation-modal';
 import ReceiptsModal from './booking-reciept-modal';
 import { PACKAGE_TYPES } from '@/constants/generic';
 import { removeNoneAlphanumericEntity } from '@/lib/utils';
+import { useErrorToast } from '@/providers/get-request-error-provider';
 
 interface BookingViewProps {
   id: string;
@@ -58,6 +59,7 @@ export function BookingView({ id }: BookingViewProps) {
   const {
     data: bookingData,
     isLoading,
+    isError,
     error: bookingError,
   } = useGetBookingInformation(id);
   const [showReceiptsModal, setShowReceiptsModal] = useState(false);
@@ -76,14 +78,14 @@ export function BookingView({ id }: BookingViewProps) {
     }
   }, [booking?.status]);
 
-  if (bookingError) {
-    toast({
-      variant: 'destructive',
-      title: 'Error',
-      description: 'Failed to fetch booking information. Please try again.',
-    });
-    return null;
-  }
+  // if (bookingError) {
+  //   toast({
+  //     variant: 'destructive',
+  //     title: 'Error',
+  //     description: 'Failed to fetch booking information. Please try again.',
+  //   });
+  //   return null;
+  // }
 
   if (isLoading) {
     return (

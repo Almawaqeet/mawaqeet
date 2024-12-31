@@ -3,10 +3,15 @@ import {
   useMutation,
   UseQueryResult,
   UseMutationResult,
+  QueryClient,
 } from '@tanstack/react-query';
 import axios, { AxiosRequestConfig } from 'axios';
 import { getSession } from 'next-auth/react';
 import { API_URL } from '@/environment-config';
+import { useErrorToast } from '@/providers/get-request-error-provider';
+import { redirect, useRouter } from 'next/navigation';
+import { CLIENT_ROUTES } from '@/lib/routes';
+// import { ErrorProvider } from '@/providers/get-request-error-provider';
 
 type QueryConfig<TQueryKey, TData> = {
   queryKey: TQueryKey;
@@ -34,41 +39,51 @@ const axiosInstance = axios.create({
   },
 });
 
+const showErrorToast = useErrorToast();
+const query = new QueryClient();
+const router = useRouter();
+
+
 export function useAppQuery<
   TData = unknown,
-  TError = Error,
+  TError = unknown,
   TQueryKey extends Array<unknown> = unknown[],
 >(config: QueryConfig<TQueryKey, TData>): UseQueryResult<TData, TError> {
   const { queryKey, apiRoute, options } = config;
 
-  return useQuery<TData, TError>({
+  return useQuery({
     queryKey,
     queryFn: async () => {
       const session = await getSession();
       const token = session?.user?.accessToken ?? '';
 
-      try {
-        const response = await axiosInstance.get<TData>(apiRoute, {
+      const response = await axiosInstance
+        .get<TData>(apiRoute, {
           ...options,
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
-        return response.data;
-      } catch (error: any) {
+        })
+        // .catch((error: any) => {
+          
+        //   console.log(error)
 
-        const errorMessage =
-          error?.response?.data?.message ||
-          error?.response?.message ||
-          'An error occurred while fetching data.';
-        throw new Error(errorMessage);
-      }
+        //   if (error) {
+        //     showErrorToast(`${error?.message}`);
+        //   }
+
+        //   if (error?.status === 403 || error?.status === 401) {
+        //     showErrorToast(error?.response?.data?.detail);
+
+        //     router.push(CLIENT_ROUTES.PublicPages.auth.login);
+        //     query.clear();
+        //   }
+        // });
+      return response?.data;
     },
-    
-    throwOnError: true, 
 
-    retry: 3, // Retry up to 3 times on failure
-    staleTime: 1000 * 60 * 5, // Data is fresh for 5 minutes
+    retry: 3,
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
   });
 }
 
@@ -111,7 +126,22 @@ export function useAppQueryWithPaginationAndParams<
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      })
+      // .catch((error: any) => {
+          
+      //   console.log(error)
+
+      //   if (error) {
+      //     showErrorToast(`${error?.message}`);
+      //   }
+
+      //   if (error?.status === 403 || error?.status === 401) {
+      //     showErrorToast(error?.response?.data?.detail);
+
+      //     router.push(CLIENT_ROUTES.PublicPages.auth.login);
+      //     query.clear();
+      //   }
+      // });
 
       return (
         response?.data ?? {
