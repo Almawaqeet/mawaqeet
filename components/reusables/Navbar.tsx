@@ -10,6 +10,7 @@ import { IoMdArrowRoundForward } from 'react-icons/io';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { CLIENT_ROUTES } from '@/lib/routes';
 
 interface NavItem {
   id: string;
@@ -145,12 +146,17 @@ const MobileNavMenu = ({
               }}
               className="w-full flex justify-center pt-4"
             >
-              <Link href={'/login'} className="w-full flex justify-center">
+              <Link
+                href={`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`}
+                className="w-full flex justify-center"
+              >
                 <AppButton
                   className="text-fz-xs w-full"
                   icon={<IoMdArrowRoundForward />}
                   onClick={() => {
-                    router.push('/onboarding/new-user');
+                    router.push(
+                      `${CLIENT_ROUTES.PublicPages.onboarding.newUser}`
+                    );
                   }}
                 >
                   Get Started
@@ -222,11 +228,13 @@ const Navbar = () => {
           />
 
           <div className="flex justify-end items-center">
-            <Link href={'/onboarding/new-user'}>
+            <Link href={`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`}>
               <AppButton
                 className="mobile:hidden xmd:hidden tab_md:flex font-bold"
                 icon={<IoMdArrowRoundForward className="w-6 h-4" />}
-                onClick={() => router.push('/onboarding/new-user')}
+                onClick={() =>
+                  router.push(`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`)
+                }
               >
                 Get Started
               </AppButton>

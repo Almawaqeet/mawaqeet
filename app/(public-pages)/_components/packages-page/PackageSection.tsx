@@ -13,11 +13,13 @@ import { addSearchParamsToUrl } from '@/lib/utils';
 import { PACKAGE_TYPES } from '@/constants/generic';
 import { PackagesEmptyState } from '@/components/reusables/PackagesEmptyState';
 import { useGetAllActivePackages } from '@/api/services/packages';
+import { useAppToast } from '@/components/reusables/AppToast';
 
 const PackageSection = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { showToast } = useAppToast();
 
   const currentTab = searchParams
     ?.get('type')
@@ -63,7 +65,12 @@ const PackageSection = () => {
     [updateSearchParams]
   );
 
-  const { data: packages, isLoading } = useGetAllActivePackages({
+  const {
+    data: packages,
+    isLoading,
+    isError,
+    error,
+  } = useGetAllActivePackages({
     package_type: activeTab,
     search: searchTerm.trim() || undefined,
   });

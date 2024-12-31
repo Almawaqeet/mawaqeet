@@ -1,9 +1,13 @@
 'use client';
 
-import { useViewPackage } from '@/api/services/packages';
+import {
+  useViewPackage,
+  useCheckPackageSettlementStatus,
+} from '@/api/services/packages';
 import {
   useGetBookingFinancialSummaryForASpecificPackage,
   useGetBookingsForAPackage,
+  useCompleteBooking,
 } from '@/api/services/booking';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
@@ -19,8 +23,17 @@ import { DataTableFilterBox } from '@/components/ui/table/data-table-filter-box'
 import { DataTableResetFilter } from '@/components/ui/table/data-table-reset-filter';
 import { searchParams } from '@/lib/searchparams';
 import { useQueryState } from 'nuqs';
-import { useCallback, useMemo } from 'react';
-
+import { useCallback, useMemo, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from '@/components/ui/dialog';
 import {
   Calendar,
   CreditCard,
@@ -31,7 +44,10 @@ import {
   Star,
   Diamond,
   Gem,
+  AlertCircle,
+  CheckCircle2,
   Clock,
+  Wallet,
 } from 'lucide-react';
 import { SummarySkeleton } from '@/app/(private-pages)/admin-dashboard/bookings/_components/summary-skeleton';
 import { BookingTableSkeleton } from '@/app/(private-pages)/client-dashboard/bookings/_components/booking-table-skeleton';
@@ -39,9 +55,20 @@ import {
   booking_payment_status_constant,
   package_price_category,
 } from '@/constants/generic';
+import { removeNoneAlphanumericEntity } from '@/lib/utils';
+import { useQueryClient } from '@tanstack/react-query';
+import { useAppToast } from '@/components/reusables/AppToast';
+import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 
 export default function BookingsForSpecificPackage() {
   const { packageId } = useParams();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isSettlementDialogOpen, setIsSettlementDialogOpen] = useState(false);
+  const [isWalletDetailsDialogOpen, setIsWalletDetailsDialogOpen] =
+    useState(false);
+  const queryClient = useQueryClient();
+  const { showToast } = useAppToast();
+
   const [searchQuery, setSearchQuery] = useQueryState(
     'q',
     searchParams.q
@@ -67,6 +94,10 @@ export default function BookingsForSpecificPackage() {
   const { data: packageData, isLoading: packageLoading } = useViewPackage(
     packageId as string
   );
+
+  const { data: settlementData, isLoading: settlementLoading } =
+    useCheckPackageSettlementStatus(packageId as string);
+
   const { data: bookingsData, isLoading: bookingsLoading } =
     useGetBookingsForAPackage(packageId as string, {
       search: searchQuery ?? '',
@@ -77,6 +108,10 @@ export default function BookingsForSpecificPackage() {
 
   const { data: financialSummaryData, isLoading: summaryLoading } =
     useGetBookingFinancialSummaryForASpecificPackage(packageId as string);
+
+  const completeBookingMutation = useCompleteBooking({
+    package_id: packageId as string,
+  });
 
   const resetFilters = useCallback(() => {
     setSearchQuery(null);
@@ -89,7 +124,42 @@ export default function BookingsForSpecificPackage() {
     return !!searchQuery || !!statusFilter || !!categoryFilter;
   }, [searchQuery, statusFilter, categoryFilter]);
 
-  const isLoading = packageLoading || bookingsLoading;
+  const isLoading = packageLoading || bookingsLoading || settlementLoading;
+
+  const handleCompletePackage = async () => {
+    try {
+      if (settlementData?.has_settlement) {
+        setIsSettlementDialogOpen(true);
+        return;
+      }
+
+      await completeBookingMutation.mutateAsync({
+        package_id: packageId as string,
+      });
+
+      // Invalidate settlement status query
+      queryClient.invalidateQueries({
+        queryKey: [
+          generateBaseQueryKeyFromRoute(
+            routes.package.checkSettlementStatus(packageId as string)
+          ),
+        ],
+      });
+
+      showToast({
+        title: 'Success',
+        description: 'Package completed successfully',
+        variant: 'default',
+      });
+      setIsDialogOpen(false);
+    } catch (error) {
+      showToast({
+        title: 'Error',
+        description: 'Failed to complete package. Please try again.',
+        variant: 'destructive',
+      });
+    }
+  };
 
   const columns: ColumnDef<PackageBookingListResponse>[] = [
     {
@@ -200,7 +270,9 @@ export default function BookingsForSpecificPackage() {
             <div className="flex items-center gap-2">
               <CreditCard className="h-4 w-4 text-gray-500" />
               <span className="text-sm text-gray-600">
-                {row.original?.payment_plan ?? 'N/A'}
+                {removeNoneAlphanumericEntity(
+                  row.original?.payment_plan ?? 'N/A'
+                )}
               </span>
             </div>
           </div>
@@ -294,6 +366,196 @@ export default function BookingsForSpecificPackage() {
               View and manage bookings for this package
             </p>
           </div>
+          {isLoading ? (
+            <Skeleton className="h-10 w-32" />
+          ) : settlementData?.has_settlement ? (
+            <div className="flex items-center gap-4">
+              <Badge
+                variant="outline"
+                className="px-3 py-2 bg-green-50 text-green-700 border-green-200"
+              >
+                <CheckCircle2 className="h-4 w-4 mr-2" />
+                Package Completed
+              </Badge>
+              <Dialog
+                open={isWalletDetailsDialogOpen}
+                onOpenChange={setIsWalletDetailsDialogOpen}
+              >
+                <DialogTrigger asChild>
+                  <Badge
+                    variant="outline"
+                    className={`px-3 py-2 cursor-pointer hover:bg-opacity-90 ${
+                      settlementData?.settlement_details?.has_credited_wallets
+                        ? 'bg-green-50 text-green-700 border-green-200'
+                        : 'bg-yellow-50 text-yellow-700 border-yellow-200'
+                    }`}
+                  >
+                    <Wallet className="h-4 w-4 mr-2" />
+                    {settlementData?.settlement_details?.has_credited_wallets
+                      ? 'Wallets Credited'
+                      : 'Wallets Crediting Pending'}
+                  </Badge>
+                </DialogTrigger>
+                <DialogContent className="bg-white max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="flex items-center gap-2 text-xl">
+                      <Wallet className="h-6 w-6 text-brand-color" />
+                      Settlement Details
+                    </DialogTitle>
+                    <DialogDescription className="pt-4">
+                      <div className="space-y-4">
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <p className="text-sm text-gray-600 mb-2">
+                            Total Amount Generated
+                          </p>
+                          <p className="text-lg font-medium text-gray-900">
+                            ₦
+                            {settlementData?.settlement_details?.total_amount_generated?.toLocaleString() ??
+                              '0'}
+                          </p>
+                        </div>
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <p className="text-sm text-gray-600 mb-2">
+                            Settlement Status
+                          </p>
+                          <Badge
+                            variant="outline"
+                            className={`${
+                              settlementData?.settlement_details
+                                ?.has_credited_wallets
+                                ? 'bg-green-50 text-green-700 border-green-200'
+                                : 'bg-yellow-50 text-yellow-700 border-yellow-200'
+                            }`}
+                          >
+                            {settlementData?.settlement_details
+                              ?.has_credited_wallets
+                              ? 'Completed'
+                              : 'Pending'}
+                          </Badge>
+                        </div>
+                        {settlementData?.settlement_details?.date_initiated && (
+                          <div className="bg-gray-50 p-4 rounded-lg">
+                            <p className="text-sm text-gray-600 mb-2">
+                              Settlement Date
+                            </p>
+                            <p className="text-base text-gray-900">
+                              {format(
+                                new Date(
+                                  settlementData.settlement_details.date_initiated
+                                ),
+                                'PPP'
+                              )}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter className="mt-6">
+                    <Button
+                      variant="default"
+                      onClick={() => setIsWalletDetailsDialogOpen(false)}
+                    >
+                      Close
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+            </div>
+          ) : (
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button variant="default">Complete Package</Button>
+              </DialogTrigger>
+              <DialogContent className="bg-white max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="flex items-center gap-2 text-xl">
+                    <AlertCircle className="h-6 w-6 text-amber-500" />
+                    Complete Package
+                  </DialogTitle>
+                  <DialogDescription className="pt-4 space-y-4">
+                    <div className="flex items-start gap-3 bg-amber-50 p-4 rounded-lg">
+                      <Clock className="h-5 w-5 text-amber-600 mt-0.5" />
+                      <div>
+                        <p className="text-amber-900 font-medium mb-1">
+                          Refund Schedule
+                        </p>
+                        <p className="text-amber-700 text-sm">
+                          Any pending refunds will be automatically processed
+                          tomorrow at 12:00 AM.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3 bg-gray-50 p-4 rounded-lg">
+                      <CheckCircle2 className="h-5 w-5 text-gray-600 mt-0.5" />
+                      <div>
+                        <p className="text-gray-900 font-medium mb-1">
+                          Package Status
+                        </p>
+                        <p className="text-gray-600 text-sm">
+                          Once completed, this package will no longer be
+                          available for booking.
+                        </p>
+                      </div>
+                    </div>
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="mt-6">
+                  <Button
+                    variant="outline"
+                    onClick={() => setIsDialogOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="default"
+                    onClick={handleCompletePackage}
+                    disabled={completeBookingMutation.isPending}
+                  >
+                    {completeBookingMutation.isPending
+                      ? 'Completing...'
+                      : 'Complete Package'}
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          )}
+
+          <Dialog
+            open={isSettlementDialogOpen}
+            onOpenChange={setIsSettlementDialogOpen}
+          >
+            <DialogContent className="bg-white max-w-md">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2 text-xl">
+                  <CheckCircle2 className="h-6 w-6 text-green-500" />
+                  Package Already Settled
+                </DialogTitle>
+                <DialogDescription className="pt-4">
+                  <div className="flex items-start gap-3 bg-green-50 p-4 rounded-lg">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5" />
+                    <div>
+                      <p className="text-green-900 font-medium mb-1">
+                        Settlement Complete
+                      </p>
+                      <p className="text-green-700 text-sm">
+                        This package has already been settled and completed. No
+                        further actions are required.
+                      </p>
+                    </div>
+                  </div>
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter className="mt-6">
+                <Button
+                  variant="default"
+                  onClick={() => setIsSettlementDialogOpen(false)}
+                >
+                  Close
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 

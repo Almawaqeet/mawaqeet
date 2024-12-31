@@ -46,6 +46,7 @@ import CancelModal from './booking-cancel-modal';
 import ConfirmationModal from './booking-confirmation-modal';
 import ReceiptsModal from './booking-reciept-modal';
 import { PACKAGE_TYPES } from '@/constants/generic';
+import { removeNoneAlphanumericEntity } from '@/lib/utils';
 
 interface BookingViewProps {
   id: string;
@@ -378,7 +379,9 @@ export function BookingView({ id }: BookingViewProps) {
                   Payment Plan
                 </span>
                 <span className="font-semibold text-gray-900">
-                  {(booking.payment_plan ?? 'N/A').toUpperCase()}
+                  {removeNoneAlphanumericEntity(
+                    (booking.payment_plan ?? 'N/A').toUpperCase()
+                  )}
                 </span>
               </div>
             </div>
@@ -392,15 +395,15 @@ export function BookingView({ id }: BookingViewProps) {
               Payment Progress
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-4 sm:p-6">
-            <div className="w-36 h-36 sm:w-48 sm:h-48 mx-auto relative">
+          <CardContent className="p-4 sm:p-6 flex flex-col items-center justify-center">
+            <div className="w-36 h-36 sm:w-48 sm:h-48 relative flex items-center justify-center">
               <PieChart width={192} height={192}>
                 <Pie
                   data={data}
                   cx={96}
                   cy={96}
-                  innerRadius={60}
-                  outerRadius={80}
+                  innerRadius={70}
+                  outerRadius={95}
                   fill="#A88A69"
                   paddingAngle={0}
                   dataKey="value"
@@ -466,7 +469,9 @@ export function BookingView({ id }: BookingViewProps) {
                 Payment Plan
               </p>
               <p className="text-lg sm:text-xl font-bold mt-1 capitalize">
-                {booking.payment_plan?.toLowerCase() ?? 'N/A'}
+                {removeNoneAlphanumericEntity(
+                  booking.payment_plan?.toLowerCase() ?? 'N/A'
+                )}
               </p>
             </div>
             <div className="rounded-lg p-4 bg-gray-50">

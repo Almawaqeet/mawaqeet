@@ -31,13 +31,6 @@ export const clientDashboardNavItems: NavItem[] = [
     items: [], // No child items
   },
   {
-    title: 'Payments',
-    url: CLIENT_ROUTES.PrivatePages.clientDashboard.payment,
-    icon: 'userPen',
-    isActive: false,
-    items: [], // No child items
-  },
-  {
     title: 'Bookings',
     url: CLIENT_ROUTES.PrivatePages.clientDashboard.booking.mainPage,
     icon: 'booking',
@@ -123,13 +116,13 @@ export const adminDashboardNavItems: NavItem[] = [
   //     isActive: false,
   //     items: [] // No child items
   //   },
-  //   {
-  //     title: 'Profile',
-  //     url: CLIENT_ROUTES.PrivatePages.adminDashboard.profile,
-  //     icon: 'userPen',
-  //     isActive: false,
-  //     items: [] // No child items
-  //   },
+  {
+    title: 'Profile',
+    url: CLIENT_ROUTES.PrivatePages.adminDashboard.profile,
+    icon: 'userPen',
+    isActive: false,
+    items: [], // No child items
+  },
   //   {
   //     title: 'Settings',
   //     url: '/dashboard/',

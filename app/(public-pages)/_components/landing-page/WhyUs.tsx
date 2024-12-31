@@ -73,7 +73,7 @@ export default function WhyUs() {
           >
             Experience the Divine Journey
           </AppHeading>
-          <p className="text-gray-400 mb-6 text-lg leading-relaxed text-left">
+          <p className="text-gray-400 mb-6 text-lg xmd:text-base leading-relaxed text-left">
             Have you ever wished to experience the peace and calm of being close
             to Allah in the holiest cities of Islam, Makkah and Madinah?
             Experience the life-changing journey of Hajj and Umrah, the fifth
