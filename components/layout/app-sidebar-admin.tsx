@@ -40,26 +40,23 @@ import {
   Bell,
   ChevronRight,
   ChevronsUpDown,
-  CreditCard,
-  GalleryVerticalEnd,
   LogOut,
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { redirect, usePathname } from 'next/navigation';
 import * as React from 'react';
-import { Breadcrumbs } from '@/components/reusables/breadcrumbs';
 import { Icons } from '@/components/reusables/icons';
-import SearchInput from '@/components/reusables/search-input';
-import ThemeToggle from './ThemeToggle/theme-toggle';
 import { UserNav } from './user-nav';
 import { extractInitials } from '@/lib/utils';
 import { signOut } from 'next-auth/react';
 import { CLIENT_ROUTES } from '@/lib/routes';
+import Image from 'next/image';
+
 
 export const company = {
   name: 'Al-Mawaqeet Travels and Tours',
-  logo: GalleryVerticalEnd,
+  logo: '/images/logo.jpg',
   plan: 'Enterprise',
 };
 
@@ -86,7 +83,13 @@ export default function AppSidebar({
         <SidebarHeader>
           <div className="flex gap-2 py-2 text-white">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-[#1A1A1A] text-white">
-              <company.logo className="size-4" />
+              <Image
+                src={company.logo}
+                alt={company.name}
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">{company.name}</span>

@@ -53,10 +53,11 @@ import { extractInitials } from '@/lib/utils';
 import { BellIcon } from 'lucide-react';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { useQueryClient } from '@tanstack/react-query';
+import Image from 'next/image';
 
 export const company = {
   name: 'Al-Mawaqeet Travels and Tours',
-  logo: GalleryVerticalEnd,
+  logo: '/images/logo.jpg',
   plan: 'Client',
 };
 
@@ -84,7 +85,13 @@ export default function AppSidebarClient({
         <SidebarHeader>
           <div className="flex gap-2 py-2 text-white">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-[#1A1A1A] text-white">
-              <company.logo className="size-4" />
+            <Image
+                src={company.logo}
+                alt={company.name}
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">{company.name}</span>

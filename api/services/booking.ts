@@ -8,6 +8,8 @@ import {
   BookingFinancialSummaryResponse,
   BookingInformationResponse,
   BookingVerifyPaymentResponse,
+  CompleteBookingRequest,
+  CompleteBookingResponse,
   CustomApiResponse,
   InitiateBookingApiResponse,
   InitiateBookingPaymentRequest,
@@ -128,3 +130,15 @@ export const useGetBookingFinancialSummaryForASpecificPackage = (
     queryKey: [baseQueryKey],
   });
 };
+
+
+export const useCompleteBooking = (body: CompleteBookingRequest) => {
+    return useAppMutation<CompleteBookingResponse>({
+      apiRoute: routes.bookings.completeBooking,
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+  };
+
+
+  

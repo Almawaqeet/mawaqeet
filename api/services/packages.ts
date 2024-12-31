@@ -4,7 +4,11 @@ import {
   useAppQuery,
   useAppQueryWithPaginationAndParams,
 } from '@/api/client-constructor';
-import { CustomApiResponse, PaginatedResponse } from '@/api/types';
+import {
+  CustomApiResponse,
+  PackageSettlementResponse,
+  PaginatedResponse,
+} from '@/api/types';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 
 export const useGetAllActivePackages = (params?: {
@@ -106,5 +110,17 @@ export const useDeletePackage = (packageId: string) => {
     options: {
       enabled: !!packageId,
     },
+  });
+};
+
+export const useCheckPackageSettlementStatus = (packageId: string) => {
+  const baseQueryKey = generateBaseQueryKeyFromRoute(
+    routes.package.checkSettlementStatus(packageId)
+  );
+
+  
+  return useAppQuery<PackageSettlementResponse>({
+    apiRoute: routes.package.checkSettlementStatus(packageId),
+    queryKey: [baseQueryKey],
   });
 };
