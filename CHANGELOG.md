@@ -4,21 +4,19 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.1.3](https://github.com/Almawaqeet/Almawaqeet-FE/compare/v0.1.2...v0.1.3) (2024-12-31)
 
-
 ### Features
 
-* Add package settlement status check and complete booking functionality ([df7078f](https://github.com/Almawaqeet/Almawaqeet-FE/commit/df7078fa9fcec747d05e9a73e30d550b64032a0d))
-* Add profile viewing and editing functionality ([84d0eb0](https://github.com/Almawaqeet/Almawaqeet-FE/commit/84d0eb0910b0fbf8e5c32207d78d694ca71e46a7))
-* Enhance Open Graph metadata for improved SEO and sharing ([1ea8fe7](https://github.com/Almawaqeet/Almawaqeet-FE/commit/1ea8fe7748f41452ff357ed71f922bd853993784))
-* Integrate wallet check and user prompts in booking and overview components ([a222b41](https://github.com/Almawaqeet/Almawaqeet-FE/commit/a222b414a7235af357f7aa8e0455373fec9666ce))
-* setup utility helper function to remove nonalphanumeric entity and clean up bloated route links ([9164a7a](https://github.com/Almawaqeet/Almawaqeet-FE/commit/9164a7a19887ef3d08efc659c7ad5f595f9e1059))
-
+- Add package settlement status check and complete booking functionality ([df7078f](https://github.com/Almawaqeet/Almawaqeet-FE/commit/df7078fa9fcec747d05e9a73e30d550b64032a0d))
+- Add profile viewing and editing functionality ([84d0eb0](https://github.com/Almawaqeet/Almawaqeet-FE/commit/84d0eb0910b0fbf8e5c32207d78d694ca71e46a7))
+- Enhance Open Graph metadata for improved SEO and sharing ([1ea8fe7](https://github.com/Almawaqeet/Almawaqeet-FE/commit/1ea8fe7748f41452ff357ed71f922bd853993784))
+- Integrate wallet check and user prompts in booking and overview components ([a222b41](https://github.com/Almawaqeet/Almawaqeet-FE/commit/a222b414a7235af357f7aa8e0455373fec9666ce))
+- setup utility helper function to remove nonalphanumeric entity and clean up bloated route links ([9164a7a](https://github.com/Almawaqeet/Almawaqeet-FE/commit/9164a7a19887ef3d08efc659c7ad5f595f9e1059))
 
 ### Bug Fixes
 
-* Remove onClick handler from ResetPasswordStepTwo component ([e2fd15f](https://github.com/Almawaqeet/Almawaqeet-FE/commit/e2fd15f99a39b44103e3705736ab0ef17ad9acab))
-* Standardize code formatting and improve profile form components ([8750ae0](https://github.com/Almawaqeet/Almawaqeet-FE/commit/8750ae0e90c1da7d2b397b1cf28a15be2f979ad6))
-* Standardize formatting of admin dashboard navigation items ([2242407](https://github.com/Almawaqeet/Almawaqeet-FE/commit/2242407879e05b3fccfbede685a096af9ebb7d7f))
+- Remove onClick handler from ResetPasswordStepTwo component ([e2fd15f](https://github.com/Almawaqeet/Almawaqeet-FE/commit/e2fd15f99a39b44103e3705736ab0ef17ad9acab))
+- Standardize code formatting and improve profile form components ([8750ae0](https://github.com/Almawaqeet/Almawaqeet-FE/commit/8750ae0e90c1da7d2b397b1cf28a15be2f979ad6))
+- Standardize formatting of admin dashboard navigation items ([2242407](https://github.com/Almawaqeet/Almawaqeet-FE/commit/2242407879e05b3fccfbede685a096af9ebb7d7f))
 
 ### 0.1.2 (2024-12-27)
 
