@@ -70,9 +70,12 @@ export function BookingPayment({ id }: BookingPaymentProps) {
   if (settlementData?.has_settlement) {
     return (
       <div className="w-full max-w-4xl mx-auto mt-8 p-6 bg-red-50 border border-red-200 rounded-xl">
-        <h2 className="text-xl font-semibold text-red-700 mb-4">Payment Not Allowed</h2>
+        <h2 className="text-xl font-semibold text-red-700 mb-4">
+          Payment Not Allowed
+        </h2>
         <p className="text-red-600">
-          This package has been settled and no further payments can be made. If you believe this is an error, please contact support.
+          This package has been settled and no further payments can be made. If
+          you believe this is an error, please contact support.
         </p>
         <AppButton
           variant="secondary"

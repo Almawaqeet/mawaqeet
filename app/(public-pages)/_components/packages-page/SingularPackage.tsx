@@ -47,7 +47,7 @@ const staggerChildren = {
 export default function SingularPackage({ id }: { id: string }) {
   const { data: pkg, isLoading } = useViewPackage(id);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-    const router = useRouter()
+  const router = useRouter();
 
   const closeModal = useCallback(() => {
     setIsLoginModalOpen(false);
