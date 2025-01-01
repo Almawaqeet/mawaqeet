@@ -314,6 +314,10 @@ export interface PackageBookingListResponse {
     balance?: number;
   };
   is_active?: boolean;
+  is_card_delivered?: boolean;
+  qr_code_url?: string
+  is_on_whatsapp_group?: boolean;
+  card_delivered?: boolean;
 }
 
 export interface BookingFinancialSummaryResponse {
@@ -428,4 +432,16 @@ export interface PackageSettlementResponse {
     has_credited_wallets?: boolean | null;
     date_initiated?: string | null;
   } | null;
+}
+
+
+export interface UpdateHotelRoomRequest {
+  booking_id: string;
+  hotel_room: string;
+}
+
+export interface UpdateHotelRoomResponse {
+  message: string;
+  booking_id: string;
+  hotel_room: string;
 }

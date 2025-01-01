@@ -18,6 +18,8 @@ import {
   PackageBookingListResponse,
   PaginatedResponse,
   SimpleBookingResponse,
+  UpdateHotelRoomRequest,
+  UpdateHotelRoomResponse,
 } from '@/api/types';
 
 export const useGetUserBookings = () => {
@@ -134,6 +136,17 @@ export const useGetBookingFinancialSummaryForASpecificPackage = (
 export const useCompleteBooking = (body: CompleteBookingRequest) => {
   return useAppMutation<CompleteBookingResponse>({
     apiRoute: routes.bookings.completeBooking,
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+};
+
+
+
+
+export const useUpdateHotelRoom = (body?: UpdateHotelRoomRequest) => {
+  return useAppMutation<UpdateHotelRoomResponse>({
+    apiRoute: routes.bookings.updateHotelRoom,
     method: 'POST',
     body: JSON.stringify(body),
   });

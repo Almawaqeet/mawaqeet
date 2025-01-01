@@ -274,6 +274,20 @@ export default function ViewPackage({
                     <BookOpenIcon className="h-4 w-4" />
                     <span>View Bookings</span>
                   </Button>
+                  <Button
+                    variant="outline"
+                    className="rounded-md flex items-center justify-center gap-2"
+                    onClick={() =>
+                      router.push(
+                        CLIENT_ROUTES.PrivatePages.adminDashboard.bookings.completionList(
+                          packageData?.id as string
+                        )
+                      )
+                    }
+                  >
+                    <BookOpenIcon className="h-4 w-4" />
+                    <span>View Completion List</span>
+                  </Button>
                 </>
               )}
             </div>

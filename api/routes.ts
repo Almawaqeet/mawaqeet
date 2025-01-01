@@ -69,6 +69,8 @@ export const routes = {
     cancelBooking: (bookingId: string) =>
       `core/customer/cancel-booking/${bookingId}/`,
     completeBooking: 'core/admin/process-package-settlement/',
+    updateHotelRoom:
+      `core/admin/update-hotel-room/`,
 
     //specifically for admin
     bookingsForPackage: (packageId: string) =>
