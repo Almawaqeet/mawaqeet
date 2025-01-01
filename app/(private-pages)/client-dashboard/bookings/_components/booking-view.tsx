@@ -71,8 +71,9 @@ export function BookingView({ id }: BookingViewProps) {
     useCancelBooking(id);
   const queryClient = useQueryClient();
   const { data: settlementData, isLoading: settlementLoading } =
-  useCheckPackageSettlementStatus(bookingData?.booking?.package?.id as string);
-
+    useCheckPackageSettlementStatus(
+      bookingData?.booking?.package?.id as string
+    );
 
   useEffect(() => {
     if (booking?.status?.toLowerCase() === 'payment_completed') {
@@ -296,21 +297,28 @@ export function BookingView({ id }: BookingViewProps) {
         isCancelling={isCancelling}
       />
 
-      <Dialog open={showSettlementDialog} onOpenChange={setShowSettlementDialog}>
+      <Dialog
+        open={showSettlementDialog}
+        onOpenChange={setShowSettlementDialog}
+      >
         <DialogContent className="bg-white">
           <DialogHeader>
             <DialogTitle>Cannot Modify Booking</DialogTitle>
             <DialogDescription>
-              This booking cannot be modified as it has already been settled. Please contact support for assistance.
+              This booking cannot be modified as it has already been settled.
+              Please contact support for assistance.
               {progressPercentage < 100 && (
                 <p className="mt-2 text-sm text-gray-600">
-                  Don&apos;t worry - the amount you&apos;ve paid will be automatically refunded to your wallet overnight.
+                  Don&apos;t worry - the amount you&apos;ve paid will be
+                  automatically refunded to your wallet overnight.
                 </p>
               )}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={() => setShowSettlementDialog(false)}>Close</Button>
+            <Button onClick={() => setShowSettlementDialog(false)}>
+              Close
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

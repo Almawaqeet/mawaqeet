@@ -15,8 +15,17 @@ const poppins = Poppins({
 });
 export const metadata: Metadata = {
   title: 'Al-Mawaqeet Travels and Tours | Premier Hajj & Umrah Services',
-  description: 'Experience seamless Islamic pilgrimages with Al-Mawaqeet Travels. We offer premium Hajj & Umrah packages, expert guidance, and comprehensive travel services tailored to your spiritual journey.',
-  keywords: ['Hajj packages', 'Umrah services', 'Islamic pilgrimage', 'Muslim travel agency', 'Saudi Arabia tours', 'Makkah trips', 'Madinah visits'],
+  description:
+    'Experience seamless Islamic pilgrimages with Al-Mawaqeet Travels. We offer premium Hajj & Umrah packages, expert guidance, and comprehensive travel services tailored to your spiritual journey.',
+  keywords: [
+    'Hajj packages',
+    'Umrah services',
+    'Islamic pilgrimage',
+    'Muslim travel agency',
+    'Saudi Arabia tours',
+    'Makkah trips',
+    'Madinah visits',
+  ],
   authors: [{ name: 'Al-Mawaqeet Travels and Tours' }],
   icons: {
     icon: '/images/logo.png',
@@ -24,7 +33,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Al-Mawaqeet Travels and Tours | Premier Hajj & Umrah Services',
-    description: 'Experience seamless Islamic pilgrimages with Al-Mawaqeet Travels. We offer premium Hajj & Umrah packages, expert guidance, and comprehensive travel services tailored to your spiritual journey.',
+    description:
+      'Experience seamless Islamic pilgrimages with Al-Mawaqeet Travels. We offer premium Hajj & Umrah packages, expert guidance, and comprehensive travel services tailored to your spiritual journey.',
     images: [
       {
         url: '/images/og-img.jpg',
@@ -40,7 +50,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Al-Mawaqeet Travels and Tours | Premier Hajj & Umrah Services',
-    description: 'Experience seamless Islamic pilgrimages with Al-Mawaqeet Travels. We offer premium Hajj & Umrah packages, expert guidance, and comprehensive travel services.',
+    description:
+      'Experience seamless Islamic pilgrimages with Al-Mawaqeet Travels. We offer premium Hajj & Umrah packages, expert guidance, and comprehensive travel services.',
     images: ['/images/og-img.jpg'],
   },
   robots: {

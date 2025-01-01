@@ -10,7 +10,10 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useCheckPackageSettlementStatus, useViewPackage } from '@/api/services/packages';
+import {
+  useCheckPackageSettlementStatus,
+  useViewPackage,
+} from '@/api/services/packages';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useInitiateBooking } from '@/api/services/booking';
 import { useAppToast } from '@/components/reusables/AppToast';

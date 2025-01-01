@@ -123,7 +123,7 @@ export const useCheckPackageSettlementStatus = (packageId: string) => {
     queryKey: [baseQueryKey],
     options: {
       enabled: !!packageId,
-      staleTime: 0, 
+      staleTime: 0,
       cacheTime: 0,
       refetchOnMount: true,
       refetchOnWindowFocus: true,

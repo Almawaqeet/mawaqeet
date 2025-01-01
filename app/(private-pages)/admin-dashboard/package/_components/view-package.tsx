@@ -1,6 +1,10 @@
 'use client';
 
-import { useViewPackage, useEditPackage, useCheckPackageSettlementStatus } from '@/api/services/packages';
+import {
+  useViewPackage,
+  useEditPackage,
+  useCheckPackageSettlementStatus,
+} from '@/api/services/packages';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
@@ -42,7 +46,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 
 const RichTextEditor = dynamic(
   () => import('@/components/ui/rich-text-editor'),
@@ -64,7 +68,7 @@ export default function ViewPackage({
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPackage, setEditedPackage] = useState(packageData ?? null);
   const { data: settlementData, isLoading: settlementLoading } =
-  useCheckPackageSettlementStatus(params.packageId as string);
+    useCheckPackageSettlementStatus(params.packageId as string);
   const [showSettlementDialog, setShowSettlementDialog] = useState(false);
 
   const { toast } = useToast();
@@ -142,12 +146,16 @@ export default function ViewPackage({
       animate={{ opacity: 1 }}
       className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8"
     >
-      <Dialog open={showSettlementDialog} onOpenChange={setShowSettlementDialog}>
+      <Dialog
+        open={showSettlementDialog}
+        onOpenChange={setShowSettlementDialog}
+      >
         <DialogContent className="bg-white">
           <DialogHeader>
             <DialogTitle>Package Not Available</DialogTitle>
             <DialogDescription>
-              This package is no longer active for booking as it has been settled.
+              This package is no longer active for booking as it has been
+              settled.
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
