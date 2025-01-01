@@ -141,9 +141,6 @@ export const useCompleteBooking = (body: CompleteBookingRequest) => {
   });
 };
 
-
-
-
 export const useUpdateHotelRoom = (body?: UpdateHotelRoomRequest) => {
   return useAppMutation<UpdateHotelRoomResponse>({
     apiRoute: routes.bookings.updateHotelRoom,

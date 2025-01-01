@@ -11,7 +11,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useQueryClient } from '@tanstack/react-query';
 
-
 import { BookingTableSkeleton } from '@/app/(private-pages)/client-dashboard/bookings/_components/booking-table-skeleton';
 import {
   Dialog,
@@ -23,7 +22,10 @@ import {
 import { Label } from '@/components/ui/label';
 import { Download } from 'lucide-react';
 import { DataTable } from '@/components/ui/table/data-table';
-import { useGetBookingsForAPackage, useUpdateHotelRoom } from '@/api/services/booking';
+import {
+  useGetBookingsForAPackage,
+  useUpdateHotelRoom,
+} from '@/api/services/booking';
 import { useCheckPackageSettlementStatus } from '@/api/services/packages';
 import { useAppToast } from '@/components/reusables/AppToast';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
@@ -33,7 +35,7 @@ const validationSchema = Yup.object({
   hotelAddress: Yup.string().required('Hotel address is required'),
   hotelRoomNumber: Yup.string().required('Room number is required'),
   cardDelivered: Yup.boolean(),
-  addedToWhatsapp: Yup.boolean()
+  addedToWhatsapp: Yup.boolean(),
 });
 
 export default function CompletionList() {
@@ -44,12 +46,16 @@ export default function CompletionList() {
   const { showToast } = useAppToast();
   const queryClient = useQueryClient();
 
-  const { data: bookingsData, isLoading } = useGetBookingsForAPackage(packageId as string, {
-    status: 'completed',
-    page: 1
-  });
+  const { data: bookingsData, isLoading } = useGetBookingsForAPackage(
+    packageId as string,
+    {
+      status: 'completed',
+      page: 1,
+    }
+  );
 
-  const { data: settlementData, isLoading: settlementLoading } = useCheckPackageSettlementStatus(packageId as string);
+  const { data: settlementData, isLoading: settlementLoading } =
+    useCheckPackageSettlementStatus(packageId as string);
 
   const { mutateAsync: updateHotelRoom } = useUpdateHotelRoom();
 
@@ -59,7 +65,7 @@ export default function CompletionList() {
       hotelAddress: '',
       hotelRoomNumber: '',
       cardDelivered: false,
-      addedToWhatsapp: false
+      addedToWhatsapp: false,
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -74,14 +80,17 @@ export default function CompletionList() {
         });
 
         showToast({
-          title: "Success",
-          description: "Booking details updated successfully",
-          variant: "default"
+          title: 'Success',
+          description: 'Booking details updated successfully',
+          variant: 'default',
         });
 
-
         queryClient.invalidateQueries({
-          queryKey: [generateBaseQueryKeyFromRoute(routes.bookings.bookingsForPackage(packageId as string))]
+          queryKey: [
+            generateBaseQueryKeyFromRoute(
+              routes.bookings.bookingsForPackage(packageId as string)
+            ),
+          ],
         });
 
         setIsDialogOpen(false);
@@ -89,22 +98,24 @@ export default function CompletionList() {
       } catch (error) {
         console.error('Error saving data:', error);
         showToast({
-          title: "Error",
-          description: "Failed to update booking details",
-          variant: "destructive"
+          title: 'Error',
+          description: 'Failed to update booking details',
+          variant: 'destructive',
         });
       }
-    }
+    },
   });
 
   // Segregate bookings based on card delivery status with null checks
-  const pendingDeliveryBookings = bookingsData?.results?.filter(booking =>
-    booking && booking.card_delivered === false
-  ) ?? [];
+  const pendingDeliveryBookings =
+    bookingsData?.results?.filter(
+      (booking) => booking && booking.card_delivered === false
+    ) ?? [];
 
-  const completedDeliveryBookings = bookingsData?.results?.filter(booking =>
-    booking && booking.card_delivered === true
-  ) ?? [];
+  const completedDeliveryBookings =
+    bookingsData?.results?.filter(
+      (booking) => booking && booking.card_delivered === true
+    ) ?? [];
 
   const columns = [
     {
@@ -114,11 +125,11 @@ export default function CompletionList() {
         const firstName = row.original.user?.profile?.first_name ?? '';
         const lastName = row.original.user?.profile?.last_name ?? '';
         return `${firstName} ${lastName}`;
-      }
+      },
     },
     {
       accessorKey: 'id',
-      header: 'Booking Reference'
+      header: 'Booking Reference',
     },
     {
       id: 'actions',
@@ -132,7 +143,11 @@ export default function CompletionList() {
                 return;
               }
               const booking = row.original;
-              const [roomNumber = '', hotelName = '', hotelAddress = ''] = (booking.hotel_room ?? '').split(',').map((s: string) => s.trim());
+              const [roomNumber = '', hotelName = '', hotelAddress = ''] = (
+                booking.hotel_room ?? ''
+              )
+                .split(',')
+                .map((s: string) => s.trim());
 
               formik.resetForm({
                 values: {
@@ -140,8 +155,8 @@ export default function CompletionList() {
                   hotelAddress: hotelAddress || '',
                   hotelRoomNumber: roomNumber || '',
                   cardDelivered: booking.card_delivered ?? false,
-                  addedToWhatsapp: booking.is_on_whatsapp_group ?? false
-                }
+                  addedToWhatsapp: booking.is_on_whatsapp_group ?? false,
+                },
               });
               setSelectedBooking(booking.id);
               setIsDialogOpen(true);
@@ -163,8 +178,8 @@ export default function CompletionList() {
             Download Info
           </Button>
         </div>
-      )
-    }
+      ),
+    },
   ];
 
   const handleDownloadPackage = (booking: any) => {
@@ -189,9 +204,9 @@ QR Code URL: ${bookingInfoUrl}`;
     document.body.removeChild(a);
 
     showToast({
-      title: "Success",
-      description: "Booking info downloaded successfully",
-      variant: "default"
+      title: 'Success',
+      description: 'Booking info downloaded successfully',
+      variant: 'default',
     });
   };
 
@@ -258,7 +273,9 @@ QR Code URL: ${bookingInfoUrl}`;
                 onBlur={formik.handleBlur}
               />
               {formik.touched.hotelName && formik.errors.hotelName && (
-                <div className="text-red-500 text-sm">{formik.errors.hotelName}</div>
+                <div className="text-red-500 text-sm">
+                  {formik.errors.hotelName}
+                </div>
               )}
             </div>
 
@@ -272,7 +289,9 @@ QR Code URL: ${bookingInfoUrl}`;
                 onBlur={formik.handleBlur}
               />
               {formik.touched.hotelAddress && formik.errors.hotelAddress && (
-                <div className="text-red-500 text-sm">{formik.errors.hotelAddress}</div>
+                <div className="text-red-500 text-sm">
+                  {formik.errors.hotelAddress}
+                </div>
               )}
             </div>
 
@@ -285,9 +304,12 @@ QR Code URL: ${bookingInfoUrl}`;
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.hotelRoomNumber && formik.errors.hotelRoomNumber && (
-                <div className="text-red-500 text-sm">{formik.errors.hotelRoomNumber}</div>
-              )}
+              {formik.touched.hotelRoomNumber &&
+                formik.errors.hotelRoomNumber && (
+                  <div className="text-red-500 text-sm">
+                    {formik.errors.hotelRoomNumber}
+                  </div>
+                )}
             </div>
 
             <div className="flex items-center space-x-2">
@@ -295,7 +317,9 @@ QR Code URL: ${bookingInfoUrl}`;
                 id="cardDelivered"
                 name="cardDelivered"
                 checked={formik.values.cardDelivered}
-                onCheckedChange={(checked) => formik.setFieldValue('cardDelivered', checked)}
+                onCheckedChange={(checked) =>
+                  formik.setFieldValue('cardDelivered', checked)
+                }
               />
               <Label htmlFor="cardDelivered">Card Delivered to User</Label>
             </div>
@@ -305,7 +329,9 @@ QR Code URL: ${bookingInfoUrl}`;
                 id="addedToWhatsapp"
                 name="addedToWhatsapp"
                 checked={formik.values.addedToWhatsapp}
-                onCheckedChange={(checked) => formik.setFieldValue('addedToWhatsapp', checked)}
+                onCheckedChange={(checked) =>
+                  formik.setFieldValue('addedToWhatsapp', checked)
+                }
               />
               <Label htmlFor="addedToWhatsapp">Added to WhatsApp Group</Label>
             </div>
@@ -319,16 +345,22 @@ QR Code URL: ${bookingInfoUrl}`;
         </DialogContent>
       </Dialog>
 
-      <Dialog open={showSettlementWarning} onOpenChange={setShowSettlementWarning}>
+      <Dialog
+        open={showSettlementWarning}
+        onOpenChange={setShowSettlementWarning}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Action Not Available</DialogTitle>
             <DialogDescription>
-              This package requires settlement before any actions can be taken. Please ensure the package is settled first.
+              This package requires settlement before any actions can be taken.
+              Please ensure the package is settled first.
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end">
-            <Button onClick={() => setShowSettlementWarning(false)}>Close</Button>
+            <Button onClick={() => setShowSettlementWarning(false)}>
+              Close
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

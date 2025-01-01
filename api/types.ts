@@ -315,7 +315,7 @@ export interface PackageBookingListResponse {
   };
   is_active?: boolean;
   is_card_delivered?: boolean;
-  qr_code_url?: string
+  qr_code_url?: string;
   is_on_whatsapp_group?: boolean;
   card_delivered?: boolean;
 }
@@ -433,7 +433,6 @@ export interface PackageSettlementResponse {
     date_initiated?: string | null;
   } | null;
 }
-
 
 export interface UpdateHotelRoomRequest {
   booking_id: string;
