@@ -11,7 +11,16 @@ import { API_URL } from '@/environment-config';
 type QueryConfig<TQueryKey, TData> = {
   queryKey: TQueryKey;
   apiRoute: string;
-  options?: Omit<AxiosRequestConfig, 'url' | 'method'>;
+  options?: Omit<AxiosRequestConfig, 'url' | 'method'> & {
+    enabled?: boolean;
+    retry?: number;
+    staleTime?: number;
+    refetchOnWindowFocus?: boolean;
+    refetchOnMount?: boolean;
+    refetchOnReconnect?: boolean;
+    refetchInterval?: number | false;
+    cacheTime?: number;
+  };
 };
 
 type QueryConfigWithParams<TQueryKey, TData> = QueryConfig<TQueryKey, TData> & {
@@ -57,6 +66,7 @@ export function useAppQuery<
     },
     retry: 3,
     staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+    enabled: options?.enabled !== false, // Allow enabled option
   });
 }
 

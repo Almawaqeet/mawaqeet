@@ -121,5 +121,14 @@ export const useCheckPackageSettlementStatus = (packageId: string) => {
   return useAppQuery<PackageSettlementResponse>({
     apiRoute: routes.package.checkSettlementStatus(packageId),
     queryKey: [baseQueryKey],
+    options: {
+      enabled: !!packageId,
+      staleTime: 0, 
+      cacheTime: 0,
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: true,
+      refetchInterval: 5000,
+    },
   });
 };

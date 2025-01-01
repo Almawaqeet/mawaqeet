@@ -61,6 +61,9 @@ export const useVerifyOnboardingPayment = (reference: string) => {
   return useAppQuery<OnboardingVerifyPaymentResponse>({
     apiRoute: routes.onboarding.verifyPayment.replace(':reference', reference),
     queryKey: ['VERIFY_ONBOARDING_PAYMENT', reference],
+    options: {
+      enabled: !!reference
+    }
   });
 };
 
