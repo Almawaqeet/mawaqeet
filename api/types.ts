@@ -7,12 +7,13 @@ export interface PaginatedResponse<T> {
   results: T[];
 }
 
-export interface CustomApiErrorResponse {
-  message?: string;
+export interface CustomApiErrorResponse extends Error {
+  error?: string;
 }
 
 export interface CustomApiResponse {
   message?: string;
+  error?: string;
 }
 
 export interface InitiateBookingApiResponse {

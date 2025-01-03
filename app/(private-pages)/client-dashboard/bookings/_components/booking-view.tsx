@@ -56,11 +56,7 @@ interface BookingViewProps {
 export function BookingView({ id }: BookingViewProps) {
   const router = useRouter();
   const { toast } = useToast();
-  const {
-    data: bookingData,
-    isLoading,
-    error: bookingError,
-  } = useGetBookingInformation(id);
+  const { data: bookingData, isLoading } = useGetBookingInformation(id);
   const [showReceiptsModal, setShowReceiptsModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -80,15 +76,6 @@ export function BookingView({ id }: BookingViewProps) {
       setShowCompletionModal(true);
     }
   }, [booking?.status]);
-
-  if (bookingError) {
-    toast({
-      variant: 'destructive',
-      title: 'Error',
-      description: 'Failed to fetch booking information. Please try again.',
-    });
-    return null;
-  }
 
   if (isLoading || settlementLoading) {
     return (
@@ -212,15 +199,6 @@ export function BookingView({ id }: BookingViewProps) {
           });
         }
         setShowCancelModal(false);
-      },
-      onError: (error: any) => {
-        toast({
-          variant: 'destructive',
-          title: 'Error',
-          description:
-            error?.response?.message ||
-            'Failed to cancel booking. Please try again.',
-        });
       },
     });
   };

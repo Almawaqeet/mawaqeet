@@ -15,7 +15,7 @@ const ActivePackages = () => {
   const { data: packages, isLoading } = useGetAllActivePackages();
 
   const segregatedPackages = segregatePackageByItsPriceCategory(
-    packages?.results || []
+    packages?.results ?? []
   );
 
   const EmptyState = () => (
@@ -50,7 +50,6 @@ const ActivePackages = () => {
               variant="secondary"
               className="w-fit mx-auto"
               onClick={() => {
-                // Add actual click handler implementation
                 console.log('Live call button clicked');
               }}
             >
