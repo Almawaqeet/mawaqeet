@@ -100,24 +100,28 @@ const Footer: React.FC = () => {
             <Link
               href="https://www.facebook.com/people/Al-mawaqeet-Tour/61570372806546/"
               className="text-gray-200 hover:text-white transition-colors"
+              aria-label="Visit our Facebook page"
             >
               <FiFacebook className="w-6 h-6" />
             </Link>
             <Link
               href="#"
               className="text-gray-200 hover:text-white transition-colors"
+              aria-label="Visit our Twitter page"
             >
               <BsTwitterX className="w-6 h-6" />
             </Link>
             <Link
               href="#"
               className="text-gray-200 hover:text-white transition-colors"
+              aria-label="Visit our Instagram page"
             >
               <IoLogoInstagram className="w-6 h-6" />
             </Link>
             <Link
               href="#"
               className="text-gray-200 hover:text-white transition-colors"
+              aria-label="Contact us on WhatsApp"
             >
               <FaSquareWhatsapp className="w-6 h-6" />
             </Link>
