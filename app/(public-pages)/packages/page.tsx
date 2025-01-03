@@ -4,6 +4,7 @@ import { HydrationBoundary } from '@tanstack/react-query';
 import { generateBaseQueryKeyFromRoute } from '@/api/routes';
 import { createServerAxiosInstance } from '@/api/server-constructor';
 import { routes } from '@/api/routes';
+import { Metadata } from 'next';
 
 const PackageSection = dynamic(
   () => import('@/app/(public-pages)/_components/packages-page/PackageSection'),
@@ -31,3 +32,24 @@ export default async function Page() {
     </HydrationBoundary>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Hajj & Umrah Packages | Al-Mawaqeet Travels and Tours',
+  description:
+    'Explore our comprehensive Hajj and Umrah packages designed for Nigerian pilgrims. Find affordable, all-inclusive packages with premium accommodations, transportation, and expert guidance.',
+  keywords: [
+    'hajj packages nigeria',
+    'umrah packages',
+    'islamic pilgrimage packages',
+    'mecca travel deals',
+    'medina pilgrimage packages',
+    'affordable hajj services',
+    'premium umrah deals',
+    'muslim travel packages',
+    'holy sites pilgrimage',
+    'al-mawaqeet packages',
+  ].join(', '),
+  alternates: {
+    canonical: 'https://almawaqeet.com/packages',
+  },
+};

@@ -75,7 +75,7 @@ export const HeroSection = () => {
           className="relative w-full md:w-auto"
           initial={{ opacity: 0, width: 0 }}
           animate={{ opacity: 1, width: 'auto' }}
-          transition={{ duration: 1.5, ease: 'easeOut' }}
+          transition={{ duration: 0.05, ease: 'easeOut' }}
         >
           <span className="text-xs md:text-sm text-[#665544] line-clamp-1 px-2">
             {verses[currentVerseIndex].text.substring(0, 70)}...

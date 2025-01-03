@@ -53,7 +53,7 @@ const HeroSectionCarousel = () => {
     <motion.section
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.4 }}
       className="relative overflow-hidden py-4 mb-8 sm:py-8 sm:mb-16"
     >
       {/* Mobile View */}
