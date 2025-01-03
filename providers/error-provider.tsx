@@ -3,6 +3,7 @@
 import { useToast } from '@/hooks/use-toast';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
+import * as Sentry from '@sentry/nextjs';
 
 interface ErrorProviderProps {
   children: React.ReactNode;
@@ -40,8 +41,22 @@ export function ErrorProvider({
 
     if (error instanceof AxiosError) {
       const responseData = error?.response?.data;
+      const statusCode = error.response?.status;
 
-      if (error.response?.status === 401) {
+      // Capture specific status codes in Sentry
+      if (statusCode === 404 || statusCode === 500) {
+        Sentry.captureException(error, {
+          tags: {
+            statusCode,
+            endpoint: error.config?.url,
+          },
+          extra: {
+            responseData,
+          },
+        });
+      }
+
+      if (statusCode === 401) {
         description =
           'You are not authorized to view this page. Please logout and login again.';
       } else if (
@@ -59,6 +74,12 @@ export function ErrorProvider({
         description = responseData?.message || error?.message || description;
       }
     } else {
+      // Capture non-Axios errors in Sentry
+      Sentry.captureException(error, {
+        extra: {
+          errorMessage: error.message,
+        },
+      });
       description = error?.message || description;
     }
 
