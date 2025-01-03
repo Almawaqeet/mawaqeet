@@ -158,7 +158,7 @@ export default function CreateWallet() {
                   CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet
                 );
               }
-            }
+            },
           }
         );
       }

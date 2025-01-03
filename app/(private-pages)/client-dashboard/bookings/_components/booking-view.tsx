@@ -56,10 +56,7 @@ interface BookingViewProps {
 export function BookingView({ id }: BookingViewProps) {
   const router = useRouter();
   const { toast } = useToast();
-  const {
-    data: bookingData,
-    isLoading,
-  } = useGetBookingInformation(id);
+  const { data: bookingData, isLoading } = useGetBookingInformation(id);
   const [showReceiptsModal, setShowReceiptsModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -79,7 +76,6 @@ export function BookingView({ id }: BookingViewProps) {
       setShowCompletionModal(true);
     }
   }, [booking?.status]);
-
 
   if (isLoading || settlementLoading) {
     return (

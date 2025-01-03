@@ -22,21 +22,21 @@ const nextConfig = {
   },
 };
 
-const { withSentryConfig } = require("@sentry/nextjs");
+const { withSentryConfig } = require('@sentry/nextjs');
 
 module.exports = withSentryConfig(
   nextConfig,
   {
-    org: "saw-t-concepts",
-    project: "almqt-fe",
+    org: 'saw-t-concepts',
+    project: 'almqt-fe',
     silent: !process.env.CI,
     widenClientFileUpload: true,
-    tunnelRoute: "/monitoring",
+    tunnelRoute: '/monitoring',
     hideSourceMaps: true,
     disableLogger: true,
     automaticVercelMonitors: true,
   },
   {
-    experimental: {}
+    experimental: {},
   }
 );

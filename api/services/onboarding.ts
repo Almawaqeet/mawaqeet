@@ -72,9 +72,7 @@ export const useGetOnboardingUsers = (params?: {
   status?: string;
   email?: string;
 }) => {
-  return useAppQueryWithPaginationAndParams<
-    SimpleOnboardingUser
-  >({
+  return useAppQueryWithPaginationAndParams<SimpleOnboardingUser>({
     apiRoute: routes.onboarding.getOnboardingUsers,
     queryKey: [
       'ONBOARDING_USERS',

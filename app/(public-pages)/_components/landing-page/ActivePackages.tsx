@@ -11,9 +11,8 @@ import { SegregatedPackage } from '@/constants/types';
 import { segregatePackageByItsPriceCategory } from '@/lib/utils';
 import { useGetAllActivePackages } from '@/api/services/packages';
 
-
 const ActivePackages = () => {
-  const { data: packages, isLoading} = useGetAllActivePackages();
+  const { data: packages, isLoading } = useGetAllActivePackages();
 
   const segregatedPackages = segregatePackageByItsPriceCategory(
     packages?.results ?? []

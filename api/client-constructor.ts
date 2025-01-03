@@ -66,7 +66,9 @@ export function useAppQuery<
       });
 
       if (!response?.data) {
-        throw new Error('No data received from server. It may be network issue');
+        throw new Error(
+          'No data received from server. It may be network issue'
+        );
       }
 
       return response.data;
@@ -107,16 +109,21 @@ export function useAppQueryWithPaginationAndParams<
           )
         : undefined;
 
-      const response = await axiosInstance.get<PaginatedResponse<TData>>(apiRoute, {
-        ...options,
-        params: queryParams,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axiosInstance.get<PaginatedResponse<TData>>(
+        apiRoute,
+        {
+          ...options,
+          params: queryParams,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!response?.data) {
-        throw new Error('No data received from server. It may be network issue');
+        throw new Error(
+          'No data received from server. It may be network issue'
+        );
       }
 
       return (
@@ -137,7 +144,7 @@ export function useAppQueryWithPaginationAndParams<
 
 export function useAppMutation<
   TData = unknown,
-  TError =  AxiosError,
+  TError = AxiosError,
   TVariables = unknown,
 >(
   config: MutationConfig<TVariables, TData>
@@ -160,7 +167,9 @@ export function useAppMutation<
       });
 
       if (!response?.data) {
-        throw new Error('No data received from server. It may be network issue');
+        throw new Error(
+          'No data received from server. It may be network issue'
+        );
       }
 
       return response.data as NonNullable<TData>;

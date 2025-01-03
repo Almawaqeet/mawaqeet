@@ -69,7 +69,7 @@ const ProfileCreateForm = () => {
             title: 'Success',
             description: 'Profile updated successfully',
           });
-        }
+        },
       }
     );
   };

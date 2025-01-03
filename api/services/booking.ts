@@ -104,9 +104,7 @@ export const useGetBookingsForAPackage = (
   const baseQueryKey = generateBaseQueryKeyFromRoute(
     routes.bookings.bookingsForPackage(packageId)
   );
-  return useAppQueryWithPaginationAndParams<
-    PackageBookingListResponse
-  >({
+  return useAppQueryWithPaginationAndParams<PackageBookingListResponse>({
     apiRoute: routes.bookings.bookingsForPackage(packageId),
     queryKey: [
       baseQueryKey,

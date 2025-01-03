@@ -7,7 +7,6 @@ import { fakeUsers } from '@/constants/mock-api';
 import { searchParamsCache } from '@/lib/searchparams';
 import CustomerTable from './customer-table';
 
-
 type TEmployeeListingPage = {};
 
 export default async function EmployeeListingPage({}: TEmployeeListingPage) {

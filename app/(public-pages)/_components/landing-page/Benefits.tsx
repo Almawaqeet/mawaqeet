@@ -9,7 +9,7 @@ import { useGetError } from '@/api/services/packages';
 export default function Benefits() {
   const { data: error } = useGetError();
 
-console.log(error)
+  console.log(error);
   const benefits = [
     {
       icon: vector as StaticImageData,

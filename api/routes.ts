@@ -78,7 +78,7 @@ export const routes = {
       `core/admin/get-summary-for-package/${packageId}/`,
   },
   error: {
-    getError: "core/get-error"
+    getError: 'core/get-error',
   },
   analytics: {
     financialSummary: 'analytics/admin/company-financial-view/',

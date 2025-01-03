@@ -116,7 +116,7 @@ export default function NewPackagePage() {
     createPackage(values, {
       onSuccess: () => {
         setShowSuccessDialog(true);
-      }
+      },
     });
   };
 

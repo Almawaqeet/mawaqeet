@@ -5,7 +5,7 @@ import {
   useAppQueryWithPaginationAndParams,
 } from '@/api/client-constructor';
 import {
-    CustomApiErrorResponse,
+  CustomApiErrorResponse,
   CustomApiResponse,
   PackageSettlementResponse,
 } from '@/api/types';
@@ -132,7 +132,6 @@ export const useCheckPackageSettlementStatus = (packageId: string) => {
     },
   });
 };
-
 
 export const useGetError = () => {
   const baseQueryKey = generateBaseQueryKeyFromRoute(routes.error.getError);
