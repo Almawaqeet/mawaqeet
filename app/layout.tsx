@@ -14,7 +14,9 @@ const poppins = Poppins({
   variable: '--font-poppins',
   display: 'swap',
 });
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://almawaqeet.com'),
   title: 'Al-Mawaqeet Travels and Tours | Premier Hajj & Umrah Services',
   description:
     'Experience seamless Islamic pilgrimages with Al-Mawaqeet Travels. We offer premium Hajj & Umrah packages, expert guidance, and comprehensive travel services tailored to your spiritual journey.',
