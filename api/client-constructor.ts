@@ -39,9 +39,9 @@ const axiosInstance = axios.create({
   },
 });
 
-const showErrorToast = useErrorToast();
+// const showErrorToast = useErrorToast();
 const query = new QueryClient();
-const router = useRouter();
+// const router = useRouter();
 
 
 export function useAppQuery<
@@ -65,19 +65,8 @@ export function useAppQuery<
           },
         })
         .catch((error: any) => {
-          
           console.log(error)
-
-          if (error) {
-            showErrorToast(`${error?.message}`);
-          }
-
-          if (error?.status === 403 || error?.status === 401) {
-            showErrorToast(error?.response?.data?.detail);
-
-            router.push(CLIENT_ROUTES.PublicPages.auth.login);
-            query.clear();
-          }
+          throw error?.message
         });
       return response?.data;
     },
@@ -127,21 +116,21 @@ export function useAppQueryWithPaginationAndParams<
           Authorization: `Bearer ${token}`,
         },
       })
-      .catch((error: any) => {
+      // .catch((error: any) => {
           
-        console.log(error)
+      //   console.log(error)
 
-        if (error) {
-          showErrorToast(`${error?.message}`);
-        }
+      //   if (error) {
+      //     showErrorToast(`${error?.message}`);
+      //   }
 
-        if (error?.status === 403 || error?.status === 401) {
-          showErrorToast(error?.response?.data?.detail);
+      //   if (error?.status === 403 || error?.status === 401) {
+      //     showErrorToast(error?.response?.data?.detail);
 
-          router.push(CLIENT_ROUTES.PublicPages.auth.login);
-          query.clear();
-        }
-      });
+      //     router.push(CLIENT_ROUTES.PublicPages.auth.login);
+      //     query.clear();
+      //   }
+      // });
 
       return (
         response?.data ?? {
