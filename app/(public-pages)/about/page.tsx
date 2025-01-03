@@ -16,7 +16,8 @@ export default function AboutPage() {
 
 export const metadata: Metadata = {
   title: 'About Us | Al-Mawaqeet Travels and Tours',
-  description: 'Learn about Al-Mawaqeet Travels and Tours, your trusted partner for Hajj and Umrah services. Discover our experienced team, values, and commitment to excellence in Islamic pilgrimage services.',
+  description:
+    'Learn about Al-Mawaqeet Travels and Tours, your trusted partner for Hajj and Umrah services. Discover our experienced team, values, and commitment to excellence in Islamic pilgrimage services.',
   keywords: [
     'al-mawaqeet travels',
     'hajj services',
@@ -28,9 +29,9 @@ export const metadata: Metadata = {
     'religious tourism',
     'nigerian travel agency',
     'pilgrimage experts',
-    'spiritual journey guides'
+    'spiritual journey guides',
   ].join(', '),
   alternates: {
-    canonical: 'https://almawaqeet.com/about'
-  }
+    canonical: 'https://almawaqeet.com/about',
+  },
 };

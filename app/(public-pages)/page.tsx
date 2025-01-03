@@ -48,6 +48,6 @@ export default async function LandingPage() {
 
 export const metadata: Metadata = {
   alternates: {
-    canonical: 'https://almawaqeet.com'
-  }
+    canonical: 'https://almawaqeet.com',
+  },
 };

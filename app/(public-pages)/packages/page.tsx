@@ -35,7 +35,8 @@ export default async function Page() {
 
 export const metadata: Metadata = {
   title: 'Hajj & Umrah Packages | Al-Mawaqeet Travels and Tours',
-  description: 'Explore our comprehensive Hajj and Umrah packages designed for Nigerian pilgrims. Find affordable, all-inclusive packages with premium accommodations, transportation, and expert guidance.',
+  description:
+    'Explore our comprehensive Hajj and Umrah packages designed for Nigerian pilgrims. Find affordable, all-inclusive packages with premium accommodations, transportation, and expert guidance.',
   keywords: [
     'hajj packages nigeria',
     'umrah packages',
@@ -46,9 +47,9 @@ export const metadata: Metadata = {
     'premium umrah deals',
     'muslim travel packages',
     'holy sites pilgrimage',
-    'al-mawaqeet packages'
+    'al-mawaqeet packages',
   ].join(', '),
   alternates: {
-    canonical: 'https://almawaqeet.com/packages'
-  }
+    canonical: 'https://almawaqeet.com/packages',
+  },
 };
