@@ -133,17 +133,3 @@ export const useCheckPackageSettlementStatus = (packageId: string) => {
   });
 };
 
-export const useGetError = () => {
-  const baseQueryKey = generateBaseQueryKeyFromRoute(routes.error.getError);
-  return useAppQuery<CustomApiErrorResponse>({
-    apiRoute: routes.error.getError,
-    queryKey: [baseQueryKey],
-    options: {
-      staleTime: 0,
-      cacheTime: 0,
-      refetchOnMount: true,
-      refetchOnWindowFocus: true,
-      refetchOnReconnect: true,
-    },
-  });
-};
