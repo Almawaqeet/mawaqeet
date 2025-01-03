@@ -37,9 +37,9 @@ export const metadata: Metadata = {
       'Experience seamless Islamic pilgrimages with Al-Mawaqeet Travels. We offer premium Hajj & Umrah packages, expert guidance, and comprehensive travel services tailored to your spiritual journey.',
     images: [
       {
-        url: '/images/og-img.jpg',
-        width: 1200,
-        height: 630,
+        url: '/images/export.png',
+        width: 800,
+        height: 600,
         alt: 'Al-Mawaqeet Travels and Tours - Your Trusted Partner for Hajj & Umrah',
       },
     ],
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title: 'Al-Mawaqeet Travels and Tours | Premier Hajj & Umrah Services',
     description:
       'Experience seamless Islamic pilgrimages with Al-Mawaqeet Travels. We offer premium Hajj & Umrah packages, expert guidance, and comprehensive travel services.',
-    images: ['/images/og-img.jpg'],
+    images: ['/images/export.png'],
   },
   robots: {
     index: true,
