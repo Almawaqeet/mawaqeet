@@ -47,6 +47,7 @@ import ConfirmationModal from './booking-confirmation-modal';
 import ReceiptsModal from './booking-reciept-modal';
 import { PACKAGE_TYPES } from '@/constants/generic';
 import { removeNoneAlphanumericEntity } from '@/lib/utils';
+import { useCheckPackageSettlementStatus } from '@/api/services/packages';
 
 interface BookingViewProps {
   id: string;
@@ -55,37 +56,28 @@ interface BookingViewProps {
 export function BookingView({ id }: BookingViewProps) {
   const router = useRouter();
   const { toast } = useToast();
-  const {
-    data: bookingData,
-    isLoading,
-    error: bookingError,
-  } = useGetBookingInformation(id);
+  const { data: bookingData, isLoading } = useGetBookingInformation(id);
   const [showReceiptsModal, setShowReceiptsModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [showSettlementDialog, setShowSettlementDialog] = useState(false);
   const booking = bookingData?.booking;
   const { mutate: cancelBooking, isPending: isCancelling } =
     useCancelBooking(id);
   const queryClient = useQueryClient();
+  const { data: settlementData, isLoading: settlementLoading } =
+    useCheckPackageSettlementStatus(
+      bookingData?.booking?.package?.id as string
+    );
 
-  // Handle completion modal visibility when booking data changes
   useEffect(() => {
     if (booking?.status?.toLowerCase() === 'payment_completed') {
       setShowCompletionModal(true);
     }
   }, [booking?.status]);
 
-  if (bookingError) {
-    toast({
-      variant: 'destructive',
-      title: 'Error',
-      description: 'Failed to fetch booking information. Please try again.',
-    });
-    return null;
-  }
-
-  if (isLoading) {
+  if (isLoading || settlementLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-black/80">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-white"></div>
@@ -208,15 +200,6 @@ export function BookingView({ id }: BookingViewProps) {
         }
         setShowCancelModal(false);
       },
-      onError: (error: any) => {
-        toast({
-          variant: 'destructive',
-          title: 'Error',
-          description:
-            error?.response?.message ||
-            'Failed to cancel booking. Please try again.',
-        });
-      },
     });
   };
 
@@ -248,6 +231,26 @@ export function BookingView({ id }: BookingViewProps) {
     });
   };
 
+  const handleCancelClick = () => {
+    if (settlementData?.has_settlement) {
+      setShowSettlementDialog(true);
+    } else {
+      setShowCancelModal(true);
+    }
+  };
+
+  const handlePaymentClick = () => {
+    if (settlementData?.has_settlement) {
+      setShowSettlementDialog(true);
+    } else {
+      router.push(
+        CLIENT_ROUTES.PrivatePages.clientDashboard.booking.initiatePayment(
+          booking.id ?? ''
+        )
+      );
+    }
+  };
+
   return (
     <div className="container mx-auto max-w-6xl px-4 py-4 sm:py-8">
       <CompletionModal
@@ -271,6 +274,32 @@ export function BookingView({ id }: BookingViewProps) {
         totalAmountPaid={booking.total_amount_paid || 0}
         isCancelling={isCancelling}
       />
+
+      <Dialog
+        open={showSettlementDialog}
+        onOpenChange={setShowSettlementDialog}
+      >
+        <DialogContent className="bg-white">
+          <DialogHeader>
+            <DialogTitle>Cannot Modify Booking</DialogTitle>
+            <DialogDescription>
+              This booking cannot be modified as it has already been settled.
+              Please contact support for assistance.
+              {progressPercentage < 100 && (
+                <p className="mt-2 text-sm text-gray-600">
+                  Don&apos;t worry - the amount you&apos;ve paid will be
+                  automatically refunded to your wallet overnight.
+                </p>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={() => setShowSettlementDialog(false)}>
+              Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <ConfirmationModal
         open={showConfirmationModal}
@@ -503,13 +532,7 @@ export function BookingView({ id }: BookingViewProps) {
                 ) : (
                   <Button
                     className="w-full sm:flex-1 bg-brand-color"
-                    onClick={() =>
-                      router.push(
-                        CLIENT_ROUTES.PrivatePages.clientDashboard.booking.initiatePayment(
-                          booking.id ?? ''
-                        )
-                      )
-                    }
+                    onClick={handlePaymentClick}
                   >
                     <CreditCardIcon className="mr-2 h-4 w-4" />
                     Make Payment
@@ -518,7 +541,7 @@ export function BookingView({ id }: BookingViewProps) {
                 <Button
                   variant="destructive"
                   className="w-full sm:flex-1"
-                  onClick={() => setShowCancelModal(true)}
+                  onClick={handleCancelClick}
                 >
                   <XIcon className="mr-2 h-4 w-4" />
                   Cancel Plan

@@ -70,14 +70,6 @@ const ProfileCreateForm = () => {
             description: 'Profile updated successfully',
           });
         },
-        onError: (error) => {
-          console.error(error);
-          showToast({
-            title: 'Error',
-            description: 'An error occurred while updating profile',
-            variant: 'destructive',
-          });
-        },
       }
     );
   };

@@ -17,7 +17,7 @@ export const ContactPageSection = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.05,
       },
     },
   };
@@ -28,7 +28,7 @@ export const ContactPageSection = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.3,
       },
     },
   };

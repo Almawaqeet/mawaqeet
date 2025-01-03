@@ -3,7 +3,7 @@ import Image, { StaticImageData } from 'next/image';
 import { motion } from 'framer-motion';
 import AppHeading from '@/components/reusables/AppHeading';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
-import { icon_1, icon_2, icon_3, people, vector } from '@/public/images/index';
+import { icon_2, icon_3, people, vector } from '@/public/images/index';
 
 export default function Benefits() {
   const benefits = [

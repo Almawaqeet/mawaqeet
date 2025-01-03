@@ -32,7 +32,7 @@ const SingularTeam = ({ id }: { id: string }) => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: 'easeOut' }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               >
                 <AppHeading
                   variant="h2"
@@ -49,7 +49,7 @@ const SingularTeam = ({ id }: { id: string }) => {
             <motion.div
               initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
               className="relative"
             >
               <div className="w-64 h-64 sm:w-72 sm:h-72 md:w-96 md:h-96 relative group">
@@ -79,7 +79,7 @@ const SingularTeam = ({ id }: { id: string }) => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              transition={{ duration: 0.4, delay: index * 0.2 }}
               className="bg-white p-6 sm:p-10 duration-300 rounded-xl shadow-md hover:shadow-lg"
             >
               {Object.values(item).map((detail, i) => (

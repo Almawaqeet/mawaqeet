@@ -30,7 +30,7 @@ const NewUser = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.2 }}
       className="min-h-screen flex pt-[4rem] md:pt-[6rem] lg:pt-[10rem] justify-center w-full px-4 md:px-8 lg:px-0"
     >
       <div className="text-center w-full sm:w-[80%] md:w-[60%] lg:w-[40%] px-4">

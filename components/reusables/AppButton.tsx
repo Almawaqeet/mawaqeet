@@ -109,6 +109,7 @@ const AppButton: React.FC<ButtonProps> = ({
       initial={{ opacity: 1 }}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.95 }}
+      aria-label={children?.toString() || 'Button'}
     >
       {renderContent()}
     </motion.button>
