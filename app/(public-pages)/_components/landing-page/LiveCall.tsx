@@ -51,6 +51,7 @@ const LiveCall = () => {
                 key={option}
                 className="w-12 h-12 rounded-full bg-[#1A1A1A] hover:bg-gray-800 transition-colors flex items-center justify-center"
                 onClick={() => console.log(`Contact via ${option}`)}
+                aria-label={`Contact via ${option}`}
               >
                 {option === 'phone' && (
                   <IoMdCall className="w-6 h-6 text-brand-color-subtle" />

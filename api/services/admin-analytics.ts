@@ -6,7 +6,6 @@ import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 import {
   FinancialSummaryResponse,
   PackageBookingFinancialSummaryResponse,
-  PaginatedResponse,
   User,
 } from '@/api/types';
 
@@ -15,7 +14,7 @@ export const useGetAllRegisteredUsers = (params?: {
   name?: string;
   email?: string;
 }) => {
-  return useAppQueryWithPaginationAndParams<PaginatedResponse<User>>({
+  return useAppQueryWithPaginationAndParams<User>({
     apiRoute: routes.users.getUsers,
     queryKey: [
       'ALL_REGISTERED_USERS',
