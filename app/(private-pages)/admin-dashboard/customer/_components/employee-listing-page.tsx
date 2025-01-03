@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { fakeUsers } from '@/constants/mock-api';
 import { searchParamsCache } from '@/lib/searchparams';
 import CustomerTable from './customer-table';
-import { useGetOnboardingUsers } from '@/api/services/onboarding';
+
 
 type TEmployeeListingPage = {};
 

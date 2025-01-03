@@ -16,7 +16,6 @@ import {
   InitiateBookingRequest,
   InitiatePaymentResponse,
   PackageBookingListResponse,
-  PaginatedResponse,
   SimpleBookingResponse,
   UpdateHotelRoomRequest,
   UpdateHotelRoomResponse,
@@ -106,7 +105,7 @@ export const useGetBookingsForAPackage = (
     routes.bookings.bookingsForPackage(packageId)
   );
   return useAppQueryWithPaginationAndParams<
-    PaginatedResponse<PackageBookingListResponse>
+    PackageBookingListResponse
   >({
     apiRoute: routes.bookings.bookingsForPackage(packageId),
     queryKey: [

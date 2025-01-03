@@ -5,9 +5,9 @@ import {
   useAppQueryWithPaginationAndParams,
 } from '@/api/client-constructor';
 import {
+    CustomApiErrorResponse,
   CustomApiResponse,
   PackageSettlementResponse,
-  PaginatedResponse,
 } from '@/api/types';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 
@@ -19,7 +19,7 @@ export const useGetAllActivePackages = (params?: {
   const baseQueryKey = generateBaseQueryKeyFromRoute(
     routes.packages.showAllActivePackages
   );
-  return useAppQueryWithPaginationAndParams<PaginatedResponse<Package>>({
+  return useAppQueryWithPaginationAndParams<Package>({
     apiRoute: routes.packages.showAllActivePackages,
     queryKey: [
       baseQueryKey,
@@ -39,7 +39,7 @@ export const useGetAllInactivePackages = (params?: {
   const baseQueryKey = generateBaseQueryKeyFromRoute(
     routes.packages.showAllInactivePackages
   );
-  return useAppQueryWithPaginationAndParams<PaginatedResponse<Package>>({
+  return useAppQueryWithPaginationAndParams<Package>({
     apiRoute: routes.packages.showAllInactivePackages,
     queryKey: [
       baseQueryKey,
@@ -129,6 +129,22 @@ export const useCheckPackageSettlementStatus = (packageId: string) => {
       refetchOnWindowFocus: true,
       refetchOnReconnect: true,
       refetchInterval: 5000,
+    },
+  });
+};
+
+
+export const useGetError = () => {
+  const baseQueryKey = generateBaseQueryKeyFromRoute(routes.error.getError);
+  return useAppQuery<CustomApiErrorResponse>({
+    apiRoute: routes.error.getError,
+    queryKey: [baseQueryKey],
+    options: {
+      staleTime: 0,
+      cacheTime: 0,
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: true,
     },
   });
 };

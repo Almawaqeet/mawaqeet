@@ -77,7 +77,9 @@ export const routes = {
     bookingFinancialSummaryForASpecificPackage: (packageId: string) =>
       `core/admin/get-summary-for-package/${packageId}/`,
   },
-
+  error: {
+    getError: "core/get-error"
+  },
   analytics: {
     financialSummary: 'analytics/admin/company-financial-view/',
     packageSummaryMonthly: 'analytics/admin/booking-summary-monthly/',

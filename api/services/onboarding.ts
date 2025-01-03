@@ -12,7 +12,6 @@ import {
   InitiatePaymentResponse,
   OnboardingPaymentResponse,
   OnboardingVerifyPaymentResponse,
-  PaginatedResponse,
   PreBookPackageRequest,
   PreBookPackageResponse,
   SimpleOnboardingUser,
@@ -74,7 +73,7 @@ export const useGetOnboardingUsers = (params?: {
   email?: string;
 }) => {
   return useAppQueryWithPaginationAndParams<
-    PaginatedResponse<SimpleOnboardingUser>
+    SimpleOnboardingUser
   >({
     apiRoute: routes.onboarding.getOnboardingUsers,
     queryKey: [

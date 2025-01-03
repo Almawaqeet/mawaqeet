@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 import NextTopLoader from 'nextjs-toploader';
 import { NextAuthProvider } from '@/providers/session-provider';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { ErrorProvider } from '@/providers/error-provider';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -77,13 +78,15 @@ export default function RootLayout({
       <body className={`${poppins.className}`}>
         <NextAuthProvider>
           <ReactQueryProvider>
-            <NuqsAdapter>
-              <NextTopLoader showSpinner={false} color="#4B3938" />
-              <Toaster />
-              <div className="max-w-screen-2xl mx-auto bg-[#F1EBE5] text-brand-color suppressHydrationWarning={true}">
-                {children}
-              </div>
-            </NuqsAdapter>
+            <ErrorProvider error={null}>
+              <NuqsAdapter>
+                <NextTopLoader showSpinner={false} color="#4B3938" />
+                <Toaster />
+                <div className="max-w-screen-2xl mx-auto bg-[#F1EBE5] text-brand-color suppressHydrationWarning={true}">
+                  {children}
+                </div>
+              </NuqsAdapter>
+            </ErrorProvider>
           </ReactQueryProvider>
         </NextAuthProvider>
       </body>

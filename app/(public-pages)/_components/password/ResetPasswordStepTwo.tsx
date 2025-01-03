@@ -55,13 +55,6 @@ export default function ResetPasswordStepTwo() {
             });
           }
         },
-        onError: (error: any) => {
-          showToast({
-            title: 'Error',
-            description: 'Failed to resend OTP. Please try again.',
-            variant: 'destructive',
-          });
-        },
       }
     );
   };
@@ -96,8 +89,7 @@ export default function ResetPasswordStepTwo() {
             }
           },
           onError: (error: any) => {
-            //!THIS IS DIRTY!!! FIX LATER
-            const errorMessage = error?.response?.data?.error;
+            const errorMessage = error?.response?.data?.message;
             if (errorMessage === "Invalid OTP, it doesn't exist or expired") {
               otpFormik.setErrors({
                 otp: errorMessage,

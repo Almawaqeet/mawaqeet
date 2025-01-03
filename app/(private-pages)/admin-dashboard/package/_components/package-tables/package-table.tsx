@@ -1,4 +1,3 @@
-import { PaginatedResponse } from '@/api/types';
 import { Package } from '@/constants/types';
 import { DataTable } from '@/components/ui/table/data-table';
 import { ColumnDef } from '@tanstack/react-table';
@@ -120,9 +119,6 @@ export default function PackageTable({}: {}) {
           ],
         });
       },
-      onError: () => {
-        showToast({ title: 'Error', description: 'Failed to delete package.' });
-      },
     });
   };
 
@@ -156,13 +152,7 @@ export default function PackageTable({}: {}) {
             ),
           ],
         });
-      },
-      onError: () => {
-        showToast({
-          title: 'Error',
-          description: 'Failed to activate package.',
-        });
-      },
+      }
     });
   };
 
@@ -199,12 +189,6 @@ export default function PackageTable({}: {}) {
               routes.packages.showAllInactivePackages
             ),
           ],
-        });
-      },
-      onError: () => {
-        showToast({
-          title: 'Error',
-          description: 'Failed to deactivate package.',
         });
       },
     });

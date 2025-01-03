@@ -59,7 +59,6 @@ export function BookingView({ id }: BookingViewProps) {
   const {
     data: bookingData,
     isLoading,
-    error: bookingError,
   } = useGetBookingInformation(id);
   const [showReceiptsModal, setShowReceiptsModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
@@ -81,14 +80,6 @@ export function BookingView({ id }: BookingViewProps) {
     }
   }, [booking?.status]);
 
-  if (bookingError) {
-    toast({
-      variant: 'destructive',
-      title: 'Error',
-      description: 'Failed to fetch booking information. Please try again.',
-    });
-    return null;
-  }
 
   if (isLoading || settlementLoading) {
     return (
@@ -212,15 +203,6 @@ export function BookingView({ id }: BookingViewProps) {
           });
         }
         setShowCancelModal(false);
-      },
-      onError: (error: any) => {
-        toast({
-          variant: 'destructive',
-          title: 'Error',
-          description:
-            error?.response?.message ||
-            'Failed to cancel booking. Please try again.',
-        });
       },
     });
   };

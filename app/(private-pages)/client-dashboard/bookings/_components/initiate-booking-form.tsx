@@ -85,14 +85,6 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
             );
           }
         },
-        onError: (error: any) => {
-          showToast({
-            title: 'Error',
-            description:
-              error?.message || 'An error occurred while initiating booking',
-            variant: 'destructive',
-          });
-        },
       });
     },
   });

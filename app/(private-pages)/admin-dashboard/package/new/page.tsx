@@ -113,23 +113,11 @@ export default function NewPackagePage() {
       return;
     }
 
-    try {
-      createPackage(values, {
-        onSuccess: () => {
-          setShowSuccessDialog(true);
-        },
-        onError: (error: unknown) => {
-          const err = error as { data?: { message?: string } };
-          showToast({
-            title: 'Error',
-            description: err?.data?.message || 'An error occurred',
-            variant: 'destructive',
-          });
-        },
-      });
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
+    createPackage(values, {
+      onSuccess: () => {
+        setShowSuccessDialog(true);
+      }
+    });
   };
 
   const nextStep = (values: typeof initialValues) => {
