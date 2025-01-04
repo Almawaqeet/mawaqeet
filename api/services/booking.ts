@@ -82,6 +82,10 @@ export const useVerifyBookingPayment = (reference: string) => {
       reference
     ),
     queryKey: ['VERIFY_BOOKING_PAYMENT', reference],
+    options: {
+      enabled: !!reference,
+      refetchOnWindowFocus: false,
+    }
   });
 };
 

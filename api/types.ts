@@ -357,8 +357,8 @@ export interface FinancialSummaryResponse {
   summary?: {
     company_balance?: {
       currency?: string;
-      balance?: number;
-    }[];
+      balance?: string;
+    };
     company_amount_in_debt?: number;
     total_amount_due?: number;
     active_bookings?: number;

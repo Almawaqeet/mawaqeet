@@ -16,6 +16,7 @@ export interface Package {
   updated_at?: string;
   reason_for_deactivation?: string | null;
   deactivated_at?: string | null;
+  settlement: boolean
 }
 export interface UserBookingListView {
   id: string;

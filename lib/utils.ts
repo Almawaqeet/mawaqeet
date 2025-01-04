@@ -108,17 +108,16 @@ export const segregatePackageByItsPriceCategory = (
   return packages
     .filter(
       (item) =>
-        item.price.map((tier) =>
+        // Filter out packages with settlement=true
+        !item.settlement &&
+        (item.price.map((tier) =>
           tier.category.toLowerCase().includes(normalizeInput)
-        ) || item.name.toLowerCase().includes(normalizeInput)
+        ) || item.name.toLowerCase().includes(normalizeInput))
     )
-
     .flatMap((pkg) => {
       if (!pkg?.price?.length) return [];
 
       return pkg.price.map((priceItem) => {
-        // if(tier?.toLowerCase() || priceItem.category.toLowerCase() !== tier?.toLowerCase() ) return null
-
         const categoryDescription = pkg.category_description?.find(
           (desc) => desc.category === priceItem.category
         );
