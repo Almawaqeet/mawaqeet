@@ -52,7 +52,13 @@ export function Transaction({ transaction }: TransactionProps) {
           <p
             className={`font-semibold ${isCredit ? 'text-green-600' : 'text-red-600'}`}
           >
-            {isCredit ? '+' : '-'}₦{transaction?.amount ? Number(transaction.amount).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+            {isCredit ? '+' : '-'}₦
+            {transaction?.amount
+              ? Number(transaction.amount).toLocaleString('en-NG', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })
+              : '0.00'}
           </p>
           <Badge
             variant="outline"
