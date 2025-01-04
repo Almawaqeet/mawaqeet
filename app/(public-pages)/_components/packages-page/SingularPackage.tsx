@@ -47,7 +47,8 @@ const staggerChildren = {
 export default function SingularPackage({ id }: { id: string }) {
   const { data: pkg, isLoading } = useViewPackage(id);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const [isSettlementModalOpen, setIsSettlementModalOpen] = useState<boolean>(false);
+  const [isSettlementModalOpen, setIsSettlementModalOpen] =
+    useState<boolean>(false);
   const router = useRouter();
 
   const closeModal = useCallback(() => {
@@ -127,14 +128,17 @@ export default function SingularPackage({ id }: { id: string }) {
       >
         <div className="space-y-6">
           <p className="text-brand-color-text text-center text-sm sm:text-base leading-relaxed">
-            This package has been completed and is no longer available for booking.
+            This package has been completed and is no longer available for
+            booking.
           </p>
           <div className="space-y-4">
             <AppButton
               variant="primary"
               className="w-full h-12 text-base font-medium transition-all duration-200 hover:opacity-90"
               type="button"
-              onClick={() => router.push(CLIENT_ROUTES.PublicPages.packages.index)}
+              onClick={() =>
+                router.push(CLIENT_ROUTES.PublicPages.packages.index)
+              }
             >
               Close
             </AppButton>
@@ -277,7 +281,9 @@ export default function SingularPackage({ id }: { id: string }) {
                               onClick={handleBookNowClick}
                               disabled={pkg?.settlement}
                             >
-                              {pkg?.settlement ? 'Booking Completed' : 'Book Now'}
+                              {pkg?.settlement
+                                ? 'Booking Completed'
+                                : 'Book Now'}
                             </AppButton>
                           </div>
 

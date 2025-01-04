@@ -1,4 +1,4 @@
-import { useAppQuery, useAppMutation } from '@/api/client-constructor';
+import { useAppQuery, useAppMutation, useAppQueryWithPaginationAndParams } from '@/api/client-constructor';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 import {
   BankListResponse,
@@ -9,6 +9,8 @@ import {
   VerifyWalletAccountNumberResponse,
   VerifyWalletAccountNumberRequest,
   VerifyWalletAccountNumberErrorResponse,
+  WalletTransactionResponse,
+  CustomApiResponse,
 } from '@/api/types';
 
 export const useCheckIfUserHasAWallet = () => {
@@ -70,5 +72,27 @@ export const useVerifyWalletAccountNumber = (
     apiRoute: routes.wallet.verifyWalletAccountNumber,
     method: 'POST',
     body: JSON.stringify(body),
+  });
+};
+
+
+export const useRequestPayout = (body?: { amount: number }) => {
+  return useAppMutation<CustomApiResponse>({
+    apiRoute: routes.wallet.requestPayout,
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+};
+
+export const useGetWalletTransactions = (params?: Record<string, any>) => {
+  const baseQueryKey = generateBaseQueryKeyFromRoute(
+    routes.wallet.walletTransactions
+  );
+
+
+  return useAppQueryWithPaginationAndParams<WalletTransactionResponse>({
+    apiRoute: routes.wallet.walletTransactions,
+    queryKey: [baseQueryKey, params],
+    params,
   });
 };

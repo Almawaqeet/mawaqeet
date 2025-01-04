@@ -445,3 +445,16 @@ export interface UpdateHotelRoomResponse {
   booking_id: string;
   hotel_room: string;
 }
+
+
+export interface WalletTransactionResponse {
+  transaction_date?: string | null;
+  transaction_type?: string | null;
+  amount?: string | null;
+  status?: string | null;
+  reason?: string | null;
+  reference?: string | null;
+  bank?: string | null;
+  account_number?: string | null;
+}
+

@@ -85,7 +85,7 @@ export const useVerifyBookingPayment = (reference: string) => {
     options: {
       enabled: !!reference,
       refetchOnWindowFocus: false,
-    }
+    },
   });
 };
 

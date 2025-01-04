@@ -112,7 +112,8 @@ export const segregatePackageByItsPriceCategory = (
         !item.settlement &&
         (item.price.map((tier) =>
           tier.category.toLowerCase().includes(normalizeInput)
-        ) || item.name.toLowerCase().includes(normalizeInput))
+        ) ||
+          item.name.toLowerCase().includes(normalizeInput))
     )
     .flatMap((pkg) => {
       if (!pkg?.price?.length) return [];
