@@ -255,7 +255,9 @@ export default function WalletView() {
                           disabled={walletTransactionsLoading}
                           variant="outline"
                         >
-                          {walletTransactionsLoading ? 'Loading...' : 'Load More'}
+                          {walletTransactionsLoading
+                            ? 'Loading...'
+                            : 'Load More'}
                         </Button>
                       </div>
                     )}

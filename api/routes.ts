@@ -27,8 +27,8 @@ export const routes = {
     editWallet: 'payments/customer/wallet/',
     getBanksOnWalletCreation: 'payments/customer/get-banks/',
     verifyWalletAccountNumber: 'payments/customer/verify-account-number/',
-    requestPayout: "payments/customer/request-payout/",
-    walletTransactions: "payments/customer/wallet-transactions/"
+    requestPayout: 'payments/customer/request-payout/',
+    walletTransactions: 'payments/customer/wallet-transactions/',
   },
 
   users: {

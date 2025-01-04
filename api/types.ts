@@ -446,7 +446,6 @@ export interface UpdateHotelRoomResponse {
   hotel_room: string;
 }
 
-
 export interface WalletTransactionResponse {
   transaction_date?: string | null;
   transaction_type?: string | null;
@@ -457,4 +456,3 @@ export interface WalletTransactionResponse {
   bank?: string | null;
   account_number?: string | null;
 }
-

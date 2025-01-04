@@ -1,6 +1,5 @@
 'use client';
 
-
 import { WalletTransactionResponse } from '@/api/types';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
@@ -18,7 +17,9 @@ export function Transaction({ transaction }: TransactionProps) {
     <Card className="p-4 hover:shadow-md transition-all duration-200 bg-white">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-full ${isCredit ? 'bg-green-100' : 'bg-red-100'}`}>
+          <div
+            className={`p-2 rounded-full ${isCredit ? 'bg-green-100' : 'bg-red-100'}`}
+          >
             {isCredit ? (
               <ArrowDownLeft className="h-5 w-5 text-green-600" />
             ) : (
@@ -32,11 +33,12 @@ export function Transaction({ transaction }: TransactionProps) {
             </p>
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <Clock className="h-3.5 w-3.5" />
-              {transaction?.transaction_date ? (
-                format(new Date(transaction.transaction_date), 'MMM d, yyyy • h:mm a')
-              ) : (
-                'Date not available'
-              )}
+              {transaction?.transaction_date
+                ? format(
+                    new Date(transaction.transaction_date),
+                    'MMM d, yyyy • h:mm a'
+                  )
+                : 'Date not available'}
             </div>
             {transaction?.reference && (
               <p className="text-sm text-gray-500 mt-1">
@@ -47,15 +49,18 @@ export function Transaction({ transaction }: TransactionProps) {
         </div>
 
         <div className="text-right">
-          <p className={`font-semibold ${isCredit ? 'text-green-600' : 'text-red-600'}`}>
-            {isCredit ? '+' : '-'}₦{transaction?.amount ?? '0'}
+          <p
+            className={`font-semibold ${isCredit ? 'text-green-600' : 'text-red-600'}`}
+          >
+            {isCredit ? '+' : '-'}₦{transaction?.amount ? Number(transaction.amount).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
           </p>
           <Badge
             variant="outline"
             className={`
-              ${transaction?.status?.toLowerCase() === 'completed'
-                ? 'bg-green-50 text-green-700 border-green-200'
-                : 'bg-yellow-50 text-yellow-700 border-yellow-200'
+              ${
+                transaction?.status?.toLowerCase() === 'completed'
+                  ? 'bg-green-50 text-green-700 border-green-200'
+                  : 'bg-yellow-50 text-yellow-700 border-yellow-200'
               }
             `}
           >
