@@ -220,7 +220,11 @@ const StepThreeOnboarding = () => {
             <AppSkeleton height="3rem" width="200px" className="mx-auto" />
           ) : (
             <div className="text-4xl sm:text-5xl font-bold text-brand-color">
-              ₦{registrationFee}
+              ₦
+              {registrationFee?.toLocaleString('en-NG', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </div>
           )}
           <p className="text-gray-500 text-xs sm:text-sm mt-2">

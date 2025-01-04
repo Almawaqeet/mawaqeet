@@ -56,8 +56,8 @@ export default function OverViewPage() {
                   ) : (
                     <div className="text-2xl font-bold">
                       ₦
-                      {financialSummary?.summary?.company_balance?.[0]?.balance?.toLocaleString() ??
-                        '0.00'}
+                      {financialSummary?.summary?.company_balance?.balance ??
+                        '0.000'}
                     </div>
                   )}
                 </CardContent>

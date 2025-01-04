@@ -3,6 +3,8 @@
 import {
   useCheckIfUserHasAWallet,
   useCheckWalletInformation,
+  useGetWalletTransactions,
+  useRequestPayout,
 } from '@/api/services/wallet';
 import { useSession } from 'next-auth/react';
 import {
@@ -14,18 +16,50 @@ import {
 } from '@/components/ui/card';
 import AppButton from '@/components/reusables/AppButton';
 import { extractFirstName } from '@/lib/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { useAppToast } from '@/components/reusables/AppToast';
+import { Transaction } from './transaction';
+import { useQueryState, parseAsInteger } from 'nuqs';
+import { useQueryClient } from '@tanstack/react-query';
+import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 
 export default function WalletView() {
   const { data: session } = useSession();
   const { data: checkIfUserHasWallet, isLoading } = useCheckIfUserHasAWallet();
   const { data: walletInformation, isLoading: walletInformationLoading } =
     useCheckWalletInformation();
+
+  const [pageIndex, setPageIndex] = useQueryState(
+    'page',
+    parseAsInteger.withDefault(1)
+  );
+
+  const { data: walletTransactions, isLoading: walletTransactionsLoading } =
+    useGetWalletTransactions({
+      page: pageIndex,
+      limit: 10,
+    });
+
+  const queryClient = useQueryClient();
+  const { mutate: walletTransactionsMutate, isPending: isWithdrawPending } =
+    useRequestPayout();
   const router = useRouter();
+  const [isWithdrawDialogOpen, setIsWithdrawDialogOpen] = useState(false);
+  const [withdrawAmount, setWithdrawAmount] = useState('');
+  const { showToast } = useAppToast();
 
   useEffect(() => {
     if (!isLoading && checkIfUserHasWallet?.has_wallet === false) {
@@ -35,6 +69,62 @@ export default function WalletView() {
       );
     }
   }, [checkIfUserHasWallet, isLoading, router]);
+
+  const handleWithdraw = () => {
+    const amount = Number(withdrawAmount);
+    const balance = Number(walletInformation?.wallet?.balance ?? 0);
+
+    if (isNaN(amount) || amount <= 0) {
+      showToast({
+        variant: 'destructive',
+        title: 'Invalid amount',
+        description: 'Please enter a valid amount',
+      });
+      return;
+    }
+
+    if (amount > balance) {
+      showToast({
+        variant: 'destructive',
+        title: 'Insufficient funds',
+        description: 'Withdrawal amount cannot exceed your balance',
+      });
+      return;
+    }
+
+    walletTransactionsMutate(
+      { amount },
+      {
+        onSuccess: () => {
+          showToast({
+            title: 'Success',
+            description: 'Withdrawal request submitted successfully',
+          });
+          setIsWithdrawDialogOpen(false);
+          queryClient.invalidateQueries({
+            queryKey: [
+              generateBaseQueryKeyFromRoute(
+                routes.wallet.checkWalletInformation
+              ),
+            ],
+          });
+          queryClient.invalidateQueries({
+            queryKey: [
+              generateBaseQueryKeyFromRoute(routes.wallet.walletTransactions),
+            ],
+          });
+        },
+      }
+    );
+  };
+
+  const handleLoadMore = () => {
+    setPageIndex((prev) => (prev ?? 1) + 1);
+  };
+
+  const handlePrevPage = () => {
+    setPageIndex((prev) => Math.max((prev ?? 1) - 1, 1));
+  };
 
   if (isLoading || walletInformationLoading) {
     return (
@@ -115,7 +205,7 @@ export default function WalletView() {
                 </div>
 
                 <AppButton
-                  disabled={true}
+                  onClick={() => setIsWithdrawDialogOpen(true)}
                   className="mt-2 sm:mt-4 w-full md:w-auto"
                 >
                   Withdraw Money
@@ -134,14 +224,90 @@ export default function WalletView() {
                 <CardDescription>
                   Track your recent transactions
                 </CardDescription>
+                {pageIndex > 1 && (
+                  <Button
+                    onClick={handlePrevPage}
+                    className="mt-2"
+                    variant="outline"
+                  >
+                    Previous Results
+                  </Button>
+                )}
               </CardHeader>
               <CardContent className="p-4 sm:p-6">
-                <div className="flex min-h-[150px] sm:min-h-[200px] items-center justify-center rounded-lg bg-gray-50 p-4 sm:p-8 text-gray-500">
-                  <p>No transactions to display</p>
-                </div>
+                {walletTransactionsLoading && pageIndex === 1 ? (
+                  <div className="flex min-h-[150px] sm:min-h-[200px] items-center justify-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-brand-color"></div>
+                  </div>
+                ) : walletTransactions?.results?.length === 0 ? (
+                  <div className="flex min-h-[150px] sm:min-h-[200px] items-center justify-center rounded-lg bg-gray-50 p-4 sm:p-8 text-gray-500">
+                    <p>No transactions to display</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {walletTransactions?.results?.map((transaction, index) => (
+                      <Transaction key={index} transaction={transaction} />
+                    ))}
+                    {walletTransactions?.next && (
+                      <div className="flex justify-center p-4">
+                        <Button
+                          onClick={handleLoadMore}
+                          disabled={walletTransactionsLoading}
+                          variant="outline"
+                        >
+                          {walletTransactionsLoading
+                            ? 'Loading...'
+                            : 'Load More'}
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
+
+          <Dialog
+            open={isWithdrawDialogOpen}
+            onOpenChange={setIsWithdrawDialogOpen}
+          >
+            <DialogContent className="bg-white">
+              <DialogHeader>
+                <DialogTitle>Withdraw Money</DialogTitle>
+                <DialogDescription>
+                  Enter the amount you want to withdraw. Available balance: ₦
+                  {walletInformation.wallet?.balance
+                    ? Number(walletInformation.wallet.balance).toLocaleString(
+                        'en-NG'
+                      )
+                    : '0'}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Input
+                    id="amount"
+                    type="number"
+                    value={withdrawAmount}
+                    onChange={(e) => setWithdrawAmount(e.target.value)}
+                    placeholder="Enter amount"
+                    className="col-span-4"
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button
+                  variant="outline"
+                  onClick={() => setIsWithdrawDialogOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button onClick={handleWithdraw} disabled={isWithdrawPending}>
+                  {isWithdrawPending ? 'Processing...' : 'Withdraw'}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </>
       )}
     </div>

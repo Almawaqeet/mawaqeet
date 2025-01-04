@@ -146,20 +146,22 @@ export default function ViewPackage({
       animate={{ opacity: 1 }}
       className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8"
     >
-      <Dialog
-        open={showSettlementDialog}
-        onOpenChange={setShowSettlementDialog}
-      >
-        <DialogContent className="bg-white">
-          <DialogHeader>
-            <DialogTitle>Package Not Available</DialogTitle>
-            <DialogDescription>
-              This package is no longer active for booking as it has been
-              settled.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+      {userAccount?.user.accountType === ACCOUNT_TYPES.USER && (
+        <Dialog
+          open={showSettlementDialog}
+          onOpenChange={setShowSettlementDialog}
+        >
+          <DialogContent className="bg-white">
+            <DialogHeader>
+              <DialogTitle>Package Not Available</DialogTitle>
+              <DialogDescription>
+                This package is no longer active for booking as it has been
+                settled.
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      )}
 
       <Card className="overflow-hidden bg-white shadow-xl rounded-xl sm:rounded-2xl">
         <motion.div {...fadeInUp} className="p-4 sm:p-6 lg:p-8">

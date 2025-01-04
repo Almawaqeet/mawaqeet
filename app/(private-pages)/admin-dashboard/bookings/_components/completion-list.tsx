@@ -49,7 +49,7 @@ export default function CompletionList() {
   const { data: bookingsData, isLoading } = useGetBookingsForAPackage(
     packageId as string,
     {
-      status: 'completed',
+      status: 'payment_completed',
       page: 1,
     }
   );
