@@ -14,6 +14,7 @@ import {
   useful_Links,
 } from '@/old-pages/contents/footer';
 import Headings from '@/old-pages/utilities/Headings';
+import { IoLogoLinkedin } from 'react-icons/io';
 
 const Footer: React.FC = () => {
   return (
@@ -105,25 +106,25 @@ const Footer: React.FC = () => {
               <FiFacebook className="w-6 h-6" />
             </Link>
             <Link
-              href="#"
+              href="https://x.com/AlMawaqeet41790"
               className="text-gray-200 hover:text-white transition-colors"
               aria-label="Visit our Twitter page"
             >
               <BsTwitterX className="w-6 h-6" />
             </Link>
             <Link
-              href="#"
+              href="https://www.instagram.com/almawaqeetcompany254/"
               className="text-gray-200 hover:text-white transition-colors"
               aria-label="Visit our Instagram page"
             >
               <IoLogoInstagram className="w-6 h-6" />
             </Link>
             <Link
-              href="#"
+              href="https://www.linkedin.com/company/almawaqeet"
               className="text-gray-200 hover:text-white transition-colors"
-              aria-label="Contact us on WhatsApp"
+              aria-label="visit our Linkedin page"
             >
-              <FaSquareWhatsapp className="w-6 h-6" />
+              <IoLogoLinkedin className="w-6 h-6" />
             </Link>
           </div>
         </div>

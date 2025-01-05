@@ -7,7 +7,7 @@ import { useFormik } from 'formik';
 import AppHeading from '@/components/reusables/AppHeading';
 import AppButton from '@/components/reusables/AppButton';
 import AppTextInput from '@/components/reusables/AppTextInput';
-import { IoEyeOutline } from 'react-icons/io5';
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { ACCOUNT_TYPES } from '@/constants/generic';
@@ -17,6 +17,7 @@ import { useSession } from 'next-auth/react';
 const Login = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [ showPassword, setShowPassword ] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null);
   const { data: session, status } = useSession();
 
@@ -128,9 +129,9 @@ const Login = () => {
             <div className="space-y-1">
               <AppTextInput
                 label="Password"
-                type="password"
+                type={showPassword ? `text` : 'password'}
                 placeholder="Password"
-                icon={<IoEyeOutline />}
+                icon={showPassword ? <IoEyeOffOutline onClick={() => setShowPassword(false)} /> : <IoEyeOutline onClick={() => setShowPassword(true)} />}
                 required
                 name="password"
                 value={formik.values.password}

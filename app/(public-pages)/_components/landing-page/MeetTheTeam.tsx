@@ -29,7 +29,7 @@ export default function MeetTheTeam() {
 
   const team = [
     {
-      name: 'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi',
+      name: 'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi(Ameerul Hajj)',
       role: 'Chief Executive Officer and Managing Director, Al-Mawaqeet Travels and Tours',
       video:
         'https://utfs.io/f/iywkFYKVsyRUWtcoj8ZG2a5m6p9AMqPUzI4OujgdSQlcoXnB',
@@ -39,11 +39,11 @@ export default function MeetTheTeam() {
         'Led over 1000+ successful pilgrimages, certified Hajj guide, fluent in Arabic and English',
     },
     {
-      name: "Shaykh Abdullah Ma'ruf Oyelekan",
+      name: "Shaykh Abdullah Ma'ruf Oyelekan(Baba-n-madeenah)",
       role: 'Chief Managing Director Al-Mawaqeet Travels and Tours',
       video:
-        'https://utfs.io/f/iywkFYKVsyRU0ee0fLB2QUDtI9aTqmwWieroJsGgH3S7CEBM',
-      thumbnail: '/images/director.jpg',
+        'https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L',
+      thumbnail: '/images/babanmadeenah.png',
       bio: 'Expert in pilgrim logistics and coordination',
       achievements:
         'Coordinated logistics for 500+ pilgrims annually, developed innovative pilgrim tracking systems',
