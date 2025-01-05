@@ -213,6 +213,14 @@ export default function PackageTable({}: {}) {
           <div className="flex flex-col gap-1.5">
             <span className="text-sm sm:text-base font-semibold text-gray-800 tracking-tight break-words">
               {row.original?.name ?? 'N/A'}
+              {row.original?.settlement && (
+                <Badge
+                  variant="outline"
+                  className="ml-2 px-2 py-0.5 text-xs bg-yellow-100 text-yellow-800 border-yellow-300"
+                >
+                  Booking Completed
+                </Badge>
+              )}
             </span>
             <span className="text-xs sm:text-sm font-medium text-gray-500">
               ID: {row.original?.id ?? 'N/A'}

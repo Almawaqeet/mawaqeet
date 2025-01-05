@@ -357,8 +357,8 @@ export interface FinancialSummaryResponse {
   summary?: {
     company_balance?: {
       currency?: string;
-      balance?: number;
-    }[];
+      balance?: string;
+    };
     company_amount_in_debt?: number;
     total_amount_due?: number;
     active_bookings?: number;
@@ -445,3 +445,17 @@ export interface UpdateHotelRoomResponse {
   booking_id: string;
   hotel_room: string;
 }
+<<<<<<< HEAD
+=======
+
+export interface WalletTransactionResponse {
+  transaction_date?: string | null;
+  transaction_type?: string | null;
+  amount?: string | null;
+  status?: string | null;
+  reason?: string | null;
+  reference?: string | null;
+  bank?: string | null;
+  account_number?: string | null;
+}
+>>>>>>> 7ffb9f95ae07f29d100b72ea951f1b28d9025f43
