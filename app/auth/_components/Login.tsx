@@ -25,7 +25,7 @@ const Login = () => {
     if (status === 'authenticated' && session?.user?.accountType) {
       handleLoginRedirect();
     }
-  }, [session, status]);
+  }, [session, status, ]);
 
   const handleLoginRedirect = () => {
     if (!session?.user?.accountType) return;
@@ -129,7 +129,7 @@ const Login = () => {
             <div className="space-y-1">
               <AppTextInput
                 label="Password"
-                type={showPassword ? `text` : 'password'}
+                type={showPassword ? `text` : `password`}
                 placeholder="Password"
                 icon={showPassword ? <IoEyeOffOutline onClick={() => setShowPassword(false)} /> : <IoEyeOutline onClick={() => setShowPassword(true)} />}
                 required
