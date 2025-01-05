@@ -29,11 +29,7 @@ export default function MeetTheTeam() {
 
   const team = [
     {
-<<<<<<< HEAD
-      name: 'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi(Ameerul Hajj)',
-=======
       name: 'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi(Ameerul-Hajj).',
->>>>>>> 8c356c27f8ffdcb6222c2e76bd68393780c53b64
       role: 'Chief Executive Officer and Managing Director, Al-Mawaqeet Travels and Tours',
       video:
         'https://utfs.io/f/iywkFYKVsyRUWtcoj8ZG2a5m6p9AMqPUzI4OujgdSQlcoXnB',
@@ -47,11 +43,7 @@ export default function MeetTheTeam() {
       role: 'Chief Managing Director Al-Mawaqeet Travels and Tours',
       video:
         'https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L',
-<<<<<<< HEAD
-      thumbnail: '/images/babanmadeenah.png',
-=======
       thumbnail: '/images/welcome.png',
->>>>>>> 8c356c27f8ffdcb6222c2e76bd68393780c53b64
       bio: 'Expert in pilgrim logistics and coordination',
       achievements:
         'Coordinated logistics for 500+ pilgrims annually, developed innovative pilgrim tracking systems',

@@ -33,14 +33,8 @@ export default function ResetPasswordStepThree() {
   const { showToast } = useAppToast();
   const { mutate: changePassword, isPending: isChangingPassword } =
     useChangePassword();
-<<<<<<< HEAD
-    const [ showPassword, setShowPassword ] = React.useState(false)
-    const [ showConfirmPassword, setShowConfirmPassword ] = React.useState(false)
-
-=======
 const [ showPassword, setShowPassword ] = React.useState(false)
 const [ showConfirmPassword, setShowConfirmPassword ] = React.useState(false)
->>>>>>> 8c356c27f8ffdcb6222c2e76bd68393780c53b64
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const email = sessionStorage.getItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL);
@@ -162,8 +156,6 @@ const [ showConfirmPassword, setShowConfirmPassword ] = React.useState(false)
                 onBlur={passwordFormik.handleBlur}
                 icon={showPassword ? <IoEyeOffOutline onClick={() => setShowPassword(false)} /> : <IoEyeOutline onClick={() => setShowPassword(true)} />}
                 value={passwordFormik.values.password}
-                icon={showPassword ? <IoEyeOffOutline onClick={() => setShowPassword(false)} /> : <IoEyeOutline
-                 onClick={() => setShowPassword(true)} />}
                 required
               />
               {passwordFormik.touched.password &&
@@ -183,8 +175,6 @@ const [ showConfirmPassword, setShowConfirmPassword ] = React.useState(false)
                 onBlur={passwordFormik.handleBlur}
                 icon={showConfirmPassword ? <IoEyeOffOutline onClick={() => setShowPassword(false)} /> : <IoEyeOutline onClick={() => setShowConfirmPassword(true)} />}
                 value={passwordFormik.values.confirmPassword}
-                icon={showConfirmPassword ? <IoEyeOffOutline onClick={() => setShowConfirmPassword(false)} /> : <IoEyeOutline
-                 onClick={() => setShowConfirmPassword(true)} />}
                 required
               />
               {passwordFormik.touched.confirmPassword &&

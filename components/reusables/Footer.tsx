@@ -122,11 +122,7 @@ const Footer: React.FC = () => {
             <Link
               href="https://www.linkedin.com/company/almawaqeet"
               className="text-gray-200 hover:text-white transition-colors"
-<<<<<<< HEAD
-              aria-label="visit our Linkedin page"
-=======
               aria-label="Visit our LinkedIn page"
->>>>>>> 8c356c27f8ffdcb6222c2e76bd68393780c53b64
             >
               <IoLogoLinkedin className="w-6 h-6" />
             </Link>
