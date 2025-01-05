@@ -62,6 +62,8 @@ export const CLIENT_ROUTES = {
         mainPage: '/admin-dashboard/bookings',
         viewBookingsForPackage: (packageId: string) =>
           `/admin-dashboard/bookings/${packageId}`,
+        completionList: (packageId: string) =>
+          `/admin-dashboard/bookings/${packageId}/completion-list`,
       },
 
       products: '/admin-dashboard/product',

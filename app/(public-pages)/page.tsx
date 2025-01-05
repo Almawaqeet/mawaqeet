@@ -47,9 +47,7 @@ export default async function LandingPage() {
 }
 
 export const metadata: Metadata = {
-  title: 'Al-Mawaqeet Travels and Tours | Home',
-  description:
-    'Your trusted partner for Hajj and Umrah services. We provide comprehensive travel packages, guidance and support for your spiritual journey.',
-  keywords:
-    'hajj, umrah, islamic travel, muslim pilgrimage, mecca travel, medina tours, religious tourism, travel agency',
+  alternates: {
+    canonical: 'https://almawaqeet.com',
+  },
 };

@@ -12,6 +12,7 @@ import university from './university.png';
 import appsupport from './appsupport.png';
 import admission from './admission.png';
 import ziyarah from './hajj.png';
+import welcome from './welcome.png'
 
 export {
   icon_1,
@@ -28,4 +29,5 @@ export {
   ziyarah,
   vector,
   people,
+  welcome
 };

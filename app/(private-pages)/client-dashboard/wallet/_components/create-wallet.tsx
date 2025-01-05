@@ -105,12 +105,6 @@ export default function CreateWallet() {
               'account_number',
               'Error verifying account number'
             );
-            showToast({
-              title: 'Error',
-              description: 'Error verifying account number',
-              variant: 'destructive',
-            });
-            console.error('Error verifying account number:', error);
           },
         }
       );
@@ -164,14 +158,6 @@ export default function CreateWallet() {
                   CLIENT_ROUTES.PrivatePages.clientDashboard.wallet.viewWallet
                 );
               }
-            },
-            onError: (error) => {
-              showToast({
-                title: 'Error',
-                description: 'Error creating wallet',
-                variant: 'destructive',
-              });
-              console.error('Error creating wallet:', error);
             },
           }
         );

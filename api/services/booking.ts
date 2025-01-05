@@ -8,14 +8,17 @@ import {
   BookingFinancialSummaryResponse,
   BookingInformationResponse,
   BookingVerifyPaymentResponse,
+  CompleteBookingRequest,
+  CompleteBookingResponse,
   CustomApiResponse,
   InitiateBookingApiResponse,
   InitiateBookingPaymentRequest,
   InitiateBookingRequest,
   InitiatePaymentResponse,
   PackageBookingListResponse,
-  PaginatedResponse,
   SimpleBookingResponse,
+  UpdateHotelRoomRequest,
+  UpdateHotelRoomResponse,
 } from '@/api/types';
 
 export const useGetUserBookings = () => {
@@ -101,9 +104,7 @@ export const useGetBookingsForAPackage = (
   const baseQueryKey = generateBaseQueryKeyFromRoute(
     routes.bookings.bookingsForPackage(packageId)
   );
-  return useAppQueryWithPaginationAndParams<
-    PaginatedResponse<PackageBookingListResponse>
-  >({
+  return useAppQueryWithPaginationAndParams<PackageBookingListResponse>({
     apiRoute: routes.bookings.bookingsForPackage(packageId),
     queryKey: [
       baseQueryKey,
@@ -126,5 +127,21 @@ export const useGetBookingFinancialSummaryForASpecificPackage = (
     apiRoute:
       routes.bookings.bookingFinancialSummaryForASpecificPackage(packageId),
     queryKey: [baseQueryKey],
+  });
+};
+
+export const useCompleteBooking = (body: CompleteBookingRequest) => {
+  return useAppMutation<CompleteBookingResponse>({
+    apiRoute: routes.bookings.completeBooking,
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+};
+
+export const useUpdateHotelRoom = (body?: UpdateHotelRoomRequest) => {
+  return useAppMutation<UpdateHotelRoomResponse>({
+    apiRoute: routes.bookings.updateHotelRoom,
+    method: 'POST',
+    body: JSON.stringify(body),
   });
 };

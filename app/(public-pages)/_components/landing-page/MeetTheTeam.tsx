@@ -42,8 +42,8 @@ export default function MeetTheTeam() {
       name: "Shaykh Abdullah Ma'ruf Oyelekan(Baba-n-madeenah)",
       role: 'Chief Managing Director Al-Mawaqeet Travels and Tours',
       video:
-        'https://utfs.io/f/iywkFYKVsyRU0ee0fLB2QUDtI9aTqmwWieroJsGgH3S7CEBM',
-      thumbnail: '/images/director.jpg',
+        'https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L',
+      thumbnail: '/images/welcome.png',
       bio: 'Expert in pilgrim logistics and coordination',
       achievements:
         'Coordinated logistics for 500+ pilgrims annually, developed innovative pilgrim tracking systems',
@@ -135,6 +135,7 @@ export default function MeetTheTeam() {
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, 50vw"
+                          quality={100}
                         />
                         <div className="absolute inset-0 bg-black/40" />
                       </>

@@ -20,7 +20,7 @@ interface NavItem {
 // Logo Component
 const Logo = () => (
   <Link href="/">
-    <motion.li
+    <motion.div
       className="flex gap-2 mobile:gap-3 tab_md:gap-[4px] items-center group relative cursor-pointer"
       whileHover={{ scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 300 }}
@@ -36,12 +36,12 @@ const Logo = () => (
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 0, x: -20 }}
         whileHover={{ opacity: 1, x: 0 }}
-        className="hidden lg:group-hover:block absolute left-full ml-2  px-3 py-1 rounded-lg shadow-md whitespace-nowrap"
-        transition={{ duration: 0.3, ease: 'easeOut' }}
+        className="hidden lg:group-hover:block absolute left-full ml-2 bg-white px-3 py-1 rounded-lg shadow-md whitespace-nowrap"
+        transition={{ duration: 0.02, ease: 'easeOut' }}
       >
         Al-Mawaqeet Travels and Tours
       </motion.div>
-    </motion.li>
+    </motion.div>
   </Link>
 );
 
@@ -57,7 +57,7 @@ const DesktopNavLinks = ({
   activeItem,
   setActiveItem,
 }: DesktopNavLinksProps) => (
-  <div className="flex items-center justify-center ml-6 lg:gap-12 md:gap-10">
+  <ul className="flex items-center justify-center ml-6 lg:gap-12 md:gap-10">
     {navItems?.map((item) => (
       <li
         key={item.id}
@@ -71,7 +71,7 @@ const DesktopNavLinks = ({
         <Link href={`/${item.id}`}>{item.content}</Link>
       </li>
     ))}
-  </div>
+  </ul>
 );
 
 interface MobileNavMenuProps {
@@ -228,7 +228,10 @@ const Navbar = () => {
           />
 
           <div className="flex justify-end items-center">
-            <Link href={`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`}>
+            <Link
+              href={`${CLIENT_ROUTES.PublicPages.onboarding.newUser}`}
+              aria-label="Get started with Al-Mawaqeet"
+            >
               <AppButton
                 className="mobile:hidden xmd:hidden tab_md:flex font-bold"
                 icon={<IoMdArrowRoundForward className="w-6 h-4" />}

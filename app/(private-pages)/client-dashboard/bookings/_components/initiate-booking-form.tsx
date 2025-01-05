@@ -10,7 +10,10 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useViewPackage } from '@/api/services/packages';
+import {
+  useCheckPackageSettlementStatus,
+  useViewPackage,
+} from '@/api/services/packages';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useInitiateBooking } from '@/api/services/booking';
 import { useAppToast } from '@/components/reusables/AppToast';
@@ -42,6 +45,8 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
   const queryClient = useQueryClient();
   const { data: checkIfUserHasWallet, isLoading: walletLoading } =
     useCheckIfUserHasAWallet();
+  const { data: settlementData, isLoading: settlementLoading } =
+    useCheckPackageSettlementStatus(packageId);
 
   const formik = useFormik({
     initialValues: {
@@ -80,22 +85,32 @@ export const InitiateBookingForm = ({ packageId }: { packageId: string }) => {
             );
           }
         },
-        onError: (error: any) => {
-          showToast({
-            title: 'Error',
-            description:
-              error?.message || 'An error occurred while initiating booking',
-            variant: 'destructive',
-          });
-        },
       });
     },
   });
-  if (walletLoading) {
+
+  if (walletLoading || settlementLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-black/80">
         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-white"></div>
       </div>
+    );
+  }
+
+  if (settlementData?.has_settlement) {
+    return (
+      <AppDialogBox
+        open={true}
+        onOpenChange={() => {}}
+        title="Package Not Available"
+        description="This package has already been settled and is no longer available for booking. Please choose another package."
+        cancelText="Go Back"
+        confirmText="View Packages"
+        onCancel={() => router.back()}
+        onConfirm={() =>
+          router.push(CLIENT_ROUTES.PrivatePages.clientDashboard.packages)
+        }
+      />
     );
   }
 

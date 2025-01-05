@@ -26,7 +26,7 @@ const WelcomeBanner = ({
     <motion.div
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.2 }}
       className="mb-6 bg-yellow-100 text-black p-4 rounded-lg shadow-lg flex justify-between items-center"
     >
       <div>

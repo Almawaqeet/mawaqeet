@@ -180,7 +180,7 @@ const StepTwoOnboarding = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.2 }}
       className="min-h-screen flex flex-col items-center px-6 sm:px-8 md:px-12 lg:px-20 xl:px-4 py-8 sm:py-12 md:py-16 lg:py-20"
     >
       <AppDialogBox

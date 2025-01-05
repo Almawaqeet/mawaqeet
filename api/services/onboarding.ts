@@ -12,7 +12,6 @@ import {
   InitiatePaymentResponse,
   OnboardingPaymentResponse,
   OnboardingVerifyPaymentResponse,
-  PaginatedResponse,
   PreBookPackageRequest,
   PreBookPackageResponse,
   SimpleOnboardingUser,
@@ -61,6 +60,9 @@ export const useVerifyOnboardingPayment = (reference: string) => {
   return useAppQuery<OnboardingVerifyPaymentResponse>({
     apiRoute: routes.onboarding.verifyPayment.replace(':reference', reference),
     queryKey: ['VERIFY_ONBOARDING_PAYMENT', reference],
+    options: {
+      enabled: !!reference,
+    },
   });
 };
 
@@ -70,9 +72,7 @@ export const useGetOnboardingUsers = (params?: {
   status?: string;
   email?: string;
 }) => {
-  return useAppQueryWithPaginationAndParams<
-    PaginatedResponse<SimpleOnboardingUser>
-  >({
+  return useAppQueryWithPaginationAndParams<SimpleOnboardingUser>({
     apiRoute: routes.onboarding.getOnboardingUsers,
     queryKey: [
       'ONBOARDING_USERS',

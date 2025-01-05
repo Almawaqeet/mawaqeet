@@ -26,6 +26,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { CreditCard, Wallet, Calendar, Package2, Layers } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { useCheckPackageSettlementStatus } from '@/api/services/packages';
 
 interface BookingPaymentProps {
   id: string;
@@ -54,12 +55,38 @@ export function BookingPayment({ id }: BookingPaymentProps) {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
 
+  const { data: settlementData, isLoading: settlementLoading } =
+    useCheckPackageSettlementStatus(
+      bookingData?.booking?.package?.id as string
+    );
+
   const booking = bookingData?.booking;
   const totalAmount = Number(booking?.balance) ?? 0;
   const amountPaid = Number(booking?.total_amount_paid) ?? 0;
   const remainingAmount = totalAmount - amountPaid;
   const isFullPayment = booking?.payment_plan?.toLowerCase() === 'full';
   const walletBalance = Number(walletInformation?.wallet?.balance ?? 0);
+
+  if (settlementData?.has_settlement) {
+    return (
+      <div className="w-full max-w-4xl mx-auto mt-8 p-6 bg-red-50 border border-red-200 rounded-xl">
+        <h2 className="text-xl font-semibold text-red-700 mb-4">
+          Payment Not Allowed
+        </h2>
+        <p className="text-red-600">
+          This package has been settled and no further payments can be made. If
+          you believe this is an error, please contact support.
+        </p>
+        <AppButton
+          variant="secondary"
+          className="mt-4"
+          onClick={() => router.push(CLIENT_ROUTES.PublicPages.contact)}
+        >
+          Contact Support
+        </AppButton>
+      </div>
+    );
+  }
 
   const handlePayment = () => {
     const amount = parseFloat(paymentAmount);
@@ -246,7 +273,7 @@ export function BookingPayment({ id }: BookingPaymentProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.3 }}
       className="w-full max-w-4xl mx-auto mt-8"
     >
       <AppModal
@@ -300,7 +327,7 @@ export function BookingPayment({ id }: BookingPaymentProps) {
         </div>
       </AppModal>
 
-      {isLoadingBooking || walletInformationLoading ? (
+      {isLoadingBooking || walletInformationLoading || settlementLoading ? (
         <div className="space-y-4">
           <Skeleton className="h-16 w-full" />
           <Skeleton className="h-16 w-full" />

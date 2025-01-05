@@ -4,7 +4,11 @@ import {
   useAppQuery,
   useAppQueryWithPaginationAndParams,
 } from '@/api/client-constructor';
-import { CustomApiResponse, PaginatedResponse } from '@/api/types';
+import {
+  CustomApiErrorResponse,
+  CustomApiResponse,
+  PackageSettlementResponse,
+} from '@/api/types';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 
 export const useGetAllActivePackages = (params?: {
@@ -15,7 +19,7 @@ export const useGetAllActivePackages = (params?: {
   const baseQueryKey = generateBaseQueryKeyFromRoute(
     routes.packages.showAllActivePackages
   );
-  return useAppQueryWithPaginationAndParams<PaginatedResponse<Package>>({
+  return useAppQueryWithPaginationAndParams<Package>({
     apiRoute: routes.packages.showAllActivePackages,
     queryKey: [
       baseQueryKey,
@@ -35,7 +39,7 @@ export const useGetAllInactivePackages = (params?: {
   const baseQueryKey = generateBaseQueryKeyFromRoute(
     routes.packages.showAllInactivePackages
   );
-  return useAppQueryWithPaginationAndParams<PaginatedResponse<Package>>({
+  return useAppQueryWithPaginationAndParams<Package>({
     apiRoute: routes.packages.showAllInactivePackages,
     queryKey: [
       baseQueryKey,
@@ -106,6 +110,26 @@ export const useDeletePackage = (packageId: string) => {
     method: 'DELETE',
     options: {
       enabled: !!packageId,
+    },
+  });
+};
+
+export const useCheckPackageSettlementStatus = (packageId: string) => {
+  const baseQueryKey = generateBaseQueryKeyFromRoute(
+    routes.package.checkSettlementStatus(packageId)
+  );
+
+  return useAppQuery<PackageSettlementResponse>({
+    apiRoute: routes.package.checkSettlementStatus(packageId),
+    queryKey: [baseQueryKey],
+    options: {
+      enabled: !!packageId,
+      staleTime: 0,
+      cacheTime: 0,
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+      refetchOnReconnect: true,
+      refetchInterval: 5000,
     },
   });
 };

@@ -1,6 +1,10 @@
 'use client';
 
-import { useViewPackage, useEditPackage } from '@/api/services/packages';
+import {
+  useViewPackage,
+  useEditPackage,
+  useCheckPackageSettlementStatus,
+} from '@/api/services/packages';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
@@ -36,6 +40,13 @@ import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 const RichTextEditor = dynamic(
   () => import('@/components/ui/rich-text-editor'),
@@ -56,6 +67,10 @@ export default function ViewPackage({
   const router = useRouter();
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPackage, setEditedPackage] = useState(packageData ?? null);
+  const { data: settlementData, isLoading: settlementLoading } =
+    useCheckPackageSettlementStatus(params.packageId as string);
+  const [showSettlementDialog, setShowSettlementDialog] = useState(false);
+
   const { toast } = useToast();
 
   useEffect(() => {
@@ -64,7 +79,13 @@ export default function ViewPackage({
     }
   }, [packageData]);
 
-  if (isLoading) {
+  useEffect(() => {
+    if (settlementData?.has_settlement) {
+      setShowSettlementDialog(true);
+    }
+  }, [settlementData?.has_settlement]);
+
+  if (isLoading || settlementLoading) {
     return <ViewPackageSkeleton />;
   }
 
@@ -125,6 +146,21 @@ export default function ViewPackage({
       animate={{ opacity: 1 }}
       className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8"
     >
+      <Dialog
+        open={showSettlementDialog}
+        onOpenChange={setShowSettlementDialog}
+      >
+        <DialogContent className="bg-white">
+          <DialogHeader>
+            <DialogTitle>Package Not Available</DialogTitle>
+            <DialogDescription>
+              This package is no longer active for booking as it has been
+              settled.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
       <Card className="overflow-hidden bg-white shadow-xl rounded-xl sm:rounded-2xl">
         <motion.div {...fadeInUp} className="p-4 sm:p-6 lg:p-8">
           {/* Header Section */}
@@ -192,6 +228,7 @@ export default function ViewPackage({
                       )
                     )
                   }
+                  disabled={settlementData?.has_settlement}
                 >
                   <span>Book Now</span>
                   <span>→</span>
@@ -236,6 +273,20 @@ export default function ViewPackage({
                   >
                     <BookOpenIcon className="h-4 w-4" />
                     <span>View Bookings</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="rounded-md flex items-center justify-center gap-2"
+                    onClick={() =>
+                      router.push(
+                        CLIENT_ROUTES.PrivatePages.adminDashboard.bookings.completionList(
+                          packageData?.id as string
+                        )
+                      )
+                    }
+                  >
+                    <BookOpenIcon className="h-4 w-4" />
+                    <span>View Completion List</span>
                   </Button>
                 </>
               )}

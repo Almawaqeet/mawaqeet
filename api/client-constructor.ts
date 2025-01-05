@@ -5,18 +5,25 @@ import {
   UseMutationResult,
   QueryClient,
 } from '@tanstack/react-query';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 import { getSession } from 'next-auth/react';
 import { API_URL } from '@/environment-config';
-import { useErrorToast } from '@/providers/get-request-error-provider';
-import { redirect, useRouter } from 'next/navigation';
-import { CLIENT_ROUTES } from '@/lib/routes';
-// import { ErrorProvider } from '@/providers/get-request-error-provider';
+import { useErrorHandling } from '@/hooks/handle-error';
+import { PaginatedResponse } from './types';
 
 type QueryConfig<TQueryKey, TData> = {
   queryKey: TQueryKey;
   apiRoute: string;
-  options?: Omit<AxiosRequestConfig, 'url' | 'method'>;
+  options?: Omit<AxiosRequestConfig, 'url' | 'method'> & {
+    enabled?: boolean;
+    retry?: number;
+    staleTime?: number;
+    refetchOnWindowFocus?: boolean;
+    refetchOnMount?: boolean;
+    refetchOnReconnect?: boolean;
+    refetchInterval?: number | false;
+    cacheTime?: number;
+  };
 };
 
 type QueryConfigWithParams<TQueryKey, TData> = QueryConfig<TQueryKey, TData> & {
@@ -39,53 +46,53 @@ const axiosInstance = axios.create({
   },
 });
 
-// const showErrorToast = useErrorToast();
-const query = new QueryClient();
-// const router = useRouter();
-
 
 export function useAppQuery<
   TData = unknown,
-  TError = unknown,
+  TError = AxiosError,
   TQueryKey extends Array<unknown> = unknown[],
 >(config: QueryConfig<TQueryKey, TData>): UseQueryResult<TData, TError> {
   const { queryKey, apiRoute, options } = config;
 
-  return useQuery({
+  const query = useQuery<TData, TError>({
     queryKey,
     queryFn: async () => {
       const session = await getSession();
       const token = session?.user?.accessToken ?? '';
+      const response = await axiosInstance.get<TData>(apiRoute, {
+        ...options,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      const response = await axiosInstance
-        .get<TData>(apiRoute, {
-          ...options,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .catch((error: any) => {
-          console.log(error)
-          throw error?.message
-        });
-      return response?.data;
+      if (!response?.data) {
+        throw new Error(
+          'No data received from server. It may be network issue'
+        );
+      }
+
+      return response.data;
     },
 
     retry: 3,
     staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+    enabled: options?.enabled !== false, // Allow enabled option
   });
+
+  return useErrorHandling(() => query)();
 }
 
 export function useAppQueryWithPaginationAndParams<
   TData = unknown,
-  TError = unknown,
+  TError = AxiosError,
   TQueryKey extends Array<unknown> = unknown[],
 >(
   config: QueryConfigWithParams<TQueryKey, TData>
-): UseQueryResult<TData, TError> {
+): UseQueryResult<PaginatedResponse<TData>, TError> {
   const { apiRoute, queryKey, options, params } = config;
 
-  return useQuery({
+  const query = useQuery<PaginatedResponse<TData>, TError>({
     queryKey,
     queryFn: async () => {
       const session = await getSession();
@@ -104,36 +111,25 @@ export function useAppQueryWithPaginationAndParams<
           )
         : undefined;
 
-      const response = await axiosInstance.get<{
-        count: number;
-        next: string | null;
-        previous: string | null;
-        results: TData[];
-      }>(apiRoute, {
-        ...options,
-        params: queryParams,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      // .catch((error: any) => {
-          
-      //   console.log(error)
+      const response = await axiosInstance.get<PaginatedResponse<TData>>(
+        apiRoute,
+        {
+          ...options,
+          params: queryParams,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      //   if (error) {
-      //     showErrorToast(`${error?.message}`);
-      //   }
-
-      //   if (error?.status === 403 || error?.status === 401) {
-      //     showErrorToast(error?.response?.data?.detail);
-
-      //     router.push(CLIENT_ROUTES.PublicPages.auth.login);
-      //     query.clear();
-      //   }
-      // });
+      if (!response?.data) {
+        throw new Error(
+          'No data received from server. It may be network issue'
+        );
+      }
 
       return (
-        response?.data ?? {
+        response.data ?? {
           count: 0,
           next: null,
           previous: null,
@@ -144,18 +140,20 @@ export function useAppQueryWithPaginationAndParams<
     retry: 3,
     staleTime: 1000 * 60 * 5,
   });
+
+  return useErrorHandling(() => query)();
 }
 
 export function useAppMutation<
   TData = unknown,
-  TError = unknown,
+  TError = AxiosError,
   TVariables = unknown,
 >(
   config: MutationConfig<TVariables, TData>
-): UseMutationResult<TData, TError, TVariables> {
+): UseMutationResult<NonNullable<TData>, TError, TVariables> {
   const { apiRoute, method, body, options } = config;
 
-  return useMutation({
+  const mutation = useMutation<NonNullable<TData>, TError, TVariables>({
     mutationFn: async (variables: TVariables) => {
       const session = await getSession();
       const token = session?.user?.accessToken ?? '';
@@ -169,8 +167,17 @@ export function useAppMutation<
           Authorization: `Bearer ${token}`,
         },
       });
-      return response?.data;
+
+      if (!response?.data) {
+        throw new Error(
+          'No data received from server. It may be network issue'
+        );
+      }
+
+      return response.data as NonNullable<TData>;
     },
-    retry: 0, // Only try once
+    retry: 0,
   });
+
+  return useErrorHandling(() => mutation)();
 }
