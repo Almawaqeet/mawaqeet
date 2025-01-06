@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { FiFacebook } from 'react-icons/fi';
 import { BsTwitterX } from 'react-icons/bs';
-import { IoLogoInstagram } from 'react-icons/io5';
+import { IoLogoInstagram, IoLogoYoutube } from 'react-icons/io5';
 import { FaSquareWhatsapp } from 'react-icons/fa6';
 import Image from 'next/image';
 
@@ -100,6 +100,7 @@ const Footer: React.FC = () => {
           <div className="flex gap-6 items-center">
             <Link
               href="https://www.facebook.com/people/Al-mawaqeet-Tour/61570372806546/"
+              target='_blank'
               className="text-gray-200 hover:text-white transition-colors"
               aria-label="Visit our Facebook page"
             >
@@ -107,6 +108,7 @@ const Footer: React.FC = () => {
             </Link>
             <Link
               href="https://x.com/AlMawaqeet41790"
+               target='_blank'
               className="text-gray-200 hover:text-white transition-colors"
               aria-label="Visit our Twitter page"
             >
@@ -114,6 +116,7 @@ const Footer: React.FC = () => {
             </Link>
             <Link
               href="https://www.instagram.com/almawaqeetcompany254/"
+               target='_blank'
               className="text-gray-200 hover:text-white transition-colors"
               aria-label="Visit our Instagram page"
             >
@@ -121,10 +124,20 @@ const Footer: React.FC = () => {
             </Link>
             <Link
               href="https://www.linkedin.com/company/almawaqeet"
+               target='_blank'
               className="text-gray-200 hover:text-white transition-colors"
               aria-label="Visit our LinkedIn page"
             >
               <IoLogoLinkedin className="w-6 h-6" />
+            </Link>
+
+            <Link
+              href="https://www.youtube.com/@Al-mawaqeetTravelsandTours"
+               target='_blank'
+              className="text-gray-200 hover:text-white transition-colors"
+              aria-label="Visit our Youtube page"
+            >
+              <IoLogoYoutube className="w-6 h-6" />
             </Link>
           </div>
         </div>
