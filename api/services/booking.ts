@@ -34,7 +34,7 @@ export const useGetUserBookings = () => {
 
 export const useGetBookingInformation = (id: string) => {
   const baseQueryKey = generateBaseQueryKeyFromRoute(
-    routes.bookings.viewUserBookings
+    routes.bookings.viewAndEditBooking(id)
   );
   return useAppQuery<BookingInformationResponse>({
     apiRoute: routes.bookings.viewAndEditBooking(id),

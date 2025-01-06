@@ -63,7 +63,7 @@ const PackageSection = () => {
     [updateSearchParams]
   );
 
-  const { data: packages, isLoading, error, isError } = useGetAllActivePackages({
+  const { data: packages, isLoading } = useGetAllActivePackages({
 
     package_type: activeTab,
     search: searchTerm.trim() || undefined,
@@ -128,8 +128,6 @@ const PackageSection = () => {
         </div>
 
         {/* Package grid */}
-
-        {isError && <div>error</div>}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {isLoading ? (
             <>

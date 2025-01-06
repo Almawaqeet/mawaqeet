@@ -27,7 +27,7 @@ const Logo = () => (
     >
       <Image
         src={'/images/logo.png'}
-        className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 bg-white"
+        className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7"
         alt="Brand Logo"
         width={28}
         height={28}

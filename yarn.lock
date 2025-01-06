@@ -4745,8 +4745,6 @@ matchmediaquery@^0.4.2:
   integrity sha512-wrZpoT50ehYOudhDjt/YvUJc6eUzcdFPdmbizfgvswCKNHD1/OBOHYJpHie+HXpu6bSkEGieFMYk6VuutaiRfA==
   dependencies:
     css-mediaquery "^0.1.2"
-
-mawaqeet@./:
   version "0.1.0"
   dependencies:
     "@dnd-kit/core" "^6.1.0"
