@@ -3,6 +3,7 @@ import {
   useMutation,
   UseQueryResult,
   UseMutationResult,
+  QueryClient,
 } from '@tanstack/react-query';
 import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 import { getSession } from 'next-auth/react';
@@ -45,6 +46,7 @@ const axiosInstance = axios.create({
   },
 });
 
+
 export function useAppQuery<
   TData = unknown,
   TError = AxiosError,
@@ -57,7 +59,6 @@ export function useAppQuery<
     queryFn: async () => {
       const session = await getSession();
       const token = session?.user?.accessToken ?? '';
-
       const response = await axiosInstance.get<TData>(apiRoute, {
         ...options,
         headers: {
@@ -73,6 +74,7 @@ export function useAppQuery<
 
       return response.data;
     },
+
     retry: 3,
     staleTime: 1000 * 60 * 5, // Cache for 5 minutes
     enabled: options?.enabled !== false, // Allow enabled option
