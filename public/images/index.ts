@@ -13,6 +13,7 @@ import appsupport from './appsupport.png';
 import admission from './admission.png';
 import ziyarah from './hajj.png';
 import welcome from './welcome.png'
+import leadconsultantalmawaqeet from './leadconsultantalmawaqeet.png'
 export {
   icon_1,
   icon_2,
@@ -28,5 +29,6 @@ export {
   ziyarah,
   vector,
   people,
-  welcome
+  welcome,
+  leadconsultantalmawaqeet
 };

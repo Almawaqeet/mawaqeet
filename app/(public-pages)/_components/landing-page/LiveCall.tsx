@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { IoMdCall } from 'react-icons/io';
 import { IoLogoWhatsapp } from 'react-icons/io5';
 import { IoMdMail } from 'react-icons/io';
+import {leadconsultantalmawaqeet } from '@/public/images';
 
 const LiveCall = () => {
   return (
@@ -26,9 +27,9 @@ const LiveCall = () => {
         </p>
 
         <div className="flex flex-col items-center">
-          <div className="w-32 h-32 rounded-full overflow-hidden mb-4">
+          <div className="w-44 h-44 rounded-full overflow-hidden mb-4 bg-brand-color-white">
             <Image
-              src="https://img.freepik.com/premium-photo/smiling-muslim-man-wearing-kufi_856987-707.jpg"
+              src={leadconsultantalmawaqeet}
               alt="Lead Consultant"
               className="w-full h-full object-cover rounded-full"
               width={100}
@@ -42,7 +43,7 @@ const LiveCall = () => {
           </h3>
 
           <p className="text-brand-color-text text-center mb-6">
-            Lead consultant, Amwakweet
+            Lead consultant, Almwakweet
           </p>
 
           <div className="flex gap-4">
@@ -54,10 +55,14 @@ const LiveCall = () => {
                 aria-label={`Contact via ${option}`}
               >
                 {option === 'phone' && (
+                  <a href='tel:+234 807 445 6704'>
                   <IoMdCall className="w-6 h-6 text-brand-color-subtle" />
+                  </a>
                 )}
                 {option === 'whatsapp' && (
+                  <a href="https://wa.me/2348074456704" target="_blank" rel="noopener noreferrer">
                   <IoLogoWhatsapp className="w-6 h-6 text-brand-color-subtle" />
+                  </a>
                 )}
                 {option === 'email' && (
                   <IoMdMail className="w-6 h-6 text-brand-color-subtle" />
