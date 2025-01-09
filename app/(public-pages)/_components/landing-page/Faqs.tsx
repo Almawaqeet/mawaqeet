@@ -49,7 +49,7 @@ const Faqs = () => {
   };
 
   return (
-    <section className={`${whiteSpaces.paddingX} py-16 md:py-24 bg-gray-50`}>
+    <section className={`${whiteSpaces.paddingX} py-16 md:py-24 bg-gray-50`} id='faqs'>
       <motion.div
         initial="hidden"
         whileInView="visible"

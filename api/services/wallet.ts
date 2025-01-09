@@ -13,8 +13,8 @@ import {
   VerifyWalletAccountNumberResponse,
   VerifyWalletAccountNumberRequest,
   VerifyWalletAccountNumberErrorResponse,
-  WalletTransactionResponse,
   CustomApiResponse,
+  WalletTransactionResponse,
 } from '@/api/types';
 
 export const useCheckIfUserHasAWallet = () => {
