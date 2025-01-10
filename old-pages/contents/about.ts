@@ -6,6 +6,7 @@ import team4 from '@/public/images/team_4.png';
 import Maruf from '@/public/images/Rectangle1.png';
 import Kutubi from '@/public/images/Rectangle3.png';
 import Ramadan from '@/public/images/Rectangle2.png';
+import { leadconsultantalmawaqeet } from '@/public/images';
 
 interface AboutHero {
   id: string;
@@ -124,8 +125,8 @@ export const about_us_team: AboutUsTeam[] = [
   {
     id: 'operations-manager',
     company: ' Al-Mawaqeet Travels and Tours',
-    image: team3,
-    imageProfile: Ramadan,
+    image: leadconsultantalmawaqeet,
+    imageProfile: leadconsultantalmawaqeet,
     fullname: ' Arch. Amodu Sheriff Adekola',
     post: 'Operations Manager',
     personality: 'Architect, BSc and MSc from OAU',
