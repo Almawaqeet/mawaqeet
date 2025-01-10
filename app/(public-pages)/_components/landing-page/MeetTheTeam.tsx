@@ -29,8 +29,8 @@ export default function MeetTheTeam() {
 
   const team = [
     {
-      name: 'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi(Ameerul-Hajj).',
-      role: 'Chief Executive Officer and Managing Director, Al-Mawaqeet Travels and Tours',
+      name: 'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi.',
+      role: 'Ameerul-Hajj',
       video:
         'https://utfs.io/f/iywkFYKVsyRUWtcoj8ZG2a5m6p9AMqPUzI4OujgdSQlcoXnB',
       thumbnail: '/images/ceo.png',
@@ -39,8 +39,8 @@ export default function MeetTheTeam() {
         'Led over 1000+ successful pilgrimages, certified Hajj guide, fluent in Arabic and English',
     },
     {
-      name: "Shaykh Abdullah Ma'ruf Oyelekan(Baba-n-madeenah)",
-      role: 'Chief Managing Director Al-Mawaqeet Travels and Tours',
+      name: "Shaykh Abdullah Ma'ruf Oyelekan.",
+      role: 'Baba-n-madeenah',
       video:
         'https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L',
       thumbnail: '/images/welcome.png',

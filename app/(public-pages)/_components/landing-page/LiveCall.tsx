@@ -39,7 +39,7 @@ const LiveCall = () => {
           </div>
 
           <h3 className="text-xl font-semibold mb-1">
-            Dr. Abdulrahman Abdulilahi
+          Arch. Amodu Sheriff Adekola
           </h3>
 
           <p className="text-brand-color-text text-center mb-6">
