@@ -64,7 +64,6 @@ const PackageSection = () => {
   );
 
   const { data: packages, isLoading } = useGetAllActivePackages({
-
     package_type: activeTab,
     search: searchTerm.trim() || undefined,
   });

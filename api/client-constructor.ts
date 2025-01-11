@@ -46,7 +46,6 @@ const axiosInstance = axios.create({
   },
 });
 
-
 export function useAppQuery<
   TData = unknown,
   TError = AxiosError,

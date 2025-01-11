@@ -30,7 +30,6 @@ import { useCheckPackageSettlementStatus } from '@/api/services/packages';
 import { useAppToast } from '@/components/reusables/AppToast';
 import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
 
-
 const validationSchema = Yup.object({
   hotelName: Yup.string().required('Hotel name is required'),
   hotelAddress: Yup.string().required('Hotel address is required'),

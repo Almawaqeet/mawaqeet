@@ -20,9 +20,7 @@ interface NavItem {
 // Logo Component
 const Logo = () => (
   <Link href="/">
-    <div
-      className="flex gap-2 mobile:gap-3 items-center group relative cursor-pointer xmd:w-full bg-white px-3 py-1 rounded-lg shadow-md whitespace-nowrap"
-    >
+    <div className="flex gap-2 mobile:gap-3 items-center group relative cursor-pointer xmd:w-full bg-white px-3 py-1 rounded-lg shadow-md whitespace-nowrap">
       <Image
         src={'/images/logo.png'}
         className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7"
@@ -54,10 +52,11 @@ const DesktopNavLinks = ({
       <li
         key={item.id}
         onClick={() => setActiveItem(item.id)}
-        className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${item.id === activeItem
+        className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${
+          item.id === activeItem
             ? 'text-hover-color font-bold'
             : `text-${brandColors.dark_brown}`
-          }`}
+        }`}
       >
         <Link href={`/${item.id}`}>{item.content}</Link>
       </li>
@@ -120,10 +119,11 @@ const MobileNavMenu = ({
                   setActiveItem(item.id);
                   setIsOpen(false);
                 }}
-                className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${item.id === activeItem
+                className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${
+                  item.id === activeItem
                     ? 'text-hover-color font-bold'
                     : `text-${brandColors.dark_brown}`
-                  }`}
+                }`}
               >
                 <Link href={`/${item.id}`}>{item.content}</Link>
               </motion.li>

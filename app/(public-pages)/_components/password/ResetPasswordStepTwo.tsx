@@ -25,7 +25,7 @@ const otpValidationSchema = Yup.object({
 export default function ResetPasswordStepTwo() {
   const router = useRouter();
   const { showToast } = useAppToast();
-    const [ showPassword, setShowPassword ] = React.useState(false)
+  const [showPassword, setShowPassword] = React.useState(false);
   const email =
     typeof window !== 'undefined'
       ? sessionStorage.getItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL)
