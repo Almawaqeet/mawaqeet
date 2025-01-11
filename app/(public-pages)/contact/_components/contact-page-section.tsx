@@ -147,7 +147,7 @@ export const ContactPageSection = () => {
                           No.3, Agric Area. Along Old Jebba Road, Off Federal Ministry of Agric, Znago Road, Ilorin, Kwara State.
                         </li>
                         <li className='list-disc'>
-                          C1& C3 King's Shopping Mail, Behind Petrocam Filling Station, Old ife Road, Alaki Airport Junction, Ibadan, Oyo State.
+                          C1&amp; C3 King&apos;s Shopping Mail, Behind Petrocam Filling Station, Old ife Road, Alaki Airport Junction, Ibadan, Oyo State.
                         </li>
                       </div>
                     </div>
