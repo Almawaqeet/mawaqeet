@@ -100,7 +100,7 @@ const SingularTeam = ({ id }: { id: string }) => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => router.push(CLIENT_ROUTES.PublicPages.about.parallel)}
-        className="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 px-6 sm:px-8 py-3 sm:py-4 bg-brand-color text-white rounded-full shadow-xl hover:shadow-2xl flex items-center gap-2 sm:gap-3 hover:bg-brand-color/90 transition-all duration-300"
+        className="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 px-6 sm:px-8 py-3 sm:py-4 bg-brand-color text-white rounded-full shadow-xl hover:shadow-2xl flex items-center gap-2 sm:gap-3 hover:bg-brand-color/90 transition-all duration-300 z-50"
       >
         <FaArrowLeft className="text-lg sm:text-xl" />
         <span className="font-semibold text-base sm:text-lg">Back to Team</span>

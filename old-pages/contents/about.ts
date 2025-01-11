@@ -108,7 +108,6 @@ export const about_us_team: AboutUsTeam[] = [
     imageProfile: Ramadan,
     fullname: 'Shaykh Abdullah Zahradeen Abū Ramadan',
     post: 'Chief Operating Officer',
-    // personality: 'Architect, BSc and MSc from OAU',
     view_profile: 'View Profile',
     profile: [
       {
