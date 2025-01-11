@@ -43,7 +43,7 @@ const LiveCall = () => {
           </h3>
 
           <p className="text-brand-color-text text-center mb-6">
-            Lead consultant, Almwakweet
+            Lead consultant, Almawakweet
           </p>
 
           <div className="flex gap-4">

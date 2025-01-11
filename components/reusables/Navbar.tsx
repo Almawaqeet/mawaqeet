@@ -20,10 +20,8 @@ interface NavItem {
 // Logo Component
 const Logo = () => (
   <Link href="/">
-    <motion.div
-      className="flex gap-2 mobile:gap-3 tab_md:gap-[4px] items-center group relative cursor-pointer"
-      whileHover={{ scale: 1.05 }}
-      transition={{ type: 'spring', stiffness: 300 }}
+    <div
+      className="flex gap-2 mobile:gap-3 items-center group relative cursor-pointer xmd:w-full bg-white px-3 py-1 rounded-lg shadow-md whitespace-nowrap"
     >
       <Image
         src={'/images/logo.png'}
@@ -32,16 +30,10 @@ const Logo = () => (
         width={28}
         height={28}
       />
-      <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 0, x: -20 }}
-        whileHover={{ opacity: 1, x: 0 }}
-        className="hidden lg:group-hover:block absolute left-full ml-2 bg-white px-3 py-1 rounded-lg shadow-md whitespace-nowrap"
-        transition={{ duration: 0.02, ease: 'easeOut' }}
-      >
-        Al-Mawaqeet Travels and Tours
-      </motion.div>
-    </motion.div>
+      <div className="tab_md:hidden xmd:relative tab_md:group-hover:block transition-all">
+        Al-Mawaqeet
+      </div>
+    </div>
   </Link>
 );
 
@@ -62,11 +54,10 @@ const DesktopNavLinks = ({
       <li
         key={item.id}
         onClick={() => setActiveItem(item.id)}
-        className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${
-          item.id === activeItem
+        className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${item.id === activeItem
             ? 'text-hover-color font-bold'
             : `text-${brandColors.dark_brown}`
-        }`}
+          }`}
       >
         <Link href={`/${item.id}`}>{item.content}</Link>
       </li>
@@ -129,11 +120,10 @@ const MobileNavMenu = ({
                   setActiveItem(item.id);
                   setIsOpen(false);
                 }}
-                className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${
-                  item.id === activeItem
+                className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${item.id === activeItem
                     ? 'text-hover-color font-bold'
                     : `text-${brandColors.dark_brown}`
-                }`}
+                  }`}
               >
                 <Link href={`/${item.id}`}>{item.content}</Link>
               </motion.li>
