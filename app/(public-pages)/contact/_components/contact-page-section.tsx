@@ -10,6 +10,10 @@ import {
   FaBuilding,
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
+import { FaBoxOpen } from 'react-icons/fa6';
+import Link from 'next/link';
+import { IoLogoLinkedin, IoLogoYoutube } from 'react-icons/io5';
 
 export const ContactPageSection = () => {
   const containerVariants = {
@@ -47,8 +51,8 @@ export const ContactPageSection = () => {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={containerVariants}>
-      <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <div className="max-w-lg mx-auto md:max-w-none md:grid md:grid-cols-2 md:gap-8">
+      <div className={`max-w-7xl mx-auto ${whiteSpaces.paddingX} w-full mb-8`}>
+        <div className="max-w-lg mx-auto md:max-w-none md:grid md:grid-cols-2 md:gap-10">
           <motion.div variants={itemVariants}>
             <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight">
               Get in touch
@@ -57,7 +61,7 @@ export const ContactPageSection = () => {
               Have questions about our services? We&apos;re here to help. Send
               us a message and we&apos;ll respond as soon as possible.
             </p>
-            <div className="mt-9">
+            <div className="mt-2">
               <motion.div
                 className="flex hover:bg-gray-50 p-4 rounded-lg transition-colors"
                 whileHover={{ x: 10 }}
@@ -70,11 +74,12 @@ export const ContactPageSection = () => {
                 </div>
                 <div className="ml-3 text-base text-gray-500">
                   <p>+234 (091) 15653889</p>
+                  <p>+966 (563) 776239</p>
                   <p className="mt-1">Mon-Fri 8am to 6pm WAT</p>
                 </div>
               </motion.div>
               <motion.div
-                className="mt-6 flex hover:bg-gray-50 p-4 rounded-lg transition-colors"
+                className="mt-2 flex hover:bg-gray-50 p-4 rounded-lg transition-colors"
                 whileHover={{ x: 10 }}
               >
                 <div className="flex-shrink-0">
@@ -84,11 +89,11 @@ export const ContactPageSection = () => {
                   />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
-                  <p>almawaqeettravelsandtours@gmail.com</p>
+                  <p>support@almawaqeet.com</p>
                 </div>
               </motion.div>
               <motion.div
-                className="mt-6 flex hover:bg-gray-50 p-4 rounded-lg transition-colors"
+                className="mt-2 flex hover:bg-gray-50 p-4 rounded-lg transition-colors"
                 whileHover={{ x: 10 }}
               >
                 <div className="flex-shrink-0">
@@ -98,27 +103,56 @@ export const ContactPageSection = () => {
                   />
                 </div>
                 <div className="ml-3 text-base text-gray-500">
-                  {/* <p>MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN</p> */}
                   <p className="mt-1">Oyo State, Nigeria</p>
                 </div>
               </motion.div>
               <motion.div
-                className="mt-6 flex hover:bg-gray-50 p-4 rounded-lg transition-colors"
+                className="mt-2 flex hover:bg-gray-50 p-4 rounded-lg transition-colors"
                 whileHover={{ x: 10 }}
               >
-                <div className="flex-shrink-0">
-                  <FaBuilding
-                    className="h-6 w-6 text-gray-400"
-                    aria-hidden="true"
-                  />
-                </div>
-                <div className="ml-3 text-base text-gray-500">
-                  <p>Main Office</p>
-                  <p>
-                    MAKTABAT DAARILHADITH SHOP NO 20/21 KOLEOSO PLAZA, KOLAWOLE
-                    AREA, SAKI USTADH YUUSUF MURTADAH AL-MUJAHIDUN
-                  </p>
-                  {/* <p className="mt-1">Central Business District</p> */}
+                <div className='flex flex-col gap-4'>
+                  <div className='flex'>
+                    <div className="flex-shrink-0">
+                      <FaBuilding
+                        className="h-6 w-6 text-gray-400"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div className="ml-3 text-base text-gray-500 mb-4">
+                      <p className='text-xl mb-2'>Head Office</p>
+                      <p>
+                        Ansaarus-Sunnah Avenue by Rogunjoye Street, off Lukosi-Simawa,Simawa, Ogun State, Nigeria
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className='flex'>
+                    <div className="flex-shrink-0">
+                      <FaBoxOpen
+                        className="h-6 w-6 text-gray-400"
+                        aria-hidden="true"
+                      />
+                    </div>
+
+                    <div className='ml-3 text-base text-gray-500 mb-4'>
+                      <p className='text-xl mb-2'>Branch Offices</p>
+                      <div className='flex flex-col gap-2'>
+                        <li className='list-disc'>
+                          Ansaarus-Sunnah Avenue by Rogunjoye Street, off Lukosi-Simawa,Simawa, Ogun State, Nigeria.
+                        </li>
+                        <li className='list-disc'>
+                          Khubz Bakery & Grills Along Igbe-Olaja Road, Igbe-Laara last, Ikorodu, Lagos State.
+                        </li>
+                        <li className='list-disc'>
+                          No.3, Agric Area. Along Old Jebba Road, Off Federal Ministry of Agric, Znago Road, Ilorin, Kwara State.
+                        </li>
+                        <li className='list-disc'>
+                          C1& C3 King's Shopping Mail, Behind Petrocam Filling Station, Old ife Road, Alaki Airport Junction, Ibadan, Oyo State.
+                        </li>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </motion.div>
             </div>
@@ -144,31 +178,90 @@ export const ContactPageSection = () => {
               </h3>
               <div className="mt-4 flex space-x-6">
                 <motion.a
-                  href="#"
+                  href="https://www.facebook.com/people/Al-mawaqeet-Tour/61570372806546/"
                   className="text-gray-400 hover:text-gray-500"
                   variants={socialVariants}
                   whileHover={{ scale: 1.2 }}
                 >
                   <span className="sr-only">Facebook</span>
-                  <FaFacebookF className="h-6 w-6" />
+                  <Link
+                    href="https://www.facebook.com/people/Al-mawaqeet-Tour/61570372806546/"
+                    target='_blank'
+                    className="text-gray-200 hover:text-white transition-colors"
+                    aria-label="Visit our Facebook page"
+                  >
+                    <FaFacebookF  className="h-6 w-6 text-gray-400"
+                    aria-hidden="true" />
+                  </Link>
                 </motion.a>
                 <motion.a
-                  href="#"
+                  href="https://www.instagram.com/almawaqeetcompany254/"
                   className="text-gray-400 hover:text-gray-500"
                   variants={socialVariants}
                   whileHover={{ scale: 1.2 }}
                 >
                   <span className="sr-only">Instagram</span>
-                  <FaInstagram className="h-6 w-6" />
+                  <Link
+                    href="https://www.instagram.com/almawaqeetcompany254/"
+                    target='_blank'
+                    className="text-gray-200 hover:text-white transition-colors"
+                    aria-label="Visit our Instagram page"
+                  >
+                    <FaInstagram  className="h-6 w-6 text-gray-400"
+                    aria-hidden="true" />
+                  </Link>
                 </motion.a>
                 <motion.a
-                  href="#"
+                 href="https://x.com/AlMawaqeet41790"
                   className="text-gray-400 hover:text-gray-500"
                   variants={socialVariants}
                   whileHover={{ scale: 1.2 }}
                 >
                   <span className="sr-only">Twitter</span>
-                  <FaTwitter className="h-6 w-6" />
+                  <Link
+                    href="https://x.com/AlMawaqeet41790"
+                    target='_blank'
+                    className="text-gray-200 hover:text-white transition-colors"
+                    aria-label="Visit our Twitter page"
+                  >
+                    <FaTwitter className="h-6 w-6 text-gray-400"
+                    aria-hidden="true" />
+                  </Link>
+                </motion.a>
+
+                <motion.a
+                  href="https://www.linkedin.com/company/almawaqeet"
+                  className="text-gray-400 hover:text-gray-500"
+                  variants={socialVariants}
+                  whileHover={{ scale: 1.2 }}
+                >
+                  <span className="sr-only">LinkedIn</span>
+                  <Link
+                    href="https://www.linkedin.com/company/almawaqeet"
+                    target='_blank'
+                    className="text-gray-200 hover:text-white transition-colors"
+                    aria-label="Visit our Twitter page"
+                  >
+                     <IoLogoLinkedin className="h-6 w-6 text-gray-400"
+                    aria-hidden="true" />
+                  </Link>
+                </motion.a>
+                <motion.a
+                  href="https://www.youtube.com/@Al-mawaqeetTravelsandTours"
+                  className="text-gray-400 hover:text-gray-500"
+                  variants={socialVariants}
+                  whileHover={{ scale: 1.2 }}
+                >
+                  <span className="sr-only">Youtube</span>
+                  <Link
+                    href="https://www.youtube.com/@Al-mawaqeetTravelsandTours"
+                    target='_blank'
+                    className="text-gray-200 hover:text-white transition-colors"
+                    aria-label="Visit our Twitter page"
+                  >
+                    <IoLogoYoutube className="h-6 w-6 text-gray-400"
+                    aria-hidden="true" />
+                  </Link>
                 </motion.a>
               </div>
             </div>
