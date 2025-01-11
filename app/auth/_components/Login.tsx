@@ -17,7 +17,7 @@ import { useSession } from 'next-auth/react';
 const Login = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [ showPassword, setShowPassword ] = React.useState(false)
+  const [showPassword, setShowPassword] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const { data: session, status } = useSession();
 
@@ -25,7 +25,7 @@ const Login = () => {
     if (status === 'authenticated' && session?.user?.accountType) {
       handleLoginRedirect();
     }
-  }, [session, status, ]);
+  }, [session, status]);
 
   const handleLoginRedirect = () => {
     if (!session?.user?.accountType) return;
@@ -131,7 +131,13 @@ const Login = () => {
                 label="Password"
                 type={showPassword ? `text` : `password`}
                 placeholder="Password"
-                icon={showPassword ? <IoEyeOffOutline onClick={() => setShowPassword(false)} /> : <IoEyeOutline onClick={() => setShowPassword(true)} />}
+                icon={
+                  showPassword ? (
+                    <IoEyeOffOutline onClick={() => setShowPassword(false)} />
+                  ) : (
+                    <IoEyeOutline onClick={() => setShowPassword(true)} />
+                  )
+                }
                 required
                 name="password"
                 value={formik.values.password}

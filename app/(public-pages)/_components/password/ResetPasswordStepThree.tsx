@@ -33,8 +33,8 @@ export default function ResetPasswordStepThree() {
   const { showToast } = useAppToast();
   const { mutate: changePassword, isPending: isChangingPassword } =
     useChangePassword();
-const [ showPassword, setShowPassword ] = React.useState(false)
-const [ showConfirmPassword, setShowConfirmPassword ] = React.useState(false)
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const email = sessionStorage.getItem(SESSION_STORAGE_KEYS.ACTIVE_EMAIL);
@@ -154,7 +154,13 @@ const [ showConfirmPassword, setShowConfirmPassword ] = React.useState(false)
                 placeholder="Enter new password"
                 onChange={passwordFormik.handleChange}
                 onBlur={passwordFormik.handleBlur}
-                icon={showPassword ? <IoEyeOffOutline onClick={() => setShowPassword(false)} /> : <IoEyeOutline onClick={() => setShowPassword(true)} />}
+                icon={
+                  showPassword ? (
+                    <IoEyeOffOutline onClick={() => setShowPassword(false)} />
+                  ) : (
+                    <IoEyeOutline onClick={() => setShowPassword(true)} />
+                  )
+                }
                 value={passwordFormik.values.password}
                 required
               />
@@ -173,7 +179,15 @@ const [ showConfirmPassword, setShowConfirmPassword ] = React.useState(false)
                 placeholder="Confirm new password"
                 onChange={passwordFormik.handleChange}
                 onBlur={passwordFormik.handleBlur}
-                icon={showConfirmPassword ? <IoEyeOffOutline onClick={() => setShowPassword(false)} /> : <IoEyeOutline onClick={() => setShowConfirmPassword(true)} />}
+                icon={
+                  showConfirmPassword ? (
+                    <IoEyeOffOutline onClick={() => setShowPassword(false)} />
+                  ) : (
+                    <IoEyeOutline
+                      onClick={() => setShowConfirmPassword(true)}
+                    />
+                  )
+                }
                 value={passwordFormik.values.confirmPassword}
                 required
               />

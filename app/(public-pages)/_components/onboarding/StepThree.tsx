@@ -86,7 +86,6 @@ const StepThreeOnboarding = () => {
       { onboarding_id: parseInt(onboardingId ?? '0') },
       {
         onSuccess: (data) => {
-          
           if (
             data?.data?.reference &&
             data?.data?.authorization_url &&
@@ -108,7 +107,6 @@ const StepThreeOnboarding = () => {
           }
         },
         onError: (error: any) => {
-          
           const errorMessage =
             error?.response?.data?.message ||
             error?.message ||

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { IoMdCall } from 'react-icons/io';
 import { IoLogoWhatsapp } from 'react-icons/io5';
 import { IoMdMail } from 'react-icons/io';
-import {leadconsultantalmawaqeet } from '@/public/images';
+import { leadconsultantalmawaqeet } from '@/public/images';
 
 const LiveCall = () => {
   return (
@@ -39,7 +39,7 @@ const LiveCall = () => {
           </div>
 
           <h3 className="text-xl font-semibold mb-1">
-          Arch. Amodu Sheriff Adekola
+            Arch. Amodu Sheriff Adekola
           </h3>
 
           <p className="text-brand-color-text text-center mb-6">
@@ -55,13 +55,17 @@ const LiveCall = () => {
                 aria-label={`Contact via ${option}`}
               >
                 {option === 'phone' && (
-                  <a href='tel:+234 807 445 6704'>
-                  <IoMdCall className="w-6 h-6 text-brand-color-subtle" />
+                  <a href="tel:+234 807 445 6704">
+                    <IoMdCall className="w-6 h-6 text-brand-color-subtle" />
                   </a>
                 )}
                 {option === 'whatsapp' && (
-                  <a href="https://wa.me/2348074456704" target="_blank" rel="noopener noreferrer">
-                  <IoLogoWhatsapp className="w-6 h-6 text-brand-color-subtle" />
+                  <a
+                    href="https://wa.me/2348074456704"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <IoLogoWhatsapp className="w-6 h-6 text-brand-color-subtle" />
                   </a>
                 )}
                 {option === 'email' && (
