@@ -139,10 +139,6 @@ export const ContactPageSection = () => {
                       <p className="text-xl mb-2">Branch Offices</p>
                       <div className="flex flex-col gap-2">
                         <li className="list-disc">
-                          Ansaarus-Sunnah Avenue by Rogunjoye Street, off
-                          Lukosi-Simawa,Simawa, Ogun State, Nigeria.
-                        </li>
-                        <li className="list-disc">
                           Khubz Bakery & Grills Along Igbe-Olaja Road,
                           Igbe-Laara last, Ikorodu, Lagos State.
                         </li>
