@@ -20,7 +20,7 @@ interface NavItem {
 // Logo Component
 const Logo = () => (
   <Link href="/">
-    <div className="flex gap-2 mobile:gap-3 items-center group relative cursor-pointer xmd:w-full bg-white px-3 py-1 rounded-lg shadow-md whitespace-nowrap">
+    <div className="flex gap-2 mobile:gap-3 items-center group relative cursor-pointer xmd:w-full px-3 py-1 rounded-lg whitespace-nowrap">
       <Image
         src={'/images/logo.png'}
         className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7"
@@ -88,7 +88,7 @@ const MobileNavMenu = ({
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: '100%' }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="fixed z-10 w-full md:w-[80%] bg-white min-h-svh h-screen max-h-[1000px] overflow-y-scroll drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16"
+          className="fixed z-10 w-full md:w-[80%] min-h-svh h-screen max-h-[1000px] overflow-y-scroll drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16"
         >
           <motion.ul
             className="text-fz-xs font-normal gap-6 flex flex-col justify-start items-center relative mt-8 p-6"
