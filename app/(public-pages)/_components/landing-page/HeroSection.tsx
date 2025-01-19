@@ -14,25 +14,6 @@ import { CLIENT_ROUTES } from '@/lib/routes';
 
 export const HeroSection = () => {
   const router = useRouter();
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-    },
-  };
 
   const QuoteCard = () => {
     const verses = [
@@ -61,7 +42,6 @@ export const HeroSection = () => {
 
     return (
       <motion.div
-        variants={itemVariants}
         className="hidden md:flex flex-col md:flex-row items-center gap-2 mb-8 bg-[#D9CBBA] rounded-full p-2 border-[0.2px] border-brand-color-main hover:scale-105 transition-transform duration-300 w-full md:w-[500px] group"
       >
         <div className="flex items-center gap-2 bg-[#F2F2F2] rounded-full px-4 py-2 w-full md:w-auto">
@@ -91,19 +71,15 @@ export const HeroSection = () => {
   };
 
   return (
-    <motion.section
+    <section
       className={`w-full max-w-[6000px] m-auto ${whiteSpaces?.paddingX} py-2 sm:py-4 md:py-[60px] flex  justify-center`}
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
     >
-      <motion.div
+      <div
         className="flex flex-col items-start sm:items-center text-left sm:text-center w-full max-w-[800px]"
-        variants={containerVariants}
       >
         <QuoteCard />
 
-        <motion.div variants={itemVariants} className="w-full">
+        <div className="w-full">
           <AppHeading
             variant="h1"
             align="left"
@@ -112,19 +88,17 @@ export const HeroSection = () => {
             We offer flexible payment plans for Hajj and Umrah tours, with great
             support at every step of your pilgrimage.
           </AppHeading>
-        </motion.div>
+        </div>
 
-        <motion.p
-          variants={itemVariants}
+        <p
           className="text-base sm:text-lg text-brand-color-text mb-8 sm:mb-12 max-w-[700px] px-2 text-left sm:text-center"
         >
           Start your holy journey with us today. We make it easy - pay all at
           once or in smaller payments. Our team will help you every step of the
           way, from planning to completing your pilgrimage.
-        </motion.p>
+        </p>
 
-        <motion.div
-          variants={itemVariants}
+        <div
           className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-6 sm:mb-8 w-full sm:w-auto px-4"
         >
           <AppButton
@@ -148,17 +122,16 @@ export const HeroSection = () => {
           >
             Learn more
           </AppButton>
-        </motion.div>
-        <motion.div
-          variants={itemVariants}
+        </div>
+        <div
           className="flex items-center justify-center gap-2 sm:justify-center w-full"
         >
           <FaCreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-brand-color" />
           <p className="text-xs font-semibold sm:text-sm text-brand-color text-center">
             Cancel payments anytime!
           </p>
-        </motion.div>
-      </motion.div>
-    </motion.section>
+        </div>
+      </div>
+    </section>
   );
 };
