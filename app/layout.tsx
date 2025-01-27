@@ -80,7 +80,7 @@ export default function RootLayout({
           <ReactQueryProvider>
             <ErrorProvider error={null}>
               <NuqsAdapter>
-                <NextTopLoader showSpinner={false} color="#4B3938" />
+                <NextTopLoader showSpinner={false} color="#ffffff"  />
                 <Toaster />
                 <div className="max-w-screen-2xl mx-auto bg-[#F1EBE5] text-brand-color suppressHydrationWarning={true}">
                   {children}

@@ -75,7 +75,7 @@ const PackageSection = () => {
   }, [packages?.results]);
 
   return (
-    <section className={`w-full ${whiteSpaces?.paddingX ?? ''} py-16`}>
+    <section className={`w-full ${whiteSpaces?.paddingX ?? ''} pb-16 pt-20`}>
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center mb-12">
           <AppHeading

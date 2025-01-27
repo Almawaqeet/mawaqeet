@@ -6,14 +6,17 @@ import vector from './Vector.png';
 import people from './people.png';
 import thumbnail from './thumbnail.png';
 import identify from './identify.png';
-import culture from './culture.png';
-import preparation from './preparation.png';
+import culture from './local-culture.jpg';
+import preparation from './seminar.jpg';
 import university from './university.png';
-import appsupport from './appsupport.png';
+import diet from './diet-pic.jpg';
 import admission from './admission.png';
 import ziyarah from './hajj.png';
 import welcome from './welcome.png';
 import leadconsultantalmawaqeet from './leadconsultantalmawaqeet.png';
+import iataLogo from './iatalogo.jpeg'
+import saudiMinistry from './saudiforeignaffair.png'
+import mawaqeetLogo from './logo.jpg'
 export {
   icon_1,
   icon_2,
@@ -23,8 +26,11 @@ export {
   identify,
   culture,
   preparation,
+  iataLogo, 
+  saudiMinistry,
+  mawaqeetLogo,
   university,
-  appsupport,
+  diet,
   admission,
   ziyarah,
   vector,
