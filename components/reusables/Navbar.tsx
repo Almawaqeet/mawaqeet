@@ -88,7 +88,7 @@ const MobileNavMenu = ({
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: '100%' }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="fixed z-10 w-full md:w-[80%] min-h-svh h-screen max-h-[1000px] overflow-y-scroll drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16"
+          className="fixed z-10 w-full md:w-[80%] min-h-svh h-screen max-h-[1000px] overflow-y-scroll drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16 bg-white"
         >
           <motion.ul
             className="text-fz-xs font-normal gap-6 flex flex-col justify-start items-center relative mt-8 p-6"
