@@ -11,6 +11,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { CLIENT_ROUTES } from '@/lib/routes';
+import { iataLogo, mawaqeetLogo, saudiMinistry } from '@/public/images';
+import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
+import { splitPhoneNumber } from '@/lib/utils';
 
 interface NavItem {
   id: string;
@@ -35,6 +38,56 @@ const Logo = () => (
   </Link>
 );
 
+type NavbarHeaderProps = {
+  companyLogo: string,
+  iataLogo: string,
+  saudiLogo: string,
+  hotLine: string
+}
+
+const NavbarHeader = ({ companyLogo, iataLogo, saudiLogo, hotLine }: NavbarHeaderProps) => {
+
+  return (
+    <section className={`w-full my-auto fixed top-0  bg-brand-color flex justify-between items-center py-2 ${whiteSpaces.paddingX}`}>
+      <div className='flex gap-4 jus'>
+        <Image
+          src={saudiLogo}
+          width={50}
+          height={50}
+          quality={100}
+          className='rounded-full bg-white'
+          alt='saudi-forign-affairs-logo'
+
+        />
+
+        <Image
+          src={companyLogo}
+          width={50}
+          height={50}
+          quality={100}
+          className='rounded-full bg-white'
+          alt='saudi-forign-affairs-logo'
+
+        />
+
+        <Image
+          src={iataLogo}
+          width={50}
+          height={50}
+          quality={100}
+          className='rounded-full bg-white'
+          alt='saudi-forign-affairs-logo'
+
+        />
+      </div>
+      <div>
+        <h1 className='text-white'>{hotLine}</h1>
+      </div>
+
+    </section>
+  )
+}
+
 interface DesktopNavLinksProps {
   navItems: NavItem[];
   activeItem: string;
@@ -52,11 +105,10 @@ const DesktopNavLinks = ({
       <li
         key={item.id}
         onClick={() => setActiveItem(item.id)}
-        className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${
-          item.id === activeItem
-            ? 'text-hover-color font-bold'
-            : `text-${brandColors.dark_brown}`
-        }`}
+        className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${item.id === activeItem
+          ? 'text-hover-color font-bold'
+          : `text-${brandColors.dark_brown}`
+          }`}
       >
         <Link href={`/${item.id}`}>{item.content}</Link>
       </li>
@@ -88,7 +140,7 @@ const MobileNavMenu = ({
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: '100%' }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="fixed z-10 w-full md:w-[80%] min-h-svh h-screen max-h-[1000px] overflow-y-scroll drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-16 bg-white"
+          className="fixed z-10 w-full md:w-[80%] min-h-svh h-screen max-h-[1000px] overflow-y-scroll drop-shadow-white-ash lg:hidden tab_md:hidden right-0 top-20 bg-white"
         >
           <motion.ul
             className="text-fz-xs font-normal gap-6 flex flex-col justify-start items-center relative mt-8 p-6"
@@ -119,11 +171,10 @@ const MobileNavMenu = ({
                   setActiveItem(item.id);
                   setIsOpen(false);
                 }}
-                className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${
-                  item.id === activeItem
-                    ? 'text-hover-color font-bold'
-                    : `text-${brandColors.dark_brown}`
-                }`}
+                className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${item.id === activeItem
+                  ? 'text-hover-color font-bold'
+                  : `text-${brandColors.dark_brown}`
+                  }`}
               >
                 <Link href={`/${item.id}`}>{item.content}</Link>
               </motion.li>
@@ -205,8 +256,14 @@ const Navbar = () => {
     <section
       className={`xmd:max-w-[375px] mobile:max-w-[700px] sm:max-w-[900px] lg:max-w-[2000px] tab_md:max-w-[1500px] m-auto relative z-50`}
     >
+      <NavbarHeader
+      iataLogo={`/images/iataLogo.jpeg`}
+      saudiLogo={`/images/saudiforeignaffair.png`}
+      companyLogo={`/images/logo.jpg`}
+      hotLine={`${splitPhoneNumber(`+2349115653889`)}`}
+       />
       <nav
-        className={`xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed top-0 right-0 w-full z-50`}
+        className={`xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed top-16 right-0 w-full z-50`}
       >
         <ul className="flex justify-between items-center lg:gap-12 md:gap-10 text-navbar-clamp font-normal md:leading-5">
           <Logo />

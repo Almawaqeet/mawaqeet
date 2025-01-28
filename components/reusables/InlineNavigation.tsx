@@ -47,7 +47,7 @@ const InlineNavigation = () => {
         onClick={scrollinToTop}
         className={`fixed bottom-4 sm:bottom-8 right-4 sm:right-8 px-3 sm:px-4 py-3 sm:py-4 bg-brand-color text-white rounded-full shadow-xl hover:shadow-2xl flex items-center gap-2 sm:gap-3 hover:bg-brand-color/90 transition-all duration-300 z-50 ${
           showNavigate
-            ? 'transform translate-y-0'
+            ? 'transform -translate-y-0'
             : 'transform -translate-y-[1000rem] transition-all duration-1000'
         }`}
       >
