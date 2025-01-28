@@ -18,7 +18,8 @@ const SingularTeam = ({ id }: { id: string }) => {
   const { fullname, personality, imageProfile, profile } = teamMember;
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <section className='pt-10'>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header Section */}
       <div className="relative min-h-[40rem] sm:min-h-[20rem] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-transparent z-10" />
@@ -105,6 +106,7 @@ const SingularTeam = ({ id }: { id: string }) => {
         <FaArrowLeft className="text-lg sm:text-xl" />
         <span className="font-semibold text-base sm:text-lg">Back to Team</span>
       </motion.button>
+    </div>
     </section>
   );
 };
