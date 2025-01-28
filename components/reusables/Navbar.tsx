@@ -11,7 +11,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { CLIENT_ROUTES } from '@/lib/routes';
-import { iataLogo, mawaqeetLogo, saudiMinistry } from '@/public/images';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 import { splitPhoneNumber } from '@/lib/utils';
 
@@ -48,8 +47,8 @@ type NavbarHeaderProps = {
 const NavbarHeader = ({ companyLogo, iataLogo, saudiLogo, hotLine }: NavbarHeaderProps) => {
 
   return (
-    <section className={`w-full my-auto fixed top-0  bg-brand-color flex justify-between items-center py-2 ${whiteSpaces.paddingX}`}>
-      <div className='flex gap-4 jus'>
+    <section className={`w-full my-auto fixed top-0  bg-brand-color-main flex sm:flex-row justify-between items-center py-2 xmd:flex-col xmd:gap-2  ${whiteSpaces.paddingX}`}>
+      <div className='flex gap-4'>
         <Image
           src={saudiLogo}
           width={50}
@@ -263,7 +262,7 @@ const Navbar = () => {
       hotLine={`${splitPhoneNumber(`+2349115653889`)}`}
        />
       <nav
-        className={`xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed top-16 right-0 w-full z-50`}
+        className={`xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed sm:top-16 xmd:top-24 right-0 w-full z-50`}
       >
         <ul className="flex justify-between items-center lg:gap-12 md:gap-10 text-navbar-clamp font-normal md:leading-5">
           <Logo />
