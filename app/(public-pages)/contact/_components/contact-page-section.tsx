@@ -51,7 +51,7 @@ export const ContactPageSection = () => {
 
   return (
     <motion.div initial="hidden" animate="visible" variants={containerVariants}>
-      <div className={`max-w-7xl mx-auto ${whiteSpaces.paddingX} w-full py-4`}>
+      <div className={`max-w-7xl mx-auto ${whiteSpaces.paddingX} w-full py-6`}>
         <div className="max-w-lg mx-auto md:max-w-none md:grid md:grid-cols-2 md:gap-10">
           <motion.div variants={itemVariants}>
             <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight">
