@@ -244,7 +244,7 @@ const Navbar = () => {
     >
       {/* <NavbarHeader /> */}
       <nav
-        className={`xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed sm:top-14 xmd:top-[4.5rem] right-0 w-full z-50`}
+        className={`xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed top-0 right-0 w-full z-50`}
       >
         <ul className="flex justify-between items-center lg:gap-12 md:gap-10 text-navbar-clamp font-normal md:leading-5">
           <Logo />
