@@ -37,50 +37,37 @@ const Logo = () => (
   </Link>
 );
 
-type NavbarHeaderProps = {
-  companyLogo: string,
-  iataLogo: string,
-  saudiLogo: string,
-  hotLine: string
-}
-
-const NavbarHeader = ({ companyLogo, iataLogo, saudiLogo, hotLine }: NavbarHeaderProps) => {
+const NavbarHeader = () => {
 
   return (
     <section className={`w-full my-auto fixed top-0  bg-brand-color-main flex sm:flex-row justify-between items-center py-2 xmd:flex-col xmd:gap-2  ${whiteSpaces.paddingX}`}>
       <div className='flex gap-4'>
         <Image
-          src={saudiLogo}
-          width={50}
-          height={50}
-          quality={100}
-          className='rounded-full bg-white'
-          alt='saudi-forign-affairs-logo'
-
+          src={`/images/saudiforeignaffair.png`}
+          className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 rounded-full bg-white"
+          alt="saudilogo"
+          width={28}
+          height={28}
         />
 
         <Image
-          src={companyLogo}
-          width={50}
-          height={50}
-          quality={100}
-          className='rounded-full bg-white'
-          alt='saudi-forign-affairs-logo'
-
+          src={`/images/logo.jpg`}
+          className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 rounded-full"
+          alt="Brand Logo"
+          width={28}
+          height={28}
         />
 
         <Image
-          src={iataLogo}
-          width={50}
-          height={50}
-          quality={100}
-          className='rounded-full bg-white'
-          alt='saudi-forign-affairs-logo'
-
+          src={`/images/iataLogo.jpeg`}
+          className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 rounded-full"
+          alt="iatalogo"
+          width={28}
+          height={28}
         />
       </div>
       <div>
-        <h1 className='text-white'>{hotLine}</h1>
+        <h1 className='text-white'>{splitPhoneNumber(`+2349115653889`)}</h1>
       </div>
 
     </section>
@@ -255,14 +242,9 @@ const Navbar = () => {
     <section
       className={`xmd:max-w-[375px] mobile:max-w-[700px] sm:max-w-[900px] lg:max-w-[2000px] tab_md:max-w-[1500px] m-auto relative z-50`}
     >
-      <NavbarHeader
-      iataLogo={`/images/iataLogo.jpeg`}
-      saudiLogo={`/images/saudiforeignaffair.png`}
-      companyLogo={`/images/logo.jpg`}
-      hotLine={`${splitPhoneNumber(`+2349115653889`)}`}
-       />
+      <NavbarHeader />
       <nav
-        className={`xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed sm:top-16 xmd:top-24 right-0 w-full z-50`}
+        className={`xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed sm:top-14 xmd:top-[4.5rem] right-0 w-full z-50`}
       >
         <ul className="flex justify-between items-center lg:gap-12 md:gap-10 text-navbar-clamp font-normal md:leading-5">
           <Logo />
