@@ -41,7 +41,7 @@ export const HeroSection = () => {
     }, [verses.length]);
 
     return (
-      <motion.div className="hidden md:flex flex-col md:flex-row items-center gap-2 mb-8 bg-[#D9CBBA] rounded-full p-2 border-[0.2px] border-brand-color-main hover:scale-105 transition-transform duration-300 w-full md:w-[500px] group">
+      <motion.div className="hidden md:flex flex-col md:flex-row items-center gap-2 xmd:mb-8 sm:mb-4 bg-[#D9CBBA] rounded-full p-2 border-[0.2px] border-brand-color-main hover:scale-105 transition-transform duration-300 w-full md:w-[500px] group">
         <div className="flex items-center gap-2 bg-[#F2F2F2] rounded-full px-4 py-2 w-full md:w-auto">
           <PiBookOpenThin className="w-4 h-4 md:w-5 md:h-5 text-[#875929]" />
           <span className="text-xs md:text-sm text-[#875929] font-medium">
