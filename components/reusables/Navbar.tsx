@@ -42,7 +42,7 @@ const NavbarHeader = () => {
   return (
     <section className={`w-full my-auto fixed top-0  bg-brand-color-main flex sm:flex-row justify-between items-center py-2 xmd:flex-col xmd:gap-2  ${whiteSpaces.paddingX}`}>
       <div className='flex gap-4'>
-        <Image
+        <img
           src={`/images/saudiforeignaffair.png`}
           className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 rounded-full bg-white"
           alt="saudilogo"
@@ -50,7 +50,7 @@ const NavbarHeader = () => {
           height={28}
         />
 
-        <Image
+        <img
           src={`/images/logo.jpg`}
           className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 rounded-full"
           alt="Brand Logo"
@@ -58,12 +58,13 @@ const NavbarHeader = () => {
           height={28}
         />
 
-        <Image
+        <img
           src={`/images/iataLogo.jpeg`}
           className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 rounded-full"
           alt="iatalogo"
           width={28}
           height={28}
+          
         />
       </div>
       <div>
