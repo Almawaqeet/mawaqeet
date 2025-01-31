@@ -123,10 +123,9 @@ export const HeroSection = () => {
           </p>
         </div>
 
-
-      <div className="w-full mt-12">
-        <Partners />
-      </div>
+        <div className="w-full mt-12">
+          <Partners />
+        </div>
       </div>
     </section>
   );

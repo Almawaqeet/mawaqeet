@@ -37,7 +37,6 @@ const Logo = () => (
   </Link>
 );
 
-
 interface DesktopNavLinksProps {
   navItems: NavItem[];
   activeItem: string;
@@ -55,10 +54,11 @@ const DesktopNavLinks = ({
       <li
         key={item.id}
         onClick={() => setActiveItem(item.id)}
-        className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${item.id === activeItem
-          ? 'text-hover-color font-bold'
-          : `text-${brandColors.dark_brown}`
-          }`}
+        className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${
+          item.id === activeItem
+            ? 'text-hover-color font-bold'
+            : `text-${brandColors.dark_brown}`
+        }`}
       >
         <Link href={`/${item.id}`}>{item.content}</Link>
       </li>
@@ -121,10 +121,11 @@ const MobileNavMenu = ({
                   setActiveItem(item.id);
                   setIsOpen(false);
                 }}
-                className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${item.id === activeItem
-                  ? 'text-hover-color font-bold'
-                  : `text-${brandColors.dark_brown}`
-                  }`}
+                className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${
+                  item.id === activeItem
+                    ? 'text-hover-color font-bold'
+                    : `text-${brandColors.dark_brown}`
+                }`}
               >
                 <Link href={`/${item.id}`}>{item.content}</Link>
               </motion.li>

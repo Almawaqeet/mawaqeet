@@ -120,7 +120,7 @@ export const segregatePackageByItsPriceCategory = (
 
       return pkg.price.map((priceItem) => {
         const categoryDescription = pkg.category_description?.find(
-          (desc) => desc.category === priceItem.category,
+          (desc) => desc.category === priceItem.category
         );
         // Split description into bullet points if it contains line breaks
         const descriptionPoints =
@@ -182,7 +182,7 @@ export const removeNoneAlphanumericEntity = (str: string) => {
   return str.replace(/[^a-z0-9]/gi, ' ');
 };
 
-export const splitPhoneNumber = (str:string) => {
-  const formatNumber = str.split('').join('')
-  return `${formatNumber.substring(0, 4)} ${formatNumber.substring(4, 7)} ${formatNumber.substring(7, 10)} ${formatNumber.substring(10)}`
-}
+export const splitPhoneNumber = (str: string) => {
+  const formatNumber = str.split('').join('');
+  return `${formatNumber.substring(0, 4)} ${formatNumber.substring(4, 7)} ${formatNumber.substring(7, 10)} ${formatNumber.substring(10)}`;
+};
