@@ -36,7 +36,10 @@ const Partners = () => {
 
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 hover:bg-white/20 transition-all duration-300">
             <div className="flex items-center space-x-4">
-              <Link href="https://cdn.freebiesupply.com/logos/large/2x/iata-logo-png-transparent.png" target="_blank">
+              <Link
+                href="https://cdn.freebiesupply.com/logos/large/2x/iata-logo-png-transparent.png"
+                target="_blank"
+              >
                 <Image
                   src="https://cdn.freebiesupply.com/logos/large/2x/iata-logo-png-transparent.png"
                   className="w-24 h-24 rounded-2xl object-contain bg-white p-2"
