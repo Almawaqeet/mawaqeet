@@ -9,12 +9,12 @@ const WhatsaapChat = () => {
         rel="noopener noreferrer"
       >
         <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="fixed xmd:bottom-16 sm:bottom-28 right-4 sm:right-8 px-6 sm:px-8 py-3 sm:py-4 bg-brand-color-main text-white rounded-full shadow-xl hover:shadow-2xl flex items-center gap-2 sm:gap-3 hover:bg-brand-color/90 transition-all duration-300 z-50"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="fixed bottom-8 right-4 sm:right-8 p-3 bg-white/90 text-brand-color-main rounded-full shadow-md hover:shadow-lg flex items-center gap-2 transition-all duration-200 z-50 border border-brand-color-main/20"
         >
-            <IoLogoWhatsapp className="w-6 h-6 text-brand-color-subtle" />
-            <span className="font-semibold text-base sm:text-lg">Chat</span>
+            <IoLogoWhatsapp className="w-5 h-5" />
+            <span className="text-sm font-medium">Chat with us</span>
         </motion.button>
         </a>
     )
