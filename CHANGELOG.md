@@ -4,18 +4,17 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.1.5](https://github.com/Almawaqeet/Almawaqeet-FE/compare/v0.1.4...v0.1.5) (2025-01-04)
 
-
 ### Features
 
-* Add update hotel room functionality and enhance admin dashboard ([9b90174](https://github.com/Almawaqeet/Almawaqeet-FE/commit/9b9017461cb2fc465b981587be75ad7d7f14d427))
-* Enhance query configuration and package settlement handling ([d5779a3](https://github.com/Almawaqeet/Almawaqeet-FE/commit/d5779a3f00d815c93161c0341a3511dda485c62d))
-* Enhance wallet functionality with payout requests and transaction tracking ([9f8c7aa](https://github.com/Almawaqeet/Almawaqeet-FE/commit/9f8c7aa33433fe780e5dc368048ee62402936e5c))
-* Implement package settlement status check and update booking flow ([cf098ba](https://github.com/Almawaqeet/Almawaqeet-FE/commit/cf098bab4e8ed25265e4cdbe4e8aecce2076778c))
-* Integrate Sentry for enhanced error tracking in ErrorProvider ([3bab52b](https://github.com/Almawaqeet/Almawaqeet-FE/commit/3bab52b4d71171d4ba492470a4785bed08fd24d3))
-* Integrate Sentry for error tracking and enhance API error handling ([cec5ac9](https://github.com/Almawaqeet/Almawaqeet-FE/commit/cec5ac927fdb8a0b0513ee4d6666fbb354cad206))
-* Update financial summary and booking components for improved user experience ([01a9bb9](https://github.com/Almawaqeet/Almawaqeet-FE/commit/01a9bb9c332b6a246cb45b0d579e192226af263c))
-* Update metadata and improve layout for Al-Mawaqeet Travels pages ([b7bc1a3](https://github.com/Almawaqeet/Almawaqeet-FE/commit/b7bc1a36271c4a14280341e44917a7734bcadb79))
-* Update metadata formatting and enhance SEO across public pages ([5177147](https://github.com/Almawaqeet/Almawaqeet-FE/commit/51771472b63239d746107cb83ddd879fd43354f9))
+- Add update hotel room functionality and enhance admin dashboard ([9b90174](https://github.com/Almawaqeet/Almawaqeet-FE/commit/9b9017461cb2fc465b981587be75ad7d7f14d427))
+- Enhance query configuration and package settlement handling ([d5779a3](https://github.com/Almawaqeet/Almawaqeet-FE/commit/d5779a3f00d815c93161c0341a3511dda485c62d))
+- Enhance wallet functionality with payout requests and transaction tracking ([9f8c7aa](https://github.com/Almawaqeet/Almawaqeet-FE/commit/9f8c7aa33433fe780e5dc368048ee62402936e5c))
+- Implement package settlement status check and update booking flow ([cf098ba](https://github.com/Almawaqeet/Almawaqeet-FE/commit/cf098bab4e8ed25265e4cdbe4e8aecce2076778c))
+- Integrate Sentry for enhanced error tracking in ErrorProvider ([3bab52b](https://github.com/Almawaqeet/Almawaqeet-FE/commit/3bab52b4d71171d4ba492470a4785bed08fd24d3))
+- Integrate Sentry for error tracking and enhance API error handling ([cec5ac9](https://github.com/Almawaqeet/Almawaqeet-FE/commit/cec5ac927fdb8a0b0513ee4d6666fbb354cad206))
+- Update financial summary and booking components for improved user experience ([01a9bb9](https://github.com/Almawaqeet/Almawaqeet-FE/commit/01a9bb9c332b6a246cb45b0d579e192226af263c))
+- Update metadata and improve layout for Al-Mawaqeet Travels pages ([b7bc1a3](https://github.com/Almawaqeet/Almawaqeet-FE/commit/b7bc1a36271c4a14280341e44917a7734bcadb79))
+- Update metadata formatting and enhance SEO across public pages ([5177147](https://github.com/Almawaqeet/Almawaqeet-FE/commit/51771472b63239d746107cb83ddd879fd43354f9))
 
 ### [0.1.4](https://github.com/Almawaqeet/Almawaqeet-FE/compare/v0.1.3...v0.1.4) (2025-01-03)
 

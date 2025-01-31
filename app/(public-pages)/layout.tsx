@@ -12,7 +12,7 @@ export default function PublicPagesLayout({
     <div className="min-h-screen pt-[100px] bg-brand-color-subtle">
       <Navbar />
       <WhatsaapChat />
-      <InlineNavigation />
+      {/* <InlineNavigation /> */}
       {children}
       <Footer />
     </div>
