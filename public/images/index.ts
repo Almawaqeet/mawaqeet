@@ -14,9 +14,9 @@ import admission from './admission.png';
 import ziyarah from './hajj.png';
 import welcome from './welcome.png';
 import leadconsultantalmawaqeet from './leadconsultantalmawaqeet.png';
-import iataLogo from './iatalogo.jpeg'
-import saudiMinistry from './saudiforeignaffair.png'
-import mawaqeetLogo from './logo.jpg'
+import iataLogo from './iatalogo.jpeg';
+import saudiMinistry from './saudiforeignaffair.png';
+import mawaqeetLogo from './logo.jpg';
 export {
   icon_1,
   icon_2,

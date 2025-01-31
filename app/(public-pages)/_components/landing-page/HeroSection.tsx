@@ -11,6 +11,7 @@ import { FaCreditCard } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 import { CLIENT_ROUTES } from '@/lib/routes';
+import Partners from '@/app/(public-pages)/_components/landing-page/Partners';
 
 export const HeroSection = () => {
   const router = useRouter();
@@ -120,6 +121,10 @@ export const HeroSection = () => {
           <p className="text-xs font-semibold sm:text-sm text-brand-color text-center">
             Cancel payments anytime!
           </p>
+        </div>
+
+        <div className="w-full mt-12">
+          <Partners />
         </div>
       </div>
     </section>

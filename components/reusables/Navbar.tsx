@@ -37,44 +37,6 @@ const Logo = () => (
   </Link>
 );
 
-const NavbarHeader = () => {
-
-  return (
-    <section className={`w-full my-auto fixed top-0  bg-brand-color-main flex sm:flex-row justify-between items-center py-2 xmd:flex-col xmd:gap-2  ${whiteSpaces.paddingX}`}>
-      <div className='flex gap-4'>
-        <img
-          src={`/images/saudiforeignaffair.png`}
-          className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 rounded-full bg-white"
-          alt="saudilogo"
-          width={28}
-          height={28}
-        />
-
-        <img
-          src={`/images/logo.jpg`}
-          className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 rounded-full"
-          alt="Brand Logo"
-          width={28}
-          height={28}
-        />
-
-        <img
-          src={`/images/iataLogo.jpeg`}
-          className="mobile:w-7 mobile:h-7 lg:w-10 lg:h-10 tab_md:w-8 tab_md:h-7 rounded-full"
-          alt="iatalogo"
-          width={28}
-          height={28}
-          
-        />
-      </div>
-      <div>
-        <h1 className='text-white'>{splitPhoneNumber(`+2349115653889`)}</h1>
-      </div>
-
-    </section>
-  )
-}
-
 interface DesktopNavLinksProps {
   navItems: NavItem[];
   activeItem: string;
@@ -92,10 +54,11 @@ const DesktopNavLinks = ({
       <li
         key={item.id}
         onClick={() => setActiveItem(item.id)}
-        className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${item.id === activeItem
-          ? 'text-hover-color font-bold'
-          : `text-${brandColors.dark_brown}`
-          }`}
+        className={`mobile:hidden xmd:hidden tab_md:block hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] cursor-pointer ${
+          item.id === activeItem
+            ? 'text-hover-color font-bold'
+            : `text-${brandColors.dark_brown}`
+        }`}
       >
         <Link href={`/${item.id}`}>{item.content}</Link>
       </li>
@@ -158,10 +121,11 @@ const MobileNavMenu = ({
                   setActiveItem(item.id);
                   setIsOpen(false);
                 }}
-                className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${item.id === activeItem
-                  ? 'text-hover-color font-bold'
-                  : `text-${brandColors.dark_brown}`
-                  }`}
+                className={`mobile:block w-full text-center tab_md:hidden hover:text-hover-color transition-all duration-[0.5s] ease-[cubic-bezier(0.645,0.045,0.355,1)] delay-[400] p-3 cursor-pointer border-b border-gray-100 ${
+                  item.id === activeItem
+                    ? 'text-hover-color font-bold'
+                    : `text-${brandColors.dark_brown}`
+                }`}
               >
                 <Link href={`/${item.id}`}>{item.content}</Link>
               </motion.li>
@@ -243,9 +207,6 @@ const Navbar = () => {
     <section
       className={`xmd:max-w-[375px] mobile:max-w-[700px] sm:max-w-[900px] lg:max-w-[2000px] tab_md:max-w-[1500px] m-auto relative z-50 xmd:mb-10`}
     >
-      <div>
-        <NavbarHeader />
-      </div>
       <nav
         className={`xmd:px-5 px-[20px] sm:px-[16px] md:px-12 lg:px-[150px] xl:px-[150px] 2xl:px-[150px] xmd:h-16 lg:h-[80px] tab_md:h-16 ${hasScrolled ? 'bg-white drop-shadow-white-ash shadow-md' : ''} grid my-auto fixed md:top-11 lg:top-14 sm:top-10 xmd:top-[4.5rem] right-0 w-full z-50`}
       >
