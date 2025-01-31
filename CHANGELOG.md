@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/Almawaqeet/Almawaqeet-FE/compare/v0.1.5...v0.1.6) (2025-01-31)
+
+
+### Features
+
+* add consultant data ([1e9e859](https://github.com/Almawaqeet/Almawaqeet-FE/commit/1e9e859a09b1b86436404260d52051e49e178696))
+* added the iata logo from the link section ([09c4688](https://github.com/Almawaqeet/Almawaqeet-FE/commit/09c46888834e317a2cf997dcbf2e70fb1b04af5e))
+
 ### [0.1.5](https://github.com/Almawaqeet/Almawaqeet-FE/compare/v0.1.4...v0.1.5) (2025-01-04)
 
 ### Features
