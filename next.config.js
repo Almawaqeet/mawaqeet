@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'api.slingacademy.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.freebiesupply.com',
+      },
     ],
   },
 };
