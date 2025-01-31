@@ -71,7 +71,7 @@ export const HeroSection = () => {
 
   return (
     <section
-      className={`w-full max-w-[6000px] m-auto ${whiteSpaces?.paddingX} py-4 sm:py-8 md:py-[80px] flex  justify-center`}
+      className={`w-full max-w-[6000px] m-auto ${whiteSpaces?.paddingX} py-4 flex  justify-center`}
     >
       <div className="flex flex-col items-start sm:items-center text-left sm:text-center w-full max-w-[800px]">
         <QuoteCard />
