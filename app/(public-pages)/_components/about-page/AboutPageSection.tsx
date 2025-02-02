@@ -33,14 +33,14 @@ export const AboutPageSection = () => {
         ))}
       </div>
 
-      <div className="relative overflow-hidden w-full pt-[56.25%]">
+      {/* <div className="relative overflow-hidden w-full pt-[56.25%]">
         <iframe
           className="absolute inset-0 w-full h-full bg-black opacity-90"
           src="https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L"
           title="mawaqeet-welcoming-video"
           sandbox="allow-scripts allow-same-origin"
         ></iframe>
-      </div>
+      </div> */}
     </section>
   );
 };

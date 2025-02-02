@@ -33,10 +33,10 @@ export default async function LandingPage() {
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main className="flex flex-col gap-8">
         <HeroSection />
-        <HeroSectionCarousel />
+        <MeetTheTeam />
         <WhyUs />
         <Benefits />
-        <MeetTheTeam />
+        {/* <HeroSectionCarousel /> */}
         <StepsToRegister />
         <ActivePackages />
         <LiveCall />

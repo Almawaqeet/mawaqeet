@@ -29,6 +29,16 @@ export default function MeetTheTeam() {
 
   const team = [
     {
+      name: "Shaykh Abdullah Ma'ruf Oyelekan.",
+      role: 'Baba-n-madeenah',
+      video:
+        'https://gmri7q7qlz.ufs.sh/f/iymw741EWPk0QrGSR6Np5osRHLe8iuyjdmXDVPJCAfU43w01',
+      thumbnail: '/images/ceo-image-placeholder.png',
+      bio: 'Expert in pilgrim logistics and coordination',
+      achievements:
+        'Coordinated logistics for 500+ pilgrims annually, developed innovative pilgrim tracking systems',
+    },
+    {
       name: 'Shaykh Abdul-Hakeem Abdur-Raheem Al-Kutubi.',
       role: 'Ameerul-Hajj',
       video:
@@ -37,16 +47,6 @@ export default function MeetTheTeam() {
       bio: '20+ years experience in Hajj and Umrah services',
       achievements:
         'Led over 1000+ successful pilgrimages, certified Hajj guide, fluent in Arabic and English',
-    },
-    {
-      name: "Shaykh Abdullah Ma'ruf Oyelekan.",
-      role: 'Baba-n-madeenah',
-      video:
-        'https://utfs.io/f/HSbZtkoKCyOfYL1eF7ylQTZp2r0cG3Mw97Xjdq4DnKhSiR1L',
-      thumbnail: '/images/welcome.png',
-      bio: 'Expert in pilgrim logistics and coordination',
-      achievements:
-        'Coordinated logistics for 500+ pilgrims annually, developed innovative pilgrim tracking systems',
     },
   ];
 

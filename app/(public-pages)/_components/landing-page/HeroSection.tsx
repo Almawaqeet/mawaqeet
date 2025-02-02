@@ -3,7 +3,7 @@
 import React from 'react';
 import AppButton from '@/components/reusables/AppButton';
 import { IoMdArrowRoundForward } from 'react-icons/io';
-import { FaPlay } from 'react-icons/fa';
+import { FaUsers } from 'react-icons/fa';
 import AppHeading from '@/components/reusables/AppHeading';
 import { PiBookOpenThin } from 'react-icons/pi';
 import { motion } from 'framer-motion';
@@ -107,7 +107,7 @@ export const HeroSection = () => {
           <AppButton
             variant="secondary"
             iconPosition="start"
-            icon={<FaPlay className="w-3 h-3 sm:w-4 sm:h-4" />}
+            icon={<FaUsers className="w-3 h-3 sm:w-4 sm:h-4" />}
             onClick={() =>
               router.push(`${CLIENT_ROUTES.PublicPages.about.index}`)
             }

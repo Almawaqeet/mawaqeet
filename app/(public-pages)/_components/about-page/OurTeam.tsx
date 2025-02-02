@@ -1,11 +1,12 @@
 'use client';
 import AppHeading from '@/components/reusables/AppHeading';
-import { about_us_team } from '@/old-pages/contents/about';
+import { about_main_body, about_us_team } from '@/old-pages/contents/about';
 import { whiteSpaces } from '@/old-pages/utilities/GlobalSpaces';
 import { motion } from 'framer-motion';
 import React from 'react';
 import Team from './Team';
 import TeamCarousel from './TeamCarousel';
+import Paragraph from '@/old-pages/utilities/Paragraph';
 
 const OurTeam = () => {
   const containerVariants = {
@@ -20,14 +21,26 @@ const OurTeam = () => {
 
   return (
     <section
-      className={`w-full ${whiteSpaces?.paddingX} py-16 max-w-7xl mx-auto`}
+      className={`w-full ${whiteSpaces?.paddingX} py-4 max-w-7xl mx-auto`}
     >
       <AppHeading
         variant="h2"
-        className="text-2xl sm:text-3xl md:text-4xl text-brand-color mb-14 text-center"
+        className="text-2xl sm:text-3xl md:text-4xl text-brand-color mb-8 text-center"
       >
         Meet Our Team
       </AppHeading>
+
+       <div className=" mb-8">
+              {about_main_body?.map((itm) => (
+                <Paragraph
+                  type="global"
+                  key={itm.id}
+                  classname="text-base sm:text-lg text-brand-color-text mb-8 sm:mb-12 max-w-[1000px] px-2 text-left sm:text-center"
+                >
+                  {itm.about_main_content}
+                </Paragraph>
+              ))}
+            </div>
 
       <aside>
         <motion.div

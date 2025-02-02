@@ -55,7 +55,7 @@ export default function Benefits() {
   };
 
   return (
-    <section className={`w-full ${whiteSpaces?.paddingX} py-16`}>
+    <section className={`w-full ${whiteSpaces?.paddingX} py-8`}>
       <motion.div
         initial="hidden"
         whileInView="visible"
