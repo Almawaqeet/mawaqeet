@@ -5,34 +5,16 @@ import {
   QueryClient,
   dehydrate,
 } from '@tanstack/react-query';
-import { createServerAxiosInstance } from '@/api/server-constructor';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+
 
 const StepThreeOnboarding = dynamic(
   () => import('@/app/(public-pages)/_components/onboarding/StepThree'),
   { ssr: false }
 );
 
-async function getInitialData() {
-  const queryClient = new QueryClient();
-  const route = routes.onboarding.getOnboardingPaymentAmount;
-
-  const baseQueryKey = generateBaseQueryKeyFromRoute(route);
-
-  try {
-    const data = await createServerAxiosInstance(route);
-    await queryClient.prefetchQuery({
-      queryKey: [baseQueryKey],
-      queryFn: () => data,
-    });
-    return queryClient;
-  } catch (error) {
-    console.error('Error fetching initial data:', error);
-  }
-}
 
 export default async function StepThreePage() {
-  const queryClient = (await getInitialData()) ?? new QueryClient();
+  const queryClient = new QueryClient();
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
