@@ -28,12 +28,11 @@ async function getInitialData() {
     return queryClient;
   } catch (error) {
     console.error('Error fetching initial data:', error);
-    throw error;
   }
 }
 
 export default async function StepThreePage() {
-  const queryClient = await getInitialData();
+  const queryClient = (await getInitialData()) ?? new QueryClient();
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
