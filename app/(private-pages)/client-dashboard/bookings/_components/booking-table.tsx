@@ -17,7 +17,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { useGetUserBookings } from '@/api/services/booking';
+import { useGetUserBookings } from '@/network/services/booking';
 import { format, differenceInDays } from 'date-fns';
 import Link from 'next/link';
 import {

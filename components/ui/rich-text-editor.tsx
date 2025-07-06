@@ -112,6 +112,30 @@ const RichTextEditor = ({
     'video',
   ];
 
+  // For read-only mode, render HTML content directly to avoid React Quill compatibility issues
+  if (readOnly) {
+    return (
+      <div className="rich-text-editor">
+        <div
+          className="ql-editor ql-editor-no-border min-h-[200px] prose max-w-none"
+          dangerouslySetInnerHTML={{ __html: value ?? '' }}
+        />
+        <style jsx global>{`
+          .ql-editor-no-border {
+            border: none !important;
+            padding: 0 !important;
+          }
+          .ql-editor {
+            min-height: 200px !important;
+          }
+          .ql-container {
+            height: auto !important;
+          }
+        `}</style>
+      </div>
+    );
+  }
+
   return (
     <div className="rich-text-editor">
       <ReactQuill
@@ -119,16 +143,12 @@ const RichTextEditor = ({
         theme="snow"
         value={value ?? ''}
         onChange={onChange}
-        modules={readOnly ? { toolbar: false } : modules}
+        modules={modules}
         formats={formats}
         placeholder={placeholder}
-        className={`min-h-[200px] ${readOnly ? 'ql-editor-no-border' : ''}`}
-        readOnly={readOnly}
+        className="min-h-[200px]"
       />
       <style jsx global>{`
-        .ql-editor-no-border .ql-container.ql-snow {
-          border: none !important;
-        }
         .ql-editor {
           min-height: 200px !important;
         }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetAllActivePackages } from '@/api/services/packages';
+import { useGetAllActivePackages } from '@/network/services/packages';
 // import { my_packages } from '@/app/(public-pages)/_components/packages-page/Package';
 import { Input } from '@/components/ui/input';
 import { SegregatedPackage } from '@/constants/types';

@@ -12,7 +12,7 @@ import AppTextInput from '@/components/reusables/AppTextInput';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { useAppToast } from '@/components/reusables/AppToast';
 import { SESSION_STORAGE_KEYS } from '@/constants/local-storage-keys';
-import { useSendOtp } from '@/api/services/authentication';
+import { useSendOtp } from '@/network/services/authentication';
 import AppDialogBox from '@/components/reusables/AppDialogBox';
 
 const emailValidationSchema = Yup.object({

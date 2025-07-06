@@ -25,10 +25,10 @@ import { DataTable } from '@/components/ui/table/data-table';
 import {
   useGetBookingsForAPackage,
   useUpdateHotelRoom,
-} from '@/api/services/booking';
-import { useCheckPackageSettlementStatus } from '@/api/services/packages';
+} from '@/network/services/booking';
+import { useCheckPackageSettlementStatus } from '@/network/services/packages';
 import { useAppToast } from '@/components/reusables/AppToast';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 
 const validationSchema = Yup.object({
   hotelName: Yup.string().required('Hotel name is required'),

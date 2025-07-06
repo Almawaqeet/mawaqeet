@@ -1,5 +1,5 @@
 'use client';
-import { PackageBookingListResponse } from '@/api/types';
+import { PackageBookingListResponse } from '@/network/types';
 import { ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
 import { Badge } from '@/components/ui/badge';

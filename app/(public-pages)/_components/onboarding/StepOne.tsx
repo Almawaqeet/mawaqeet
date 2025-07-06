@@ -9,7 +9,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import AppButton from '@/components/reusables/AppButton';
 import AppTextInput from '@/components/reusables/AppTextInput';
-import { useCheckIfEmailAddressExist } from '@/api/services/onboarding';
+import { useCheckIfEmailAddressExist } from '@/network/services/onboarding';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import AppDialogBox from '@/components/reusables/AppDialogBox';
 import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys';

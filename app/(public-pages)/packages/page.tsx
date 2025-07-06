@@ -1,34 +1,55 @@
-import dynamic from 'next/dynamic';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { HydrationBoundary } from '@tanstack/react-query';
-import { generateBaseQueryKeyFromRoute } from '@/api/routes';
-import { createServerAxiosInstance } from '@/api/server-constructor';
-import { routes } from '@/api/routes';
+import { generateBaseQueryKeyFromRoute } from '@/network/routes';
+import { createServerAxiosInstance } from '@/network/server-constructor';
+import { routes } from '@/network/routes';
 import { Metadata } from 'next';
+import { PACKAGE_TYPES } from '@/constants/generic';
+import PackageSectionWrapper from './PackageSectionWrapper';
 
-const PackageSection = dynamic(
-  () => import('@/app/(public-pages)/_components/packages-page/PackageSection'),
-  { ssr: false }
-);
-
-async function getInitialData() {
+async function getInitialData(searchParams?: {
+  type?: string;
+  search?: string;
+}) {
   const queryClient = new QueryClient();
   const route = routes.packages.showAllActivePackages;
   const baseQueryKey = generateBaseQueryKeyFromRoute(route);
-  const data = await createServerAxiosInstance(route);
+
+  // Prepare query parameters for the API call
+  const params: Record<string, any> = {};
+
+  // Set package type (default to HAJJ if not provided)
+  const packageType = searchParams?.type?.toUpperCase() || PACKAGE_TYPES.HAJJ;
+  params.package_type = packageType;
+
+  // Set search term if provided
+  if (searchParams?.search) {
+    params.search = searchParams.search;
+  }
+
+  const data = await createServerAxiosInstance(route, { params });
+
+  // Create the exact same query key structure as the client-side hook
+  const queryKey = [baseQueryKey, params && params];
+
   await queryClient.prefetchQuery({
-    queryKey: [baseQueryKey],
+    queryKey,
     queryFn: () => data,
   });
+
   return queryClient;
 }
 
-export default async function Page() {
-  const queryClient = await getInitialData();
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: { type?: string; search?: string };
+}) {
+  const queryClient = await getInitialData(searchParams);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <PackageSection />
+      <PackageSectionWrapper />
     </HydrationBoundary>
   );
 }

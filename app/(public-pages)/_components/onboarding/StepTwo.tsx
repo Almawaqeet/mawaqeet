@@ -10,7 +10,7 @@ import AppButton from '@/components/reusables/AppButton';
 // import Autocomplete from "react-google-autocomplete"
 import AppTextInput from '@/components/reusables/AppTextInput';
 import AppPhoneInput from '@/components/reusables/AppPhoneInput';
-import { useCreateOnboardingUser } from '@/api/services/onboarding';
+import { useCreateOnboardingUser } from '@/network/services/onboarding';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import * as Yup from 'yup';
 import AppDialogBox from '@/components/reusables/AppDialogBox';

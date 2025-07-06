@@ -146,6 +146,7 @@ export const segregatePackageByItsPriceCategory = (
 
         return {
           id: pkg.id ?? '',
+          slug: pkg.slug,
           type: pkg.package_type,
           tier: priceItem.category.toUpperCase(),
           cohort: pkg.name ?? '',

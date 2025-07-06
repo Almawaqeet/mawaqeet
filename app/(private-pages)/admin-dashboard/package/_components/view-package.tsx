@@ -4,7 +4,7 @@ import {
   useViewPackage,
   useEditPackage,
   useCheckPackageSettlementStatus,
-} from '@/api/services/packages';
+} from '@/network/services/packages';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';

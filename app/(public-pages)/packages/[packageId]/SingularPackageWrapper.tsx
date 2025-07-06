@@ -3,12 +3,12 @@
 import dynamic from 'next/dynamic';
 
 const SingularPackage = dynamic(
-  () => import('@/app/(public-pages)/_components/packages-page/SingularPackage'),
+  () =>
+    import('@/app/(public-pages)/_components/packages-page/SingularPackage'),
   {
-    loading: () => <div>Loading...</div>
+    loading: () => <div>Loading...</div>,
   }
 );
-
 
 interface SingularPackageWrapperProps {
   id: string;

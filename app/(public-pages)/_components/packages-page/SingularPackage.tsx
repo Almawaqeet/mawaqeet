@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import AppButton from '@/components/reusables/AppButton';
 import SingularPackageSkeleton from '../SingularPackageSkeleton';
-import { useViewPackage } from '@/api/services/packages';
+import { useViewPackage } from '@/network/services/packages';
 import AppModal from '@/components/reusables/AppModal';
 import { useState, useCallback } from 'react';
 import { extractUlFromFeature } from './Package';
@@ -191,129 +191,123 @@ export default function SingularPackage({ id }: { id: string }) {
               </TabsTrigger>
             </TabsList>
 
-            <AnimatePresence mode="wait">
-              <TabsContent value="overview">
-                <motion.div
-                  {...fadeInUp}
-                  className="prose max-w-none text-sm sm:text-base"
-                >
-                  {pkg?.description ? (
-                    <RichTextEditor
-                      value={pkg.description}
-                      onChange={() => {}}
-                      readOnly={true}
-                    />
-                  ) : (
-                    <p className="text-gray-500 italic">
-                      No description available
-                    </p>
-                  )}
-                </motion.div>
-              </TabsContent>
+            <TabsContent value="overview">
+              <motion.div
+                {...fadeInUp}
+                className="prose max-w-none text-sm sm:text-base"
+              >
+                {pkg?.description ? (
+                  <RichTextEditor
+                    value={pkg.description}
+                    onChange={() => {}}
+                    readOnly={true}
+                  />
+                ) : (
+                  <p className="text-gray-500 italic">
+                    No description available
+                  </p>
+                )}
+              </motion.div>
+            </TabsContent>
 
-              <TabsContent value="pricing-details">
-                <motion.div
-                  variants={staggerChildren}
-                  initial="initial"
-                  animate="animate"
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
-                >
-                  {pkg?.price?.map((price) => {
-                    if (!price?.category) return null;
+            <TabsContent value="pricing-details">
+              <motion.div
+                variants={staggerChildren}
+                initial="initial"
+                animate="animate"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+              >
+                {pkg?.price?.map((price) => {
+                  if (!price?.category) return null;
 
-                    const matchingDescription = pkg?.category_description?.find(
-                      (desc) =>
-                        desc?.category?.toLowerCase() ===
-                        price?.category?.toLowerCase()
-                    );
-                    const isVIP = price?.category?.toLowerCase() === 'vip';
+                  const matchingDescription = pkg?.category_description?.find(
+                    (desc) =>
+                      desc?.category?.toLowerCase() ===
+                      price?.category?.toLowerCase()
+                  );
+                  const isVIP = price?.category?.toLowerCase() === 'vip';
 
-                    return (
-                      <motion.div key={price?.id ?? ''} variants={fadeInUp}>
-                        <Card
-                          className={`flex flex-col h-full p-4 sm:p-6 hover:shadow-lg transition-all duration-300 border
+                  return (
+                    <motion.div key={price?.id ?? ''} variants={fadeInUp}>
+                      <Card
+                        className={`flex flex-col h-full p-4 sm:p-6 hover:shadow-lg transition-all duration-300 border
                                                     ${isVIP ? 'bg-gradient-to-br from-yellow-50 to-white border-yellow-300 hover:border-yellow-400 scale-100' : 'hover:border-brand-color/20'}`}
-                        >
-                          <div>
-                            <div className="flex items-center justify-between mb-2 sm:mb-4">
-                              <h3 className="text-lg sm:text-xl font-semibold capitalize text-gray-800 flex items-center gap-2">
-                                {getCategoryIcon(price?.category)}
-                                {price?.category}
-                              </h3>
-                              {isVIP && (
-                                <Badge className="bg-yellow-500">VIP</Badge>
-                              )}
-                            </div>
-                            <p
-                              className={`text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 ${isVIP ? 'text-yellow-600' : 'text-brand-color'}`}
-                            >
-                              ₦
-                              {parseFloat(price?.price ?? '0').toLocaleString(
-                                'en-US'
-                              )}
-                            </p>
-                            <div className="space-y-2 sm:space-y-4 mb-4 sm:mb-6">
-                              {price?.monthly_installment_fee && (
-                                <div className="flex items-center gap-2 text-sm text-gray-700 bg-gray-50 p-2 rounded-lg">
-                                  <CalendarIcon className="h-4 w-4 text-brand-color" />
-                                  <span>
-                                    Monthly: ₦
-                                    {parseFloat(
-                                      price?.monthly_installment_fee ?? '0'
-                                    ).toLocaleString('en-US')}
-                                  </span>
-                                </div>
-                              )}
-                              {price?.weekly_installment_fee && (
-                                <div className="flex items-center gap-2 text-sm text-gray-700 bg-gray-50 p-2 rounded-lg">
-                                  <CalendarIcon className="h-4 w-4 text-brand-color" />
-                                  <span>
-                                    Weekly: ₦
-                                    {parseFloat(
-                                      price?.weekly_installment_fee ?? '0'
-                                    ).toLocaleString('en-US')}
-                                  </span>
-                                </div>
-                              )}
-                            </div>
-                            <AppButton
-                              variant="primary"
-                              onClick={handleBookNowClick}
-                              disabled={pkg?.settlement}
-                            >
-                              {pkg?.settlement
-                                ? 'Booking Completed'
-                                : 'Book Now'}
-                            </AppButton>
+                      >
+                        <div>
+                          <div className="flex items-center justify-between mb-2 sm:mb-4">
+                            <h3 className="text-lg sm:text-xl font-semibold capitalize text-gray-800 flex items-center gap-2">
+                              {getCategoryIcon(price?.category)}
+                              {price?.category}
+                            </h3>
+                            {isVIP && (
+                              <Badge className="bg-yellow-500">VIP</Badge>
+                            )}
                           </div>
-
-                          {matchingDescription?.description && (
-                            <div className="mt-3 pt-3 border-t border-gray-200">
-                              <div className="prose prose-sm max-w-none text-xs sm:text-sm">
-                                <li
-                                  className={`text-sm  flex items-start gap-2`}
-                                >
-                                  <div className="flex gap-2">
-                                    <ul
-                                      className="flex flex-col gap-2"
-                                      dangerouslySetInnerHTML={{
-                                        __html: extractUlFromFeature(
-                                          matchingDescription.description
-                                        ),
-                                      }}
-                                    />
-                                  </div>
-                                </li>
+                          <p
+                            className={`text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 ${isVIP ? 'text-yellow-600' : 'text-brand-color'}`}
+                          >
+                            ₦
+                            {parseFloat(price?.price ?? '0').toLocaleString(
+                              'en-US'
+                            )}
+                          </p>
+                          <div className="space-y-2 sm:space-y-4 mb-4 sm:mb-6">
+                            {price?.monthly_installment_fee && (
+                              <div className="flex items-center gap-2 text-sm text-gray-700 bg-gray-50 p-2 rounded-lg">
+                                <CalendarIcon className="h-4 w-4 text-brand-color" />
+                                <span>
+                                  Monthly: ₦
+                                  {parseFloat(
+                                    price?.monthly_installment_fee ?? '0'
+                                  ).toLocaleString('en-US')}
+                                </span>
                               </div>
+                            )}
+                            {price?.weekly_installment_fee && (
+                              <div className="flex items-center gap-2 text-sm text-gray-700 bg-gray-50 p-2 rounded-lg">
+                                <CalendarIcon className="h-4 w-4 text-brand-color" />
+                                <span>
+                                  Weekly: ₦
+                                  {parseFloat(
+                                    price?.weekly_installment_fee ?? '0'
+                                  ).toLocaleString('en-US')}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                          <AppButton
+                            variant="primary"
+                            onClick={handleBookNowClick}
+                            disabled={pkg?.settlement}
+                          >
+                            {pkg?.settlement ? 'Booking Completed' : 'Book Now'}
+                          </AppButton>
+                        </div>
+
+                        {matchingDescription?.description && (
+                          <div className="mt-3 pt-3 border-t border-gray-200">
+                            <div className="prose prose-sm max-w-none text-xs sm:text-sm">
+                              <li className={`text-sm  flex items-start gap-2`}>
+                                <div className="flex gap-2">
+                                  <ul
+                                    className="flex flex-col gap-2"
+                                    dangerouslySetInnerHTML={{
+                                      __html: extractUlFromFeature(
+                                        matchingDescription.description
+                                      ),
+                                    }}
+                                  />
+                                </div>
+                              </li>
                             </div>
-                          )}
-                        </Card>
-                      </motion.div>
-                    );
-                  })}
-                </motion.div>
-              </TabsContent>
-            </AnimatePresence>
+                          </div>
+                        )}
+                      </Card>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            </TabsContent>
           </Tabs>
         </div>
       </Card>

@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import {
   useGetBookingInformation,
   useCancelBooking,
-} from '@/api/services/booking';
+} from '@/network/services/booking';
 import { PieChart, Pie, Cell } from 'recharts';
 import {
   CrownIcon,
@@ -40,14 +40,14 @@ import {
 import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useQueryClient } from '@tanstack/react-query';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 import CompletionModal from './booking-completion-modal';
 import CancelModal from './booking-cancel-modal';
 import ConfirmationModal from './booking-confirmation-modal';
 import ReceiptsModal from './booking-reciept-modal';
 import { PACKAGE_TYPES } from '@/constants/generic';
 import { removeNoneAlphanumericEntity } from '@/lib/utils';
-import { useCheckPackageSettlementStatus } from '@/api/services/packages';
+import { useCheckPackageSettlementStatus } from '@/network/services/packages';
 
 interface BookingViewProps {
   id: string;

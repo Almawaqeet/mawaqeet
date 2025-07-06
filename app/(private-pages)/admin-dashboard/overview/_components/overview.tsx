@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { useSession } from 'next-auth/react';
-import { useGetFinancialSummary } from '@/api/services/admin-analytics';
+import { useGetFinancialSummary } from '@/network/services/admin-analytics';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function OverViewPage() {

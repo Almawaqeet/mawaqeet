@@ -10,9 +10,9 @@ import Benefits from '@/app/(public-pages)/_components/landing-page/Benefits';
 import Faqs from './_components/landing-page/Faqs';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { HydrationBoundary } from '@tanstack/react-query';
-import { generateBaseQueryKeyFromRoute } from '@/api/routes';
-import { createServerAxiosInstance } from '@/api/server-constructor';
-import { routes } from '@/api/routes';
+import { generateBaseQueryKeyFromRoute } from '@/network/routes';
+import { createServerAxiosInstance } from '@/network/server-constructor';
+import { routes } from '@/network/routes';
 
 async function getInitialData() {
   const queryClient = new QueryClient();

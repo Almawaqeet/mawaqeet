@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetRecentOnboardingUsers } from '@/api/services/onboarding';
+import { useGetRecentOnboardingUsers } from '@/network/services/onboarding';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 

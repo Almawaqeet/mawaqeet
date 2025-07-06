@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetAllActivePackages } from '@/api/services/packages';
+import { useGetAllActivePackages } from '@/network/services/packages';
 import { Package } from '@/app/(public-pages)/_components/packages-page/Package';
 import { PackageIcon } from 'lucide-react';
 import { segregatePackageByItsPriceCategory } from '@/lib/utils';

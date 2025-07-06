@@ -1,9 +1,9 @@
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 import {
   useAppMutation,
   useAppQuery,
   useAppQueryWithPaginationAndParams,
-} from '@/api/client-constructor';
+} from '@/network/client-constructor';
 import {
   BookingFinancialSummaryResponse,
   BookingInformationResponse,
@@ -19,7 +19,7 @@ import {
   SimpleBookingResponse,
   UpdateHotelRoomRequest,
   UpdateHotelRoomResponse,
-} from '@/api/types';
+} from '@/network/types';
 
 export const useGetUserBookings = () => {
   const baseQueryKey = generateBaseQueryKeyFromRoute(

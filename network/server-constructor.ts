@@ -1,4 +1,4 @@
-import axiosInstance from '@/api/axios';
+import axiosInstance from '@/network/axios';
 
 interface ServerGetConfig {
   params?: Record<string, any>;
@@ -19,10 +19,10 @@ export const createServerAxiosInstance = async (
       },
       params: config?.params,
     });
-
+    console.log('yoyo', response);
     return response;
   } catch (error) {
-    console.error('Server GET request failed:', error);
+    // console.error('Server GET request failed:', error);
     throw error;
   }
 };

@@ -13,7 +13,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useSession } from 'next-auth/react';
 import { extractFirstName } from '@/lib/utils';
-import { useCheckIfUserHasAWallet } from '@/api/services/wallet';
+import { useCheckIfUserHasAWallet } from '@/network/services/wallet';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import AppDialogBox from '@/components/reusables/AppDialogBox';
@@ -23,7 +23,7 @@ import WelcomeBanner from './welcome-banner';
 import {
   useGetUpcomingHajjAndUmrahPackage,
   useGetUserFinancialSummary,
-} from '@/api/services/user-anaalytics';
+} from '@/network/services/user-anaalytics';
 import { PACKAGE_TYPES } from '@/constants/generic';
 import { Skeleton } from '@/components/ui/skeleton';
 

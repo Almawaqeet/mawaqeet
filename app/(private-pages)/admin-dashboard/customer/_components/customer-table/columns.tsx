@@ -1,6 +1,6 @@
 'use client';
 import { Checkbox } from '@/components/ui/checkbox';
-import { User } from '@/api/types';
+import { User } from '@/network/types';
 import { ColumnDef } from '@tanstack/react-table';
 // import { CellAction } from './cell-action';
 

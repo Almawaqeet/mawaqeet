@@ -13,17 +13,17 @@ import * as Yup from 'yup';
 import {
   useCheckPackageSettlementStatus,
   useViewPackage,
-} from '@/api/services/packages';
+} from '@/network/services/packages';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useInitiateBooking } from '@/api/services/booking';
+import { useInitiateBooking } from '@/network/services/booking';
 import { useAppToast } from '@/components/reusables/AppToast';
 import { useRouter } from 'next/navigation';
 import AppButton from '@/components/reusables/AppButton';
 import { CLIENT_ROUTES } from '@/lib/routes';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 import { useQueryClient } from '@tanstack/react-query';
 import { PACKAGE_TYPES } from '@/constants/generic';
-import { useCheckIfUserHasAWallet } from '@/api/services/wallet';
+import { useCheckIfUserHasAWallet } from '@/network/services/wallet';
 import AppDialogBox from '@/components/reusables/AppDialogBox';
 
 const validationSchema = Yup.object({

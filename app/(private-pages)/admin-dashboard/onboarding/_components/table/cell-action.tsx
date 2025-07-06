@@ -11,7 +11,7 @@ import {
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { SimpleOnboardingUser } from '@/api/types';
+import { SimpleOnboardingUser } from '@/network/types';
 
 interface CellActionProps {
   data: SimpleOnboardingUser;
