@@ -1,3 +1,6 @@
+import { AxiosError } from "axios";
+import serverAxiosInstance from "./server-axios";
+
 interface ServerGetConfig {
   params?: Record<string, any>;
   headers?: Record<string, any>;
@@ -10,25 +13,20 @@ export const createServerAxiosInstance = async (
   try {
     if (!url) throw new Error('URL is required');
 
-    // Construct query string from params
-    const queryParams = config?.params
-      ? '?' + new URLSearchParams(config.params).toString()
-      : '';
-
-    const response = await fetch(`${process.env.SERVER_API_BASE_URL}${url}${queryParams}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        ...config?.headers,
-      },
+    const response = await serverAxiosInstance.get(url, {
+      params: config?.params,
+      headers: config?.headers,
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    return response;
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.error('Server request error:', {
+        status: error.response?.status,
+        data: error.response?.data,
+        message: error.message
+      });
     }
-
-    return await response.json();
-  } catch (error) {
     throw error;
   }
 };

@@ -31,7 +31,7 @@ import {
   X,
 } from 'lucide-react';
 import { cn, uploadToCloudinary } from '@/lib/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Youtube from '@tiptap/extension-youtube';
 
 interface RichTextEditorProps {
@@ -89,6 +89,13 @@ export function RichTextEditor({
     },
     editable: !readOnly,
   });
+
+  // Update editor editable state when readOnly prop changes
+  useEffect(() => {
+    if (editor) {
+      editor.setEditable(!readOnly);
+    }
+  }, [editor, readOnly]);
 
   if (!editor) {
     return null;
