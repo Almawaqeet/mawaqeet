@@ -1,5 +1,3 @@
-import axiosInstance from '@/network/axios';
-
 interface ServerGetConfig {
   params?: Record<string, any>;
   headers?: Record<string, any>;
@@ -12,16 +10,25 @@ export const createServerAxiosInstance = async (
   try {
     if (!url) throw new Error('URL is required');
 
-    const response = await axiosInstance.get(`${url}`, {
+    // Construct query string from params
+    const queryParams = config?.params
+      ? '?' + new URLSearchParams(config.params).toString()
+      : '';
+
+    const response = await fetch(`${process.env.SERVER_API_BASE_URL}${url}${queryParams}`, {
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         ...config?.headers,
       },
-      params: config?.params,
     });
-    return response;
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
   } catch (error) {
-    // console.error('Server GET request failed:', error);
     throw error;
   }
 };
