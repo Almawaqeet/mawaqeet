@@ -5,15 +5,18 @@ import { Field } from 'formik';
 import dynamic from 'next/dynamic';
 import { Package, FileText, Star, Crown, Award } from 'lucide-react';
 
-
 const RichTextEditor = dynamic(
-    () => import('@/components/ui/rich-text-editor').then((mod) => mod.RichTextEditor),
-    {
-      ssr: false,
-      loading: () => <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />,
-    }
-  )
-
+  () =>
+    import('@/components/ui/rich-text-editor').then(
+      (mod) => mod.RichTextEditor
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />
+    ),
+  }
+);
 
 const categoryIcons = {
   vip: Crown,

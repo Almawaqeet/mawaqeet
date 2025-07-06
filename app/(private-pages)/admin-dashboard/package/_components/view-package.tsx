@@ -48,14 +48,18 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
-
 const RichTextEditor = dynamic(
-    () => import('@/components/ui/rich-text-editor').then((mod) => mod.RichTextEditor),
-    {
-      ssr: false,
-      loading: () => <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />,
-    }
-  )
+  () =>
+    import('@/components/ui/rich-text-editor').then(
+      (mod) => mod.RichTextEditor
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />
+    ),
+  }
+);
 
 export default function ViewPackage({
   params,

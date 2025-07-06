@@ -22,14 +22,18 @@ import { extractUlFromFeature } from './Package';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { useRouter } from 'next/navigation';
 
-
 const RichTextEditor = dynamic(
-    () => import('@/components/ui/rich-text-editor').then((mod) => mod.RichTextEditor),
-    {
-      ssr: false,
-      loading: () => <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />,
-    }
-  )
+  () =>
+    import('@/components/ui/rich-text-editor').then(
+      (mod) => mod.RichTextEditor
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />
+    ),
+  }
+);
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },

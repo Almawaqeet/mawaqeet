@@ -4,16 +4,18 @@ import dynamic from 'next/dynamic';
 import { Field } from 'formik';
 import AppTextInput from '@/components/reusables/AppTextInput';
 
-
-
-
 const RichTextEditor = dynamic(
-    () => import('@/components/ui/rich-text-editor').then((mod) => mod.RichTextEditor),
-    {
-      ssr: false,
-      loading: () => <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />,
-    }
-  )
+  () =>
+    import('@/components/ui/rich-text-editor').then(
+      (mod) => mod.RichTextEditor
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />
+    ),
+  }
+);
 export const BasicDetailsForm = ({
   errors,
   touched,

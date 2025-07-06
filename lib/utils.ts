@@ -188,8 +188,6 @@ export const splitPhoneNumber = (str: string) => {
   return `${formatNumber.substring(0, 4)} ${formatNumber.substring(4, 7)} ${formatNumber.substring(7, 10)} ${formatNumber.substring(10)}`;
 };
 
-
-
 export const uploadToCloudinary = async (file: File): Promise<string> => {
   const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;

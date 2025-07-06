@@ -419,7 +419,9 @@ export function RichTextEditor({
 
       <div
         className={cn(
-          isFullScreen ? 'h-[calc(100vh-48px)] overflow-y-auto' : 'min-h-[14rem]'
+          isFullScreen
+            ? 'h-[calc(100vh-48px)] overflow-y-auto'
+            : 'min-h-[14rem]'
         )}
       >
         <EditorContent
