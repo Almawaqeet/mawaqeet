@@ -5,10 +5,17 @@ import { Field } from 'formik';
 import AppTextInput from '@/components/reusables/AppTextInput';
 
 const RichTextEditor = dynamic(
-  () => import('@/components/ui/rich-text-editor'),
-  { ssr: false }
+  () =>
+    import('@/components/ui/rich-text-editor').then(
+      (mod) => mod.RichTextEditor
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />
+    ),
+  }
 );
-
 export const BasicDetailsForm = ({
   errors,
   touched,
@@ -49,7 +56,7 @@ export const BasicDetailsForm = ({
           Package Description
         </Label>
         <RichTextEditor
-          value={values.description}
+          content={values.description}
           onChange={(value) => setFieldValue('description', value)}
           placeholder="Enter package description"
         />

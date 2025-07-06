@@ -9,7 +9,7 @@ import { useQueryState } from 'nuqs';
 import { useCallback, useMemo } from 'react';
 import TableIndexSkelton from '@/app/(private-pages)/admin-dashboard/onboarding/_components/table/table-index-skelton';
 import { columns } from './columns';
-import { useGetBookingsForAPackage } from '@/api/services/booking';
+import { useGetBookingsForAPackage } from '@/network/services/booking';
 import { useParams } from 'next/navigation';
 
 export default function BookingsTable() {

@@ -3,13 +3,13 @@ import {
   useAppMutation,
   useAppQuery,
   useAppQueryWithPaginationAndParams,
-} from '@/api/client-constructor';
+} from '@/network/client-constructor';
 import {
   CustomApiErrorResponse,
   CustomApiResponse,
   PackageSettlementResponse,
-} from '@/api/types';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+} from '@/network/types';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 
 export const useGetAllActivePackages = (params?: {
   package_type?: string;
@@ -21,12 +21,7 @@ export const useGetAllActivePackages = (params?: {
   );
   return useAppQueryWithPaginationAndParams<Package>({
     apiRoute: routes.packages.showAllActivePackages,
-    queryKey: [
-      baseQueryKey,
-      params?.package_type,
-      params?.search,
-      params?.page,
-    ],
+    queryKey: [baseQueryKey, params && params],
     params: params,
   });
 };
@@ -41,12 +36,7 @@ export const useGetAllInactivePackages = (params?: {
   );
   return useAppQueryWithPaginationAndParams<Package>({
     apiRoute: routes.packages.showAllInactivePackages,
-    queryKey: [
-      baseQueryKey,
-      params?.package_type,
-      params?.search,
-      params?.page,
-    ],
+    queryKey: [baseQueryKey, params && params],
     params: params,
   });
 };

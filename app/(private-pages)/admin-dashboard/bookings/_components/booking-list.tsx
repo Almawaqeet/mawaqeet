@@ -3,7 +3,7 @@
 import {
   useGetAllActivePackages,
   useGetAllInactivePackages,
-} from '@/api/services/packages';
+} from '@/network/services/packages';
 import { Card } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { Skeleton } from '@/components/ui/skeleton';

@@ -10,7 +10,7 @@ import {
   useGetOnboardingPaymentAmount,
   useInitiateOnboardingPayment,
   useVerifyOnboardingPayment,
-} from '@/api/services/onboarding';
+} from '@/network/services/onboarding';
 import AppSkeleton from '@/components/reusables/AppSkeleton';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { usePaystack } from '@/third-party/Paystack';

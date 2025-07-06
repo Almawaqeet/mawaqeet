@@ -6,9 +6,15 @@ import dynamic from 'next/dynamic';
 import { Package, FileText, Star, Crown, Award } from 'lucide-react';
 
 const RichTextEditor = dynamic(
-  () => import('@/components/ui/rich-text-editor'),
+  () =>
+    import('@/components/ui/rich-text-editor').then(
+      (mod) => mod.RichTextEditor
+    ),
   {
     ssr: false,
+    loading: () => (
+      <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />
+    ),
   }
 );
 
@@ -101,7 +107,7 @@ export const CategoryForm = ({
                 </Label>
                 <div className="bg-white rounded-lg min-h-[200px] border border-gray-300 hover:shadow-sm transition-all duration-300">
                   <RichTextEditor
-                    value={
+                    content={
                       values.category_descriptions?.[index]?.description ?? ''
                     }
                     onChange={(value) =>

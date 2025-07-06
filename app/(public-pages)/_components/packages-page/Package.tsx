@@ -3,7 +3,7 @@
 import { SegregatedPackage } from '@/constants/types';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 interface PackageProps {
   pkg: SegregatedPackage;
   theme?: 'light' | 'dark';
@@ -19,7 +19,6 @@ export const extractUlFromFeature = (feature: string) => {
 };
 
 export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
-  const router = useRouter();
   const { data: session } = useSession();
 
   const themeStyles = {
@@ -53,19 +52,11 @@ export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
 
   const styles = themeStyles[theme];
 
-  const singlePackageLink = CLIENT_ROUTES.PublicPages.packages.details(
-    pkg?.id ?? ''
-  );
+  const packageLink = session
+    ? CLIENT_ROUTES.PrivatePages.clientDashboard.viewPackage(pkg?.slug ?? '')
+    : CLIENT_ROUTES.PublicPages.packages.details(pkg?.slug ?? '');
 
-  const handleClick = () => {
-    if (!session) {
-      router.push(singlePackageLink);
-      return;
-    }
-    router.push(
-      CLIENT_ROUTES.PrivatePages.clientDashboard.viewPackage(pkg?.id ?? '')
-    );
-  };
+  console.log(packageLink, 'ok ok');
 
   return (
     <div
@@ -127,12 +118,12 @@ export const Package: React.FC<PackageProps> = ({ pkg, theme = 'dark' }) => {
         </ul>
       </div>
 
-      <button
-        className={`w-full mt-6 py-2 text-sm font-medium ${styles.text.primary} bg-transparent border ${styles.border} rounded ${styles.button} transition-colors duration-300`}
-        onClick={handleClick}
+      <Link
+        href={packageLink}
+        className={`w-full mt-6 py-2 text-sm font-medium ${styles.text.primary} bg-transparent border ${styles.border} rounded ${styles.button} transition-colors duration-300 text-center`}
       >
         Learn more →
-      </button>
+      </Link>
     </div>
   );
 };

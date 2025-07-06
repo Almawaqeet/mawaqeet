@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { FiFacebook } from 'react-icons/fi';
 import { BsTwitterX } from 'react-icons/bs';
 import { IoLogoInstagram, IoLogoYoutube } from 'react-icons/io5';
-import { FaSquareWhatsapp } from 'react-icons/fa6';
 import Image from 'next/image';
 
 import { brand } from '@/old-pages/contents/navbar';
@@ -147,7 +146,7 @@ const Footer: React.FC = () => {
       <div className={`max-w-7xl w-full mt-12`}>
         <div className="border-t border-gray-500 opacity-50 mb-6"></div>
         <div className="flex items-center justify-center gap-4 text-gray-200">
-          <span>&copy;</span>
+          <span>&copy; {new Date().getFullYear()}</span>
           <span className="w-px h-4 bg-gray-400"></span>
           <p className="text-sm">All rights reserved.</p>
         </div>

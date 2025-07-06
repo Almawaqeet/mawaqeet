@@ -31,10 +31,10 @@ import {
   useDeletePackage,
   useGetAllActivePackages,
   useGetAllInactivePackages,
-} from '@/api/services/packages';
+} from '@/network/services/packages';
 import { useQueryClient } from '@tanstack/react-query';
-import { routes } from '@/api/routes';
-import { generateBaseQueryKeyFromRoute } from '@/api/routes';
+import { routes } from '@/network/routes';
+import { generateBaseQueryKeyFromRoute } from '@/network/routes';
 import { useQueryState, parseAsInteger } from 'nuqs';
 import { DataTableSearch } from '@/components/ui/table/data-table-search';
 

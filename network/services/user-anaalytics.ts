@@ -1,12 +1,12 @@
-import { useAppQuery } from '@/api/client-constructor';
+import { useAppQuery } from '@/network/client-constructor';
 
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 import {
   SimpleTransactionResponse,
   UpcomingPackageResponse,
   UserFinancialSummaryResponse,
   UserTransactionResponse,
-} from '@/api/types';
+} from '@/network/types';
 
 export const useGetUpcomingHajjAndUmrahPackage = () => {
   const baseQueryKey = generateBaseQueryKeyFromRoute(

@@ -2,8 +2,8 @@ import {
   useAppQuery,
   useAppMutation,
   useAppQueryWithPaginationAndParams,
-} from '@/api/client-constructor';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+} from '@/network/client-constructor';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 import {
   BankListResponse,
   CheckIfUserHasAWalletResponse,
@@ -15,7 +15,7 @@ import {
   VerifyWalletAccountNumberErrorResponse,
   CustomApiResponse,
   WalletTransactionResponse,
-} from '@/api/types';
+} from '@/network/types';
 
 export const useCheckIfUserHasAWallet = () => {
   const baseQueryKey = generateBaseQueryKeyFromRoute(

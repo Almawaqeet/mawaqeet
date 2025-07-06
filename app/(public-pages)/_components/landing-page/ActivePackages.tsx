@@ -9,7 +9,7 @@ import { PackageIcon } from 'lucide-react';
 import PackageSkeleton from '@/components/skeletons/public-pages/PackageSkeleton';
 import { SegregatedPackage } from '@/constants/types';
 import { segregatePackageByItsPriceCategory } from '@/lib/utils';
-import { useGetAllActivePackages } from '@/api/services/packages';
+import { useGetAllActivePackages } from '@/network/services/packages';
 
 const ActivePackages = () => {
   const { data: packages, isLoading } = useGetAllActivePackages();

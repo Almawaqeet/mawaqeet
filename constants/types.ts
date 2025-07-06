@@ -9,7 +9,7 @@ export interface Package {
   price: Array<PackagePrice>;
   umrah_batch?: Array<UmrahBatch>;
   category_description: Array<CategoryDescription>;
-  slug?: string;
+  slug: string;
   is_active?: boolean;
   expiry_date: string;
   created_at?: string;
@@ -79,6 +79,7 @@ export type SegregatedPackage = {
   id?: string;
   type: 'hajj' | 'umrah';
   tier: string;
+  slug: string;
   cohort: string;
   price: string;
   paymentPlan: string;

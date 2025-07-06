@@ -27,13 +27,13 @@ import { useRouter } from 'next/navigation';
 import { LOCAL_STORAGE_KEYS } from '@/constants/local-storage-keys';
 import { CLIENT_ROUTES } from '@/lib/routes';
 import { useQueryClient } from '@tanstack/react-query';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 import {
   useCheckIfUserHasAWallet,
   useCreateWallet,
   useGetBankList,
   useVerifyWalletAccountNumber,
-} from '@/api/services/wallet';
+} from '@/network/services/wallet';
 
 const validationSchema = Yup.object({
   account_number: Yup.string().required('Account number is required'),

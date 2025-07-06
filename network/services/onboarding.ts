@@ -2,8 +2,8 @@ import {
   useAppQuery,
   useAppMutation,
   useAppQueryWithPaginationAndParams,
-} from '@/api/client-constructor';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+} from '@/network/client-constructor';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 import {
   CheckIfEmailAddressExistResponse,
   OnboardingCreateUserRequest,
@@ -15,7 +15,7 @@ import {
   PreBookPackageRequest,
   PreBookPackageResponse,
   SimpleOnboardingUser,
-} from '@/api/types';
+} from '@/network/types';
 
 export const useCheckIfEmailAddressExist = (body?: { email: string }) => {
   return useAppMutation<CheckIfEmailAddressExistResponse>({
@@ -74,13 +74,7 @@ export const useGetOnboardingUsers = (params?: {
 }) => {
   return useAppQueryWithPaginationAndParams<SimpleOnboardingUser>({
     apiRoute: routes.onboarding.getOnboardingUsers,
-    queryKey: [
-      'ONBOARDING_USERS',
-      params?.page ?? 1,
-      params?.name ?? '',
-      params?.status ?? '',
-      params?.email ?? '',
-    ],
+    queryKey: ['ONBOARDING_USERS', params && params],
     params: params,
   });
 };

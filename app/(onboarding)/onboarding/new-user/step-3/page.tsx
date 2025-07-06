@@ -5,8 +5,8 @@ import {
   QueryClient,
   dehydrate,
 } from '@tanstack/react-query';
-import { createServerAxiosInstance } from '@/api/server-constructor';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { createServerAxiosInstance } from '@/network/server-constructor';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 
 const StepThreeOnboarding = dynamic(
   () => import('@/app/(public-pages)/_components/onboarding/StepThree'),
@@ -20,10 +20,10 @@ async function getInitialData() {
   const baseQueryKey = generateBaseQueryKeyFromRoute(route);
 
   try {
-    const data = await createServerAxiosInstance(route);
+    const response = await createServerAxiosInstance(route);
     await queryClient.prefetchQuery({
       queryKey: [baseQueryKey],
-      queryFn: () => data,
+      queryFn: () => response.data,
     });
     return queryClient;
   } catch (error) {

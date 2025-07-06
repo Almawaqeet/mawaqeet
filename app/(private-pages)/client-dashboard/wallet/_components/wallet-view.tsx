@@ -5,7 +5,7 @@ import {
   useCheckWalletInformation,
   useGetWalletTransactions,
   useRequestPayout,
-} from '@/api/services/wallet';
+} from '@/network/services/wallet';
 import { useSession } from 'next-auth/react';
 import {
   Card,
@@ -34,7 +34,7 @@ import { useAppToast } from '@/components/reusables/AppToast';
 import { Transaction } from './transaction';
 import { useQueryState, parseAsInteger } from 'nuqs';
 import { useQueryClient } from '@tanstack/react-query';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 
 export default function WalletView() {
   const { data: session } = useSession();

@@ -12,7 +12,7 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { addSearchParamsToUrl } from '@/lib/utils';
 import { PACKAGE_TYPES } from '@/constants/generic';
 import { PackagesEmptyState } from '@/components/reusables/PackagesEmptyState';
-import { useGetAllActivePackages } from '@/api/services/packages';
+import { useGetAllActivePackages } from '@/network/services/packages';
 
 const PackageSection = () => {
   const router = useRouter();

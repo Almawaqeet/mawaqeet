@@ -18,15 +18,15 @@ import {
   useInitiateBookingPayment,
   useVerifyBookingPayment,
   useMakeBookingPaymentThroughWallet,
-} from '@/api/services/booking';
+} from '@/network/services/booking';
 import { useSession } from 'next-auth/react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useCheckWalletInformation } from '@/api/services/wallet';
+import { useCheckWalletInformation } from '@/network/services/wallet';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { CreditCard, Wallet, Calendar, Package2, Layers } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
-import { useCheckPackageSettlementStatus } from '@/api/services/packages';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
+import { useCheckPackageSettlementStatus } from '@/network/services/packages';
 
 interface BookingPaymentProps {
   id: string;

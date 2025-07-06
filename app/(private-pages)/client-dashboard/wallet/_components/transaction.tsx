@@ -1,6 +1,6 @@
 'use client';
 
-import { WalletTransactionResponse } from '@/api/types';
+import { WalletTransactionResponse } from '@/network/types';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { format } from 'date-fns';

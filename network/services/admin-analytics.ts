@@ -1,13 +1,13 @@
 import {
   useAppQuery,
   useAppQueryWithPaginationAndParams,
-} from '@/api/client-constructor';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+} from '@/network/client-constructor';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 import {
   FinancialSummaryResponse,
   PackageBookingFinancialSummaryResponse,
   User,
-} from '@/api/types';
+} from '@/network/types';
 
 export const useGetAllRegisteredUsers = (params?: {
   page: number;
