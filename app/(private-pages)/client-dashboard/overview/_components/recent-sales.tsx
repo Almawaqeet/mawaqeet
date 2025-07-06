@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetRecentPayments } from '@/api/services/user-anaalytics';
+import { useGetRecentPayments } from '@/network/services/user-anaalytics';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 

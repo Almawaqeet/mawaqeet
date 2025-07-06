@@ -9,7 +9,7 @@ import { PackageDetailsForm } from '../_components/new-package/package-details';
 import { CategoryForm } from '../_components/new-package/category-form';
 import AppButton from '@/components/reusables/AppButton';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import { useCreatePackage } from '@/api/services/packages';
+import { useCreatePackage } from '@/network/services/packages';
 import { useAppToast } from '@/components/reusables/AppToast';
 import { useRouter } from 'next/navigation';
 import AppDialogBox from '@/components/reusables/AppDialogBox';

@@ -1,5 +1,5 @@
-import { useAppMutation, useAppQuery } from '@/api/client-constructor';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { useAppMutation, useAppQuery } from '@/network/client-constructor';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 import {
   ChangePasswordRequest,
   ChangePasswordResponse,
@@ -11,7 +11,7 @@ import {
   VerifyOtpResponse,
   UserProfile,
   EditUserProfileRequest,
-} from '@/api/types';
+} from '@/network/types';
 
 export const useLogin = (body?: LoginRequest) => {
   return useAppMutation<LoginResponse>({

@@ -4,7 +4,7 @@ import {
   useViewPackage,
   useEditPackage,
   useCheckPackageSettlementStatus,
-} from '@/api/services/packages';
+} from '@/network/services/packages';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
@@ -49,10 +49,15 @@ import {
 } from '@/components/ui/dialog';
 
 const RichTextEditor = dynamic(
-  () => import('@/components/ui/rich-text-editor'),
+  () =>
+    import('@/components/ui/rich-text-editor').then(
+      (mod) => mod.RichTextEditor
+    ),
   {
     ssr: false,
-    loading: () => <p>Loading...</p>,
+    loading: () => (
+      <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />
+    ),
   }
 );
 
@@ -340,7 +345,7 @@ export default function ViewPackage({
                   onChange={(value) =>
                     isEditMode ? handleEdit('description', value) : null
                   }
-                  value={editedPackage?.description ?? ''}
+                  content={editedPackage?.description ?? ''}
                   readOnly={!isEditMode}
                 />
               </motion.div>
@@ -440,7 +445,8 @@ export default function ViewPackage({
                         </AccordionTrigger>
                         <AccordionContent>
                           <RichTextEditor
-                            onChange={(value) =>
+                            content={category?.description ?? ''}
+                            onChange={(value: string) =>
                               isEditMode
                                 ? handleEdit(
                                     'category_description',
@@ -453,8 +459,7 @@ export default function ViewPackage({
                                   )
                                 : null
                             }
-                            value={category?.description ?? ''}
-                            readOnly={!isEditMode}
+                            readOnly={isEditMode}
                           />
                         </AccordionContent>
                       </AccordionItem>

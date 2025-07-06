@@ -1,7 +1,7 @@
 'use client';
 import { ColumnDef } from '@tanstack/react-table';
 import { CellAction } from './cell-action';
-import { SimpleOnboardingUser } from '@/api/types';
+import { SimpleOnboardingUser } from '@/network/types';
 
 export const columns: ColumnDef<SimpleOnboardingUser>[] = [
   {

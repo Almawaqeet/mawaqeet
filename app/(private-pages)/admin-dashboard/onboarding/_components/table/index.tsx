@@ -8,7 +8,7 @@ import { searchParams } from '@/lib/searchparams';
 import { useQueryState } from 'nuqs';
 import { useCallback, useMemo } from 'react';
 import { columns } from './columns';
-import { useGetOnboardingUsers } from '@/api/services/onboarding';
+import { useGetOnboardingUsers } from '@/network/services/onboarding';
 import TableIndexSkelton from './table-index-skelton';
 
 export default function OnboardingTable() {

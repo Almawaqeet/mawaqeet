@@ -5,7 +5,7 @@ import { DataTableResetFilter } from '@/components/ui/table/data-table-reset-fil
 import { DataTableSearch } from '@/components/ui/table/data-table-search';
 import { useEmployeeTableFilters } from '../employee-tables/use-employee-table-filters';
 import { columns } from './columns';
-import { useGetAllRegisteredUsers } from '@/api/services/admin-analytics';
+import { useGetAllRegisteredUsers } from '@/network/services/admin-analytics';
 import TableIndexSkelton from '@/app/(private-pages)/admin-dashboard/onboarding/_components/table/table-index-skelton';
 import { useQueryState } from 'nuqs';
 

@@ -96,13 +96,14 @@ export function useAppQueryWithPaginationAndParams<
     queryFn: async () => {
       const session = await getSession();
       const token = session?.user?.accessToken ?? '';
-
       const queryParams = params
         ? Object.entries(params).reduce(
             (acc, [key, value]) => {
               if (value !== null && value !== undefined) {
                 acc[key] =
                   typeof value === 'string' ? value.toLowerCase() : value;
+                // Add the key as an object in queryKey
+                queryKey.push({ [key]: value });
               }
               return acc;
             },

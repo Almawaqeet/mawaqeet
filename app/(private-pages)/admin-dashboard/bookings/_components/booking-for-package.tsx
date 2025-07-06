@@ -3,12 +3,12 @@
 import {
   useViewPackage,
   useCheckPackageSettlementStatus,
-} from '@/api/services/packages';
+} from '@/network/services/packages';
 import {
   useGetBookingFinancialSummaryForASpecificPackage,
   useGetBookingsForAPackage,
   useCompleteBooking,
-} from '@/api/services/booking';
+} from '@/network/services/booking';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -17,7 +17,7 @@ import { DataTable } from '@/components/ui/table/data-table';
 import { ColumnDef } from '@tanstack/react-table';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
-import { PackageBookingListResponse } from '@/api/types';
+import { PackageBookingListResponse } from '@/network/types';
 import { DataTableSearch } from '@/components/ui/table/data-table-search';
 import { DataTableFilterBox } from '@/components/ui/table/data-table-filter-box';
 import { DataTableResetFilter } from '@/components/ui/table/data-table-reset-filter';
@@ -58,7 +58,7 @@ import {
 import { removeNoneAlphanumericEntity } from '@/lib/utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAppToast } from '@/components/reusables/AppToast';
-import { generateBaseQueryKeyFromRoute, routes } from '@/api/routes';
+import { generateBaseQueryKeyFromRoute, routes } from '@/network/routes';
 
 export default function BookingsForSpecificPackage() {
   const { packageId } = useParams();

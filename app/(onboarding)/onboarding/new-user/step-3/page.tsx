@@ -20,10 +20,10 @@ async function getInitialData() {
   const baseQueryKey = generateBaseQueryKeyFromRoute(route);
 
   try {
-    const data = await createServerAxiosInstance(route);
+    const response = await createServerAxiosInstance(route);
     await queryClient.prefetchQuery({
       queryKey: [baseQueryKey],
-      queryFn: () => data,
+      queryFn: () => response.data,
     });
     return queryClient;
   } catch (error) {

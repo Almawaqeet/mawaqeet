@@ -15,7 +15,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useEditProfile, useViewProfile } from '@/api/services/authentication';
+import {
+  useEditProfile,
+  useViewProfile,
+} from '@/network/services/authentication';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAppToast } from '@/components/reusables/AppToast';
 import { useEffect } from 'react';

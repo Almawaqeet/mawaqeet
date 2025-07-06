@@ -16,7 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { useGetPackageSummaryMonthly } from '@/api/services/admin-analytics';
+import { useGetPackageSummaryMonthly } from '@/network/services/admin-analytics';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export const description = 'Booking statistics chart';
