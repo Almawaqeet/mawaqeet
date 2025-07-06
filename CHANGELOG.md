@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/Almawaqeet/Almawaqeet-FE/compare/v0.1.6...v0.1.7) (2025-07-06)
+
+
+### Features
+
+* add sitemap generation and dynamic package components ([b496c81](https://github.com/Almawaqeet/Almawaqeet-FE/commit/b496c810737ed07c8a1e979e69e56d7378ca2b71))
+* integrate Tiptap rich text editor and update related components for enhanced content editing ([235709f](https://github.com/Almawaqeet/Almawaqeet-FE/commit/235709fbcf7b4cc725a184286fd13b834f93d1bf))
+
 ### [0.1.6](https://github.com/Almawaqeet/Almawaqeet-FE/compare/v0.1.5...v0.1.6) (2025-01-31)
 
 
