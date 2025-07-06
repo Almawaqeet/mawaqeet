@@ -19,7 +19,6 @@ export const createServerAxiosInstance = async (
       },
       params: config?.params,
     });
-    console.log('yoyo', response);
     return response;
   } catch (error) {
     // console.error('Server GET request failed:', error);

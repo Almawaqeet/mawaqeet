@@ -1,9 +1,12 @@
-import { dehydrate, QueryClient } from '@tanstack/react-query';
-import { HydrationBoundary } from '@tanstack/react-query';
-import { generateBaseQueryKeyFromRoute } from '@/network/routes';
-import { createServerAxiosInstance } from '@/network/server-constructor';
-import { routes } from '@/network/routes';
 import { Metadata } from 'next';
+import { Package } from '@/constants/types';
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from '@tanstack/react-query';
+import { routes, generateBaseQueryKeyFromRoute } from '@/network/routes';
+import { createServerAxiosInstance } from '@/network/server-constructor';
 import { PACKAGE_TYPES } from '@/constants/generic';
 import PackageSectionWrapper from './PackageSectionWrapper';
 
@@ -27,17 +30,28 @@ async function getInitialData(searchParams?: {
     params.search = searchParams.search;
   }
 
-  const data = await createServerAxiosInstance(route, { params });
+  try {
+    await queryClient.prefetchQuery({
+      queryKey: [baseQueryKey, params],
+      queryFn: async () => {
+        try {
+          const response = await createServerAxiosInstance(route, { params });
+          if (!response || !response.data) {
+            throw new Error('Packages not found');
+          }
+          return response.data;
+        } catch (error) {
+          console.error('Error fetching packages:', error);
+          throw error;
+        }
+      },
+    });
 
-  // Create the exact same query key structure as the client-side hook
-  const queryKey = [baseQueryKey, params && params];
-
-  await queryClient.prefetchQuery({
-    queryKey,
-    queryFn: () => data,
-  });
-
-  return queryClient;
+    return { queryClient };
+  } catch (error) {
+    console.error('Failed to load packages:', error);
+    throw error;
+  }
 }
 
 export default async function Page({
@@ -45,13 +59,18 @@ export default async function Page({
 }: {
   searchParams?: { type?: string; search?: string };
 }) {
-  const queryClient = await getInitialData(searchParams);
+  try {
+    const { queryClient } = await getInitialData(searchParams);
 
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <PackageSectionWrapper />
-    </HydrationBoundary>
-  );
+    return (
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <PackageSectionWrapper />
+      </HydrationBoundary>
+    );
+  } catch (error) {
+    console.error('Failed to load packages page:', error);
+    throw error;
+  }
 }
 
 export const metadata: Metadata = {
