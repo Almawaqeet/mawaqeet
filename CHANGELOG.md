@@ -4,19 +4,17 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.1.7](https://github.com/Almawaqeet/Almawaqeet-FE/compare/v0.1.6...v0.1.7) (2025-07-06)
 
-
 ### Features
 
-* add sitemap generation and dynamic package components ([b496c81](https://github.com/Almawaqeet/Almawaqeet-FE/commit/b496c810737ed07c8a1e979e69e56d7378ca2b71))
-* integrate Tiptap rich text editor and update related components for enhanced content editing ([235709f](https://github.com/Almawaqeet/Almawaqeet-FE/commit/235709fbcf7b4cc725a184286fd13b834f93d1bf))
+- add sitemap generation and dynamic package components ([b496c81](https://github.com/Almawaqeet/Almawaqeet-FE/commit/b496c810737ed07c8a1e979e69e56d7378ca2b71))
+- integrate Tiptap rich text editor and update related components for enhanced content editing ([235709f](https://github.com/Almawaqeet/Almawaqeet-FE/commit/235709fbcf7b4cc725a184286fd13b834f93d1bf))
 
 ### [0.1.6](https://github.com/Almawaqeet/Almawaqeet-FE/compare/v0.1.5...v0.1.6) (2025-01-31)
 
-
 ### Features
 
-* add consultant data ([1e9e859](https://github.com/Almawaqeet/Almawaqeet-FE/commit/1e9e859a09b1b86436404260d52051e49e178696))
-* added the iata logo from the link section ([09c4688](https://github.com/Almawaqeet/Almawaqeet-FE/commit/09c46888834e317a2cf997dcbf2e70fb1b04af5e))
+- add consultant data ([1e9e859](https://github.com/Almawaqeet/Almawaqeet-FE/commit/1e9e859a09b1b86436404260d52051e49e178696))
+- added the iata logo from the link section ([09c4688](https://github.com/Almawaqeet/Almawaqeet-FE/commit/09c46888834e317a2cf997dcbf2e70fb1b04af5e))
 
 ### [0.1.5](https://github.com/Almawaqeet/Almawaqeet-FE/compare/v0.1.4...v0.1.5) (2025-01-04)
 
