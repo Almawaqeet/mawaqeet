@@ -48,13 +48,14 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
+
 const RichTextEditor = dynamic(
-  () => import('@/components/ui/rich-text-editor'),
-  {
-    ssr: false,
-    loading: () => <p>Loading...</p>,
-  }
-);
+    () => import('@/components/ui/rich-text-editor').then((mod) => mod.RichTextEditor),
+    {
+      ssr: false,
+      loading: () => <div className="h-64 w-full border rounded-md bg-muted animate-pulse" />,
+    }
+  )
 
 export default function ViewPackage({
   params,
@@ -340,7 +341,7 @@ export default function ViewPackage({
                   onChange={(value) =>
                     isEditMode ? handleEdit('description', value) : null
                   }
-                  value={editedPackage?.description ?? ''}
+                  content={editedPackage?.description ?? ''}
                   readOnly={!isEditMode}
                 />
               </motion.div>
@@ -440,7 +441,8 @@ export default function ViewPackage({
                         </AccordionTrigger>
                         <AccordionContent>
                           <RichTextEditor
-                            onChange={(value) =>
+                            content={category?.description ?? ''}
+                            onChange={(value: string) =>
                               isEditMode
                                 ? handleEdit(
                                     'category_description',
@@ -453,8 +455,7 @@ export default function ViewPackage({
                                   )
                                 : null
                             }
-                            value={category?.description ?? ''}
-                            readOnly={!isEditMode}
+                            readOnly={isEditMode}
                           />
                         </AccordionContent>
                       </AccordionItem>

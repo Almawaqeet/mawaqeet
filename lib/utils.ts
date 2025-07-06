@@ -187,3 +187,42 @@ export const splitPhoneNumber = (str: string) => {
   const formatNumber = str.split('').join('');
   return `${formatNumber.substring(0, 4)} ${formatNumber.substring(4, 7)} ${formatNumber.substring(7, 10)} ${formatNumber.substring(10)}`;
 };
+
+
+
+export const uploadToCloudinary = async (file: File): Promise<string> => {
+  const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+
+  if (!uploadPreset || !cloudName) {
+    throw new Error('Missing Cloudinary configuration');
+  }
+
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', uploadPreset);
+
+  try {
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
+      { method: 'POST', body: formData }
+    );
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.error?.message || 'Failed to upload image');
+    }
+
+    const data = await res.json();
+    const url = data?.secure_url;
+
+    if (!url) {
+      throw new Error('Failed to get upload URL');
+    }
+
+    return url;
+  } catch (error) {
+    console.error('Cloudinary upload error:', error);
+    throw new Error('Failed to upload image to Cloudinary');
+  }
+};
