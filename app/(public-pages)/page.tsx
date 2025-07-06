@@ -18,10 +18,19 @@ async function getInitialData() {
   const queryClient = new QueryClient();
   const route = routes.packages.showAllActivePackages;
   const baseQueryKey = generateBaseQueryKeyFromRoute(route);
-  const data = await createServerAxiosInstance(route);
   await queryClient.prefetchQuery({
     queryKey: [baseQueryKey],
-    queryFn: () => data,
+    queryFn: async () => {
+      try {
+        const response = await createServerAxiosInstance(route);
+        if (!response || !response.data) {
+          throw new Error('Package not found');
+        }
+        return response.data;
+      } catch (error) {
+        throw new Error('Package not found');
+      }
+    },
   });
   return queryClient;
 }
